@@ -12,5 +12,5 @@ Serve locally with `python3 -m http.server` and open `index.html`.
 Built on the same page pattern as the Talent Marketplace program page (me5231979/TransferPortal-, `program.html`).
 Verified in Chromium at 1440px and 390px wide: no horizontal scroll, no console errors.
 
-Publishing: every push to `main` runs `.github/workflows/pages.yml`, which enables GitHub Pages if needed and deploys the repo root.
+Publishing: GitHub Pages serves the `gh-pages` branch. Every push to `main` runs `.github/workflows/pages.yml`, which mirrors main to gh-pages.
 The site will be at https://me5231979.github.io/Manager-Voyage/
