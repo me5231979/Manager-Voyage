@@ -27,6 +27,7 @@ try{
     { sel:'#survey',          key:'survey',    label:'The survey',                   mode:'whole' },
     { sel:'#quiz',            key:'quiz',      label:'Quick check',                  mode:'whole' },
     { sel:'#nextstep',        key:'nextstep',  label:'Your next step',               mode:'whole' },
+    { sel:'#learn',           key:'learn',     label:'Keep learning',                mode:'whole' },
     { sel:'section.cta',      key:'end',       label:'Wrap-up',                      mode:'whole', extras:['footer'] }
   ];
   var TRACKED = [

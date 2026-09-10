@@ -15,7 +15,7 @@
 <!--
   ══════════════════════════════════════════════════════════════════════════
   MANAGER VOYAGE · MANAGER FOUNDATIONS · COURSE 1
-  You are a manager now. About twenty minutes, eighteen pages.
+  You are a manager now. About twenty minutes, nineteen pages.
   The first course in Manager Foundations (after the manager compliance
   courses, before the micro modules). It teaches the four jobs of a manager
   in plain words: get the work done, take care of your people, make things
@@ -310,6 +310,51 @@ html.paged .split2 .scn{ margin-top:8px; }
 .helpers small a{ color:var(--link); border-bottom:1px solid var(--bdg); text-transform:none; letter-spacing:0; font-family:var(--sans); font-weight:600; font-size:.86rem; }
 @media (max-width:1100px){ .helpers{ grid-template-columns:repeat(3,1fr); } }
 @media (max-width:700px){ .helpers{ grid-template-columns:1fr; } }
+/* situation simulator */
+.sim{ margin-top:18px; border:1px solid var(--bd); border-left:4px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:16px 18px 18px; }
+.sim-head h3{ font-family:var(--serif); font-weight:400; font-size:1.35rem; margin-top:4px; }
+.sim-head p{ font-size:.92rem; color:var(--tx2); margin-top:4px; max-width:70ch; }
+.sim-pick{ display:grid; gap:6px; margin-top:12px; max-width:560px; }
+.sim-pick select{ font:inherit; font-size:1rem; padding:10px 12px; border:1px solid var(--field-bd); border-radius:var(--r); background:var(--field); color:var(--tx); }
+.sim-out{ display:none; margin-top:14px; }
+.sim-out.show{ display:grid; grid-template-columns:1.2fr 1fr; gap:14px 22px; }
+.sim-out .s-lab{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:3px; }
+.sim-out p{ font-size:.93rem; color:var(--tx2); }
+.sim-out .s-first{ grid-column:1 / -1; border:1px solid var(--eyebrow); background:rgba(207,174,112,.12); border-radius:var(--r); padding:12px 14px; }
+.sim-out .s-first p{ color:var(--tx); font-weight:600; font-size:1rem; }
+.sim-out .s-who ul{ list-style:none; display:grid; gap:6px; }
+.sim-out .s-who li{ font-size:.9rem; color:var(--tx2); padding-left:14px; position:relative; }
+.sim-out .s-who li::before{ content:''; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:50%; background:var(--eyebrow); }
+.sim-out .s-never p{ color:var(--vu-err); }
+.sim-out .s-learn{ grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding-top:10px; border-top:1px solid var(--bd); }
+.sim-out .s-note{ grid-column:1 / -1; font-size:.8rem; color:var(--tx3); }
+.chip-l{ display:inline-flex; align-items:center; gap:6px; border:1px solid var(--bd); border-radius:999px; padding:5px 11px; font-size:.82rem; color:var(--tx); background:var(--card); text-decoration:none; }
+.chip-l:hover{ border-color:var(--eyebrow); color:var(--strong); }
+.chip-l i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:3px; padding:2px 5px; }
+.chip-l.mm i{ background:var(--tx); }
+@media (max-width:900px){ .sim-out.show{ grid-template-columns:1fr; } }
+/* keep learning */
+.keep{ margin-top:16px; border-top:1px solid var(--bd); padding-top:10px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.keep .mono{ font-size:.68rem; margin-right:4px; }
+.learn-top{ margin-top:14px; display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+.learn-top a{ display:flex; flex-direction:column; gap:6px; border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:12px 14px; text-decoration:none; color:var(--tx); }
+.learn-top a:hover{ border-color:var(--eyebrow); }
+.learn-top a b{ font-family:var(--serif); font-weight:400; font-size:1.05rem; line-height:1.25; }
+.learn-top a small{ font-size:.8rem; color:var(--tx2); line-height:1.4; }
+.learn-top a i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); }
+.learn-grid{ margin-top:16px; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.learn-grid > div{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:12px 14px; }
+.learn-grid h4{ font-family:var(--serif); font-weight:400; font-size:1.1rem; margin-bottom:6px; }
+.learn-grid ul{ list-style:none; display:grid; gap:6px; }
+.learn-grid li{ font-size:.86rem; line-height:1.35; }
+.learn-grid li a{ color:var(--tx); text-decoration:none; font-weight:600; border-bottom:1px solid var(--bdg); }
+.learn-grid li a:hover{ color:var(--strong); }
+.learn-grid li span{ display:block; color:var(--tx2); font-size:.8rem; }
+.learn-grid li i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.6rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-right:4px; }
+.learn-media{ margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.learn-media .mono{ display:block; margin-bottom:6px; }
+@media (max-width:1000px){ .learn-top{ grid-template-columns:repeat(2,1fr); } .learn-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:700px){ .learn-top,.learn-grid,.learn-media{ grid-template-columns:1fr; } }
 .who .mono{ grid-column:1 / -1; font-size:.7rem; }
 .who div{ font-size:.82rem; color:var(--tx2); line-height:1.4; }
 .who b{ display:block; color:var(--tx); font-weight:600; font-size:.86rem; }
@@ -441,6 +486,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <a href="#year">Your first year</a>
           <a href="#welcome">The four jobs</a>
           <a href="#survey">The survey</a>
+          <a href="#learn">Keep learning</a>
           <a class="btn btn-gold btn-sm nav-cta" href="#quiz">Quick check</a>
         </nav>
         <button class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel"><span class="pw">Progress</span> <b id="progCount">0/8</b></button>
@@ -482,7 +528,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
     <div class="hero-scrim"></div>
   </div>
   <div class="wrap">
-    <span class="mono">Vanderbilt University &middot; Manager Voyage &middot; Manager Foundations &middot; Course 1 &middot; Page 1 of 18</span>
+    <span class="mono">Vanderbilt University &middot; Manager Voyage &middot; Manager Foundations &middot; Course 1 &middot; Page 1 of 19</span>
     <h1 class="metal">You are a manager <em>now</em>.</h1>
     <p class="hello" id="heroHello">Welcome aboard.</p>
     <p class="lead">This is the first course in Manager Foundations, and it starts at the beginning: what changed when you became a manager, what a manager is and is not, the ideas the best-known voices on management agree on, and what Vanderbilt will ask you to do in your first year. It ends with a simple way to keep the whole job in view. Before you start, you should have started or finished your manager compliance courses (the required courses on your dashboard). After it, the micro modules (short how-to lessons, also on your dashboard) teach each common task, one at a time. By the end, you will be able to:</p>
@@ -493,7 +539,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <li><b>Make the call</b>: handle it, ask your HCM, send it to the leave office, or report it</li>
       <li><b>Keep</b> the four jobs of a manager in view, week to week</li>
     </ul>
-    <p class="meta-line"><b>About 20 minutes &middot; 18 pages &middot; 5 modules</b> &middot; self-paced &middot; completion recorded in Oracle Learning</p>
+    <p class="meta-line"><b>About 20 minutes &middot; 19 pages &middot; 5 modules</b> &middot; self-paced &middot; completion recorded in Oracle Learning</p>
     <p class="listen-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span><b>Prefer to listen?</b> Every page is narrated. Use <b>Listen</b> in the bar below for this page, or turn on <b>Auto</b> to hear each page as it turns.</span></p>
     <div class="cta-row"><a class="btn btn-gold" href="#overview">Begin the course<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     <ol class="hw-mini" aria-label="How this course works">
@@ -509,7 +555,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="overview" class="th-light" aria-label="Course and module overview">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Page 2 of 18</b> Course and module overview <i>&middot; Next: module 1, what changed</i></p>
+      <p class="you-are"><b>Page 2 of 19</b> Course and module overview <i>&middot; Next: module 1, what changed</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Course overview</span></span>
       <h2>What a manager is, and what Vanderbilt will <em class="s">ask</em>.</h2>
     </div>
@@ -527,7 +573,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div class="hw"><span class="hw-no" aria-hidden="true">04</span><h3>The four jobs of a manager</h3><p><b>Learn:</b> one picture that holds the whole job: get the work done, take care of your people, make things better, connect your team. <b>Do:</b> five short videos, flip the cards, then your call in four situations.</p><span class="chip">Pages 9 to 14 &middot; 6 min</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>The survey and where you stand</h3><p><b>Learn:</b> what the survey you already took was asking. <b>Do:</b> rate yourself on fifteen habits and get your micro-module order.</p><span class="chip">Page 15 &middot; 2 min</span></div>
     </div>
-    <p class="hw-meta reveal" style="margin-top:10px">Then a five-question check (page 16), your next seven days (page 17), and the wrap-up (page 18). The four jobs in module 4 come from research by Gary Yukl; we use it as a guide, and nobody is tested on the theory. <span id="progTopLine">Section tracking: you have 8 sections ahead.</span></p>
+    <p class="hw-meta reveal" style="margin-top:10px">Then a five-question check (page 16), your next seven days (page 17), a keep-learning page of recommended courses, podcasts, and videos (page 18), and the wrap-up (page 19). The four jobs in module 4 come from research by Gary Yukl; we use it as a guide, and nobody is tested on the theory. <span id="progTopLine">Section tracking: you have 8 sections ahead.</span></p>
   </div>
 </section>
 
@@ -535,7 +581,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="shift" class="th-cream" aria-label="What changed when you became a manager">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 1 &middot; Page 3 of 18</b> What changed <i>&middot; You have the overview &middot; Next: what a manager is</i></p>
+      <p class="you-are"><b>Module 1 &middot; Page 3 of 19</b> What changed <i>&middot; You have the overview &middot; Next: what a manager is</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">What changed</span></span>
       <h2>Your job used to be your work. Now it is the team&rsquo;s work, and the <em class="s">people</em>.</h2>
     </div>
@@ -560,6 +606,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
         <p class="drill-status" id="shiftStatus" role="status" aria-live="polite">0 of 6 sorted.</p>
       </div>
     </div>
+    <div class="keep" data-keep="shift"></div>
   </div>
 </section>
 
@@ -567,7 +614,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="basics" class="th-light" aria-label="What a manager is">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 1 &middot; Page 4 of 18</b> What a manager is <i>&middot; You have what changed &middot; Next: module 2, five ideas</i></p>
+      <p class="you-are"><b>Module 1 &middot; Page 4 of 19</b> What a manager is <i>&middot; You have what changed &middot; Next: module 2, five ideas</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">What a manager is</span></span>
       <h2>Responsible for the work, and for the people who <em class="s">do it</em>.</h2>
     </div>
@@ -606,6 +653,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <span class="c-label">A note from People, Culture and Belonging</span>
       <p>Most people become managers because they were good at the work. Nobody hands them a description of the new job, so they copy whatever their own managers did. Vanderbilt will not leave what the job means to chance: every manager starts here, with the same plain description, and your unit leader, your Engagement Consultant, your HCM, and the micro modules all use the same words.</p>
     </div>
+    <div class="keep" data-keep="basics"></div>
   </div>
 </section>
 
@@ -613,7 +661,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="ideas" class="th-cream" aria-label="Five ideas the best-known voices agree on">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 2 &middot; Page 5 of 18</b> Five ideas that hold up <i>&middot; You have what a manager is &middot; Next: safe to speak up</i></p>
+      <p class="you-are"><b>Module 2 &middot; Page 5 of 19</b> Five ideas that hold up <i>&middot; You have what a manager is &middot; Next: safe to speak up</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Five ideas</span></span>
       <h2>Five ideas every good manager <em class="s">relies</em> on.</h2>
     </div>
@@ -623,6 +671,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
     <p class="drill-status" id="ideasStatus" role="status" aria-live="polite">1 of 5 ideas.</p>
     <div class="yukl foot"><b>Where these come from</b><span>Setting priorities: the big rocks method (Stephen Covey, The 7 Habits of Highly Effective People)</span><span>Clear expectations: clear is kind (Bren&eacute; Brown, Dare to Lead)</span><span>Psychological safety (Amy Edmondson, The Fearless Organization)</span><span>Purpose: start with why, leaders eat last (Simon Sinek)</span><span>The people work: the people manager standard (SHRM)</span></div>
     <details class="deeper"><summary><b>Optional &middot; go deeper</b>The big rocks method, in two minutes<span class="dur">Short video &middot; not needed for completion</span></summary><div class="d-body"><p>The jar, the rocks, and the sand. If the big rocks do not go in first, they do not go in.</p><div class="yt" data-embed="j6m9WnNdpSw" data-title="FranklinCovey: The 7 Habits, Big Rocks"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=j6m9WnNdpSw" target="_blank" rel="noopener">Open it on YouTube</a>. Also: <a href="https://www.youtube.com/watch?v=1Evwgu369Jw" target="_blank" rel="noopener">Bren&eacute; Brown on empathy</a> (3 min).</p></div></details>
+    <div class="keep" data-keep="ideas"></div>
   </div>
 </section>
 
@@ -630,7 +679,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="safe" class="th-light" aria-label="Safe to speak up">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 2 &middot; Page 6 of 18</b> Safe to speak up <i>&middot; You have the five ideas &middot; Next: module 3, what Vanderbilt will ask</i></p>
+      <p class="you-are"><b>Module 2 &middot; Page 6 of 19</b> Safe to speak up <i>&middot; You have the five ideas &middot; Next: module 3, what Vanderbilt will ask</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Safe to speak up</span></span>
       <h2>Three moments that build trust or <em class="s">break</em> it.</h2>
     </div>
@@ -646,6 +695,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
         <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Psychological safety, from the researcher who named it<span class="dur">11 min &middot; not needed for completion</span></summary><div class="d-body"><p>The researcher behind the idea, in her own words: why the best teams report more mistakes, not fewer.</p><div class="yt" data-embed="LhoLuui9gX8" data-title="Amy Edmondson: Building a psychologically safe workplace"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>. Also: <a href="https://www.youtube.com/watch?v=lmyZMtPVodo" target="_blank" rel="noopener">Simon Sinek, Why good leaders make you feel safe</a> (12 min).</p></div></details>
       </div>
     </div>
+    <div class="keep" data-keep="safe"></div>
   </div>
 </section>
 
@@ -653,7 +703,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="year" class="th-cream" aria-label="What Vanderbilt will ask you to do">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 3 &middot; Page 7 of 18</b> What Vanderbilt will ask you to do <i>&middot; You have the ideas &middot; Next: your first calls</i></p>
+      <p class="you-are"><b>Module 3 &middot; Page 7 of 19</b> What Vanderbilt will ask you to do <i>&middot; You have the ideas &middot; Next: your first calls</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your first year</span></span>
       <h2>What Vanderbilt will ask you to do, and <em class="s">when</em>.</h2>
     </div>
@@ -666,6 +716,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <button type="button" class="fw-card" aria-expanded="false"><b>When it happens</b><strong>Know the process, move the same day.</strong><p>Leave, flexible work, concerns, reports.</p><ul><li>A leave request, including FMLA <i>(FMLA and Leave)</i></li><li>A flexible work request <i>(Flexible Work Arrangements)</i></li><li>An accommodation request <i>(Reasonable Accommodations)</i></li><li>A concern about a coworker or a manager <i>(Employee Relations Grounding)</i></li><li>A performance concern <i>(Performance Concerns and Progressive Discipline)</i></li><li>Something you must report: discrimination, harassment, Title IX <i>(EOA and Reporting Obligations)</i></li></ul><span class="hint">Tap to open</span></button>
     </div>
     <p class="fw-status" id="yearStatus" role="status" aria-live="polite">0 of 4 groups opened.</p>
+    <div class="keep" data-keep="year"></div>
   </div>
 </section>
 
@@ -673,7 +724,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="calls" class="th-light" aria-label="Your first calls">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 3 &middot; Page 8 of 18</b> Your first calls <i>&middot; You have the year ahead &middot; Next: module 4, the four jobs</i></p>
+      <p class="you-are"><b>Module 3 &middot; Page 8 of 19</b> Your first calls <i>&middot; You have the year ahead &middot; Next: module 4, the four jobs</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your first calls</span></span>
       <h2>Handle it, ask PCB, route it, or <em class="s">report</em> it.</h2>
     </div>
@@ -684,16 +735,22 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div role="listitem"><b>The leave office, the same day</b><strong>Health or family time off.</strong><p>Anything that sounds like leave. You never ask for a diagnosis.</p></div>
       <div role="listitem"><b>EOA, the same day</b><strong>Discrimination, harassment, misconduct.</strong><p>You report it; you do not investigate it.</p></div>
     </div>
+    <div class="sim" id="simBox" data-sim>
+      <div class="sim-head"><span class="mno">Situation simulator</span><h3>Something just landed on your desk. What now?</h3><p>Pick a situation. You get the first move, who handles what, what never to do, and the micro module that teaches it step by step.</p></div>
+      <label class="sim-pick" for="simSel"><span class="mono">Pick a situation</span><select id="simSel"></select></label>
+      <div class="sim-out" id="simOut" aria-live="polite"></div>
+    </div>
     <div class="module-head" style="margin-top:16px"><span class="mno">Decide &middot; five situations</span><h3>What do you do first?</h3><p>1. Read the situation. 2. Tap the first thing you do. 3. Read the feedback, then Next. All five decided marks this section done.</p></div>
     <div class="drill" id="callsDrill" data-drill="calls"></div>
     <p class="drill-status" id="callsStatus" role="status" aria-live="polite">0 of 5 decided.</p>
+    <div class="keep" data-keep="calls"></div>
   </div>
 </section>
 
 <section id="welcome" class="th-cream" aria-label="The four jobs of a manager">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 4 &middot; Page 9 of 18</b> The four jobs of a manager <i>&middot; You have what Vanderbilt will ask &middot; Next: job 1, get the work done</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 9 of 19</b> The four jobs of a manager <i>&middot; You have what Vanderbilt will ask &middot; Next: job 1, get the work done</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The four jobs</span></span>
       <h2>A simple way to keep the whole job in view: four <em class="s">jobs</em>.</h2>
     </div>
@@ -716,13 +773,14 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </div>
     </div>
     <p class="fw-status" id="fwStatus" role="status" aria-live="polite">0 of 4 jobs opened.</p>
+    <div class="keep" data-keep="welcome"></div>
   </div>
 </section>
 
 <section id="task" class="th-light" aria-label="Job 1: get the work done">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 4 &middot; Page 10 of 18</b> Job 1, get the work done <i>&middot; You have the four jobs &middot; Next: job 2, your people</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 10 of 19</b> Job 1, get the work done <i>&middot; You have the four jobs &middot; Next: job 2, your people</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Job 1: get the work done</span></span>
       <h2>Get the work <em class="s">done</em>.</h2>
     </div>
@@ -745,13 +803,14 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </div>
     </div>
     <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this task-oriented behavior: planning, clarifying, monitoring, problem solving</span><span>The survey asks about these four habits</span><span>Micro modules that build them: Setting Expectations and Goals, Running 1:1s, Time and Attendance Approvals</span></div>
+    <div class="keep" data-keep="task"></div>
   </div>
 </section>
 
 <section id="relations" class="th-cream" aria-label="Job 2: take care of your people">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 4 &middot; Page 11 of 18</b> Job 2, take care of your people <i>&middot; You have job 1 &middot; Next: job 3, make things better</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 11 of 19</b> Job 2, take care of your people <i>&middot; You have job 1 &middot; Next: job 3, make things better</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Job 2: take care of your people</span></span>
       <h2>Take care of your <em class="s">people</em>.</h2>
     </div>
@@ -774,13 +833,14 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </div>
     </div>
     <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this relations-oriented behavior: supporting, developing, recognizing, empowering</span><span>The survey asks about these four habits</span><span>Micro modules that build them: Giving Feedback, FMLA and Leave, Flexible Work Arrangements</span></div>
+    <div class="keep" data-keep="relations"></div>
   </div>
 </section>
 
 <section id="change" class="th-dark" aria-label="Job 3: make things better">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 4 &middot; Page 12 of 18</b> Job 3, make things better <i>&middot; You have jobs 1 and 2 &middot; Next: job 4, connect your team</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 12 of 19</b> Job 3, make things better <i>&middot; You have jobs 1 and 2 &middot; Next: job 4, connect your team</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Job 3: make things better</span></span>
       <h2>Make things <em class="s">better</em>.</h2>
     </div>
@@ -803,13 +863,14 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </div>
     </div>
     <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this change-oriented behavior: advocating, envisioning, encouraging innovation, collective learning</span><span>The survey asks about these four habits</span><span>Micro modules that build them: The Mission and the Vision, Areas of Focus</span></div>
+    <div class="keep" data-keep="change"></div>
   </div>
 </section>
 
 <section id="external" class="th-cream" aria-label="Job 4: connect your team">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 4 &middot; Page 13 of 18</b> Job 4, connect your team <i>&middot; You have jobs 1 to 3 &middot; Next: your call, four situations</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 13 of 19</b> Job 4, connect your team <i>&middot; You have jobs 1 to 3 &middot; Next: your call, four situations</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Job 4: connect your team</span></span>
       <h2>Connect your team to the rest of <em class="s">Vanderbilt</em>.</h2>
     </div>
@@ -831,6 +892,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </div>
     </div>
     <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this external behavior: networking, external monitoring, representing</span><span>The survey asks about these three habits</span><span>Micro modules that build them: How We Work Together, Requisitions and Hiring, Compensation Cycle and Merit Basics</span></div>
+    <div class="keep" data-keep="external"></div>
   </div>
 </section>
 
@@ -838,7 +900,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="yourcall" class="th-light" aria-label="Your call: four situations">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 4 &middot; Page 14 of 18</b> Your call: four situations <i>&middot; You have all four jobs &middot; Next: module 5, the survey</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 14 of 19</b> Your call: four situations <i>&middot; You have all four jobs &middot; Next: module 5, the survey</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your call</span></span>
       <h2>Four situations, one for each <em class="s">job</em>.</h2>
     </div>
@@ -861,7 +923,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="survey" class="th-light" aria-label="The survey and your profile">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 5 &middot; Page 15 of 18</b> The survey, and where you stand <i>&middot; You have made your calls &middot; Next: a quick check</i></p>
+      <p class="you-are"><b>Module 5 &middot; Page 15 of 19</b> The survey, and where you stand <i>&middot; You have made your calls &middot; Next: a quick check</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The survey</span></span>
       <h2>Where you <em class="s">stand</em>.</h2>
     </div>
@@ -902,7 +964,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="quiz" class="th-cream" aria-label="Knowledge check">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Page 16 of 18</b> A quick check <i>&middot; Five questions, one at a time &middot; Next: your seven days</i></p>
+      <p class="you-are"><b>Page 16 of 19</b> A quick check <i>&middot; Five questions, one at a time &middot; Next: your seven days</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Quick check</span></span>
       <h2>A quick <em class="s">check</em>.</h2>
       <p>Four of five finishes the course. Each question points back to one page, so a miss tells you where to look. Retake anytime.</p>
@@ -917,7 +979,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="nextstep" class="th-light" aria-label="What you now know and your next step">
   <div class="wrap">
     <div class="sec-head tight reveal" style="margin-bottom:0">
-      <p class="you-are"><b>Page 17 of 18</b> What you now know, and your next seven days <i>&middot; Next: wrap-up</i></p>
+      <p class="you-are"><b>Page 17 of 19</b> What you now know, and your next seven days <i>&middot; Next: keep learning</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Next step</span></span>
       <h2>What you now know, and your next seven <em class="s">days.</em></h2>
     </div>
@@ -944,10 +1006,29 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<!-- ═══════════════════ 16 WRAP-UP ═══════════════════ -->
+<!-- ═══════════════════ 18 KEEP LEARNING ═══════════════════ -->
+<section id="learn" class="th-cream" aria-label="Keep learning: recommended courses, podcasts, and videos">
+  <div class="wrap">
+    <div class="sec-head tight reveal">
+      <p class="you-are"><b>Page 18 of 19</b> Keep learning <i>&middot; You have your next seven days &middot; Next: wrap-up</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Keep learning</span></span>
+      <h2>What to take <em class="s">next</em>.</h2>
+    </div>
+    <div class="ask"><p><b>What this page is</b>A short, chosen list, not the whole catalog: courses in Oracle Learning (they open with your Vanderbilt login), a few podcasts for the commute, and a few videos, grouped by the topics this course touched. Each one says why it is on the list.</p><p><b>How to use it</b>The micro modules on your dashboard come first; they teach the Vanderbilt way to do each task. Pick one item from here per month, on the topic your self-rating pointed to, and put it on your calendar.</p></div>
+    <div class="learn-top" id="learnTop"></div>
+    <div class="learn-grid" id="learnGrid"></div>
+    <div class="learn-media">
+      <div><span class="mono">Watch: feedback in three parts</span><div class="yt" data-embed="-oRKr5xA9N0" data-title="Give feedback with situation, behavior, impact"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=-oRKr5xA9N0" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+      <div><span class="mono">Watch: delegation and priorities</span><div class="yt" data-embed="dRhb0-CFBbk" data-title="Delegation and the urgent and important grid"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=dRhb0-CFBbk" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+    </div>
+    <p class="hinttxt" style="margin-top:12px">Oracle Learning links come from the active catalog and open in a new tab. Podcasts and videos are public and free. This list is curated by the Futures Learning Hub and updated with the course.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ 19 WRAP-UP ═══════════════════ -->
 <section class="cta th-dark" aria-label="Closing">
   <div class="wrap">
-    <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Page 18 of 18 &middot; Wrap-up</span></span>
+    <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Page 19 of 19 &middot; Wrap-up</span></span>
     <h2 class="metal">Now manage it the <em>same</em> way.</h2>
     <p>Four jobs, one habit to try this week, and a dashboard that now knows where to start you. The micro modules are open; take the first one today. When the survey comes back around in six months, answer it honestly and see what changed. From first day to fully formed leader starts now.</p>
     <a class="btn btn-gold" href="../dashboard/">Open My Voyage<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -1002,6 +1083,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <script src="../assets/js/scorm.js?v=4"></script>
 <script src="../assets/js/oracle.js?v=4"></script>
 <script src="narration-scripts.js?v=4"></script>
+<script src="resources.js?v=4"></script>
 <script src="pager.js?v=4"></script>
 <script src="app.js?v=4"></script>
 </body>

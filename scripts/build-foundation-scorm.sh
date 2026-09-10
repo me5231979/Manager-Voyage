@@ -6,7 +6,7 @@ OUT=manager-voyage-foundation-scorm.zip
 STAGE=$(mktemp -d)
 SHA=$(git rev-parse --short HEAD 2>/dev/null || echo dev)
 mkdir -p "$STAGE/foundation" "$STAGE/assets/css" "$STAGE/assets/js" "$STAGE/assets/fonts" "$STAGE/assets/img" "$STAGE/assets/video"
-cp foundation/index.html foundation/pager.js foundation/app.js foundation/narration-scripts.js "$STAGE/foundation/"
+cp foundation/index.html foundation/pager.js foundation/app.js foundation/narration-scripts.js foundation/resources.js "$STAGE/foundation/"
 sed -i "s/?v=[0-9a-z]*/?v=${SHA}/g" "$STAGE/foundation/index.html"
 # dashboard links do not exist inside the package; point them at the live site
 sed -i 's#href="../dashboard/"#href="https://me5231979.github.io/Manager-Voyage/dashboard/" target="_blank" rel="noopener"#g; s#href="../"#href="https://me5231979.github.io/Manager-Voyage/" target="_blank" rel="noopener"#g' "$STAGE/foundation/index.html"

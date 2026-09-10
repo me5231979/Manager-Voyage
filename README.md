@@ -57,7 +57,11 @@ about management and starts there.
 5. Module 5, the survey and a fifteen-habit self-rating (one at a time)
 6. A five-question check (4 of 5), the next seven days, and the wrap-up
 
-Eight tracked sections. Every page is narrated (narration-scripts.js);
+Eight tracked sections. Every page is narrated (narration-scripts.js).
+A situation simulator on the first-calls page (leave, ER, EOA, performance,
+and more) and a keep-learning page of recommended Oracle Learning courses,
+podcasts, and videos (foundation/resources.js; Oracle deep links from the
+active catalog export). Every module page ends with a keep-learning strip.
 six custom training videos (basics plus the four jobs and the framework).
 
 - Survey: the Managerial Practices Survey is completed before the course and retaken six months after completion. Open items:

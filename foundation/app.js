@@ -600,6 +600,55 @@ var IDEAS = [
   });
 })();
 
+/* ══════════ recommended learning: page strips, the keep-learning page, the situation simulator ══════════ */
+(function(){
+  var L = window.MV_LEARN || [], T = window.MV_LEARN_TOPICS || [], byId = {};
+  L.forEach(function(it){ byId[it.id] = it; });
+  var MODS = {}; try{ (window.MV_PROGRAM.mrc.tracks || []).forEach(function(t){ t.modules.forEach(function(m){ MODS[m.title] = m; }); }); }catch(e){}
+  function kind(it){ return it.type === 'oracle' ? 'Oracle Learning' : it.type === 'video' ? 'Video' : it.type === 'podcast' ? 'Podcast' : 'Guide'; }
+  function chip(it){ return '<a class="chip-l" href="' + esc(it.url) + '" target="_blank" rel="noopener" title="' + esc(it.why || '') + '"><i>' + kind(it) + '</i>' + esc(it.title) + '</a>'; }
+  /* strips */
+  $$('[data-keep]').forEach(function(el){
+    var key = el.getAttribute('data-keep');
+    var items = L.filter(function(it){ return (it.pages || []).indexOf(key) > -1; }).slice(0, 4);
+    if(!items.length){ el.remove(); return; }
+    el.innerHTML = '<span class="mono">Keep learning</span>' + items.map(chip).join('') + '<a class="chip-l" href="#learn"><i>List</i>All recommendations</a>';
+  });
+  /* the page */
+  var top = $('#learnTop'), grid = $('#learnGrid');
+  if(top){
+    var TOP = ['OLC3668481','OLC3681769','OLC3687089','OLC2538027','p-mt'];
+    top.innerHTML = '<span class="mono" style="grid-column:1 / -1">Start with these five</span>' + TOP.map(function(id){ var it = byId[id]; if(!it) return ''; return '<a href="' + esc(it.url) + '" target="_blank" rel="noopener"><i>' + kind(it) + '</i><b>' + esc(it.title) + '</b><small>' + esc(it.why || '') + '</small></a>'; }).join('');
+  }
+  if(grid){
+    grid.innerHTML = T.map(function(t){
+      var items = L.filter(function(it){ return it.topic === t[0]; });
+      if(!items.length) return '';
+      return '<div><h4>' + esc(t[1]) + '</h4><ul>' + items.map(function(it){ return '<li><i>' + kind(it) + '</i><a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.title) + '</a><span>' + esc(it.why || '') + (it.src && it.type !== 'oracle' ? ' (' + esc(it.src) + ')' : '') + '</span></li>'; }).join('') + '</ul></div>';
+    }).join('');
+  }
+  /* simulator */
+  var box = $('[data-sim]'), sel = $('#simSel'), out = $('#simOut'), SIM = window.MV_SIM || [];
+  if(box && sel && out && SIM.length){
+    sel.innerHTML = '<option value="">Choose one&hellip;</option>' + SIM.map(function(s){ return '<option value="' + esc(s.k) + '">' + esc(s.label) + '</option>'; }).join('');
+    function show(k){
+      var s = SIM.filter(function(x){ return x.k === k; })[0];
+      if(!s){ out.classList.remove('show'); out.innerHTML = ''; return; }
+      var course = byId[s.oracle], mod = MODS[s.mod];
+      out.innerHTML =
+        '<div class="s-first"><span class="s-lab">Your first move, today</span><p>' + esc(s.first) + '</p></div>' +
+        '<div><span class="s-lab">What it sounds like</span><p>' + esc(s.sounds) + '</p><span class="s-lab" style="margin-top:10px">Then</span><p>' + esc(s.then) + '</p></div>' +
+        '<div><div class="s-who"><span class="s-lab">Who handles what</span><ul>' + s.who.map(function(w){ return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div><div class="s-never" style="margin-top:10px"><span class="s-lab">Never</span><p>' + esc(s.never) + '</p></div></div>' +
+        '<div class="s-learn"><span class="s-lab" style="margin:0 4px 0 0">Learn it step by step</span>' +
+          (s.mod ? '<a class="chip-l mm" href="../dashboard/"><i>Micro module</i>' + esc(s.mod) + (mod && mod.format ? ' · ' + esc(mod.format) : '') + '</a>' : '') +
+          (course ? chip(course) : '') + '</div>' +
+        (s.note ? '<p class="s-note">' + esc(s.note) + '</p>' : '');
+      out.classList.add('show');
+    }
+    sel.addEventListener('change', function(){ show(sel.value); });
+  }
+})();
+
 /* ══════════ segment 6: self-rating, one behavior at a time → module order ══════════ */
 var ASSESS_QS = [
   { c:'task', b:'Plan it', q:'I set priorities, owners, and schedules before the work starts.' },
