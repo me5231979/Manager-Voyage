@@ -1,6 +1,6 @@
 {
  "_note": "Signed Runway URLs for the Foundation course media. They expire within about a day of generation; pushing this file to main runs .github/workflows/fetch-media.yml, which downloads and builds the media (narration, videos with captions, posters) and commits it. Regenerate with the Runway MCP (generate_speech, Leslie, eleven_multilingual_v2, from foundation/narration-scripts.js; generate_video, seedance-2-fast, 10s, 16:9, 720p, no audio) and replace the URLs here. The text fields are the caption source and must match the narration recording.",
- "generated": "2026-09-11 (plain-language rewrite)",
+ "generated": "2026-09-11 (plain-language rewrite, rerun)",
  "voice": "Leslie (eleven_multilingual_v2)",
  "videoModel": "seedance-2-fast 720p 10s",
  "audio": {
