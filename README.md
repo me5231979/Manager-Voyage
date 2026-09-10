@@ -45,8 +45,9 @@ about management and starts there.
 1. Module 1, what changed and what a manager is: the one change, three
    things that are new, what a manager is not, a sort activity (whose job is
    it now?), the definition, and who helps at Vanderbilt (80-second video)
-2. Module 2, five ideas that hold up (Covey, Brene Brown, Amy Edmondson,
-   Simon Sinek, SHRM) as flip cards, then "safe to speak up": three moments
+2. Module 2, five ideas by topic (setting priorities, clear expectations,
+   psychological safety, purpose, the people work; sources in a footnote),
+   one at a time, then "safe to speak up": three moments
    (bad news, a question, a mistake) with three responses each
 3. Module 3, what Vanderbilt will ask you to do in year one (a tap-to-open
    map by cadence, each item naming its micro module), then five situations
