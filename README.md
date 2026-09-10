@@ -50,7 +50,7 @@ about management and starts there.
    (bad news, a question, a mistake) with three responses each
 3. Module 3, what Vanderbilt will ask you to do in year one (a tap-to-open
    map by cadence, each item naming its micro module), then five situations
-   to decide: handle it, ask your HR partner, the leave office, or EOA
+   to decide: handle it, ask your PCB partner, the leave office, or EOA
 4. Module 4, the four jobs of a manager (Yukl, in plain words): a video and
    flip cards per job, one page each, then four situations for your call
 5. Module 5, the survey and a fifteen-habit self-rating (one at a time)

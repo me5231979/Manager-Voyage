@@ -118,7 +118,7 @@ window.MV_PROGRAM = {
       segments: [
         { n: 1, title: 'What changed, and what a manager is', format: 'Sort activity plus video', desc: 'The one change that makes you a manager, three things that are new, what a manager is not, and who helps you at Vanderbilt.' },
         { n: 2, title: 'Five ideas, and safe to speak up', format: 'Flip cards plus your call', desc: 'Covey, Brene Brown, Amy Edmondson, Simon Sinek, and SHRM in one line each, then three moments that build trust or break it.' },
-        { n: 3, title: 'What Vanderbilt will ask you to do', format: 'Tap-to-open map plus decisions', desc: 'The manager tasks of year one, when each shows up, the micro module for it, and five situations: handle it, ask HR, route it, or report it.' },
+        { n: 3, title: 'What Vanderbilt will ask you to do', format: 'Tap-to-open map plus decisions', desc: 'The manager tasks of year one, when each shows up, the micro module for it, and five situations: handle it, ask PCB, route it, or report it.' },
         { n: 4, title: 'The four jobs of a manager', format: 'Five videos, cards, your call', desc: 'Get the work done, take care of your people, make things better, connect your team. One page each, then four situations.' },
         { n: 5, title: 'The survey and where you stand', format: 'Self-rating', desc: 'What the Managerial Practices Survey you already took was asking, and a fifteen-habit self-rating that produces a first picture and your micro-module order.' }
       ]
@@ -130,7 +130,7 @@ window.MV_PROGRAM = {
         modules: [
           { id: 'M1.1', oracleUrl: null, title: 'Oracle HCM for Managers', format: 'Guided walkthrough', desc: 'Reading the team view, finding a direct report\'s record, what a manager can and cannot see.' },
           { id: 'M1.2', oracleUrl: null, title: 'Time and Attendance Approvals', format: 'Simulator', desc: 'Approving timecards, correcting errors, absence requests, and what happens to payroll when a deadline is missed.' },
-          { id: 'M1.3', oracleUrl: null, title: 'Requisitions and Hiring', format: 'Walkthrough plus checklist', desc: 'Opening a requisition, the approval chain, Oracle Recruiting basics, what HR needs from you and when.' },
+          { id: 'M1.3', oracleUrl: null, title: 'Requisitions and Hiring', format: 'Walkthrough plus checklist', desc: 'Opening a requisition, the approval chain, Oracle Recruiting basics, what PCB needs from you and when.' },
           { id: 'M1.4', oracleUrl: null, title: 'Culture Amp', format: 'Guided walkthrough', desc: 'Setting goals, running check-ins, where the performance cycle lives, and the annual calendar.' },
           { id: 'M1.5', oracleUrl: null, title: 'Expense and Procurement Approvals', format: 'Decision tree', desc: 'What you approve, spend thresholds, common rejections, and where policy lives.' }
         ] },
@@ -178,7 +178,7 @@ window.MV_PROGRAM = {
       { title: 'Templates', desc: '1:1 agenda, goal-setting worksheet, feedback prep, onboarding checklist, offboarding checklist.' },
       { title: 'Frameworks', desc: 'The Manager Standard, the feedback model, the delegation ladder, the coach-or-correct decision guide.' },
       { title: 'Policy links', desc: 'Leave, accommodations, flexible work, compensation cycle, progressive discipline, Code of Conduct.' },
-      { title: 'Who to call', desc: 'HR partner, Engagement Consultant, Employee Relations, Equal Opportunity and Access, Ombuds, Compliance.' }
+      { title: 'Who to call', desc: 'PCB partner, Engagement Consultant, Employee Relations, Equal Opportunity and Access, Ombuds, Compliance.' }
     ]
   },
 
@@ -207,7 +207,7 @@ window.MV_PROGRAM = {
   },
 
   contacts: [
-    { role: 'HR partner', desc: 'Your first call for anything people-related in your unit.' },
+    { role: 'PCB partner', desc: 'Your first call for anything people-related in your unit.' },
     { role: 'Engagement Consultant', desc: 'Culture, engagement, and manager support for your business unit.' },
     { role: 'Employee Relations (ER)', desc: 'Workplace concerns, investigations, performance and conduct cases.' },
     { role: 'Equal Opportunity and Access (EOA)', desc: 'Discrimination and harassment reporting, Title IX, accommodations.' },
