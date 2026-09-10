@@ -37,55 +37,56 @@ row, and a rail with Up next, Milestones, and Who to call.
 
 ## Foundation course (`foundation/`)
 
-"Foundation: What Vanderbilt Expects of a Manager," the 30-minute course every
-manager completes before the micro modules unlock. It teaches management
-itself, one shared way, on Yukl's taxonomy of leadership behavior (four
-categories, fifteen behaviors), the same behaviors the Managerial Practices
-Survey measures. Built on the Working Smarter book-mode engine with the hero
-video montage, the Chancellor's charge, and six five-minute segments across
-36 short pages, one idea or one activity each:
+"Foundation: what Vanderbilt expects of a manager," about fifteen minutes,
+sixteen pages, completed before the micro modules unlock. It teaches
+management itself, one shared way, on Yukl's taxonomy of leadership behavior
+(four categories, fifteen behaviors), the same behaviors the Managerial
+Practices Survey measures. Every page opens with a breadcrumb (where you are,
+what you have, what is next) and every module page with two plain lines: what
+you will learn, and what Vanderbilt asks you to do, followed by the Yukl
+tie-in (category, behavior numbers of fifteen, objective, survey items).
 
-1. What management is: the Vice Chancellor welcome, the numbers, a narrated
-   framework explainer with a tap-to-open map, fact or fiction
-2. to 5. One segment per category (task, relations, change, external), each
-   five pages: a narrated opener video and the idea; flip cards for the
-   behaviors and the habit each replaces; "Habit or the Vanderbilt way", a
-   tap-to-sort of eight statements; "Your call", one scenario with three
-   responses and their consequences; "Name the behavior", six situations one
-   at a time, beside a related public video (loaded only when tapped)
-6. The Managerial Practices Survey, and a fifteen-behavior self-rating (one
-   behavior at a time) that produces a first profile, the three behaviors to
-   practice first, and the micro-module order
+1. Welcome, then a course and module overview (purpose, audience, objectives,
+   completion, one card per module)
+2. Module 1, why and the framework: the belief, the welcome from People,
+   Culture and Belonging, the Chancellor's charge, then a 90-second captioned
+   training video and a tap-to-open map of the four categories
+3. Modules 2 to 5, one category each, two pages: an 80-second captioned
+   training video (Yukl tie, each behavior with a Vanderbilt example, the
+   habit versus the Vanderbilt way, the cue to act) beside flip cards; then
+   two aligned practices, "Your call" (apply: one situation, three responses,
+   consequences) and a three-item quick check (recognize), with an optional
+   collapsed public video below
+4. Module 6, the survey and a fifteen-behavior self-rating (one at a time)
+   that produces a first profile, the three behaviors to practice first, and
+   the micro-module order
+5. A five-question knowledge check (one at a time, feedback after each, four
+   to pass), the recap and next seven days, and the wrap-up
 
-Then an eight-question knowledge check (six to pass), a summary, and next steps.
-Each category marks itself done when its "Name the behavior" drill is finished.
-The profile is saved to `localStorage` (`mv.foundation.v1`) and SCORM
-suspend_data; the dashboard orders the tracks from it.
+Progress: the map, four quick checks, the self-rating, the check, and the next
+step (eight sections). Saved to `localStorage` (`mv.foundation.v1` for the
+profile) and SCORM suspend_data; the dashboard orders the tracks from it.
 
-**Narration.** Every page is narrated. The book bar has **Listen** (this page)
-and **Auto** (every page as it turns). Scripts live in
-`foundation/narration-scripts.js`; the recordings (`assets/audio/foundation/
-<section>-<n>.mp3`, one professional voice, generated with Runway from those
-exact words) play when present, and the browser's speech synthesis reads the
-same words when they are not (for example inside an LMS that blocks media).
+**Narration.** Every page is narrated (Listen for this page, Auto for every
+page). Scripts are in `foundation/narration-scripts.js`; recordings are
+generated with Runway from those exact words and live in
+`assets/audio/foundation/<section>-<n>.mp3`; browser speech reads the same
+words if a file cannot load.
 
-**Videos.** Five custom narrated videos (`assets/video/foundation/`): the
-40-second framework explainer and a 12-second opener for each category. Clips
-are generated with Runway, narration is generated from `MV_VIDEO_NARR`, and
-`scripts/build-media.py` concatenates, muxes, and makes posters. Signed Runway
-URLs go in `.github/media-urls.json`; pushing that file to `main` runs
-`.github/workflows/fetch-media.yml`, which downloads, builds, commits the media,
-and mirrors to `gh-pages`. Until the media lands, each video slot shows a
-"being produced" card. Public videos (YouTube, click to load, with an open-on-
-YouTube fallback): Google's Project Oxygen (task), Simon Sinek on safety plus
-Renninger on feedback and Pink on motivation (relations), Amy Edmondson on
-psychological safety (change), Harvard on managing your boss (external).
+**Videos.** Five custom training videos with captions (`assets/video/
+foundation/<name>.mp4` and `.vtt`), built by `scripts/build-media.py` from
+Runway clips and narration listed in `.github/media-urls.json` (the `text`
+fields feed the captions). Pushing that file to `main` runs
+`.github/workflows/fetch-media.yml`, which downloads, builds, commits, and
+mirrors to `gh-pages`. Until media lands, each video slot shows a "being
+produced" card. No headcounts or unit counts appear in the course, so nothing
+dates.
 
 - Source: Yukl, G. (2012), Academy of Management Perspectives, 26(4), 66 to 85.
-- Preview: `foundation/?name=Alex%20Rivera&state=NY`
+- Preview: `foundation/?name=Alex%20Rivera`
 - SCORM: `bash scripts/build-foundation-scorm.sh` writes
   `manager-voyage-foundation-scorm.zip` (standalone SCORM 1.2, media included
   when built).
-- Open items: the Vice Chancellor welcome video (placeholder card); confirm how
-  the survey is administered and its due window (segment 6); confirm the
-  YouTube video IDs still resolve (each slot has an open-on-YouTube link).
+- Open items: confirm how the survey is administered and its due window;
+  confirm the YouTube video IDs still resolve (each has an open-on-YouTube
+  link).

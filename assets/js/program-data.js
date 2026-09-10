@@ -112,7 +112,7 @@ window.MV_PROGRAM = {
       title: 'Foundation: What Vanderbilt Expects of a Manager',
       why: 'Thirty minutes, completed first. One definition of management for every Vanderbilt manager, and the framework the survey measures.',
       segments: [
-        { n: 1, title: 'Welcome from the Vice Chancellor', format: 'Video', desc: 'Why Vanderbilt is standardizing management, and what changes for you starting today.' },
+        { n: 1, title: 'Welcome from People, Culture and Belonging', format: 'Video', desc: 'Why Vanderbilt is standardizing management, and what changes for you starting today.' },
         { n: 2, title: 'The Manager Standard', format: 'Interactive walkthrough', desc: 'The foundation gate (ethical and inclusive practice) and the five domains, in plain language.' },
         { n: 3, title: 'Your First 60 Days', format: 'Timeline', desc: 'The two required components, the Portal, the cohort, and the Day 30 and Day 60 milestones.' },
         { n: 4, title: 'What You Now Own', format: 'Decision tree', desc: 'The shift from doing the work to owning the team\'s outcomes, including the legal exposure that arrives with the title.' },

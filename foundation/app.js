@@ -174,13 +174,13 @@ $$('.yt[data-embed]').forEach(function(box){
 
 /* ══════════ PROGRESS ══════════ */
 var SECTIONS = [
-  { k:'welcome',   no:'01', name:'What management is',           how:'Reveal all six claims, or mark it done' },
-  { k:'task',      no:'02', name:'Task-oriented',                how:'Name the six behaviors, or mark it done' },
-  { k:'relations', no:'03', name:'Relations-oriented',           how:'Name the six behaviors, or mark it done' },
-  { k:'change',    no:'04', name:'Change-oriented',              how:'Name the six behaviors, or mark it done' },
-  { k:'external',  no:'05', name:'External',                     how:'Name the six behaviors, or mark it done' },
+  { k:'welcome',   no:'01', name:'The framework',                how:'Open all four categories, or mark it done' },
+  { k:'task',      no:'02', name:'Task-oriented',                how:'Name the three behaviors, or mark it done' },
+  { k:'relations', no:'03', name:'Relations-oriented',           how:'Name the three behaviors, or mark it done' },
+  { k:'change',    no:'04', name:'Change-oriented',              how:'Name the three behaviors, or mark it done' },
+  { k:'external',  no:'05', name:'External',                     how:'Name the three behaviors, or mark it done' },
   { k:'survey',    no:'06', name:'The survey and your profile',  how:'Show your profile' },
-  { k:'quiz',      no:'07', name:'Knowledge check',              how:'Score six or more of eight' },
+  { k:'quiz',      no:'07', name:'Knowledge check',              how:'Score four or more of five' },
   { k:'nextstep',  no:'08', name:'Your next step',               how:'Mark it done once planned' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }
@@ -328,87 +328,10 @@ $$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){
     c.addEventListener('click', function(){
       var open = c.getAttribute('aria-expanded') !== 'true';
       c.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if(open){ seen[i] = 1; var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 4 categories opened.' + (n === 4 ? ' The next four segments take one each.' : ''); }
+      if(open){ seen[i] = 1; var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 4 categories opened.' + (n === 4 ? ' Section complete. The next four segments take one each.' : ''); if(n === 4) progDone('welcome'); }
     });
   });
 })();
-(function(){
-  var grid = $('#factGrid'), status = $('#factStatus'); if(!grid) return;
-  var cards = $$('.myth', grid), seen = {};
-  cards.forEach(function(c, i){
-    var b = c.querySelector('button');
-    b.addEventListener('click', function(){
-      var open = c.classList.toggle('open'); b.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if(open){ seen[i] = 1; var n = Object.keys(seen).length; if(status) status.textContent = n + ' of ' + cards.length + ' revealed.' + (n === cards.length ? ' Segment 1 complete.' : ''); if(n === cards.length) progDone('welcome'); }
-    });
-  });
-})();
-
-/* ══════════ habit or the Vanderbilt way: tap to sort ══════════
-   v:0 = the habit, v:1 = the Vanderbilt way */
-var SORTS = {
-  task: [
-    { s:'Send the quarter’s goals in one email and assume they landed.', v:0, x:'Clarifying is said out loud, confirmed back, and written where the team can see it.' },
-    { s:'Write each person’s goals into Culture Amp and confirm them in the first 1:1.', v:1, x:'Clarifying, the Vanderbilt way: visible, confirmed, dated.' },
-    { s:'Look at the finished deliverable on the due date.', v:0, x:'Monitoring happens before the deadline, when there is still time to steer.' },
-    { s:'Look at the work in progress in the weekly 1:1.', v:1, x:'Monitoring: progress and quality checked while it can still change.' },
-    { s:'Rebuild the report yourself because it is faster.', v:0, x:'Doing the work is not on the list. Finding out why it breaks is problem solving.' },
-    { s:'Trace the second failure to its cause, change the handoff, and tell the team.', v:1, x:'Problem solving: cause found, decision made, team told.' },
-    { s:'Set the quarter’s three priorities, with an owner each, before the quarter starts.', v:1, x:'Planning: what, who, when, and what gives.' },
-    { s:'Decide priorities as requests land, whoever asked loudest.', v:0, x:'That is reacting, not planning. Planning happens before the quarter, not during it.' }
-  ],
-  relations: [
-    { s:'Be friendly, ask about weekends, keep things light.', v:0, x:'Friendly is pleasant. Supporting is listening when it is hard, adjusting the load, and following up.' },
-    { s:'Listen when someone is under pressure, move what you can, and check in on Monday.', v:1, x:'Supporting, the Vanderbilt way.' },
-    { s:'Wait for the annual review to talk about anyone’s growth.', v:0, x:'Developing is a quarterly conversation, without a form in front of you.' },
-    { s:'Ask each person, once a quarter, what they want to be doing in two years, and find one stretch assignment.', v:1, x:'Developing: coaching and opening the next door.' },
-    { s:'“Great job, everyone” at the end of the project.', v:0, x:'Names nobody and nothing. Recognizing is specific, named, and within the week.' },
-    { s:'“The way you handled the vendor call on Thursday kept us on schedule,” said on Friday.', v:1, x:'Recognizing, the Vanderbilt way.' },
-    { s:'Delegate the task but keep every decision.', v:0, x:'That is assigning work. Empowering hands over the decision, with the boundary stated.' },
-    { s:'Ask the team how they would design the new rotation before you set it, and use most of their design.', v:1, x:'Empowering, the consulting half: ask before you decide, and let the answer change the decision.' }
-  ],
-  change: [
-    { s:'Forward the campus-wide announcement about the new system.', v:0, x:'Forwarding is not advocating. The why, in your own words, before the email.' },
-    { s:'Explain the reason for the new system in the team meeting two days before the announcement.', v:1, x:'Advocating change, the Vanderbilt way.' },
-    { s:'Manage the team as if next year looks like this year.', v:0, x:'Envisioning change is a two-sentence picture of what the team will be able to do next year.' },
-    { s:'Tell the team, in two sentences, what they will be able to do next year that they cannot do now.', v:1, x:'Envisioning change.' },
-    { s:'“That is not how we do it here.”', v:0, x:'The opposite of encouraging innovation.' },
-    { s:'“Try it for two weeks and show me.”', v:1, x:'Encouraging innovation: the idea invited and allowed to be tried, small and soon.' },
-    { s:'Move to the next project the day this one ends.', v:0, x:'Without a debrief nothing is learned. Ten minutes, written down.' },
-    { s:'Run a ten-minute debrief and write the three changes for next time into the Portal template.', v:1, x:'Facilitating collective learning.' }
-  ],
-  external: [
-    { s:'Meet your HR partner for the first time at the first crisis.', v:0, x:'Networking builds the relationship before it is needed.' },
-    { s:'Have coffee with your HR partner, your Engagement Consultant, and a peer manager in your first month.', v:1, x:'Networking, the Vanderbilt way: names known before they are needed.' },
-    { s:'Learn about the policy change from the team, after it lands.', v:0, x:'External monitoring sees the change before it lands.' },
-    { s:'Read the compensation cycle calendar in August and tell the team in September what to expect.', v:1, x:'External monitoring.' },
-    { s:'Absorb every request from other units so nobody is upset.', v:0, x:'The team pays for that. Representing defends the workload with numbers, politely and early.' },
-    { s:'Show the numbers and negotiate the deadline when another unit’s request would break the month.', v:1, x:'Representing, the Vanderbilt way.' },
-    { s:'Write the business case for the open position and walk it through the approval chain yourself.', v:1, x:'Representing: getting the team the resources it needs.' },
-    { s:'Wait for central to tell you what other units are planning.', v:0, x:'Ask. The Engagement Consultant and your peer managers are the network that tells you what is coming.' }
-  ]
-};
-function buildSort(el){
-  var name = el.getAttribute('data-sort'), items = SORTS[name]; if(!items) return;
-  var status = $('#' + name + 'SortStatus'), done = {}, right = 0;
-  el.innerHTML = items.map(function(it, i){
-    return '<div class="sq" data-i="' + i + '"><p>' + esc(it.s) + '</p><div class="sq-opts" role="group" aria-label="Sort this statement">' +
-      '<button type="button" data-v="0" aria-pressed="false">The habit</button><button type="button" data-v="1" aria-pressed="false">The Vanderbilt way</button></div><p class="sq-x" role="status"></p></div>';
-  }).join('');
-  el.addEventListener('click', function(e){
-    var b = e.target.closest('button[data-v]'); if(!b || b.disabled) return;
-    var q = b.closest('.sq'), i = parseInt(q.getAttribute('data-i'), 10), v = parseInt(b.getAttribute('data-v'), 10), it = items[i];
-    var ok = v === it.v;
-    $$('button[data-v]', q).forEach(function(x){ x.disabled = true; x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); if(parseInt(x.getAttribute('data-v'), 10) === it.v) x.classList.add('is-answer'); });
-    q.classList.add(ok ? 'right' : 'wrong');
-    q.querySelector('.sq-x').innerHTML = '<b>' + (ok ? 'Right. ' : (it.v ? 'That is the Vanderbilt way. ' : 'That is the habit. ')) + '</b>' + esc(it.x);
-    done[i] = 1; if(ok) right++;
-    var n = Object.keys(done).length;
-    if(status) status.textContent = n + ' of ' + items.length + ' sorted.' + (n === items.length ? ' ' + right + ' of ' + items.length + ' right. Now one situation, your call.' : '');
-  });
-}
-$$('[data-sort]').forEach(buildSort);
-
 /* ══════════ your call: one scenario, three responses, consequences ══════════ */
 var SCENARIOS = {
   task: { s:'It is Wednesday. The monthly report your team owns is due Friday. Priya, who builds it, has not mentioned it in two weeks, and you have not asked. A director just emailed you asking whether it will be on time.', opts:[
@@ -488,8 +411,10 @@ var DRILLS = {
     { s:'Asked the Engagement Consultant what other units were doing about the same staffing gap.', a:0, x:'Networking, and a little external monitoring: using a relationship outside the team to learn what is coming.' }
   ]}
 };
+var DRILL_PICK = { task:[1,3,4], relations:[0,4,3], change:[0,4,2], external:[1,3,2] };
 function buildDrill(el){
-  var name = el.getAttribute('data-drill'), d = DRILLS[name]; if(!d) return;
+  var name = el.getAttribute('data-drill'), d0 = DRILLS[name]; if(!d0) return;
+  var d = { opts:d0.opts, prog:d0.prog, verb:d0.verb, items:(DRILL_PICK[name] || [0,1,2]).map(function(i){ return d0.items[i]; }) };
   var status = $('#' + name + 'Status'), done = {}, cur = 0, right = 0;
   el.innerHTML = d.items.map(function(it, i){
     return '<div class="dq' + (i === 0 ? ' cur' : '') + '" data-i="' + i + '"><p class="dq-s"><b>' + (i + 1) + ' of ' + d.items.length + '</b>' + esc(it.s) + '</p><div class="dq-opts" role="group" aria-label="Choose one">' +
@@ -622,50 +547,50 @@ function assessLoad(){
 assessRender();
 assessLoad();
 
-/* ══════════ knowledge check ══════════ */
+/* ══════════ knowledge check: five questions, one at a time, feedback after each ══════════ */
+var QUIZ = [
+  { seg:'The framework (page 4)', q:'In the framework Vanderbilt uses, management is defined as:', opts:['A set of personality traits','A title with approval rights','Four categories of behavior: task, relations, change, external','Whatever your own manager did'], a:2, x:'Four categories of behavior, from Yukl’s taxonomy. Behavior can be named, measured, and practiced; that is why the program, and the survey, are built on it.' },
+  { seg:'Task-oriented (page 5)', q:'A manager writes each person’s quarterly goals into Culture Amp and confirms them in the first 1:1. Which behavior is that?', opts:['Monitoring','Clarifying','Recognizing','Representing'], a:1, x:'Clarifying, behavior 2 of 15: what is expected, by when, and how good, written where the team can see it. Monitoring is checking the progress afterward.' },
+  { seg:'Relations-oriented (page 7)', q:'A direct report says, “I might need some time off for a medical thing.” The supporting behavior is:', opts:['Listen, adjust what you can, and hand the possible leave request to leave administration the same day','Ask for the diagnosis so you can plan coverage','Decide whether they qualify for leave','Wait for something in writing'], a:0, x:'Listen, adjust, route. Support and a legal duty arrive in the same sentence. Never ask for a diagnosis; recognize the request and hand it off the same day.' },
+  { seg:'Change-oriented (page 9)', q:'A team member suggests a different way to run the weekly report. The change-oriented response is:', opts:['Explain why the current way exists','Escalate it to your unit leader','“Try it for two weeks and show me”','Add it to next year’s plan'], a:2, x:'Encouraging innovation, behavior 11 of 15: the new idea invited and allowed to be tried, small and soon.' },
+  { seg:'External (page 11)', q:'Another unit’s request would break your team’s month. You show the hours, offer two options, and negotiate the deadline. That is:', opts:['Problem solving','Supporting','Not managing','Representing'], a:3, x:'Representing, behavior 15 of 15: speaking for the team with the numbers, politely and early, instead of absorbing the request or refusing it.' }
+];
 (function(){
-  var submit = $('#quizSubmit'), result = $('#quizResult'), prog = $('#quizProgress'), nudge = $('#quizNudge'), waitLine = $('#quizWait');
-  var sets = $$('.qz[data-answer]'); if(!sets.length || !submit) return;
-  var TOTAL = sets.length, PASS = 6;
-  function goPage(el){ if(window.chartPager && el) window.chartPager.goToEl(el); }
-  function answered(fs){ return fs.querySelector('input[type=radio]:checked'); }
-  function updateProgress(){ var n = sets.filter(function(fs){ return !!answered(fs); }).length; if(prog) prog.textContent = n + ' of ' + TOTAL + ' answered'; if(n === TOTAL && nudge) nudge.classList.remove('show'); return n; }
-  document.addEventListener('change', function(e){ if(e.target && e.target.closest && e.target.closest('.qz[data-answer]')) updateProgress(); });
-  function setLocked(lock){ sets.forEach(function(fs){ $$('input[type=radio]', fs).forEach(function(r){ r.disabled = lock; }); }); }
-  function tier(score){
-    if(score === TOTAL) return ['Gold standard.', 'Perfect. The foundation held. Open your dashboard and start module one.'];
-    if(score >= PASS) return ['Foundation complete.', 'Skim the explanations under the questions you missed, then go.'];
-    return ['Almost there.', 'Six of eight completes the foundation. Reread the segment each missed question points to and retake the check; it takes four minutes.'];
+  var box = $('#quizBox'), status = $('#quizStatus'), done = $('#quizDone'); if(!box) return;
+  var PASS = 4, cur = 0, score = 0, answered = {};
+  function render(){
+    cur = 0; score = 0; answered = {};
+    box.innerHTML = QUIZ.map(function(it, i){
+      return '<div class="kq' + (i === 0 ? ' cur' : '') + '" data-i="' + i + '"><p class="kq-q"><span class="qn">' + (i + 1) + ' of ' + QUIZ.length + ' &middot; ' + esc(it.seg) + '</span><br>' + esc(it.q) + '</p><div class="kq-opts" role="group" aria-label="Choose one">' +
+        it.opts.map(function(o, oi){ return '<button type="button" data-o="' + oi + '" aria-pressed="false">' + esc(o) + '</button>'; }).join('') +
+        '</div><p class="kq-x" role="status"></p><div class="kq-nav">' + (i < QUIZ.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next question<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<button type="button" class="btn btn-primary btn-sm" data-finish="1">See my score</button>') + '</div></div>';
+    }).join('');
+    done.classList.remove('show'); done.innerHTML = '';
+    if(status) status.textContent = '0 of ' + QUIZ.length + ' answered.';
   }
-  submit.addEventListener('click', function(){
-    var n = updateProgress();
-    if(n < TOTAL){
-      if(nudge) nudge.classList.add('show');
-      var firstBlank = sets.filter(function(fs){ return !answered(fs); })[0];
-      if(firstBlank){ goPage(firstBlank); var input = firstBlank.querySelector('input[type=radio]'); if(input) input.focus(); }
-      return;
-    }
-    if(nudge) nudge.classList.remove('show');
-    var score = 0;
-    sets.forEach(function(fs){ var pick = answered(fs), ok = pick && pick.value === fs.getAttribute('data-answer'); fs.classList.add('graded'); fs.classList.toggle('correct', !!ok); fs.classList.toggle('wrong', !ok); if(ok) score++; });
-    setLocked(true);
+  function show(i){ $$('.kq', box).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); cur = i; var f = $$('.kq', box)[i].querySelector('button:not([disabled])'); if(f) f.focus({ preventScroll:true }); }
+  function finish(){
+    var t = score === QUIZ.length ? ['Gold standard.', 'Perfect. The foundation held. Turn the page for your next seven days.'] : score >= PASS ? ['Foundation complete.', 'Reread the explanation under the one you missed, then turn the page.'] : ['Almost there.', 'Four of five completes the foundation. Each missed question names the page to reread; then retake the check.'];
+    done.innerHTML = '<div class="big-score">' + score + ' / ' + QUIZ.length + '</div><h3>' + t[0] + '</h3><p>' + t[1] + '</p><button type="button" class="btn btn-ghost btn-sm" id="quizRetake">Retake the check</button>';
+    done.classList.add('show');
+    $$('.kq', box).forEach(function(q){ q.classList.remove('cur'); });
     if(score >= PASS) progDone('quiz');
-    var t = tier(score);
-    if(result){
-      result.innerHTML = '<div class="big-score">' + score + ' / ' + TOTAL + '</div><h3>' + t[0] + '</h3><p>' + t[1] + '</p>' +
-        '<button type="button" class="btn btn-ghost" id="quizRetake"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Retake the check</button>';
-      result.classList.add('show');
-      if(waitLine) waitLine.hidden = true;
-      var retake = $('#quizRetake');
-      if(retake) retake.addEventListener('click', function(){
-        setLocked(false); if(waitLine) waitLine.hidden = false;
-        sets.forEach(function(fs){ fs.classList.remove('graded','correct','wrong'); $$('input[type=radio]', fs).forEach(function(r){ r.checked = false; }); });
-        result.classList.remove('show'); result.innerHTML = ''; updateProgress(); goPage(sets[0]);
-      });
-      goPage(result);
-    }
+    $('#quizRetake').addEventListener('click', render);
+    if(window.chartPager) window.chartPager.goToEl(done);
+  }
+  box.addEventListener('click', function(e){
+    if(e.target.closest('button[data-next]')){ show(cur + 1); return; }
+    if(e.target.closest('button[data-finish]')){ finish(); return; }
+    var b = e.target.closest('button[data-o]'); if(!b || b.disabled) return;
+    var q = b.closest('.kq'), i = parseInt(q.getAttribute('data-i'), 10), oi = parseInt(b.getAttribute('data-o'), 10), it = QUIZ[i];
+    var ok = oi === it.a;
+    $$('button[data-o]', q).forEach(function(x){ x.disabled = true; x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); if(parseInt(x.getAttribute('data-o'), 10) === it.a) x.classList.add('is-answer'); });
+    q.classList.add(ok ? 'right' : 'wrong');
+    q.querySelector('.kq-x').innerHTML = '<b>' + (ok ? 'Right. ' : 'Not quite. The answer is: ' + esc(it.opts[it.a]) + '. ') + '</b>' + esc(it.x);
+    if(!answered[i]){ answered[i] = 1; if(ok) score++; }
+    if(status) status.textContent = Object.keys(answered).length + ' of ' + QUIZ.length + ' answered.';
   });
-  updateProgress();
+  render();
 })();
 
 /* ══════════ copy to clipboard ══════════ */
