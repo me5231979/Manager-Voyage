@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Voyage | Manager Voyage | Vanderbilt</title>
+<meta name="description" content="Your Manager Voyage dashboard: every required course, the Manager Responsibilities Course, the Manager Portal, and the cohort, tuned to your role and your work location, with completions synced from Oracle Learning.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../assets/img/favicon-96.png">
+<link rel="preload" href="../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/styles.css?v=1">
+<link rel="stylesheet" href="../assets/css/voyage.css?v=1">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <a class="nav__brand" href="../" aria-label="Manager Voyage overview">
+    <img class="nav__lockup" src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="250" height="65">
+    <img class="nav__vicon" src="../assets/img/vu-v-icon-nav.png" alt="Vanderbilt University" width="34" height="25">
+  </a>
+  <button type="button" class="nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav class="nav__links" aria-label="Sections" id="navLinks">
+    <a href="../">About the program</a>
+    <a href="#" data-nav="dashboard" id="navDash">My voyage</a>
+    <a href="#" data-area="portal" id="navPortal">Who to call</a>
+    <a class="btn" href="#" id="navCta">Open my dashboard</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ============ VIEW: WELCOME ============ -->
+  <section class="view active hero hero--voyage on-dark" id="view-welcome" data-view="welcome">
+    <img class="mark" src="../assets/img/vu-v-icon.png" alt="" aria-hidden="true">
+    <div class="wrap">
+      <p class="eyebrow">Manager Voyage · Vanderbilt · People, Culture and Belonging</p>
+      <h1 class="h-hero" id="heroTitle">Welcome aboard, <em class="gold-text">Manager</em>.</h1>
+      <p class="lead" id="heroLead">Every course, module, and resource you need in your first 60 days as a Vanderbilt manager, on one page. What you see is assigned to you in Oracle Learning based on your role and your work location. Completions recorded in Oracle show up here on their own.</p>
+
+      <div class="hero__idcard" id="idCard">
+        <span class="avatar" id="idInitials">MV</span>
+        <span>
+          <b id="idName">Vanderbilt Manager</b>
+          <span id="idMeta">Preview profile. At launch this card is filled from your Oracle Learning record.</span>
+          <button type="button" class="idcard__rename" id="renameBtn">Not you? Use your name</button>
+        </span>
+      </div>
+
+      <div class="gate" id="stateGate" hidden>
+        <h2>Where do you <em>work</em>?</h2>
+        <p>Oracle did not tell us your work location. Your state sets which compliance courses you are required to take.</p>
+        <div class="tiles" id="stateTiles" role="group" aria-label="Choose your work location"></div>
+      </div>
+      <p class="stateline" id="stateLine" hidden></p>
+
+      <div class="hero__cta">
+        <a class="btn" href="#" id="beginBtn">Open my dashboard</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIEW: DASHBOARD ============ -->
+  <section class="view section section--day" id="view-dashboard" data-view="dashboard" style="padding-top:calc(var(--nav-h) + 2rem)">
+    <div class="wrap wrap--wide">
+      <div class="dashhead">
+        <div class="dashhead__greet">
+          <p class="eyebrow" style="margin-bottom:.4rem">Manager Voyage · Your first 60 days</p>
+          <h1 id="dashGreeting">Good morning</h1>
+          <p class="day" id="dashDay"></p>
+        </div>
+        <div class="dashhead__spacer"></div>
+        <div class="ring" role="img" aria-label="Required path progress">
+          <svg width="108" height="108" viewBox="0 0 108 108">
+            <circle class="track" cx="54" cy="54" r="47"></circle>
+            <circle class="bar" id="ringBar" cx="54" cy="54" r="47" stroke-dasharray="295.3" stroke-dashoffset="295.3"></circle>
+          </svg>
+          <span class="ring__label"><span><b id="ringPct">0%</b><span>required path</span></span></span>
+        </div>
+        <div class="dashhead__actions">
+          <button type="button" class="btn btn--ghost-dark" id="syncBtn" hidden>Sync with Oracle</button>
+          <button type="button" class="btn btn--ghost-dark" id="changeStateBtn">Change location</button>
+          <a class="btn" id="portalBtn" href="#" target="_blank" rel="noopener">Manager Portal</a>
+        </div>
+      </div>
+
+      <div class="howline" id="howline"></div>
+      <div class="preview" id="previewBar" hidden>
+        <b>Preview mode.</b>
+        <label>Name <input type="text" id="pvName" placeholder="First Last" size="16"></label>
+        <label>State <select id="pvState"><option value="">Choose</option><option value="TN">Tennessee</option><option value="NY">New York</option><option value="FL">Florida</option><option value="CA">California</option></select></label>
+        <label>Started <input type="date" id="pvStart"></label>
+        <button type="button" class="btn btn--ghost-dark" id="pvApply" style="padding:.35rem .8rem;font-size:.8rem">Apply</button>
+        <button type="button" class="item__minor item__minor--text" id="pvReset">Reset progress</button>
+      </div>
+
+      <div class="cattiles" id="areaTiles" role="tablist" aria-label="Program areas"></div>
+
+      <div class="dashgrid">
+        <div class="panel" id="panel" role="tabpanel"></div>
+        <aside class="rail" aria-label="Up next, milestones, and who to call">
+          <div class="railbox">
+            <h4>Up next</h4>
+            <ul id="upNext"></ul>
+          </div>
+          <div class="railbox">
+            <h4>Milestones</h4>
+            <div id="milestones"></div>
+          </div>
+          <div class="railbox">
+            <h4>Who to call</h4>
+            <ul id="contacts"></ul>
+          </div>
+          <div class="railbox">
+            <h4>Your record</h4>
+            <p class="syncline" id="syncline"></p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="300" height="78" style="width:min(300px,80%);height:auto">
+        <p class="brandline">From first day to fully formed leader.</p>
+      </div>
+      <div>
+        <h4>Manager Voyage</h4>
+        <ul>
+          <li><a href="../">About the program</a></li>
+          <li><a href="#" data-nav="dashboard">My voyage</a></li>
+          <li><a href="#" data-area="cohort">The cohort</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>People, Culture and Belonging</h4>
+        <ul>
+          <li><a href="https://www.vanderbilt.edu/pcb/" target="_blank" rel="noopener">People, Culture and Belonging</a></li>
+          <li><a href="https://hr.vanderbilt.edu/" target="_blank" rel="noopener">Human Resources</a></li>
+          <li><a href="#" id="footerContact" hidden>Contact the Futures Learning Hub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© <span id="year">2026</span> Vanderbilt University · Manager Voyage · Futures Learning Hub. <b>Completions recorded in Oracle Learning appear here automatically.</b> A check mark you add yourself is labeled self-reported and written to your Oracle record as an attestation.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/config.js?v=1"></script>
+<script src="../assets/js/program-data.js?v=1"></script>
+<script src="../assets/js/scorm.js?v=1"></script>
+<script src="../assets/js/profile.js?v=1"></script>
+<script src="../assets/js/dashboard.js?v=1"></script>
+</body>
+</html>
