@@ -102,8 +102,12 @@ for name, spec in (data.get('videos') or {}).items():
         p = os.path.join(TMP, '%s-%d.mp4' % (name, i))
         if not fetch(c, p): ok = False; break
         n = os.path.join(TMP, '%s-%d.norm.mp4' % (name, i))
-        run('ffmpeg', '-y', '-v', 'error', '-i', p, '-an', '-vf', 'scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,fps=24,format=yuv420p',
-            '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', n)
+        # fit every clip to 1280x720; a clip that is not 16:9 (a photo animated
+        # from a square or 4:3 picture) sits on a blurred, enlarged copy of
+        # itself instead of black bars, so the frame stays full
+        run('ffmpeg', '-y', '-v', 'error', '-i', p, '-an', '-filter_complex',
+            '[0:v]split=2[a][b];[a]scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,boxblur=24:4,eq=brightness=-0.08[bg];[b]scale=1280:720:force_original_aspect_ratio=decrease[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2,fps=24,format=yuv420p[v]',
+            '-map', '[v]', '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', n)
         parts.append(n)
     npath = os.path.join(TMP, name + '.narr.mp3')
     if not ok or not fetch(narr, npath): skipped.append('video ' + name + ' (download failed)'); continue
