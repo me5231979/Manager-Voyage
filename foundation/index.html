@@ -287,6 +287,13 @@ html.paged .split2 .scn{ margin-top:8px; }
 @media (max-width:900px){ .ask{ grid-template-columns:1fr; } }
 /* who is who */
 .who{ margin-top:14px; border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:12px 16px; display:grid; grid-template-columns:repeat(5,1fr); gap:8px 16px; }
+.isnot{ margin-top:14px; border:1px solid var(--bd); border-top:3px solid var(--tx); border-radius:var(--r); background:var(--card); padding:14px 18px 18px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px 22px; }
+.isnot .mono{ grid-column:1 / -1; font-size:.72rem; color:var(--tx); }
+.isnot > div{ display:grid; grid-template-columns:auto 1fr; gap:4px 10px; align-items:start; }
+.isnot .x{ grid-row:1 / span 2; width:26px; height:26px; border-radius:50%; background:var(--tx); color:var(--card); display:grid; place-items:center; font-size:1rem; line-height:1; margin-top:2px; }
+.isnot b{ font-family:var(--serif); font-weight:400; font-size:1.15rem; line-height:1.2; color:var(--tx); }
+.isnot p{ font-size:.9rem; color:var(--tx2); line-height:1.45; }
+@media (max-width:900px){ .isnot{ grid-template-columns:1fr; } }
 .who .mono{ grid-column:1 / -1; font-size:.7rem; }
 .who div{ font-size:.82rem; color:var(--tx2); line-height:1.4; }
 .who b{ display:block; color:var(--tx); font-weight:600; font-size:.86rem; }
@@ -526,11 +533,11 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <div role="listitem"><b>New 2</b><strong>You approve.</strong><p>Timecards, time off, expenses, and requests now come to you. Vanderbilt trusts your signature, so look before you sign.</p></div>
           <div role="listitem"><b>New 3</b><strong>You are responsible for people.</strong><p>Fair treatment, a safe place to speak up, a chance to grow, and the right help when life happens.</p></div>
         </div>
-        <div class="who" role="list" aria-label="What a manager is not">
+        <div class="isnot" role="list" aria-label="What a manager is not">
           <span class="mono">What a manager is not</span>
-          <div role="listitem"><b>Not the person who does everyone&rsquo;s work</b>When you are tempted to just do it yourself, that is the moment to manage instead.</div>
-          <div role="listitem"><b>Not a friend first</b>Be warm and be fair. The team needs a manager more than it needs another friend.</div>
-          <div role="listitem"><b>Not the police, and not alone</b>Some things are not yours to investigate or decide. Part of the job is knowing what to send on, and to whom.</div>
+          <div role="listitem"><span class="x" aria-hidden="true">&times;</span><b>Not the person who does everyone&rsquo;s work</b><p>When you are tempted to just do it yourself, that is the moment to manage instead.</p></div>
+          <div role="listitem"><span class="x" aria-hidden="true">&times;</span><b>Not a friend first</b><p>Be warm and be fair. The team needs a manager more than it needs another friend.</p></div>
+          <div role="listitem"><span class="x" aria-hidden="true">&times;</span><b>Not the police, and not alone</b><p>Some things are not yours to investigate or decide. Part of the job is knowing what to send on, and to whom.</p></div>
         </div>
       </div>
       <div>
