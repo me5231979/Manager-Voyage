@@ -12,7 +12,7 @@ try{
   var PLAN = [
     { sel:'section.hero',     key:'home',      label:'Welcome',                    mode:'whole' },
     { sel:'#start',           key:'belief',    label:'The belief',                 mode:'whole', extras:['.topics'] },
-    { sel:'#mission',         key:'mission',   label:'The Chancellor’s charge',   mode:'whole' },
+    { sel:'#mission',         key:'mission',   label:'The Chancellor’s charge',   mode:'split' },
     { sel:'section.howworks', key:'how',       label:'How the foundation works',   mode:'whole' },
     { sel:'#welcome',         key:'welcome',   label:'What management is',         mode:'split' },
     { sel:'#task',            key:'task',      label:'Task-oriented',              mode:'split' },
@@ -182,7 +182,7 @@ try{
     updateBar();
     writeHash(to);
     checkMore();
-    try{ document.dispatchEvent(new CustomEvent('chart:page', { detail:{ key:to.key, index:cur, label:to.pgLabel } })); }catch(e){}
+    try{ document.dispatchEvent(new CustomEvent('chart:page', { detail:{ key:to.key, index:cur, n:to.n, label:to.pgLabel } })); }catch(e){}
   }
   function goToEl(el){
     if(!el || !el.closest) return;
@@ -195,7 +195,7 @@ try{
   window.chartPager = {
     go: go, goToEl: goToEl,
     goToKey: function(k){ if(k in secFirst) go(secFirst[k]); },
-    current: function(){ return cur >= 0 ? { key: pages[cur].key, index: cur } : { key:'', index:0 }; },
+    current: function(){ return cur >= 0 ? { key: pages[cur].key, index: cur, n: pages[cur].n } : { key:'', index:0, n:1 }; },
     count: pages.length
   };
   document.addEventListener('click', function(e){

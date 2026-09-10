@@ -21,6 +21,14 @@
   relations, change, external) and fifteen behaviors, the same ones the
   Managerial Practices Survey measures. Built on the Working Smarter engine
   (../assets/css/course.css, pager.js) in the FLH brand.
+
+  Thirty-six short pages, one idea or one activity each. Every page is
+  narrated: the Listen button in the book bar plays the recorded narration
+  (assets/audio/foundation, generated from narration-scripts.js) and Auto
+  narrates each page as it turns. Custom narrated videos (assets/video/
+  foundation) open the framework and each category; each category also
+  ends with a related public video, loaded only when tapped.
+
   Progress: localStorage mv-found-* booleans plus one JSON string with the
   self-rating and its output. In Oracle Learning the same state rides in
   SCORM suspend_data and the SCO reports complete at eight of eight.
@@ -33,35 +41,73 @@
   ══════════════════════════════════════════════════════════════════════════
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=2" />
+<link rel="stylesheet" href="../assets/css/course.css?v=3" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
-.stat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:22px; }
-.stat{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:22px 20px 18px; }
-.stat b{ display:block; font-family:var(--serif); font-weight:400; font-size:clamp(2.2rem,4vw,3rem); line-height:1; color:var(--eyebrow); }
-.stat span{ display:block; margin-top:8px; font-size:.9rem; color:var(--tx2); }
-.vslot{ margin-top:20px; border:1px solid var(--bdg); background:var(--card2); border-radius:var(--r); padding:26px 28px; display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:center; }
-.vslot .vic{ width:64px; height:64px; border-radius:50%; border:2px solid var(--eyebrow); display:grid; place-items:center; color:var(--eyebrow); }
-.vslot .vic svg{ width:26px; height:26px; }
-.vslot h4{ font-family:var(--serif); font-weight:400; font-size:1.3rem; }
-.vslot p{ color:var(--tx2); font-size:.95rem; margin-top:6px; }
-.quote{ margin-top:22px; border-left:3px solid var(--eyebrow); padding:6px 0 6px 22px; font-family:var(--serif); font-size:clamp(1.15rem,2vw,1.4rem); line-height:1.4; max-width:40ch; }
+.hero .listen-line{ margin-top:14px; font-size:.9rem; color:rgba(255,255,255,.7); max-width:none; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.hero .listen-line svg{ width:16px; height:16px; color:var(--vu-gold); flex-shrink:0; }
+.hero .listen-line b{ color:#fff; font-weight:600; }
+html.paged .hero .outcomes{ columns:2; column-gap:28px; }
+html.paged .hero .outcomes li{ break-inside:avoid; }
+.quote{ margin-top:22px; border-left:3px solid var(--eyebrow); padding:6px 0 6px 22px; font-family:var(--serif); font-size:clamp(1.1rem,1.8vw,1.35rem); line-height:1.4; max-width:44ch; }
 .quote em{ font-family:var(--serif-i); font-style:italic; color:var(--eyebrow); }
 .quote cite{ display:block; margin-top:10px; font-family:var(--cond); font-style:normal; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--tx3); }
-/* the framework map */
-.fw{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:22px; }
-.fw > div{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:18px 18px 16px; border-top:3px solid var(--eyebrow); }
-.fw b{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
-.fw strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.25rem; line-height:1.15; margin:6px 0 8px; }
-.fw p{ font-size:.86rem; color:var(--tx2); }
-.fw ul{ list-style:none; margin-top:10px; display:grid; gap:4px; }
-.fw li{ font-size:.86rem; color:var(--tx); padding-left:14px; position:relative; }
-.fw li::before{ content:''; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:50%; background:var(--eyebrow); }
-.fw > div.on{ box-shadow:0 0 0 1px var(--eyebrow) inset; }
-/* drills */
-.drill{ display:grid; gap:12px; margin-top:20px; }
-.dq{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:18px 20px; }
+html.paged .hw-grid{ margin-top:clamp(16px,2.5vh,28px); }
+html.paged .hw{ padding:18px 20px; }
+html.paged .hw p{ font-size:.875rem; }
+/* compact section heads for short pages */
+html.paged .sec-head p{ font-size:1.02rem; margin-top:12px; }
+html.paged .sec-head.tight{ margin-bottom:clamp(12px,2vh,22px); }
+html.paged .sec-head.tight h2{ font-size:clamp(1.5rem,2vh + .9rem,2.3rem); }
+html.paged .module{ margin-top:0; }
+html.paged .module-head{ margin-bottom:14px; }
+html.paged .module-head h3{ font-size:clamp(1.3rem,2.2vw,1.75rem); }
+html.paged .module-head p{ margin-top:8px; font-size:.95rem; }
+/* the Vice Chancellor slot */
+.vslot{ margin-top:16px; border:1px solid var(--bdg); background:var(--card2); border-radius:var(--r); padding:20px 24px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center; }
+.vslot .vic{ width:56px; height:56px; border-radius:50%; border:2px solid var(--eyebrow); display:grid; place-items:center; color:var(--eyebrow); }
+.vslot .vic svg{ width:24px; height:24px; }
+.vslot h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; }
+.vslot p{ color:var(--tx2); font-size:.92rem; margin-top:4px; }
+/* custom narrated videos */
+.cv-wrap{ position:relative; border-radius:var(--r); overflow:hidden; border:1px solid var(--bdg); background:#1C1C1C; aspect-ratio:16/9; max-width:100%; }
+.cv-wrap video{ display:block; width:100%; height:100%; object-fit:cover; background:#1C1C1C; }
+.cv-wrap .cv-wait{ position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:20px; text-align:center; color:#fff; background:linear-gradient(160deg,#262624,#1C1C1C); }
+.cv-wrap.nomedia video{ display:none; }
+.cv-wrap.nomedia .cv-wait{ display:flex; }
+.cv-wait .vic{ width:52px; height:52px; border-radius:50%; border:2px solid var(--vu-gold); display:grid; place-items:center; color:var(--vu-gold); }
+.cv-wait .vic svg{ width:22px; height:22px; }
+.cv-wait b{ font-weight:600; font-size:1rem; }
+.cv-wait p{ font-size:.85rem; color:rgba(255,255,255,.7); max-width:34ch; }
+.cv-cap{ margin-top:8px; font-size:.82rem; color:var(--tx3); display:flex; align-items:center; gap:8px; }
+.cv-cap svg{ width:13px; height:13px; color:var(--eyebrow); flex-shrink:0; }
+.intro-grid{ display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(18px,3vw,36px); align-items:start; margin-top:4px; }
+.intro-grid .concept{ margin:0; }
+/* numbers strip */
+.stat-strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:14px 0 16px; }
+.stat{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:12px 16px; display:flex; align-items:baseline; gap:10px; }
+.stat b{ font-family:var(--serif); font-weight:400; font-size:clamp(1.5rem,2.4vw,2rem); line-height:1; color:var(--eyebrow); }
+.stat span{ font-size:.8rem; color:var(--tx2); line-height:1.3; }
+/* the framework map: tap a category to open it */
+.fw{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px; }
+.fw-card{ width:100%; text-align:left; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:16px 16px 14px; border-top:3px solid var(--eyebrow); cursor:pointer; color:var(--tx); font:inherit; transition:border-color .2s var(--ease); display:flex; flex-direction:column; }
+.fw-card:hover{ border-color:var(--bdg); }
+.fw-card b{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.fw-card strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.2rem; line-height:1.15; margin:6px 0 6px; }
+.fw-card p{ font-size:.84rem; color:var(--tx2); }
+.fw-card ul{ list-style:none; margin-top:10px; display:none; gap:4px; }
+.fw-card li{ font-size:.86rem; color:var(--tx); padding-left:14px; position:relative; }
+.fw-card li::before{ content:''; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:50%; background:var(--eyebrow); }
+.fw-card .hint{ margin-top:auto; padding-top:12px; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.05em; text-transform:uppercase; color:var(--eyebrow); }
+.fw-card[aria-expanded="true"]{ box-shadow:0 0 0 1px var(--eyebrow) inset; }
+.fw-card[aria-expanded="true"] ul{ display:grid; }
+.fw-card[aria-expanded="true"] .hint{ display:none; }
+.fw-status{ margin-top:12px; font-size:.9rem; color:var(--tx2); }
+/* drills, one situation at a time */
+.drill{ margin-top:14px; }
+.dq{ display:none; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:18px 20px; }
+.dq.cur{ display:block; }
 .dq.right{ border-color:var(--eyebrow); }
 .dq.wrong{ border-color:var(--vu-err); }
 .dq .dq-s{ font-size:1rem; color:var(--tx); }
@@ -75,34 +121,154 @@
 .dq-x{ display:none; margin-top:12px; font-size:.93rem; color:var(--tx2); border-top:1px solid var(--bd); padding-top:12px; }
 .dq-x b{ color:var(--tx); }
 .dq.right .dq-x, .dq.wrong .dq-x{ display:block; }
-.drill-status{ margin-top:14px; font-size:.95rem; color:var(--tx2); }
-/* the same-way panel: one behavior, done the Vanderbilt way */
-.way{ margin-top:18px; border:1px solid var(--bdg); border-radius:var(--r); background:var(--card); padding:18px 22px; display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-.way > div{ font-size:.93rem; }
+.dq-nav{ display:none; margin-top:12px; }
+.dq.right .dq-nav, .dq.wrong .dq-nav{ display:flex; gap:10px; align-items:center; }
+.drill-status{ margin-top:12px; font-size:.92rem; color:var(--tx2); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.drill-status .pips{ display:inline-flex; gap:5px; }
+.drill-status .pips i{ width:9px; height:9px; border-radius:50%; border:1.5px solid var(--eyebrow); display:block; }
+.drill-status .pips i.ok{ background:var(--eyebrow); }
+.drill-status .pips i.no{ background:var(--vu-err); border-color:var(--vu-err); }
+/* habit or the Vanderbilt way: tap to sort */
+.sort-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+.sq{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:14px 16px; }
+.sq.right{ border-color:var(--eyebrow); }
+.sq.wrong{ border-color:var(--vu-err); }
+.sq p{ font-size:.95rem; color:var(--tx); }
+.sq-opts{ display:flex; gap:8px; margin-top:10px; }
+.sq-opts button{ flex:1; border:1px solid var(--field-bd); background:var(--field); color:var(--tx2); border-radius:var(--r); padding:8px 10px; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; transition:all .2s var(--ease); }
+.sq-opts button:hover{ border-color:var(--eyebrow); color:var(--eyebrow); }
+.sq-opts button[aria-pressed="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.sq-opts button:disabled{ cursor:default; }
+.sq-opts button.is-answer{ box-shadow:0 0 0 2px var(--eyebrow) inset; }
+.sq-x{ display:none; margin-top:10px; font-size:.86rem; color:var(--tx2); border-top:1px solid var(--bd); padding-top:8px; }
+.sq.right .sq-x, .sq.wrong .sq-x{ display:block; }
+.sq-x b{ color:var(--tx); }
+/* your call: one scenario, three responses */
+.scn{ margin-top:14px; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card2); padding:clamp(18px,2.5vw,28px); }
+.scn .scn-s{ font-family:var(--serif); font-size:clamp(1.15rem,1.9vw,1.45rem); line-height:1.4; color:var(--tx); max-width:60ch; }
+.scn .scn-s em{ font-family:var(--serif-i); font-style:italic; color:var(--strong); }
+.scn-opts{ display:grid; gap:10px; margin-top:16px; }
+.scn-opts button{ text-align:left; border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:var(--r); padding:14px 16px; font-size:.95rem; line-height:1.45; cursor:pointer; display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start; transition:border-color .2s var(--ease), background-color .2s var(--ease); }
+.scn-opts button .k{ font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.05em; color:var(--eyebrow); padding-top:3px; }
+.scn-opts button:hover{ border-color:var(--eyebrow); }
+.scn-opts button[aria-pressed="true"]{ border-color:var(--strong); background:rgba(207,174,112,.14); }
+.scn-opts button.best-pick{ box-shadow:0 0 0 2px var(--eyebrow) inset; }
+.scn-out{ display:none; margin-top:16px; padding-top:14px; border-top:1px solid var(--bd); }
+.scn-out.show{ display:block; }
+.scn-out .vtag{ display:inline-flex; align-items:center; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; padding:4px 9px; border-radius:2px; border:1px solid var(--eyebrow); color:var(--eyebrow); }
+.scn-out .vtag.best{ background:var(--eyebrow); color:var(--btn-tx); }
+.scn-out p{ margin-top:10px; font-size:.95rem; color:var(--tx2); max-width:70ch; }
+.scn-out p b{ color:var(--tx); }
+.scn-out .scn-again{ margin-top:12px; }
+/* drill beside a public video */
+.split2{ display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(18px,3vw,36px); align-items:start; }
+.split2 .module-head{ margin-bottom:10px; }
+.yt{ max-width:none; }
+.more-watch{ list-style:none; margin-top:10px; display:grid; gap:6px; }
+.more-watch li{ font-size:.86rem; color:var(--tx2); display:flex; gap:8px; align-items:baseline; }
+.more-watch li::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--eyebrow); flex-shrink:0; position:relative; top:-2px; }
+.more-watch a{ color:var(--link); border-bottom:1px solid var(--bdg); }
+.more-watch a:hover{ color:var(--strong); }
+/* the same-way panel */
+.way{ margin-top:14px; border:1px solid var(--bdg); border-radius:var(--r); background:var(--card); padding:14px 18px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.way > div{ font-size:.9rem; }
 .way b{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; }
 .way .no b{ color:var(--vu-err); }
 .way .yes b{ color:var(--eyebrow); }
 .way p{ color:var(--tx2); }
+html.paged .flip-grid{ gap:12px; }
+html.paged .fcard button{ padding:16px 16px 14px; }
+html.paged .fcard h4{ margin-top:8px; }
 /* survey card + profile output */
-.survey{ margin-top:18px; border:2px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:22px 24px; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start; }
+.survey{ margin-top:14px; border:2px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:18px 22px; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start; }
 .survey .sk{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); padding:6px 10px; border-radius:2px; white-space:nowrap; }
-.survey h4{ font-family:var(--serif); font-weight:400; font-size:1.35rem; }
-.survey p{ color:var(--tx2); margin-top:6px; }
-.survey ol{ margin:10px 0 0 18px; color:var(--tx2); font-size:.93rem; display:grid; gap:4px; }
+.survey h4{ font-family:var(--serif); font-weight:400; font-size:1.3rem; }
+.survey p{ color:var(--tx2); margin-top:6px; font-size:.95rem; }
+.survey ol{ margin:10px 0 0 18px; color:var(--tx2); font-size:.9rem; display:grid; gap:4px; }
+html.paged .route{ margin-top:0; padding:clamp(18px,2.5vw,28px); }
+.route-qs{ margin-top:16px; }
+.route-q{ display:none; }
+.route-q.cur{ display:block; }
+.route-q .route-qt{ font-size:1.08rem; }
+.route-opts{ grid-template-columns:repeat(3,1fr); margin-top:14px; }
+.route-opts button{ min-height:52px; font-size:1rem; text-align:center; }
+.route-nav{ display:flex; align-items:center; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.route-nav .pips{ display:inline-flex; gap:4px; flex-wrap:wrap; }
+.route-nav .pips i{ width:8px; height:8px; border-radius:50%; border:1.5px solid var(--eyebrow); display:block; }
+.route-nav .pips i.ok{ background:var(--eyebrow); }
+.route-nav .pips i.cur{ transform:scale(1.4); }
+.route-nav button{ min-height:36px; padding:6px 12px; font-size:.8rem; }
 .prof{ margin-top:14px; display:grid; gap:10px; }
 .prof > div{ display:grid; grid-template-columns:200px 1fr 60px; gap:14px; align-items:center; }
 .prof b{ font-weight:600; font-size:.95rem; }
 .prof .bar{ height:10px; background:var(--bd); border-radius:999px; overflow:hidden; }
-.prof .bar i{ display:block; height:100%; background:var(--eyebrow); width:0; transition:width .5s var(--ease); }
+.prof .bar i{ display:block; height:100%; background:var(--eyebrow); width:0; transition:width .4s var(--ease); }
 .prof span{ font-family:var(--cond); font-weight:700; font-size:.9rem; color:var(--eyebrow); text-align:right; }
-.focus-list{ list-style:none; margin-top:14px; display:grid; gap:8px; }
-.focus-list li{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:12px 16px; font-size:.93rem; display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:baseline; }
+.focus-list{ list-style:none; margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.focus-list li{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:12px 14px; font-size:.92rem; display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:baseline; }
 .focus-list li b{ font-family:var(--cond); font-weight:700; color:var(--eyebrow); font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; }
-.focus-list li small{ display:block; color:var(--tx3); font-size:.82rem; margin-top:2px; }
-.gap-line{ margin-top:14px; font-size:.95rem; color:var(--tx2); }
+.focus-list li small{ display:block; color:var(--tx3); font-size:.8rem; margin-top:2px; }
+.gap-line{ margin-top:12px; font-size:.95rem; color:var(--tx2); }
 .gap-line b{ color:var(--tx); }
-@media (max-width:900px){ .stat-grid,.fw{ grid-template-columns:1fr 1fr; } .way{ grid-template-columns:1fr; } .prof > div{ grid-template-columns:1fr 60px; } .prof .bar{ grid-column:1 / -1; } }
-@media (max-width:600px){ .stat-grid,.fw{ grid-template-columns:1fr; } .vslot,.survey{ grid-template-columns:1fr; } }
+/* compact quiz */
+html.paged .quiz-shell{ padding:clamp(16px,2.4vw,28px); }
+html.paged .qz{ padding:14px 18px; margin-bottom:10px; }
+html.paged .qz legend{ font-size:.98rem; margin-bottom:10px; }
+html.paged .qz .opts label{ min-height:42px; padding:8px 14px; font-size:.92rem; }
+/* summary and next step, compact */
+html.paged .recap{ padding:16px 18px; }
+html.paged .recap h3{ font-size:1.15rem; }
+html.paged .recap p{ font-size:.88rem; margin-top:6px; }
+html.paged .recap .r-why{ margin-top:10px; padding-top:8px; font-size:.82rem; }
+html.paged .canon{ padding:16px 20px; }
+html.paged .canon ol{ display:grid; grid-template-columns:1fr 1fr; gap:8px 20px; }
+html.paged .hw-step{ padding:12px 0; grid-template-columns:90px 1fr auto; }
+html.paged .hw-step .hw-no{ font-size:2.2rem; }
+html.paged .hw-step h3{ font-size:1.15rem; }
+html.paged .hw-step p{ font-size:.9rem; margin-top:4px; }
+html.paged .oracle-strip{ margin-top:14px; padding:12px 18px; }
+html.paged #tell-leader{ margin-top:12px; padding:14px 18px; }
+html.paged .hw{ padding:14px 16px; }
+html.paged .hw h3{ font-size:1rem; margin-top:8px; }
+html.paged .hw p{ font-size:.84rem; margin-top:6px; }
+html.paged .hw .chip{ margin-top:10px; }
+html.paged .howworks .bridge{ margin-top:14px; padding-top:12px; }
+html.paged .evidence{ padding:14px 18px; margin-top:12px; }
+html.paged .evidence p{ font-size:.9rem; line-height:1.6; }
+html.paged .intro-grid.even{ grid-template-columns:1fr 1fr; }
+.vslot.stack{ grid-template-columns:1fr; gap:12px; margin-top:0; padding:18px 20px; }
+.stat-strip{ margin:10px 0 12px; gap:8px; }
+.stat{ padding:8px 12px; }
+.stat b{ font-size:clamp(1.3rem,2vw,1.6rem); }
+.stat span{ font-size:.76rem; }
+html.paged .qz{ padding:10px 14px; margin-bottom:8px; }
+html.paged .qz legend{ font-size:.95rem; margin-bottom:8px; }
+html.paged .qz .opts{ gap:6px; }
+html.paged .qz .opts label{ min-height:36px; padding:6px 12px; font-size:.9rem; }
+html.paged #nextstep .hw-list{ display:grid; grid-template-columns:1fr 1fr; gap:0 28px; border-top:0; margin-top:10px; }
+html.paged #nextstep .hw-step{ padding:10px 0; grid-template-columns:56px 1fr auto; gap:8px 14px; }
+html.paged #nextstep .hw-step .hw-no{ font-size:1.7rem; }
+html.paged #nextstep .hw-step h3{ font-size:1.05rem; }
+html.paged #nextstep .hw-step p{ font-size:.86rem; margin-top:3px; }
+html.paged #nextstep .hw-step .chip{ font-size:.64rem; padding:4px 8px; }
+@media (max-width:900px){ html.paged #nextstep .hw-list{ grid-template-columns:1fr; } }
+/* book bar: narration controls */
+.bb-aud{ display:inline-flex; align-items:center; justify-content:center; gap:7px; height:44px; padding:0 12px; flex-shrink:0; border:1px solid rgba(255,255,255,.25); border-radius:var(--r); background:transparent; color:#fff; cursor:pointer; font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.05em; text-transform:uppercase; transition:border-color .2s ease-out, color .2s ease-out; }
+.bb-aud:hover{ border-color:var(--vu-gold); color:var(--vu-gold); }
+.bb-aud svg{ width:15px; height:15px; flex-shrink:0; }
+.bb-aud[aria-pressed="true"]{ border-color:var(--vu-gold); background:var(--vu-gold); color:var(--vu-black); }
+.bb-aud.playing .wave{ display:inline-flex; gap:2px; align-items:flex-end; height:12px; }
+.bb-aud .wave{ display:none; }
+.bb-aud .wave i{ width:3px; background:currentColor; height:4px; animation:bbwave .8s ease-in-out infinite; }
+.bb-aud .wave i:nth-child(2){ animation-delay:.15s; } .bb-aud .wave i:nth-child(3){ animation-delay:.3s; }
+@keyframes bbwave{ 0%,100%{ height:4px; } 50%{ height:12px; } }
+.bb-aud.playing .ico{ display:none; }
+.narr-toast{ position:fixed; left:50%; bottom:calc(var(--bar-h,64px) + 10px); transform:translateX(-50%); z-index:215; background:var(--vu-black); color:#fff; border:1px solid rgba(207,174,112,.5); border-radius:var(--r); padding:8px 14px; font-size:.85rem; opacity:0; visibility:hidden; transition:opacity .25s ease-out, visibility 0s .25s; pointer-events:none; max-width:calc(100vw - 32px); text-align:center; }
+.narr-toast.show{ opacity:1; visibility:visible; transition:opacity .25s ease-out; }
+@media (max-width:1100px){ .bb-aud .bb-aud-t{ display:none; } .bb-aud{ width:44px; padding:0; } }
+@media (prefers-reduced-motion:reduce){ .bb-aud .wave i{ animation:none; height:8px; } }
+@media (max-width:900px){ .stat-strip,.fw{ grid-template-columns:1fr 1fr; } .way,.intro-grid,.split2,.sort-grid{ grid-template-columns:1fr; } .prof > div{ grid-template-columns:1fr 60px; } .prof .bar{ grid-column:1 / -1; } .focus-list{ grid-template-columns:1fr; } html.paged .hero .outcomes{ columns:1; } html.paged .canon ol{ grid-template-columns:1fr; } }
+@media (max-width:600px){ .stat-strip,.fw{ grid-template-columns:1fr; } .vslot,.survey{ grid-template-columns:1fr; } .route-opts{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -175,12 +341,12 @@
       <li><b>Explain</b> the Managerial Practices Survey you are about to receive, and what its results mean</li>
       <li><b>Rate</b> yourself on the fifteen behaviors and pick the one to practice first</li>
     </ul>
-    <p class="lead closer">Same definition. Same vocabulary. Same measure. That is what a <em>standard</em> is.</p>
     <p class="meta-line"><b>About 30 minutes &middot; six segments</b> &middot; self-paced &middot; completion recorded in Oracle Learning</p>
+    <p class="listen-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span><b>Prefer to listen?</b> Every page is narrated. Use <b>Listen</b> in the bar below for this page, or turn on <b>Auto</b> to hear each page as it turns.</span></p>
     <div class="cta-row"><a class="btn btn-gold" href="#start">Begin the foundation<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     <ol class="hw-mini" aria-label="How this course works">
       <li>Turn pages with the arrows below, your keyboard arrows, or a swipe</li>
-      <li>Do each drill as it comes; the section marks itself done when you finish it</li>
+      <li>Do each activity as it comes; the section marks itself done when you finish it</li>
       <li>Finish with the knowledge check and your self-rating</li>
       <li>Your completion is recorded in Oracle Learning; the survey arrives by email</li>
     </ol>
@@ -210,13 +376,14 @@
       <p>That is Chancellor Diermeier&rsquo;s institutional vision, one sentence with no hedge in it. The how is equally blunt: operate at <b>uncommon speed, agility, and scale</b> to address society&rsquo;s challenges through education and research, and help <b>reclaim the essential role of leading research universities in driving American prosperity</b>. Speed, agility, and scale are not properties of a strategy. They are properties of how 4,600 staff are managed, day to day, by you and your peers.</p>
     </div>
     <span class="eyebrow" style="margin-bottom:10px"><span class="tick" aria-hidden="true"></span><span class="mono">Areas of Focus</span></span>
-    <h3 style="font-size:1.35rem;margin:10px 0 18px">Three ways Vanderbilt delivers on the vision</h3>
+    <h3 style="font-size:1.25rem;margin:8px 0 14px">Three ways Vanderbilt delivers on the vision</h3>
     <div class="resp-grid">
-      <article class="principle reveal"><span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:12px">1</span><h3>Exceptional Core Operations</h3><p>With speed, agility and scale, Vanderbilt will distinguish itself with innovative and impactful capabilities to ensure that we have the talent, resources and reputation necessary to deliver on our vision.</p></article>
-      <article class="principle reveal" style="transition-delay:.06s"><span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:12px">2</span><h3>Bold Strategic Initiatives</h3><p>With exceptional core operations as our fuel, Vanderbilt will pursue increasingly bold initiatives that enable and enhance the reach and impact of our education and research mission.</p></article>
-      <article class="principle reveal" style="transition-delay:.12s"><span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:12px">3</span><h3>Industry Leadership</h3><p>Through strategic advocacy efforts and modeling the role of an essential research university, Vanderbilt will stimulate industry change and combat existential threats to our education and research mission.</p></article>
+      <article class="principle reveal"><span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:10px">1</span><h3>Exceptional Core Operations</h3><p>With speed, agility and scale, Vanderbilt will distinguish itself with innovative and impactful capabilities to ensure that we have the talent, resources and reputation necessary to deliver on our vision.</p></article>
+      <article class="principle reveal"><span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:10px">2</span><h3>Bold Strategic Initiatives</h3><p>With exceptional core operations as our fuel, Vanderbilt will pursue increasingly bold initiatives that enable and enhance the reach and impact of our education and research mission.</p></article>
+      <article class="principle reveal"><span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:10px">3</span><h3>Industry Leadership</h3><p>Through strategic advocacy efforts and modeling the role of an essential research university, Vanderbilt will stimulate industry change and combat existential threats to our education and research mission.</p></article>
     </div>
-    <div class="evidence"><span class="e-label">How this course delivers</span><p>Exceptional Core Operations is task-oriented management done well: clear expectations, monitored work, problems solved fast. Bold Strategic Initiatives need change-oriented managers who can explain why and encourage the new idea. Industry Leadership is external behavior: managers who represent their team, watch the environment, and build the relationships the work needs. The four categories you are about to learn are the vision, at the scale of one team.</p></div>
+    <div class="module-head" data-pg="The flywheel" style="margin-top:0"><span class="mno">The Chancellor&rsquo;s charge &middot; continued</span><h3>The vision, at the scale of one team</h3></div>
+    <div class="evidence" style="margin-top:0"><span class="e-label">How this course delivers</span><p>Exceptional Core Operations is task-oriented management done well: clear expectations, monitored work, problems solved fast. Bold Strategic Initiatives need change-oriented managers who can explain why and encourage the new idea. Industry Leadership is external behavior: managers who represent their team, watch the environment, and build the relationships the work needs. The four categories you are about to learn are the vision, at the scale of one team.</p></div>
     <div class="evidence reveal"><span class="e-label">The reputation flywheel, and your place in it</span><p>Reputation and resources feed each other: reputation attracts <b>talent, funding, partnerships, and access and influence</b>, which build the reputation. The university spins that wheel with <b>execution with ambition, values-driven leadership, and athletics momentum</b>, and it now turns in <b>San Francisco, West Palm Beach, New York City, and Chattanooga</b> as well as Nashville. Execution with ambition is a team whose manager plans, clarifies, and monitors. Values-driven leadership is a manager who supports, develops, and recognizes people the same way every week.</p><span class="e-src">&ldquo;Daring to Grow&rdquo;, Chancellor Diermeier, Vanderbilt University (July 2022): <a href="https://news.vanderbilt.edu/2022/07/01/daring-to-grow-together-we-are-building-the-great-university-of-the-21st-century/" target="_blank" rel="noopener">the vision statement this page draws from</a>; Leadership Redefined, Module 1 (Futures Learning Hub, 2026).</span></div>
     <blockquote class="quote">Our mission is not small. We are scaling Mount Everest. Climbing Everest requires courage and commitment. But it promises the professional experience of a lifetime to all who sign on. And we will support one another <em>at every step of the way.</em><cite>Chancellor Daniel Diermeier</cite></blockquote>
   </div>
@@ -227,19 +394,18 @@
     <div class="sec-head reveal" style="margin-bottom:0">
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">How the foundation works</span></span>
       <h2>Six segments, five minutes <em>each</em>.</h2>
+      <p>One idea or one activity per page. Flip the cards, sort the habits, make the call, name the behavior. Listen to any page with the button below.</p>
     </div>
-    <span class="mono hw-cover reveal">The path, in six stops</span>
-    <div class="hw-list reveal">
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>What management is</h3><p>Why Vanderbilt is defining it, the framework every manager here shares, and where this course sits in Manager Voyage.</p></div><span class="chip">5 min</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Task-oriented behavior</h3><p>Planning, clarifying, monitoring, problem solving. Getting the work done well and on time.</p></div><span class="chip">5 min</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Relations-oriented behavior</h3><p>Supporting, developing, recognizing, empowering. Building the people and the trust the work runs on.</p></div><span class="chip">5 min</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">04</span><div><h3>Change-oriented behavior</h3><p>Advocating change, envisioning change, encouraging innovation, facilitating collective learning.</p></div><span class="chip">5 min</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">05</span><div><h3>External behavior</h3><p>Networking, external monitoring, representing. The part of the job that happens outside the team.</p></div><span class="chip">5 min</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">06</span><div><h3>The survey and your profile</h3><p>What the Managerial Practices Survey is, what to expect when it arrives, and a self-rating on the fifteen behaviors.</p></div><span class="chip">5 min</span></div>
+    <div class="hw-grid reveal">
+      <div class="hw"><span class="hw-no" aria-hidden="true">01</span><h3>What management is</h3><p>Why Vanderbilt is defining it, the framework every manager here shares, and the four categories at a glance.</p><span class="chip">5 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">02</span><h3>Task-oriented behavior</h3><p>Planning, clarifying, monitoring, problem solving. Getting the work done well and on time.</p><span class="chip">5 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">03</span><h3>Relations-oriented behavior</h3><p>Supporting, developing, recognizing, empowering. Building the people and the trust the work runs on.</p><span class="chip">5 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">04</span><h3>Change-oriented behavior</h3><p>Advocating change, envisioning change, encouraging innovation, facilitating collective learning.</p><span class="chip">5 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>External behavior</h3><p>Networking, external monitoring, representing. The part of the job that happens outside the team.</p><span class="chip">5 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">06</span><h3>The survey and your profile</h3><p>What the Managerial Practices Survey is, what to expect when it arrives, and a self-rating on the fifteen behaviors.</p><span class="chip">5 min</span></div>
     </div>
     <p class="hw-meta reveal">A knowledge check closes the course. Then the micro modules unlock and your dashboard shows them, ordered from your self-rating.</p>
-    <p class="hw-meta reveal" id="progTopLine" style="margin-top:10px">Section tracking: you have 8 sections ahead.</p>
-    <p class="acr-line reveal">Same definition. Same vocabulary. <b>Same measure.</b></p>
+    <p class="hw-meta reveal" id="progTopLine" style="margin-top:6px">Section tracking: you have 8 sections ahead.</p>
     <div class="bridge reveal"><span class="b-label">Next</span><p>First, the definition most managers never <em>get</em>.</p></div>
   </div>
 </section>
@@ -247,54 +413,60 @@
 <!-- ═════════════════════════ 01 WHAT MANAGEMENT IS ═════════════════════════ -->
 <section id="welcome" class="th-light" aria-label="What management is">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head tight reveal">
       <span class="you-are">You are here: segment 1, the definition.</span>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">What management is / 01</span></span>
       <h2>Management is behavior, not a <em class="s">title</em>.</h2>
-      <p>In this segment, you will hear why Vanderbilt is defining management for every manager, meet the framework the whole program uses, and see the four categories at a glance.</p>
       <div class="lframe">
-        <span class="lf-chip"><b>You&rsquo;ll learn</b>The one definition of management every Vanderbilt manager shares</span>
-        <span class="lf-chip"><b>You&rsquo;ll do</b>Watch the welcome, read the map, sort six claims</span>
+        <span class="lf-chip"><b>You&rsquo;ll learn</b>The one definition every Vanderbilt manager shares</span>
+        <span class="lf-chip"><b>You&rsquo;ll do</b>Watch the welcome, open the map, sort six claims</span>
         <span class="lf-chip"><b>Time</b>5 min</span>
       </div>
     </div>
-
     <div class="module reveal">
       <div class="module-head"><span class="mno">Segment 1 &middot; Welcome from the Vice Chancellor</span><h3>Why we are defining it</h3></div>
-      <div class="vslot" id="vcVideo">
+      <div class="intro-grid even">
+      <div class="vslot stack" id="vcVideo">
         <span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
-        <div><h4>Welcome from the Vice Chancellor for People, Culture and Belonging</h4><p>Five minutes on why Vanderbilt is standardizing management and what changes for you starting today. <b>The recording is being produced; the written welcome below carries the same message.</b></p></div>
+        <div><h4>Welcome from the Vice Chancellor for People, Culture and Belonging</h4><p>Five minutes on why Vanderbilt is standardizing management and what changes for you starting today. <b>The recording is being produced; the written welcome beside it carries the same message.</b></p></div>
       </div>
       <div class="concept reveal">
         <span class="c-label">The welcome, in writing</span>
         <p>You were promoted or hired because you are good at the work. Management is a different job, and until now Vanderbilt never told anyone what that job was. Every manager filled in the blank with whatever they had seen, so 4,600 staff experienced a few hundred different versions of management. Some were excellent. Some ended in an Employee Relations case. The difference was luck.</p>
         <p>This course ends the luck. It gives you the definition Vanderbilt uses, the words we use for it, and the survey that measures it. Everything after this, the micro modules, the cohort, the Portal, uses the same words. When your unit leader, your HR partner, and your Engagement Consultant talk about your management, they will be talking about these fifteen behaviors.</p>
       </div>
-      <div class="stat-grid" role="list" aria-label="The numbers behind the decision">
-        <div class="stat" role="listitem"><b>4,600</b><span>Non-union staff led by Vanderbilt managers</span></div>
-        <div class="stat" role="listitem"><b>~400</b><span>New or promoted managers each year, each with their own version of the job</span></div>
-        <div class="stat" role="listitem"><b>4</b><span>Categories of managerial behavior in the framework</span></div>
-        <div class="stat" role="listitem"><b>15</b><span>Specific behaviors the Managerial Practices Survey measures</span></div>
       </div>
-      <div class="bridge mid reveal"><span class="b-label">Next</span><p>The framework itself, on one <em>page</em>.</p></div>
     </div>
 
     <div class="module reveal" data-pg="The framework">
-      <div class="module-head"><span class="mno">Segment 1 &middot; continued</span><h3>The framework: four categories, fifteen behaviors</h3><p>Vanderbilt uses Gary Yukl&rsquo;s taxonomy of leadership behavior. Decades of research on what managers actually do, sorted into four categories by what each one is for. Read the map now; the next four segments take one category each.</p></div>
-      <div class="concept reveal"><span class="c-label">The idea</span><p>Every category answers a different question. <b>Task:</b> is the work getting done well? <b>Relations:</b> are the people growing and staying? <b>Change:</b> is the team getting better at what it does? <b>External:</b> is the team connected to what it needs outside itself? A good manager does all four. A great manager knows which one this week needs.</p></div>
-      <div class="fw" role="list" aria-label="The four categories">
-        <div role="listitem"><b>Task-oriented</b><strong>Get the work done well.</strong><p>Efficiency, quality, reliability.</p><ul><li>Planning</li><li>Clarifying</li><li>Monitoring</li><li>Problem solving</li></ul></div>
-        <div role="listitem"><b>Relations-oriented</b><strong>Build the people.</strong><p>Trust, skill, commitment.</p><ul><li>Supporting</li><li>Developing</li><li>Recognizing</li><li>Empowering</li></ul></div>
-        <div role="listitem"><b>Change-oriented</b><strong>Make the team better.</strong><p>Adaptation, innovation, learning.</p><ul><li>Advocating change</li><li>Envisioning change</li><li>Encouraging innovation</li><li>Facilitating collective learning</li></ul></div>
-        <div role="listitem"><b>External</b><strong>Connect the team.</strong><p>Information, resources, standing.</p><ul><li>Networking</li><li>External monitoring</li><li>Representing</li></ul></div>
+      <div class="module-head"><span class="mno">Segment 1 &middot; continued</span><h3>The framework: four categories, fifteen behaviors</h3><p>Vanderbilt uses Gary Yukl&rsquo;s taxonomy of leadership behavior: decades of research on what managers actually do, sorted by what each behavior is for. Watch the forty-second explainer, then tap each category to open it.</p></div>
+      <div class="stat-strip" role="list" aria-label="The numbers behind the decision">
+        <div class="stat" role="listitem"><b>4,600</b><span>staff led by Vanderbilt managers</span></div>
+        <div class="stat" role="listitem"><b>~400</b><span>new or promoted managers a year</span></div>
+        <div class="stat" role="listitem"><b>4</b><span>categories of behavior</span></div>
+        <div class="stat" role="listitem"><b>15</b><span>behaviors the survey measures</span></div>
       </div>
-      <div class="evidence reveal"><span class="e-label">The source</span><p>Yukl, G. (2012). Effective leadership behavior: what we know and what questions need more attention. <a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener"><em>Academy of Management Perspectives</em>, 26(4), 66 to 85</a>. The Managerial Practices Survey you will receive measures these same fifteen behaviors.</p></div>
-      <div class="evidence reveal"><span class="e-label">Where this sits in Manager Voyage</span><p>This foundation is the first piece of the Manager Responsibilities Course, one of two components Oracle assigned you for your first 60 days (the other is your state&rsquo;s compliance courses). After it, 22 micro modules practice these behaviors in Vanderbilt&rsquo;s systems and policies, the Manager Portal holds every template, and the optional four-week cohort rehearses the hard conversations. Your dashboard at <a href="../dashboard/">My Voyage</a> shows all of it.</p></div>
-      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Six things people say about management. Sort the <em>true</em> ones.</p></div>
+      <div class="intro-grid even">
+        <div>
+          <div class="cv-wrap" data-cv="framework">
+            <video controls playsinline preload="metadata" poster="../assets/img/foundation/framework-poster.jpg" src="../assets/video/foundation/framework.mp4" aria-label="The framework: four categories, fifteen behaviors. Narrated explainer, forty seconds."></video>
+            <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>The framework in forty seconds</b><p>The narrated explainer is being produced. The map beside it says the same thing.</p></div>
+          </div>
+          <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated. Four categories, fifteen behaviors, forty seconds.</p>
+        </div>
+        <div class="concept"><span class="c-label">The idea</span><p>Every category answers a different question. <b>Task:</b> is the work getting done well? <b>Relations:</b> are the people growing and staying? <b>Change:</b> is the team getting better at what it does? <b>External:</b> is the team connected to what it needs outside itself? A good manager does all four. A great manager knows which one this week needs.</p><p style="margin-top:10px;font-size:.86rem;color:var(--tx3)">Source: Yukl, G. (2012), <a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener" style="color:var(--link);border-bottom:1px solid var(--bdg)"><em>Academy of Management Perspectives</em>, 26(4)</a>. The Managerial Practices Survey measures these same fifteen behaviors.</p></div>
+      </div>
+      <div class="fw" id="fwMap">
+        <button type="button" class="fw-card" aria-expanded="false"><b>Task-oriented</b><strong>Get the work done well.</strong><p>Efficiency, quality, reliability.</p><ul><li>Planning</li><li>Clarifying</li><li>Monitoring</li><li>Problem solving</li></ul><span class="hint">Tap to open</span></button>
+        <button type="button" class="fw-card" aria-expanded="false"><b>Relations-oriented</b><strong>Build the people.</strong><p>Trust, skill, commitment.</p><ul><li>Supporting</li><li>Developing</li><li>Recognizing</li><li>Empowering</li></ul><span class="hint">Tap to open</span></button>
+        <button type="button" class="fw-card" aria-expanded="false"><b>Change-oriented</b><strong>Make the team better.</strong><p>Adaptation, innovation, learning.</p><ul><li>Advocating change</li><li>Envisioning change</li><li>Encouraging innovation</li><li>Facilitating collective learning</li></ul><span class="hint">Tap to open</span></button>
+        <button type="button" class="fw-card" aria-expanded="false"><b>External</b><strong>Connect the team.</strong><p>Information, resources, standing.</p><ul><li>Networking</li><li>External monitoring</li><li>Representing</li></ul><span class="hint">Tap to open</span></button>
+      </div>
+      <p class="fw-status" id="fwStatus" role="status" aria-live="polite">0 of 4 categories opened.</p>
     </div>
 
     <div class="module reveal" data-pg="Fact or fiction">
-      <div class="module-head"><span class="mno">Drill</span><h3>Fact or fiction</h3><p>Tap each claim to see the answer. Six things you will hear about management in any hallway on campus.</p></div>
+      <div class="module-head"><span class="mno">Activity</span><h3>Fact or fiction</h3><p>Tap each claim to see the answer. Six things you will hear about management in any hallway on campus. All six revealed marks this segment done.</p></div>
       <div class="myth-grid" id="factGrid">
         <div class="myth" data-verdict="myth"><button type="button" aria-expanded="false">&ldquo;Good managers are born, not made.&rdquo;</button><span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div class="verdict"><span class="vtag myth-v">Fiction</span><p>Management is behavior, and behavior can be named, measured, and practiced. That is the whole premise of the framework and of this program.</p></div></div>
         <div class="myth" data-verdict="fact"><button type="button" aria-expanded="false">&ldquo;Task and relations behaviors are both required; neither replaces the other.&rdquo;</button><span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div class="verdict"><span class="vtag fact-v">Fact</span><p>A team with clear goals and no support burns out. A team with support and no clarity drifts. The research is consistent: effective managers do both.</p></div></div>
@@ -304,26 +476,33 @@
         <div class="myth" data-verdict="fact"><button type="button" aria-expanded="false">&ldquo;The survey I will receive measures these fifteen behaviors, not my personality.&rdquo;</button><span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div class="verdict"><span class="vtag fact-v">Fact</span><p>The Managerial Practices Survey asks how often you do each behavior. Behavior can change by next month; personality cannot. That is why the program measures behavior.</p></div></div>
       </div>
       <p class="drill-status" id="factStatus" role="status" aria-live="polite">0 of 6 revealed.</p>
+      <div class="md-wrap" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="welcome" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
     </div>
-
-    <div class="md-wrap"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="welcome" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    <div class="bridge reveal"><span class="b-label">Next</span><p>The first category: getting the work <em>done</em>.</p></div>
   </div>
 </section>
 
 <!-- ═════════════════════════ 02 TASK-ORIENTED ═════════════════════════ -->
 <section id="task" class="th-cream" aria-label="Task-oriented behavior">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head tight reveal">
       <span class="you-are">You are here: segment 2, the work.</span>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Task-oriented / 02</span></span>
       <h2>Get the work done <em class="s">well</em>.</h2>
-      <p>In this segment, you will learn the four task-oriented behaviors, see each done the Vanderbilt way versus the habit it replaces, and name them in real situations.</p>
-      <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>Planning, clarifying, monitoring, problem solving</span><span class="lf-chip"><b>You&rsquo;ll do</b>Flip four cards, name six behaviors</span><span class="lf-chip"><b>Time</b>5 min</span></div>
+      <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>Planning, clarifying, monitoring, problem solving</span><span class="lf-chip"><b>You&rsquo;ll do</b>Flip four cards, sort eight habits, make one call, name six behaviors</span><span class="lf-chip"><b>Time</b>5 min</span></div>
     </div>
-    <div class="module reveal">
-      <div class="module-head"><span class="mno">Segment 2 &middot; Task-oriented behavior</span><h3>The four behaviors</h3></div>
-      <div class="concept reveal"><span class="c-label">The idea</span><p>Task-oriented behavior is about efficiency and reliability: the work gets done, done right, and done on time. It is the category new managers most often skip, because they assume the team knows what they know. The team does not. Flip each card for the behavior, what it looks like on a Tuesday, and where you practice it in Manager Voyage.</p></div>
+    <div class="intro-grid">
+      <div>
+        <div class="cv-wrap" data-cv="task">
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/task-poster.jpg" src="../assets/video/foundation/task.mp4" aria-label="Task-oriented behavior, narrated opener."></video>
+          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Task-oriented behavior, in fifteen seconds</b><p>The narrated opener is being produced. Read the idea beside it and turn the page.</p></div>
+        </div>
+        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated. Plan it, say it, check it, fix it.</p>
+      </div>
+      <div class="concept"><span class="c-label">The idea</span><p>Task-oriented behavior is about efficiency and reliability: the work gets done, done right, and done on time. It is the category new managers most often skip, because they assume the team knows what they know. <b>The team does not.</b></p><p>Four behaviors, each one a thing you do on a Tuesday. The next page has them.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="The four behaviors">
+      <div class="module-head"><span class="mno">Segment 2 &middot; Task-oriented behavior</span><h3>The four behaviors</h3><p>Flip each card for what it looks like on a Tuesday and where Manager Voyage practices it.</p></div>
       <div class="flip-grid">
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">1</span><h4>Planning</h4><span class="def">Decide what, who, when, and with what.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>You set the quarter&rsquo;s priorities before the quarter, assign who owns each one, and know what has to move if a new request lands.</p><p><b>Practice:</b> Processes track, Setting Expectations and Goals.</p></span></button></div>
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">2</span><h4>Clarifying</h4><span class="def">Say what is expected, by when, and how good.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>Every direct report can say, without notes, what they own this month, the deadline, and what &ldquo;done well&rdquo; means. Goals live in Culture Amp, not in your head.</p><p><b>Practice:</b> Processes track, Setting Expectations and Goals; Systems track, Culture Amp.</p></span></button></div>
@@ -331,31 +510,57 @@
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Problem solving</h4><span class="def">Find the cause, decide, act.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>A process broke twice this month. You find out why, decide what changes, and tell the team, rather than fixing the symptom a third time yourself.</p><p><b>Practice:</b> People track, Performance Concerns; every simulator.</p></span></button></div>
       </div>
       <div class="way"><div class="no"><b>The habit it replaces</b><p>Assuming the team knows. Sending the goal in an email once. Checking the work when it is late. Fixing problems yourself because it is faster.</p></div><div class="yes"><b>The Vanderbilt way</b><p>Goals written where the team can see them. Expectations said out loud and confirmed back. Progress checked in the 1:1 every week. Root cause found, decision made, team told.</p></div></div>
-      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Six situations. Name the <em>behavior</em>.</p></div>
     </div>
-    <div class="module reveal" data-pg="Name the behavior">
-      <div class="module-head"><span class="mno">Drill</span><h3>Name the behavior</h3><p>Six things a Vanderbilt manager did this week. Tap the task-oriented behavior each one is, or &ldquo;Not managing&rdquo; when it is doing the work instead of managing it.</p></div>
-      <div class="drill" id="taskDrill" data-drill="task"></div>
-      <p class="drill-status" id="taskStatus" role="status" aria-live="polite">0 of 6 named.</p>
+
+    <div class="module reveal" data-pg="Habit or the Vanderbilt way">
+      <div class="module-head"><span class="mno">Activity</span><h3>Habit or the Vanderbilt way?</h3><p>Eight statements. Some are the habit a new manager falls into. Some are how Vanderbilt expects it done. Tap each one to sort it.</p></div>
+      <div class="sort-grid" data-sort="task" id="taskSort"></div>
+      <p class="drill-status" id="taskSortStatus" role="status" aria-live="polite">0 of 8 sorted.</p>
     </div>
-    <div class="md-wrap"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="task" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    <div class="bridge reveal"><span class="b-label">Next</span><p>The work gets done by people. The second category is <em>them</em>.</p></div>
+
+    <div class="module reveal" data-pg="Your call">
+      <div class="module-head"><span class="mno">Activity</span><h3>Your call</h3><p>One situation, three responses. Pick the one you would actually do, then read what happens next. You can try all three.</p></div>
+      <div class="scn" data-scn="task" id="taskScn"></div>
+    </div>
+
+    <div class="split2" data-pg="Name the behavior">
+      <div class="module reveal">
+        <div class="module-head"><span class="mno">Activity</span><h3>Name the behavior</h3><p>Six things a Vanderbilt manager did this week, one at a time. Tap the task-oriented behavior each one is, or &ldquo;Not managing&rdquo; when it is doing the work instead of managing it. All six named marks this segment done.</p></div>
+        <div class="drill" id="taskDrill" data-drill="task"></div>
+        <p class="drill-status" id="taskStatus" role="status" aria-live="polite">0 of 6 named.</p>
+        <div class="md-wrap" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="task" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
+      </div>
+      <div class="module reveal">
+        <div class="module-head"><span class="mno">If you have three minutes</span><h3>What Google learned about managers</h3><p>Google&rsquo;s Project Oxygen studied thousands of managers to find what the best ones do. Notice how many of the behaviors are task-oriented: clear goals, results, and removing what is in the way.</p></div>
+        <div class="yt" data-embed="ICnUGpjgbI0" data-title="Google&rsquo;s Project Oxygen: what great managers do"></div>
+        <p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=ICnUGpjgbI0" target="_blank" rel="noopener">Open it on YouTube</a>.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ═════════════════════════ 03 RELATIONS-ORIENTED ═════════════════════════ -->
 <section id="relations" class="th-light" aria-label="Relations-oriented behavior">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head tight reveal">
       <span class="you-are">You are here: segment 3, the people.</span>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Relations-oriented / 03</span></span>
       <h2>Build the <em class="s">people</em>.</h2>
-      <p>In this segment, you will learn the four relations-oriented behaviors, the ones that decide whether people grow and stay, and name them in real situations.</p>
-      <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>Supporting, developing, recognizing, empowering</span><span class="lf-chip"><b>You&rsquo;ll do</b>Flip four cards, name six behaviors</span><span class="lf-chip"><b>Time</b>5 min</span></div>
+      <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>Supporting, developing, recognizing, empowering</span><span class="lf-chip"><b>You&rsquo;ll do</b>Flip four cards, sort eight habits, make one call, name six behaviors</span><span class="lf-chip"><b>Time</b>5 min</span></div>
     </div>
-    <div class="module reveal">
-      <div class="module-head"><span class="mno">Segment 3 &middot; Relations-oriented behavior</span><h3>The four behaviors</h3></div>
-      <div class="concept reveal"><span class="c-label">The idea</span><p>Relations-oriented behavior builds the trust, skill, and commitment that task behavior runs on. It is where Vanderbilt&rsquo;s engagement scores are made or lost, and it is the category the cohort spends the most time rehearsing. Flip each card.</p></div>
+    <div class="intro-grid">
+      <div>
+        <div class="cv-wrap" data-cv="relations">
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/relations-poster.jpg" src="../assets/video/foundation/relations.mp4" aria-label="Relations-oriented behavior, narrated opener."></video>
+          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Relations-oriented behavior, in fifteen seconds</b><p>The narrated opener is being produced. Read the idea beside it and turn the page.</p></div>
+        </div>
+        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated. Listen, coach, recognize, delegate.</p>
+      </div>
+      <div class="concept"><span class="c-label">The idea</span><p>Relations-oriented behavior builds the trust, skill, and commitment that task behavior runs on. It is where Vanderbilt&rsquo;s engagement scores are made or lost, and it is the category the cohort spends the most time rehearsing.</p><p>Being friendly is not the same as supporting. &ldquo;Great job, everyone&rdquo; is not recognizing. The next page has the four behaviors, precisely.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="The four behaviors">
+      <div class="module-head"><span class="mno">Segment 3 &middot; Relations-oriented behavior</span><h3>The four behaviors</h3><p>Flip each card.</p></div>
       <div class="flip-grid">
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">5</span><h4>Supporting</h4><span class="def">Show concern. Listen. Help with the load.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>Someone mentions a hard week at home. You listen, you adjust what you can, and you know the difference between support and a leave request that needs a handoff.</p><p><b>Practice:</b> People track, FMLA and Leave; cohort week 1, psychological safety.</p></span></button></div>
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">6</span><h4>Developing</h4><span class="def">Coach. Mentor. Open the next door.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>You have a growth conversation without a form in front of you, and you know what each person wants next. Coach before you correct.</p><p><b>Practice:</b> Processes track, Giving Feedback; cohort week 3, coaching and delegation.</p></span></button></div>
@@ -363,31 +568,61 @@
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">8</span><h4>Empowering</h4><span class="def">Delegate real decisions. Consult before deciding.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>You hand over the decision, not only the task, and you ask the team before you set the new process. Autonomy with a clear boundary.</p><p><b>Practice:</b> Processes track, Flexible Work Arrangements; cohort week 3, delegation.</p></span></button></div>
       </div>
       <div class="way"><div class="no"><b>The habit it replaces</b><p>Being friendly instead of supportive. Waiting for the annual review to develop anyone. &ldquo;Great job, team.&rdquo; Delegating tasks but keeping every decision.</p></div><div class="yes"><b>The Vanderbilt way</b><p>Listen, adjust, and route what needs routing. A growth conversation each quarter. Praise that names the person and the act. Decisions delegated with the boundary stated.</p></div></div>
-      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Six situations. Name the <em>behavior</em>.</p></div>
     </div>
-    <div class="module reveal" data-pg="Name the behavior">
-      <div class="module-head"><span class="mno">Drill</span><h3>Name the behavior</h3><p>Six things a Vanderbilt manager did this week. Tap the relations-oriented behavior each one is, or &ldquo;Route it&rdquo; when the situation has crossed into a duty the manager must hand to Employee Relations, Equal Opportunity and Access, or leave administration.</p></div>
-      <div class="drill" id="relationsDrill" data-drill="relations"></div>
-      <p class="drill-status" id="relationsStatus" role="status" aria-live="polite">0 of 6 named.</p>
+
+    <div class="module reveal" data-pg="Habit or the Vanderbilt way">
+      <div class="module-head"><span class="mno">Activity</span><h3>Habit or the Vanderbilt way?</h3><p>Tap each statement to sort it.</p></div>
+      <div class="sort-grid" data-sort="relations" id="relationsSort"></div>
+      <p class="drill-status" id="relationsSortStatus" role="status" aria-live="polite">0 of 8 sorted.</p>
     </div>
-    <div class="md-wrap"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="relations" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    <div class="bridge reveal"><span class="b-label">Next</span><p>A team that works and a team that grows. The third category makes it <em>better</em>.</p></div>
+
+    <div class="module reveal" data-pg="Your call">
+      <div class="module-head"><span class="mno">Activity</span><h3>Your call</h3><p>A team member tells you something that is half a personal disclosure and half a leave request. Pick the response you would actually give.</p></div>
+      <div class="scn" data-scn="relations" id="relationsScn"></div>
+    </div>
+
+    <div class="split2" data-pg="Name the behavior">
+      <div class="module reveal">
+        <div class="module-head"><span class="mno">Activity</span><h3>Name the behavior</h3><p>Six situations, one at a time. Tap the relations-oriented behavior, or &ldquo;Route it&rdquo; when the situation has crossed into a duty the manager must hand to Employee Relations, Equal Opportunity and Access, or leave administration.</p></div>
+        <div class="drill" id="relationsDrill" data-drill="relations"></div>
+        <p class="drill-status" id="relationsStatus" role="status" aria-live="polite">0 of 6 named.</p>
+        <div class="md-wrap" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="relations" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
+      </div>
+      <div class="module reveal">
+        <div class="module-head"><span class="mno">If you have twelve minutes</span><h3>Why good leaders make you feel safe</h3><p>Simon Sinek&rsquo;s TED talk on the circle of safety: the manager who takes care of the people gets a team that takes care of the work. That is supporting, in one story.</p></div>
+        <div class="yt" data-embed="lmyZMtPVodo" data-title="Simon Sinek: Why good leaders make you feel safe"></div>
+        <p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=lmyZMtPVodo" target="_blank" rel="noopener">Open it on YouTube</a>.</p>
+        <ul class="more-watch" aria-label="More to watch">
+          <li><a href="https://www.youtube.com/watch?v=0jgbWPX56js" target="_blank" rel="noopener">LeeAnn Renninger, The secret to giving great feedback</a> (TED, 6 min). Developing and recognizing, done specifically.</li>
+          <li><a href="https://www.youtube.com/watch?v=u6XAPnuFjJc" target="_blank" rel="noopener">Dan Pink, Drive: the surprising truth about what motivates us</a> (RSA, 11 min). Why empowering works.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ═════════════════════════ 04 CHANGE-ORIENTED ═════════════════════════ -->
 <section id="change" class="th-dark" aria-label="Change-oriented behavior">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head tight reveal">
       <span class="you-are">You are here: segment 4, getting better.</span>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Change-oriented / 04</span></span>
       <h2>Make the team <em class="s">better</em>.</h2>
-      <p>In this segment, you will learn the four change-oriented behaviors, the ones Vanderbilt&rsquo;s speed, agility, and scale depend on, and name them in real situations.</p>
-      <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>Advocating change, envisioning change, encouraging innovation, facilitating collective learning</span><span class="lf-chip"><b>You&rsquo;ll do</b>Flip four cards, name six behaviors</span><span class="lf-chip"><b>Time</b>5 min</span></div>
+      <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>Advocating change, envisioning change, encouraging innovation, facilitating collective learning</span><span class="lf-chip"><b>You&rsquo;ll do</b>Flip four cards, sort eight habits, make one call, name six behaviors</span><span class="lf-chip"><b>Time</b>5 min</span></div>
     </div>
-    <div class="module reveal">
-      <div class="module-head"><span class="mno">Segment 4 &middot; Change-oriented behavior</span><h3>The four behaviors</h3></div>
-      <div class="concept reveal"><span class="c-label">The idea</span><p>Change-oriented behavior is how a team adapts, improves, and learns. The Chancellor&rsquo;s charge is uncommon speed, agility, and scale; none of those happen at the university level unless they happen at the team level, one manager at a time. This is not about big reorganizations. Most of it is small and weekly. Flip each card.</p></div>
+    <div class="intro-grid">
+      <div>
+        <div class="cv-wrap" data-cv="change">
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/change-poster.jpg" src="../assets/video/foundation/change.mp4" aria-label="Change-oriented behavior, narrated opener."></video>
+          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Change-oriented behavior, in fifteen seconds</b><p>The narrated opener is being produced. Read the idea beside it and turn the page.</p></div>
+        </div>
+        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated. Explain the why, picture next year, try it, debrief.</p>
+      </div>
+      <div class="concept"><span class="c-label">The idea</span><p>Change-oriented behavior is how a team adapts, improves, and learns. The Chancellor&rsquo;s charge is uncommon speed, agility, and scale; none of those happen at the university level unless they happen at the team level, one manager at a time.</p><p>This is not about big reorganizations. <b>Most of it is small and weekly.</b></p></div>
+    </div>
+
+    <div class="module reveal" data-pg="The four behaviors">
+      <div class="module-head"><span class="mno">Segment 4 &middot; Change-oriented behavior</span><h3>The four behaviors</h3><p>Flip each card.</p></div>
       <div class="flip-grid">
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">9</span><h4>Advocating change</h4><span class="def">Explain why, and build support for it.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>A new system is coming from central. You explain the reason in your own words before the announcement email does, and you take the objections seriously.</p><p><b>Practice:</b> Vanderbilt and Nashville track, Areas of Focus; cohort week 1.</p></span></button></div>
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">10</span><h4>Envisioning change</h4><span class="def">Describe where the team is going, and why it matters.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>You can say, in two sentences, how your team&rsquo;s work connects to the great university of the 21st century, and what the team will be able to do next year that it cannot do now.</p><p><b>Practice:</b> Vanderbilt and Nashville track, The Mission and the Vision.</p></span></button></div>
@@ -395,57 +630,99 @@
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">12</span><h4>Facilitating collective learning</h4><span class="def">Debrief. Share what worked. Keep it.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>Ten minutes after the event: what worked, what did not, what changes next time. Written down where the next person can find it.</p><p><b>Practice:</b> cohort week 4, team development; the Manager Portal templates.</p></span></button></div>
       </div>
       <div class="way"><div class="no"><b>The habit it replaces</b><p>Forwarding the announcement. Managing the team as if next year looks like this year. &ldquo;That is not how we do it here.&rdquo; Moving to the next project without a look back.</p></div><div class="yes"><b>The Vanderbilt way</b><p>The why, in your own words, before the email. A two-sentence picture of next year. &ldquo;Try it and show me.&rdquo; A ten-minute debrief, written down.</p></div></div>
-      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Six situations. Name the <em>behavior</em>.</p></div>
     </div>
-    <div class="module reveal" data-pg="Name the behavior">
-      <div class="module-head"><span class="mno">Drill</span><h3>Name the behavior</h3><p>Six things a Vanderbilt manager did this week. Tap the change-oriented behavior each one is, or &ldquo;Not this category&rdquo; when it belongs somewhere else.</p></div>
-      <div class="drill" id="changeDrill" data-drill="change"></div>
-      <p class="drill-status" id="changeStatus" role="status" aria-live="polite">0 of 6 named.</p>
+
+    <div class="module reveal" data-pg="Habit or the Vanderbilt way">
+      <div class="module-head"><span class="mno">Activity</span><h3>Habit or the Vanderbilt way?</h3><p>Tap each statement to sort it.</p></div>
+      <div class="sort-grid" data-sort="change" id="changeSort"></div>
+      <p class="drill-status" id="changeSortStatus" role="status" aria-live="polite">0 of 8 sorted.</p>
     </div>
-    <div class="md-wrap"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="change" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    <div class="bridge reveal"><span class="b-label">Next</span><p>No team is an island. The last category faces <em>outward</em>.</p></div>
+
+    <div class="module reveal" data-pg="Your call">
+      <div class="module-head"><span class="mno">Activity</span><h3>Your call</h3><p>A new system is coming from central and your team is already unhappy about it. Pick the response you would actually give.</p></div>
+      <div class="scn" data-scn="change" id="changeScn"></div>
+    </div>
+
+    <div class="split2" data-pg="Name the behavior">
+      <div class="module reveal">
+        <div class="module-head"><span class="mno">Activity</span><h3>Name the behavior</h3><p>Six situations, one at a time. Tap the change-oriented behavior, or &ldquo;Not this category&rdquo; when it belongs somewhere else.</p></div>
+        <div class="drill" id="changeDrill" data-drill="change"></div>
+        <p class="drill-status" id="changeStatus" role="status" aria-live="polite">0 of 6 named.</p>
+        <div class="md-wrap" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="change" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
+      </div>
+      <div class="module reveal">
+        <div class="module-head"><span class="mno">If you have eleven minutes</span><h3>Building a psychologically safe workplace</h3><p>Amy Edmondson, whose research named psychological safety, on the condition every change behavior depends on: people will only try the new idea, or admit the debrief truth, when it is safe to.</p></div>
+        <div class="yt" data-embed="LhoLuui9gX8" data-title="Amy Edmondson: Building a psychologically safe workplace"></div>
+        <p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ═════════════════════════ 05 EXTERNAL ═════════════════════════ -->
 <section id="external" class="th-cream" aria-label="External behavior">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head tight reveal">
       <span class="you-are">You are here: segment 5, outside the team.</span>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">External / 05</span></span>
       <h2>Connect the <em class="s">team</em>.</h2>
-      <p>In this segment, you will learn the three external behaviors, the part of management that happens outside your team, and name them in real situations.</p>
-      <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>Networking, external monitoring, representing</span><span class="lf-chip"><b>You&rsquo;ll do</b>Flip three cards, name six behaviors</span><span class="lf-chip"><b>Time</b>5 min</span></div>
+      <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>Networking, external monitoring, representing</span><span class="lf-chip"><b>You&rsquo;ll do</b>Flip three cards, sort eight habits, make one call, name six behaviors</span><span class="lf-chip"><b>Time</b>5 min</span></div>
     </div>
-    <div class="module reveal">
-      <div class="module-head"><span class="mno">Segment 5 &middot; External behavior</span><h3>The three behaviors</h3></div>
-      <div class="concept reveal"><span class="c-label">The idea</span><p>Every team depends on information, resources, and goodwill it does not control. Vanderbilt is 39 business units, schools, central offices, and now five cities; the manager is the team&rsquo;s connection to all of it. This is the category new managers most often do not know exists. Flip each card.</p></div>
+    <div class="intro-grid">
+      <div>
+        <div class="cv-wrap" data-cv="external">
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/external-poster.jpg" src="../assets/video/foundation/external.mp4" aria-label="External behavior, narrated opener."></video>
+          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>External behavior, in fifteen seconds</b><p>The narrated opener is being produced. Read the idea beside it and turn the page.</p></div>
+        </div>
+        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated. Know the people, watch what is coming, speak for the team.</p>
+      </div>
+      <div class="concept"><span class="c-label">The idea</span><p>Every team depends on information, resources, and goodwill it does not control. Vanderbilt is 39 business units, schools, central offices, and now five cities; the manager is the team&rsquo;s connection to all of it.</p><p><b>This is the category new managers most often do not know exists.</b></p></div>
+    </div>
+
+    <div class="module reveal" data-pg="The three behaviors">
+      <div class="module-head"><span class="mno">Segment 5 &middot; External behavior</span><h3>The three behaviors</h3><p>Flip each card.</p></div>
       <div class="flip-grid" style="grid-template-columns:repeat(3,1fr)">
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">13</span><h4>Networking</h4><span class="def">Know the people your team will need.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>You know your HR partner, your Engagement Consultant, the person in Finance who approves your requisitions, and a peer manager in another unit, by name, before you need any of them.</p><p><b>Practice:</b> Vanderbilt and Nashville track, How We Work Together; the Manager Portal, Who to call.</p></span></button></div>
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">14</span><h4>External monitoring</h4><span class="def">Watch for what is coming.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>You read the policy change before it lands on your team, you know when the compensation cycle opens, and you know what the other units that depend on you are planning.</p><p><b>Practice:</b> Vanderbilt and Nashville track, Areas of Focus; Processes track, Compensation Cycle.</p></span></button></div>
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">15</span><h4>Representing</h4><span class="def">Speak for the team. Get it what it needs.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">On a Tuesday</span><p>When another unit&rsquo;s request would break your team&rsquo;s month, you say so, with the numbers, and you negotiate the deadline instead of absorbing it. You make the case for the hire.</p><p><b>Practice:</b> Systems track, Requisitions and Hiring; cohort week 4, the capstone presentation.</p></span></button></div>
       </div>
       <div class="way"><div class="no"><b>The habit it replaces</b><p>Meeting your HR partner at the first crisis. Learning about the policy change from the team. Absorbing every request so nobody is upset.</p></div><div class="yes"><b>The Vanderbilt way</b><p>Names known before they are needed. The change read before it lands. The team&rsquo;s workload defended with numbers, politely and early.</p></div></div>
-      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Six situations. Name the <em>behavior</em>.</p></div>
     </div>
-    <div class="module reveal" data-pg="Name the behavior">
-      <div class="module-head"><span class="mno">Drill</span><h3>Name the behavior</h3><p>Six things a Vanderbilt manager did this week. Tap the external behavior each one is, or &ldquo;Not this category&rdquo; when it belongs somewhere else. This drill also tests whether you can tell the four categories apart.</p></div>
-      <div class="drill" id="externalDrill" data-drill="external"></div>
-      <p class="drill-status" id="externalStatus" role="status" aria-live="polite">0 of 6 named.</p>
+
+    <div class="module reveal" data-pg="Habit or the Vanderbilt way">
+      <div class="module-head"><span class="mno">Activity</span><h3>Habit or the Vanderbilt way?</h3><p>Tap each statement to sort it.</p></div>
+      <div class="sort-grid" data-sort="external" id="externalSort"></div>
+      <p class="drill-status" id="externalSortStatus" role="status" aria-live="polite">0 of 8 sorted.</p>
     </div>
-    <div class="md-wrap"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="external" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    <div class="bridge reveal"><span class="b-label">Next</span><p>Fifteen behaviors, one measure. Now the <em>survey</em>.</p></div>
+
+    <div class="module reveal" data-pg="Your call">
+      <div class="module-head"><span class="mno">Activity</span><h3>Your call</h3><p>Another unit asks for something that would break your team&rsquo;s month. Pick the response you would actually give.</p></div>
+      <div class="scn" data-scn="external" id="externalScn"></div>
+    </div>
+
+    <div class="split2" data-pg="Name the behavior">
+      <div class="module reveal">
+        <div class="module-head"><span class="mno">Activity</span><h3>Name the behavior</h3><p>Six situations, one at a time. Tap the external behavior, or &ldquo;Not this category&rdquo; when it belongs somewhere else. This drill also tests whether you can tell the four categories apart.</p></div>
+        <div class="drill" id="externalDrill" data-drill="external"></div>
+        <p class="drill-status" id="externalStatus" role="status" aria-live="polite">0 of 6 named.</p>
+        <div class="md-wrap" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="external" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
+      </div>
+      <div class="module reveal">
+        <div class="module-head"><span class="mno">If you have four minutes</span><h3>Managing your boss</h3><p>Harvard Business Publishing on the relationship above you: external behavior pointed upward. Your unit leader is the first person your team needs you connected to.</p></div>
+        <div class="yt" data-embed="qLFAHMHWtIA" data-title="Harvard ManageMentor: Managing your boss"></div>
+        <p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=qLFAHMHWtIA" target="_blank" rel="noopener">Open it on YouTube</a>.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ═════════════════════════ 06 THE SURVEY AND YOUR PROFILE ═════════════════════════ -->
 <section id="survey" class="th-light" aria-label="The survey and your profile">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head tight reveal">
       <span class="you-are">You are here: segment 6, the measure.</span>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The survey and your profile / 06</span></span>
       <h2>One measure, fifteen <em class="s">behaviors</em>.</h2>
-      <p>In this segment, you will learn what the Managerial Practices Survey is and what to expect when it arrives, then rate yourself on the fifteen behaviors to get a first profile and the one behavior to practice this week.</p>
       <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>How the survey works and how to read it</span><span class="lf-chip"><b>You&rsquo;ll do</b>Rate yourself fifteen times, get your profile</span><span class="lf-chip"><b>Time</b>5 min</span></div>
     </div>
     <div class="module reveal">
@@ -463,36 +740,34 @@
           </ol>
         </div>
       </div>
-      <div class="evidence reveal"><span class="e-label">How to read a result</span><p>A low score on a behavior is not a verdict; it is a behavior you do less often than the job needs. Behaviors are the most changeable thing about a manager. The self-rating below is practice for reading your own profile, and it sets the order your micro modules open in.</p></div>
-      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Rate yourself on all fifteen. Be honest, not <em>modest</em>.</p></div>
+      <div class="evidence reveal" style="margin-top:14px"><span class="e-label">How to read a result</span><p>A low score on a behavior is not a verdict; it is a behavior you do less often than the job needs. Behaviors are the most changeable thing about a manager. The self-rating on the next page is practice for reading your own profile, and it sets the order your micro modules open in.</p></div>
     </div>
     <div class="route reveal" id="assessBox" data-pg="Your self-rating">
       <div class="route-head">
         <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Self-rating &middot; fifteen behaviors</span></span>
         <h3>How often do you do <em>this</em>?</h3>
-        <p>For each behavior: rarely, sometimes, or often. Think of a typical month with your current team. Your answers stay in this browser and in your Oracle record when you open this course from Oracle Learning; the footer Reset clears them.</p>
+        <p>One behavior at a time: rarely, sometimes, or often. Think of a typical month with your current team. Be honest, not modest. Your answers stay in this browser and in your Oracle record when you open this course from Oracle Learning.</p>
       </div>
       <div class="route-qs" id="assessQs"></div>
+      <div class="route-nav" id="assessNav"></div>
       <div class="route-act">
         <button type="button" class="btn btn-primary" id="assessShow" disabled>Show my profile</button>
         <span class="route-hint" id="assessHint">Rate all fifteen to see your profile.</span>
       </div>
       <div class="route-out" id="assessOut" aria-live="polite"></div>
+      <div class="md-wrap" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="survey" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
     </div>
-    <div class="md-wrap"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="survey" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    <div class="bridge reveal"><span class="b-label">Next</span><p>Eight questions to prove the foundation <em>held</em>.</p></div>
   </div>
 </section>
 
 <!-- ═════════════════════════ KNOWLEDGE CHECK ═════════════════════════ -->
 <section id="quiz" class="th-cream" aria-label="Knowledge check">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head tight reveal">
       <span class="you-are">You are here: the checkpoint.</span>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Knowledge check / 07</span></span>
       <h2>The knowledge <em class="s">check</em>.</h2>
-      <p>Eight questions across the six segments. Six or more correct completes the foundation; you can retake it anytime.</p>
-      <div class="lframe"><span class="lf-chip"><b>You&rsquo;ll learn</b>Where your gaps are (if any)</span><span class="lf-chip"><b>You&rsquo;ll do</b>Answer eight questions, scored instantly</span><span class="lf-chip"><b>Time</b>4 min</span></div>
+      <p>Eight questions across the six segments. Six or more correct completes the foundation; you can retake it anytime. Questions 1 to 4 are on this page.</p>
     </div>
     <div class="quiz-shell reveal">
       <div id="quizForm" role="group" aria-label="Knowledge check, questions 1 to 4">
@@ -503,7 +778,7 @@
       </div>
     </div>
     <div class="quiz-shell" data-pg="Questions 5 to 8">
-      <div class="module-head" style="margin-bottom:18px"><span class="mno">Knowledge check &middot; continued</span><h3>Questions 5 to 8</h3></div>
+      <div class="module-head" style="margin-bottom:14px"><span class="mno">Knowledge check &middot; continued</span><h3>Questions 5 to 8</h3></div>
       <div id="quizForm2" role="group" aria-label="Knowledge check, questions 5 to 8">
         <fieldset class="qz" data-answer="c"><legend><span class="qn">5/8</span>A team member suggests a different way to run the weekly report. The change-oriented response is:</legend><div class="opts"><label><input type="radio" name="q5" value="a" /> Explain why the current way exists</label> <label><input type="radio" name="q5" value="b" /> Escalate it to your unit leader</label> <label><input type="radio" name="q5" value="c" /> &ldquo;Try it for two weeks and show me&rdquo;</label> <label><input type="radio" name="q5" value="d" /> Add it to next year&rsquo;s plan</label></div><p class="expl"><b>Try it and show me.</b> Encouraging innovation is inviting the new idea and letting it be tried, small and soon.</p></fieldset>
         <fieldset class="qz" data-answer="b"><legend><span class="qn">6/8</span>Knowing your HR partner, your Engagement Consultant, and the requisition approver in Finance by name before you need them is:</legend><div class="opts"><label><input type="radio" name="q6" value="a" /> Planning</label> <label><input type="radio" name="q6" value="b" /> Networking</label> <label><input type="radio" name="q6" value="c" /> Empowering</label> <label><input type="radio" name="q6" value="d" /> Advocating change</label></div><p class="expl"><b>Networking.</b> External behavior: the relationships outside the team that the team&rsquo;s work depends on.</p></fieldset>
@@ -517,55 +792,51 @@
       </div>
     </div>
     <div class="quiz-shell" data-pg="Your score">
-      <div class="module-head" style="margin-bottom:18px"><span class="mno">Knowledge check &middot; results</span><h3>Your score</h3></div>
+      <div class="module-head" style="margin-bottom:14px"><span class="mno">Knowledge check &middot; results</span><h3>Your score</h3></div>
       <p class="hinttxt" id="quizWait">Answer all eight questions, then choose &ldquo;Check my answers&rdquo;; your score lands here.</p>
       <div class="quiz-result" id="quizResult" role="status" aria-live="polite"></div>
+      <div class="md-wrap" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="quiz" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
     </div>
-    <div class="md-wrap"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="quiz" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    <div class="bridge reveal"><span class="b-label">Next</span><p>Score in hand, one <em>quick review</em> before you go.</p></div>
   </div>
 </section>
 
 <!-- ═════════════════════════ SUMMARY ═════════════════════════ -->
 <section id="summary" class="th-light" aria-label="What you now know">
   <div class="wrap">
-    <div class="sec-head reveal">
+    <div class="sec-head tight reveal">
       <span class="you-are">You are here: consolidation, one quick revisit.</span>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Summary</span></span>
       <h2>What you now <em class="s">know.</em></h2>
-      <p>The six ideas you picked up in thirty minutes.</p>
     </div>
     <div class="recap-grid">
       <article class="recap reveal"><h3>Management is behavior</h3><p>Four categories, fifteen behaviors. The same definition, vocabulary, and measure for every Vanderbilt manager.</p><span class="r-why"><b>At work:</b> when a week feels hard, ask which category it needs.</span></article>
-      <article class="recap reveal" style="transition-delay:.06s"><h3>Task: get the work done well</h3><p>Planning, clarifying, monitoring, problem solving. The category new managers skip because they assume the team knows.</p><span class="r-why"><b>At work:</b> goals written where the team can see them, progress checked in the 1:1.</span></article>
-      <article class="recap reveal" style="transition-delay:.12s"><h3>Relations: build the people</h3><p>Supporting, developing, recognizing, empowering. Where engagement is made or lost.</p><span class="r-why"><b>At work:</b> praise that names the person and the act, decisions delegated with the boundary stated.</span></article>
+      <article class="recap reveal"><h3>Task: get the work done well</h3><p>Planning, clarifying, monitoring, problem solving. The category new managers skip because they assume the team knows.</p><span class="r-why"><b>At work:</b> goals written where the team can see them, progress checked in the 1:1.</span></article>
+      <article class="recap reveal"><h3>Relations: build the people</h3><p>Supporting, developing, recognizing, empowering. Where engagement is made or lost.</p><span class="r-why"><b>At work:</b> praise that names the person and the act, decisions delegated with the boundary stated.</span></article>
       <article class="recap reveal"><h3>Change: make the team better</h3><p>Advocating, envisioning, encouraging innovation, collective learning. Small and weekly, not a reorganization.</p><span class="r-why"><b>At work:</b> the why in your own words, and a ten-minute debrief written down.</span></article>
-      <article class="recap reveal" style="transition-delay:.06s"><h3>External: connect the team</h3><p>Networking, external monitoring, representing. The category most new managers do not know exists.</p><span class="r-why"><b>At work:</b> names known before they are needed, the team&rsquo;s workload defended with numbers.</span></article>
-      <article class="recap reveal" style="transition-delay:.12s"><h3>One measure</h3><p>The Managerial Practices Survey measures how often you do the fifteen behaviors. Nobody passes or fails it. It is a map.</p><span class="r-why"><b>At work:</b> complete it when it arrives, for a typical month, honestly.</span></article>
+      <article class="recap reveal"><h3>External: connect the team</h3><p>Networking, external monitoring, representing. The category most new managers do not know exists.</p><span class="r-why"><b>At work:</b> names known before they are needed, the team&rsquo;s workload defended with numbers.</span></article>
+      <article class="recap reveal"><h3>One measure</h3><p>The Managerial Practices Survey measures how often you do the fifteen behaviors. Nobody passes or fails it. It is a map.</p><span class="r-why"><b>At work:</b> complete it when it arrives, for a typical month, honestly.</span></article>
     </div>
-    <div class="canon reveal" id="takehome" style="margin-top:24px">
+    <div class="canon reveal" id="takehome" style="margin-top:14px">
       <h5>What you leave with</h5>
       <ol>
-        <li><span><b>Your first profile.</b> The self-rating from <a href="#survey">segment 6</a>, saved to this browser and your Oracle record, with the one behavior to practice this week.</span></li>
+        <li><span><b>Your first profile.</b> The self-rating from <a href="#survey">segment 6</a>, with the one behavior to practice this week.</span></li>
         <li><span><b>Your module order.</b> The 22 micro modules, ordered from your weakest category. Your dashboard shows them.</span></li>
         <li><span><b>The map.</b> Four categories and fifteen behaviors, in <a href="#welcome">segment 1</a>.</span></li>
         <li><span><b>The survey, expected.</b> What it is, how to answer it, and how to read it.</span></li>
       </ol>
     </div>
-    <div class="bridge reveal"><span class="b-label">Next</span><p>The foundation is poured. Now the first <em>seven days</em>.</p></div>
   </div>
 </section>
 
 <!-- ═════════════════════════ NEXT STEP ═════════════════════════ -->
 <section id="nextstep" class="th-cream" aria-label="Your next step">
   <div class="wrap">
-    <div class="sec-head reveal" style="margin-bottom:0">
+    <div class="sec-head tight reveal" style="margin-bottom:0">
       <span class="you-are">You are here: the handoff to your real week.</span>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Next step / 08</span></span>
       <h2>Your next seven <em class="s">days.</em></h2>
-      <p>Five small moves. Each one is on your dashboard.</p>
     </div>
-    <div class="hw-list reveal">
+    <div class="hw-list reveal" style="margin-top:14px">
       <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Complete the survey when it arrives</h3><p>The Managerial Practices Survey comes by email from the Futures Learning Hub. Fifteen minutes, for a typical month, honestly.</p></div><span class="chip">When it arrives</span></div>
       <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one behavior this week</h3><p id="ns2p">The one your self-rating pointed to. Do it once, on purpose, and notice what happened.</p></div><span class="chip">This week</span></div>
       <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Open your dashboard</h3><p>Your compliance list, your micro modules in the order your rating set, your milestones, and who to call. <a href="../dashboard/">Open My Voyage</a>.</p></div><span class="chip">Today</span></div>
@@ -578,11 +849,12 @@
     </div>
     <div class="evidence reveal" id="tell-leader">
       <span class="e-label">Tell your unit leader</span>
-      <p>Commitments kept in private fade. Copy this message, fill in the brackets, and send it to your unit leader today.</p>
-      <p><em>&ldquo;I just completed the Manager Voyage foundation. The behavior I am practicing this week is [behavior]. Ask me about it on [date].&rdquo;</em></p>
-      <button type="button" class="btn btn-ghost btn-sm" data-copytext="I just completed the Manager Voyage foundation. The behavior I am practicing this week is [behavior]. Ask me about it on [date].">Copy the message</button>
+      <p>Commitments kept in private fade. Copy this message, fill in the brackets, and send it to your unit leader today. <em>&ldquo;I just completed the Manager Voyage foundation. The behavior I am practicing this week is [behavior]. Ask me about it on [date].&rdquo;</em></p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:center">
+        <button type="button" class="btn btn-ghost btn-sm" data-copytext="I just completed the Manager Voyage foundation. The behavior I am practicing this week is [behavior]. Ask me about it on [date].">Copy the message</button>
+        <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="nextstep" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+      </div>
     </div>
-    <div class="md-wrap"><button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="nextstep" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
   </div>
 </section>
 
@@ -612,6 +884,8 @@
 <div class="book-bar" id="bookBar" role="navigation" aria-label="Book controls">
   <div class="bb-left">
     <span class="bb-sec" id="bbSec" aria-hidden="true">Welcome</span>
+    <button type="button" class="bb-aud" id="bbListen" aria-pressed="false" aria-label="Listen to this page" title="Listen to this page"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span class="wave" aria-hidden="true"><i></i><i></i><i></i></span><span class="bb-aud-t" id="bbListenT">Listen</span></button>
+    <button type="button" class="bb-aud" id="bbAuto" aria-pressed="false" aria-label="Auto-narrate every page" title="Auto-narrate every page"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/><path d="M18 15l3 3-3 3"/></svg><span class="bb-aud-t">Auto</span></button>
     <button type="button" class="bb-done" id="bbDone" aria-pressed="false" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span class="bb-done-t">Mark done</span></button>
   </div>
   <nav class="bb-dots" id="bbDots" aria-label="Course sections"></nav>
@@ -621,6 +895,7 @@
     <button type="button" class="bb-btn" id="pgNext" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
   </div>
 </div>
+<p class="narr-toast" id="narrToast" role="status" aria-live="polite"></p>
 
 <div class="oracle-overlay" id="oracleModal" role="dialog" aria-modal="true" aria-labelledby="oracleTitle" hidden>
   <div class="oracle-modal">
@@ -635,9 +910,10 @@
   </div>
 </div>
 
-<script src="../assets/js/program-data.js?v=2"></script>
-<script src="../assets/js/scorm.js?v=2"></script>
-<script src="pager.js?v=2"></script>
-<script src="app.js?v=2"></script>
+<script src="../assets/js/program-data.js?v=3"></script>
+<script src="../assets/js/scorm.js?v=3"></script>
+<script src="narration-scripts.js?v=3"></script>
+<script src="pager.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>

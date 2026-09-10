@@ -1,0 +1,34 @@
+name: Fetch course media
+# Downloads the Runway-generated narration and video clips listed in
+# .github/media-urls.json, builds the course media with ffmpeg, commits the
+# results to main, and mirrors main to gh-pages. The signed URLs expire within
+# a day of generation, so this runs as soon as the JSON changes.
+on:
+  push:
+    branches: [main]
+    paths: ['.github/media-urls.json', 'scripts/build-media.py']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: fetch-media
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Build media
+        run: python3 scripts/build-media.py
+      - name: Commit media
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/audio/foundation assets/video/foundation assets/img/foundation
+          if git diff --cached --quiet; then echo "No media changes"; else git commit -m "Add Foundation course narration and videos (built from media-urls.json)"; git push origin HEAD:main; fi
+      - name: Mirror main to gh-pages
+        run: git push -f origin HEAD:gh-pages

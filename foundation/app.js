@@ -1,8 +1,10 @@
 /* ══════════ MANAGER VOYAGE · FOUNDATION · app engine ══════════
-   Progress (eight tracked sections), the six segments' activities, the
-   self-assessment that orders the 22 micro modules, the knowledge check,
-   and the SCORM hookup. State: localStorage mv-found-* plus, inside Oracle
-   Learning, SCORM suspend_data. Nothing is sent anywhere else. */
+   Progress (eight tracked sections), the six segments' activities (flip
+   cards, habit sort, your call, name the behavior), the self-rating that
+   orders the 22 micro modules, the knowledge check, page narration, the
+   custom and public videos, and the SCORM hookup. State: localStorage
+   mv-found-* plus, inside Oracle Learning, SCORM suspend_data. Nothing is
+   sent anywhere else. */
 (function(){
 'use strict';
 var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -66,6 +68,109 @@ function navShade(idx){ if(nav) nav.classList.toggle('scrolled', idx > 0); }
 document.addEventListener('chart:page', function(ev){ navShade(ev.detail ? ev.detail.index : 0); });
 if(window.chartPager) navShade(window.chartPager.current().index);
 $$('.reveal').forEach(function(el){ el.classList.add('in'); });
+
+/* ══════════ NARRATION: Listen (this page) and Auto (every page) ══════════
+   Plays ../assets/audio/foundation/<key>-<n>.mp3, recorded from the exact
+   words in narration-scripts.js. If the file is missing (or blocked inside
+   an LMS), the browser's own speech synthesis reads the same words. */
+var NARR = window.MV_NARR || {};
+var narr = { audio:null, playing:false, key:'', auto: get('auto') === '1', utter:null };
+var bbListen = $('#bbListen'), bbListenT = $('#bbListenT'), bbAuto = $('#bbAuto'), narrToast = $('#narrToast'), toastT = null;
+function toast(msg){
+  if(!narrToast) return;
+  narrToast.textContent = msg; narrToast.classList.add('show');
+  if(toastT) window.clearTimeout(toastT);
+  toastT = window.setTimeout(function(){ narrToast.classList.remove('show'); }, 2800);
+}
+function narrKey(){ var c = window.chartPager ? window.chartPager.current() : { key:'home', n:1 }; return c.key + '/' + (c.n || 1); }
+function narrUI(){
+  if(bbListen){
+    bbListen.setAttribute('aria-pressed', narr.playing ? 'true' : 'false');
+    bbListen.classList.toggle('playing', narr.playing);
+    bbListen.setAttribute('aria-label', narr.playing ? 'Stop narration' : 'Listen to this page');
+    bbListen.setAttribute('title', narr.playing ? 'Stop narration' : 'Listen to this page');
+    if(bbListenT) bbListenT.textContent = narr.playing ? 'Stop' : 'Listen';
+  }
+  if(bbAuto) bbAuto.setAttribute('aria-pressed', narr.auto ? 'true' : 'false');
+}
+function narrStop(){
+  if(narr.audio){ try{ narr.audio.pause(); narr.audio.src = ''; }catch(e){} narr.audio = null; }
+  if(window.speechSynthesis){ try{ window.speechSynthesis.cancel(); }catch(e){} }
+  narr.utter = null; narr.playing = false; narrUI();
+}
+function narrSpeak(text){
+  if(!window.speechSynthesis || !window.SpeechSynthesisUtterance){ narr.playing = false; narrUI(); toast('Narration is not available in this browser.'); return; }
+  try{
+    var u = new SpeechSynthesisUtterance(text);
+    u.rate = 1; u.pitch = 1; u.lang = 'en-US';
+    var voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+    var pick = voices.filter(function(v){ return /^en(-|_)?(US|GB)?/i.test(v.lang) && /Google|Samantha|Karen|Daniel|Serena|Zira|Aria|Natural/i.test(v.name); })[0] || voices.filter(function(v){ return /^en/i.test(v.lang); })[0];
+    if(pick) u.voice = pick;
+    u.onend = function(){ if(narr.utter === u){ narr.utter = null; narr.playing = false; narrUI(); } };
+    u.onerror = function(){ if(narr.utter === u){ narr.utter = null; narr.playing = false; narrUI(); } };
+    narr.utter = u; narr.playing = true; narrUI();
+    window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
+  }catch(e){ narr.playing = false; narrUI(); }
+}
+function narrPlay(){
+  var k = narrKey(), text = NARR[k];
+  narrStop();
+  if(!text){ toast('No narration on this page.'); return; }
+  narr.key = k; narr.playing = true; narrUI();
+  var a = new Audio('../assets/audio/foundation/' + k.replace('/', '-') + '.mp3');
+  a.preload = 'auto';
+  a.addEventListener('ended', function(){ if(narr.audio === a){ narr.audio = null; narr.playing = false; narrUI(); } });
+  a.addEventListener('error', function(){ if(narr.audio === a){ narr.audio = null; narrSpeak(text); } });
+  narr.audio = a;
+  var pr = a.play();
+  if(pr && pr.catch) pr.catch(function(err){
+    if(narr.audio !== a) return;
+    narr.audio = null;
+    if(err && err.name === 'NotAllowedError'){ narr.playing = false; narrUI(); toast('Tap Listen to hear this page.'); }
+    else narrSpeak(text);
+  });
+}
+if(bbListen) bbListen.addEventListener('click', function(){ if(narr.playing) narrStop(); else narrPlay(); });
+if(bbAuto) bbAuto.addEventListener('click', function(){
+  narr.auto = !narr.auto; set('auto', narr.auto ? '1' : null); narrUI();
+  if(narr.auto){ toast('Auto-narration on. Each page is read as it turns.'); narrPlay(); }
+  else { toast('Auto-narration off.'); narrStop(); }
+});
+document.addEventListener('chart:page', function(){ narrStop(); if(narr.auto) window.setTimeout(narrPlay, reduce ? 0 : 380); });
+document.addEventListener('play', function(e){ if(e.target && e.target.tagName === 'VIDEO' && e.target.id !== 'heroVideo') narrStop(); }, true);
+document.addEventListener('visibilitychange', function(){ if(document.hidden && narr.playing) narrStop(); });
+narrUI();
+if(narr.auto) window.setTimeout(narrPlay, 600);
+
+/* ══════════ custom narrated videos: hide gracefully until the media exists ══════════ */
+$$('.cv-wrap').forEach(function(w){
+  var v = w.querySelector('video'); if(!v) return;
+  v.addEventListener('error', function(){ w.classList.add('nomedia'); });
+  if(v.error) w.classList.add('nomedia');
+  document.addEventListener('chart:page', function(){ if(!v.paused) v.pause(); });
+});
+
+/* ══════════ public videos: a facade, loaded only when tapped ══════════
+   Leaving the page puts the facade back, which also stops playback. */
+$$('.yt[data-embed]').forEach(function(box){
+  var id = box.getAttribute('data-embed'), title = box.getAttribute('data-title') || 'Play video';
+  function facade(){
+    box.innerHTML = '<button type="button" class="yt-btn" aria-label="Play: ' + esc(title.replace(/&[a-z]+;/g, '')) + '"><span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="yt-t">' + title + '</span><span class="yt-sub mono">YouTube &middot; loads when you tap</span></button>';
+    box.querySelector('.yt-btn').addEventListener('click', load);
+  }
+  function load(){
+    narrStop();
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&modestbranding=1';
+    f.title = title.replace(/&[a-z]+;/g, '');
+    f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture; web-share';
+    f.setAttribute('allowfullscreen', '');
+    f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    box.innerHTML = ''; box.appendChild(f);
+  }
+  facade();
+  document.addEventListener('chart:page', function(){ if(box.querySelector('iframe')) facade(); });
+});
 
 /* ══════════ PROGRESS ══════════ */
 var SECTIONS = [
@@ -149,7 +254,7 @@ var progReset = $('#progReset');
 if(progReset) progReset.addEventListener('click', function(){
   SECTIONS.forEach(function(s){ progWrite(s.k, false); });
   set('assess', null); set('done-seen', null); doneSeen = false;
-  assessAns = new Array(ASSESS_QS.length).fill(null); assessRender();
+  assessAns = new Array(ASSESS_QS.length).fill(null); aCur = 0; assessRender();
   progRender();
   if(progStatus) progStatus.textContent = 'Progress reset. 0 of ' + SECTIONS.length + ' sections complete; your self-assessment is cleared.';
 });
@@ -214,8 +319,19 @@ function scormAdopt(){
 window.addEventListener('mv-scorm-connected', scormAdopt);
 if(window.MVScorm && MVScorm.connected) scormAdopt();
 
-/* ══════════ flip cards + myth cards ══════════ */
+/* ══════════ flip cards, the framework map, fact or fiction ══════════ */
 $$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){ var f = btn.classList.toggle('flipped'); btn.setAttribute('aria-expanded', f ? 'true' : 'false'); }); });
+(function(){
+  var map = $('#fwMap'), status = $('#fwStatus'); if(!map) return;
+  var cards = $$('.fw-card', map), seen = {};
+  cards.forEach(function(c, i){
+    c.addEventListener('click', function(){
+      var open = c.getAttribute('aria-expanded') !== 'true';
+      c.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if(open){ seen[i] = 1; var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 4 categories opened.' + (n === 4 ? ' The next four segments take one each.' : ''); }
+    });
+  });
+})();
 (function(){
   var grid = $('#factGrid'), status = $('#factStatus'); if(!grid) return;
   var cards = $$('.myth', grid), seen = {};
@@ -228,7 +344,116 @@ $$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){
   });
 })();
 
-/* ══════════ drills: tap the right option ══════════ */
+/* ══════════ habit or the Vanderbilt way: tap to sort ══════════
+   v:0 = the habit, v:1 = the Vanderbilt way */
+var SORTS = {
+  task: [
+    { s:'Send the quarter’s goals in one email and assume they landed.', v:0, x:'Clarifying is said out loud, confirmed back, and written where the team can see it.' },
+    { s:'Write each person’s goals into Culture Amp and confirm them in the first 1:1.', v:1, x:'Clarifying, the Vanderbilt way: visible, confirmed, dated.' },
+    { s:'Look at the finished deliverable on the due date.', v:0, x:'Monitoring happens before the deadline, when there is still time to steer.' },
+    { s:'Look at the work in progress in the weekly 1:1.', v:1, x:'Monitoring: progress and quality checked while it can still change.' },
+    { s:'Rebuild the report yourself because it is faster.', v:0, x:'Doing the work is not on the list. Finding out why it breaks is problem solving.' },
+    { s:'Trace the second failure to its cause, change the handoff, and tell the team.', v:1, x:'Problem solving: cause found, decision made, team told.' },
+    { s:'Set the quarter’s three priorities, with an owner each, before the quarter starts.', v:1, x:'Planning: what, who, when, and what gives.' },
+    { s:'Decide priorities as requests land, whoever asked loudest.', v:0, x:'That is reacting, not planning. Planning happens before the quarter, not during it.' }
+  ],
+  relations: [
+    { s:'Be friendly, ask about weekends, keep things light.', v:0, x:'Friendly is pleasant. Supporting is listening when it is hard, adjusting the load, and following up.' },
+    { s:'Listen when someone is under pressure, move what you can, and check in on Monday.', v:1, x:'Supporting, the Vanderbilt way.' },
+    { s:'Wait for the annual review to talk about anyone’s growth.', v:0, x:'Developing is a quarterly conversation, without a form in front of you.' },
+    { s:'Ask each person, once a quarter, what they want to be doing in two years, and find one stretch assignment.', v:1, x:'Developing: coaching and opening the next door.' },
+    { s:'“Great job, everyone” at the end of the project.', v:0, x:'Names nobody and nothing. Recognizing is specific, named, and within the week.' },
+    { s:'“The way you handled the vendor call on Thursday kept us on schedule,” said on Friday.', v:1, x:'Recognizing, the Vanderbilt way.' },
+    { s:'Delegate the task but keep every decision.', v:0, x:'That is assigning work. Empowering hands over the decision, with the boundary stated.' },
+    { s:'Ask the team how they would design the new rotation before you set it, and use most of their design.', v:1, x:'Empowering, the consulting half: ask before you decide, and let the answer change the decision.' }
+  ],
+  change: [
+    { s:'Forward the campus-wide announcement about the new system.', v:0, x:'Forwarding is not advocating. The why, in your own words, before the email.' },
+    { s:'Explain the reason for the new system in the team meeting two days before the announcement.', v:1, x:'Advocating change, the Vanderbilt way.' },
+    { s:'Manage the team as if next year looks like this year.', v:0, x:'Envisioning change is a two-sentence picture of what the team will be able to do next year.' },
+    { s:'Tell the team, in two sentences, what they will be able to do next year that they cannot do now.', v:1, x:'Envisioning change.' },
+    { s:'“That is not how we do it here.”', v:0, x:'The opposite of encouraging innovation.' },
+    { s:'“Try it for two weeks and show me.”', v:1, x:'Encouraging innovation: the idea invited and allowed to be tried, small and soon.' },
+    { s:'Move to the next project the day this one ends.', v:0, x:'Without a debrief nothing is learned. Ten minutes, written down.' },
+    { s:'Run a ten-minute debrief and write the three changes for next time into the Portal template.', v:1, x:'Facilitating collective learning.' }
+  ],
+  external: [
+    { s:'Meet your HR partner for the first time at the first crisis.', v:0, x:'Networking builds the relationship before it is needed.' },
+    { s:'Have coffee with your HR partner, your Engagement Consultant, and a peer manager in your first month.', v:1, x:'Networking, the Vanderbilt way: names known before they are needed.' },
+    { s:'Learn about the policy change from the team, after it lands.', v:0, x:'External monitoring sees the change before it lands.' },
+    { s:'Read the compensation cycle calendar in August and tell the team in September what to expect.', v:1, x:'External monitoring.' },
+    { s:'Absorb every request from other units so nobody is upset.', v:0, x:'The team pays for that. Representing defends the workload with numbers, politely and early.' },
+    { s:'Show the numbers and negotiate the deadline when another unit’s request would break the month.', v:1, x:'Representing, the Vanderbilt way.' },
+    { s:'Write the business case for the open position and walk it through the approval chain yourself.', v:1, x:'Representing: getting the team the resources it needs.' },
+    { s:'Wait for central to tell you what other units are planning.', v:0, x:'Ask. The Engagement Consultant and your peer managers are the network that tells you what is coming.' }
+  ]
+};
+function buildSort(el){
+  var name = el.getAttribute('data-sort'), items = SORTS[name]; if(!items) return;
+  var status = $('#' + name + 'SortStatus'), done = {}, right = 0;
+  el.innerHTML = items.map(function(it, i){
+    return '<div class="sq" data-i="' + i + '"><p>' + esc(it.s) + '</p><div class="sq-opts" role="group" aria-label="Sort this statement">' +
+      '<button type="button" data-v="0" aria-pressed="false">The habit</button><button type="button" data-v="1" aria-pressed="false">The Vanderbilt way</button></div><p class="sq-x" role="status"></p></div>';
+  }).join('');
+  el.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-v]'); if(!b || b.disabled) return;
+    var q = b.closest('.sq'), i = parseInt(q.getAttribute('data-i'), 10), v = parseInt(b.getAttribute('data-v'), 10), it = items[i];
+    var ok = v === it.v;
+    $$('button[data-v]', q).forEach(function(x){ x.disabled = true; x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); if(parseInt(x.getAttribute('data-v'), 10) === it.v) x.classList.add('is-answer'); });
+    q.classList.add(ok ? 'right' : 'wrong');
+    q.querySelector('.sq-x').innerHTML = '<b>' + (ok ? 'Right. ' : (it.v ? 'That is the Vanderbilt way. ' : 'That is the habit. ')) + '</b>' + esc(it.x);
+    done[i] = 1; if(ok) right++;
+    var n = Object.keys(done).length;
+    if(status) status.textContent = n + ' of ' + items.length + ' sorted.' + (n === items.length ? ' ' + right + ' of ' + items.length + ' right. Now one situation, your call.' : '');
+  });
+}
+$$('[data-sort]').forEach(buildSort);
+
+/* ══════════ your call: one scenario, three responses, consequences ══════════ */
+var SCENARIOS = {
+  task: { s:'It is Wednesday. The monthly report your team owns is due Friday. Priya, who builds it, has not mentioned it in two weeks, and you have not asked. A director just emailed you asking whether it will be on time.', opts:[
+    { t:'Reply “yes” to the director, then build the report yourself Thursday night to be sure.', b:'Not managing', best:false, out:'The report ships. You are now the person who builds it, Priya does not know she was doubted, and next month you are in the same spot. Doing the work is not on the list; monitoring it is.' },
+    { t:'Reply “I will confirm today,” then ask Priya in a fifteen-minute check-in where the report stands and what she needs.', b:'Monitoring, then clarifying', best:true, out:'Priya is two-thirds done and waiting on a Finance extract nobody chased. You chase it, confirm Friday with the director, and put the monthly check-in on the calendar for the second week of every month so you never learn this on a Wednesday again.' },
+    { t:'Forward the director’s email to Priya with “Please make sure this is on time.”', b:'The habit', best:false, out:'Priya reads it as blame from two levels up. The report may still ship, but you have clarified nothing (what does “on time” mean, what is blocking her) and you have spent trust. Monitoring is a conversation, not a forwarded email.' }
+  ]},
+  relations: { s:'Marcus, one of your strongest people, stays after the 1:1 and says: “My dad has been in and out of the hospital. I might need some time off for it, I am not sure yet. I did not want you to think I was slacking.”', opts:[
+    { t:'“I am so sorry. Take whatever you need. Just let me know what is going on with him so I can plan around it.”', b:'Supporting, but a step too far', best:false, out:'Warm, and it asks for a diagnosis, which you must never do. It also leaves a possible leave request sitting with you instead of with leave administration. The kindness is right; the routing is missing.' },
+    { t:'“Thank you for telling me. Let us move the two deadlines you have this week. I am going to send your situation to leave administration today so the options are ready if you need them, and nothing you told me affects how I see your work.”', b:'Supporting, and route it', best:true, out:'Marcus has what he needs: the load adjusted now, the leave process started without him having to ask twice, and no request for medical detail. Support and a legal duty arrived in the same sentence; you handled both.' },
+    { t:'“No problem at all. Let me know if it becomes an issue.”', b:'The habit', best:false, out:'Friendly, and nothing changed. The deadlines still stand, the leave request is not routed, and Marcus learns that telling you things does not help. Being pleasant is not supporting.' }
+  ]},
+  change: { s:'Central is replacing the travel reimbursement system in six weeks. The announcement email goes out next Tuesday. Your team already hates the idea; two people have said “here we go again” in the hallway.', opts:[
+    { t:'Wait for the announcement email and forward it with “FYI, let me know if you have questions.”', b:'The habit', best:false, out:'The team hears about it from central, not from you, and the hallway version wins. Forwarding is not advocating change.' },
+    { t:'In Thursday’s team meeting, before the email, explain in your own words why the change is happening and what it fixes, ask what worries them, and write the worries down to take back to central.', b:'Advocating change', best:true, out:'The team still does not love it, but they heard the why from you first, their objections went somewhere, and two of them volunteer to test the new system early. Small and weekly is how uncommon agility actually happens.' },
+    { t:'Tell the team you also think it is a bad idea, but there is nothing anyone can do.', b:'The opposite of advocating', best:false, out:'It feels honest and it costs the team its manager. You have joined the hallway instead of leading it, and nobody’s concerns will reach the people who could act on them.' }
+  ]},
+  external: { s:'A director in another unit emails you Monday: “We need your team to pull a full data reconciliation by Friday for our audit prep.” Your team’s own month-end close is the same week. Doing both is not possible without weekend work.', opts:[
+    { t:'Say yes and ask the team to work the weekend. Better not to upset a director.', b:'The habit', best:false, out:'The audit prep ships, the team works the weekend, and next quarter the same director asks again, sooner, because it worked. Absorbing every request is what representing replaces.' },
+    { t:'Reply the same day with the numbers: the hours the reconciliation takes, the month-end close it collides with, and two options, a partial pull by Friday with the rest the following Wednesday, or the full pull with the close pushed, and ask which the audit actually needs.', b:'Representing', best:true, out:'The director needed three of the seven tables by Friday and did not know the close was that week. You deliver three tables Thursday, the rest Wednesday, no weekend. The team saw you defend their month, politely and early.' },
+    { t:'Reply “We cannot do this” and copy your unit leader.', b:'Not representing, escalating', best:false, out:'Your unit leader now owns a negotiation you could have had in one email, and the director hears “no” with no reason and no option. Representing is speaking for the team with the numbers, not just refusing for it.' }
+  ]}
+};
+function buildScenario(el){
+  var name = el.getAttribute('data-scn'), sc = SCENARIOS[name]; if(!sc) return;
+  var tried = {};
+  el.innerHTML = '<p class="scn-s">' + esc(sc.s) + '</p><div class="scn-opts" role="group" aria-label="Choose your response">' +
+    sc.opts.map(function(o, i){ return '<button type="button" data-o="' + i + '" aria-pressed="false"><span class="k" aria-hidden="true">' + String.fromCharCode(65 + i) + '</span><span>' + esc(o.t) + '</span></button>'; }).join('') +
+    '</div><div class="scn-out" role="status" aria-live="polite"></div>';
+  var out = el.querySelector('.scn-out');
+  el.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-o]'); if(!b) return;
+    var i = parseInt(b.getAttribute('data-o'), 10), o = sc.opts[i];
+    tried[i] = 1;
+    $$('button[data-o]', el).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    if(o.best) b.classList.add('best-pick');
+    var n = Object.keys(tried).length;
+    out.innerHTML = '<span class="vtag' + (o.best ? ' best' : '') + '">' + (o.best ? 'The Vanderbilt way: ' : 'Consider: ') + esc(o.b) + '</span><p>' + esc(o.out) + '</p>' +
+      (n < sc.opts.length ? '<p class="scn-again hinttxt">' + (o.best ? 'See what the other responses would have cost. ' : 'Now pick the response a Vanderbilt manager would give. ') + n + ' of ' + sc.opts.length + ' tried.</p>' : '<p class="scn-again hinttxt">All three tried. Turn the page to name the behaviors.</p>');
+    out.classList.add('show');
+  });
+}
+$$('[data-scn]').forEach(buildScenario);
+
+/* ══════════ name the behavior: six situations, one at a time ══════════ */
 var DRILLS = {
   task: { opts:['Planning','Clarifying','Monitoring','Problem solving','Not managing'], prog:'task', verb:'named', items:[
     { s:'Before the quarter, set three priorities, assigned an owner to each, and decided what would move if a new request landed.', a:0, x:'Planning: what, who, when, and what gives. Done before the quarter, not during it.' },
@@ -265,46 +490,33 @@ var DRILLS = {
 };
 function buildDrill(el){
   var name = el.getAttribute('data-drill'), d = DRILLS[name]; if(!d) return;
-  var status = $('#' + name + 'Status'), done = {};
+  var status = $('#' + name + 'Status'), done = {}, cur = 0, right = 0;
   el.innerHTML = d.items.map(function(it, i){
-    return '<div class="dq" data-i="' + i + '"><p class="dq-s"><b>' + (i + 1) + '</b>' + esc(it.s) + '</p><div class="dq-opts" role="group" aria-label="Choose one">' +
+    return '<div class="dq' + (i === 0 ? ' cur' : '') + '" data-i="' + i + '"><p class="dq-s"><b>' + (i + 1) + ' of ' + d.items.length + '</b>' + esc(it.s) + '</p><div class="dq-opts" role="group" aria-label="Choose one">' +
       d.opts.map(function(o, oi){ return '<button type="button" data-o="' + oi + '" aria-pressed="false">' + esc(o) + '</button>'; }).join('') +
-      '</div><p class="dq-x" role="status"></p></div>';
+      '</div><p class="dq-x" role="status"></p><div class="dq-nav">' + (i < d.items.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next situation<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '') + '</div></div>';
   }).join('');
+  function pips(){ return '<span class="pips" aria-hidden="true">' + d.items.map(function(it, i){ return '<i class="' + (done[i] === 1 ? 'ok' : done[i] === 2 ? 'no' : '') + '"></i>'; }).join('') + '</span>'; }
+  function show(i){ $$('.dq', el).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); cur = i; var f = $$('.dq', el)[i].querySelector('button:not([disabled])'); if(f) f.focus({ preventScroll:true }); }
   el.addEventListener('click', function(e){
+    var nx = e.target.closest('button[data-next]');
+    if(nx){ if(cur < d.items.length - 1) show(cur + 1); return; }
     var b = e.target.closest('button[data-o]'); if(!b || b.disabled) return;
     var q = b.closest('.dq'), i = parseInt(q.getAttribute('data-i'), 10), oi = parseInt(b.getAttribute('data-o'), 10), it = d.items[i];
     var ok = oi === it.a;
     $$('button[data-o]', q).forEach(function(x){ x.disabled = true; x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); if(parseInt(x.getAttribute('data-o'), 10) === it.a) x.classList.add('is-answer'); });
     q.classList.add(ok ? 'right' : 'wrong');
     q.querySelector('.dq-x').innerHTML = '<b>' + (ok ? 'Right. ' : 'Not quite. The answer is ' + esc(d.opts[it.a]) + '. ') + '</b>' + esc(it.x);
-    done[i] = 1;
+    done[i] = ok ? 1 : 2; if(ok) right++;
     var n = Object.keys(done).length;
-    if(status) status.textContent = n + ' of ' + d.items.length + ' ' + d.verb + '.' + (n === d.items.length ? ' Section complete.' : '');
+    if(status) status.innerHTML = pips() + '<span>' + n + ' of ' + d.items.length + ' ' + d.verb + '.' + (n === d.items.length ? ' ' + right + ' of ' + d.items.length + ' right. Section complete.' : '') + '</span>';
     if(n === d.items.length) progDone(d.prog);
   });
+  if(status) status.innerHTML = pips() + '<span>0 of ' + d.items.length + ' ' + d.verb + '.</span>';
 }
 $$('[data-drill]').forEach(buildDrill);
 
-/* ══════════ segment 3: what your state adds ══════════ */
-(function(){
-  var pick = $('#statePick'), out = $('#stateOut'); if(!pick || !out || !P) return;
-  function render(st){
-    $$('button', pick).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-state') === st ? 'true' : 'false'); });
-    var rows = P.compliance.filter(function(c){ return c.state === st || c.state === 'ALL'; });
-    var mine = rows.filter(function(c){ return c.state !== 'ALL'; }), all = rows.filter(function(c){ return c.state === 'ALL'; });
-    var legal = rows.filter(function(c){ return c.type === 'Legal'; }).length;
-    var name = (P.states[st] || {}).name || st;
-    function li(c){ return '<li><i>' + esc(c.oracleCode) + '</i><span>' + esc(c.title) + ' <em>' + esc(c.type) + ' · ' + (c.deadlineDays === 0 ? 'on hire' : c.deadlineDays >= 180 ? '6 months' : c.deadlineDays + ' days') + ' · ' + esc(c.audience === 'Manager' ? 'supervisor version' : 'all staff') + '</em></span></li>'; }
-    out.innerHTML = '<h4>' + esc(name) + ': ' + rows.length + ' courses, ' + legal + ' required by law.</h4>' +
-      '<p class="hinttxt" style="margin-top:6px">' + mine.length + ' from your state, ' + all.length + ' for every location. Deadlines count from Day 1.</p>' +
-      '<ul>' + mine.map(li).join('') + all.map(li).join('') + '</ul>';
-  }
-  pick.addEventListener('click', function(e){ var b = e.target.closest('button[data-state]'); if(b) render(b.getAttribute('data-state')); });
-  if(/^(TN|NY|FL|CA)$/.test(profile.state)) render(profile.state);
-})();
-
-/* ══════════ segment 6: self-assessment → module order ══════════ */
+/* ══════════ segment 6: self-rating, one behavior at a time → module order ══════════ */
 var ASSESS_QS = [
   { c:'task', b:'Planning', q:'I set priorities, owners, and schedules before the work starts.' },
   { c:'task', b:'Clarifying', q:'Each person on my team can say what they own, by when, and what done well means.' },
@@ -326,28 +538,37 @@ var CATS = { task:{ name:'Task-oriented', short:'Task' }, relations:{ name:'Rela
 /* which micro-module tracks practice each category, for the dashboard order */
 var CAT_TRACKS = { task:['T1','T3'], relations:['T2','T3'], change:['T4'], external:['T4'] };
 var ASSESS_OPTS = ['Rarely', 'Sometimes', 'Often'];
-var assessAns = new Array(ASSESS_QS.length).fill(null);
-var aQs = $('#assessQs'), aShow = $('#assessShow'), aHint = $('#assessHint'), aOut = $('#assessOut');
+var assessAns = new Array(ASSESS_QS.length).fill(null), aCur = 0;
+var aQs = $('#assessQs'), aNav = $('#assessNav'), aShow = $('#assessShow'), aHint = $('#assessHint'), aOut = $('#assessOut');
 function assessRender(){
   if(!aQs) return;
+  aQs.hidden = false; if(aNav) aNav.hidden = false;
   aQs.innerHTML = ASSESS_QS.map(function(x, i){
-    return '<div class="route-q" data-rq="' + i + '"><p class="route-qt" id="aq' + i + '"><span class="qn" aria-hidden="true">' + (i < 9 ? '0' : '') + (i + 1) + '</span><b style="color:var(--eyebrow);font-weight:600">' + esc(x.b) + '.</b> ' + esc(x.q) + '</p>' +
+    return '<div class="route-q' + (i === aCur ? ' cur' : '') + '" data-rq="' + i + '"><p class="route-qt" id="aq' + i + '"><span class="qn" aria-hidden="true">' + (i + 1) + ' of ' + ASSESS_QS.length + ' &middot; ' + esc(CATS[x.c].short) + '</span><br><b style="color:var(--eyebrow);font-weight:600">' + esc(x.b) + '.</b> ' + esc(x.q) + '</p>' +
       '<div class="route-opts" role="group" aria-labelledby="aq' + i + '">' + ASSESS_OPTS.map(function(o, v){ return '<button type="button" data-rv="' + v + '" aria-pressed="' + (assessAns[i] === v) + '">' + o + '</button>'; }).join('') + '</div></div>';
   }).join('');
   assessSync();
   if(aOut) aOut.innerHTML = '';
 }
+function assessGo(i){ if(i < 0 || i >= ASSESS_QS.length) return; aCur = i; $$('.route-q', aQs).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); assessSync(); }
 function assessSync(){
   var n = assessAns.filter(function(v){ return v !== null; }).length, all = n === ASSESS_QS.length;
   if(aShow) aShow.disabled = !all;
-  if(aHint) aHint.textContent = all ? 'All fifteen rated.' : n + ' of ' + ASSESS_QS.length + ' rated. Rate all fifteen to see your profile.';
+  if(aHint) aHint.textContent = all ? 'All fifteen rated.' : n + ' of ' + ASSESS_QS.length + ' rated.';
+  if(aNav) aNav.innerHTML = '<button type="button" class="btn btn-ghost btn-sm" data-an="-1"' + (aCur === 0 ? ' disabled' : '') + '>Back</button>' +
+    '<span class="pips" aria-hidden="true">' + ASSESS_QS.map(function(x, i){ return '<i class="' + (assessAns[i] !== null ? 'ok' : '') + (i === aCur ? ' cur' : '') + '"></i>'; }).join('') + '</span>' +
+    '<button type="button" class="btn btn-ghost btn-sm" data-an="1"' + (aCur === ASSESS_QS.length - 1 ? ' disabled' : '') + '>Next</button>';
 }
+if(aNav) aNav.addEventListener('click', function(e){ var b = e.target.closest('button[data-an]'); if(b) assessGo(aCur + parseInt(b.getAttribute('data-an'), 10)); });
 if(aQs) aQs.addEventListener('click', function(e){
   var b = e.target.closest('button[data-rv]'); if(!b) return;
   var q = b.closest('.route-q'), i = parseInt(q.getAttribute('data-rq'), 10);
   assessAns[i] = parseInt(b.getAttribute('data-rv'), 10);
   $$('button[data-rv]', q).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
   assessSync();
+  var next = -1; for(var k = 1; k <= ASSESS_QS.length; k++){ var j = (i + k) % ASSESS_QS.length; if(assessAns[j] === null){ next = j; break; } }
+  if(next > -1) window.setTimeout(function(){ assessGo(next); }, reduce ? 0 : 220);
+  else if(aShow){ aShow.focus(); }
 });
 function assessProfile(){
   var cat = {}, max = {};
@@ -356,16 +577,13 @@ function assessProfile(){
   var pct = {}; keys.forEach(function(k){ pct[k] = Math.round(cat[k] / max[k] * 100); });
   var weakest = keys.slice().sort(function(a, b){ return pct[a] - pct[b]; })[0];
   var strongest = keys.slice().sort(function(a, b){ return pct[b] - pct[a]; })[0];
-  /* the behaviors rated lowest, weakest category first */
   var focus = ASSESS_QS.map(function(x, i){ return { b:x.b, c:x.c, v:assessAns[i] }; })
     .sort(function(p, q){ return (p.v - q.v) || (pct[p.c] - pct[q.c]); }).slice(0, 3);
-  /* module order for the dashboard: track score = mean of its categories, weakest first inside each phase */
   var tscore = {};
   Object.keys(CAT_TRACKS).forEach(function(c){ CAT_TRACKS[c].forEach(function(t){ tscore[t] = tscore[t] || []; tscore[t].push(pct[c]); }); });
   Object.keys(tscore).forEach(function(t){ tscore[t] = tscore[t].reduce(function(a, b){ return a + b; }, 0) / tscore[t].length; });
   var order = [];
   if(P){
-    var tracks = {}; P.mrc.tracks.forEach(function(t){ tracks[t.id] = t; });
     [1, 2].forEach(function(phase){
       P.mrc.tracks.filter(function(t){ return t.phase === phase; }).sort(function(a, b){ return tscore[a.id] - tscore[b.id]; })
         .forEach(function(t){ t.modules.forEach(function(m){ order.push(m.id); }); });
@@ -381,17 +599,19 @@ function assessShowOut(){
       return '<div role="listitem"><b>' + esc(CATS[k].name) + '</b><span class="bar" aria-hidden="true"><i style="width:' + r.pct[k] + '%"></i></span><span>' + r.pct[k] + '%</span></div>';
     }).join('') + '</div>' +
     '<p class="gap-line">Your strongest category is <b>' + esc(CATS[r.strongest].name) + '</b>. The category the job needs more of from you is <b>' + esc(CATS[r.weakest].name) + '</b>. That is not a verdict; it is the behaviors you do less often than the role needs, and behaviors change.</p>' +
-    '<p class="mono" style="margin-top:16px">Practice these first</p><ol class="focus-list">' + r.focus.map(function(f, i){
+    '<p class="mono" style="margin-top:14px">Practice these first</p><ol class="focus-list">' + r.focus.map(function(f, i){
       return '<li><b>' + (i + 1) + '</b><span>' + esc(f.b) + '<small>' + esc(CATS[f.c].name) + ' &middot; you rated it ' + esc(ASSESS_OPTS[f.v].toLowerCase()) + '</small></span></li>';
     }).join('') + '</ol>' +
-    '<p class="hinttxt" style="margin-top:14px">Saved to this browser and your Oracle record. Your dashboard orders the micro modules from this profile, weakest category first inside each window. The Managerial Practices Survey will give you the same profile with more precision.</p>' +
-    '<div class="route-act" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm" id="assessRedo">Rate again</button></div>';
+    '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your dashboard orders the micro modules from this profile, weakest category first inside each window. The Managerial Practices Survey will give you the same profile with more precision.</p>' +
+    '<div class="route-act" style="margin-top:12px"><button type="button" class="btn btn-ghost btn-sm" id="assessRedo">Rate again</button></div>';
   aOut.innerHTML = html;
+  if(aQs) aQs.hidden = true; if(aNav) aNav.hidden = true;
+  if(aShow) aShow.disabled = true; if(aHint) aHint.textContent = 'Your profile is below.';
   set('assess', JSON.stringify({ answers:assessAns, pct:r.pct, weakest:r.weakest, focus:r.focus.map(function(f){ return f.b; }), order:r.order, at:new Date().toISOString() }));
   try{ localStorage.setItem('mv.foundation.v1', get('assess')); }catch(e){}
   var ns = $('#ns2p'); if(ns) ns.textContent = 'Your self-rating pointed to ' + r.focus[0].b.toLowerCase() + '. Do it once this week, on purpose, and notice what happened.';
   progDone('survey');
-  var redo = $('#assessRedo'); if(redo) redo.addEventListener('click', function(){ assessAns = new Array(ASSESS_QS.length).fill(null); set('assess', null); assessRender(); var f = aQs.querySelector('button'); if(f) f.focus(); });
+  var redo = $('#assessRedo'); if(redo) redo.addEventListener('click', function(){ assessAns = new Array(ASSESS_QS.length).fill(null); aCur = 0; set('assess', null); assessRender(); var f = aQs.querySelector('.route-q.cur button'); if(f) f.focus(); });
   if(window.chartPager) window.chartPager.goToEl(aOut);
 }
 if(aShow) aShow.addEventListener('click', assessShowOut);

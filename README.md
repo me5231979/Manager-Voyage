@@ -42,24 +42,50 @@ manager completes before the micro modules unlock. It teaches management
 itself, one shared way, on Yukl's taxonomy of leadership behavior (four
 categories, fifteen behaviors), the same behaviors the Managerial Practices
 Survey measures. Built on the Working Smarter book-mode engine with the hero
-video montage, the Chancellor's charge, and six five-minute segments:
+video montage, the Chancellor's charge, and six five-minute segments across
+36 short pages, one idea or one activity each:
 
-1. What management is (why Vanderbilt is defining it, the framework map, fact or fiction)
-2. Task-oriented: planning, clarifying, monitoring, problem solving (name the behavior drill)
-3. Relations-oriented: supporting, developing, recognizing, empowering
-4. Change-oriented: advocating, envisioning, encouraging innovation, collective learning
-5. External: networking, external monitoring, representing
-6. The Managerial Practices Survey, and a fifteen-behavior self-rating that produces
-   a first profile, the three behaviors to practice first, and the micro-module order
+1. What management is: the Vice Chancellor welcome, the numbers, a narrated
+   framework explainer with a tap-to-open map, fact or fiction
+2. to 5. One segment per category (task, relations, change, external), each
+   five pages: a narrated opener video and the idea; flip cards for the
+   behaviors and the habit each replaces; "Habit or the Vanderbilt way", a
+   tap-to-sort of eight statements; "Your call", one scenario with three
+   responses and their consequences; "Name the behavior", six situations one
+   at a time, beside a related public video (loaded only when tapped)
+6. The Managerial Practices Survey, and a fifteen-behavior self-rating (one
+   behavior at a time) that produces a first profile, the three behaviors to
+   practice first, and the micro-module order
 
 Then an eight-question knowledge check (six to pass), a summary, and next steps.
-Each segment marks itself done when its drill is finished. The profile is saved to
-`localStorage` (`mv.foundation.v1`) and SCORM suspend_data; the dashboard orders
-the tracks from it.
+Each category marks itself done when its "Name the behavior" drill is finished.
+The profile is saved to `localStorage` (`mv.foundation.v1`) and SCORM
+suspend_data; the dashboard orders the tracks from it.
+
+**Narration.** Every page is narrated. The book bar has **Listen** (this page)
+and **Auto** (every page as it turns). Scripts live in
+`foundation/narration-scripts.js`; the recordings (`assets/audio/foundation/
+<section>-<n>.mp3`, one professional voice, generated with Runway from those
+exact words) play when present, and the browser's speech synthesis reads the
+same words when they are not (for example inside an LMS that blocks media).
+
+**Videos.** Five custom narrated videos (`assets/video/foundation/`): the
+40-second framework explainer and a 12-second opener for each category. Clips
+are generated with Runway, narration is generated from `MV_VIDEO_NARR`, and
+`scripts/build-media.py` concatenates, muxes, and makes posters. Signed Runway
+URLs go in `.github/media-urls.json`; pushing that file to `main` runs
+`.github/workflows/fetch-media.yml`, which downloads, builds, commits the media,
+and mirrors to `gh-pages`. Until the media lands, each video slot shows a
+"being produced" card. Public videos (YouTube, click to load, with an open-on-
+YouTube fallback): Google's Project Oxygen (task), Simon Sinek on safety plus
+Renninger on feedback and Pink on motivation (relations), Amy Edmondson on
+psychological safety (change), Harvard on managing your boss (external).
 
 - Source: Yukl, G. (2012), Academy of Management Perspectives, 26(4), 66 to 85.
 - Preview: `foundation/?name=Alex%20Rivera&state=NY`
 - SCORM: `bash scripts/build-foundation-scorm.sh` writes
-  `manager-voyage-foundation-scorm.zip` (standalone SCORM 1.2).
+  `manager-voyage-foundation-scorm.zip` (standalone SCORM 1.2, media included
+  when built).
 - Open items: the Vice Chancellor welcome video (placeholder card); confirm how
-  the survey is administered and its due window (segment 6).
+  the survey is administered and its due window (segment 6); confirm the
+  YouTube video IDs still resolve (each slot has an open-on-YouTube link).
