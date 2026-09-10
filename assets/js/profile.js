@@ -46,6 +46,15 @@
     return out;
   }
 
+  /* completions the courses on this site recorded themselves (assets/js/oracle.js) */
+  function courseCompletions() {
+    var out = {};
+    try {
+      var c = (window.MVOracle && MVOracle.localCompletions()) || JSON.parse(localStorage.getItem('mv.completions.v1') || '{}');
+      Object.keys(c).forEach(function (k) { out[k] = { at: c[k].at || '', source: c[k].source === 'scorm' ? 'oracle' : 'self' }; });
+    } catch (e) {}
+    return out;
+  }
   function merge(p, extra, source) {
     if (!extra) return p;
     if (extra.name) { p.name = String(extra.name); p.firstName = firstName(extra.name); p.source = source; }
@@ -87,6 +96,7 @@
   function resolve() {
     var p = blank();
     p = merge(p, readLocal(), 'local');
+    p = merge(p, { completions: courseCompletions() }, 'course');
     p = fromScorm(p);
     var q = params();
     p = merge(p, { name: q.name, id: q.id, state: q.state, start: q.start || q.startDate }, 'url');

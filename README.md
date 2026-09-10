@@ -29,7 +29,7 @@ row, and a rail with Up next, Milestones, and Who to call.
 - `assets/js/program-data.js` is the curriculum: 20 compliance courses (with
   Oracle Learn deep links from the Compliance Training Matrix), the foundation
   course, 22 micro modules across four tracks, the Portal, and the cohort.
-- `assets/js/config.js` holds the Oracle feed URL, Portal URL, cohort request
+- `assets/js/oracle.js` is the one place the site talks to Oracle (course links from item numbers, completion write-back); `assets/js/config.js` holds the Oracle feed URL, Portal URL, cohort request
   URL, and contact. See `docs/ORACLE-INTEGRATION.md` for the feed contract.
 - SCORM: `imsmanifest.xml` plus `assets/js/scorm.js`. Build the Oracle Learning
   package with `bash scripts/build-scorm.sh`.
@@ -88,6 +88,6 @@ dates.
 - SCORM: `bash scripts/build-foundation-scorm.sh` writes
   `manager-voyage-foundation-scorm.zip` (standalone SCORM 1.2, media included
   when built).
-- Open items: confirm how the survey is administered and its due window;
+- Survey: the Managerial Practices Survey is completed before the course and retaken six months after completion. Open items:
   confirm the YouTube video IDs still resolve (each has an open-on-YouTube
   link).

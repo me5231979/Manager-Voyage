@@ -11,7 +11,7 @@ sed -i "s/?v=[0-9a-z]*/?v=${SHA}/g" "$STAGE/foundation/index.html"
 # dashboard links do not exist inside the package; point them at the live site
 sed -i 's#href="../dashboard/"#href="https://me5231979.github.io/Manager-Voyage/dashboard/" target="_blank" rel="noopener"#g; s#href="../"#href="https://me5231979.github.io/Manager-Voyage/" target="_blank" rel="noopener"#g' "$STAGE/foundation/index.html"
 cp assets/css/course.css "$STAGE/assets/css/"
-cp assets/js/program-data.js assets/js/scorm.js "$STAGE/assets/js/"
+cp assets/js/config.js assets/js/program-data.js assets/js/scorm.js assets/js/oracle.js "$STAGE/assets/js/"
 cp assets/fonts/*.woff2 "$STAGE/assets/fonts/"
 cp assets/img/favicon.svg assets/img/favicon-96.png assets/img/vu-lockup-white.png assets/img/vu-centered-white.png assets/img/hero-poster.jpg "$STAGE/assets/img/"
 cp assets/video/hero-montage.mp4 "$STAGE/assets/video/"

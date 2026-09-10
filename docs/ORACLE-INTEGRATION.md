@@ -73,13 +73,50 @@ Oracle source is present) does the same thing without editing the URL.
 
 ## Course links
 
-Every item carries `oracleUrl`, the Oracle Learning deep link. The
-compliance rows use the links from the Compliance Training Matrix
-(`.../learner/learn/redirect?learningItemId=...`). Items with `oracleUrl:
-null` show "Link coming soon" until FLH provides the link; drop it into
-`assets/js/program-data.js`. If Oracle exposes a stable URL pattern by item
-number, set `oracleLearningBase` in `config.js` and every item with an
-`oracleCode` links automatically.
+`assets/js/oracle.js` builds every course link (`MVOracle.courseUrl(item)`),
+in this order:
+
+1. `oracleUrl`: a pasted Oracle Learning deep link. The compliance rows use
+   the links from the Compliance Training Matrix.
+2. `oracleItemId` (+ `oracleItemType`, `ORA_COURSE` or `ORA_CLASS`): the
+   Oracle Learning item number. The link is built from
+   `MV_CONFIG.oracleRedirect`, which already carries the redirect pattern the
+   matrix links use (`.../learner/learn/redirect?learningItemId=...&learningItemType=...`).
+   This is the field to fill in when FLH receives the item numbers: one
+   number per item in `assets/js/program-data.js`, nothing else changes.
+3. `localUrl`: a course hosted on this site (the Foundation course today).
+4. `MV_CONFIG.oracleLearningBase` + `oracleCode`, for a code-based catalog URL.
+
+Items with none of these show "Link coming soon".
+
+## Completions written back
+
+`MVOracle.reportCompletion(id, { score, max, passed, note })` records a
+completion from a course on this site (the Foundation course calls it when
+all eight sections are done, with the quick-check score):
+
+- Inside Oracle Learning (SCORM launch): the SCO is marked complete, the
+  score is written (`cmi.core.score.*` or `cmi.score.*`), and an interaction
+  `attest-<id>` is recorded.
+- Outside Oracle Learning with single sign-on: if `MV_CONFIG.completionEndpoint`
+  is set, the record is POSTed as JSON (`{ id, at, score, max, passed, extra }`)
+  with credentials, for the proxy to write to Oracle Learning.
+- Always: a local copy (`localStorage` key `mv.completions.v1`) that the
+  dashboard reads, so the Foundation course shows as complete there without
+  a feed.
+
+## Survey timing
+
+The Managerial Practices Survey is completed before the Foundation course
+and retaken `MV_CONFIG.surveyRetakeMonths` (6) months after completing it.
+The course copy states this; the value is here so the dashboard can show
+the retake date once a completion date is known.
+
+## Packaging the Foundation course
+
+`bash scripts/build-foundation-scorm.sh` builds a standalone SCORM 1.2 zip of
+the Foundation course that includes `config.js` and `oracle.js`, so the same
+configuration applies inside Oracle Learning.
 
 Also in `config.js`: `portalUrl` (the Manager Portal), `cohortRequestUrl`
 (seat request), and `contactEmail` (footer contact).

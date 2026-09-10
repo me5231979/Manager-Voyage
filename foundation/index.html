@@ -26,8 +26,10 @@
   vocabulary. Built on the Working Smarter engine (../assets/css/course.css,
   pager.js) in the FLH brand. Every page is narrated (narration-scripts.js).
   Progress: localStorage mv-found-* plus one JSON string with the self-rating;
-  in Oracle Learning the same state rides in SCORM suspend_data.
-  [EDIT] confirm how the survey is administered and its due window (module 6).
+  in Oracle Learning the same state rides in SCORM suspend_data. Completion is
+  reported through ../assets/js/oracle.js (SCORM, or MV_CONFIG.completionEndpoint).
+  Survey: managers complete the Managerial Practices Survey before this course
+  and retake it six months after completing it (module 6, next step, wrap-up).
   Source: Yukl, G. (2012). Effective leadership behavior: what we know and
   what questions need more attention. Academy of Management Perspectives,
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
@@ -162,6 +164,12 @@ html.paged .module-head p{ margin-top:8px; font-size:.95rem; }
 .split2{ display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(18px,3vw,36px); align-items:start; }
 .split2 .module-head{ margin-bottom:10px; }
 .yt{ max-width:none; }
+.yt-thumb{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.55; }
+.yt-btn{ z-index:1; }
+.yt-loading{ position:absolute; inset:0; display:grid; place-items:center; color:var(--vu-gold); font-size:.8rem; }
+.yt-off{ position:absolute; inset:0; display:grid; place-content:center; gap:12px; padding:20px; text-align:center; color:#fff; }
+.yt-off p{ color:#fff; max-width:420px; font-size:.95rem; }
+.yt-off .btn{ justify-self:center; }
 .more-watch{ list-style:none; margin-top:10px; display:grid; gap:6px; }
 .more-watch li{ font-size:.86rem; color:var(--tx2); display:flex; gap:8px; align-items:baseline; }
 .more-watch li::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--eyebrow); flex-shrink:0; position:relative; top:-2px; }
@@ -430,7 +438,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <li><b>Name</b> the four jobs of a manager, in plain words</li>
       <li><b>Say</b> why each job matters to your team, and what it looks like on a Tuesday</li>
       <li><b>Make the call</b> in four real situations, the Vanderbilt way</li>
-      <li><b>Know</b> what the survey asks and where you stand today</li>
+      <li><b>Read</b> the survey you already took, and see where you stand today</li>
     </ul>
     <p class="meta-line"><b>About 15 minutes &middot; 16 pages &middot; 6 modules</b> &middot; self-paced &middot; completion recorded in Oracle Learning</p>
     <p class="listen-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span><b>Prefer to listen?</b> Every page is narrated. Use <b>Listen</b> in the bar below for this page, or turn on <b>Auto</b> to hear each page as it turns.</span></p>
@@ -439,7 +447,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <li>Turn pages with the arrows below, your keyboard arrows, or a swipe</li>
       <li>Each page starts with where you are and what comes next</li>
       <li>In each module: watch, flip the cards, make the call, answer three quick questions</li>
-      <li>Your completion is recorded in Oracle Learning; the survey arrives by email</li>
+      <li>Your completion is recorded in Oracle Learning; you retake the survey six months later</li>
     </ol>
   </div>
 </section>
@@ -455,8 +463,8 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
     <div class="ov-grid">
       <div class="ov-card"><b>What this course is</b><p>The first course in Manager Foundations: the four jobs every Vanderbilt manager does, in plain words, with one thing to do this week for each.</p></div>
       <div class="ov-card"><b>Before and after</b><p>Before: start or finish your manager compliance courses (required, on your dashboard). After: the micro modules, short how-to lessons on the common tasks (hiring, timecards, feedback, and more). About 15 minutes, narrated.</p></div>
-      <div class="ov-card"><b>You will be able to</b><ul><li>Name the four jobs of a manager</li><li>Say why each one matters, and what it looks like on a Tuesday</li><li>Make the call in four real situations</li><li>Know what the survey asks and where you stand</li></ul></div>
-      <div class="ov-card"><b>How you finish</b><p>Each job module finishes with three quick questions. Open the four jobs, rate yourself, pass the five-question check (4 of 5), and mark your next step. Recorded in Oracle Learning. The survey follows by email.</p></div>
+      <div class="ov-card"><b>You will be able to</b><ul><li>Name the four jobs of a manager</li><li>Say why each one matters, and what it looks like on a Tuesday</li><li>Make the call in four real situations</li><li>Read the survey you took, and see where you stand</li></ul></div>
+      <div class="ov-card"><b>How you finish</b><p>Each job module finishes with three quick questions. Open the four jobs, rate yourself, pass the five-question check (4 of 5), and mark your next step. Recorded in Oracle Learning. You took the survey before this course and take it again six months after.</p></div>
     </div>
     <span class="mono" style="display:block;margin:14px 0 8px">Module overviews</span>
     <div class="hw-grid reveal ov-mods">
@@ -465,7 +473,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div class="hw"><span class="hw-no" aria-hidden="true">03</span><h3>Job 2: take care of your people</h3><p><b>Learn:</b> listen and help, grow them, thank them, trust them. <b>Do:</b> video, cards, your call, quick check.</p><span class="chip">Pages 7 to 8 &middot; 3 min</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">04</span><h3>Job 3: make things better</h3><p><b>Learn:</b> explain the why, describe where you are going, let people try, look back. <b>Do:</b> video, cards, your call, quick check.</p><span class="chip">Pages 9 to 10 &middot; 3 min</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>Job 4: connect your team</h3><p><b>Learn:</b> know the people, watch for what is coming, speak up for your team. <b>Do:</b> video, cards, your call, quick check.</p><span class="chip">Pages 11 to 12 &middot; 3 min</span></div>
-      <div class="hw"><span class="hw-no" aria-hidden="true">06</span><h3>The survey and where you stand</h3><p><b>Learn:</b> what the survey asks and how to read it. <b>Do:</b> rate yourself on the fifteen habits, get your first picture and your micro-module order.</p><span class="chip">Page 13 &middot; 2 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">06</span><h3>The survey and where you stand</h3><p><b>Learn:</b> what the survey you already took was asking, and how to read it. <b>Do:</b> rate yourself on the fifteen habits, get your first picture and your micro-module order.</p><span class="chip">Page 13 &middot; 2 min</span></div>
     </div>
     <p class="hw-meta reveal" style="margin-top:10px">Then a five-question check (page 14), your next seven days (page 15), and the wrap-up (page 16). The four jobs come from research by Gary Yukl; we use it as a guide, and nobody is tested on the theory. <span id="progTopLine">Section tracking: you have 8 sections ahead.</span></p>
   </div>
@@ -488,7 +496,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div class="concept" style="margin:0">
         <span class="c-label">The detail that matters for you</span>
         <p>Chancellor Diermeier has asked the whole university to work with <b>uncommon speed, agility, and scale</b>. That is not a strategy document; it is how teams are managed, week by week, by you. A team that gets the work done, keeps improving, and is connected to the rest of Vanderbilt is what those words look like up close.</p>
-        <p>So every manager starts here, with the same four jobs and the same words, and a short survey later shows where you stand. That way every team gets a good manager, not a lucky one.</p>
+        <p>So every manager starts here, with the same four jobs and the same words, the survey you took shows where you stand, and the retake in six months shows the change. That way every team gets a good manager, not a lucky one.</p>
       </div>
     </div>
     <div class="who" role="list" aria-label="People this course mentions">
@@ -511,7 +519,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <h2>Being a manager is four <em class="s">jobs</em>.</h2>
     </div>
     <div class="ask"><p><b>What you will learn</b>The four jobs every manager does, and the fifteen habits inside them. This is the map for the whole course.</p><p><b>What Vanderbilt asks you to do</b>Do all four jobs, every week, and notice which one this week needs. Watch the video, then tap each card.</p></div>
-    <div class="yukl"><b>Where this comes from</b><span>Research by Gary Yukl (<a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener">2012</a>): four kinds of manager behavior, fifteen habits</span><span>Vanderbilt uses it as a guide, in plain words</span><span>The survey you will receive asks about the same fifteen habits</span></div>
+    <div class="yukl"><b>Where this comes from</b><span>Research by Gary Yukl (<a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener">2012</a>): four kinds of manager behavior, fifteen habits</span><span>Vanderbilt uses it as a guide, in plain words</span><span>The survey you took before this course asks about the same fifteen habits</span></div>
     <div class="vc-grid">
       <div>
         <div class="cv-wrap" data-cv="framework">
@@ -573,7 +581,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <p class="drill-status" id="taskStatus" role="status" aria-live="polite">0 of 3 named.</p>
       </div>
       </div>
-      <details class="deeper"><summary><b>Optional &middot; go deeper</b>Project Oxygen: Google found the same habits in its best managers<span class="dur">3 min &middot; not needed for completion</span></summary><div class="d-body"><p>Notice how many of the behaviors Google found are task-oriented: clear goals, results, and removing what is in the way.</p><div class="yt" data-embed="ICnUGpjgbI0" data-title="Google&rsquo;s Project Oxygen: what great managers do"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=ICnUGpjgbI0" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div></details>
+      <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Project Oxygen: Google found the same habits in its best managers<span class="dur">Short video &middot; not needed for completion</span></summary><div class="d-body"><p>Notice how many of the behaviors Google found are task-oriented: clear goals, results, and removing what is in the way.</p><div class="yt" data-embed="ICnUGpjgbI0" data-title="Top 10 behaviors of a great manager, according to Google&rsquo;s Project Oxygen"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=ICnUGpjgbI0" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div></details>
       <div class="md-wrap" style="margin-top:12px">
 <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="task" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
     </div>
@@ -621,7 +629,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <p class="drill-status" id="relationsStatus" role="status" aria-live="polite">0 of 3 named.</p>
       </div>
       </div>
-      <details class="deeper"><summary><b>Optional &middot; go deeper</b>Simon Sinek: taking care of your people, in one story<span class="dur">12 min &middot; not needed for completion</span></summary><div class="d-body"><p>The circle of safety: the manager who takes care of the people gets a team that takes care of the work. That is supporting, in one story.</p><div class="yt" data-embed="lmyZMtPVodo" data-title="Simon Sinek: Why good leaders make you feel safe"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=lmyZMtPVodo" target="_blank" rel="noopener">Open it on YouTube</a>. Also: <a href="https://www.youtube.com/watch?v=0jgbWPX56js" target="_blank" rel="noopener">Renninger, The secret to giving great feedback</a> (6 min) and <a href="https://www.youtube.com/watch?v=u6XAPnuFjJc" target="_blank" rel="noopener">Pink, Drive</a> (11 min).</p></div></details>
+      <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Simon Sinek: taking care of your people, in one story<span class="dur">12 min &middot; not needed for completion</span></summary><div class="d-body"><p>The circle of safety: the manager who takes care of the people gets a team that takes care of the work. That is supporting, in one story.</p><div class="yt" data-embed="lmyZMtPVodo" data-title="Simon Sinek: Why good leaders make you feel safe"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=lmyZMtPVodo" target="_blank" rel="noopener">Open it on YouTube</a>. Also: <a href="https://www.youtube.com/watch?v=0jgbWPX56js" target="_blank" rel="noopener">Renninger, The secret to giving great feedback</a> (7 min) and <a href="https://www.youtube.com/watch?v=u6XAPnuFjJc" target="_blank" rel="noopener">Pink, Drive</a> (11 min).</p></div></details>
       <div class="md-wrap" style="margin-top:12px">
 <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="relations" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
     </div>
@@ -669,7 +677,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <p class="drill-status" id="changeStatus" role="status" aria-live="polite">0 of 3 named.</p>
       </div>
       </div>
-      <details class="deeper"><summary><b>Optional &middot; go deeper</b>Amy Edmondson: why people only try new ideas when it is safe to<span class="dur">11 min &middot; not needed for completion</span></summary><div class="d-body"><p>The condition every change behavior depends on: people only try the new idea, or tell the debrief truth, when it is safe to.</p><div class="yt" data-embed="LhoLuui9gX8" data-title="Amy Edmondson: Building a psychologically safe workplace"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div></details>
+      <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Amy Edmondson: why people only try new ideas when it is safe to<span class="dur">11 min &middot; not needed for completion</span></summary><div class="d-body"><p>The condition every change behavior depends on: people only try the new idea, or tell the debrief truth, when it is safe to.</p><div class="yt" data-embed="LhoLuui9gX8" data-title="Amy Edmondson: Building a psychologically safe workplace"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div></details>
       <div class="md-wrap" style="margin-top:12px">
 <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="change" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
     </div>
@@ -716,7 +724,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <p class="drill-status" id="externalStatus" role="status" aria-live="polite">0 of 3 named.</p>
       </div>
       </div>
-      <details class="deeper"><summary><b>Optional &middot; go deeper</b>Harvard: speaking up, pointed upward (managing your boss)<span class="dur">4 min &middot; not needed for completion</span></summary><div class="d-body"><p>External behavior pointed upward. Your unit leader is the first person your team needs you connected to.</p><div class="yt" data-embed="qLFAHMHWtIA" data-title="Harvard ManageMentor: Managing your boss"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=qLFAHMHWtIA" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div></details>
+      <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Harvard: speaking up, pointed upward (managing your boss)<span class="dur">Short video &middot; not needed for completion</span></summary><div class="d-body"><p>External behavior pointed upward. Your unit leader is the first person your team needs you connected to.</p><div class="yt" data-embed="qLFAHMHWtIA" data-title="Harvard ManageMentor: Managing your boss (introduction)"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=qLFAHMHWtIA" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div></details>
       <div class="md-wrap" style="margin-top:12px">
 <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="external" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
     </div>
@@ -731,18 +739,18 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The survey</span></span>
       <h2>Where you <em class="s">stand</em>.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>What the survey asks (how often you do the fifteen habits, nothing else) and how to read your results.</p><p><b>What Vanderbilt asks you to do</b>Rate yourself honestly now. Complete the real survey when it arrives by email. Pick one habit to work on this week.</p></div>
+    <div class="ask"><p><b>What you will learn</b>What the survey you already took was asking (how often you do the fifteen habits, nothing else) and how to read your results.</p><p><b>What Vanderbilt asks you to do</b>Rate yourself honestly now that you know the habits by name. Pick one habit to work on this week. Take the survey again six months after you finish.</p></div>
     <div class="survey-grid">
       <div class="survey">
-        <span class="sk">Coming to your inbox</span>
+        <span class="sk">Done once &middot; again in six months</span>
         <div>
           <h4>The survey</h4>
-          <p>A short survey (its formal name is the Managerial Practices Survey) asks how often you do each of the fifteen habits you just learned. It is not about personality or performance, and nobody passes or fails it. It shows you, and the program, where to start.</p>
+          <p>Before this course you completed a short survey, the Managerial Practices Survey. It asked how often you do each of the fifteen habits you just learned. It is not about personality or performance, and nobody passes or fails it. It shows you, and the program, where to start.</p>
           <ol>
-            <li><b>Arrives by email</b> from the Futures Learning Hub after this course; the email says how long you have. About fifteen minutes to complete.</li>
-            <li><b>Answer for a typical month,</b> not your best week. An honest low score is worth more than a flattering one.</li>
-            <li><b>Results come back to you first,</b> as a picture across the four jobs. Your Engagement Consultant can walk through them with you; ask them who else sees the results and when.</li>
-            <li><b>You take it again later,</b> so the change shows.</li>
+            <li><b>You already took it,</b> before this course. Now that you know the fifteen habits by name, your results will read differently.</li>
+            <li><b>It asks about a typical month,</b> not your best week. An honest low score is worth more than a flattering one.</li>
+            <li><b>Read it as a picture across the four jobs.</b> Your Engagement Consultant can walk through your results with you.</li>
+            <li><b>You take it again six months after you finish this course,</b> so the change shows.</li>
           </ol>
         </div>
       </div>
@@ -794,9 +802,9 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div role="listitem"><b>Job 4</b><strong>Connect your team.</strong><p>Know the people, watch for what is coming, speak up with facts.</p></div>
     </div>
     <div class="hw-list reveal" style="margin-top:12px">
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Complete the survey when it arrives</h3><p>By email from the Futures Learning Hub. Fifteen minutes, for a typical month, honestly.</p></div><span class="chip">When it arrives</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Open your dashboard today</h3><p>Your micro modules (how to do the common tasks) in your order, your compliance list, and who to call. <a href="../dashboard/">Open My Voyage</a> &middot; <a href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Manager Portal</a>.</p></div><span class="chip">Today</span></div>
       <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one habit this week</h3><p id="ns2p">The one your self-rating pointed to. Do it once, on purpose, and notice what happened.</p></div><span class="chip">This week</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Open your dashboard today</h3><p>Your micro modules (how to do the common tasks) in your order, your compliance list, and who to call. <a href="../dashboard/">Open My Voyage</a> &middot; <a href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Manager Portal</a>.</p></div><span class="chip">Today</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Take the survey again in six months</h3><p>The Futures Learning Hub sends it six months after you finish this course. Answer for a typical month, honestly, and compare it with the one you took before you started.</p></div><span class="chip">In six months</span></div>
     </div>
     <div class="evidence reveal" id="tell-leader">
       <span class="e-label">Tell your unit leader</span>
@@ -815,7 +823,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   <div class="wrap">
     <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Page 16 of 16 &middot; Wrap-up</span></span>
     <h2 class="metal">Now manage it the <em>same</em> way.</h2>
-    <p>Four jobs, one habit to try this week, and a dashboard that now knows where to start you. The survey is coming; answer it honestly. The micro modules are open; take the first one today. From first day to fully formed leader starts now.</p>
+    <p>Four jobs, one habit to try this week, and a dashboard that now knows where to start you. The micro modules are open; take the first one today. When the survey comes back around in six months, answer it honestly and see what changed. From first day to fully formed leader starts now.</p>
     <a class="btn btn-gold" href="../dashboard/">Open My Voyage<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <p class="cta-alt">Have not taken the quick check yet? <a href="#quiz">It takes three minutes.</a></p>
     <p class="send-sign">The quality of Vanderbilt&rsquo;s future depends on the quality of its managers today.</p>
@@ -854,7 +862,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   <div class="oracle-modal">
     <span class="mono">Foundation complete</span>
     <h2 id="oracleTitle">You have completed the foundation.</h2>
-    <p id="oracleBody">All eight sections are done. Watch for the survey by email. Your micro modules are open on your dashboard.</p>
+    <p id="oracleBody">All eight sections are done. Your micro modules are open on your dashboard. The survey comes back around six months from now.</p>
     <div class="oracle-actions">
       <a class="btn btn-gold" id="oracleGo" href="../dashboard/">Open My Voyage<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
       <button type="button" class="btn btn-ghost btn-sm" id="oracleLater">Stay here</button>
@@ -863,8 +871,10 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </div>
 
+<script src="../assets/js/config.js?v=4"></script>
 <script src="../assets/js/program-data.js?v=4"></script>
 <script src="../assets/js/scorm.js?v=4"></script>
+<script src="../assets/js/oracle.js?v=4"></script>
 <script src="narration-scripts.js?v=4"></script>
 <script src="pager.js?v=4"></script>
 <script src="app.js?v=4"></script>

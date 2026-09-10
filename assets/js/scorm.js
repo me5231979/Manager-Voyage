@@ -127,6 +127,20 @@
     } catch (e) { /* completion still lives in suspend_data */ }
   };
 
+  /* score for the SCO (the Foundation quick check): raw plus min and max */
+  scorm.score = function (raw, max) {
+    try {
+      if (scorm.version === '2004') {
+        api2004.SetValue('cmi.score.raw', String(raw)); api2004.SetValue('cmi.score.min', '0');
+        if (max) { api2004.SetValue('cmi.score.max', String(max)); api2004.SetValue('cmi.score.scaled', String(Math.round(raw / max * 100) / 100)); }
+        api2004.Commit('');
+      } else if (scorm.version === '1.2') {
+        api12.LMSSetValue('cmi.core.score.raw', String(raw)); api12.LMSSetValue('cmi.core.score.min', '0');
+        if (max) api12.LMSSetValue('cmi.core.score.max', String(max));
+        api12.LMSCommit('');
+      }
+    } catch (e) {}
+  };
   scorm.complete = function () {
     try {
       if (scorm.version === '2004') {

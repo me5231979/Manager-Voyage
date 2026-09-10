@@ -115,23 +115,28 @@ for name, spec in (data.get('videos') or {}).items():
     vd, nd = duration(cat), duration(npath)
     lead, tail = 0.8, 1.2
     total = nd + lead + tail
-    # the narration is the spine: slow the footage (up to 1.6x, a calm training pace) so it
-    # covers the narration, and loop from the start only if it still falls short
-    stretch = min(max(total / vd, 1.0), 1.6)
-    if stretch > 1.02:
+    # the narration is the spine. Footage never loops: the manifest carries enough
+    # clips to cover it, an imperceptible slow-down (at most 8 percent) closes a
+    # small gap, and if a video still falls short the last frame holds and the
+    # build prints a warning so more clips get added.
+    stretch = min(max(total / vd, 1.0), 1.08)
+    if stretch > 1.005:
         slow = os.path.join(TMP, name + '.slow.mp4')
         run('ffmpeg', '-y', '-v', 'error', '-i', cat, '-vf', 'setpts=%.4f*PTS,fps=24' % stretch, '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-pix_fmt', 'yuv420p', slow)
         cat = slow; vd = duration(cat)
+    short = max(total - vd, 0)
+    if short > 0.5:
+        sys.stderr.write('WARNING: %s footage is %.1fs short of its narration; holding the last frame. Add a clip.\n' % (name, short))
     fade = max(total - 0.8, 0)
     out = os.path.join(VID, name + '.mp4')
-    run('ffmpeg', '-y', '-v', 'error', '-stream_loop', '-1', '-i', cat, '-i', npath,
-        '-filter_complex', '[1:a]adelay=%d|%d,loudnorm=I=-16:TP=-1.5:LRA=11,apad,afade=t=out:st=%.2f:d=0.8[a];[0:v]fade=t=in:d=0.6,fade=t=out:st=%.2f:d=0.8[v]' % (int(lead * 1000), int(lead * 1000), fade, fade),
+    run('ffmpeg', '-y', '-v', 'error', '-i', cat, '-i', npath,
+        '-filter_complex', '[1:a]adelay=%d|%d,loudnorm=I=-16:TP=-1.5:LRA=11,apad,afade=t=out:st=%.2f:d=0.8[a];[0:v]tpad=stop_mode=clone:stop_duration=%.2f,fade=t=in:d=0.6,fade=t=out:st=%.2f:d=0.8[v]' % (int(lead * 1000), int(lead * 1000), fade, short + 1.0, fade),
         '-map', '[v]', '-map', '[a]', '-t', '%.2f' % total,
         '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', out)
     run('ffmpeg', '-y', '-v', 'error', '-ss', '1.5', '-i', out, '-frames:v', '1', '-q:v', '3', os.path.join(IMG, name + '-poster.jpg'))
     if spec.get('text'):
         write_captions(spec['text'], lead, nd, os.path.join(VID, name + '.vtt'))
-    built.append('video %s (%.1fs, %d clip%s, x%.2f)' % (name, total, len(parts), '' if len(parts) == 1 else 's', stretch))
+    built.append('video %s (%.1fs narration, %d clip%s = %.0fs footage, x%.2f%s)' % (name, total, len(parts), '' if len(parts) == 1 else 's', vd / stretch, stretch, ', last frame held %.1fs' % short if short > 0.5 else ''))
 
 shutil.rmtree(TMP, ignore_errors=True)
 print('Built:\n  ' + '\n  '.join(built) if built else 'Built: nothing')

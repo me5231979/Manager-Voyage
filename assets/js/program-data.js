@@ -3,7 +3,11 @@
    One object, no framework. Every item carries:
      id         stable key used for progress and Oracle matching
      oracleCode the Oracle Learning catalog reference (where known)
-     oracleUrl  the Oracle Learning deep link (null until FLH provides it)
+     oracleUrl  a pasted Oracle Learning deep link (optional)
+     oracleItemId  the Oracle Learning item number; with oracleItemType
+                (ORA_COURSE or ORA_CLASS) the link is built from
+                MV_CONFIG.oracleRedirect, so this is the field to fill in
+                when FLH gets the numbers (see assets/js/oracle.js)
    Source: Manager Voyage Executive Brief v2, September 2026.
    No em or en dashes anywhere in this file.
    ===================================================================== */
@@ -76,11 +80,11 @@ window.MV_PROGRAM = {
       title: 'TN Harassment Prevention: Supervisors',
       why: 'Vanderbilt policy: supervisors carry the duty to respond and escalate.',
       desc: 'Recognizing a concern, responding well in the moment, and getting it to Equal Opportunity and Access.' },
-    { id: 'R-015', oracleCode: 'R-015', oracleUrl: null, mins: 20, state: 'ALL', audience: 'All Staff', type: 'Advisory', deadlineDays: 30, cadence: 'Annual',
+    { id: 'R-015', oracleCode: 'R-015', oracleUrl: null, oracleItemId: null, mins: 20, state: 'ALL', audience: 'All Staff', type: 'Advisory', deadlineDays: 30, cadence: 'Annual',
       title: 'Code of Conduct: Vanderbilt',
       why: 'Every staff member affirms the Code of Conduct each year.',
       desc: 'The commitments every Vanderbilt employee makes: integrity, respect, stewardship, and how to raise a concern.' },
-    { id: 'R-016', oracleCode: 'R-016', oracleUrl: null, mins: 20, state: 'ALL', audience: 'Manager', type: 'Advisory', deadlineDays: 30, cadence: 'Annual',
+    { id: 'R-016', oracleCode: 'R-016', oracleUrl: null, oracleItemId: null, mins: 20, state: 'ALL', audience: 'Manager', type: 'Advisory', deadlineDays: 30, cadence: 'Annual',
       title: 'Code of Conduct: Managers',
       why: 'Managers model the Code and are accountable for it on their teams.',
       desc: 'Conflicts of interest, gifts, records, fair treatment, and what to do when a team member raises a concern.' },
@@ -108,7 +112,7 @@ window.MV_PROGRAM = {
     title: 'Manager Responsibilities Course',
     summary: 'Compliance tells you what the law requires. This course tells you what Vanderbilt requires: the systems you approve in, the people obligations you now carry, the processes you run, and the university and city you represent.',
     foundation: {
-      id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, localUrl: '../foundation/', minutes: 15, phase: 1,
+      id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, oracleItemId: null, oracleItemType: 'ORA_COURSE', localUrl: '../foundation/', minutes: 15, phase: 1,
       title: 'Foundation: What Vanderbilt Expects of a Manager',
       why: 'About fifteen minutes, taken first. The four jobs of a manager in plain words, why each matters, one thing to do this week for each, and a self-rating that sets the order of your micro modules.',
       segments: [
@@ -117,7 +121,7 @@ window.MV_PROGRAM = {
         { n: 3, title: 'Job 2: take care of your people', format: 'Video, cards, your call, quick check', desc: 'Listen and help, grow them, thank them, trust them, and the line where helping becomes a duty to route.' },
         { n: 4, title: 'Job 3: make things better', format: 'Video, cards, your call, quick check', desc: 'Explain the why, describe where you are going, let people try, look back.' },
         { n: 5, title: 'Job 4: connect your team', format: 'Video, cards, your call, quick check', desc: 'Know the people, watch for what is coming, speak up for your team with facts.' },
-        { n: 6, title: 'The survey and where you stand', format: 'Self-rating', desc: 'What the Managerial Practices Survey asks, and a fifteen-habit self-rating that produces a first picture and your micro-module order.' }
+        { n: 6, title: 'The survey and where you stand', format: 'Self-rating', desc: 'What the Managerial Practices Survey you already took was asking, and a fifteen-habit self-rating that produces a first picture and your micro-module order.' }
       ]
     },
     tracks: [

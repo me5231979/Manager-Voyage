@@ -152,24 +152,68 @@ $$('.cv-wrap').forEach(function(w){
 
 /* ══════════ public videos: a facade, loaded only when tapped ══════════
    Leaving the page puts the facade back, which also stops playback. */
+/* The window shows the video's own thumbnail before it is tapped, then the
+   YouTube player is embedded in place (an iframe inside the course). If the
+   player's API reports the video cannot be embedded or has gone away, the
+   window turns into a plain card that opens the video on YouTube instead. */
+var ytApiState = 0, ytApiQueue = [];
+function ytApi(cb){
+  if(window.YT && window.YT.Player){ cb(true); return; }
+  ytApiQueue.push(cb);
+  if(ytApiState) return;
+  ytApiState = 1;
+  var prev = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = function(){ if(typeof prev === 'function') prev(); ytApiState = 2; ytApiQueue.splice(0).forEach(function(f){ f(true); }); };
+  var s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; s.async = true;
+  s.onerror = function(){ ytApiState = 3; ytApiQueue.splice(0).forEach(function(f){ f(false); }); };
+  document.head.appendChild(s);
+  window.setTimeout(function(){ if(ytApiState === 1){ ytApiState = 3; ytApiQueue.splice(0).forEach(function(f){ f(false); }); } }, 5000);
+}
 $$('.yt[data-embed]').forEach(function(box){
   var id = box.getAttribute('data-embed'), title = box.getAttribute('data-title') || 'Play video';
+  var plain = title.replace(/&[a-z]+;/g, ''), watch = 'https://www.youtube.com/watch?v=' + encodeURIComponent(id);
+  var player = null;
   function facade(){
-    box.innerHTML = '<button type="button" class="yt-btn" aria-label="Play: ' + esc(title.replace(/&[a-z]+;/g, '')) + '"><span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="yt-t">' + title + '</span><span class="yt-sub mono">YouTube &middot; loads when you tap</span></button>';
+    if(player && player.destroy){ try{ player.destroy(); }catch(e){} } player = null;
+    box.innerHTML = '<img class="yt-thumb" src="https://img.youtube.com/vi/' + encodeURIComponent(id) + '/hqdefault.jpg" alt="" aria-hidden="true">' +
+      '<button type="button" class="yt-btn" aria-label="Play: ' + esc(plain) + '"><span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="yt-t">' + title + '</span><span class="yt-sub mono">YouTube &middot; plays here when you tap</span></button>';
+    var img = box.querySelector('.yt-thumb'); img.addEventListener('error', function(){ img.remove(); });
     box.querySelector('.yt-btn').addEventListener('click', load);
   }
-  function load(){
-    narrStop();
+  function unavailable(){
+    if(player && player.destroy){ try{ player.destroy(); }catch(e){} } player = null;
+    box.innerHTML = '<div class="yt-off"><p><b>This video cannot play inside the course</b> (its owner does not allow embedding, or it has moved).</p><a class="btn btn-gold btn-sm" href="' + watch + '" target="_blank" rel="noopener">Open it on YouTube</a></div>';
+  }
+  function iframeOnly(){
     var f = document.createElement('iframe');
     f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&modestbranding=1';
-    f.title = title.replace(/&[a-z]+;/g, '');
+    f.title = plain;
     f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture; web-share';
     f.setAttribute('allowfullscreen', '');
     f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
     box.innerHTML = ''; box.appendChild(f);
   }
+  function load(){
+    narrStop();
+    box.innerHTML = '<div class="yt-loading mono">Loading the player&hellip;</div>';
+    ytApi(function(ok){
+      if(!box.querySelector('.yt-loading')) return; /* page turned meanwhile */
+      if(!ok){ iframeOnly(); return; }
+      var host = document.createElement('div'); box.innerHTML = ''; box.appendChild(host);
+      try{
+        player = new YT.Player(host, {
+          host: 'https://www.youtube-nocookie.com', videoId: id, width: '100%', height: '100%',
+          playerVars: { autoplay: 1, rel: 0, modestbranding: 1, playsinline: 1 },
+          events: {
+            onReady: function(e){ try{ e.target.playVideo(); }catch(x){} var f = box.querySelector('iframe'); if(f){ f.title = plain; f.setAttribute('allowfullscreen', ''); } },
+            onError: function(){ unavailable(); }
+          }
+        });
+      }catch(e){ iframeOnly(); }
+    });
+  }
   facade();
-  document.addEventListener('chart:page', function(){ if(box.querySelector('iframe')) facade(); });
+  document.addEventListener('chart:page', function(){ if(box.querySelector('iframe') || box.querySelector('.yt-loading')) facade(); });
 });
 
 /* ══════════ PROGRESS ══════════ */
@@ -264,7 +308,10 @@ if(!store){ var pw = $('#progStorageNote'); if(pw) pw.hidden = false; }
 var doneSeen = get('done-seen') === '1';
 var modalReturn = null, modalTimer = null;
 function allDone(){
-  if(window.MVScorm && MVScorm.connected) MVScorm.complete();
+  if(window.MVOracle){
+    var qs = get('quiz-score'), qm = get('quiz-max');
+    MVOracle.reportCompletion('MRC-F', { score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: all eight sections', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })() } });
+  } else if(window.MVScorm && MVScorm.connected) MVScorm.complete();
   if(doneSeen) return;
   doneSeen = true; set('done-seen', '1');
   window.setTimeout(modalShow, reduce ? 0 : 450);
@@ -527,7 +574,7 @@ function assessShowOut(){
     '<p class="mono" style="margin-top:14px">Work on these first</p><ol class="focus-list">' + r.focus.map(function(f, i){
       return '<li><b>' + (i + 1) + '</b><span>' + esc(f.b) + '<small>' + esc(CATS[f.c].name) + ' &middot; you rated it ' + esc(ASSESS_OPTS[f.v].toLowerCase()) + '</small></span></li>';
     }).join('') + '</ol>' +
-    '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your dashboard puts the micro modules in this order, the job that needs you most first. The survey you receive by email will give you the same picture with more precision.</p>' +
+    '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your dashboard puts the micro modules in this order, the job that needs you most first. The survey you took before this course gives the same picture with more precision, and the retake in six months shows the change.</p>' +
     '<div class="route-act" style="margin-top:12px"><button type="button" class="btn btn-ghost btn-sm" id="assessRedo">Rate again</button></div>';
   aOut.innerHTML = html;
   if(aQs) aQs.hidden = true; if(aNav) aNav.hidden = true;
@@ -574,6 +621,7 @@ var QUIZ = [
     done.innerHTML = '<div class="big-score">' + score + ' / ' + QUIZ.length + '</div><h3>' + t[0] + '</h3><p>' + t[1] + '</p><button type="button" class="btn btn-ghost btn-sm" id="quizRetake">Retake the check</button>';
     done.classList.add('show');
     $$('.kq', box).forEach(function(q){ q.classList.remove('cur'); });
+    set('quiz-score', String(score)); set('quiz-max', String(QUIZ.length));
     if(score >= PASS) progDone('quiz');
     $('#quizRetake').addEventListener('click', render);
     if(window.chartPager) window.chartPager.goToEl(done);

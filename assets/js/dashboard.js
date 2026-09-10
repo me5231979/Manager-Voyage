@@ -34,6 +34,7 @@
   function greeting() { var h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
   function stateName(s) { return (P.states[s] || {}).name || ''; }
   function courseUrl(it) {
+    if (window.MVOracle) return MVOracle.courseUrl(it);
     if (it.oracleUrl) return it.oracleUrl;
     if (it.localUrl) return it.localUrl;
     if (CFG.oracleLearningBase && it.oracleCode) return CFG.oracleLearningBase + encodeURIComponent(it.oracleCode);
@@ -60,7 +61,7 @@
   }
   function mrcItems() {
     var f = P.mrc.foundation;
-    var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'What management is at Vanderbilt, one shared way: four categories and fifteen behaviors (task, relations, change, external), the Managerial Practices Survey, and a self-rating that orders your modules.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
+    var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The four jobs of a manager in plain words: get the work done, take care of your people, make things better, connect your team. Then a self-rating that orders your micro modules.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
     orderedTracks().forEach(function (t) {
       t.modules.forEach(function (m) {
         out.push(Object.assign({}, m, { kind: 'course', area: 'mrc', track: t, oracleCode: m.id, minutes: 15,
@@ -121,7 +122,7 @@
     if (it.cadence) meta.push('<span>' + esc(it.cadence) + '</span>');
     meta.push(dueHtml(it));
     var why = it.why ? '<details class="item__why"><summary>Why you take it</summary><p>' + esc(it.why) + (it.note ? ' <b>' + esc(it.note) + '</b>' : '') + '</p></details>' : '';
-    var local = !it.oracleUrl && !!it.localUrl;
+    var local = !!url && !/^https?:/i.test(url);
     var cta = url
       ? '<a class="btn" data-go="' + esc(it.id) + '" href="' + esc(url) + '"' + (local ? '' : ' target="_blank" rel="noopener"') + '>' + (done ? 'Revisit' : statusOf(it.id) === 'opened' ? 'Continue' : local ? 'Open the course' : 'Open in Oracle') + '</a>'
       : '<span class="btn is-disabled" title="Oracle link coming soon">Link coming soon</span>';

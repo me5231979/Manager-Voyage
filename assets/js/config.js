@@ -4,9 +4,31 @@
    Fill in the Oracle values when FLH provides them; nothing else changes.
    ===================================================================== */
 window.MV_CONFIG = {
-  /* Oracle Learning base, used to build a course link from an oracleCode
-     when an item has no explicit oracleUrl. Leave null to disable. */
-  oracleLearningBase: null,           /* e.g. 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/' */
+  /* Oracle Learning deep links, built from an item's learning item number.
+     Every compliance link in the training matrix follows this pattern, so
+     any item that carries oracleItemId (and optionally oracleItemType,
+     ORA_COURSE or ORA_CLASS) links without a pasted URL. */
+  oracleRedirect: {
+    base: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect',
+    idParam: 'learningItemId',
+    typeParam: 'learningItemType',
+    defaultType: 'ORA_COURSE'
+  },
+
+  /* Fallback: a base URL plus the item's oracleCode, for catalogs that
+     expose a stable code-based link. Leave null to disable. */
+  oracleLearningBase: null,
+
+  /* Completion write-back when a course runs outside Oracle Learning
+     (GitHub Pages behind single sign-on). POST JSON
+     { id, at, score, max, passed, extra } to this URL with credentials.
+     Inside Oracle Learning the SCORM API is used instead. Leave null to
+     keep completions local and self-reported. */
+  completionEndpoint: null,           /* e.g. 'https://flh-proxy.vanderbilt.edu/voyage/completions' */
+
+  /* The Managerial Practices Survey: taken before the Foundation course and
+     again this many months after completing it. */
+  surveyRetakeMonths: 6,
 
   /* Profile and completion feed. A small proxy in front of Oracle HCM that
      returns the signed-in manager's record as JSON. See docs/ORACLE-INTEGRATION.md
