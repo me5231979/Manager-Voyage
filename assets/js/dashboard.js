@@ -165,7 +165,7 @@
     var ordered = !!foundationOrder();
     var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · About 4 hours</span></div>' +
       '<p class="panel__lead">' + esc(P.mrc.summary) + ' Every module is interactive: simulators, scenario studios, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check, and Oracle records the date you pass it.</p>' +
-      lane(f.title, '30 minutes · Completed first', [f], ordered ? 'Your self-assessment set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation first. It unlocks the micro modules and orders them from your self-assessment.'));
+      lane(f.title, '15 minutes · Completed first', [f], ordered ? 'Your self-assessment set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation first. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;
     [1, 2].forEach(function (phase) {
       var tracks = orderedTracks().filter(function (t) { return t.phase === phase; });

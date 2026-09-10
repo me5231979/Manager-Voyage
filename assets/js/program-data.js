@@ -108,16 +108,16 @@ window.MV_PROGRAM = {
     title: 'Manager Responsibilities Course',
     summary: 'Compliance tells you what the law requires. This course tells you what Vanderbilt requires: the systems you approve in, the people obligations you now carry, the processes you run, and the university and city you represent.',
     foundation: {
-      id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, localUrl: '../foundation/', minutes: 30, phase: 1,
+      id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, localUrl: '../foundation/', minutes: 15, phase: 1,
       title: 'Foundation: What Vanderbilt Expects of a Manager',
-      why: 'Thirty minutes, completed first. One definition of management for every Vanderbilt manager, and the framework the survey measures.',
+      why: 'About fifteen minutes, taken first. The four jobs of a manager in plain words, why each matters, one thing to do this week for each, and a self-rating that sets the order of your micro modules.',
       segments: [
-        { n: 1, title: 'Welcome from People, Culture and Belonging', format: 'Video', desc: 'Why Vanderbilt is standardizing management, and what changes for you starting today.' },
-        { n: 2, title: 'The Manager Standard', format: 'Interactive walkthrough', desc: 'The foundation gate (ethical and inclusive practice) and the five domains, in plain language.' },
-        { n: 3, title: 'Your First 60 Days', format: 'Timeline', desc: 'The two required components, the Portal, the cohort, and the Day 30 and Day 60 milestones.' },
-        { n: 4, title: 'What You Now Own', format: 'Decision tree', desc: 'The shift from doing the work to owning the team\'s outcomes, including the legal exposure that arrives with the title.' },
-        { n: 5, title: 'The People You Will Call', format: 'Interactive map', desc: 'HR partner, Engagement Consultant, Employee Relations, Equal Opportunity and Access, Ombuds, Compliance. Who does what.' },
-        { n: 6, title: 'Self-Assessment', format: 'Assessment', desc: 'Twelve questions on systems confidence, people obligations, and process experience. Output: your personal order for the 22 micro modules.' }
+        { n: 1, title: 'Why, and the four jobs', format: 'Video plus tap-to-open map', desc: 'Why Vanderbilt is spelling out the job, and the four jobs of a manager: get the work done, take care of your people, make things better, connect your team.' },
+        { n: 2, title: 'Job 1: get the work done', format: 'Video, cards, your call, quick check', desc: 'Plan it, say it, check it, fix it.' },
+        { n: 3, title: 'Job 2: take care of your people', format: 'Video, cards, your call, quick check', desc: 'Listen and help, grow them, thank them, trust them, and the line where helping becomes a duty to route.' },
+        { n: 4, title: 'Job 3: make things better', format: 'Video, cards, your call, quick check', desc: 'Explain the why, describe where you are going, let people try, look back.' },
+        { n: 5, title: 'Job 4: connect your team', format: 'Video, cards, your call, quick check', desc: 'Know the people, watch for what is coming, speak up for your team with facts.' },
+        { n: 6, title: 'The survey and where you stand', format: 'Self-rating', desc: 'What the Managerial Practices Survey asks, and a fifteen-habit self-rating that produces a first picture and your micro-module order.' }
       ]
     },
     tracks: [
