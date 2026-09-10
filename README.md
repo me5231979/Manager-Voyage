@@ -37,23 +37,24 @@ row, and a rail with Up next, Milestones, and Who to call.
 
 ## Foundation course (`foundation/`)
 
-"Foundation: what Vanderbilt expects of a manager," about fifteen minutes,
-sixteen pages, completed before the micro modules unlock. It teaches
-management itself, one shared way, on Yukl's taxonomy of leadership behavior
-(four categories, fifteen behaviors), the same behaviors the Managerial
-Practices Survey measures. Every page opens with a breadcrumb (where you are,
-what you have, what is next) and every module page with two plain lines: what
-you will learn, and what Vanderbilt asks you to do, followed by the Yukl
-tie-in (category, behavior numbers of fifteen, objective, survey items).
+"What Vanderbilt expects of a manager," the first course in Manager
+Foundations (after the manager compliance courses, before the micro modules).
+About fifteen minutes, sixteen pages. It teaches the four jobs of a manager in
+plain words: get the work done, take care of your people, make things better,
+connect your team. Yukl's research is the guide behind the four jobs (each
+module names his term once, in a "where this comes from" line), not the
+vocabulary in front of them. Every page opens with a breadcrumb (where you
+are, what you have, what is next) and every module page with what you will
+learn and why it matters to you.
 
 1. Welcome, then a course and module overview (purpose, audience, objectives,
    completion, one card per module)
 2. Module 1, why and the framework: the belief, the welcome from People,
    Culture and Belonging, the Chancellor's charge, then a 90-second captioned
    training video and a tap-to-open map of the four categories
-3. Modules 2 to 5, one category each, two pages: an 80-second captioned
-   training video (Yukl tie, each behavior with a Vanderbilt example, the
-   habit versus the Vanderbilt way, the cue to act) beside flip cards; then
+3. Modules 2 to 5, one job each, two pages: an 80-second captioned training
+   video (why it matters, each habit on a normal Tuesday, what to stop doing,
+   one thing to do this week) beside flip cards; then
    two aligned practices, "Your call" (apply: one situation, three responses,
    consequences) and a three-item quick check (recognize), with an optional
    collapsed public video below

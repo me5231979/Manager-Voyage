@@ -1,6 +1,6 @@
 /* ══════════ MANAGER VOYAGE · FOUNDATION · app engine ══════════
    Progress (eight tracked sections), the six segments' activities (flip
-   cards, habit sort, your call, name the behavior), the self-rating that
+   cards, your call, quick check), the self-rating that
    orders the 22 micro modules, the knowledge check, page narration, the
    custom and public videos, and the SCORM hookup. State: localStorage
    mv-found-* plus, inside Oracle Learning, SCORM suspend_data. Nothing is
@@ -174,13 +174,13 @@ $$('.yt[data-embed]').forEach(function(box){
 
 /* ══════════ PROGRESS ══════════ */
 var SECTIONS = [
-  { k:'welcome',   no:'01', name:'The framework',                how:'Open all four categories, or mark it done' },
-  { k:'task',      no:'02', name:'Task-oriented',                how:'Name the three behaviors, or mark it done' },
-  { k:'relations', no:'03', name:'Relations-oriented',           how:'Name the three behaviors, or mark it done' },
-  { k:'change',    no:'04', name:'Change-oriented',              how:'Name the three behaviors, or mark it done' },
-  { k:'external',  no:'05', name:'External',                     how:'Name the three behaviors, or mark it done' },
-  { k:'survey',    no:'06', name:'The survey and your profile',  how:'Show your profile' },
-  { k:'quiz',      no:'07', name:'Knowledge check',              how:'Score four or more of five' },
+  { k:'welcome',   no:'01', name:'The four jobs',                how:'Open all four jobs, or mark it done' },
+  { k:'task',      no:'02', name:'Job 1: get the work done',     how:'Answer the three quick questions, or mark it done' },
+  { k:'relations', no:'03', name:'Job 2: take care of your people', how:'Answer the three quick questions, or mark it done' },
+  { k:'change',    no:'04', name:'Job 3: make things better',     how:'Answer the three quick questions, or mark it done' },
+  { k:'external',  no:'05', name:'Job 4: connect your team',      how:'Answer the three quick questions, or mark it done' },
+  { k:'survey',    no:'06', name:'The survey and where you stand', how:'Rate yourself and see where you stand' },
+  { k:'quiz',      no:'07', name:'A quick check',                how:'Score four or more of five' },
   { k:'nextstep',  no:'08', name:'Your next step',               how:'Mark it done once planned' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }
@@ -328,31 +328,31 @@ $$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){
     c.addEventListener('click', function(){
       var open = c.getAttribute('aria-expanded') !== 'true';
       c.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if(open){ seen[i] = 1; var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 4 categories opened.' + (n === 4 ? ' Section complete. The next four segments take one each.' : ''); if(n === 4) progDone('welcome'); }
+      if(open){ seen[i] = 1; var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 4 jobs opened.' + (n === 4 ? ' Section complete. The next four modules take one job each.' : ''); if(n === 4) progDone('welcome'); }
     });
   });
 })();
 /* ══════════ your call: one scenario, three responses, consequences ══════════ */
 var SCENARIOS = {
   task: { s:'It is Wednesday. The monthly report your team owns is due Friday. Priya, who builds it, has not mentioned it in two weeks, and you have not asked. A director just emailed you asking whether it will be on time.', opts:[
-    { t:'Reply “yes” to the director, then build the report yourself Thursday night to be sure.', b:'Not managing', best:false, out:'The report ships. You are now the person who builds it, Priya does not know she was doubted, and next month you are in the same spot. Doing the work is not on the list; monitoring it is.' },
-    { t:'Reply “I will confirm today,” then ask Priya in a fifteen-minute check-in where the report stands and what she needs.', b:'Monitoring, then clarifying', best:true, out:'Priya is two-thirds done and waiting on a Finance extract nobody chased. You chase it, confirm Friday with the director, and put the monthly check-in on the calendar for the second week of every month so you never learn this on a Wednesday again.' },
-    { t:'Forward the director’s email to Priya with “Please make sure this is on time.”', b:'The habit', best:false, out:'Priya reads it as blame from two levels up. The report may still ship, but you have clarified nothing (what does “on time” mean, what is blocking her) and you have spent trust. Monitoring is a conversation, not a forwarded email.' }
+    { t:'Reply “yes” to the director, then build the report yourself Thursday night to be sure.', b:'Doing the work instead of managing it', best:false, out:'The report ships. You are now the person who builds it, Priya does not know she was doubted, and next month you are in the same spot. Doing the work is not the job; checking it is.' },
+    { t:'Reply “I will confirm today,” then ask Priya in a fifteen-minute check-in where the report stands and what she needs.', b:'Check it, then say it', best:true, out:'Priya is two-thirds done and waiting on a Finance extract nobody chased. You chase it, confirm Friday with the director, and put the monthly check-in on the calendar for the second week of every month so you never learn this on a Wednesday again.' },
+    { t:'Forward the director’s email to Priya with “Please make sure this is on time.”', b:'The habit', best:false, out:'Priya reads it as blame from two levels up. The report may still ship, but you have clarified nothing (what does “on time” mean, what is blocking her) and you have spent trust. Checking work is a conversation, not a forwarded email.' }
   ]},
   relations: { s:'Marcus, one of your strongest people, stays after the 1:1 and says: “My dad has been in and out of the hospital. I might need some time off for it, I am not sure yet. I did not want you to think I was slacking.”', opts:[
-    { t:'“I am so sorry. Take whatever you need. Just let me know what is going on with him so I can plan around it.”', b:'Supporting, but a step too far', best:false, out:'Warm, and it asks for a diagnosis, which you must never do. It also leaves a possible leave request sitting with you instead of with leave administration. The kindness is right; the routing is missing.' },
-    { t:'“Thank you for telling me. Let us move the two deadlines you have this week. I am going to send your situation to leave administration today so the options are ready if you need them, and nothing you told me affects how I see your work.”', b:'Supporting, and route it', best:true, out:'Marcus has what he needs: the load adjusted now, the leave process started without him having to ask twice, and no request for medical detail. Support and a legal duty arrived in the same sentence; you handled both.' },
-    { t:'“No problem at all. Let me know if it becomes an issue.”', b:'The habit', best:false, out:'Friendly, and nothing changed. The deadlines still stand, the leave request is not routed, and Marcus learns that telling you things does not help. Being pleasant is not supporting.' }
+    { t:'“I am so sorry. Take whatever you need. Just let me know what is going on with him so I can plan around it.”', b:'Listening and helping, but a step too far', best:false, out:'Warm, and it asks for a diagnosis, which you must never do. It also leaves a possible leave request sitting with you instead of with leave administration. The kindness is right; the routing is missing.' },
+    { t:'“Thank you for telling me. Let us move the two deadlines you have this week. I am going to send your situation to leave administration today so the options are ready if you need them, and nothing you told me affects how I see your work.”', b:'Listen, help, and route it', best:true, out:'Marcus has what he needs: the load adjusted now, the leave process started without him having to ask twice, and no request for medical detail. Helping and a duty to route arrived in the same sentence; you handled both.' },
+    { t:'“No problem at all. Let me know if it becomes an issue.”', b:'The habit', best:false, out:'Friendly, and nothing changed. The deadlines still stand, the leave request is not routed, and Marcus learns that telling you things does not help. Being pleasant is not helping.' }
   ]},
   change: { s:'Central is replacing the travel reimbursement system in six weeks. The announcement email goes out next Tuesday. Your team already hates the idea; two people have said “here we go again” in the hallway.', opts:[
-    { t:'Wait for the announcement email and forward it with “FYI, let me know if you have questions.”', b:'The habit', best:false, out:'The team hears about it from central, not from you, and the hallway version wins. Forwarding is not advocating change.' },
-    { t:'In Thursday’s team meeting, before the email, explain in your own words why the change is happening and what it fixes, ask what worries them, and write the worries down to take back to central.', b:'Advocating change', best:true, out:'The team still does not love it, but they heard the why from you first, their objections went somewhere, and two of them volunteer to test the new system early. Small and weekly is how uncommon agility actually happens.' },
-    { t:'Tell the team you also think it is a bad idea, but there is nothing anyone can do.', b:'The opposite of advocating', best:false, out:'It feels honest and it costs the team its manager. You have joined the hallway instead of leading it, and nobody’s concerns will reach the people who could act on them.' }
+    { t:'Wait for the announcement email and forward it with “FYI, let me know if you have questions.”', b:'The habit', best:false, out:'The team hears about it from central, not from you, and the hallway version wins. Forwarding is not explaining the why.' },
+    { t:'In Thursday’s team meeting, before the email, explain in your own words why the change is happening and what it fixes, ask what worries them, and write the worries down to take back to central.', b:'Explain the why', best:true, out:'The team still does not love it, but they heard the why from you first, their objections went somewhere, and two of them volunteer to test the new system early. Small and weekly is how uncommon agility actually happens.' },
+    { t:'Tell the team you also think it is a bad idea, but there is nothing anyone can do.', b:'The opposite of explaining the why', best:false, out:'It feels honest and it costs the team its manager. You have joined the hallway instead of leading it, and nobody’s concerns will reach the people who could act on them.' }
   ]},
   external: { s:'A director in another unit emails you Monday: “We need your team to pull a full data reconciliation by Friday for our audit prep.” Your team’s own month-end close is the same week. Doing both is not possible without weekend work.', opts:[
-    { t:'Say yes and ask the team to work the weekend. Better not to upset a director.', b:'The habit', best:false, out:'The audit prep ships, the team works the weekend, and next quarter the same director asks again, sooner, because it worked. Absorbing every request is what representing replaces.' },
-    { t:'Reply the same day with the numbers: the hours the reconciliation takes, the month-end close it collides with, and two options, a partial pull by Friday with the rest the following Wednesday, or the full pull with the close pushed, and ask which the audit actually needs.', b:'Representing', best:true, out:'The director needed three of the seven tables by Friday and did not know the close was that week. You deliver three tables Thursday, the rest Wednesday, no weekend. The team saw you defend their month, politely and early.' },
-    { t:'Reply “We cannot do this” and copy your unit leader.', b:'Not representing, escalating', best:false, out:'Your unit leader now owns a negotiation you could have had in one email, and the director hears “no” with no reason and no option. Representing is speaking for the team with the numbers, not just refusing for it.' }
+    { t:'Say yes and ask the team to work the weekend. Better not to upset a director.', b:'The habit', best:false, out:'The audit prep ships, the team works the weekend, and next quarter the same director asks again, sooner, because it worked. Absorbing every request is what speaking up replaces.' },
+    { t:'Reply the same day with the numbers: the hours the reconciliation takes, the month-end close it collides with, and two options, a partial pull by Friday with the rest the following Wednesday, or the full pull with the close pushed, and ask which the audit actually needs.', b:'Speak up for your team', best:true, out:'The director needed three of the seven tables by Friday and did not know the close was that week. You deliver three tables Thursday, the rest Wednesday, no weekend. The team saw you defend their month, politely and early.' },
+    { t:'Reply “We cannot do this” and copy your unit leader.', b:'Not speaking up, just escalating', best:false, out:'Your unit leader now owns a negotiation you could have had in one email, and the director hears “no” with no reason and no option. Speaking up for your team means the numbers and the options, not just a refusal.' }
   ]}
 };
 function buildScenario(el){
@@ -376,39 +376,39 @@ function buildScenario(el){
 }
 $$('[data-scn]').forEach(buildScenario);
 
-/* ══════════ name the behavior: six situations, one at a time ══════════ */
+/* ══════════ quick check: which habit is it, one situation at a time ══════════ */
 var DRILLS = {
-  task: { opts:['Planning','Clarifying','Monitoring','Problem solving','Not managing'], prog:'task', verb:'named', items:[
-    { s:'Before the quarter, set three priorities, assigned an owner to each, and decided what would move if a new request landed.', a:0, x:'Planning: what, who, when, and what gives. Done before the quarter, not during it.' },
-    { s:'In the first 1:1 of the month, confirmed with each person what they own, the deadline, and what “done well” means, and wrote it in Culture Amp.', a:1, x:'Clarifying. Said out loud, confirmed back, written where the team can see it.' },
-    { s:'Looked at the half-finished slide deck in the weekly 1:1 rather than the finished one on the due date.', a:2, x:'Monitoring: progress and quality checked before the deadline, when there is still time to steer.' },
-    { s:'Stayed late to rebuild the report personally after the process broke for the second time this month.', a:4, x:'Not managing. Doing the work is not on the list. Finding out why the process breaks and deciding what changes would be problem solving.' },
-    { s:'After the second failure, traced it to a handoff nobody owned, assigned the handoff, and told the team.', a:3, x:'Problem solving: cause found, decision made, team told.' },
-    { s:'Approved the team’s timecards on Thursday and asked one person about a 52-hour week before approving it.', a:2, x:'Monitoring. Approvals in Oracle are monitoring behavior; the question before the approval is what makes it management.' }
+  task: { opts:['Plan it','Say it','Check it','Fix it','Not managing, just doing the work'], prog:'task', verb:'named', items:[
+    { s:'Before the quarter, set three priorities, assigned an owner to each, and decided what would move if a new request landed.', a:0, x:'Plan it: what, who, when, and what gives. Done before the quarter, not during it.' },
+    { s:'In the first 1:1 of the month, confirmed with each person what they own, the deadline, and what “done well” means, and wrote it in Culture Amp.', a:1, x:'Say it: said out loud, confirmed back, written where the team can see it.' },
+    { s:'Looked at the half-finished slide deck in the weekly 1:1 rather than the finished one on the due date.', a:2, x:'Check it: the work looked at before the deadline, while there is still time to steer.' },
+    { s:'Stayed late to rebuild the report personally after the process broke for the second time this month.', a:4, x:'Doing the work is not managing it. Finding out why the process breaks and changing something would be fix it.' },
+    { s:'After the second failure, traced it to a handoff nobody owned, assigned the handoff, and told the team.', a:3, x:'Fix it: cause found, decision made, team told.' },
+    { s:'Approved the team’s timecards on Thursday and asked one person about a 52-hour week before approving it.', a:2, x:'Check it. Approvals in Oracle are a way of checking work; the question before the approval is what makes it management.' }
   ]},
-  relations: { opts:['Supporting','Developing','Recognizing','Empowering','Route it'], prog:'relations', verb:'named', items:[
-    { s:'Told a direct report, “The way you handled the vendor call on Thursday kept us on schedule,” on Friday.', a:2, x:'Recognizing: specific, named, within the week.' },
-    { s:'Handed over the decision about the new intake process, not only the task, and set the one boundary it had to respect.', a:3, x:'Empowering: a real decision delegated, with the boundary stated.' },
-    { s:'Asked each person in the quarterly 1:1 what they want to be doing in two years, and found one stretch assignment to match.', a:1, x:'Developing: coaching and opening the next door, without a form in front of you.' },
-    { s:'A team member said their mother is in the hospital. The manager listened, moved two deadlines, and checked in on Monday.', a:0, x:'Supporting: concern shown, load adjusted, follow-up kept. If the person needs time off for it, that becomes a leave request to route.' },
-    { s:'A team member said a colleague keeps commenting on their accent. The manager documented it and called Equal Opportunity and Access the same day.', a:4, x:'Route it. Support still matters, but a possible discrimination report is a duty, not a relations behavior. You do not investigate; you report the same day.' },
-    { s:'Before setting the new on-call rotation, asked the team how they would design it, and used most of their design.', a:3, x:'Empowering, the consulting half: ask before you decide, and let the answer change the decision.' }
+  relations: { opts:['Listen and help','Grow them','Thank them','Trust them','Route it'], prog:'relations', verb:'named', items:[
+    { s:'Told a direct report, “The way you handled the vendor call on Thursday kept us on schedule,” on Friday.', a:2, x:'Thank them: specific, by name, that week.' },
+    { s:'Handed over the decision about the new intake process, not only the task, and set the one boundary it had to respect.', a:3, x:'Trust them: a real decision handed over, with the boundary stated.' },
+    { s:'Asked each person in the quarterly 1:1 what they want to be doing in two years, and found one stretch assignment to match.', a:1, x:'Grow them: a real conversation about what is next, without a form in front of you.' },
+    { s:'A team member said their mother is in the hospital. The manager listened, moved two deadlines, and checked in on Monday.', a:0, x:'Listen and help: the load moved, the follow-up kept. If the person needs time off for it, that becomes a leave request to route.' },
+    { s:'A team member said a colleague keeps commenting on their accent. The manager documented it and called Equal Opportunity and Access the same day.', a:4, x:'Route it. Listening still matters, but a possible discrimination report is a duty, not a habit. You do not investigate; you report it to Equal Opportunity and Access the same day.' },
+    { s:'Before setting the new on-call rotation, asked the team how they would design it, and used most of their design.', a:3, x:'Trust them: ask before you decide, and let the answer change the decision.' }
   ]},
-  change: { opts:['Advocating change','Envisioning change','Encouraging innovation','Facilitating collective learning','Not this category'], prog:'change', verb:'named', items:[
-    { s:'Explained the reason for the new travel system in the team meeting, in their own words, two days before the campus-wide email.', a:0, x:'Advocating change: the why, in your own words, before the announcement, with objections taken seriously.' },
-    { s:'Ran a ten-minute debrief after the orientation event and wrote the three changes for next year into the Portal template.', a:3, x:'Facilitating collective learning: what worked, what did not, what changes, written down.' },
-    { s:'Told a team member who suggested a new way to run the weekly report, “Try it for two weeks and show me.”', a:2, x:'Encouraging innovation: the idea invited and allowed to be tried, small and soon.' },
-    { s:'Described to the team, in two sentences, what they will be able to do next year that they cannot do now, and how it connects to the Chancellor’s vision.', a:1, x:'Envisioning change: a clear picture of where the team is going and why it matters.' },
-    { s:'Approved a flexible work request after checking the policy and the equity across the team.', a:4, x:'Not this category. That is task and relations behavior (a decision with a process, and empowering). Change-oriented behavior is about the team getting better at what it does.' },
-    { s:'Shared the checklist one person built with the whole team and made it the standard.', a:3, x:'Facilitating collective learning: knowledge from one person becomes the team’s.' }
+  change: { opts:['Explain the why','Describe where we are going','Let people try','Look back','A different job'], prog:'change', verb:'named', items:[
+    { s:'Explained the reason for the new travel system in the team meeting, in their own words, two days before the campus-wide email.', a:0, x:'Explain the why: in your own words, before the announcement, with objections taken seriously.' },
+    { s:'Ran a ten-minute debrief after the orientation event and wrote the three changes for next year into the Portal template.', a:3, x:'Look back: what worked, what did not, what changes, written down.' },
+    { s:'Told a team member who suggested a new way to run the weekly report, “Try it for two weeks and show me.”', a:2, x:'Let people try: the idea invited and allowed to be tried, small and soon.' },
+    { s:'Described to the team, in two sentences, what they will be able to do next year that they cannot do now, and how it connects to the Chancellor’s vision.', a:1, x:'Describe where we are going: a clear picture of next year and why it matters.' },
+    { s:'Approved a flexible work request after checking the policy and the equity across the team.', a:4, x:'A different job. That is getting the work done and taking care of people (a decision with a process, and trust). Making things better is about the team getting better at what it does.' },
+    { s:'Shared the checklist one person built with the whole team and made it the standard.', a:3, x:'Look back: what one person learned becomes the team’s.' }
   ]},
-  external: { opts:['Networking','External monitoring','Representing','Not this category'], prog:'external', verb:'named', items:[
-    { s:'Had coffee with a peer manager in Finance in the first month, before needing anything from Finance.', a:0, x:'Networking: the relationship built before it is needed.' },
-    { s:'Read the compensation cycle calendar in August and told the team in September what to expect in October.', a:1, x:'External monitoring: what is coming, seen before it lands.' },
-    { s:'When another unit asked for a report that would take a week the team did not have, showed the numbers and negotiated a two-week deadline.', a:2, x:'Representing: the team’s workload defended with numbers, politely and early.' },
-    { s:'Ran the weekly 1:1 and checked the progress on each person’s goals.', a:3, x:'Not this category. Monitoring is task-oriented. External behavior faces outside the team.' },
-    { s:'Wrote the business case for the open position and walked it through the approval chain personally.', a:2, x:'Representing: getting the team the resources it needs.' },
-    { s:'Asked the Engagement Consultant what other units were doing about the same staffing gap.', a:0, x:'Networking, and a little external monitoring: using a relationship outside the team to learn what is coming.' }
+  external: { opts:['Know the people','Watch for what is coming','Speak up for the team','A different job'], prog:'external', verb:'named', items:[
+    { s:'Had coffee with a peer manager in Finance in the first month, before needing anything from Finance.', a:0, x:'Know the people: the relationship built before it is needed.' },
+    { s:'Read the compensation cycle calendar in August and told the team in September what to expect in October.', a:1, x:'Watch for what is coming: seen before it lands.' },
+    { s:'When another unit asked for a report that would take a week the team did not have, showed the numbers and negotiated a two-week deadline.', a:2, x:'Speak up for the team: the workload defended with numbers, politely and early.' },
+    { s:'Ran the weekly 1:1 and checked the progress on each person’s goals.', a:3, x:'A different job. Checking work is job one, get the work done. Job four faces outside the team.' },
+    { s:'Wrote the business case for the open position and walked it through the approval chain personally.', a:2, x:'Speak up for the team: getting it the resources it needs.' },
+    { s:'Asked the Engagement Consultant what other units were doing about the same staffing gap.', a:0, x:'Know the people, and a little watching for what is coming: using a relationship outside the team to learn what is next.' }
   ]}
 };
 var DRILL_PICK = { task:[1,3,4], relations:[0,4,3], change:[0,4,2], external:[1,3,2] };
@@ -443,23 +443,23 @@ $$('[data-drill]').forEach(buildDrill);
 
 /* ══════════ segment 6: self-rating, one behavior at a time → module order ══════════ */
 var ASSESS_QS = [
-  { c:'task', b:'Planning', q:'I set priorities, owners, and schedules before the work starts.' },
-  { c:'task', b:'Clarifying', q:'Each person on my team can say what they own, by when, and what done well means.' },
-  { c:'task', b:'Monitoring', q:'I check progress and quality before the deadline, in the 1:1, not after.' },
-  { c:'task', b:'Problem solving', q:'When something breaks twice, I find the cause and change something, rather than fixing it again myself.' },
-  { c:'relations', b:'Supporting', q:'I listen when someone is under pressure, adjust what I can, and follow up.' },
-  { c:'relations', b:'Developing', q:'I have a growth conversation with each person at least once a quarter.' },
-  { c:'relations', b:'Recognizing', q:'I praise specific work, by name, within the week it happened.' },
-  { c:'relations', b:'Empowering', q:'I delegate real decisions, and I consult the team before I set a new process.' },
-  { c:'change', b:'Advocating change', q:'When a change is coming, I explain the why in my own words before the announcement does.' },
-  { c:'change', b:'Envisioning change', q:'I can describe, in two sentences, what my team will be able to do next year that it cannot do now.' },
-  { c:'change', b:'Encouraging innovation', q:'When someone suggests a different way, I let them try it.' },
-  { c:'change', b:'Facilitating collective learning', q:'We debrief after significant work and write down what changes.' },
-  { c:'external', b:'Networking', q:'I know the people outside my team that my team depends on, by name, before I need them.' },
-  { c:'external', b:'External monitoring', q:'I see policy changes, cycles, and other units’ plans before they land on my team.' },
-  { c:'external', b:'Representing', q:'I speak up for my team’s workload and resources, with numbers, early.' }
+  { c:'task', b:'Plan it', q:'I set priorities, owners, and schedules before the work starts.' },
+  { c:'task', b:'Say it', q:'Each person on my team can say what they own, by when, and what good looks like.' },
+  { c:'task', b:'Check it', q:'I check progress and quality before the deadline, in the 1:1, not after.' },
+  { c:'task', b:'Fix it', q:'When something breaks twice, I find the cause and change something, rather than fixing it again myself.' },
+  { c:'relations', b:'Listen and help', q:'I listen when someone is under pressure, adjust what I can, and follow up.' },
+  { c:'relations', b:'Grow them', q:'I talk with each person about where they want to go at least once a quarter.' },
+  { c:'relations', b:'Thank them', q:'I praise specific work, by name, within the week it happened.' },
+  { c:'relations', b:'Trust them', q:'I delegate real decisions, and I consult the team before I set a new process.' },
+  { c:'change', b:'Explain the why', q:'When a change is coming, I explain the why in my own words before the announcement does.' },
+  { c:'change', b:'Describe where we are going', q:'I can describe, in two sentences, what my team will be able to do next year that it cannot do now.' },
+  { c:'change', b:'Let people try', q:'When someone suggests a different way, I let them try it.' },
+  { c:'change', b:'Look back', q:'We look back after big work and write down what changes.' },
+  { c:'external', b:'Know the people', q:'I know the people outside my team that my team depends on, by name, before I need them.' },
+  { c:'external', b:'Watch for what is coming', q:'I see policy changes, deadlines, and other offices’ plans before they land on my team.' },
+  { c:'external', b:'Speak up for your team', q:'I speak up for my team’s workload and resources, with numbers, early.' }
 ];
-var CATS = { task:{ name:'Task-oriented', short:'Task' }, relations:{ name:'Relations-oriented', short:'Relations' }, change:{ name:'Change-oriented', short:'Change' }, external:{ name:'External', short:'External' } };
+var CATS = { task:{ name:'Get the work done', short:'Job 1' }, relations:{ name:'Take care of your people', short:'Job 2' }, change:{ name:'Make things better', short:'Job 3' }, external:{ name:'Connect your team', short:'Job 4' } };
 /* which micro-module tracks practice each category, for the dashboard order */
 var CAT_TRACKS = { task:['T1','T3'], relations:['T2','T3'], change:['T4'], external:['T4'] };
 var ASSESS_OPTS = ['Rarely', 'Sometimes', 'Often'];
@@ -519,22 +519,22 @@ function assessProfile(){
 function assessShowOut(){
   var r = assessProfile(); if(!aOut) return;
   var keys = Object.keys(CATS);
-  var html = '<h4>Your first <em>profile</em>.</h4>' +
+  var html = '<h4>Where you <em>stand</em>.</h4>' +
     '<div class="prof" role="list" aria-label="Your profile by category">' + keys.map(function(k){
       return '<div role="listitem"><b>' + esc(CATS[k].name) + '</b><span class="bar" aria-hidden="true"><i style="width:' + r.pct[k] + '%"></i></span><span>' + r.pct[k] + '%</span></div>';
     }).join('') + '</div>' +
-    '<p class="gap-line">Your strongest category is <b>' + esc(CATS[r.strongest].name) + '</b>. The category the job needs more of from you is <b>' + esc(CATS[r.weakest].name) + '</b>. That is not a verdict; it is the behaviors you do less often than the role needs, and behaviors change.</p>' +
-    '<p class="mono" style="margin-top:14px">Practice these first</p><ol class="focus-list">' + r.focus.map(function(f, i){
+    '<p class="gap-line">Your strongest job right now is <b>' + esc(CATS[r.strongest].name) + '</b>. The job that needs more of you is <b>' + esc(CATS[r.weakest].name) + '</b>. That is not a verdict; it is a set of habits you do less often than the team needs, and habits change.</p>' +
+    '<p class="mono" style="margin-top:14px">Work on these first</p><ol class="focus-list">' + r.focus.map(function(f, i){
       return '<li><b>' + (i + 1) + '</b><span>' + esc(f.b) + '<small>' + esc(CATS[f.c].name) + ' &middot; you rated it ' + esc(ASSESS_OPTS[f.v].toLowerCase()) + '</small></span></li>';
     }).join('') + '</ol>' +
-    '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your dashboard orders the micro modules from this profile, weakest category first inside each window. The Managerial Practices Survey will give you the same profile with more precision.</p>' +
+    '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your dashboard puts the micro modules in this order, the job that needs you most first. The survey you receive by email will give you the same picture with more precision.</p>' +
     '<div class="route-act" style="margin-top:12px"><button type="button" class="btn btn-ghost btn-sm" id="assessRedo">Rate again</button></div>';
   aOut.innerHTML = html;
   if(aQs) aQs.hidden = true; if(aNav) aNav.hidden = true;
   if(aShow) aShow.disabled = true; if(aHint) aHint.textContent = 'Your profile is below.';
   set('assess', JSON.stringify({ answers:assessAns, pct:r.pct, weakest:r.weakest, focus:r.focus.map(function(f){ return f.b; }), order:r.order, at:new Date().toISOString() }));
   try{ localStorage.setItem('mv.foundation.v1', get('assess')); }catch(e){}
-  var ns = $('#ns2p'); if(ns) ns.textContent = 'Your self-rating pointed to ' + r.focus[0].b.toLowerCase() + '. Do it once this week, on purpose, and notice what happened.';
+  var ns = $('#ns2p'); if(ns) ns.textContent = 'Your self-rating pointed to: ' + r.focus[0].b.toLowerCase() + '. Do it once this week, on purpose, and notice what happened.';
   progDone('survey');
   var redo = $('#assessRedo'); if(redo) redo.addEventListener('click', function(){ assessAns = new Array(ASSESS_QS.length).fill(null); aCur = 0; set('assess', null); assessRender(); var f = aQs.querySelector('.route-q.cur button'); if(f) f.focus(); });
   if(window.chartPager) window.chartPager.goToEl(aOut);
@@ -549,11 +549,11 @@ assessLoad();
 
 /* ══════════ knowledge check: five questions, one at a time, feedback after each ══════════ */
 var QUIZ = [
-  { seg:'The framework (page 4)', q:'In the framework Vanderbilt uses, management is defined as:', opts:['A set of personality traits','A title with approval rights','Four categories of behavior: task, relations, change, external','Whatever your own manager did'], a:2, x:'Four categories of behavior, from Yukl’s taxonomy. Behavior can be named, measured, and practiced; that is why the program, and the survey, are built on it.' },
-  { seg:'Task-oriented (page 5)', q:'A manager writes each person’s quarterly goals into Culture Amp and confirms them in the first 1:1. Which behavior is that?', opts:['Monitoring','Clarifying','Recognizing','Representing'], a:1, x:'Clarifying, behavior 2 of 15: what is expected, by when, and how good, written where the team can see it. Monitoring is checking the progress afterward.' },
-  { seg:'Relations-oriented (page 7)', q:'A direct report says, “I might need some time off for a medical thing.” The supporting behavior is:', opts:['Listen, adjust what you can, and hand the possible leave request to leave administration the same day','Ask for the diagnosis so you can plan coverage','Decide whether they qualify for leave','Wait for something in writing'], a:0, x:'Listen, adjust, route. Support and a legal duty arrive in the same sentence. Never ask for a diagnosis; recognize the request and hand it off the same day.' },
-  { seg:'Change-oriented (page 9)', q:'A team member suggests a different way to run the weekly report. The change-oriented response is:', opts:['Explain why the current way exists','Escalate it to your unit leader','“Try it for two weeks and show me”','Add it to next year’s plan'], a:2, x:'Encouraging innovation, behavior 11 of 15: the new idea invited and allowed to be tried, small and soon.' },
-  { seg:'External (page 11)', q:'Another unit’s request would break your team’s month. You show the hours, offer two options, and negotiate the deadline. That is:', opts:['Problem solving','Supporting','Not managing','Representing'], a:3, x:'Representing, behavior 15 of 15: speaking for the team with the numbers, politely and early, instead of absorbing the request or refusing it.' }
+  { seg:'The four jobs (page 4)', q:'Being a manager at Vanderbilt means doing four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' },
+  { seg:'Job 1 (page 5)', q:'A manager writes each person’s goals for the quarter into Culture Amp and confirms them in the first 1:1. Which habit is that?', opts:['Check it','Say it','Thank them','Speak up for the team'], a:1, x:'Say it: what is expected, by when, and what good looks like, written where the team can see it. Check it comes later, when you look at the work in progress.' },
+  { seg:'Job 2 (page 7)', q:'A team member says, “I might need some time off for a medical thing.” The right move is:', opts:['Listen, move what you can, and send the possible leave request to leave administration the same day','Ask what the condition is so you can plan coverage','Decide yourself whether they qualify for leave','Wait until they put it in writing'], a:0, x:'Listen, help, and route it. Never ask for a diagnosis. A possible leave request goes to the right office the same day, and you keep supporting the person.' },
+  { seg:'Job 3 (page 9)', q:'A team member suggests a different way to run the weekly report. The make-things-better response is:', opts:['Explain why the current way exists','Escalate it to your unit leader','“Try it for two weeks and show me”','Add it to next year’s plan'], a:2, x:'Let people try: the new idea invited and given a small, short trial.' },
+  { seg:'Job 4 (page 11)', q:'Another office’s request would break your team’s month. You show the hours, offer two options, and negotiate the date. That is:', opts:['Fix it','Listen and help','Not managing','Speak up for your team'], a:3, x:'Speak up for your team: facts, options, and a negotiated date, instead of absorbing the request or refusing it.' }
 ];
 (function(){
   var box = $('#quizBox'), status = $('#quizStatus'), done = $('#quizDone'); if(!box) return;
