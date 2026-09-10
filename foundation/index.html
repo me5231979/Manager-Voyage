@@ -294,6 +294,22 @@ html.paged .split2 .scn{ margin-top:8px; }
 .isnot b{ font-family:var(--serif); font-weight:400; font-size:1.15rem; line-height:1.2; color:var(--tx); }
 .isnot p{ font-size:.9rem; color:var(--tx2); line-height:1.45; }
 @media (max-width:900px){ .isnot{ grid-template-columns:1fr; } }
+.threeq{ margin-top:14px; display:grid; gap:8px; }
+.threeq .mono{ font-size:.7rem; }
+.threeq > div{ display:grid; grid-template-columns:34px 1fr; gap:10px; align-items:center; border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:8px 12px 8px 8px; }
+.threeq b{ width:34px; height:34px; border-radius:50%; background:var(--eyebrow); color:var(--btn-tx); display:grid; place-items:center; font-family:var(--cond); font-weight:700; font-size:.95rem; }
+.threeq p{ font-size:.98rem; color:var(--tx); font-weight:600; line-height:1.3; }
+.helpers{ margin-top:18px; display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+.helpers .mono{ grid-column:1 / -1; font-size:.72rem; }
+.helpers > div{ border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:14px 14px 12px; display:flex; flex-direction:column; gap:6px; }
+.helpers .hic{ width:44px; height:44px; border-radius:50%; background:var(--eyebrow); color:var(--btn-tx); display:grid; place-items:center; margin-bottom:4px; }
+.helpers .hic svg{ width:24px; height:24px; }
+.helpers b{ font-family:var(--serif); font-weight:400; font-size:1.15rem; line-height:1.2; color:var(--tx); }
+.helpers p{ font-size:.86rem; color:var(--tx2); line-height:1.4; }
+.helpers small{ margin-top:auto; padding-top:6px; border-top:1px solid var(--bd); font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.04em; text-transform:uppercase; color:var(--eyebrow); line-height:1.4; }
+.helpers small a{ color:var(--link); border-bottom:1px solid var(--bdg); text-transform:none; letter-spacing:0; font-family:var(--sans); font-weight:600; font-size:.86rem; }
+@media (max-width:1100px){ .helpers{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:700px){ .helpers{ grid-template-columns:1fr; } }
 .who .mono{ grid-column:1 / -1; font-size:.7rem; }
 .who div{ font-size:.82rem; color:var(--tx2); line-height:1.4; }
 .who b{ display:block; color:var(--tx); font-weight:600; font-size:.86rem; }
@@ -352,8 +368,6 @@ details.deeper .d-body p{ margin:0 0 10px; font-size:.9rem; color:var(--tx2); }
 /* recap chips */
 .recap-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px; }
 .recap-row.three{ grid-template-columns:repeat(3,1fr); margin-top:0; }
-.who.who-col{ grid-template-columns:1fr 1fr; }
-.who.who-col > div{ font-size:.86rem; }
 .calls .scn{ margin-top:0; }
 .calls .cq{ display:none; } .calls .cq.cur{ display:block; }
 .calls .cq-h{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:8px; }
@@ -476,7 +490,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <li><b>Say</b> what changed when you became a manager, and what the job is now</li>
       <li><b>Use</b> five ideas every good manager relies on: priorities, clear expectations, psychological safety, purpose, and the people work</li>
       <li><b>Know</b> what Vanderbilt will ask you to do this year, when, and who helps</li>
-      <li><b>Make the call</b>: handle it, ask your PCB partner, send it to the leave office, or report it</li>
+      <li><b>Make the call</b>: handle it, ask your HCM, send it to the leave office, or report it</li>
       <li><b>Keep</b> the four jobs of a manager in view, week to week</li>
     </ul>
     <p class="meta-line"><b>About 20 minutes &middot; 18 pages &middot; 5 modules</b> &middot; self-paced &middot; completion recorded in Oracle Learning</p>
@@ -565,27 +579,32 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>What a manager is, in eighty seconds</b><p>The training video is being produced. The definition beside it says the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. What changed, the three things that are new, what a manager is not, and who helps. 80 seconds.</p>
-        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on). 2. Read the definition and the three questions. 3. Find the five people and places on the right; you will meet them all in year one.</p>
+        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on). 2. Read the definition and the three questions. 3. Meet the five people and places below; you will need all of them in year one.</p>
       </div>
       <div>
-        <div class="concept" style="margin:0 0 14px">
+        <div class="concept" style="margin:0">
           <span class="c-label">The definition</span>
-          <p style="font-family:var(--serif);font-size:1.25rem;line-height:1.35">A manager is the person responsible for a team&rsquo;s work, and for the people who do it.</p>
-          <p>Three questions every manager answers every week: <b>Does everyone know what to do this week?</b> <b>Is anyone stuck, struggling, or waiting on me?</b> <b>What is coming that the team should hear from me first?</b></p>
+          <p style="font-family:var(--serif);font-size:1.35rem;line-height:1.3">A manager is the person responsible for a team&rsquo;s work, and for the people who do it.</p>
         </div>
-        <div class="who who-col" role="list" aria-label="People and places this course mentions">
-          <span class="mono">Who helps you at Vanderbilt</span>
-          <div role="listitem"><b>Your unit leader</b>The leader your team reports up to.</div>
-          <div role="listitem"><b>Your PCB partner</b>People, Culture and Belonging (PCB) is Vanderbilt&rsquo;s HR. Your PCB partner is the person assigned to your unit: your first call for anything people-related.</div>
-          <div role="listitem"><b>Your Engagement Consultant</b>Culture, engagement, and manager support for your business unit.</div>
-          <div role="listitem"><b>The leave office and EOA</b>Leave administration handles time off for health and family. Equal Opportunity and Access (EOA) handles discrimination and harassment reports.</div>
-          <div role="listitem"><b>Your dashboard (My Voyage)</b>Your compliance list, the micro modules, and who to call. <a href="../dashboard/">Open it</a>.</div>
+        <div class="threeq" role="list" aria-label="Three questions every manager answers every week">
+          <span class="mono">Three questions you answer every week</span>
+          <div role="listitem"><b>1</b><p>Does everyone know what to do this week?</p></div>
+          <div role="listitem"><b>2</b><p>Is anyone stuck, struggling, or waiting on me?</p></div>
+          <div role="listitem"><b>3</b><p>What is coming that the team should hear from me first?</p></div>
         </div>
       </div>
     </div>
+    <div class="helpers" role="list" aria-label="Who helps you at Vanderbilt">
+      <span class="mono">Who helps you at Vanderbilt</span>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M12 2v1.5M18.5 5.5l-1 1M5.5 5.5l1 1"/></svg></span><b>Your unit leader</b><p>The leader your team reports up to.</p><small>Call for direction, priorities, and anything above your desk.</small></div>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M14.5 20a4.5 4.5 0 0 1 7 -3.5"/></svg></span><b>Your Engagement Consultant</b><p>Your HR business partner for the business unit.</p><small>Call for engagement, culture, manager support, and the bigger people questions.</small></div>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></span><b>Your HCM</b><p>Embedded in most business units for immediate HR issues.</p><small>Call first for pay, hiring, a performance concern, a policy question, or whenever you are unsure.</small></div>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><b>The leave office and EOA</b><p>Leave handles time off for health and family. Equal Opportunity and Access handles discrimination and harassment reports.</p><small>Send it the same day. Never ask for a diagnosis; never investigate.</small></div>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 20V9"/></svg></span><b>My Voyage</b><p>Your dashboard: compliance list, micro modules, and who to call.</p><small><a href="../dashboard/">Open it</a></small></div>
+    </div>
     <div class="concept" style="margin:16px 0 0">
       <span class="c-label">A note from People, Culture and Belonging</span>
-      <p>Most people become managers because they were good at the work. Nobody hands them a description of the new job, so they copy whatever their own managers did. Vanderbilt will not leave what the job means to chance: every manager starts here, with the same plain description, and your unit leader, your PCB partner, your Engagement Consultant, and the micro modules all use the same words.</p>
+      <p>Most people become managers because they were good at the work. Nobody hands them a description of the new job, so they copy whatever their own managers did. Vanderbilt will not leave what the job means to chance: every manager starts here, with the same plain description, and your unit leader, your Engagement Consultant, your HCM, and the micro modules all use the same words.</p>
     </div>
   </div>
 </section>
@@ -658,10 +677,10 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your first calls</span></span>
       <h2>Handle it, ask PCB, route it, or <em class="s">report</em> it.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>The one question behind most manager moments: do I handle this myself, ask my PCB partner first, send it to the leave office, or report it to EOA?</p><p><b>Why it matters to you</b>Most new-manager mistakes are not bad judgment. They are handling alone something that had a process, or sitting on something that needed to move the same day.</p></div>
+    <div class="ask"><p><b>What you will learn</b>The one question behind most manager moments: do I handle this myself, ask my HCM first, send it to the leave office, or report it to EOA?</p><p><b>Why it matters to you</b>Most new-manager mistakes are not bad judgment. They are handling alone something that had a process, or sitting on something that needed to move the same day.</p></div>
     <div class="recap-row" role="list" aria-label="The four answers">
       <div role="listitem"><b>Handle it</b><strong>A normal manager task.</strong><p>Time off, a timecard question, a 1:1, expectations, feedback, a thank-you.</p></div>
-      <div role="listitem"><b>Ask my PCB partner first</b><strong>There is a process.</strong><p>Pay, hiring, a performance concern, discipline, and anything you are unsure of.</p></div>
+      <div role="listitem"><b>Ask my HCM first</b><strong>There is a process.</strong><p>Pay, hiring, a performance concern, discipline, and anything you are unsure of. No HCM in your unit? Your Engagement Consultant.</p></div>
       <div role="listitem"><b>The leave office, the same day</b><strong>Health or family time off.</strong><p>Anything that sounds like leave. You never ask for a diagnosis.</p></div>
       <div role="listitem"><b>EOA, the same day</b><strong>Discrimination, harassment, misconduct.</strong><p>You report it; you do not investigate it.</p></div>
     </div>
@@ -806,7 +825,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
         <p class="week"><b>Do this week</b>Have coffee with one person your team depends on.</p>
       </div>
       <div class="flip-grid two">
-        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">13</span><h4>Know the people</h4><span class="def">Know who your team depends on, before you need them.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 13 of 15 &middot; Yukl calls it networking</span><p class="hb no"><b>Stop doing this</b>The PCB partner met at the first crisis.</p><p class="hb yes"><b>Do this instead</b>PCB partner, Engagement Consultant, the Finance approver, and a peer manager, known by name in the first month.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">13</span><h4>Know the people</h4><span class="def">Know who your team depends on, before you need them.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 13 of 15 &middot; Yukl calls it networking</span><p class="hb no"><b>Stop doing this</b>The HCM met at the first crisis.</p><p class="hb yes"><b>Do this instead</b>HCM, Engagement Consultant, the Finance approver, and a peer manager, known by name in the first month.</p></span></button></div>
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">14</span><h4>Watch for what is coming</h4><span class="def">See the change before it lands.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 14 of 15 &middot; Yukl calls it external monitoring</span><p class="hb no"><b>Stop doing this</b>The policy change learned from the team, after it lands.</p><p class="hb yes"><b>Do this instead</b>The compensation calendar read in August; the team told in September what October brings.</p></span></button></div>
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">15</span><h4>Speak up for your team</h4><span class="def">Facts, options, and a negotiated date.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 15 of 15 &middot; Yukl calls it representing</span><p class="hb no"><b>Stop doing this</b>Every request absorbed so nobody is upset. Or refused with no reason.</p><p class="hb yes"><b>Do this instead</b>The hours shown, the conflict named, two options offered, the date negotiated.</p></span></button></div>
       </div>

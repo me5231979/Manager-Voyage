@@ -130,7 +130,7 @@ window.MV_PROGRAM = {
         modules: [
           { id: 'M1.1', oracleUrl: null, title: 'Oracle HCM for Managers', format: 'Guided walkthrough', desc: 'Reading the team view, finding a direct report\'s record, what a manager can and cannot see.' },
           { id: 'M1.2', oracleUrl: null, title: 'Time and Attendance Approvals', format: 'Simulator', desc: 'Approving timecards, correcting errors, absence requests, and what happens to payroll when a deadline is missed.' },
-          { id: 'M1.3', oracleUrl: null, title: 'Requisitions and Hiring', format: 'Walkthrough plus checklist', desc: 'Opening a requisition, the approval chain, Oracle Recruiting basics, what PCB needs from you and when.' },
+          { id: 'M1.3', oracleUrl: null, title: 'Requisitions and Hiring', format: 'Walkthrough plus checklist', desc: 'Opening a requisition, the approval chain, Oracle Recruiting basics, what your HCM needs from you and when.' },
           { id: 'M1.4', oracleUrl: null, title: 'Culture Amp', format: 'Guided walkthrough', desc: 'Setting goals, running check-ins, where the performance cycle lives, and the annual calendar.' },
           { id: 'M1.5', oracleUrl: null, title: 'Expense and Procurement Approvals', format: 'Decision tree', desc: 'What you approve, spend thresholds, common rejections, and where policy lives.' }
         ] },
@@ -178,7 +178,7 @@ window.MV_PROGRAM = {
       { title: 'Templates', desc: '1:1 agenda, goal-setting worksheet, feedback prep, onboarding checklist, offboarding checklist.' },
       { title: 'Frameworks', desc: 'The Manager Standard, the feedback model, the delegation ladder, the coach-or-correct decision guide.' },
       { title: 'Policy links', desc: 'Leave, accommodations, flexible work, compensation cycle, progressive discipline, Code of Conduct.' },
-      { title: 'Who to call', desc: 'PCB partner, Engagement Consultant, Employee Relations, Equal Opportunity and Access, Ombuds, Compliance.' }
+      { title: 'Who to call', desc: 'Your HCM, your Engagement Consultant, Employee Relations, Equal Opportunity and Access, Ombuds, Compliance.' }
     ]
   },
 
@@ -207,8 +207,8 @@ window.MV_PROGRAM = {
   },
 
   contacts: [
-    { role: 'PCB partner', desc: 'Your first call for anything people-related in your unit.' },
-    { role: 'Engagement Consultant', desc: 'Culture, engagement, and manager support for your business unit.' },
+    { role: 'HCM', desc: 'Embedded in most business units. Your first call for an immediate HR issue: pay, hiring, a performance concern, a policy question.' },
+    { role: 'Engagement Consultant', desc: 'Your HR business partner: engagement, culture, manager support, and the bigger people questions for your business unit.' },
     { role: 'Employee Relations (ER)', desc: 'Workplace concerns, investigations, performance and conduct cases.' },
     { role: 'Equal Opportunity and Access (EOA)', desc: 'Discrimination and harassment reporting, Title IX, accommodations.' },
     { role: 'Ombuds', desc: 'Confidential, informal, impartial help thinking through a situation.' },

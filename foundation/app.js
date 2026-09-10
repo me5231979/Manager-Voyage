@@ -477,13 +477,13 @@ var DRILLS = {
     { s:'Investigating a complaint that a coworker is harassing someone.', a:2, x:'Equal Opportunity and Access investigates. Your job is to report it the same day, not to look into it yourself.' },
     { s:'Approving a timecard that shows 52 hours in one week.', a:0, x:'Yours now. Ask about the week before you approve; Vanderbilt trusts your signature, so look before you sign.' }
   ]},
-  calls: { opts:['Handle it','Ask my PCB partner first','The leave office, the same day','EOA, the same day'], prog:'calls', verb:'decided', items:[
+  calls: { opts:['Handle it','Ask my HCM first','The leave office, the same day','EOA, the same day'], prog:'calls', verb:'decided', items:[
     { s:'A team member asks for next Friday off for a wedding.', a:0, x:'Handle it. Check coverage, approve it in Oracle, and say yes out loud. The Time and Attendance Approvals micro module shows the steps.' },
     { s:'A team member says their doctor wants them out for three weeks after surgery.', a:2, x:'The leave office, the same day. It sounds like leave, so it is leave until the leave office says otherwise. Adjust the work; do not ask about the surgery.' },
     { s:'A team member says a coworker keeps making comments about her religion.', a:3, x:'EOA, the same day. You listen, you write down what was said, and you report it. You do not investigate or promise an outcome.' },
-    { s:'You want to raise someone’s pay because they took on more work.', a:1, x:'Ask your PCB partner first. Pay has a process and a cycle (the Compensation Cycle and Merit Basics micro module); your PCB partner tells you what is possible and when.' },
-    { s:'A seat on your team just opened and you want to fill it.', a:1, x:'Ask your PCB partner first. Hiring starts with a requisition and an approval chain (the Requisitions and Hiring micro module).' },
-    { s:'A team member’s work has slipped for a month and a talk did not fix it.', a:1, x:'Ask your PCB partner first. A performance concern has a fair process (Performance Concerns and Progressive Discipline); do not improvise it.' }
+    { s:'You want to raise someone’s pay because they took on more work.', a:1, x:'Ask your HCM first. Pay has a process and a cycle (the Compensation Cycle and Merit Basics micro module); your HCM tells you what is possible and when.' },
+    { s:'A seat on your team just opened and you want to fill it.', a:1, x:'Ask your HCM first. Hiring starts with a requisition and an approval chain (the Requisitions and Hiring micro module).' },
+    { s:'A team member’s work has slipped for a month and a talk did not fix it.', a:1, x:'Ask your HCM first. A performance concern has a fair process (Performance Concerns and Progressive Discipline); do not improvise it.' }
   ]},
   task: { opts:['Plan it','Say it','Check it','Fix it','Not managing, just doing the work'], prog:'task', verb:'named', items:[
     { s:'Before the quarter, set three priorities, assigned an owner to each, and decided what would move if a new request landed.', a:0, x:'Plan it: what, who, when, and what gives. Done before the quarter, not during it.' },
@@ -571,10 +571,10 @@ var IDEAS = [
     value:'People who know the why make good decisions when you are not in the room. A team that trusts you to look after it stays, tells you the truth, and works through the hard weeks with you instead of around you.',
     week:'Explain the why behind one thing you have been asking for.' },
   { who:'The people work · a manager’s core responsibilities', h:'The people work is the manager’s <em>work</em>.',
-    what:'The professional standard for people managers is consistent on one point: the everyday people work is done by the manager, not by HR. Hiring, onboarding, setting expectations, giving feedback, managing performance, handling time and leave, and having hard conversations are yours. At Vanderbilt, PCB (People, Culture and Belonging) shows you how, tells you when a process applies, and steps in when something must be reported or investigated.',
-    apply:'You run the 1:1, give the feedback, start the leave request the same day, open the requisition, and call your PCB partner when you are unsure. The micro modules on your dashboard teach each task step by step.',
+    what:'The professional standard for people managers is consistent on one point: the everyday people work is done by the manager, not by PCB. Hiring, onboarding, setting expectations, giving feedback, managing performance, handling time and leave, and having hard conversations are yours. At Vanderbilt, PCB shows you how (your HCM for the immediate question, your Engagement Consultant for the bigger one), tells you when a process applies, and steps in when something must be reported or investigated.',
+    apply:'You run the 1:1, give the feedback, start the leave request the same day, open the requisition, and call your HCM when you are unsure. The micro modules on your dashboard teach each task step by step.',
     value:'Nothing waits for someone else to act. Your team gets answers from the person who knows them, and PCB spends its time helping you with the hard cases instead of chasing the routine ones.',
-    week:'Find out your PCB partner’s name and how to reach them.' }
+    week:'Find out your HCM’s and your Engagement Consultant’s names, and how to reach them.' }
 ];
 (function(){
   var box = $('#ideasBox'), status = $('#ideasStatus'); if(!box) return;
