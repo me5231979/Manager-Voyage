@@ -168,7 +168,7 @@ window.MV_PROGRAM = {
 
   /* -------- Component 03: Manager Portal -------- */
   portal: {
-    id: 'PORTAL', url: null,
+    id: 'PORTAL', url: 'https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/',
     title: 'Manager Portal',
     summary: 'Every template, framework, policy link, and contact from the course and the cohort. Open from Day 1, never taken away, and it grows with each cohort cycle.',
     areas: [

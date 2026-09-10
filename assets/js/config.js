@@ -15,7 +15,7 @@ window.MV_CONFIG = {
   profilePollMinutes: 10,             /* re-check completions this often while the page is open */
 
   /* Manager Portal link. */
-  portalUrl: null,
+  portalUrl: 'https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/',
 
   /* Cohort seat request link. */
   cohortRequestUrl: null,
