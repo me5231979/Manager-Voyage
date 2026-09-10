@@ -60,7 +60,7 @@
   }
   function mrcItems() {
     var f = P.mrc.foundation;
-    var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'Six five-minute segments: the welcome, the Manager Standard, your first 60 days, what you now own, the people you will call, and a self-assessment that orders your modules.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
+    var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'What management is at Vanderbilt, one shared way: four categories and fifteen behaviors (task, relations, change, external), the Managerial Practices Survey, and a self-rating that orders your modules.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
     orderedTracks().forEach(function (t) {
       t.modules.forEach(function (m) {
         out.push(Object.assign({}, m, { kind: 'course', area: 'mrc', track: t, oracleCode: m.id, minutes: 15,

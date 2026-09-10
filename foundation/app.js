@@ -69,14 +69,14 @@ $$('.reveal').forEach(function(el){ el.classList.add('in'); });
 
 /* ══════════ PROGRESS ══════════ */
 var SECTIONS = [
-  { k:'welcome',  no:'01', name:'Welcome',                  how:'Reveal all six claims, or mark it done' },
-  { k:'standard', no:'02', name:'The Manager Standard',     how:'Sort the eight behaviors, or mark it done' },
-  { k:'sixty',    no:'03', name:'Your first 60 days',       how:'Call the four milestones, or mark it done' },
-  { k:'own',      no:'04', name:'What you now own',         how:'Decide the six situations, or mark it done' },
-  { k:'people',   no:'05', name:'The people you will call', how:'Route the six situations, or mark it done' },
-  { k:'assess',   no:'06', name:'Self-assessment',          how:'Show your module order' },
-  { k:'quiz',     no:'07', name:'Knowledge check',          how:'Score six or more of eight' },
-  { k:'nextstep', no:'08', name:'Your next step',           how:'Mark it done once planned' }
+  { k:'welcome',   no:'01', name:'What management is',           how:'Reveal all six claims, or mark it done' },
+  { k:'task',      no:'02', name:'Task-oriented',                how:'Name the six behaviors, or mark it done' },
+  { k:'relations', no:'03', name:'Relations-oriented',           how:'Name the six behaviors, or mark it done' },
+  { k:'change',    no:'04', name:'Change-oriented',              how:'Name the six behaviors, or mark it done' },
+  { k:'external',  no:'05', name:'External',                     how:'Name the six behaviors, or mark it done' },
+  { k:'survey',    no:'06', name:'The survey and your profile',  how:'Show your profile' },
+  { k:'quiz',      no:'07', name:'Knowledge check',              how:'Score six or more of eight' },
+  { k:'nextstep',  no:'08', name:'Your next step',               how:'Mark it done once planned' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }
 function progWrite(k, v){ set('p-' + k, v ? '1' : null); }
@@ -230,37 +230,37 @@ $$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){
 
 /* ══════════ drills: tap the right option ══════════ */
 var DRILLS = {
-  domain: { opts:['The gate','Run the systems','Protect your people','Lead the work','Grow your people','Carry the mission'], prog:'standard', verb:'sorted', items:[
-    { s:'Approved the team’s timecards before the Friday payroll cutoff.', a:1, x:'Approvals are the Systems domain. Late approvals become payroll corrections.' },
-    { s:'Noticed a direct report said “I may need some time off for treatment” and called leave administration the same day.', a:2, x:'A leave request that did not arrive labeled. Recognizing and routing it is Protect your people.' },
-    { s:'Wrote each direct report’s quarterly goals into Culture Amp and reviewed them in the first 1:1.', a:3, x:'Setting expectations is Lead the work. The system it lives in is Systems, but the behavior is leading.' },
-    { s:'Gave the stretch assignment to the person who needed it, not the person who would finish fastest.', a:4, x:'Delegating for development is Grow your people.' },
-    { s:'Explained to a new hire how the unit’s work connects to the Chancellor’s vision and helped them find their way around Nashville.', a:5, x:'Carry the mission. A manager who can explain the why can explain the work.' },
-    { s:'Documented a performance concern the day it happened, factually, and before deciding what to do.', a:3, x:'Documentation of performance is Lead the work (with Employee Relations one call away). The record is yours.' },
-    { s:'Scheduled a team member’s shifts so the person who complained last month got the worst ones.', a:0, x:'That is retaliation. It is not domain work at all; it is the gate failing, and it is a case.' },
-    { s:'Followed the flexible work policy for everyone on the team, including the two people who asked informally.', a:0, x:'Fair, consistent treatment is the gate holding. Policy applied equally is ethical and inclusive practice.' }
+  task: { opts:['Planning','Clarifying','Monitoring','Problem solving','Not managing'], prog:'task', verb:'named', items:[
+    { s:'Before the quarter, set three priorities, assigned an owner to each, and decided what would move if a new request landed.', a:0, x:'Planning: what, who, when, and what gives. Done before the quarter, not during it.' },
+    { s:'In the first 1:1 of the month, confirmed with each person what they own, the deadline, and what “done well” means, and wrote it in Culture Amp.', a:1, x:'Clarifying. Said out loud, confirmed back, written where the team can see it.' },
+    { s:'Looked at the half-finished slide deck in the weekly 1:1 rather than the finished one on the due date.', a:2, x:'Monitoring: progress and quality checked before the deadline, when there is still time to steer.' },
+    { s:'Stayed late to rebuild the report personally after the process broke for the second time this month.', a:4, x:'Not managing. Doing the work is not on the list. Finding out why the process breaks and deciding what changes would be problem solving.' },
+    { s:'After the second failure, traced it to a handoff nobody owned, assigned the handoff, and told the team.', a:3, x:'Problem solving: cause found, decision made, team told.' },
+    { s:'Approved the team’s timecards on Thursday and asked one person about a 52-hour week before approving it.', a:2, x:'Monitoring. Approvals in Oracle are monitoring behavior; the question before the approval is what makes it management.' }
   ]},
-  milestone: { opts:['Day 1','Days 1 to 30','Days 31 to 60','Day 60','Cohort'], prog:'sixty', verb:'called', items:[
-    { s:'You log into Oracle Learning and two required items are already waiting for you.', a:0, x:'Day 1. The HR record showed a management role and Oracle assigned both required components. Portal access opened the same day.' },
-    { s:'You can open a requisition, approve time, and tell your team how their work connects to the mission.', a:1, x:'Days 1 to 30: the foundation, the Systems track, and the Vanderbilt and Nashville track.' },
-    { s:'You have passed the leave simulator and the progressive discipline simulator.', a:2, x:'Days 31 to 60: the People track and the Processes track, every simulator passed.' },
-    { s:'An invitation to the next quarterly cohort arrives from Oracle.', a:3, x:'Day 60. Completion is recorded against your job profile and the invitation follows. Voluntary; units outside the central budget are billed per seat.' }
+  relations: { opts:['Supporting','Developing','Recognizing','Empowering','Route it'], prog:'relations', verb:'named', items:[
+    { s:'Told a direct report, “The way you handled the vendor call on Thursday kept us on schedule,” on Friday.', a:2, x:'Recognizing: specific, named, within the week.' },
+    { s:'Handed over the decision about the new intake process, not only the task, and set the one boundary it had to respect.', a:3, x:'Empowering: a real decision delegated, with the boundary stated.' },
+    { s:'Asked each person in the quarterly 1:1 what they want to be doing in two years, and found one stretch assignment to match.', a:1, x:'Developing: coaching and opening the next door, without a form in front of you.' },
+    { s:'A team member said their mother is in the hospital. The manager listened, moved two deadlines, and checked in on Monday.', a:0, x:'Supporting: concern shown, load adjusted, follow-up kept. If the person needs time off for it, that becomes a leave request to route.' },
+    { s:'A team member said a colleague keeps commenting on their accent. The manager documented it and called Equal Opportunity and Access the same day.', a:4, x:'Route it. Support still matters, but a possible discrimination report is a duty, not a relations behavior. You do not investigate; you report the same day.' },
+    { s:'Before setting the new on-call rotation, asked the team how they would design it, and used most of their design.', a:3, x:'Empowering, the consulting half: ask before you decide, and let the answer change the decision.' }
   ]},
-  own: { opts:['My call','My call, with a process','Not my call, route it'], prog:'own', verb:'decided', items:[
-    { s:'A direct report asks to shift their hours to 7 to 3 twice a week.', a:1, x:'Yours, with a process. Flexible work has a policy, a documentation step, and an equity check across the team (module 3.5).' },
-    { s:'Two people on your team want the same week off in December.', a:0, x:'Yours. Absence approvals are a manager’s call; make it, document it, and apply the same logic next time.' },
-    { s:'Someone on your team says a coworker keeps making comments about their accent.', a:2, x:'Not yours. That is a possible discrimination report. Document what you were told and report to Equal Opportunity and Access the same day. You do not investigate.' },
-    { s:'A timecard shows 52 hours; you know the person was out Friday.', a:1, x:'Yours, with a process. Correcting a timecard is your approval, but it is a payroll record: correct it in Oracle, note why, and tell the employee (module 1.2).' },
-    { s:'A direct report mentions their doctor wants them to work from a different chair and take more breaks.', a:2, x:'Not yours alone. That is an accommodation request. Your role is the first step of the interactive process; EOA runs it (module 2.4).' },
-    { s:'A strong performer has missed three deadlines this month and seems disengaged.', a:1, x:'Yours, with a process. An early, informal conversation is your call. Document it. If it moves toward formal, call Employee Relations before you act (module 2.5).' }
+  change: { opts:['Advocating change','Envisioning change','Encouraging innovation','Facilitating collective learning','Not this category'], prog:'change', verb:'named', items:[
+    { s:'Explained the reason for the new travel system in the team meeting, in their own words, two days before the campus-wide email.', a:0, x:'Advocating change: the why, in your own words, before the announcement, with objections taken seriously.' },
+    { s:'Ran a ten-minute debrief after the orientation event and wrote the three changes for next year into the Portal template.', a:3, x:'Facilitating collective learning: what worked, what did not, what changes, written down.' },
+    { s:'Told a team member who suggested a new way to run the weekly report, “Try it for two weeks and show me.”', a:2, x:'Encouraging innovation: the idea invited and allowed to be tried, small and soon.' },
+    { s:'Described to the team, in two sentences, what they will be able to do next year that they cannot do now, and how it connects to the Chancellor’s vision.', a:1, x:'Envisioning change: a clear picture of where the team is going and why it matters.' },
+    { s:'Approved a flexible work request after checking the policy and the equity across the team.', a:4, x:'Not this category. That is task and relations behavior (a decision with a process, and empowering). Change-oriented behavior is about the team getting better at what it does.' },
+    { s:'Shared the checklist one person built with the whole team and made it the standard.', a:3, x:'Facilitating collective learning: knowledge from one person becomes the team’s.' }
   ]},
-  who: { opts:['HR partner','Engagement Consultant','Employee Relations','Equal Opportunity and Access','Ombuds','Compliance'], prog:'people', verb:'routed', items:[
-    { s:'A required course never appeared in your Oracle assignments and the deadline is in nine days.', a:5, x:'Compliance. Required training and its deadlines are theirs. Your HR partner is a fine second call.' },
-    { s:'Your team’s engagement scores dropped ten points and you want help planning a team conversation.', a:1, x:'Engagement Consultant. Culture, engagement, and manager support for your business unit.' },
-    { s:'A team member wants to talk through a conflict with a peer off the record before deciding whether to raise it.', a:4, x:'Ombuds. Confidential, informal, impartial, and does not report. Tell them it exists; do not decide for them.' },
-    { s:'A performance concern is moving from informal to formal and you are about to write it up.', a:2, x:'Employee Relations. Call before you act, not after. They will help you get the documentation right.' },
-    { s:'A direct report tells you a colleague made unwanted physical contact at an off-site event.', a:3, x:'Equal Opportunity and Access, the same day. As a manager the report is not optional, and it is not yours to investigate. Employee Relations may be involved after.' },
-    { s:'You are not sure whether a pay question from a new hire is a compensation issue, a policy issue, or a payroll error.', a:0, x:'HR partner. When you cannot tell which office owns it, start there; they route you.' }
+  external: { opts:['Networking','External monitoring','Representing','Not this category'], prog:'external', verb:'named', items:[
+    { s:'Had coffee with a peer manager in Finance in the first month, before needing anything from Finance.', a:0, x:'Networking: the relationship built before it is needed.' },
+    { s:'Read the compensation cycle calendar in August and told the team in September what to expect in October.', a:1, x:'External monitoring: what is coming, seen before it lands.' },
+    { s:'When another unit asked for a report that would take a week the team did not have, showed the numbers and negotiated a two-week deadline.', a:2, x:'Representing: the team’s workload defended with numbers, politely and early.' },
+    { s:'Ran the weekly 1:1 and checked the progress on each person’s goals.', a:3, x:'Not this category. Monitoring is task-oriented. External behavior faces outside the team.' },
+    { s:'Wrote the business case for the open position and walked it through the approval chain personally.', a:2, x:'Representing: getting the team the resources it needs.' },
+    { s:'Asked the Engagement Consultant what other units were doing about the same staffing gap.', a:0, x:'Networking, and a little external monitoring: using a relationship outside the team to learn what is coming.' }
   ]}
 };
 function buildDrill(el){
@@ -306,26 +306,32 @@ $$('[data-drill]').forEach(buildDrill);
 
 /* ══════════ segment 6: self-assessment → module order ══════════ */
 var ASSESS_QS = [
-  { t:'T1', q:'Could you find a direct report’s record, approve their time, and correct a timecard in Oracle HCM today?' },
-  { t:'T1', q:'Could you open a requisition and name who has to approve it before it posts?' },
-  { t:'T1', q:'Could you set a goal and run a check-in in Culture Amp without looking anything up?' },
-  { t:'T4', q:'Could you explain to a new hire how your team’s work connects to the Chancellor’s vision?' },
-  { t:'T4', q:'Could you name the institution’s current areas of focus and say where your unit fits?' },
-  { t:'T4', q:'Could you describe how decisions move across schools, central units, and business units, and where you plug in?' },
-  { t:'T2', q:'If a direct report hinted at needing medical leave, would you know what to say, what never to say, and who to hand off to?' },
-  { t:'T2', q:'Do you know which situations you must report to Equal Opportunity and Access, and that the report is not optional?' },
-  { t:'T2', q:'Have you documented a performance concern before, the day it happened, in a way Employee Relations could use?' },
-  { t:'T3', q:'Do you run 1:1s on a cadence with an agenda, and can you say what a 1:1 is for?' },
-  { t:'T3', q:'Have you given in-the-moment feedback on something hard, and done it well?' },
-  { t:'T3', q:'Do you know how the compensation cycle runs, what you influence, and how to talk about pay?' }
+  { c:'task', b:'Planning', q:'I set priorities, owners, and schedules before the work starts.' },
+  { c:'task', b:'Clarifying', q:'Each person on my team can say what they own, by when, and what done well means.' },
+  { c:'task', b:'Monitoring', q:'I check progress and quality before the deadline, in the 1:1, not after.' },
+  { c:'task', b:'Problem solving', q:'When something breaks twice, I find the cause and change something, rather than fixing it again myself.' },
+  { c:'relations', b:'Supporting', q:'I listen when someone is under pressure, adjust what I can, and follow up.' },
+  { c:'relations', b:'Developing', q:'I have a growth conversation with each person at least once a quarter.' },
+  { c:'relations', b:'Recognizing', q:'I praise specific work, by name, within the week it happened.' },
+  { c:'relations', b:'Empowering', q:'I delegate real decisions, and I consult the team before I set a new process.' },
+  { c:'change', b:'Advocating change', q:'When a change is coming, I explain the why in my own words before the announcement does.' },
+  { c:'change', b:'Envisioning change', q:'I can describe, in two sentences, what my team will be able to do next year that it cannot do now.' },
+  { c:'change', b:'Encouraging innovation', q:'When someone suggests a different way, I let them try it.' },
+  { c:'change', b:'Facilitating collective learning', q:'We debrief after significant work and write down what changes.' },
+  { c:'external', b:'Networking', q:'I know the people outside my team that my team depends on, by name, before I need them.' },
+  { c:'external', b:'External monitoring', q:'I see policy changes, cycles, and other units’ plans before they land on my team.' },
+  { c:'external', b:'Representing', q:'I speak up for my team’s workload and resources, with numbers, early.' }
 ];
-var ASSESS_OPTS = ['Not yet', 'Some', 'Confident'];
+var CATS = { task:{ name:'Task-oriented', short:'Task' }, relations:{ name:'Relations-oriented', short:'Relations' }, change:{ name:'Change-oriented', short:'Change' }, external:{ name:'External', short:'External' } };
+/* which micro-module tracks practice each category, for the dashboard order */
+var CAT_TRACKS = { task:['T1','T3'], relations:['T2','T3'], change:['T4'], external:['T4'] };
+var ASSESS_OPTS = ['Rarely', 'Sometimes', 'Often'];
 var assessAns = new Array(ASSESS_QS.length).fill(null);
 var aQs = $('#assessQs'), aShow = $('#assessShow'), aHint = $('#assessHint'), aOut = $('#assessOut');
 function assessRender(){
   if(!aQs) return;
   aQs.innerHTML = ASSESS_QS.map(function(x, i){
-    return '<div class="route-q" data-rq="' + i + '"><p class="route-qt" id="aq' + i + '"><span class="qn" aria-hidden="true">' + (i < 9 ? '0' : '') + (i + 1) + '</span>' + esc(x.q) + '</p>' +
+    return '<div class="route-q" data-rq="' + i + '"><p class="route-qt" id="aq' + i + '"><span class="qn" aria-hidden="true">' + (i < 9 ? '0' : '') + (i + 1) + '</span><b style="color:var(--eyebrow);font-weight:600">' + esc(x.b) + '.</b> ' + esc(x.q) + '</p>' +
       '<div class="route-opts" role="group" aria-labelledby="aq' + i + '">' + ASSESS_OPTS.map(function(o, v){ return '<button type="button" data-rv="' + v + '" aria-pressed="' + (assessAns[i] === v) + '">' + o + '</button>'; }).join('') + '</div></div>';
   }).join('');
   assessSync();
@@ -334,7 +340,7 @@ function assessRender(){
 function assessSync(){
   var n = assessAns.filter(function(v){ return v !== null; }).length, all = n === ASSESS_QS.length;
   if(aShow) aShow.disabled = !all;
-  if(aHint) aHint.textContent = all ? 'All twelve answered.' : n + ' of ' + ASSESS_QS.length + ' answered. Answer all twelve to see your order.';
+  if(aHint) aHint.textContent = all ? 'All fifteen rated.' : n + ' of ' + ASSESS_QS.length + ' rated. Rate all fifteen to see your profile.';
 }
 if(aQs) aQs.addEventListener('click', function(e){
   var b = e.target.closest('button[data-rv]'); if(!b) return;
@@ -343,32 +349,48 @@ if(aQs) aQs.addEventListener('click', function(e){
   $$('button[data-rv]', q).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
   assessSync();
 });
-function assessOrder(){
-  if(!P) return null;
-  var score = {}; ASSESS_QS.forEach(function(x, i){ score[x.t] = (score[x.t] || 0) + (assessAns[i] || 0); });
-  function rank(ids){ return ids.slice().sort(function(a, b){ return (score[a] - score[b]) || ids.indexOf(a) - ids.indexOf(b); }); }
-  var phase1 = rank(['T1', 'T4']), phase2 = rank(['T2', 'T3']);
-  var tracks = {}; P.mrc.tracks.forEach(function(t){ tracks[t.id] = t; });
+function assessProfile(){
+  var cat = {}, max = {};
+  ASSESS_QS.forEach(function(x, i){ cat[x.c] = (cat[x.c] || 0) + (assessAns[i] || 0); max[x.c] = (max[x.c] || 0) + 2; });
+  var keys = Object.keys(CATS);
+  var pct = {}; keys.forEach(function(k){ pct[k] = Math.round(cat[k] / max[k] * 100); });
+  var weakest = keys.slice().sort(function(a, b){ return pct[a] - pct[b]; })[0];
+  var strongest = keys.slice().sort(function(a, b){ return pct[b] - pct[a]; })[0];
+  /* the behaviors rated lowest, weakest category first */
+  var focus = ASSESS_QS.map(function(x, i){ return { b:x.b, c:x.c, v:assessAns[i] }; })
+    .sort(function(p, q){ return (p.v - q.v) || (pct[p.c] - pct[q.c]); }).slice(0, 3);
+  /* module order for the dashboard: track score = mean of its categories, weakest first inside each phase */
+  var tscore = {};
+  Object.keys(CAT_TRACKS).forEach(function(c){ CAT_TRACKS[c].forEach(function(t){ tscore[t] = tscore[t] || []; tscore[t].push(pct[c]); }); });
+  Object.keys(tscore).forEach(function(t){ tscore[t] = tscore[t].reduce(function(a, b){ return a + b; }, 0) / tscore[t].length; });
   var order = [];
-  phase1.concat(phase2).forEach(function(id){ var t = tracks[id]; if(t) t.modules.forEach(function(m){ order.push({ id:m.id, title:m.title, track:t.title, phase:t.phase }); }); });
-  return { score:score, phase1:phase1, phase2:phase2, order:order, tracks:tracks };
+  if(P){
+    var tracks = {}; P.mrc.tracks.forEach(function(t){ tracks[t.id] = t; });
+    [1, 2].forEach(function(phase){
+      P.mrc.tracks.filter(function(t){ return t.phase === phase; }).sort(function(a, b){ return tscore[a.id] - tscore[b.id]; })
+        .forEach(function(t){ t.modules.forEach(function(m){ order.push(m.id); }); });
+    });
+  }
+  return { pct:pct, weakest:weakest, strongest:strongest, focus:focus, order:order };
 }
 function assessShowOut(){
-  var r = assessOrder(); if(!r || !aOut) return;
-  var weakest = ['T1','T4','T2','T3'].sort(function(a, b){ return r.score[a] - r.score[b]; })[0];
-  var strongest = ['T1','T4','T2','T3'].sort(function(a, b){ return r.score[b] - r.score[a]; })[0];
-  var html = '<h4>Your order, in <em>two</em> windows.</h4>' +
-    '<p class="gap-line">Your biggest gap is <b>' + esc(r.tracks[weakest].title) + '</b> (' + r.score[weakest] + ' of 6). Your strongest area is <b>' + esc(r.tracks[strongest].title) + '</b> (' + r.score[strongest] + ' of 6). Weakest track first inside each window; every module is still required.</p>' +
-    '<div class="order-out"><p class="mono" style="margin-top:14px">Days 1 to 30 &middot; ' + esc(r.tracks[r.phase1[0]].title) + ', then ' + esc(r.tracks[r.phase1[1]].title) + '</p><ol>' +
-    r.order.filter(function(m){ return m.phase === 1; }).map(function(m){ return '<li><span>' + esc(m.title) + '</span><small class="track-tag">' + esc(m.track) + '</small></li>'; }).join('') +
-    '</ol><p class="mono" style="margin-top:18px">Days 31 to 60 &middot; ' + esc(r.tracks[r.phase2[0]].title) + ', then ' + esc(r.tracks[r.phase2[1]].title) + '</p><ol>' +
-    r.order.filter(function(m){ return m.phase === 2; }).map(function(m){ return '<li><span>' + esc(m.title) + '</span><small class="track-tag">' + esc(m.track) + '</small></li>'; }).join('') +
-    '</ol></div><p class="hinttxt" style="margin-top:14px">Saved to this browser and your Oracle record. Your dashboard reads the same order.</p>' +
-    '<div class="route-act" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm" id="assessRedo">Answer again</button></div>';
+  var r = assessProfile(); if(!aOut) return;
+  var keys = Object.keys(CATS);
+  var html = '<h4>Your first <em>profile</em>.</h4>' +
+    '<div class="prof" role="list" aria-label="Your profile by category">' + keys.map(function(k){
+      return '<div role="listitem"><b>' + esc(CATS[k].name) + '</b><span class="bar" aria-hidden="true"><i style="width:' + r.pct[k] + '%"></i></span><span>' + r.pct[k] + '%</span></div>';
+    }).join('') + '</div>' +
+    '<p class="gap-line">Your strongest category is <b>' + esc(CATS[r.strongest].name) + '</b>. The category the job needs more of from you is <b>' + esc(CATS[r.weakest].name) + '</b>. That is not a verdict; it is the behaviors you do less often than the role needs, and behaviors change.</p>' +
+    '<p class="mono" style="margin-top:16px">Practice these first</p><ol class="focus-list">' + r.focus.map(function(f, i){
+      return '<li><b>' + (i + 1) + '</b><span>' + esc(f.b) + '<small>' + esc(CATS[f.c].name) + ' &middot; you rated it ' + esc(ASSESS_OPTS[f.v].toLowerCase()) + '</small></span></li>';
+    }).join('') + '</ol>' +
+    '<p class="hinttxt" style="margin-top:14px">Saved to this browser and your Oracle record. Your dashboard orders the micro modules from this profile, weakest category first inside each window. The Managerial Practices Survey will give you the same profile with more precision.</p>' +
+    '<div class="route-act" style="margin-top:14px"><button type="button" class="btn btn-ghost btn-sm" id="assessRedo">Rate again</button></div>';
   aOut.innerHTML = html;
-  set('assess', JSON.stringify({ answers:assessAns, order:r.order.map(function(m){ return m.id; }), score:r.score, at:new Date().toISOString() }));
+  set('assess', JSON.stringify({ answers:assessAns, pct:r.pct, weakest:r.weakest, focus:r.focus.map(function(f){ return f.b; }), order:r.order, at:new Date().toISOString() }));
   try{ localStorage.setItem('mv.foundation.v1', get('assess')); }catch(e){}
-  progDone('assess');
+  var ns = $('#ns2p'); if(ns) ns.textContent = 'Your self-rating pointed to ' + r.focus[0].b.toLowerCase() + '. Do it once this week, on purpose, and notice what happened.';
+  progDone('survey');
   var redo = $('#assessRedo'); if(redo) redo.addEventListener('click', function(){ assessAns = new Array(ASSESS_QS.length).fill(null); set('assess', null); assessRender(); var f = aQs.querySelector('button'); if(f) f.focus(); });
   if(window.chartPager) window.chartPager.goToEl(aOut);
 }

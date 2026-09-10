@@ -10,24 +10,24 @@ try{
   var main = document.getElementById('main');
   if(!main) throw new Error('no main');
   var PLAN = [
-    { sel:'section.hero',     key:'home',     label:'Welcome',                  mode:'whole' },
-    { sel:'#start',           key:'belief',   label:'The belief',               mode:'whole', extras:['.topics'] },
-    { sel:'#mission',         key:'mission',  label:'The Chancellor’s charge', mode:'whole' },
-    { sel:'section.howworks', key:'how',      label:'How the foundation works', mode:'whole' },
-    { sel:'#welcome',         key:'welcome',  label:'Welcome',                  mode:'split' },
-    { sel:'#standard',        key:'standard', label:'The Manager Standard',     mode:'split' },
-    { sel:'#sixty',           key:'sixty',    label:'Your first 60 days',       mode:'split' },
-    { sel:'#own',             key:'own',      label:'What you now own',         mode:'split' },
-    { sel:'#people',          key:'people',   label:'The people you will call', mode:'split' },
-    { sel:'#assess',          key:'assess',   label:'Self-assessment',          mode:'whole' },
-    { sel:'#quiz',            key:'quiz',     label:'Knowledge check',          mode:'split' },
-    { sel:'#summary',         key:'summary',  label:'Summary',                  mode:'whole' },
-    { sel:'#nextstep',        key:'nextstep', label:'Next step',                mode:'whole' },
-    { sel:'section.cta',      key:'end',      label:'Wrap-up',                  mode:'whole', extras:['footer'] }
+    { sel:'section.hero',     key:'home',      label:'Welcome',                    mode:'whole' },
+    { sel:'#start',           key:'belief',    label:'The belief',                 mode:'whole', extras:['.topics'] },
+    { sel:'#mission',         key:'mission',   label:'The Chancellor’s charge',   mode:'whole' },
+    { sel:'section.howworks', key:'how',       label:'How the foundation works',   mode:'whole' },
+    { sel:'#welcome',         key:'welcome',   label:'What management is',         mode:'split' },
+    { sel:'#task',            key:'task',      label:'Task-oriented',              mode:'split' },
+    { sel:'#relations',       key:'relations', label:'Relations-oriented',         mode:'split' },
+    { sel:'#change',          key:'change',    label:'Change-oriented',            mode:'split' },
+    { sel:'#external',        key:'external',  label:'External',                   mode:'split' },
+    { sel:'#survey',          key:'survey',    label:'The survey and your profile', mode:'split' },
+    { sel:'#quiz',            key:'quiz',      label:'Knowledge check',            mode:'split' },
+    { sel:'#summary',         key:'summary',   label:'Summary',                    mode:'whole' },
+    { sel:'#nextstep',        key:'nextstep',  label:'Next step',                  mode:'whole' },
+    { sel:'section.cta',      key:'end',       label:'Wrap-up',                    mode:'whole', extras:['footer'] }
   ];
   var TRACKED = [
-    ['welcome','01','Welcome'], ['standard','02','The Manager Standard'], ['sixty','03','Your first 60 days'],
-    ['own','04','What you now own'], ['people','05','The people you will call'], ['assess','06','Self-assessment'],
+    ['welcome','01','What management is'], ['task','02','Task-oriented'], ['relations','03','Relations-oriented'],
+    ['change','04','Change-oriented'], ['external','05','External'], ['survey','06','The survey and your profile'],
     ['quiz','07','Knowledge check'], ['nextstep','08','Your next step']
   ];
   var pages = [], secFirst = {};

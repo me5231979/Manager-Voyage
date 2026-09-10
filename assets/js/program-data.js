@@ -110,7 +110,7 @@ window.MV_PROGRAM = {
     foundation: {
       id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, localUrl: '../foundation/', minutes: 30, phase: 1,
       title: 'Foundation: What Vanderbilt Expects of a Manager',
-      why: 'Thirty minutes, completed first. It unlocks every micro module and sequences them for you.',
+      why: 'Thirty minutes, completed first. One definition of management for every Vanderbilt manager, and the framework the survey measures.',
       segments: [
         { n: 1, title: 'Welcome from the Vice Chancellor', format: 'Video', desc: 'Why Vanderbilt is standardizing management, and what changes for you starting today.' },
         { n: 2, title: 'The Manager Standard', format: 'Interactive walkthrough', desc: 'The foundation gate (ethical and inclusive practice) and the five domains, in plain language.' },

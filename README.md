@@ -38,25 +38,28 @@ row, and a rail with Up next, Milestones, and Who to call.
 ## Foundation course (`foundation/`)
 
 "Foundation: What Vanderbilt Expects of a Manager," the 30-minute course every
-manager completes before the micro modules unlock. Built on the Working
-Smarter book-mode engine (`assets/css/course.css`, `foundation/pager.js`) with
-the hero video montage, the Chancellor's charge, and six five-minute segments:
+manager completes before the micro modules unlock. It teaches management
+itself, one shared way, on Yukl's taxonomy of leadership behavior (four
+categories, fifteen behaviors), the same behaviors the Managerial Practices
+Survey measures. Built on the Working Smarter book-mode engine with the hero
+video montage, the Chancellor's charge, and six five-minute segments:
 
-1. Welcome (the unmanaged window, the four components, fact or fiction)
-2. The Manager Standard (the gate, five domains, a sorting drill)
-3. Your first 60 days (timeline, what your state adds, call the milestone)
-4. What you now own (four cards, the "Is this now my call?" decision tree)
-5. The people you will call (six offices, "Who do you call?" drill)
-6. Self-assessment (twelve questions; outputs the order of the 22 micro modules)
+1. What management is (why Vanderbilt is defining it, the framework map, fact or fiction)
+2. Task-oriented: planning, clarifying, monitoring, problem solving (name the behavior drill)
+3. Relations-oriented: supporting, developing, recognizing, empowering
+4. Change-oriented: advocating, envisioning, encouraging innovation, collective learning
+5. External: networking, external monitoring, representing
+6. The Managerial Practices Survey, and a fifteen-behavior self-rating that produces
+   a first profile, the three behaviors to practice first, and the micro-module order
 
 Then an eight-question knowledge check (six to pass), a summary, and next steps.
-Each segment marks itself done when its activity is finished. The self-assessment
-order is saved to `localStorage` (`mv.foundation.v1`) and to SCORM suspend_data;
-the dashboard reads it and orders the tracks the same way.
+Each segment marks itself done when its drill is finished. The profile is saved to
+`localStorage` (`mv.foundation.v1`) and SCORM suspend_data; the dashboard orders
+the tracks from it.
 
+- Source: Yukl, G. (2012), Academy of Management Perspectives, 26(4), 66 to 85.
 - Preview: `foundation/?name=Alex%20Rivera&state=NY`
 - SCORM: `bash scripts/build-foundation-scorm.sh` writes
-  `manager-voyage-foundation-scorm.zip` (standalone SCORM 1.2, reports complete
-  when all eight sections are done).
-- Open items: the Vice Chancellor welcome video (placeholder card), and FLH
-  sign-off on the five domain names in segment 2.
+  `manager-voyage-foundation-scorm.zip` (standalone SCORM 1.2).
+- Open items: the Vice Chancellor welcome video (placeholder card); confirm how
+  the survey is administered and its due window (segment 6).
