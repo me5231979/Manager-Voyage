@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Foundation: What Vanderbilt Expects of a Manager · Manager Voyage</title>
+<meta name="description" content="The 30-minute foundation course every new Vanderbilt manager completes first: the Manager Standard, your first 60 days, what you now own, the people you will call, and a self-assessment that orders your 22 micro modules." />
+<meta name="theme-color" content="#1C1C1C" />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="alternate icon" href="../assets/img/favicon-96.png" />
+<link rel="preload" href="../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+  MANAGER VOYAGE · FOUNDATION: WHAT VANDERBILT EXPECTS OF A MANAGER
+  Component 02, segment 0. Thirty minutes, six five-minute segments, completed
+  before any micro module unlocks. Built on the Working Smarter engine
+  (../assets/css/course.css, the book-mode pager below) in the FLH brand.
+  Progress: localStorage mv-found-* booleans plus one JSON string with the
+  self-assessment answers and module order. In Oracle Learning the same state
+  rides in SCORM suspend_data, and the SCO reports complete when all eight
+  tracked sections are done. Nothing is sent anywhere else.
+  [EDIT] the Vice Chancellor welcome video (segment 1) is a placeholder card
+  until the recording exists; the Manager Standard domain names in segment 2
+  are drafted from the program brief and need FLH sign-off.
+  ══════════════════════════════════════════════════════════════════════════
+-->
+<script>document.documentElement.classList.add('js','paged');</script>
+<link rel="stylesheet" href="../assets/css/course.css?v=1" />
+<style>
+/* ── course-specific additions, all on theme vars ── */
+.hero-video{ object-position:center 35%; }
+.hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
+.stat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:22px; }
+.stat{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:22px 20px 18px; }
+.stat b{ display:block; font-family:var(--serif); font-weight:400; font-size:clamp(2.2rem,4vw,3rem); line-height:1; color:var(--eyebrow); }
+.stat span{ display:block; margin-top:8px; font-size:.9rem; color:var(--tx2); }
+.vslot{ margin-top:20px; border:1px solid var(--bdg); background:var(--card2); border-radius:var(--r); padding:26px 28px; display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:center; }
+.vslot .vic{ width:64px; height:64px; border-radius:50%; border:2px solid var(--eyebrow); display:grid; place-items:center; color:var(--eyebrow); }
+.vslot .vic svg{ width:26px; height:26px; }
+.vslot h4{ font-family:var(--serif); font-weight:400; font-size:1.3rem; }
+.vslot p{ color:var(--tx2); font-size:.95rem; margin-top:6px; }
+.quote{ margin-top:22px; border-left:3px solid var(--eyebrow); padding:6px 0 6px 22px; font-family:var(--serif); font-size:clamp(1.15rem,2vw,1.4rem); line-height:1.4; max-width:40ch; }
+.quote em{ font-family:var(--serif-i); font-style:italic; color:var(--eyebrow); }
+.quote cite{ display:block; margin-top:10px; font-family:var(--cond); font-style:normal; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--tx3); }
+.gate-card{ margin-top:18px; border:2px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:22px 24px; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start; }
+.gate-card .gk{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); padding:6px 10px; border-radius:2px; white-space:nowrap; }
+.gate-card h4{ font-family:var(--serif); font-weight:400; font-size:1.35rem; }
+.gate-card p{ color:var(--tx2); margin-top:6px; }
+/* sorter / decision drills */
+.drill{ display:grid; gap:12px; margin-top:20px; }
+.dq{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:18px 20px; }
+.dq.right{ border-color:var(--eyebrow); }
+.dq.wrong{ border-color:var(--vu-err); }
+.dq .dq-s{ font-size:1rem; color:var(--tx); }
+.dq .dq-s b{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-right:10px; }
+.dq-opts{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.dq-opts button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:9px 16px; font-size:.9rem; font-weight:500; cursor:pointer; transition:all .2s var(--ease); }
+.dq-opts button:hover{ border-color:var(--eyebrow); color:var(--eyebrow); }
+.dq-opts button[aria-pressed="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.dq-opts button:disabled{ cursor:default; opacity:.7; }
+.dq-opts button.is-answer{ box-shadow:0 0 0 2px var(--eyebrow) inset; opacity:1; }
+.dq-x{ display:none; margin-top:12px; font-size:.93rem; color:var(--tx2); border-top:1px solid var(--bd); padding-top:12px; }
+.dq-x b{ color:var(--tx); }
+.dq.right .dq-x, .dq.wrong .dq-x{ display:block; }
+.drill-status{ margin-top:14px; font-size:.95rem; color:var(--tx2); }
+/* timeline */
+.tl{ display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-top:22px; position:relative; }
+.tl::before{ content:''; position:absolute; left:0; right:0; top:11px; height:2px; background:var(--bd); }
+.tl > div{ position:relative; padding:34px 14px 0 0; }
+.tl > div::before{ content:''; position:absolute; top:4px; left:0; width:16px; height:16px; border-radius:50%; background:var(--eyebrow); border:3px solid var(--card); box-shadow:0 0 0 1px var(--bd); }
+.tl b{ display:block; font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); }
+.tl strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.15rem; line-height:1.2; margin:6px 0 6px; }
+.tl p{ font-size:.9rem; color:var(--tx2); }
+/* state picker */
+.state-pick{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.state-pick button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:9px 18px; font-weight:600; font-size:.9rem; cursor:pointer; }
+.state-pick button[aria-pressed="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.state-out{ margin-top:16px; border:1px solid var(--bdg); border-radius:var(--r); background:var(--card); padding:18px 20px; }
+.state-out h4{ font-family:var(--serif); font-weight:400; font-size:1.25rem; }
+.state-out ul{ list-style:none; margin-top:10px; display:grid; gap:6px; }
+.state-out li{ font-size:.92rem; color:var(--tx2); display:flex; gap:10px; align-items:baseline; }
+.state-out li i{ font-style:normal; font-family:var(--cond); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); min-width:46px; }
+.state-out li em{ font-style:normal; font-family:var(--cond); font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; color:var(--tx3); }
+/* self-assessment output */
+.order-out{ margin-top:10px; }
+.order-out ol{ counter-reset:mod; list-style:none; display:grid; gap:8px; margin-top:14px; }
+.order-out li{ display:grid; grid-template-columns:36px 1fr auto; gap:12px; align-items:center; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:10px 14px; font-size:.93rem; }
+.order-out li::before{ counter-increment:mod; content:counter(mod); font-family:var(--cond); font-weight:700; color:var(--eyebrow); }
+.order-out li small{ color:var(--tx3); font-size:.78rem; }
+.order-out .track-tag{ font-family:var(--cond); font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; color:var(--eyebrow); }
+.gap-line{ margin-top:14px; font-size:.95rem; color:var(--tx2); }
+.gap-line b{ color:var(--tx); }
+@media (max-width:900px){ .stat-grid{ grid-template-columns:1fr 1fr; } .tl{ grid-template-columns:1fr; gap:14px; } .tl::before{ display:none; } .tl > div{ padding-top:0; padding-left:28px; } .tl > div::before{ top:2px; } }
+@media (max-width:600px){ .stat-grid{ grid-template-columns:1fr 1fr; } .vslot,.gate-card{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <div class="bar">
+      <a class="logo" href="#top" aria-label="Vanderbilt University, Manager Voyage foundation course home">
+        <img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="166" height="43" decoding="async" />
+      </a>
+      <div class="bar-r">
+        <nav class="links" aria-label="Primary">
+          <a href="#welcome">Welcome</a>
+          <a href="#standard">The Standard</a>
+          <a href="#sixty">60 days</a>
+          <a href="#own">What you own</a>
+          <a href="#people">Who to call</a>
+          <a href="#assess">Self-assessment</a>
+          <a class="btn btn-gold btn-sm nav-cta" href="#quiz">Knowledge check</a>
+        </nav>
+        <button class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel">
+          <span class="pw">Progress</span> <b id="progCount">0/8</b>
+        </button>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="b b1" aria-hidden="true"></span><span class="b b2" aria-hidden="true"></span><span class="b b3" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <span class="prog-track" aria-hidden="true"><span class="prog-fill" id="progFill"></span></span>
+</header>
+
+<div class="prog-panel" id="progPanel" role="region" aria-label="Your progress" hidden>
+  <div class="pp-h">Your progress</div>
+  <p class="prog-sum" id="progSum">0 of 8 sections complete.</p>
+  <ol class="prog-list" id="progList"></ol>
+  <p class="prog-fine">Progress is saved in this browser and, when you open this course from Oracle Learning, in your Oracle record. Reset it anytime in the footer.</p>
+  <p class="prog-fine prog-warn" id="progStorageNote" hidden>Heads up: your browser is blocking saved progress (this happens in private browsing). Marks work during this visit but reset when you close the tab.</p>
+</div>
+<p class="sr" id="progStatus" role="status" aria-live="polite"></p>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a class="mlink" href="#welcome" data-prog="welcome"><span class="mono">01</span>Welcome<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#standard" data-prog="standard"><span class="mono">02</span>The Manager Standard<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#sixty" data-prog="sixty"><span class="mono">03</span>Your first 60 days<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#own" data-prog="own"><span class="mono">04</span>What you now own<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#people" data-prog="people"><span class="mono">05</span>The people you will call<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#assess" data-prog="assess"><span class="mono">06</span>Self-assessment<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#quiz" data-prog="quiz"><span class="mono">07</span>Knowledge check<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#summary"><span class="mono" aria-hidden="true">&middot;</span>What you now know</a>
+  <a class="mlink" href="#nextstep" data-prog="nextstep"><span class="mono">08</span>Your next step<span class="mdone" aria-hidden="true">Done</span></a>
+  <div class="mprog" id="mprogLine">0 of 8 sections complete</div>
+  <div class="mfoot">Manager Voyage &middot; Futures Learning Hub</div>
+</nav>
+
+<main id="main"><span id="top"></span>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero th-dark" aria-label="Welcome">
+  <div class="hero-media" aria-hidden="true">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="../assets/img/hero-poster.jpg" aria-hidden="true">
+      <source src="../assets/video/hero-montage.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-scrim"></div>
+  </div>
+  <div class="wrap">
+    <span class="mono">Vanderbilt University &middot; Manager Voyage &middot; Component 02 &middot; Foundation</span>
+    <h1 class="metal">What Vanderbilt expects of a <em>manager</em>.</h1>
+    <p class="hello" id="heroHello">Welcome aboard.</p>
+    <p class="lead">Every day Vanderbilt promotes or hires a new manager, a clock starts. The first 60 days set the patterns that define your leadership for years. This is the thirty-minute foundation that every Vanderbilt manager completes first. By the end, you will be able to:</p>
+    <ul class="outcomes" aria-label="By the end of this course, you will be able to">
+      <li><b>Describe</b> the Manager Standard: the one gate and the five domains Vanderbilt holds every manager to</li>
+      <li><b>Map</b> your first 60 days: the two required components, the Portal, the cohort, and the Day 30 and Day 60 milestones</li>
+      <li><b>Decide</b> what is now your call: approvals, records, conversations, and the legal exposure that arrived with the title</li>
+      <li><b>Name</b> the six people you will call, and which one for which situation</li>
+      <li><b>Rank</b> your own gaps, so the 22 micro modules open in the order you need them</li>
+    </ul>
+    <p class="lead closer">This is not a training program. It is a <em>management standard</em>, and this is where it starts.</p>
+    <p class="meta-line"><b>About 30 minutes &middot; six segments</b> &middot; self-paced &middot; completion recorded in Oracle Learning</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="#start">Begin the foundation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <ol class="hw-mini" aria-label="How this course works">
+      <li>Turn pages with the arrows below, your keyboard arrows, or a swipe</li>
+      <li>Do each activity as it comes; the section marks itself done when you finish it</li>
+      <li>Finish with the knowledge check and the self-assessment</li>
+      <li>Your completion is recorded in Oracle Learning; the micro modules unlock from there</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════════ TOPIC BAR ═══════════════════ -->
+<div class="topics th-light" role="img" aria-label="Six segments, thirty minutes. Topics: the unmanaged window, the Manager Standard, your first 60 days, what you now own, who to call, your module order">
+  <div class="wrap"><p class="tlabel mono">Six segments. Thirty minutes. Completed before any micro module unlocks.</p></div>
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <div class="set"><span class="it">The unmanaged window</span><span class="it">The Manager Standard</span><span class="it">Your first 60 days</span><span class="it">What you now own</span><span class="it">The people you will call</span><span class="it">Your module order</span></div>
+      <div class="set"><span class="it">The unmanaged window</span><span class="it">The Manager Standard</span><span class="it">Your first 60 days</span><span class="it">What you now own</span><span class="it">The people you will call</span><span class="it">Your module order</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ MANIFESTO ═══════════════════ -->
+<section id="start" class="manifesto th-cream" aria-label="Our belief">
+  <div class="wrap">
+    <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The belief</span></span>
+    <p class="creed" id="creed">A manager is the single greatest influence on a team&rsquo;s engagement. Vanderbilt will not leave the first sixty days of that influence <em>to chance.</em></p>
+  </div>
+</section>
+
+<!-- ═══════════════════ THE CHANCELLOR'S CHARGE ═══════════════════ -->
+<section id="mission" class="th-dark" aria-label="The Chancellor&rsquo;s charge">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The institutional why &middot; Crescere aude</span></span>
+      <h2>Vanderbilt will define the great university of the 21st Century and <em>be it.</em></h2>
+      <p>That is Chancellor Diermeier&rsquo;s institutional vision, one sentence with no hedge in it. The how is equally blunt: operate at <b>uncommon speed, agility, and scale</b> to address society&rsquo;s challenges through education and research, and help <b>reclaim the essential role of leading research universities in driving American prosperity</b>. Our motto has always been the dare, <em>Crescere aude</em>, dare to grow. For a manager, the dare is this: the 4,600 non-union staff who deliver on that mission are led by you and your peers, and how well they are led is the university&rsquo;s speed.</p>
+    </div>
+    <span class="eyebrow" style="margin-bottom:10px"><span class="tick" aria-hidden="true"></span><span class="mono">Areas of Focus</span></span>
+    <h3 style="font-size:1.35rem;margin:10px 0 18px">Three ways Vanderbilt delivers on the vision</h3>
+    <div class="resp-grid">
+      <article class="principle reveal">
+        <span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:12px">1</span>
+        <h3>Exceptional Core Operations</h3>
+        <p>With speed, agility and scale, Vanderbilt will distinguish itself with innovative and impactful capabilities to ensure that we have the talent, resources and reputation necessary to deliver on our vision.</p>
+      </article>
+      <article class="principle reveal" style="transition-delay:.06s">
+        <span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:12px">2</span>
+        <h3>Bold Strategic Initiatives</h3>
+        <p>With exceptional core operations as our fuel, Vanderbilt will pursue increasingly bold initiatives that enable and enhance the reach and impact of our education and research mission.</p>
+      </article>
+      <article class="principle reveal" style="transition-delay:.12s">
+        <span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:12px">3</span>
+        <h3>Industry Leadership</h3>
+        <p>Through strategic advocacy efforts and modeling the role of an essential research university, Vanderbilt will stimulate industry change and combat existential threats to our education and research mission.</p>
+      </article>
+    </div>
+    <div class="evidence">
+      <span class="e-label">How this course delivers</span>
+      <p>Exceptional Core Operations is a manager who can approve, hire, and handle a leave request without a call to HR for the basics. Bold Strategic Initiatives run on teams whose managers set clear goals and coach. Industry Leadership is modeled one team at a time. Manager Voyage is how the university makes that the standard rather than the exception.</p>
+    </div>
+    <div class="evidence reveal">
+      <span class="e-label">The reputation flywheel, and your place in it</span>
+      <p>Reputation and resources feed each other in a loop: reputation attracts <b>talent, funding, partnerships, and access and influence</b>, which build the reputation. The university spins that wheel with <b>execution with ambition, values-driven leadership, and athletics momentum</b>. The wheel now turns in more places than Nashville: Vanderbilt is growing in <b>San Francisco, West Palm Beach, New York City, and Chattanooga</b>, which is why this program is built for managers in Tennessee, New York, Florida, and California. Values-driven leadership is not a slogan on a wall; it is a manager who runs a fair 1:1, documents a concern properly, and knows who to call.</p>
+      <span class="e-src">&ldquo;Daring to Grow&rdquo;, Chancellor Diermeier, Vanderbilt University (July 2022): <a href="https://news.vanderbilt.edu/2022/07/01/daring-to-grow-together-we-are-building-the-great-university-of-the-21st-century/" target="_blank" rel="noopener">the vision statement this page draws from</a>; Leadership Redefined, Module 1 (Futures Learning Hub, 2026).</span>
+    </div>
+    <blockquote class="quote">Our mission is not small. We are scaling Mount Everest. Climbing Everest requires courage and commitment. But it promises the professional experience of a lifetime to all who sign on. And we will support one another <em>at every step of the way.</em><cite>Chancellor Daniel Diermeier</cite></blockquote>
+  </div>
+</section>
+
+<!-- ═══════════════════ HOW THE FOUNDATION WORKS ═══════════════════ -->
+<section class="howworks th-light" aria-label="How the foundation works">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:0">
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">How the foundation works</span></span>
+      <h2>Six segments, five minutes <em>each</em>.</h2>
+    </div>
+    <span class="mono hw-cover reveal">The path, in six stops</span>
+    <div class="hw-list reveal">
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Welcome</h3><p>Why Vanderbilt is standardizing management, what changes for you today, and the four components of the program.</p></div><span class="chip">5 min</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>The Manager Standard</h3><p>The foundation gate and the five domains, in plain language. What good looks like here.</p></div><span class="chip">5 min</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Your first 60 days</h3><p>The two required components, the Portal, the cohort, the Day 30 and Day 60 milestones, and what your state adds.</p></div><span class="chip">5 min</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">04</span><div><h3>What you now own</h3><p>From doing the work to owning the team&rsquo;s outcomes. A decision tree: is this now my call?</p></div><span class="chip">5 min</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">05</span><div><h3>The people you will call</h3><p>Six offices, one map. Who does what, and a drill to prove you can route a real situation.</p></div><span class="chip">5 min</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">06</span><div><h3>Self-assessment</h3><p>Twelve questions on systems, people obligations, and process experience. Output: your personal order for the 22 micro modules.</p></div><span class="chip">5 min</span></div>
+    </div>
+    <p class="hw-meta reveal">A knowledge check closes the course. Then the micro modules unlock in the order your self-assessment set, and your dashboard shows them.</p>
+    <p class="hw-meta reveal" id="progTopLine" style="margin-top:10px">Section tracking: you have 8 sections ahead.</p>
+    <p class="acr-line reveal">From first day <b>to fully formed leader.</b></p>
+    <div class="bridge reveal"><span class="b-label">Next</span><p>First, the reason this course exists: the sixty days nobody used to <em>own</em>.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ 01 WELCOME ═════════════════════════ -->
+<section id="welcome" class="th-light" aria-label="Welcome from the Vice Chancellor">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="you-are">You are here: segment 1, why this exists.</span>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Welcome / 01</span></span>
+      <h2>The sixty days nobody <em class="s">owned</em>.</h2>
+      <p>In this segment, you will hear why Vanderbilt is standardizing management, see the numbers behind the decision, and meet the four components you are about to move through.</p>
+      <div class="lframe">
+        <span class="lf-chip"><b>You&rsquo;ll learn</b>Why the first 60 days are the highest-risk days of a manager&rsquo;s tenure</span>
+        <span class="lf-chip"><b>You&rsquo;ll do</b>Watch the welcome, flip four numbers, sort six claims</span>
+        <span class="lf-chip"><b>Time</b>5 min</span>
+      </div>
+    </div>
+
+    <div class="module reveal">
+      <div class="module-head">
+        <span class="mno">Segment 1 &middot; Welcome from the Vice Chancellor</span>
+        <h3>What changes for you, starting today</h3>
+      </div>
+      <div class="vslot" id="vcVideo">
+        <span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+        <div>
+          <h4>Welcome from the Vice Chancellor for People, Culture and Belonging</h4>
+          <p>Five minutes on why Vanderbilt is standardizing management and what changes for you starting today. <b>The recording is being produced; the written welcome below carries the same message.</b></p>
+        </div>
+      </div>
+      <div class="concept reveal">
+        <span class="c-label">The welcome, in writing</span>
+        <p>You were promoted or hired because you are good at the work. Now the work is different: it is the outcomes of a team, the records the university keeps, the conversations nobody else will have, and the legal exposure that arrived with your title. Until now, Vanderbilt handed a new manager a badge and hoped. Some learned fast. Some learned from an Employee Relations case. That is the unmanaged window, and it ends with you.</p>
+        <p>Manager Voyage is not a training program. It is a <b>management standard</b>: the first structured, sequenced, institution-wide development journey for every manager. Oracle assigned your required components the day your role began. You did not have to enroll in anything. You have to finish.</p>
+      </div>
+      <div class="stat-grid" role="list" aria-label="The numbers behind the decision">
+        <div class="stat" role="listitem"><b>4,600</b><span>Non-union staff led by Vanderbilt managers</span></div>
+        <div class="stat" role="listitem"><b>~400</b><span>New or promoted managers enter roles each year</span></div>
+        <div class="stat" role="listitem"><b>0</b><span>Prior structured onboarding standard for managers</span></div>
+        <div class="stat" role="listitem"><b>60</b><span>Days of highest-risk manager decision-making</span></div>
+      </div>
+      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Now the four pieces the standard is <em>built</em> from.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="Four components">
+      <div class="module-head">
+        <span class="mno">Segment 1 &middot; continued</span>
+        <h3>Four components. One continuous journey.</h3>
+        <p>Flip each card. Two components are required and assigned automatically. Two are always available. Together they take you from first day through compliance, into operational readiness, through advanced skill development, and into a permanent support hub.</p>
+      </div>
+      <div class="flip-grid">
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><span class="abbr" aria-hidden="true">01</span><h4>Compliance Courses</h4><span class="def">Required. Days 1 to 60.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip for the detail</span></span>
+          <span class="face back"><span class="tag">Required</span><p>Twenty state-specific courses, legal and advisory, matched to your work location and delivered through OpenSesame inside Oracle. You take the supervisor version in addition to the all-staff version.</p><p><b>Remember:</b> compliance is the floor, not the bar.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><span class="abbr" aria-hidden="true">02</span><h4>Manager Responsibilities Course</h4><span class="def">Required. Days 1 to 60. You are in it now.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip for the detail</span></span>
+          <span class="face back"><span class="tag">Required</span><p>This foundation, then 22 micro modules of 15 minutes or less across four tracks: Systems, People, Processes, and Vanderbilt and Nashville. Simulators and scenario studios, not slide decks. About four hours in total.</p><p><b>Remember:</b> compliance tells you what the law requires; this course tells you what Vanderbilt requires.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><span class="abbr" aria-hidden="true">03</span><h4>Manager Portal</h4><span class="def">Always on. From Day 1.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip for the detail</span></span>
+          <span class="face back"><span class="tag">Always available</span><p>Every template, framework, policy link, and contact from this course and the cohort, in one web hub. Open before any course is complete, and never taken away.</p><p><b>Remember:</b> a manager who finished the cohort two years ago and one who started yesterday see the same hub.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><span class="abbr" aria-hidden="true">04</span><h4>Four-Week Cohort</h4><span class="def">Optional. Quarterly. 100 seats.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip for the detail</span></span>
+          <span class="face back"><span class="tag">Optional</span><p>Where skill development happens: an in-person kickoff, four blended weeks with AI rehearsal in Yoodli and peer labs in SparkWise, and an in-person capstone where you present three deliverables.</p><p><b>Remember:</b> it unlocks when both required components are complete. Oracle sends the invitation.</p></span>
+        </button></div>
+      </div>
+      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Six things people will tell you about the program. Sort the <em>true</em> ones.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="Fact or fiction">
+      <div class="module-head">
+        <span class="mno">Drill</span>
+        <h3>Fact or fiction</h3>
+        <p>Tap each claim to see the answer. Six claims you will hear in the hallway; knowing which are true keeps you from skipping something required or waiting on something that is already open.</p>
+      </div>
+      <div class="myth-grid" id="factGrid">
+        <div class="myth" data-verdict="myth"><button type="button" aria-expanded="false">&ldquo;I need to enroll myself in the required courses.&rdquo;</button><span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div class="verdict"><span class="vtag myth-v">Fiction</span><p>Oracle Learning assigned both required components the day your HR record showed a management role. No manual enrollment, no dropped handoff.</p></div></div>
+        <div class="myth" data-verdict="fact"><button type="button" aria-expanded="false">&ldquo;The Manager Portal is open before I finish anything.&rdquo;</button><span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div class="verdict"><span class="vtag fact-v">Fact</span><p>It opens on Day 1 and is never taken away. Bookmark it today.</p></div></div>
+        <div class="myth" data-verdict="myth"><button type="button" aria-expanded="false">&ldquo;Compliance courses are the same for every manager.&rdquo;</button><span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div class="verdict"><span class="vtag myth-v">Fiction</span><p>Your work location in the HR record decides them. A manager in Nashville sees the Tennessee and all-location rows; a manager in New York sees New York and all-location rows. You get the supervisor versions in addition to the staff versions.</p></div></div>
+        <div class="myth" data-verdict="fact"><button type="button" aria-expanded="false">&ldquo;Finishing both required components triggers my cohort invitation.&rdquo;</button><span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div class="verdict"><span class="vtag fact-v">Fact</span><p>Oracle records Day 60 completion against your job profile and sends the next quarterly invitation. The cohort is voluntary; units outside the central budget are billed per seat.</p></div></div>
+        <div class="myth" data-verdict="myth"><button type="button" aria-expanded="false">&ldquo;The micro modules are slide decks I click through.&rdquo;</button><span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div class="verdict"><span class="vtag myth-v">Fiction</span><p>Every module is interactive: simulators with a simulated employee, scenario studios where you choose and defend an action, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check Oracle records.</p></div></div>
+        <div class="myth" data-verdict="fact"><button type="button" aria-expanded="false">&ldquo;Current managers take this too, not only new ones.&rdquo;</button><span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div class="verdict"><span class="vtag fact-v">Fact</span><p>The Manager Responsibilities Course is assigned once to every current manager. Over three years, every manager at Vanderbilt moves through the same four components in the same order.</p></div></div>
+      </div>
+      <p class="drill-status" id="factStatus" role="status" aria-live="polite">0 of 6 revealed.</p>
+    </div>
+
+    <div class="md-wrap">
+      <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="welcome" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+    </div>
+    <div class="bridge reveal"><span class="b-label">Next</span><p>You know why. Now the <em>what</em>: the standard itself.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ 02 THE MANAGER STANDARD ═════════════════════════ -->
+<section id="standard" class="th-cream" aria-label="The Manager Standard">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="you-are">You are here: segment 2, the standard you are held to.</span>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The Manager Standard / 02</span></span>
+      <h2>One gate. Five <em class="s">domains</em>.</h2>
+      <p>In this segment, you will learn the Manager Standard in plain language: the foundation gate every manager passes through, and the five domains Vanderbilt watches. Then you will sort real behaviors into the domain they belong to.</p>
+      <div class="lframe">
+        <span class="lf-chip"><b>You&rsquo;ll learn</b>What &ldquo;good&rdquo; looks like for a Vanderbilt manager</span>
+        <span class="lf-chip"><b>You&rsquo;ll do</b>Flip five domains, sort eight behaviors</span>
+        <span class="lf-chip"><b>Time</b>5 min</span>
+      </div>
+    </div>
+
+    <div class="module reveal">
+      <div class="module-head">
+        <span class="mno">Segment 2 &middot; The Manager Standard</span>
+        <h3>The gate comes first</h3>
+      </div>
+      <div class="concept reveal">
+        <span class="c-label">The idea</span>
+        <p>The Manager Standard is Vanderbilt&rsquo;s published statement of what it expects from every manager. It has a shape: <b>one foundation gate</b> that is not negotiable, and <b>five behavioral domains</b> that describe the job. You cannot be strong in the domains and weak at the gate. The gate is the condition for everything else.</p>
+      </div>
+      <div class="gate-card">
+        <span class="gk">The gate</span>
+        <div>
+          <h4>Ethical and inclusive practice</h4>
+          <p>You treat every person on your team fairly, you follow policy even when it is slower, you document honestly, you report what must be reported, and you never retaliate. A manager who cannot clear this gate is not a manager at Vanderbilt, whatever their results.</p>
+        </div>
+      </div>
+      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Through the gate, the five domains of the <em>job</em>.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="The five domains">
+      <div class="module-head">
+        <span class="mno">Segment 2 &middot; continued</span>
+        <h3>The five domains</h3>
+        <p>Flip each card for what the domain means and what it looks like on a Tuesday. The four tracks of the micro modules map onto these domains; the cohort deepens them.</p>
+      </div>
+      <div class="flip-grid five">
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><span class="abbr" aria-hidden="true">1</span><h4>Run the systems</h4><span class="def">Approvals, records, and time, done right.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span>
+          <span class="face back"><span class="tag">On a Tuesday</span><p>Timecards approved before the payroll deadline. A requisition opened with the right approval chain. A goal written in Culture Amp that the cycle can hold.</p><p><b>Track:</b> Systems.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><span class="abbr" aria-hidden="true">2</span><h4>Protect your people</h4><span class="def">The obligations that arrived with the title.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span>
+          <span class="face back"><span class="tag">On a Tuesday</span><p>You recognize a leave request even when it is not phrased as one. You know what must go to Employee Relations and what must be reported to Equal Opportunity and Access, and you document a concern the day it happens.</p><p><b>Track:</b> People.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><span class="abbr" aria-hidden="true">3</span><h4>Lead the work</h4><span class="def">Expectations, 1:1s, feedback, performance.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span>
+          <span class="face back"><span class="tag">On a Tuesday</span><p>Every direct report can say what is expected of them this quarter. 1:1s happen on a cadence with an agenda. Feedback arrives in the moment, and the hard version gets said.</p><p><b>Track:</b> Processes. Deepened in cohort weeks 2 and 4.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Grow your people</h4><span class="def">Coach before you correct. Build the bench.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span>
+          <span class="face back"><span class="tag">On a Tuesday</span><p>You delegate work that stretches someone instead of only work you are done with. You have a growth conversation without a form in front of you. Your team development plan has names on it.</p><p><b>Track:</b> Processes. Deepened in cohort week 3.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><span class="abbr" aria-hidden="true">5</span><h4>Carry the mission</h4><span class="def">A manager who can explain the why.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span>
+          <span class="face back"><span class="tag">On a Tuesday</span><p>You can tell your team how their work connects to the great university of the 21st century, name the institution&rsquo;s priorities, and explain how the campuses and the city fit together. A new hire settles into Nashville faster because of you.</p><p><b>Track:</b> Vanderbilt and Nashville.</p></span>
+        </button></div>
+      </div>
+      <p class="hinttxt" style="margin-top:12px">The domain names above are drafted from the program brief for this foundation and are confirmed by the Futures Learning Hub before the published Manager Standard is quoted.</p>
+      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Now prove you can tell them <em>apart</em>.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="Sort the behaviors">
+      <div class="module-head">
+        <span class="mno">Drill</span>
+        <h3>Which domain is this?</h3>
+        <p>Eight things a manager did this week. Tap the domain each one belongs to. The gate is an option too: some of these are not domain work at all, they are the gate holding or failing.</p>
+      </div>
+      <div class="drill" id="domainDrill" data-drill="domain"></div>
+      <p class="drill-status" id="domainStatus" role="status" aria-live="polite">0 of 8 sorted.</p>
+    </div>
+
+    <div class="md-wrap">
+      <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="standard" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+    </div>
+    <div class="bridge reveal"><span class="b-label">Next</span><p>The standard is the destination. The next segment is the <em>calendar</em>.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ 03 YOUR FIRST 60 DAYS ═════════════════════════ -->
+<section id="sixty" class="th-light" aria-label="Your first 60 days">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="you-are">You are here: segment 3, the calendar.</span>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your first 60 days / 03</span></span>
+      <h2>Two milestones. One <em class="s">record</em>.</h2>
+      <p>In this segment, you will walk the timeline from Day 1 to the cohort, see exactly what your state adds to your compliance list, and learn where accountability sits and who tracks it.</p>
+      <div class="lframe">
+        <span class="lf-chip"><b>You&rsquo;ll learn</b>What must be true by Day 30 and by Day 60</span>
+        <span class="lf-chip"><b>You&rsquo;ll do</b>Walk the timeline, pick your state, call four milestones</span>
+        <span class="lf-chip"><b>Time</b>5 min</span>
+      </div>
+    </div>
+
+    <div class="module reveal">
+      <div class="module-head">
+        <span class="mno">Segment 3 &middot; Your first 60 days</span>
+        <h3>The timeline</h3>
+      </div>
+      <div class="concept reveal">
+        <span class="c-label">The idea</span>
+        <p>The system does the work. The manager does the learning. Oracle assigns, tracks, and records; your unit leader and the Futures Learning Hub can see the record. By Day 30 you can approve, hire, and explain the mission. By Day 60 you can run a 1:1, handle a leave request, and document a concern. Those are the two promises the timeline makes to your team.</p>
+      </div>
+      <div class="tl" role="list" aria-label="Timeline">
+        <div role="listitem"><b>Day 1</b><strong>Assigned on arrival.</strong><p>The HR record shows a management role. Oracle assigns the compliance courses and this course. Portal access opens.</p></div>
+        <div role="listitem"><b>Days 1 to 30</b><strong>Systems and story.</strong><p>This foundation, the Systems track, and the Vanderbilt and Nashville track. State compliance under way.</p></div>
+        <div role="listitem"><b>Days 31 to 60</b><strong>People and process.</strong><p>The People track and the Processes track, every simulator passed. Remaining compliance courses done.</p></div>
+        <div role="listitem"><b>Day 60</b><strong>Recorded and invited.</strong><p>Completion recorded in Oracle against your job profile. The next quarterly cohort invitation follows.</p></div>
+        <div role="listitem"><b>Cohort and beyond</b><strong>From compliant to capable.</strong><p>Four weeks, three deliverables, one capstone. The Portal stays with you for good.</p></div>
+      </div>
+      <div class="evidence reveal">
+        <span class="e-label">Where accountability sits</span>
+        <p><b>Oracle Learning</b> assigns both required components on role entry and records every completion against your job profile. <b>Knowledge checks gate each module</b>, so a module is complete only when its check is passed. <b>Your unit leader</b> sees the record and co-scores your capstone if you join the cohort. <b>The Futures Learning Hub</b> owns the program and facilitates the cohort. Nobody chases you; the record simply shows.</p>
+      </div>
+      <div class="bridge mid reveal"><span class="b-label">Next</span><p>The one thing on the calendar that depends on <em>where</em> you sit.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="What your state adds">
+      <div class="module-head">
+        <span class="mno">Segment 3 &middot; continued</span>
+        <h3>What your state adds</h3>
+        <p>State assignment comes from your work location in the HR record. Pick yours to see the compliance list Oracle assigned you. Legal rows are required by state or federal law; missing a deadline creates institutional liability. Advisory rows are Vanderbilt policy. Both are mandatory.</p>
+      </div>
+      <div class="state-pick" id="statePick" role="group" aria-label="Choose your work location">
+        <button type="button" data-state="TN" aria-pressed="false">Tennessee</button>
+        <button type="button" data-state="NY" aria-pressed="false">New York</button>
+        <button type="button" data-state="FL" aria-pressed="false">Florida</button>
+        <button type="button" data-state="CA" aria-pressed="false">California</button>
+      </div>
+      <div class="state-out" id="stateOut" aria-live="polite"><h4>Choose a state above.</h4><p class="hinttxt">Your dashboard reads the same list from your Oracle record.</p></div>
+      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Four situations. Call the <em>milestone</em>.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="Call the milestone">
+      <div class="module-head">
+        <span class="mno">Drill</span>
+        <h3>Call the milestone</h3>
+        <p>Four moments from a new manager&rsquo;s first quarter. Tap the milestone each one belongs to.</p>
+      </div>
+      <div class="drill" id="milestoneDrill" data-drill="milestone"></div>
+      <p class="drill-status" id="milestoneStatus" role="status" aria-live="polite">0 of 4 called.</p>
+    </div>
+
+    <div class="md-wrap">
+      <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="sixty" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+    </div>
+    <div class="bridge reveal"><span class="b-label">Next</span><p>The calendar is set. Now the harder shift: what is <em>yours</em> now.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ 04 WHAT YOU NOW OWN ═════════════════════════ -->
+<section id="own" class="th-dark" aria-label="What you now own">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="you-are">You are here: segment 4, the shift.</span>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">What you now own / 04</span></span>
+      <h2>Is this now my <em class="s">call</em>?</h2>
+      <p>In this segment, you will make the shift from doing the work to owning the team&rsquo;s outcomes, and run a decision tree on six real situations to find out which are yours, which are yours with a process behind them, and which must go up.</p>
+      <div class="lframe">
+        <span class="lf-chip"><b>You&rsquo;ll learn</b>The four things a manager owns, including legal exposure</span>
+        <span class="lf-chip"><b>You&rsquo;ll do</b>Flip four cards, decide six situations</span>
+        <span class="lf-chip"><b>Time</b>5 min</span>
+      </div>
+    </div>
+
+    <div class="module reveal">
+      <div class="module-head">
+        <span class="mno">Segment 4 &middot; What you now own</span>
+        <h3>From doing the work to owning the outcomes</h3>
+      </div>
+      <div class="concept reveal">
+        <span class="c-label">The idea</span>
+        <p>Before, your name was on your work. Now your name is on the team&rsquo;s work, on the records the university keeps about the people on it, on the conversations only a manager can have, and on decisions that carry legal weight. Four things arrived with the title. Flip each one.</p>
+      </div>
+      <div class="flip-grid">
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><h4>Approvals</h4><span class="def">Time, absence, requisitions, spend.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span>
+          <span class="face back"><span class="tag">You own it</span><p>Every timecard you approve is a payroll record. Every unapproved one is a correction. Every requisition and expense carries a threshold and a chain you are part of.</p><p><b>Where you learn it:</b> Systems track, modules 1.2, 1.3, and 1.5.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><h4>Records</h4><span class="def">If it is not written down, it did not happen.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span>
+          <span class="face back"><span class="tag">You own it</span><p>A concern documented the day it happened protects the employee, protects you, and protects the university. A concern remembered six weeks later protects nobody.</p><p><b>Where you learn it:</b> People track, modules 2.1 and 2.5.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H5.2L4 17.2V4z"/><path d="M8 9h8M8 12h5"/></svg><h4>Conversations</h4><span class="def">The ones nobody else will have.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span>
+          <span class="face back"><span class="tag">You own it</span><p>Expectations, feedback, the performance concern, the pay question, the resignation. Each one has a model, a template in the Portal, and a rehearsal in the cohort. None of them can be delegated.</p><p><b>Where you learn it:</b> Processes track, modules 3.1 to 3.4.</p></span>
+        </button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false">
+          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg><h4>Exposure</h4><span class="def">Your words now carry legal weight.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span>
+          <span class="face back"><span class="tag">You own it</span><p>What you say when someone mentions a medical issue, a disability, a complaint, or a pregnancy is now the university speaking. Leave, accommodations, harassment, and retaliation are the four places a manager&rsquo;s sentence becomes a case.</p><p><b>Where you learn it:</b> People track, modules 2.2 to 2.4, and your state compliance courses.</p></span>
+        </button></div>
+      </div>
+      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Six situations. Run the <em>tree</em>.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="The decision tree">
+      <div class="module-head">
+        <span class="mno">Decision tree</span>
+        <h3>Is this now my call?</h3>
+        <p>For each situation, choose one of three: <b>My call</b> (decide and act), <b>My call, with a process</b> (decide, but there is a template, a threshold, or a documentation step you must follow), or <b>Not my call, route it</b> (someone else decides; your job is to recognize it and hand it off fast). The explanation tells you why.</p>
+      </div>
+      <div class="drill" id="ownDrill" data-drill="own"></div>
+      <p class="drill-status" id="ownStatus" role="status" aria-live="polite">0 of 6 decided.</p>
+      <div class="evidence reveal" style="margin-top:20px">
+        <span class="e-label">The rule of thumb</span>
+        <p>If the situation touches a person&rsquo;s health, a protected status, a complaint, or the law, it is never only your call. Your call is to recognize it in the first sentence and route it the same day. That single habit prevents most of the cases Employee Relations sees from first-year managers.</p>
+      </div>
+    </div>
+
+    <div class="md-wrap">
+      <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="own" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+    </div>
+    <div class="bridge reveal"><span class="b-label">Next</span><p>&ldquo;Route it&rdquo; only works if you know <em>who</em>.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ 05 THE PEOPLE YOU WILL CALL ═════════════════════════ -->
+<section id="people" class="th-cream" aria-label="The people you will call">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="you-are">You are here: segment 5, the map.</span>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The people you will call / 05</span></span>
+      <h2>Six offices, one <em class="s">map</em>.</h2>
+      <p>In this segment, you will meet the six people and offices every Vanderbilt manager calls, learn who does what, and route six real situations to the right one.</p>
+      <div class="lframe">
+        <span class="lf-chip"><b>You&rsquo;ll learn</b>Who does what: HR partner, Engagement Consultant, ER, EOA, Ombuds, Compliance</span>
+        <span class="lf-chip"><b>You&rsquo;ll do</b>Flip six cards, route six situations</span>
+        <span class="lf-chip"><b>Time</b>5 min</span>
+      </div>
+    </div>
+
+    <div class="module reveal">
+      <div class="module-head">
+        <span class="mno">Segment 5 &middot; The people you will call</span>
+        <h3>The map</h3>
+        <p>Flip each card. All six live in the Manager Portal under &ldquo;Who to call,&rdquo; with names for your business unit.</p>
+      </div>
+      <div class="flip-grid" id="peopleGrid">
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">HR</span><h4>HR partner</h4><span class="def">Your first call for anything people-related.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Call when</span><p>You are not sure which office a situation belongs to, you need help with a hire, a pay question, a job change, or a policy you cannot find. If in doubt, start here; they will route you.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">EC</span><h4>Engagement Consultant</h4><span class="def">Culture, engagement, and manager support.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Call when</span><p>Your Culture Amp scores dropped, a team is not gelling, you want to plan a team session, or you need a thinking partner on how to lead a change. The People, Culture and Belonging partner assigned to your business unit.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">ER</span><h4>Employee Relations</h4><span class="def">Concerns, investigations, conduct, performance cases.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Call when</span><p>A performance concern is moving from informal to formal, there is a conduct issue, a complaint between employees, a possible policy violation, or you are about to document something you may act on later. Call before you act, not after.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">EOA</span><h4>Equal Opportunity and Access</h4><span class="def">Discrimination, harassment, Title IX, accommodations.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Call when</span><p>Anyone mentions discrimination, harassment, or sexual misconduct, or asks for an accommodation for a disability, pregnancy, or religion. As a manager you are a mandatory reporter for some of these; the report is not optional and it is not yours to investigate.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">OMB</span><h4>Ombuds</h4><span class="def">Confidential, informal, impartial.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Call when</span><p>You, or someone on your team, wants to think through a situation off the record before deciding whether to raise it formally. The Ombuds does not investigate, does not report, and does not take sides.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">CMP</span><h4>Compliance</h4><span class="def">Policy questions and required training.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Call when</span><p>A required course did not appear, a deadline looks wrong, you are not sure whether a state law applies to your site, or you need the policy behind a rule.</p></span></button></div>
+      </div>
+      <div class="bridge mid reveal"><span class="b-label">Next</span><p>Six situations. Make the <em>call</em>.</p></div>
+    </div>
+
+    <div class="module reveal" data-pg="Who do you call?">
+      <div class="module-head">
+        <span class="mno">Drill</span>
+        <h3>Who do you call?</h3>
+        <p>Six situations from a manager&rsquo;s first month. Tap the office you call first. Some have a second call too; the explanation names it.</p>
+      </div>
+      <div class="drill" id="whoDrill" data-drill="who"></div>
+      <p class="drill-status" id="whoStatus" role="status" aria-live="polite">0 of 6 routed.</p>
+    </div>
+
+    <div class="md-wrap">
+      <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="people" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+    </div>
+    <div class="bridge reveal"><span class="b-label">Next</span><p>You know the standard, the calendar, the calls. Now find your own <em>gaps</em>.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ 06 SELF-ASSESSMENT ═════════════════════════ -->
+<section id="assess" class="th-light" aria-label="Self-assessment">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="you-are">You are here: segment 6, your own order.</span>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Self-assessment / 06</span></span>
+      <h2>Twelve questions, then your <em class="s">order</em>.</h2>
+      <p>In this segment, you will answer twelve honest questions on systems confidence, people obligations, process experience, and the mission. The output is the order your 22 micro modules open in: weakest area first, inside the Day 30 and Day 60 windows. Nobody scores this. It is a map for you.</p>
+      <div class="lframe">
+        <span class="lf-chip"><b>You&rsquo;ll learn</b>Where your gaps are before anyone else finds them</span>
+        <span class="lf-chip"><b>You&rsquo;ll do</b>Answer twelve questions, get your module order</span>
+        <span class="lf-chip"><b>Time</b>5 min</span>
+      </div>
+    </div>
+    <div class="route reveal" id="assessBox">
+      <div class="route-head">
+        <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Be honest, not modest</span></span>
+        <h3>Rate yourself <em>today</em>.</h3>
+        <p>Three answers each: not yet, some, or confident. Your answers stay in this browser and in your Oracle record when you open this course from Oracle Learning; the footer Reset clears them.</p>
+      </div>
+      <div class="route-qs" id="assessQs"></div>
+      <div class="route-act">
+        <button type="button" class="btn btn-primary" id="assessShow" disabled>Show my module order</button>
+        <span class="route-hint" id="assessHint">Answer all twelve to see your order.</span>
+      </div>
+      <div class="route-out" id="assessOut" aria-live="polite"></div>
+    </div>
+    <div class="md-wrap">
+      <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="assess" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+    </div>
+    <div class="bridge reveal"><span class="b-label">Next</span><p>Eight questions to prove the foundation <em>held</em>.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ KNOWLEDGE CHECK ═════════════════════════ -->
+<section id="quiz" class="th-cream" aria-label="Knowledge check">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="you-are">You are here: the checkpoint.</span>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Knowledge check / 07</span></span>
+      <h2>The knowledge <em class="s">check</em>.</h2>
+      <p>Eight questions across the six segments. Six or more correct completes the foundation; you can retake it anytime.</p>
+      <div class="lframe">
+        <span class="lf-chip"><b>You&rsquo;ll learn</b>Where your gaps are (if any)</span>
+        <span class="lf-chip"><b>You&rsquo;ll do</b>Answer eight questions, scored instantly</span>
+        <span class="lf-chip"><b>Time</b>4 min</span>
+      </div>
+    </div>
+    <div class="quiz-shell reveal">
+      <div id="quizForm" role="group" aria-label="Knowledge check, questions 1 to 4">
+        <fieldset class="qz" data-answer="b"><legend><span class="qn">1/8</span>Manager Voyage describes itself as:</legend><div class="opts"><label><input type="radio" name="q1" value="a" /> A training program for new managers</label> <label><input type="radio" name="q1" value="b" /> A management standard: a structured, sequenced journey for every manager</label> <label><input type="radio" name="q1" value="c" /> An optional leadership elective</label> <label><input type="radio" name="q1" value="d" /> A compliance library</label></div><p class="expl"><b>A management standard.</b> Structured, sequenced, institution-wide, for every manager, current and new.</p></fieldset>
+        <fieldset class="qz" data-answer="c"><legend><span class="qn">2/8</span>Which two components are required in your first 60 days?</legend><div class="opts"><label><input type="radio" name="q2" value="a" /> The cohort and the Portal</label> <label><input type="radio" name="q2" value="b" /> Compliance courses and the cohort</label> <label><input type="radio" name="q2" value="c" /> Compliance courses and the Manager Responsibilities Course</label> <label><input type="radio" name="q2" value="d" /> The Portal and the Manager Responsibilities Course</label></div><p class="expl"><b>Compliance and the Manager Responsibilities Course.</b> Oracle assigns both on role entry. The Portal is always on; the cohort is optional and unlocks when both required components are complete.</p></fieldset>
+        <fieldset class="qz" data-answer="a"><legend><span class="qn">3/8</span>The foundation gate of the Manager Standard is:</legend><div class="opts"><label><input type="radio" name="q3" value="a" /> Ethical and inclusive practice</label> <label><input type="radio" name="q3" value="b" /> Systems confidence</label> <label><input type="radio" name="q3" value="c" /> Ten years of experience</label> <label><input type="radio" name="q3" value="d" /> A completed cohort</label></div><p class="expl"><b>Ethical and inclusive practice.</b> The gate is the condition for everything else; the five domains describe the job.</p></fieldset>
+        <fieldset class="qz" data-answer="d"><legend><span class="qn">4/8</span>What decides which compliance courses Oracle assigns you?</legend><div class="opts"><label><input type="radio" name="q4" value="a" /> Your job title</label> <label><input type="radio" name="q4" value="b" /> Your unit leader&rsquo;s request</label> <label><input type="radio" name="q4" value="c" /> Your choice at enrollment</label> <label><input type="radio" name="q4" value="d" /> Your work location in the HR record, plus your manager role</label></div><p class="expl"><b>Work location plus role.</b> A manager in Nashville sees the Tennessee and all-location rows and takes the supervisor versions in addition to the staff versions.</p></fieldset>
+      </div>
+    </div>
+    <div class="quiz-shell" data-pg="Questions 5 to 8">
+      <div class="module-head" style="margin-bottom:18px"><span class="mno">Knowledge check &middot; continued</span><h3>Questions 5 to 8</h3></div>
+      <div id="quizForm2" role="group" aria-label="Knowledge check, questions 5 to 8">
+        <fieldset class="qz" data-answer="b"><legend><span class="qn">5/8</span>By Day 30, a manager on track can:</legend><div class="opts"><label><input type="radio" name="q5" value="a" /> Run a progressive discipline process alone</label> <label><input type="radio" name="q5" value="b" /> Approve, hire, and explain the mission</label> <label><input type="radio" name="q5" value="c" /> Present a capstone</label> <label><input type="radio" name="q5" value="d" /> Skip the remaining tracks</label></div><p class="expl"><b>Approve, hire, and explain the mission.</b> That is the Systems track and the Vanderbilt and Nashville track. People and Processes come in Days 31 to 60.</p></fieldset>
+        <fieldset class="qz" data-answer="c"><legend><span class="qn">6/8</span>A direct report says, &ldquo;I might need some time off for a medical thing.&rdquo; What is your call?</legend><div class="opts"><label><input type="radio" name="q6" value="a" /> Decide whether they qualify for leave</label> <label><input type="radio" name="q6" value="b" /> Ask for the diagnosis so you can plan coverage</label> <label><input type="radio" name="q6" value="c" /> Recognize a possible leave request, say the right thing, and hand off to leave administration</label> <label><input type="radio" name="q6" value="d" /> Wait until they submit something in writing</label></div><p class="expl"><b>Recognize and hand off.</b> Leave rarely arrives labeled. Your call is to recognize it in the first sentence, never ask for a diagnosis, and route it the same day.</p></fieldset>
+        <fieldset class="qz" data-answer="d"><legend><span class="qn">7/8</span>A team member tells you a colleague made repeated comments about their religion. Who do you call first?</legend><div class="opts"><label><input type="radio" name="q7" value="a" /> The Ombuds, to keep it informal</label> <label><input type="radio" name="q7" value="b" /> Nobody yet; gather more facts first</label> <label><input type="radio" name="q7" value="c" /> The Engagement Consultant</label> <label><input type="radio" name="q7" value="d" /> Equal Opportunity and Access</label></div><p class="expl"><b>Equal Opportunity and Access.</b> Discrimination and harassment reports go to EOA, and as a manager the report is not optional. You do not investigate; you document what you were told and report the same day.</p></fieldset>
+        <fieldset class="qz" data-answer="a"><legend><span class="qn">8/8</span>What does the self-assessment at the end of this foundation produce?</legend><div class="opts"><label><input type="radio" name="q8" value="a" /> A personalized order for the 22 micro modules</label> <label><input type="radio" name="q8" value="b" /> A score your unit leader sees</label> <label><input type="radio" name="q8" value="c" /> Your cohort seat</label> <label><input type="radio" name="q8" value="d" /> A list of modules you can skip</label></div><p class="expl"><b>Your module order.</b> Weakest area first, inside the Day 30 and Day 60 windows. Nobody scores it, and nothing is skipped; every module is still required.</p></fieldset>
+        <div class="quiz-foot">
+          <button type="button" class="btn btn-primary" id="quizSubmit">Check my answers<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4L12 14l-3-3"/></svg></button>
+          <span class="quiz-prog" id="quizProgress" aria-live="polite">0 of 8 answered</span>
+        </div>
+        <p class="nudge" id="quizNudge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>A few questions are still blank. Answer them all and I will tally you up.</p>
+      </div>
+    </div>
+    <div class="quiz-shell" data-pg="Your score">
+      <div class="module-head" style="margin-bottom:18px"><span class="mno">Knowledge check &middot; results</span><h3>Your score</h3></div>
+      <p class="hinttxt" id="quizWait">Answer all eight questions, then choose &ldquo;Check my answers&rdquo;; your score lands here.</p>
+      <div class="quiz-result" id="quizResult" role="status" aria-live="polite"></div>
+    </div>
+    <div class="md-wrap">
+      <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="quiz" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+    </div>
+    <div class="bridge reveal"><span class="b-label">Next</span><p>Score in hand, one <em>quick review</em> before you go.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SUMMARY ═════════════════════════ -->
+<section id="summary" class="th-light" aria-label="What you now know">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="you-are">You are here: consolidation, one quick revisit.</span>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Summary</span></span>
+      <h2>What you now <em class="s">know.</em></h2>
+      <p>The six ideas you picked up in thirty minutes.</p>
+    </div>
+    <div class="recap-grid">
+      <article class="recap reveal"><h3>The unmanaged window is closed</h3><p>Manager Voyage is a management standard, not a program. Oracle assigned your required components the day your role began.</p><span class="r-why"><b>At work:</b> your dashboard shows exactly what you owe and when.</span></article>
+      <article class="recap reveal" style="transition-delay:.06s"><h3>One gate, five domains</h3><p>Ethical and inclusive practice is the condition. Run the systems, protect your people, lead the work, grow your people, carry the mission are the job.</p><span class="r-why"><b>At work:</b> when a decision feels hard, ask which domain it lives in, and whether the gate is holding.</span></article>
+      <article class="recap reveal" style="transition-delay:.12s"><h3>Day 30, Day 60</h3><p>By Day 30 you can approve, hire, and explain the mission. By Day 60 you can run a 1:1, handle a leave request, and document a concern. Your state adds its compliance rows.</p><span class="r-why"><b>At work:</b> the record shows; nobody chases you.</span></article>
+      <article class="recap reveal"><h3>Four things you own</h3><p>Approvals, records, conversations, and exposure. None can be delegated.</p><span class="r-why"><b>At work:</b> if it touches health, protected status, a complaint, or the law, recognize it in the first sentence and route it the same day.</span></article>
+      <article class="recap reveal" style="transition-delay:.06s"><h3>Six offices, one map</h3><p>HR partner, Engagement Consultant, Employee Relations, Equal Opportunity and Access, Ombuds, Compliance. If in doubt, start with your HR partner.</p><span class="r-why"><b>At work:</b> the names for your business unit live in the Manager Portal.</span></article>
+      <article class="recap reveal" style="transition-delay:.12s"><h3>Your order</h3><p>Twelve questions ranked your gaps. The 22 micro modules open in that order, inside the Day 30 and Day 60 windows.</p><span class="r-why"><b>At work:</b> start with the first module on your list this week.</span></article>
+    </div>
+    <div class="canon reveal" id="takehome" style="margin-top:24px">
+      <h5>What you leave with</h5>
+      <ol>
+        <li><span><b>Your module order.</b> The list from <a href="#assess">the self-assessment</a>, saved to this browser and your Oracle record.</span></li>
+        <li><span><b>Your compliance list.</b> The rows your state added, in <a href="#sixty">segment 3</a> and on your dashboard.</span></li>
+        <li><span><b>The map.</b> Six offices and when to call each, in <a href="#people">segment 5</a> and in the Manager Portal.</span></li>
+        <li><span><b>The rule of thumb.</b> Health, protected status, complaint, or law: recognize and route the same day.</span></li>
+      </ol>
+    </div>
+    <div class="bridge reveal"><span class="b-label">Next</span><p>The foundation is poured. Now the first <em>seven days</em>.</p></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ NEXT STEP ═════════════════════════ -->
+<section id="nextstep" class="th-cream" aria-label="Your next step">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:0">
+      <span class="you-are">You are here: the handoff to your real week.</span>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Next step / 08</span></span>
+      <h2>Your next seven <em class="s">days.</em></h2>
+      <p>Five small moves. Each one is on your dashboard.</p>
+    </div>
+    <div class="hw-list reveal">
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Open your dashboard</h3><p>Your compliance list, your modules in the order you just set, your milestones, and who to call. <a href="../dashboard/">Open My Voyage</a>.</p></div><span class="chip">Today</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Bookmark the Manager Portal</h3><p>Templates, frameworks, policy links, and the names for your business unit. <a href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Open the Portal</a>.</p></div><span class="chip">Today</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Start your first micro module</h3><p>The first module on your order. Fifteen minutes or less; ends with a knowledge check Oracle records.</p></div><span class="chip">This week</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">04</span><div><h3>Meet your HR partner and Engagement Consultant</h3><p>Thirty minutes each. Tell them you started Manager Voyage and ask what they wish every new manager in your unit knew.</p></div><span class="chip">This week</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">05</span><div><h3>Open your state compliance courses</h3><p>The legal rows carry the earliest deadlines. Start with those.</p></div><span class="chip">By Day 30</span></div>
+    </div>
+    <div class="oracle-strip reveal" id="oracleStrip">
+      <div>
+        <span class="mono">Training record</span>
+        <p id="oracleStripText">When you open this course from Oracle Learning, your completion is recorded automatically once all eight sections are done. Outside Oracle, progress stays in this browser.</p>
+      </div>
+      <a class="btn btn-gold btn-sm" href="../dashboard/">Open My Voyage<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+    </div>
+    <div class="evidence reveal" id="tell-leader">
+      <span class="e-label">Tell your unit leader</span>
+      <p>Commitments kept in private fade. Copy this message, fill in the brackets, and send it to your unit leader today.</p>
+      <p><em>&ldquo;I just completed the Manager Voyage foundation. My first module is [module name] and I will finish the Systems track by [date]. Ask me about it on [date].&rdquo;</em></p>
+      <button type="button" class="btn btn-ghost btn-sm" data-copytext="I just completed the Manager Voyage foundation. My first module is [module name] and I will finish the Systems track by [date]. Ask me about it on [date].">Copy the message</button>
+    </div>
+    <div class="md-wrap">
+      <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="nextstep" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ CLOSING ═════════════════════════ -->
+<section class="cta th-dark" aria-label="Closing">
+  <div class="wrap">
+    <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Wrap-up</span></span>
+    <h2 class="metal">Now begin the <em>voyage</em>.</h2>
+    <p>You know the standard, the calendar, what you own, and who to call. The 22 micro modules open in the order you set. From first day to fully formed leader starts now.</p>
+    <a class="btn btn-gold" href="../dashboard/">Open My Voyage<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <p class="cta-alt">Have not taken the knowledge check yet? <a href="#quiz">It takes four minutes.</a></p>
+    <p class="send-sign">The quality of Vanderbilt&rsquo;s future depends on the quality of its managers today.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcenter">
+      <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
+      <p class="fprogram">Manager Voyage &middot; Foundation: What Vanderbilt Expects of a Manager</p>
+      <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. Progress and your self-assessment are saved in this browser, and in your Oracle Learning record when opened there. <a href="../">About the program</a> &middot; <a href="../dashboard/">My Voyage dashboard</a></p>
+      <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="book-bar" id="bookBar" role="navigation" aria-label="Book controls">
+  <div class="bb-left">
+    <span class="bb-sec" id="bbSec" aria-hidden="true">Welcome</span>
+    <button type="button" class="bb-done" id="bbDone" aria-pressed="false" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span class="bb-done-t">Mark done</span></button>
+  </div>
+  <nav class="bb-dots" id="bbDots" aria-label="Course sections"></nav>
+  <div class="bb-ctl">
+    <span class="bb-count" id="bbCount" aria-live="polite">1 / 1</span>
+    <button type="button" class="bb-btn" id="pgPrev" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button type="button" class="bb-btn" id="pgNext" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
+<div class="oracle-overlay" id="oracleModal" role="dialog" aria-modal="true" aria-labelledby="oracleTitle" hidden>
+  <div class="oracle-modal">
+    <span class="mono">Foundation complete</span>
+    <h2 id="oracleTitle">You have completed the foundation.</h2>
+    <p id="oracleBody">All eight sections are done. Your micro modules open in the order you set; your dashboard shows them.</p>
+    <div class="oracle-actions">
+      <a class="btn btn-gold" id="oracleGo" href="../dashboard/">Open My Voyage<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      <button type="button" class="btn btn-ghost btn-sm" id="oracleLater">Stay here</button>
+    </div>
+    <p class="oracle-fine" id="oracleFine">Outside Oracle Learning, completion stays in this browser.</p>
+  </div>
+</div>
+
+<script src="../assets/js/program-data.js?v=1"></script>
+<script src="../assets/js/scorm.js?v=1"></script>
+<script src="pager.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

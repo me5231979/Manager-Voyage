@@ -108,7 +108,7 @@ window.MV_PROGRAM = {
     title: 'Manager Responsibilities Course',
     summary: 'Compliance tells you what the law requires. This course tells you what Vanderbilt requires: the systems you approve in, the people obligations you now carry, the processes you run, and the university and city you represent.',
     foundation: {
-      id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, minutes: 30, phase: 1,
+      id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, localUrl: '../foundation/', minutes: 30, phase: 1,
       title: 'Foundation: What Vanderbilt Expects of a Manager',
       why: 'Thirty minutes, completed first. It unlocks every micro module and sequences them for you.',
       segments: [

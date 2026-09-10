@@ -34,3 +34,29 @@ row, and a rail with Up next, Milestones, and Who to call.
 - SCORM: `imsmanifest.xml` plus `assets/js/scorm.js`. Build the Oracle Learning
   package with `bash scripts/build-scorm.sh`.
 - Preview without Oracle: `dashboard/?name=Alex%20Rivera&state=NY&start=2026-08-20`.
+
+## Foundation course (`foundation/`)
+
+"Foundation: What Vanderbilt Expects of a Manager," the 30-minute course every
+manager completes before the micro modules unlock. Built on the Working
+Smarter book-mode engine (`assets/css/course.css`, `foundation/pager.js`) with
+the hero video montage, the Chancellor's charge, and six five-minute segments:
+
+1. Welcome (the unmanaged window, the four components, fact or fiction)
+2. The Manager Standard (the gate, five domains, a sorting drill)
+3. Your first 60 days (timeline, what your state adds, call the milestone)
+4. What you now own (four cards, the "Is this now my call?" decision tree)
+5. The people you will call (six offices, "Who do you call?" drill)
+6. Self-assessment (twelve questions; outputs the order of the 22 micro modules)
+
+Then an eight-question knowledge check (six to pass), a summary, and next steps.
+Each segment marks itself done when its activity is finished. The self-assessment
+order is saved to `localStorage` (`mv.foundation.v1`) and to SCORM suspend_data;
+the dashboard reads it and orders the tracks the same way.
+
+- Preview: `foundation/?name=Alex%20Rivera&state=NY`
+- SCORM: `bash scripts/build-foundation-scorm.sh` writes
+  `manager-voyage-foundation-scorm.zip` (standalone SCORM 1.2, reports complete
+  when all eight sections are done).
+- Open items: the Vice Chancellor welcome video (placeholder card), and FLH
+  sign-off on the five domain names in segment 2.

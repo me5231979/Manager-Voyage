@@ -35,6 +35,7 @@
   function stateName(s) { return (P.states[s] || {}).name || ''; }
   function courseUrl(it) {
     if (it.oracleUrl) return it.oracleUrl;
+    if (it.localUrl) return it.localUrl;
     if (CFG.oracleLearningBase && it.oracleCode) return CFG.oracleLearningBase + encodeURIComponent(it.oracleCode);
     return null;
   }
@@ -47,10 +48,20 @@
         dueIso: c.deadlineDays > 0 ? addDays(profile.startDate, c.deadlineDays) : profile.startDate,
         dueLabel: c.deadlineDays === 0 ? 'On hire' : c.deadlineDays >= 180 ? 'Within 6 months' : 'By Day ' + c.deadlineDays }); });
   }
+  function foundationOrder() {
+    try { var d = JSON.parse(localStorage.getItem('mv.foundation.v1') || 'null'); return d && d.order && d.order.length ? d.order : null; } catch (e) { return null; }
+  }
+  function orderedTracks() {
+    var order = foundationOrder();
+    var tracks = P.mrc.tracks.slice();
+    if (!order) return tracks;
+    var first = {}; order.forEach(function (id, i) { tracks.forEach(function (t) { if (t.modules.some(function (m) { return m.id === id; }) && first[t.id] === undefined) first[t.id] = i; }); });
+    return tracks.sort(function (a, b) { return (a.phase - b.phase) || ((first[a.id] === undefined ? 99 : first[a.id]) - (first[b.id] === undefined ? 99 : first[b.id])); });
+  }
   function mrcItems() {
     var f = P.mrc.foundation;
     var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'Six five-minute segments: the welcome, the Manager Standard, your first 60 days, what you now own, the people you will call, and a self-assessment that orders your modules.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
-    P.mrc.tracks.forEach(function (t) {
+    orderedTracks().forEach(function (t) {
       t.modules.forEach(function (m) {
         out.push(Object.assign({}, m, { kind: 'course', area: 'mrc', track: t, oracleCode: m.id, minutes: 15,
           dueIso: addDays(profile.startDate, t.phase === 1 ? 30 : 60), dueLabel: 'By Day ' + (t.phase === 1 ? 30 : 60) }));
@@ -110,8 +121,9 @@
     if (it.cadence) meta.push('<span>' + esc(it.cadence) + '</span>');
     meta.push(dueHtml(it));
     var why = it.why ? '<details class="item__why"><summary>Why you take it</summary><p>' + esc(it.why) + (it.note ? ' <b>' + esc(it.note) + '</b>' : '') + '</p></details>' : '';
+    var local = !it.oracleUrl && !!it.localUrl;
     var cta = url
-      ? '<a class="btn" data-go="' + esc(it.id) + '" href="' + esc(url) + '" target="_blank" rel="noopener">' + (done ? 'Revisit' : statusOf(it.id) === 'opened' ? 'Continue' : 'Open in Oracle') + '</a>'
+      ? '<a class="btn" data-go="' + esc(it.id) + '" href="' + esc(url) + '"' + (local ? '' : ' target="_blank" rel="noopener"') + '>' + (done ? 'Revisit' : statusOf(it.id) === 'opened' ? 'Continue' : local ? 'Open the course' : 'Open in Oracle') + '</a>'
       : '<span class="btn is-disabled" title="Oracle link coming soon">Link coming soon</span>';
     var mark = '';
     if (CFG.allowSelfReport !== false) {
@@ -150,12 +162,13 @@
     var items = mrcItems();
     var f = items[0];
     var fDone = isDone(f.id);
+    var ordered = !!foundationOrder();
     var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · About 4 hours</span></div>' +
       '<p class="panel__lead">' + esc(P.mrc.summary) + ' Every module is interactive: simulators, scenario studios, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check, and Oracle records the date you pass it.</p>' +
-      lane(f.title, '30 minutes · Completed first', [f], fDone ? 'Foundation complete. Your self-assessment set the order of the modules below.' : 'Complete the foundation first. It unlocks the micro modules and orders them from your self-assessment.');
+      lane(f.title, '30 minutes · Completed first', [f], ordered ? 'Your self-assessment set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation first. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;
     [1, 2].forEach(function (phase) {
-      var tracks = P.mrc.tracks.filter(function (t) { return t.phase === phase; });
+      var tracks = orderedTracks().filter(function (t) { return t.phase === phase; });
       html += '<div class="lane"><div class="lane__title"><h3>' + (phase === 1 ? 'Days 1 to 30' : 'Days 31 to 60') + '</h3><span>' +
         esc(tracks.map(function (t) { return t.title; }).join(' and ')) + '</span></div>' +
         '<p class="lane__note">' + (phase === 1 ? 'By Day 30 you can approve, hire, and explain the mission.' : 'By Day 60 you can run a 1:1, handle a leave request, and document a concern.') + '</p></div>';
