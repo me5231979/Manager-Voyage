@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>What Vanderbilt Expects of a Manager · Manager Foundations · Manager Voyage</title>
-<meta name="description" content="The first course in Manager Foundations: the four jobs every Vanderbilt manager does, in plain words, with why each matters and one thing to do this week. About fifteen minutes, narrated, with training videos." />
+<title>You Are a Manager Now · Manager Foundations · Manager Voyage</title>
+<meta name="description" content="The first course in Manager Foundations: what a manager is, five ideas that hold up, what Vanderbilt will ask, and the four jobs every Vanderbilt manager does, in plain words, with why each matters and one thing to do this week. About fifteen minutes, narrated, with training videos." />
 <meta name="theme-color" content="#1C1C1C" />
 <meta name="robots" content="noindex" />
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
@@ -15,7 +15,7 @@
 <!--
   ══════════════════════════════════════════════════════════════════════════
   MANAGER VOYAGE · MANAGER FOUNDATIONS · COURSE 1
-  What Vanderbilt expects of a manager. About fifteen minutes, sixteen pages.
+  You are a manager now. About twenty minutes, eighteen pages.
   The first course in Manager Foundations (after the manager compliance
   courses, before the micro modules). It teaches the four jobs of a manager
   in plain words: get the work done, take care of your people, make things
@@ -344,6 +344,20 @@ details.deeper .d-body p{ margin:0 0 10px; font-size:.9rem; color:var(--tx2); }
 .kq-done .btn{ margin-top:14px; }
 /* recap chips */
 .recap-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px; }
+.recap-row.three{ grid-template-columns:repeat(3,1fr); margin-top:0; }
+.who.who-col{ grid-template-columns:1fr 1fr; }
+.who.who-col > div{ font-size:.86rem; }
+.calls .scn{ margin-top:0; }
+.calls .cq{ display:none; } .calls .cq.cur{ display:block; }
+.calls .cq-h{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:8px; }
+.calls .cq-nav{ display:flex; gap:10px; align-items:center; margin-top:12px; }
+.flip-grid.five .fcard h4{ font-size:1.05rem; }
+.flip-grid.five .fcard .face{ min-height:250px; }
+.flip-grid.five .fcard .def{ font-size:.86rem; }
+.flip-grid.five .fcard .back .hb{ font-size:.8rem; }
+.flip-grid.five .fcard .back .tag{ font-size:.62rem; }
+@media (max-width:1100px){ .flip-grid.five{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:700px){ .flip-grid.five,.recap-row.three{ grid-template-columns:1fr; } }
 .recap-row div{ border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 14px; }
 .recap-row b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
 .recap-row strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.05rem; margin-top:4px; }
@@ -383,11 +397,10 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </a>
       <div class="bar-r">
         <nav class="links" aria-label="Primary">
+          <a href="#shift">What changed</a>
+          <a href="#ideas">Five ideas</a>
+          <a href="#year">Your first year</a>
           <a href="#welcome">The four jobs</a>
-          <a href="#task">1 Get work done</a>
-          <a href="#relations">2 People</a>
-          <a href="#change">3 Better</a>
-          <a href="#external">4 Connect</a>
           <a href="#survey">The survey</a>
           <a class="btn btn-gold btn-sm nav-cta" href="#quiz">Quick check</a>
         </nav>
@@ -409,11 +422,11 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <p class="sr" id="progStatus" role="status" aria-live="polite"></p>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-  <a class="mlink" href="#welcome" data-prog="welcome"><span class="mono">01</span>The four jobs<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#task" data-prog="task"><span class="mono">02</span>Job 1: get the work done<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#relations" data-prog="relations"><span class="mono">03</span>Job 2: take care of your people<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#change" data-prog="change"><span class="mono">04</span>Job 3: make things better<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#external" data-prog="external"><span class="mono">05</span>Job 4: connect your team<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#shift" data-prog="shift"><span class="mono">01</span>What changed<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#safe" data-prog="safe"><span class="mono">02</span>Safe to speak up<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#calls" data-prog="calls"><span class="mono">03</span>Your first calls<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#welcome" data-prog="welcome"><span class="mono">04</span>The four jobs<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#yourcall" data-prog="yourcall"><span class="mono">05</span>Your call: four situations<span class="mdone" aria-hidden="true">Done</span></a>
   <a class="mlink" href="#survey" data-prog="survey"><span class="mono">06</span>The survey and where you stand<span class="mdone" aria-hidden="true">Done</span></a>
   <a class="mlink" href="#quiz" data-prog="quiz"><span class="mono">07</span>Knowledge check<span class="mdone" aria-hidden="true">Done</span></a>
   <a class="mlink" href="#nextstep" data-prog="nextstep"><span class="mono">08</span>Your next step<span class="mdone" aria-hidden="true">Done</span></a>
@@ -430,23 +443,24 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
     <div class="hero-scrim"></div>
   </div>
   <div class="wrap">
-    <span class="mono">Vanderbilt University &middot; Manager Voyage &middot; Manager Foundations &middot; Course 1 &middot; Page 1 of 16</span>
-    <h1 class="metal">What Vanderbilt expects of a <em>manager</em>.</h1>
+    <span class="mono">Vanderbilt University &middot; Manager Voyage &middot; Manager Foundations &middot; Course 1 &middot; Page 1 of 18</span>
+    <h1 class="metal">You are a manager <em>now</em>.</h1>
     <p class="hello" id="heroHello">Welcome aboard.</p>
-    <p class="lead">Being a manager is four jobs. This course, the first in Manager Foundations, shows you what they are, why each one matters, and one thing to do this week for each. Before you start, you should have started or finished your manager compliance courses (the required courses listed on your dashboard). After it, the micro modules (short how-to lessons, also on your dashboard) show you how to do the common manager tasks. By the end, you will be able to:</p>
+    <p class="lead">This is the first course in Manager Foundations, and it starts at the beginning: what changed when you became a manager, what a manager is and is not, the ideas the best-known voices on management agree on, and what Vanderbilt will ask you to do in your first year. It ends with a simple way to keep the whole job in view. Before you start, you should have started or finished your manager compliance courses (the required courses on your dashboard). After it, the micro modules (short how-to lessons, also on your dashboard) teach each common task, one at a time. By the end, you will be able to:</p>
     <ul class="outcomes" aria-label="By the end of this course, you will be able to">
-      <li><b>Name</b> the four jobs of a manager, in plain words</li>
-      <li><b>Say</b> why each job matters to your team, and what it looks like on a Tuesday</li>
-      <li><b>Make the call</b> in four real situations, the Vanderbilt way</li>
-      <li><b>Read</b> the survey you already took, and see where you stand today</li>
+      <li><b>Say</b> what changed when you became a manager, and what the job is now</li>
+      <li><b>Use</b> five ideas from Covey, Brown, Edmondson, Sinek, and SHRM, each as one habit</li>
+      <li><b>Know</b> what Vanderbilt will ask you to do this year, when, and who helps</li>
+      <li><b>Make the call</b>: handle it, ask your HR partner, send it to the leave office, or report it</li>
+      <li><b>Keep</b> the four jobs of a manager in view, week to week</li>
     </ul>
-    <p class="meta-line"><b>About 15 minutes &middot; 16 pages &middot; 6 modules</b> &middot; self-paced &middot; completion recorded in Oracle Learning</p>
+    <p class="meta-line"><b>About 20 minutes &middot; 18 pages &middot; 5 modules</b> &middot; self-paced &middot; completion recorded in Oracle Learning</p>
     <p class="listen-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span><b>Prefer to listen?</b> Every page is narrated. Use <b>Listen</b> in the bar below for this page, or turn on <b>Auto</b> to hear each page as it turns.</span></p>
-    <div class="cta-row"><a class="btn btn-gold" href="#overview">Begin the foundation<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    <div class="cta-row"><a class="btn btn-gold" href="#overview">Begin the course<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     <ol class="hw-mini" aria-label="How this course works">
       <li>Turn pages with the arrows below, your keyboard arrows, or a swipe</li>
       <li>Each page starts with where you are and what comes next</li>
-      <li>In each module: watch, flip the cards, make the call, answer three quick questions</li>
+      <li>Read or watch, then do the short activity on the page: sort, flip, or make the call</li>
       <li>Your completion is recorded in Oracle Learning; you retake the survey six months later</li>
     </ol>
   </div>
@@ -456,69 +470,194 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="overview" class="th-light" aria-label="Course and module overview">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Page 2 of 16</b> Course and module overview <i>&middot; Next: module 1, why, and the four jobs</i></p>
+      <p class="you-are"><b>Page 2 of 18</b> Course and module overview <i>&middot; Next: module 1, what changed</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Course overview</span></span>
-      <h2>Foundation: what Vanderbilt expects of a <em class="s">manager</em>.</h2>
+      <h2>What a manager is, and what Vanderbilt will <em class="s">ask</em>.</h2>
     </div>
     <div class="ov-grid">
-      <div class="ov-card"><b>What this course is</b><p>The first course in Manager Foundations: the four jobs every Vanderbilt manager does, in plain words, with one thing to do this week for each.</p></div>
-      <div class="ov-card"><b>Before and after</b><p>Before: start or finish your manager compliance courses (required, on your dashboard). After: the micro modules, short how-to lessons on the common tasks (hiring, timecards, feedback, and more). About 15 minutes, narrated.</p></div>
-      <div class="ov-card"><b>You will be able to</b><ul><li>Name the four jobs of a manager</li><li>Say why each one matters, and what it looks like on a Tuesday</li><li>Make the call in four real situations</li><li>Read the survey you took, and see where you stand</li></ul></div>
-      <div class="ov-card"><b>How you finish</b><p>Each job module finishes with three quick questions. Open the four jobs, rate yourself, pass the five-question check (4 of 5), and mark your next step. Recorded in Oracle Learning. You took the survey before this course and take it again six months after.</p></div>
+      <div class="ov-card"><b>What this course is</b><p>The first course in Manager Foundations. It assumes you know nothing about management yet, and it starts there: the job, the ideas that hold up, the tasks that are coming, and one simple picture to keep it all in view.</p></div>
+      <div class="ov-card"><b>Before and after</b><p>Before: start or finish your manager compliance courses (required, on your dashboard). After: the micro modules, short how-to lessons on each common task (1:1s, timecards, hiring, leave, and more). About 20 minutes, narrated.</p></div>
+      <div class="ov-card"><b>You will be able to</b><ul><li>Say what changed and what the job is now</li><li>Use five ideas from the best-known voices, one habit each</li><li>Know what Vanderbilt will ask this year, and who helps</li><li>Make the call: handle it, ask HR, route it, or report it</li><li>Keep the four jobs in view</li></ul></div>
+      <div class="ov-card"><b>How you finish</b><p>Eight sections track your progress: the activities on the way, the self-rating, and a five-question check (4 of 5). Recorded in Oracle Learning. You took the survey before this course and take it again six months after.</p></div>
     </div>
     <span class="mono" style="display:block;margin:14px 0 8px">Module overviews</span>
     <div class="hw-grid reveal ov-mods">
-      <div class="hw"><span class="hw-no" aria-hidden="true">01</span><h3>Why, and the four jobs</h3><p><b>Learn:</b> why Vanderbilt is spelling out the job, and the four jobs of a manager. <b>Do:</b> watch the 90-second video, open the four cards.</p><span class="chip">Pages 3 to 4 &middot; 3 min</span></div>
-      <div class="hw"><span class="hw-no" aria-hidden="true">02</span><h3>Job 1: get the work done</h3><p><b>Learn:</b> plan it, say it, check it, fix it. <b>Do:</b> video, cards, your call, quick check.</p><span class="chip">Pages 5 to 6 &middot; 3 min</span></div>
-      <div class="hw"><span class="hw-no" aria-hidden="true">03</span><h3>Job 2: take care of your people</h3><p><b>Learn:</b> listen and help, grow them, thank them, trust them. <b>Do:</b> video, cards, your call, quick check.</p><span class="chip">Pages 7 to 8 &middot; 3 min</span></div>
-      <div class="hw"><span class="hw-no" aria-hidden="true">04</span><h3>Job 3: make things better</h3><p><b>Learn:</b> explain the why, describe where you are going, let people try, look back. <b>Do:</b> video, cards, your call, quick check.</p><span class="chip">Pages 9 to 10 &middot; 3 min</span></div>
-      <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>Job 4: connect your team</h3><p><b>Learn:</b> know the people, watch for what is coming, speak up for your team. <b>Do:</b> video, cards, your call, quick check.</p><span class="chip">Pages 11 to 12 &middot; 3 min</span></div>
-      <div class="hw"><span class="hw-no" aria-hidden="true">06</span><h3>The survey and where you stand</h3><p><b>Learn:</b> what the survey you already took was asking, and how to read it. <b>Do:</b> rate yourself on the fifteen habits, get your first picture and your micro-module order.</p><span class="chip">Page 13 &middot; 2 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">01</span><h3>What changed, and what a manager is</h3><p><b>Learn:</b> the one change that makes you a manager, three things that are new, what a manager is not, and who helps you here. <b>Do:</b> sort six situations (whose job is it now?), watch the 80-second video.</p><span class="chip">Pages 3 to 4 &middot; 4 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">02</span><h3>Five ideas, and safe to speak up</h3><p><b>Learn:</b> Covey, Bren&eacute; Brown, Amy Edmondson, Simon Sinek, and SHRM, one line each. <b>Do:</b> flip five cards, then make the call in three moments that build or break trust.</p><span class="chip">Pages 5 to 6 &middot; 4 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">03</span><h3>What Vanderbilt will ask you to do</h3><p><b>Learn:</b> the manager tasks of year one, when each shows up, who helps, and the micro module for it. <b>Do:</b> open the four groups, then decide five situations: handle it, ask HR, route it, or report it.</p><span class="chip">Pages 7 to 8 &middot; 4 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">04</span><h3>The four jobs of a manager</h3><p><b>Learn:</b> one picture that holds the whole job: get the work done, take care of your people, make things better, connect your team. <b>Do:</b> five short videos, flip the cards, then your call in four situations.</p><span class="chip">Pages 9 to 14 &middot; 6 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>The survey and where you stand</h3><p><b>Learn:</b> what the survey you already took was asking. <b>Do:</b> rate yourself on fifteen habits and get your micro-module order.</p><span class="chip">Page 15 &middot; 2 min</span></div>
     </div>
-    <p class="hw-meta reveal" style="margin-top:10px">Then a five-question check (page 14), your next seven days (page 15), and the wrap-up (page 16). The four jobs come from research by Gary Yukl; we use it as a guide, and nobody is tested on the theory. <span id="progTopLine">Section tracking: you have 8 sections ahead.</span></p>
+    <p class="hw-meta reveal" style="margin-top:10px">Then a five-question check (page 16), your next seven days (page 17), and the wrap-up (page 18). The four jobs in module 4 come from research by Gary Yukl; we use it as a guide, and nobody is tested on the theory. <span id="progTopLine">Section tracking: you have 8 sections ahead.</span></p>
   </div>
 </section>
 
-<!-- ═══════════════════ 3 WHY ═══════════════════ -->
-<section id="why" class="th-cream" aria-label="Why Vanderbilt is defining management">
+<!-- ═══════════════════ 3 WHAT CHANGED ═══════════════════ -->
+<section id="shift" class="th-cream" aria-label="What changed when you became a manager">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 1 &middot; Page 3 of 16</b> Why Vanderbilt is spelling out the job <i>&middot; You have the overview &middot; Next: the four jobs</i></p>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The belief</span></span>
-      <h2>A manager is the biggest influence on a team. Vanderbilt will not leave what the job means <em class="s">to chance</em>.</h2>
+      <p class="you-are"><b>Module 1 &middot; Page 3 of 18</b> What changed <i>&middot; You have the overview &middot; Next: what a manager is</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">What changed</span></span>
+      <h2>Your job used to be your work. Now it is the team&rsquo;s work, and the <em class="s">people</em>.</h2>
     </div>
-    <div class="intro-grid even">
-      <div class="concept" style="margin:0">
-        <span class="c-label">A welcome from People, Culture and Belonging</span>
-        <p>Most people become managers because they were good at the work. Nobody hands them a description of the new job, so they copy whatever their own managers did. Some of that was great. Some of it was not. The difference was luck.</p>
-        <p>This course ends the luck. It gives every manager the same simple description of the job: four jobs, fifteen habits. Your unit leader, your HR partner, your Engagement Consultant, and the micro modules all use the same words.</p>
+    <div class="ask"><p><b>What you will learn</b>The one change that makes you a manager, the three things that are new, and what a manager is not.</p><p><b>Why it matters to you</b>Most new managers keep doing their old job with a new title, and the team waits for a manager who never shows up. Knowing what changed is the first thing every manager needs.</p></div>
+    <div class="split2">
+      <div>
+        <div class="recap-row three" role="list" aria-label="Three things that are new">
+          <div role="listitem"><b>New 1</b><strong>You decide.</strong><p>What matters this week, who does what, and what waits. If you do not decide, the loudest request decides for you.</p></div>
+          <div role="listitem"><b>New 2</b><strong>You approve.</strong><p>Timecards, time off, expenses, and requests now come to you. Vanderbilt trusts your signature, so look before you sign.</p></div>
+          <div role="listitem"><b>New 3</b><strong>You are responsible for people.</strong><p>Fair treatment, a safe place to speak up, a chance to grow, and the right help when life happens.</p></div>
+        </div>
+        <div class="who" role="list" aria-label="What a manager is not">
+          <span class="mono">What a manager is not</span>
+          <div role="listitem"><b>Not the person who does everyone&rsquo;s work</b>When you are tempted to just do it yourself, that is the moment to manage instead.</div>
+          <div role="listitem"><b>Not a friend first</b>Be warm and be fair. The team needs a manager more than it needs another friend.</div>
+          <div role="listitem"><b>Not the police, and not alone</b>Some things are not yours to investigate or decide. Part of the job is knowing what to send on, and to whom.</div>
+        </div>
       </div>
-      <div class="concept" style="margin:0">
-        <span class="c-label">The detail that matters for you</span>
-        <p>Chancellor Diermeier has asked the whole university to work with <b>uncommon speed, agility, and scale</b>. That is not a strategy document; it is how teams are managed, week by week, by you. A team that gets the work done, keeps improving, and is connected to the rest of Vanderbilt is what those words look like up close.</p>
-        <p>So every manager starts here, with the same four jobs and the same words, the survey you took shows where you stand, and the retake in six months shows the change. That way every team gets a good manager, not a lucky one.</p>
+      <div>
+        <div class="module-head"><span class="mno">Sort it &middot; whose job is it now?</span><h3>Six things that happen in a normal month</h3><p>1. Read the situation. 2. Tap whose job it is now: yours, your team member&rsquo;s, or another office. 3. Read the feedback, then Next. All six sorted marks this section done.</p></div>
+        <div class="drill" id="shiftDrill" data-drill="shift"></div>
+        <p class="drill-status" id="shiftStatus" role="status" aria-live="polite">0 of 6 sorted.</p>
       </div>
-    </div>
-    <div class="who" role="list" aria-label="People this course mentions">
-      <span class="mono">People this course mentions</span>
-      <div role="listitem"><b>Your unit leader</b>The leader your team reports up to.</div>
-      <div role="listitem"><b>Your HR partner</b>The HR person assigned to your unit; your first call for anything people-related.</div>
-      <div role="listitem"><b>Your Engagement Consultant</b>Culture, engagement, and manager support for your business unit.</div>
-      <div role="listitem"><b>The leave office and EOA</b>Leave administration handles time off for health and family. Equal Opportunity and Access (EOA) handles discrimination and harassment reports.</div>
-      <div role="listitem"><b>Your dashboard (My Voyage)</b>Your compliance list, the micro modules, and who to call. <a href="../dashboard/">Open it</a>.</div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ 4 THE FRAMEWORK ═══════════════════ -->
-<section id="welcome" class="th-light" aria-label="The four jobs of a manager">
+<!-- ═══════════════════ 4 WHAT A MANAGER IS ═══════════════════ -->
+<section id="basics" class="th-light" aria-label="What a manager is">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 1 &middot; Page 4 of 16</b> The four jobs of a manager <i>&middot; You have the why &middot; Next: module 2, job 1</i></p>
+      <p class="you-are"><b>Module 1 &middot; Page 4 of 18</b> What a manager is <i>&middot; You have what changed &middot; Next: module 2, five ideas</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">What a manager is</span></span>
+      <h2>Responsible for the work, and for the people who <em class="s">do it</em>.</h2>
+    </div>
+    <div class="ask"><p><b>What you will learn</b>A one-sentence definition of a manager, the three questions you answer every week, and who helps you at Vanderbilt.</p><p><b>Why it matters to you</b>You do not have to know everything on day one. You do have to know what the job is and who to call.</p></div>
+    <div class="vc-grid">
+      <div>
+        <div class="cv-wrap" data-cv="basics">
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/basics-poster.jpg" src="../assets/video/foundation/basics.mp4" aria-label="What a manager is. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/basics.vtt" srclang="en" label="English" default /></video>
+          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>What a manager is, in eighty seconds</b><p>The training video is being produced. The definition beside it says the same thing.</p></div>
+        </div>
+        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. What changed, the three things that are new, what a manager is not, and who helps. 80 seconds.</p>
+        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on). 2. Read the definition and the three questions. 3. Find the five people and places on the right; you will meet them all in year one.</p>
+      </div>
+      <div>
+        <div class="concept" style="margin:0 0 14px">
+          <span class="c-label">The definition</span>
+          <p style="font-family:var(--serif);font-size:1.25rem;line-height:1.35">A manager is the person responsible for a team&rsquo;s work, and for the people who do it.</p>
+          <p>Three questions every manager answers every week: <b>Does everyone know what to do this week?</b> <b>Is anyone stuck, struggling, or waiting on me?</b> <b>What is coming that the team should hear from me first?</b></p>
+        </div>
+        <div class="who who-col" role="list" aria-label="People and places this course mentions">
+          <span class="mono">Who helps you at Vanderbilt</span>
+          <div role="listitem"><b>Your unit leader</b>The leader your team reports up to.</div>
+          <div role="listitem"><b>Your HR partner</b>The HR person assigned to your unit; your first call for anything people-related.</div>
+          <div role="listitem"><b>Your Engagement Consultant</b>Culture, engagement, and manager support for your business unit.</div>
+          <div role="listitem"><b>The leave office and EOA</b>Leave administration handles time off for health and family. Equal Opportunity and Access (EOA) handles discrimination and harassment reports.</div>
+          <div role="listitem"><b>Your dashboard (My Voyage)</b>Your compliance list, the micro modules, and who to call. <a href="../dashboard/">Open it</a>.</div>
+        </div>
+      </div>
+    </div>
+    <div class="concept" style="margin:16px 0 0">
+      <span class="c-label">A note from People, Culture and Belonging</span>
+      <p>Most people become managers because they were good at the work. Nobody hands them a description of the new job, so they copy whatever their own managers did. Vanderbilt will not leave what the job means to chance: every manager starts here, with the same plain description, and your unit leader, your HR partner, your Engagement Consultant, and the micro modules all use the same words.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 5 FIVE IDEAS ═══════════════════ -->
+<section id="ideas" class="th-cream" aria-label="Five ideas the best-known voices agree on">
+  <div class="wrap">
+    <div class="sec-head tight reveal">
+      <p class="you-are"><b>Module 2 &middot; Page 5 of 18</b> Five ideas that hold up <i>&middot; You have what a manager is &middot; Next: safe to speak up</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Five ideas</span></span>
+      <h2>Five ideas the best-known voices on management <em class="s">agree</em> on.</h2>
+    </div>
+    <div class="ask"><p><b>What you will learn</b>Five ideas from Stephen Covey, Bren&eacute; Brown, Amy Edmondson, Simon Sinek, and SHRM, each in one line, with one habit you can start this week.</p><p><b>Why it matters to you</b>You do not need a theory of management. You need a few ideas that hold up, and these do: they show up in almost every good manager and almost every management book.</p></div>
+    <p class="how"><b>How this page works</b>1. Flip each card: the front is the idea, the back is what it looks like on a Tuesday and one thing to start this week. 2. Pick the one you will try first. 3. Turn the page to practice the third one, speaking up.</p>
+    <div class="flip-grid five">
+      <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">1</span><h4>Put first things first</h4><span class="def">Decide what matters before the day decides for you.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Stephen Covey &middot; The 7 Habits of Highly Effective People</span><p class="hb yes"><b>On a Tuesday</b>Monday, before email, you name the three things that matter this week. The small stuff fits around them, not the other way round.</p><p class="hb yes"><b>Start this week</b>Write your three big rocks before you open your inbox.</p></span></button></div>
+      <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">2</span><h4>Clear is kind</h4><span class="def">Say the expectation, the deadline, and the feedback plainly and early.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Bren&eacute; Brown &middot; Dare to Lead</span><p class="hb yes"><b>On a Tuesday</b>You say what you expect and what you noticed, in private, without hinting. Unclear feels polite and leaves people guessing.</p><p class="hb yes"><b>Start this week</b>Say one thing you have been hinting at, kindly and clearly.</p></span></button></div>
+      <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">3</span><h4>Safe to speak up</h4><span class="def">People only bring you bad news, questions, and ideas when it is safe to.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Amy Edmondson &middot; psychological safety</span><p class="hb yes"><b>On a Tuesday</b>Someone brings you a problem early. Your reaction in that moment decides whether you hear the next one early, or late.</p><p class="hb yes"><b>Start this week</b>When someone reports a problem, thank them first, then solve it.</p></span></button></div>
+      <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Start with why</h4><span class="def">Explain why before what. Take care of the people and they take care of the work.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Simon Sinek &middot; Start With Why, Leaders Eat Last</span><p class="hb yes"><b>On a Tuesday</b>Before you hand out a task or a change, you say why it matters. When it is tight, the team&rsquo;s needs come before your convenience.</p><p class="hb yes"><b>Start this week</b>Explain the why behind one thing you have been asking for.</p></span></button></div>
+      <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">5</span><h4>The people work is yours</h4><span class="def">Hiring, onboarding, expectations, feedback, leave, hard conversations: HR helps, you do them.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">SHRM &middot; the Society for Human Resource Management</span><p class="hb yes"><b>On a Tuesday</b>You run the 1:1, give the feedback, and start the leave request. Your HR partner shows you how and tells you when a process applies.</p><p class="hb yes"><b>Start this week</b>Find out your HR partner&rsquo;s name and how to reach them.</p></span></button></div>
+    </div>
+    <details class="deeper"><summary><b>Optional &middot; go deeper</b>Stephen Covey: the big rocks, in two minutes<span class="dur">Short video &middot; not needed for completion</span></summary><div class="d-body"><p>The jar, the rocks, and the sand. If the big rocks do not go in first, they do not go in.</p><div class="yt" data-embed="j6m9WnNdpSw" data-title="FranklinCovey: The 7 Habits, Big Rocks"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=j6m9WnNdpSw" target="_blank" rel="noopener">Open it on YouTube</a>. Also: <a href="https://www.youtube.com/watch?v=1Evwgu369Jw" target="_blank" rel="noopener">Bren&eacute; Brown on empathy</a> (3 min).</p></div></details>
+  </div>
+</section>
+
+<!-- ═══════════════════ 6 SAFE TO SPEAK UP ═══════════════════ -->
+<section id="safe" class="th-light" aria-label="Safe to speak up">
+  <div class="wrap">
+    <div class="sec-head tight reveal">
+      <p class="you-are"><b>Module 2 &middot; Page 6 of 18</b> Safe to speak up <i>&middot; You have the five ideas &middot; Next: module 3, what Vanderbilt will ask</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Safe to speak up</span></span>
+      <h2>Three moments that build trust or <em class="s">break</em> it.</h2>
+    </div>
+    <div class="ask"><p><b>What you will learn</b>What psychological safety means in plain words: people will tell you the truth, ask, and try things only if it is safe to. And the three moments that decide it: bad news, a question, a mistake.</p><p><b>Why it matters to you</b>If people do not feel safe telling you things, you find out late, and late is expensive. Amy Edmondson&rsquo;s research is clear: teams that speak up catch problems earlier and learn faster.</p></div>
+    <div class="split2">
+      <div>
+        <div class="module-head"><span class="mno">Your call &middot; three moments</span><h3>What would you actually say?</h3><p>1. Read the moment. 2. Tap the response you would give. 3. Read what happens next. Find the response that keeps people talking in all three; that marks this section done.</p></div>
+        <div class="calls" id="safeCalls" data-calls="safe"></div>
+        <p class="drill-status" id="safeStatus" role="status" aria-live="polite">0 of 3 moments.</p>
+      </div>
+      <div>
+        <div class="week"><b>The rule, in one line</b>Thank first. Solve second. Learn the cause later. Never in front of the team.</div>
+        <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Amy Edmondson: building a psychologically safe workplace<span class="dur">11 min &middot; not needed for completion</span></summary><div class="d-body"><p>The researcher behind the idea, in her own words: why the best teams report more mistakes, not fewer.</p><div class="yt" data-embed="LhoLuui9gX8" data-title="Amy Edmondson: Building a psychologically safe workplace"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>. Also: <a href="https://www.youtube.com/watch?v=lmyZMtPVodo" target="_blank" rel="noopener">Simon Sinek, Why good leaders make you feel safe</a> (12 min).</p></div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 7 WHAT VANDERBILT WILL ASK ═══════════════════ -->
+<section id="year" class="th-cream" aria-label="What Vanderbilt will ask you to do">
+  <div class="wrap">
+    <div class="sec-head tight reveal">
+      <p class="you-are"><b>Module 3 &middot; Page 7 of 18</b> What Vanderbilt will ask you to do <i>&middot; You have the ideas &middot; Next: your first calls</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your first year</span></span>
+      <h2>What Vanderbilt will ask you to do, and <em class="s">when</em>.</h2>
+    </div>
+    <div class="ask"><p><b>What you will learn</b>The manager tasks Vanderbilt will ask of you this year, when each one shows up, and which micro module teaches it step by step.</p><p><b>Why it matters to you</b>Nothing on this list should surprise you when it lands. Each task has a short how-to (a micro module) on your dashboard; this page is the map.</p></div>
+    <p class="how"><b>How this page works</b>1. Tap each of the four groups to open it. 2. Read what is inside and note the micro module named in brackets. 3. All four open, then turn the page to make your first calls.</p>
+    <div class="fw two" id="yearMap" data-map="year">
+      <button type="button" class="fw-card" aria-expanded="false"><b>Every week</b><strong>Run the team.</strong><p>1:1s, checking work, approvals, questions.</p><ul><li>Run a short 1:1 with each person <i>(Running 1:1s)</i></li><li>Look at work before it is due, not after <i>(Setting Expectations and Goals)</i></li><li>Approve timecards and time off in Oracle <i>(Time and Attendance Approvals)</i></li><li>Answer the team&rsquo;s questions, or find who can <i>(Oracle HCM for Managers)</i></li></ul><span class="hint">Tap to open</span></button>
+      <button type="button" class="fw-card" aria-expanded="false"><b>Every month or quarter</b><strong>Keep it on track.</strong><p>Expenses, goals, feedback, thanks.</p><ul><li>Approve expenses and purchases <i>(Expense and Procurement Approvals)</i></li><li>Set and check goals in Culture Amp <i>(Culture Amp)</i></li><li>Give feedback while it is still useful <i>(Giving Feedback)</i></li><li>Thank people for specific work <i>(Giving Feedback)</i></li></ul><span class="hint">Tap to open</span></button>
+      <button type="button" class="fw-card" aria-expanded="false"><b>A few times a year</b><strong>The cycles.</strong><p>Reviews, pay, hiring, onboarding.</p><ul><li>Performance reviews <i>(Culture Amp)</i></li><li>The compensation cycle and merit <i>(Compensation Cycle and Merit Basics)</i></li><li>Hiring when a seat opens <i>(Requisitions and Hiring)</i></li><li>Onboarding a new hire <i>(Onboarding a New Hire)</i></li><li>Someone leaving <i>(Offboarding and Transitions)</i></li></ul><span class="hint">Tap to open</span></button>
+      <button type="button" class="fw-card" aria-expanded="false"><b>When it happens</b><strong>Know the process, move the same day.</strong><p>Leave, flexible work, concerns, reports.</p><ul><li>A leave request, including FMLA <i>(FMLA and Leave)</i></li><li>A flexible work request <i>(Flexible Work Arrangements)</i></li><li>An accommodation request <i>(Reasonable Accommodations)</i></li><li>A concern about a coworker or a manager <i>(Employee Relations Grounding)</i></li><li>A performance concern <i>(Performance Concerns and Progressive Discipline)</i></li><li>Something you must report: discrimination, harassment, Title IX <i>(EOA and Reporting Obligations)</i></li></ul><span class="hint">Tap to open</span></button>
+    </div>
+    <p class="fw-status" id="yearStatus" role="status" aria-live="polite">0 of 4 groups opened.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ 8 YOUR FIRST CALLS ═══════════════════ -->
+<section id="calls" class="th-light" aria-label="Your first calls">
+  <div class="wrap">
+    <div class="sec-head tight reveal">
+      <p class="you-are"><b>Module 3 &middot; Page 8 of 18</b> Your first calls <i>&middot; You have the year ahead &middot; Next: module 4, the four jobs</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your first calls</span></span>
+      <h2>Handle it, ask HR, route it, or <em class="s">report</em> it.</h2>
+    </div>
+    <div class="ask"><p><b>What you will learn</b>The one question behind most manager moments: do I handle this myself, ask my HR partner first, send it to the leave office, or report it to EOA?</p><p><b>Why it matters to you</b>Most new-manager mistakes are not bad judgment. They are handling alone something that had a process, or sitting on something that needed to move the same day.</p></div>
+    <div class="recap-row" role="list" aria-label="The four answers">
+      <div role="listitem"><b>Handle it</b><strong>A normal manager task.</strong><p>Time off, a timecard question, a 1:1, expectations, feedback, a thank-you.</p></div>
+      <div role="listitem"><b>Ask my HR partner first</b><strong>There is a process.</strong><p>Pay, hiring, a performance concern, discipline, and anything you are unsure of.</p></div>
+      <div role="listitem"><b>The leave office, the same day</b><strong>Health or family time off.</strong><p>Anything that sounds like leave. You never ask for a diagnosis.</p></div>
+      <div role="listitem"><b>EOA, the same day</b><strong>Discrimination, harassment, misconduct.</strong><p>You report it; you do not investigate it.</p></div>
+    </div>
+    <div class="module-head" style="margin-top:16px"><span class="mno">Decide &middot; five situations</span><h3>What do you do first?</h3><p>1. Read the situation. 2. Tap the first thing you do. 3. Read the feedback, then Next. All five decided marks this section done.</p></div>
+    <div class="drill" id="callsDrill" data-drill="calls"></div>
+    <p class="drill-status" id="callsStatus" role="status" aria-live="polite">0 of 5 decided.</p>
+  </div>
+</section>
+
+<section id="welcome" class="th-cream" aria-label="The four jobs of a manager">
+  <div class="wrap">
+    <div class="sec-head tight reveal">
+      <p class="you-are"><b>Module 4 &middot; Page 9 of 18</b> The four jobs of a manager <i>&middot; You have what Vanderbilt will ask &middot; Next: job 1, get the work done</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The four jobs</span></span>
-      <h2>Being a manager is four <em class="s">jobs</em>.</h2>
+      <h2>A simple way to keep the whole job in view: four <em class="s">jobs</em>.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>The four jobs every manager does, and the fifteen habits inside them. This is the map for the whole course.</p><p><b>What Vanderbilt asks you to do</b>Do all four jobs, every week, and notice which one this week needs. Watch the video, then tap each card.</p></div>
+    <div class="ask"><p><b>What you will learn</b>You now know what a manager is and what Vanderbilt will ask of you. This module gives you one simple picture to hold it all: four jobs, and the everyday habits inside each. Nothing new to memorize; it is the same work, sorted.</p><p><b>What Vanderbilt asks you to do</b>Do all four jobs every week, and notice which one this week needs most. Watch the video, then tap each card to see the habits inside.</p></div>
     <div class="yukl"><b>Where this comes from</b><span>Research by Gary Yukl (<a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener">2012</a>): four kinds of manager behavior, fifteen habits</span><span>Vanderbilt uses it as a guide, in plain words</span><span>The survey you took before this course asks about the same fifteen habits</span></div>
     <div class="vc-grid">
       <div>
@@ -527,7 +666,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>The four jobs, in ninety seconds</b><p>The training video is being produced. The cards beside it teach the same jobs.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. The four jobs, the habits inside each, and why it matters. 90 seconds.</p>
-        <p class="how"><b>How this page works</b>1. Watch the video (about 90 seconds, captions on). 2. Tap each of the four jobs to see the habits inside it. 3. All four open marks this section done.</p>
+        <p class="how"><b>How this page works</b>1. Watch the video (about 90 seconds, captions on). 2. Tap each of the four jobs to see the habits inside it. 3. All four open marks this section done. The next four pages take one job each.</p>
       </div>
       <div class="fw two" id="fwMap">
       <button type="button" class="fw-card" aria-expanded="false"><b>Job 1</b><strong>Get the work done.</strong><p>Is the work getting done, and done well?</p><ul><li>Plan it <i>(planning)</i></li><li>Say it <i>(clarifying)</i></li><li>Check it <i>(monitoring)</i></li><li>Fix it <i>(problem solving)</i></li></ul><span class="hint">Tap to open</span></button>
@@ -540,11 +679,10 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<!-- ═══════════════════ 5-6 TASK ═══════════════════ -->
-<section id="task" class="th-cream" aria-label="Job 1: get the work done">
+<section id="task" class="th-light" aria-label="Job 1: get the work done">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 2 &middot; Page 5 of 16</b> Job 1, get the work done, page 1 of 2 <i>&middot; You have the four jobs &middot; Next: your first call</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 10 of 18</b> Job 1, get the work done <i>&middot; You have the four jobs &middot; Next: job 2, your people</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Job 1: get the work done</span></span>
       <h2>Get the work <em class="s">done</em>.</h2>
     </div>
@@ -556,7 +694,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Job 1, in eighty seconds</b><p>The training video is being produced. The cards beside it teach the same habits.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, the four habits on a Tuesday, what to stop, and one thing to do this week. 80 seconds.</p>
-        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on): why this job matters and each habit on a normal Tuesday. 2. Flip each card: the back shows what to stop doing and what to do instead. 3. Turn the page to practice.</p>
+        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on): why this job matters and each habit on a normal Tuesday. 2. Flip each card: the back shows what to stop doing and what to do instead. 3. Turn the page for the next job; you make your call on all four after job 4.</p>
         <p class="week"><b>Do this week</b>Pick one person and confirm, out loud, what they own and by when.</p>
       </div>
       <div class="flip-grid two">
@@ -567,32 +705,13 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </div>
     </div>
     <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this task-oriented behavior: planning, clarifying, monitoring, problem solving</span><span>The survey asks about these four habits</span><span>Micro modules that build them: Setting Expectations and Goals, Running 1:1s, Time and Attendance Approvals</span></div>
-    <div class="module reveal" data-pg="Your call">
-      <p class="you-are"><b>Module 2 &middot; Page 6 of 16</b> Job 1, get the work done, page 2 of 2: practice <i>&middot; Next: job 2, take care of your people</i></p>
-      <p class="how"><b>How this page works</b>Two short practices on the habits you just learned. First, try it: one real situation, your call. Then the quick check: which habit is it? Three named finishes this module.</p>
-      <div class="split2">
-      <div>
-      <div class="module-head"><span class="mno">Try it &middot; your call</span><h3>One Wednesday, three responses</h3><p>1. Read the situation. 2. Tap the response you would actually give. 3. Read what happens next and which habit it was.</p></div>
-      <div class="scn" data-scn="task" id="taskScn"></div>
-      </div>
-      <div>
-      <div class="module-head"><span class="mno">Quick check &middot; which habit is it?</span><h3>Three things a manager did this week</h3><p>1. Read what the manager did. 2. Tap the habit it is. 3. Read the feedback, then Next. Three named marks this module done.</p></div>
-      <div class="drill" id="taskDrill" data-drill="task"></div>
-      <p class="drill-status" id="taskStatus" role="status" aria-live="polite">0 of 3 named.</p>
-      </div>
-      </div>
-      <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Project Oxygen: Google found the same habits in its best managers<span class="dur">Short video &middot; not needed for completion</span></summary><div class="d-body"><p>Notice how many of the behaviors Google found are task-oriented: clear goals, results, and removing what is in the way.</p><div class="yt" data-embed="ICnUGpjgbI0" data-title="Top 10 behaviors of a great manager, according to Google&rsquo;s Project Oxygen"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=ICnUGpjgbI0" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div></details>
-      <div class="md-wrap" style="margin-top:12px">
-<button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="task" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    </div>
   </div>
 </section>
 
-<!-- ═══════════════════ 7-8 RELATIONS ═══════════════════ -->
-<section id="relations" class="th-light" aria-label="Job 2: take care of your people">
+<section id="relations" class="th-cream" aria-label="Job 2: take care of your people">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 3 &middot; Page 7 of 16</b> Job 2, take care of your people, page 1 of 2 <i>&middot; You have job 1 &middot; Next: half personal, half a leave request</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 11 of 18</b> Job 2, take care of your people <i>&middot; You have job 1 &middot; Next: job 3, make things better</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Job 2: take care of your people</span></span>
       <h2>Take care of your <em class="s">people</em>.</h2>
     </div>
@@ -604,7 +723,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Job 2, in eighty seconds</b><p>The training video is being produced. The cards beside it teach the same habits.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, the four habits on a Tuesday, where the line is, and one thing to do this week. 80 seconds.</p>
-        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on): why this job matters and each habit on a normal Tuesday. 2. Flip each card: the back shows what to stop doing and what to do instead. 3. Turn the page to practice.</p>
+        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on): why this job matters and each habit on a normal Tuesday. 2. Flip each card: the back shows what to stop doing and what to do instead. 3. Turn the page for the next job; you make your call on all four after job 4.</p>
         <p class="week"><b>Do this week</b>Thank one person for one specific thing.</p>
       </div>
       <div class="flip-grid two">
@@ -615,32 +734,13 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </div>
     </div>
     <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this relations-oriented behavior: supporting, developing, recognizing, empowering</span><span>The survey asks about these four habits</span><span>Micro modules that build them: Giving Feedback, FMLA and Leave, Flexible Work Arrangements</span></div>
-    <div class="module reveal" data-pg="Your call">
-      <p class="you-are"><b>Module 3 &middot; Page 8 of 16</b> Job 2, take care of your people, page 2 of 2: practice <i>&middot; Next: job 3, make things better</i></p>
-      <p class="how"><b>How this page works</b>Two short practices on the habits you just learned. First, try it: one real situation, your call. Then the quick check: which habit is it? Three named finishes this module.</p>
-      <div class="split2">
-      <div>
-      <div class="module-head"><span class="mno">Try it &middot; your call</span><h3>Half personal, half a leave request</h3><p>1. Read the situation. 2. Tap the response you would actually give. 3. Read what happens next and which habit it was.</p></div>
-      <div class="scn" data-scn="relations" id="relationsScn"></div>
-      </div>
-      <div>
-      <div class="module-head"><span class="mno">Quick check &middot; which habit is it?</span><h3>Three situations, one of them a duty to route</h3><p>1. Read what the manager did. 2. Tap the habit it is. 3. Read the feedback, then Next. Three named marks this module done.</p></div>
-      <div class="drill" id="relationsDrill" data-drill="relations"></div>
-      <p class="drill-status" id="relationsStatus" role="status" aria-live="polite">0 of 3 named.</p>
-      </div>
-      </div>
-      <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Simon Sinek: taking care of your people, in one story<span class="dur">12 min &middot; not needed for completion</span></summary><div class="d-body"><p>The circle of safety: the manager who takes care of the people gets a team that takes care of the work. That is supporting, in one story.</p><div class="yt" data-embed="lmyZMtPVodo" data-title="Simon Sinek: Why good leaders make you feel safe"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=lmyZMtPVodo" target="_blank" rel="noopener">Open it on YouTube</a>. Also: <a href="https://www.youtube.com/watch?v=0jgbWPX56js" target="_blank" rel="noopener">Renninger, The secret to giving great feedback</a> (7 min) and <a href="https://www.youtube.com/watch?v=u6XAPnuFjJc" target="_blank" rel="noopener">Pink, Drive</a> (11 min).</p></div></details>
-      <div class="md-wrap" style="margin-top:12px">
-<button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="relations" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    </div>
   </div>
 </section>
 
-<!-- ═══════════════════ 9-10 CHANGE ═══════════════════ -->
 <section id="change" class="th-dark" aria-label="Job 3: make things better">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 4 &middot; Page 9 of 16</b> Job 3, make things better, page 1 of 2 <i>&middot; You have jobs 1 and 2 &middot; Next: a new system is coming</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 12 of 18</b> Job 3, make things better <i>&middot; You have jobs 1 and 2 &middot; Next: job 4, connect your team</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Job 3: make things better</span></span>
       <h2>Make things <em class="s">better</em>.</h2>
     </div>
@@ -652,7 +752,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Job 3, in eighty seconds</b><p>The training video is being produced. The cards beside it teach the same habits.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, the four habits on a Tuesday, what to stop, and one thing to do this week. 80 seconds.</p>
-        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on): why this job matters and each habit on a normal Tuesday. 2. Flip each card: the back shows what to stop doing and what to do instead. 3. Turn the page to practice.</p>
+        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on): why this job matters and each habit on a normal Tuesday. 2. Flip each card: the back shows what to stop doing and what to do instead. 3. Turn the page for the next job; you make your call on all four after job 4.</p>
         <p class="week"><b>Do this week</b>Hold one ten-minute look-back.</p>
       </div>
       <div class="flip-grid two">
@@ -663,32 +763,13 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </div>
     </div>
     <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this change-oriented behavior: advocating, envisioning, encouraging innovation, collective learning</span><span>The survey asks about these four habits</span><span>Micro modules that build them: The Mission and the Vision, Areas of Focus</span></div>
-    <div class="module reveal" data-pg="Your call">
-      <p class="you-are"><b>Module 4 &middot; Page 10 of 16</b> Job 3, make things better, page 2 of 2: practice <i>&middot; Next: job 4, connect your team</i></p>
-      <p class="how"><b>How this page works</b>Two short practices on the habits you just learned. First, try it: one real situation, your call. Then the quick check: which habit is it? Three named finishes this module.</p>
-      <div class="split2">
-      <div>
-      <div class="module-head"><span class="mno">Try it &middot; your call</span><h3>A new system is coming, and the team already hates it</h3><p>1. Read the situation. 2. Tap the response you would actually give. 3. Read what happens next and which habit it was.</p></div>
-      <div class="scn" data-scn="change" id="changeScn"></div>
-      </div>
-      <div>
-      <div class="module-head"><span class="mno">Quick check &middot; which habit is it?</span><h3>Three situations, one from a different job</h3><p>1. Read what the manager did. 2. Tap the habit it is. 3. Read the feedback, then Next. Three named marks this module done.</p></div>
-      <div class="drill" id="changeDrill" data-drill="change"></div>
-      <p class="drill-status" id="changeStatus" role="status" aria-live="polite">0 of 3 named.</p>
-      </div>
-      </div>
-      <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Amy Edmondson: why people only try new ideas when it is safe to<span class="dur">11 min &middot; not needed for completion</span></summary><div class="d-body"><p>The condition every change behavior depends on: people only try the new idea, or tell the debrief truth, when it is safe to.</p><div class="yt" data-embed="LhoLuui9gX8" data-title="Amy Edmondson: Building a psychologically safe workplace"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div></details>
-      <div class="md-wrap" style="margin-top:12px">
-<button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="change" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
-    </div>
   </div>
 </section>
 
-<!-- ═══════════════════ 11-12 EXTERNAL ═══════════════════ -->
 <section id="external" class="th-cream" aria-label="Job 4: connect your team">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 5 &middot; Page 11 of 16</b> Job 4, connect your team, page 1 of 2 <i>&middot; Three jobs down &middot; Next: a request that would break your month</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 13 of 18</b> Job 4, connect your team <i>&middot; You have jobs 1 to 3 &middot; Next: your call, four situations</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Job 4: connect your team</span></span>
       <h2>Connect your team to the rest of <em class="s">Vanderbilt</em>.</h2>
     </div>
@@ -700,7 +781,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Job 4, in eighty seconds</b><p>The training video is being produced. The cards beside it teach the same habits.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, the three habits on a Tuesday, what to stop, and one thing to do this week. 80 seconds.</p>
-        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on): why this job matters and each habit on a normal Tuesday. 2. Flip each card: the back shows what to stop doing and what to do instead. 3. Turn the page to practice.</p>
+        <p class="how"><b>How this page works</b>1. Watch the video (about 80 seconds, captions on): why this job matters and each habit on a normal Tuesday. 2. Flip each card: the back shows what to stop doing and what to do instead. 3. Turn the page for the next job; you make your call on all four after job 4.</p>
         <p class="week"><b>Do this week</b>Have coffee with one person your team depends on.</p>
       </div>
       <div class="flip-grid two">
@@ -710,32 +791,37 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       </div>
     </div>
     <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this external behavior: networking, external monitoring, representing</span><span>The survey asks about these three habits</span><span>Micro modules that build them: How We Work Together, Requisitions and Hiring, Compensation Cycle and Merit Basics</span></div>
-    <div class="module reveal" data-pg="Your call">
-      <p class="you-are"><b>Module 5 &middot; Page 12 of 16</b> Job 4, connect your team, page 2 of 2: practice <i>&middot; Next: the survey and where you stand</i></p>
-      <p class="how"><b>How this page works</b>Two short practices on the habits you just learned. First, try it: one real situation, your call. Then the quick check: which habit is it? Three named finishes this module.</p>
-      <div class="split2">
+  </div>
+</section>
+
+<!-- ═══════════════════ 14 YOUR CALL: FOUR SITUATIONS ═══════════════════ -->
+<section id="yourcall" class="th-light" aria-label="Your call: four situations">
+  <div class="wrap">
+    <div class="sec-head tight reveal">
+      <p class="you-are"><b>Module 4 &middot; Page 14 of 18</b> Your call: four situations <i>&middot; You have all four jobs &middot; Next: module 5, the survey</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your call</span></span>
+      <h2>Four situations, one for each <em class="s">job</em>.</h2>
+    </div>
+    <div class="ask"><p><b>What you will learn</b>What each job looks like when it is your call: a report due Friday, a team member with a sick parent, a change the team already hates, a request that would break your month.</p><p><b>Why it matters to you</b>The consequences teach more than the right answer does. In each situation, try all three responses and read what follows.</p></div>
+    <div class="split2">
       <div>
-      <div class="module-head"><span class="mno">Try it &middot; your call</span><h3>Another office&rsquo;s request would break your month</h3><p>1. Read the situation. 2. Tap the response you would actually give. 3. Read what happens next and which habit it was.</p></div>
-      <div class="scn" data-scn="external" id="externalScn"></div>
+        <div class="module-head"><span class="mno">Your call &middot; four situations</span><h3>What would you actually do?</h3><p>1. Read the situation. 2. Tap the response you would give. 3. Read what happens, try the others, then Next. Finding the Vanderbilt way in all four marks this section done.</p></div>
+        <div class="calls" id="jobsCalls" data-calls="jobs"></div>
+        <p class="drill-status" id="jobsStatus" role="status" aria-live="polite">0 of 4 situations.</p>
       </div>
       <div>
-      <div class="module-head"><span class="mno">Quick check &middot; which habit is it?</span><h3>Three situations, and can you tell the four jobs apart</h3><p>1. Read what the manager did. 2. Tap the habit it is. 3. Read the feedback, then Next. Three named marks this module done.</p></div>
-      <div class="drill" id="externalDrill" data-drill="external"></div>
-      <p class="drill-status" id="externalStatus" role="status" aria-live="polite">0 of 3 named.</p>
+        <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Project Oxygen: Google found the same habits in its best managers<span class="dur">Short video &middot; not needed for completion</span></summary><div class="d-body"><p>Notice how many of the behaviors are job 1 and job 2: clear goals, results, and taking care of the people.</p><div class="yt" data-embed="ICnUGpjgbI0" data-title="Top 10 behaviors of a great manager, according to Google&rsquo;s Project Oxygen"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=ICnUGpjgbI0" target="_blank" rel="noopener">Open it on YouTube</a>. Also: <a href="https://www.youtube.com/watch?v=qLFAHMHWtIA" target="_blank" rel="noopener">Harvard ManageMentor, Managing your boss</a>, <a href="https://www.youtube.com/watch?v=0jgbWPX56js" target="_blank" rel="noopener">Renninger, The secret to giving great feedback</a> (7 min), and <a href="https://www.youtube.com/watch?v=u6XAPnuFjJc" target="_blank" rel="noopener">Pink, Drive</a> (11 min).</p></div></details>
       </div>
-      </div>
-      <details class="deeper" open><summary><b>Optional &middot; go deeper</b>Harvard: speaking up, pointed upward (managing your boss)<span class="dur">Short video &middot; not needed for completion</span></summary><div class="d-body"><p>External behavior pointed upward. Your unit leader is the first person your team needs you connected to.</p><div class="yt" data-embed="qLFAHMHWtIA" data-title="Harvard ManageMentor: Managing your boss (introduction)"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=qLFAHMHWtIA" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div></details>
-      <div class="md-wrap" style="margin-top:12px">
-<button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="external" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button></div>
     </div>
   </div>
 </section>
+
 
 <!-- ═══════════════════ 13 THE SURVEY AND YOUR PROFILE ═══════════════════ -->
 <section id="survey" class="th-light" aria-label="The survey and your profile">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 6 &middot; Page 13 of 16</b> The survey, and where you stand <i>&middot; You have all four jobs &middot; Next: a quick check</i></p>
+      <p class="you-are"><b>Module 5 &middot; Page 15 of 18</b> The survey, and where you stand <i>&middot; You have made your calls &middot; Next: a quick check</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The survey</span></span>
       <h2>Where you <em class="s">stand</em>.</h2>
     </div>
@@ -776,10 +862,10 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="quiz" class="th-cream" aria-label="Knowledge check">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Page 14 of 16</b> A quick check <i>&middot; Five questions, one at a time &middot; Next: your seven days</i></p>
+      <p class="you-are"><b>Page 16 of 18</b> A quick check <i>&middot; Five questions, one at a time &middot; Next: your seven days</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Quick check</span></span>
       <h2>A quick <em class="s">check</em>.</h2>
-      <p>Four of five finishes the course. Each question points back to one module, so a miss tells you where to look. Retake anytime.</p>
+      <p>Four of five finishes the course. Each question points back to one page, so a miss tells you where to look. Retake anytime.</p>
     </div>
     <div id="quizBox"></div>
     <p class="drill-status" id="quizStatus" role="status" aria-live="polite">0 of 5 answered.</p>
@@ -791,7 +877,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="nextstep" class="th-light" aria-label="What you now know and your next step">
   <div class="wrap">
     <div class="sec-head tight reveal" style="margin-bottom:0">
-      <p class="you-are"><b>Page 15 of 16</b> What you now know, and your next seven days <i>&middot; Next: wrap-up</i></p>
+      <p class="you-are"><b>Page 17 of 18</b> What you now know, and your next seven days <i>&middot; Next: wrap-up</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Next step</span></span>
       <h2>What you now know, and your next seven <em class="s">days.</em></h2>
     </div>
@@ -821,7 +907,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <!-- ═══════════════════ 16 WRAP-UP ═══════════════════ -->
 <section class="cta th-dark" aria-label="Closing">
   <div class="wrap">
-    <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Page 16 of 16 &middot; Wrap-up</span></span>
+    <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Page 18 of 18 &middot; Wrap-up</span></span>
     <h2 class="metal">Now manage it the <em>same</em> way.</h2>
     <p>Four jobs, one habit to try this week, and a dashboard that now knows where to start you. The micro modules are open; take the first one today. When the survey comes back around in six months, answer it honestly and see what changed. From first day to fully formed leader starts now.</p>
     <a class="btn btn-gold" href="../dashboard/">Open My Voyage<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -835,7 +921,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   <div class="wrap">
     <div class="fcenter">
       <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: What Vanderbilt Expects of a Manager</p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now</p>
       <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The four jobs are based on Yukl (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. <a href="../">About the program</a> &middot; <a href="../dashboard/">My Voyage dashboard</a></p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>

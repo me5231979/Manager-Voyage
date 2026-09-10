@@ -218,11 +218,11 @@ $$('.yt[data-embed]').forEach(function(box){
 
 /* ══════════ PROGRESS ══════════ */
 var SECTIONS = [
-  { k:'welcome',   no:'01', name:'The four jobs',                how:'Open all four jobs, or mark it done' },
-  { k:'task',      no:'02', name:'Job 1: get the work done',     how:'Answer the three quick questions, or mark it done' },
-  { k:'relations', no:'03', name:'Job 2: take care of your people', how:'Answer the three quick questions, or mark it done' },
-  { k:'change',    no:'04', name:'Job 3: make things better',     how:'Answer the three quick questions, or mark it done' },
-  { k:'external',  no:'05', name:'Job 4: connect your team',      how:'Answer the three quick questions, or mark it done' },
+  { k:'shift',     no:'01', name:'What changed',                 how:'Sort the six situations' },
+  { k:'safe',      no:'02', name:'Safe to speak up',             how:'Find the response that keeps people talking, three times' },
+  { k:'calls',     no:'03', name:'Your first calls',             how:'Decide the five situations' },
+  { k:'welcome',   no:'04', name:'The four jobs',                how:'Open all four jobs' },
+  { k:'yourcall',  no:'05', name:'Your call: four situations',   how:'Find the Vanderbilt way in all four' },
   { k:'survey',    no:'06', name:'The survey and where you stand', how:'Rate yourself and see where you stand' },
   { k:'quiz',      no:'07', name:'A quick check',                how:'Score four or more of five' },
   { k:'nextstep',  no:'08', name:'Your next step',               how:'Mark it done once planned' }
@@ -368,19 +368,35 @@ if(window.MVScorm && MVScorm.connected) scormAdopt();
 
 /* ══════════ flip cards, the framework map, fact or fiction ══════════ */
 $$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){ var f = btn.classList.toggle('flipped'); btn.setAttribute('aria-expanded', f ? 'true' : 'false'); }); });
-(function(){
-  var map = $('#fwMap'), status = $('#fwStatus'); if(!map) return;
+[{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', done:' Section complete. The next four pages take one job each.' },
+ { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:null, done:' All four open. Turn the page to make your first calls.' }].forEach(function(cfg){
+  var map = $(cfg.map), status = $(cfg.status); if(!map) return;
   var cards = $$('.fw-card', map), seen = {};
   cards.forEach(function(c, i){
     c.addEventListener('click', function(){
       var open = c.getAttribute('aria-expanded') !== 'true';
       c.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if(open){ seen[i] = 1; var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 4 jobs opened.' + (n === 4 ? ' Section complete. The next four modules take one job each.' : ''); if(n === 4) progDone('welcome'); }
+      if(open){ seen[i] = 1; var n = Object.keys(seen).length; if(status) status.textContent = n + ' of ' + cards.length + ' ' + cfg.noun + ' opened.' + (n === cards.length ? cfg.done : ''); if(n === cards.length && cfg.prog) progDone(cfg.prog); }
     });
   });
-})();
+});
 /* ══════════ your call: one scenario, three responses, consequences ══════════ */
 var SCENARIOS = {
+  safe1: { h:'Moment 1 · Bad news', s:'Jordan tells you on Tuesday that the vendor missed its deadline and the launch will slip a week. She looks braced for your reaction.', opts:[
+    { t:'“Why am I only hearing about this now?”', b:'The reaction that ends early warnings', best:false, out:'A fair question and the wrong first sentence. Jordan learns that bad news gets a bad reaction. Next time you hear it later, or from someone else.' },
+    { t:'“Thank you for telling me today. What do we know, and what do you need from me?”', b:'Safe to speak up', best:true, out:'Jordan relaxes and gives you the full picture, and the meeting goes to the fix. Thank first, solve second, learn the cause later. She will bring you the next one earlier.' },
+    { t:'“Okay. Let me handle it from here.”', b:'Kind, and it takes the work away', best:false, out:'It sounds supportive, and it tells Jordan she cannot be trusted with the recovery. Ask what she needs and let her run it with your help.' }
+  ]},
+  safe2: { h:'Moment 2 · A question', s:'In the team meeting, your newest hire asks what sounds like a basic question about the intake process, in front of everyone.', opts:[
+    { t:'“We covered that in onboarding. Check the document.”', b:'The last question they ask in public', best:false, out:'Accurate, and now the whole team knows what a question costs. The next gap stays hidden until it becomes a mistake.' },
+    { t:'Answer it, then, with a smile, “Anyone else unclear on that one?”', b:'The laugh costs you the next question', best:false, out:'The answer was fine. The joke, however small, tells the room that questions are a little embarrassing. People stop asking, and you stop knowing.' },
+    { t:'“Good question. Here is the short version, and let us make sure it is in the document.”', b:'Safe to ask', best:true, out:'The new hire got the answer, the room learned that asking is normal, and the document gets better. That is thirty seconds well spent.' }
+  ]},
+  safe3: { h:'Moment 3 · A mistake', s:'You discover that a team member sent the wrong file to another department. Nobody outside has noticed yet.', opts:[
+    { t:'Fix it quietly yourself and say nothing.', b:'Nobody learns, and now you own it', best:false, out:'The problem goes away and the cause does not. They never learn what happened, you have taken on their work, and it will happen again.' },
+    { t:'“Walk me through what happened. Let us fix it together, then figure out what would have caught it.”', b:'Safe to make a mistake once', best:true, out:'The file is corrected within the hour, the person keeps their dignity, and the check that would have caught it goes into the process. Mistakes reported early are cheap; hidden ones are not.' },
+    { t:'Raise it in the team meeting as an example of what not to do.', b:'Public blame', best:false, out:'The team learns exactly one thing: never let the manager find out. The next mistake gets hidden.' }
+  ]},
   task: { s:'It is Wednesday. The monthly report your team owns is due Friday. Priya, who builds it, has not mentioned it in two weeks, and you have not asked. A director just emailed you asking whether it will be on time.', opts:[
     { t:'Reply “yes” to the director, then build the report yourself Thursday night to be sure.', b:'Doing the work instead of managing it', best:false, out:'The report ships. You are now the person who builds it, Priya does not know she was doubted, and next month you are in the same spot. Doing the work is not the job; checking it is.' },
     { t:'Reply “I will confirm today,” then ask Priya in a fifteen-minute check-in where the report stands and what she needs.', b:'Check it, then say it', best:true, out:'Priya is two-thirds done and waiting on a Finance extract nobody chased. You chase it, confirm Friday with the director, and put the monthly check-in on the calendar for the second week of every month so you never learn this on a Wednesday again.' },
@@ -417,14 +433,58 @@ function buildScenario(el){
     if(o.best) b.classList.add('best-pick');
     var n = Object.keys(tried).length;
     out.innerHTML = '<span class="vtag' + (o.best ? ' best' : '') + '">' + (o.best ? 'The Vanderbilt way: ' : 'Consider: ') + esc(o.b) + '</span><p>' + esc(o.out) + '</p>' +
-      (n < sc.opts.length ? '<p class="scn-again hinttxt">' + (o.best ? 'See what the other responses would have cost. ' : 'Now pick the response a Vanderbilt manager would give. ') + n + ' of ' + sc.opts.length + ' tried.</p>' : '<p class="scn-again hinttxt">All three tried. Turn the page to name the behaviors.</p>');
+      (n < sc.opts.length ? '<p class="scn-again hinttxt">' + (o.best ? 'See what the other responses would have cost. ' : 'Now pick the response a Vanderbilt manager would give. ') + n + ' of ' + sc.opts.length + ' tried.</p>' : '<p class="scn-again hinttxt">All three tried.</p>');
     out.classList.add('show');
   });
 }
 $$('[data-scn]').forEach(buildScenario);
+/* a stepper of scenarios, one at a time; done when the best response is found in each */
+var CALL_SETS = { safe:['safe1','safe2','safe3'], jobs:['task','relations','change','external'] };
+var CALL_HEADS = { task:'Job 1 · Get the work done', relations:'Job 2 · Take care of your people', change:'Job 3 · Make things better', external:'Job 4 · Connect your team' };
+var CALL_PROG = { safe:{ prog:'safe', noun:'moments', status:'#safeStatus' }, jobs:{ prog:'yourcall', noun:'situations', status:'#jobsStatus' } };
+function buildCalls(el){
+  var name = el.getAttribute('data-calls'), keys = CALL_SETS[name]; if(!keys) return;
+  var cfg = CALL_PROG[name], status = $(cfg.status), found = {}, cur = 0;
+  el.innerHTML = keys.map(function(k, i){
+    var sc = SCENARIOS[k];
+    return '<div class="cq' + (i === 0 ? ' cur' : '') + '" data-k="' + k + '"><p class="cq-h">' + (i + 1) + ' of ' + keys.length + ' &middot; ' + esc(sc.h || CALL_HEADS[k] || '') + '</p><div class="scn" data-scn="' + k + '"></div><div class="cq-nav">' +
+      (i < keys.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1" hidden>Next situation<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '') +
+      (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + '</div></div>';
+  }).join('');
+  $$('.scn[data-scn]', el).forEach(buildScenario);
+  function pips(){ return '<span class="pips" aria-hidden="true">' + keys.map(function(k){ return '<i class="' + (found[k] ? 'ok' : '') + '"></i>'; }).join('') + '</span>'; }
+  function paint(){ var n = Object.keys(found).length; if(status) status.innerHTML = pips() + '<span>' + n + ' of ' + keys.length + ' ' + cfg.noun + '.' + (n === keys.length ? ' Section complete.' : '') + '</span>'; if(n === keys.length) progDone(cfg.prog); }
+  function show(i){ $$('.cq', el).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); cur = i; var f = $$('.cq', el)[i].querySelector('button:not([hidden])'); if(f) f.focus({ preventScroll:true }); }
+  el.addEventListener('click', function(e){
+    if(e.target.closest('button[data-next]')){ show(cur + 1); return; }
+    if(e.target.closest('button[data-prev]')){ show(cur - 1); return; }
+    var b = e.target.closest('.scn button[data-o]'); if(!b) return;
+    var q = b.closest('.cq'), k = q.getAttribute('data-k'), o = SCENARIOS[k].opts[parseInt(b.getAttribute('data-o'), 10)];
+    var nx = q.querySelector('button[data-next]'); if(nx) nx.hidden = false;
+    if(o.best){ found[k] = 1; paint(); }
+  });
+  paint();
+}
+$$('[data-calls]').forEach(buildCalls);
 
 /* ══════════ quick check: which habit is it, one situation at a time ══════════ */
 var DRILLS = {
+  shift: { opts:['Mine now','My team member’s','HR, or another office'], prog:'shift', verb:'sorted', items:[
+    { s:'Deciding which of three new requests the team does first this week.', a:0, x:'Yours now. Priorities are the manager’s call; if you do not make it, the loudest request will.' },
+    { s:'Writing the monthly report your best analyst has always written.', a:1, x:'Still theirs. Your job is to check it before it is due, not to write it. Doing the work is the old job.' },
+    { s:'Deciding whether someone qualifies for medical leave.', a:2, x:'The leave office decides. Your job is to send it there the same day, and never to ask for a diagnosis.' },
+    { s:'Making sure a new hire knows what is expected in their first month.', a:0, x:'Yours now. Nobody else will say it, and “clear is kind.” The Onboarding a New Hire micro module shows you how.' },
+    { s:'Investigating a complaint that a coworker is harassing someone.', a:2, x:'Equal Opportunity and Access investigates. Your job is to report it the same day, not to look into it yourself.' },
+    { s:'Approving a timecard that shows 52 hours in one week.', a:0, x:'Yours now. Ask about the week before you approve; Vanderbilt trusts your signature, so look before you sign.' }
+  ]},
+  calls: { opts:['Handle it','Ask my HR partner first','The leave office, the same day','EOA, the same day'], prog:'calls', verb:'decided', items:[
+    { s:'A team member asks for next Friday off for a wedding.', a:0, x:'Handle it. Check coverage, approve it in Oracle, and say yes out loud. The Time and Attendance Approvals micro module shows the steps.' },
+    { s:'A team member says their doctor wants them out for three weeks after surgery.', a:2, x:'The leave office, the same day. It sounds like leave, so it is leave until the leave office says otherwise. Adjust the work; do not ask about the surgery.' },
+    { s:'A team member says a coworker keeps making comments about her religion.', a:3, x:'EOA, the same day. You listen, you write down what was said, and you report it. You do not investigate or promise an outcome.' },
+    { s:'You want to raise someone’s pay because they took on more work.', a:1, x:'Ask your HR partner first. Pay has a process and a cycle (the Compensation Cycle and Merit Basics micro module); your HR partner tells you what is possible and when.' },
+    { s:'A seat on your team just opened and you want to fill it.', a:1, x:'Ask your HR partner first. Hiring starts with a requisition and an approval chain (the Requisitions and Hiring micro module).' },
+    { s:'A team member’s work has slipped for a month and a talk did not fix it.', a:1, x:'Ask your HR partner first. A performance concern has a fair process (Performance Concerns and Progressive Discipline); do not improvise it.' }
+  ]},
   task: { opts:['Plan it','Say it','Check it','Fix it','Not managing, just doing the work'], prog:'task', verb:'named', items:[
     { s:'Before the quarter, set three priorities, assigned an owner to each, and decided what would move if a new request landed.', a:0, x:'Plan it: what, who, when, and what gives. Done before the quarter, not during it.' },
     { s:'In the first 1:1 of the month, confirmed with each person what they own, the deadline, and what “done well” means, and wrote it in Culture Amp.', a:1, x:'Say it: said out loud, confirmed back, written where the team can see it.' },
@@ -458,7 +518,7 @@ var DRILLS = {
     { s:'Asked the Engagement Consultant what other units were doing about the same staffing gap.', a:0, x:'Know the people, and a little watching for what is coming: using a relationship outside the team to learn what is next.' }
   ]}
 };
-var DRILL_PICK = { task:[1,3,4], relations:[0,4,3], change:[0,4,2], external:[1,3,2] };
+var DRILL_PICK = { shift:[0,1,2,3,4,5], calls:[0,1,2,3,4], task:[1,3,4], relations:[0,4,3], change:[0,4,2], external:[1,3,2] };
 function buildDrill(el){
   var name = el.getAttribute('data-drill'), d0 = DRILLS[name]; if(!d0) return;
   var d = { opts:d0.opts, prog:d0.prog, verb:d0.verb, items:(DRILL_PICK[name] || [0,1,2]).map(function(i){ return d0.items[i]; }) };
@@ -596,11 +656,11 @@ assessLoad();
 
 /* ══════════ knowledge check: five questions, one at a time, feedback after each ══════════ */
 var QUIZ = [
-  { seg:'The four jobs (page 4)', q:'Being a manager at Vanderbilt means doing four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' },
-  { seg:'Job 1 (page 5)', q:'A manager writes each person’s goals for the quarter into Culture Amp and confirms them in the first 1:1. Which habit is that?', opts:['Check it','Say it','Thank them','Speak up for the team'], a:1, x:'Say it: what is expected, by when, and what good looks like, written where the team can see it. Check it comes later, when you look at the work in progress.' },
-  { seg:'Job 2 (page 7)', q:'Which of these is “thank them” done well?', opts:['“Great job, everyone,” at the end of the project','“The way you handled the vendor call on Thursday kept us on schedule,” said on Friday','A thank-you line in the annual review','A team lunch once a year'], a:1, x:'Specific, by name, that week. Group thanks and once-a-year thanks do not tell anyone what to do again.' },
-  { seg:'Job 3 (page 9)', q:'A team member suggests a different way to run the weekly report. The make-things-better response is:', opts:['Explain why the current way exists','Escalate it to your unit leader','“Try it for two weeks and show me”','Add it to next year’s plan'], a:2, x:'Let people try: the new idea invited and given a small, short trial.' },
-  { seg:'Job 4 (page 11)', q:'Another office’s request would break your team’s month. You show the hours, offer two options, and negotiate the date. That is:', opts:['Fix it','Listen and help','Not managing','Speak up for your team'], a:3, x:'Speak up for your team: facts, options, and a negotiated date, instead of absorbing the request or refusing it.' }
+  { seg:'What changed (page 3)', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
+  { seg:'Five ideas (page 5)', q:'Brené Brown’s rule for managers is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
+  { seg:'Safe to speak up (page 6)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
+  { seg:'Your first calls (page 8)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to HR when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
+  { seg:'The four jobs (page 9)', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
 ];
 (function(){
   var box = $('#quizBox'), status = $('#quizStatus'), done = $('#quizDone'); if(!box) return;

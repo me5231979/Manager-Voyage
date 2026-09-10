@@ -31,8 +31,8 @@ cat > "$STAGE/imsmanifest.xml" <<XML
   <metadata><schema>ADL SCORM</schema><schemaversion>1.2</schemaversion></metadata>
   <organizations default="mvf_org">
     <organization identifier="mvf_org">
-      <title>Manager Voyage: Foundation, What Vanderbilt Expects of a Manager</title>
-      <item identifier="mvf_item" identifierref="mvf_res"><title>Foundation: What Vanderbilt Expects of a Manager</title></item>
+      <title>Manager Voyage: Foundation, You Are a Manager Now</title>
+      <item identifier="mvf_item" identifierref="mvf_res"><title>Foundation: You Are a Manager Now</title></item>
     </organization>
   </organizations>
   <resources>

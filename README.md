@@ -37,57 +37,28 @@ row, and a rail with Up next, Milestones, and Who to call.
 
 ## Foundation course (`foundation/`)
 
-"What Vanderbilt expects of a manager," the first course in Manager
+"You are a manager now," the first course in Manager
 Foundations (after the manager compliance courses, before the micro modules).
-About fifteen minutes, sixteen pages. It teaches the four jobs of a manager in
-plain words: get the work done, take care of your people, make things better,
-connect your team. Yukl's research is the guide behind the four jobs (each
-module names his term once, in a "where this comes from" line), not the
-vocabulary in front of them. Every page opens with a breadcrumb (where you
-are, what you have, what is next) and every module page with what you will
-learn and why it matters to you.
+About twenty minutes, eighteen pages. It assumes the learner knows nothing
+about management and starts there.
 
-1. Welcome, then a course and module overview (purpose, audience, objectives,
-   completion, one card per module)
-2. Module 1, why and the framework: the belief, the welcome from People,
-   Culture and Belonging, the Chancellor's charge, then a 90-second captioned
-   training video and a tap-to-open map of the four categories
-3. Modules 2 to 5, one job each, two pages: an 80-second captioned training
-   video (why it matters, each habit on a normal Tuesday, what to stop doing,
-   one thing to do this week) beside flip cards; then
-   two aligned practices, "Your call" (apply: one situation, three responses,
-   consequences) and a three-item quick check (recognize), with an optional
-   collapsed public video below
-4. Module 6, the survey and a fifteen-behavior self-rating (one at a time)
-   that produces a first profile, the three behaviors to practice first, and
-   the micro-module order
-5. A five-question knowledge check (one at a time, feedback after each, four
-   to pass), the recap and next seven days, and the wrap-up
+1. Module 1, what changed and what a manager is: the one change, three
+   things that are new, what a manager is not, a sort activity (whose job is
+   it now?), the definition, and who helps at Vanderbilt (80-second video)
+2. Module 2, five ideas that hold up (Covey, Brene Brown, Amy Edmondson,
+   Simon Sinek, SHRM) as flip cards, then "safe to speak up": three moments
+   (bad news, a question, a mistake) with three responses each
+3. Module 3, what Vanderbilt will ask you to do in year one (a tap-to-open
+   map by cadence, each item naming its micro module), then five situations
+   to decide: handle it, ask your HR partner, the leave office, or EOA
+4. Module 4, the four jobs of a manager (Yukl, in plain words): a video and
+   flip cards per job, one page each, then four situations for your call
+5. Module 5, the survey and a fifteen-habit self-rating (one at a time)
+6. A five-question check (4 of 5), the next seven days, and the wrap-up
 
-Progress: the map, four quick checks, the self-rating, the check, and the next
-step (eight sections). Saved to `localStorage` (`mv.foundation.v1` for the
-profile) and SCORM suspend_data; the dashboard orders the tracks from it.
+Eight tracked sections. Every page is narrated (narration-scripts.js);
+six custom training videos (basics plus the four jobs and the framework).
 
-**Narration.** Every page is narrated (Listen for this page, Auto for every
-page). Scripts are in `foundation/narration-scripts.js`; recordings are
-generated with Runway from those exact words and live in
-`assets/audio/foundation/<section>-<n>.mp3`; browser speech reads the same
-words if a file cannot load.
-
-**Videos.** Five custom training videos with captions (`assets/video/
-foundation/<name>.mp4` and `.vtt`), built by `scripts/build-media.py` from
-Runway clips and narration listed in `.github/media-urls.json` (the `text`
-fields feed the captions). Pushing that file to `main` runs
-`.github/workflows/fetch-media.yml`, which downloads, builds, commits, and
-mirrors to `gh-pages`. Until media lands, each video slot shows a "being
-produced" card. No headcounts or unit counts appear in the course, so nothing
-dates.
-
-- Source: Yukl, G. (2012), Academy of Management Perspectives, 26(4), 66 to 85.
-- Preview: `foundation/?name=Alex%20Rivera`
-- SCORM: `bash scripts/build-foundation-scorm.sh` writes
-  `manager-voyage-foundation-scorm.zip` (standalone SCORM 1.2, media included
-  when built).
 - Survey: the Managerial Practices Survey is completed before the course and retaken six months after completion. Open items:
   confirm the YouTube video IDs still resolve (each has an open-on-YouTube
   link).

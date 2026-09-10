@@ -112,16 +112,15 @@ window.MV_PROGRAM = {
     title: 'Manager Responsibilities Course',
     summary: 'Compliance tells you what the law requires. This course tells you what Vanderbilt requires: the systems you approve in, the people obligations you now carry, the processes you run, and the university and city you represent.',
     foundation: {
-      id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, oracleItemId: null, oracleItemType: 'ORA_COURSE', localUrl: '../foundation/', minutes: 15, phase: 1,
-      title: 'Foundation: What Vanderbilt Expects of a Manager',
-      why: 'About fifteen minutes, taken first. The four jobs of a manager in plain words, why each matters, one thing to do this week for each, and a self-rating that sets the order of your micro modules.',
+      id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, oracleItemId: null, oracleItemType: 'ORA_COURSE', localUrl: '../foundation/', minutes: 20, phase: 1,
+      title: 'Foundation: You Are a Manager Now',
+      why: 'About twenty minutes, taken first. What changed when you became a manager, five ideas that hold up, what Vanderbilt will ask you to do this year, the four jobs of a manager, and a self-rating that sets the order of your micro modules.',
       segments: [
-        { n: 1, title: 'Why, and the four jobs', format: 'Video plus tap-to-open map', desc: 'Why Vanderbilt is spelling out the job, and the four jobs of a manager: get the work done, take care of your people, make things better, connect your team.' },
-        { n: 2, title: 'Job 1: get the work done', format: 'Video, cards, your call, quick check', desc: 'Plan it, say it, check it, fix it.' },
-        { n: 3, title: 'Job 2: take care of your people', format: 'Video, cards, your call, quick check', desc: 'Listen and help, grow them, thank them, trust them, and the line where helping becomes a duty to route.' },
-        { n: 4, title: 'Job 3: make things better', format: 'Video, cards, your call, quick check', desc: 'Explain the why, describe where you are going, let people try, look back.' },
-        { n: 5, title: 'Job 4: connect your team', format: 'Video, cards, your call, quick check', desc: 'Know the people, watch for what is coming, speak up for your team with facts.' },
-        { n: 6, title: 'The survey and where you stand', format: 'Self-rating', desc: 'What the Managerial Practices Survey you already took was asking, and a fifteen-habit self-rating that produces a first picture and your micro-module order.' }
+        { n: 1, title: 'What changed, and what a manager is', format: 'Sort activity plus video', desc: 'The one change that makes you a manager, three things that are new, what a manager is not, and who helps you at Vanderbilt.' },
+        { n: 2, title: 'Five ideas, and safe to speak up', format: 'Flip cards plus your call', desc: 'Covey, Brene Brown, Amy Edmondson, Simon Sinek, and SHRM in one line each, then three moments that build trust or break it.' },
+        { n: 3, title: 'What Vanderbilt will ask you to do', format: 'Tap-to-open map plus decisions', desc: 'The manager tasks of year one, when each shows up, the micro module for it, and five situations: handle it, ask HR, route it, or report it.' },
+        { n: 4, title: 'The four jobs of a manager', format: 'Five videos, cards, your call', desc: 'Get the work done, take care of your people, make things better, connect your team. One page each, then four situations.' },
+        { n: 5, title: 'The survey and where you stand', format: 'Self-rating', desc: 'What the Managerial Practices Survey you already took was asking, and a fifteen-habit self-rating that produces a first picture and your micro-module order.' }
       ]
     },
     tracks: [
