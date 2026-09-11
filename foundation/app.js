@@ -1,6 +1,6 @@
 /* ══════════ MANAGER VOYAGE · FOUNDATION · app engine ══════════
    Progress (eight tracked sections), the six segments' activities (flip
-   cards, your call, quick check), the self-rating that
+   cards, your call, quick check), the assessment result entry that
    orders the 22 micro modules, the knowledge check, page narration, the
    custom and public videos, and the SCORM hookup. State: localStorage
    mv-found-* plus, inside Oracle Learning, SCORM suspend_data. Nothing is
@@ -223,7 +223,7 @@ var SECTIONS = [
   { k:'calls',     no:'03', name:'Your first calls',             how:'Decide the five situations' },
   { k:'welcome',   no:'04', name:'The four jobs',                how:'Open all four jobs' },
   { k:'yourcall',  no:'05', name:'Your call: four situations',   how:'Find the Vanderbilt way in all four' },
-  { k:'survey',    no:'06', name:'The survey and where you stand', how:'Rate yourself and see where you stand' },
+  { k:'survey',    no:'06', name:'Your assessment results',     how:'Enter your band and lowest job from the results email' },
   { k:'quiz',      no:'07', name:'A quick check',                how:'Score four or more of five' },
   { k:'nextstep',  no:'08', name:'Your next step',               how:'Mark it done once planned' }
 ];
@@ -298,9 +298,9 @@ var progReset = $('#progReset');
 if(progReset) progReset.addEventListener('click', function(){
   SECTIONS.forEach(function(s){ progWrite(s.k, false); });
   set('assess', null); set('done-seen', null); doneSeen = false;
-  assessAns = new Array(ASSESS_QS.length).fill(null); aCur = 0; assessRender();
+  var mo = $('#meaOut'); if(mo) mo.innerHTML = '';
   progRender();
-  if(progStatus) progStatus.textContent = 'Progress reset. 0 of ' + SECTIONS.length + ' sections complete; your self-assessment is cleared.';
+  if(progStatus) progStatus.textContent = 'Progress reset. 0 of ' + SECTIONS.length + ' sections complete; your starting point is cleared.';
 });
 if(!store){ var pw = $('#progStorageNote'); if(pw) pw.hidden = false; }
 
@@ -369,7 +369,8 @@ if(window.MVScorm && MVScorm.connected) scormAdopt();
 /* ══════════ flip cards, the framework map, fact or fiction ══════════ */
 $$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){ var f = btn.classList.toggle('flipped'); btn.setAttribute('aria-expanded', f ? 'true' : 'false'); }); });
 [{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', done:' Section complete. The next four pages take one job each.' },
- { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:null, done:' All four open. Turn the page to make your first calls.' }].forEach(function(cfg){
+ { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:null, done:' All four open. Turn the page to make your first calls.' },
+ { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, done:' Now enter your band and lowest job on the right.' }].forEach(function(cfg){
   var map = $(cfg.map), status = $(cfg.status); if(!map) return;
   var cards = $$('.fw-card', map), seen = {};
   cards.forEach(function(c, i){
@@ -649,111 +650,66 @@ var IDEAS = [
   }
 })();
 
-/* ══════════ segment 6: self-rating, one behavior at a time → module order ══════════ */
-var ASSESS_QS = [
-  { c:'task', b:'Plan it', q:'I set priorities, owners, and schedules before the work starts.' },
-  { c:'task', b:'Say it', q:'Each person on my team can say what they own, by when, and what good looks like.' },
-  { c:'task', b:'Check it', q:'I check progress and quality before the deadline, in the 1:1, not after.' },
-  { c:'task', b:'Fix it', q:'When something breaks twice, I find the cause and change something, rather than fixing it again myself.' },
-  { c:'relations', b:'Listen and help', q:'I listen when someone is under pressure, adjust what I can, and follow up.' },
-  { c:'relations', b:'Grow them', q:'I talk with each person about where they want to go at least once a quarter.' },
-  { c:'relations', b:'Thank them', q:'I praise specific work, by name, within the week it happened.' },
-  { c:'relations', b:'Trust them', q:'I delegate real decisions, and I consult the team before I set a new process.' },
-  { c:'change', b:'Explain the why', q:'When a change is coming, I explain the why in my own words before the announcement does.' },
-  { c:'change', b:'Describe where we are going', q:'I can describe, in two sentences, what my team will be able to do next year that it cannot do now.' },
-  { c:'change', b:'Let people try', q:'When someone suggests a different way, I let them try it.' },
-  { c:'change', b:'Look back', q:'We look back after big work and write down what changes.' },
-  { c:'external', b:'Know the people', q:'I know the people outside my team that my team depends on, by name, before I need them.' },
-  { c:'external', b:'Watch for what is coming', q:'I see policy changes, deadlines, and other offices’ plans before they land on my team.' },
-  { c:'external', b:'Speak up for your team', q:'I speak up for my team’s workload and resources, with numbers, early.' }
-];
+/* ══════════ module 5: your assessment results → starting point and module order ══════════ */
 var CATS = { task:{ name:'Get the work done', short:'Job 1' }, relations:{ name:'Take care of your people', short:'Job 2' }, change:{ name:'Make things better', short:'Job 3' }, external:{ name:'Connect your team', short:'Job 4' } };
-/* which micro-module tracks practice each category, for the dashboard order */
+/* which micro-module tracks practice each job, for the dashboard order */
 var CAT_TRACKS = { task:['T1','T3'], relations:['T2','T3'], change:['T4'], external:['T4'] };
-var ASSESS_OPTS = ['Rarely', 'Sometimes', 'Often'];
-var assessAns = new Array(ASSESS_QS.length).fill(null), aCur = 0;
-var aQs = $('#assessQs'), aNav = $('#assessNav'), aShow = $('#assessShow'), aHint = $('#assessHint'), aOut = $('#assessOut');
-function assessRender(){
-  if(!aQs) return;
-  aQs.hidden = false; if(aNav) aNav.hidden = false;
-  aQs.innerHTML = ASSESS_QS.map(function(x, i){
-    return '<div class="route-q' + (i === aCur ? ' cur' : '') + '" data-rq="' + i + '"><p class="route-qt" id="aq' + i + '"><span class="qn" aria-hidden="true">' + (i + 1) + ' of ' + ASSESS_QS.length + ' &middot; ' + esc(CATS[x.c].short) + '</span><br><b style="color:var(--eyebrow);font-weight:600">' + esc(x.b) + '.</b> ' + esc(x.q) + '</p>' +
-      '<div class="route-opts" role="group" aria-labelledby="aq' + i + '">' + ASSESS_OPTS.map(function(o, v){ return '<button type="button" data-rv="' + v + '" aria-pressed="' + (assessAns[i] === v) + '">' + o + '</button>'; }).join('') + '</div></div>';
-  }).join('');
-  assessSync();
-  if(aOut) aOut.innerHTML = '';
-}
-function assessGo(i){ if(i < 0 || i >= ASSESS_QS.length) return; aCur = i; $$('.route-q', aQs).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); assessSync(); }
-function assessSync(){
-  var n = assessAns.filter(function(v){ return v !== null; }).length, all = n === ASSESS_QS.length;
-  if(aShow) aShow.disabled = !all;
-  if(aHint) aHint.textContent = all ? 'All fifteen rated.' : n + ' of ' + ASSESS_QS.length + ' rated.';
-  if(aNav) aNav.innerHTML = '<button type="button" class="btn btn-ghost btn-sm" data-an="-1"' + (aCur === 0 ? ' disabled' : '') + '>Back</button>' +
-    '<span class="pips" aria-hidden="true">' + ASSESS_QS.map(function(x, i){ return '<i class="' + (assessAns[i] !== null ? 'ok' : '') + (i === aCur ? ' cur' : '') + '"></i>'; }).join('') + '</span>' +
-    '<button type="button" class="btn btn-ghost btn-sm" data-an="1"' + (aCur === ASSESS_QS.length - 1 ? ' disabled' : '') + '>Next</button>';
-}
-if(aNav) aNav.addEventListener('click', function(e){ var b = e.target.closest('button[data-an]'); if(b) assessGo(aCur + parseInt(b.getAttribute('data-an'), 10)); });
-if(aQs) aQs.addEventListener('click', function(e){
-  var b = e.target.closest('button[data-rv]'); if(!b) return;
-  var q = b.closest('.route-q'), i = parseInt(q.getAttribute('data-rq'), 10);
-  assessAns[i] = parseInt(b.getAttribute('data-rv'), 10);
-  $$('button[data-rv]', q).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-  assessSync();
-  var next = -1; for(var k = 1; k <= ASSESS_QS.length; k++){ var j = (i + k) % ASSESS_QS.length; if(assessAns[j] === null){ next = j; break; } }
-  if(next > -1) window.setTimeout(function(){ assessGo(next); }, reduce ? 0 : 220);
-  else if(aShow){ aShow.focus(); }
-});
-function assessProfile(){
-  var cat = {}, max = {};
-  ASSESS_QS.forEach(function(x, i){ cat[x.c] = (cat[x.c] || 0) + (assessAns[i] || 0); max[x.c] = (max[x.c] || 0) + 2; });
-  var keys = Object.keys(CATS);
-  var pct = {}; keys.forEach(function(k){ pct[k] = Math.round(cat[k] / max[k] * 100); });
-  var weakest = keys.slice().sort(function(a, b){ return pct[a] - pct[b]; })[0];
-  var strongest = keys.slice().sort(function(a, b){ return pct[b] - pct[a]; })[0];
-  var focus = ASSESS_QS.map(function(x, i){ return { b:x.b, c:x.c, v:assessAns[i] }; })
-    .sort(function(p, q){ return (p.v - q.v) || (pct[p.c] - pct[q.c]); }).slice(0, 3);
-  var tscore = {};
-  Object.keys(CAT_TRACKS).forEach(function(c){ CAT_TRACKS[c].forEach(function(t){ tscore[t] = tscore[t] || []; tscore[t].push(pct[c]); }); });
-  Object.keys(tscore).forEach(function(t){ tscore[t] = tscore[t].reduce(function(a, b){ return a + b; }, 0) / tscore[t].length; });
-  var order = [];
-  if(P){
-    [1, 2].forEach(function(phase){
-      P.mrc.tracks.filter(function(t){ return t.phase === phase; }).sort(function(a, b){ return tscore[a.id] - tscore[b.id]; })
-        .forEach(function(t){ t.modules.forEach(function(m){ order.push(m.id); }); });
-    });
+var CAT_HABIT = { task:'check it: look at one piece of work before it is due', relations:'thank them: one specific thank-you, by name, this week', change:'look back: one ten-minute review after a piece of work', external:'know the people: coffee with one person your team depends on' };
+var BANDS = {
+  developing:{ name:'Developing Manager', what:'The fundamentals are not yet habits. That is normal in year one, and it is exactly what this program is for. Start with jobs 1 and 2: the 1:1, clear expectations, and specific feedback. Everything else builds on those.' },
+  strong:{ name:'Strong Manager', what:'Solid but uneven. Some habits are already yours; others happen when you remember. The fastest gain is the job where your answers were lowest: make its habits weekly, on the calendar, so they stop depending on memory.' },
+  advanced:{ name:'Advanced Manager', what:'The fundamentals happen without prompting, which is rarer than it sounds. The step up is reach: jobs 3 and 4, shaping how work gets prioritized beyond your own team, and building a team that learns without you in the room.' }
+};
+(function(){
+  var band = $('#meaBand'), score = $('#meaScore'), jobs = $('#meaJobs'), show = $('#meaShow'), hint = $('#meaHint'), out = $('#meaOut');
+  if(!band || !jobs || !show) return;
+  var picked = [];
+  function sync(){
+    var ok = band.value && picked.length; show.disabled = !ok;
+    if(hint) hint.textContent = ok ? 'Ready.' : !band.value ? 'Pick your band from the email.' : 'Pick the job where your answers were lowest.';
   }
-  return { pct:pct, weakest:weakest, strongest:strongest, focus:focus, order:order };
-}
-function assessShowOut(){
-  var r = assessProfile(); if(!aOut) return;
-  var keys = Object.keys(CATS);
-  var html = '<h4>Where you <em>stand</em>.</h4>' +
-    '<div class="prof" role="list" aria-label="Your profile by category">' + keys.map(function(k){
-      return '<div role="listitem"><b>' + esc(CATS[k].name) + '</b><span class="bar" aria-hidden="true"><i style="width:' + r.pct[k] + '%"></i></span><span>' + r.pct[k] + '%</span></div>';
-    }).join('') + '</div>' +
-    '<p class="gap-line">Your strongest job right now is <b>' + esc(CATS[r.strongest].name) + '</b>. The job that needs more of you is <b>' + esc(CATS[r.weakest].name) + '</b>. That is not a verdict; it is a set of habits you do less often than the team needs, and habits change.</p>' +
-    '<p class="mono" style="margin-top:14px">Work on these first</p><ol class="focus-list">' + r.focus.map(function(f, i){
-      return '<li><b>' + (i + 1) + '</b><span>' + esc(f.b) + '<small>' + esc(CATS[f.c].name) + ' &middot; you rated it ' + esc(ASSESS_OPTS[f.v].toLowerCase()) + '</small></span></li>';
-    }).join('') + '</ol>' +
-    '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your dashboard puts the micro modules in this order, the job that needs you most first. The survey you took before this course gives the same picture with more precision, and the retake in six months shows the change.</p>' +
-    '<div class="route-act" style="margin-top:12px"><button type="button" class="btn btn-ghost btn-sm" id="assessRedo">Rate again</button></div>';
-  aOut.innerHTML = html;
-  if(aQs) aQs.hidden = true; if(aNav) aNav.hidden = true;
-  if(aShow) aShow.disabled = true; if(aHint) aHint.textContent = 'Your profile is below.';
-  set('assess', JSON.stringify({ answers:assessAns, pct:r.pct, weakest:r.weakest, focus:r.focus.map(function(f){ return f.b; }), order:r.order, at:new Date().toISOString() }));
-  try{ localStorage.setItem('mv.foundation.v1', get('assess')); }catch(e){}
-  var ns = $('#ns2p'); if(ns) ns.textContent = 'Your self-rating pointed to: ' + r.focus[0].b.toLowerCase() + '. Do it once this week, on purpose, and notice what happened.';
-  progDone('survey');
-  var redo = $('#assessRedo'); if(redo) redo.addEventListener('click', function(){ assessAns = new Array(ASSESS_QS.length).fill(null); aCur = 0; set('assess', null); assessRender(); var f = aQs.querySelector('.route-q.cur button'); if(f) f.focus(); });
-  if(window.chartPager) window.chartPager.goToEl(aOut);
-}
-if(aShow) aShow.addEventListener('click', assessShowOut);
-function assessLoad(){
-  var raw = get('assess'); if(!raw) return;
-  try{ var d = JSON.parse(raw); if(d && d.answers && d.answers.length === ASSESS_QS.length){ assessAns = d.answers.slice(); assessRender(); if(assessAns.every(function(v){ return v !== null; })) assessShowOut(); } }catch(e){}
-}
-assessRender();
-assessLoad();
+  jobs.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-job]'); if(!b) return;
+    var k = b.getAttribute('data-job'), i = picked.indexOf(k);
+    if(i > -1) picked.splice(i, 1); else { picked.push(k); if(picked.length > 2) picked.shift(); }
+    $$('button[data-job]', jobs).forEach(function(x){ x.setAttribute('aria-pressed', picked.indexOf(x.getAttribute('data-job')) > -1 ? 'true' : 'false'); });
+    sync();
+  });
+  band.addEventListener('change', sync);
+  function order(weak){
+    var tscore = {};
+    Object.keys(CAT_TRACKS).forEach(function(c){ CAT_TRACKS[c].forEach(function(t){ tscore[t] = tscore[t] || 0; tscore[t] += (weak.indexOf(c) > -1 ? (2 - weak.indexOf(c)) : 0); }); });
+    var o = [];
+    if(P){ [1, 2].forEach(function(phase){ P.mrc.tracks.filter(function(t){ return t.phase === phase; }).sort(function(x, y){ return tscore[y.id] - tscore[x.id]; }).forEach(function(t){ t.modules.forEach(function(m){ o.push(m.id); }); }); }); }
+    return o;
+  }
+  function render(d){
+    var B = BANDS[d.band]; if(!B || !out) return;
+    var first = d.weak[0];
+    out.innerHTML = '<h4>Your starting <em>point</em>.</h4>' +
+      '<p class="gap-line"><b>' + esc(B.name) + (d.score !== null && d.score !== '' ? ' &middot; ' + esc(String(d.score)) + ' of 70' : '') + '.</b> ' + esc(B.what) + '</p>' +
+      '<p class="mono" style="margin-top:14px">Start with</p><ol class="focus-list">' + d.weak.map(function(k, i){ return '<li><b>' + (i + 1) + '</b><span>' + esc(CATS[k].name) + '<small>' + esc(CATS[k].short) + ' &middot; this week: ' + esc(CAT_HABIT[k]) + '</small></span></li>'; }).join('') + '</ol>' +
+      '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your dashboard now opens the micro modules for ' + esc(CATS[first].name.toLowerCase()) + ' first. Your Engagement Consultant can walk through the full results with you.</p>' +
+      '<div class="route-act" style="margin-top:12px"><button type="button" class="btn btn-ghost btn-sm" id="meaRedo">Change it</button></div>';
+    var ns = $('#ns2p'); if(ns) ns.textContent = 'Your results pointed to ' + CATS[first].name.toLowerCase() + '. This week: ' + CAT_HABIT[first] + '.';
+    $('#meaRedo').addEventListener('click', function(){ out.innerHTML = ''; set('assess', null); });
+  }
+  show.addEventListener('click', function(){
+    var d = { band:band.value, score: score && score.value !== '' ? Math.max(0, Math.min(70, parseInt(score.value, 10) || 0)) : null, weak:picked.slice(), weakest:picked[0], at:new Date().toISOString() };
+    d.order = order(d.weak); d.focus = d.weak.map(function(k){ return CAT_HABIT[k]; });
+    set('assess', JSON.stringify(d));
+    try{ localStorage.setItem('mv.foundation.v1', get('assess')); }catch(e){}
+    render(d); progDone('survey');
+    if(window.chartPager) window.chartPager.goToEl(out);
+  });
+  window.assessLoad = function(){
+    var raw = get('assess'); if(!raw) return;
+    try{ var d = JSON.parse(raw); if(!d || !d.band) return; band.value = d.band; if(score && d.score !== null && d.score !== undefined) score.value = d.score; picked = (d.weak || []).slice();
+      $$('button[data-job]', jobs).forEach(function(x){ x.setAttribute('aria-pressed', picked.indexOf(x.getAttribute('data-job')) > -1 ? 'true' : 'false'); }); sync(); render(d); }catch(e){}
+  };
+  sync(); window.assessLoad();
+})();
+function assessLoad(){ if(window.assessLoad) window.assessLoad(); }
 
 /* ══════════ knowledge check: five questions, one at a time, feedback after each ══════════ */
 var QUIZ = [

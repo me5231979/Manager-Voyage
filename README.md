@@ -54,7 +54,8 @@ about management and starts there.
    to decide: handle it, ask your HCM, the leave office, or EOA
 4. Module 4, the four jobs of a manager (Yukl, in plain words): a video and
    flip cards per job, one page each, then four situations for your call
-5. Module 5, the survey and a fifteen-habit self-rating (one at a time)
+5. Module 5, your Manager Effectiveness Assessment results: the 14 items
+   sorted by job, the three bands, and a results entry that sets module order
 6. A five-question check (4 of 5), the next seven days, and the wrap-up
 
 Eight tracked sections. Every page is narrated (narration-scripts.js).
@@ -64,6 +65,6 @@ podcasts, and videos (foundation/resources.js; Oracle deep links from the
 active catalog export). Every module page ends with a keep-learning strip.
 six custom training videos (basics plus the four jobs and the framework).
 
-- Survey: the Managerial Practices Survey is completed before the course and retaken six months after completion. Open items:
+- Assessment: the Manager Effectiveness Assessment (14 items, out of 70, three bands: Developing under 35, Strong 35 to 55, Advanced 56 and above) is completed before the course, results are emailed, and it is retaken six months after completion. Open items:
   confirm the YouTube video IDs still resolve (each has an open-on-YouTube
   link).

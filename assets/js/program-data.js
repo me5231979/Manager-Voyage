@@ -114,13 +114,13 @@ window.MV_PROGRAM = {
     foundation: {
       id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, oracleItemId: null, oracleItemType: 'ORA_COURSE', localUrl: '../foundation/', minutes: 20, phase: 1,
       title: 'Foundation: You Are a Manager Now',
-      why: 'About twenty minutes, taken first. What changed when you became a manager, five ideas that hold up, what Vanderbilt will ask you to do this year, the four jobs of a manager, and a self-rating that sets the order of your micro modules.',
+      why: 'About twenty minutes, taken first. What changed when you became a manager, five ideas that hold up, what Vanderbilt will ask you to do this year, the four jobs of a manager, and your Manager Effectiveness Assessment results, which set the order of your micro modules.',
       segments: [
         { n: 1, title: 'What changed, and what a manager is', format: 'Sort activity plus video', desc: 'The one change that makes you a manager, three things that are new, what a manager is not, and who helps you at Vanderbilt.' },
         { n: 2, title: 'Five ideas, and safe to speak up', format: 'Flip cards plus your call', desc: 'Setting priorities, clear expectations, psychological safety, purpose, and the people work: what each is, how you apply it, and the value it brings. Then three moments that build trust or break it.' },
         { n: 3, title: 'What Vanderbilt will ask you to do', format: 'Tap-to-open map plus decisions', desc: 'The manager tasks of year one, when each shows up, the micro module for it, and five situations: handle it, ask PCB, route it, or report it.' },
         { n: 4, title: 'The four jobs of a manager', format: 'Five videos, cards, your call', desc: 'Get the work done, take care of your people, make things better, connect your team. One page each, then four situations.' },
-        { n: 5, title: 'The survey and where you stand', format: 'Self-rating', desc: 'What the Managerial Practices Survey you already took was asking, and a fifteen-habit self-rating that produces a first picture and your micro-module order.' }
+        { n: 5, title: 'Your assessment results', format: 'Results entry', desc: 'What the Manager Effectiveness Assessment you already took was asking, sorted by the four jobs; what the three bands mean; enter your band and lowest job to set your micro-module order.' }
       ]
     },
     tracks: [

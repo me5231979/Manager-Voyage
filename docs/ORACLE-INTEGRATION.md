@@ -107,7 +107,7 @@ all eight sections are done, with the quick-check score):
 
 ## Survey timing
 
-The Managerial Practices Survey is completed before the Foundation course
+The Manager Effectiveness Assessment is completed before the Foundation course
 and retaken `MV_CONFIG.surveyRetakeMonths` (6) months after completing it.
 The course copy states this; the value is here so the dashboard can show
 the retake date once a completion date is known.

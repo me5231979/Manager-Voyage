@@ -26,7 +26,7 @@ window.MV_CONFIG = {
      keep completions local and self-reported. */
   completionEndpoint: null,           /* e.g. 'https://flh-proxy.vanderbilt.edu/voyage/completions' */
 
-  /* The Managerial Practices Survey: taken before the Foundation course and
+  /* The Manager Effectiveness Assessment: taken before the Foundation course and
      again this many months after completing it. */
   surveyRetakeMonths: 6,
 

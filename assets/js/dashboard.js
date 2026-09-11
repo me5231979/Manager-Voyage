@@ -61,7 +61,7 @@
   }
   function mrcItems() {
     var f = P.mrc.foundation;
-    var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The four jobs of a manager in plain words: get the work done, take care of your people, make things better, connect your team. Then a self-rating that orders your micro modules.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
+    var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The four jobs of a manager in plain words: get the work done, take care of your people, make things better, connect your team. Then your assessment results set the order of your micro modules.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
     orderedTracks().forEach(function (t) {
       t.modules.forEach(function (m) {
         out.push(Object.assign({}, m, { kind: 'course', area: 'mrc', track: t, oracleCode: m.id, minutes: 15,
@@ -166,7 +166,7 @@
     var ordered = !!foundationOrder();
     var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · About 4 hours</span></div>' +
       '<p class="panel__lead">' + esc(P.mrc.summary) + ' Every module is interactive: simulators, scenario studios, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check, and Oracle records the date you pass it.</p>' +
-      lane(f.title, '20 minutes · Completed first', [f], ordered ? 'Your self-assessment set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation first. It unlocks the micro modules and orders them from your self-assessment.'));
+      lane(f.title, '20 minutes · Completed first', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation first. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;
     [1, 2].forEach(function (phase) {
       var tracks = orderedTracks().filter(function (t) { return t.phase === phase; });

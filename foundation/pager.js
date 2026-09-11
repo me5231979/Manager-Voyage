@@ -24,7 +24,7 @@ try{
     { sel:'#change',          key:'change',    label:'Job 3: make things better',    mode:'whole' },
     { sel:'#external',        key:'external',  label:'Job 4: connect your team',     mode:'whole' },
     { sel:'#yourcall',        key:'yourcall',  label:'Your call: four situations',   mode:'whole' },
-    { sel:'#survey',          key:'survey',    label:'The survey',                   mode:'whole' },
+    { sel:'#survey',          key:'survey',    label:'Your results',                   mode:'whole' },
     { sel:'#quiz',            key:'quiz',      label:'Quick check',                  mode:'whole' },
     { sel:'#nextstep',        key:'nextstep',  label:'Your next step',               mode:'whole' },
     { sel:'#learn',           key:'learn',     label:'Keep learning',                mode:'whole' },

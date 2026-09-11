@@ -25,11 +25,12 @@
   jobs are based on Yukl (2012); his research is the guide, not the
   vocabulary. Built on the Working Smarter engine (../assets/css/course.css,
   pager.js) in the FLH brand. Every page is narrated (narration-scripts.js).
-  Progress: localStorage mv-found-* plus one JSON string with the self-rating;
+  Progress: localStorage mv-found-* plus one JSON string with the assessment result (band, lowest job, module order);
   in Oracle Learning the same state rides in SCORM suspend_data. Completion is
   reported through ../assets/js/oracle.js (SCORM, or MV_CONFIG.completionEndpoint).
-  Survey: managers complete the Managerial Practices Survey before this course
-  and retake it six months after completing it (module 6, next step, wrap-up).
+  Assessment: managers complete the Manager Effectiveness Assessment (14 items,
+  scored out of 70, three bands) before this course; results arrive by email;
+  they retake it six months after completing the course (module 5, next step).
   Source: Yukl, G. (2012). Effective leadership behavior: what we know and
   what questions need more attention. Academy of Management Perspectives,
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
@@ -447,6 +448,15 @@ details.deeper .d-body p{ margin:0 0 10px; font-size:.9rem; color:var(--tx2); }
 .recap-row strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.05rem; margin-top:4px; }
 .recap-row p{ font-size:.82rem; color:var(--tx2); margin-top:4px; }
 .survey-grid{ display:grid; grid-template-columns:1fr 1.3fr; gap:clamp(16px,2.5vw,28px); align-items:start; }
+.survey-grid.mea{ grid-template-columns:1.25fr 1fr; }
+.mea-map{ margin-top:12px; }
+.mea-map .fw-card li i{ display:block; font-size:.76rem; color:var(--tx3); font-style:normal; }
+.mea-map .fw-card li b{ display:inline; font-family:var(--cond); font-size:.7rem; letter-spacing:.06em; color:var(--eyebrow); margin-right:4px; }
+.mea-form{ margin-top:14px; display:grid; gap:12px; }
+.mea-form label{ display:grid; gap:6px; }
+.mea-form select,.mea-form input{ font:inherit; font-size:1rem; padding:10px 12px; border:1px solid var(--field-bd); border-radius:var(--r); background:var(--field); color:var(--tx); }
+.mea-form .route-opts{ margin-top:6px; grid-template-columns:1fr; }
+.mea-form .route-opts button{ text-align:left; }
 .survey-grid .survey{ margin-top:0; grid-template-columns:1fr; gap:10px; padding:16px 18px; }
 .survey-grid .survey ol{ font-size:.86rem; }
 html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
@@ -485,7 +495,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <a href="#ideas">Five ideas</a>
           <a href="#year">Your first year</a>
           <a href="#welcome">The four jobs</a>
-          <a href="#survey">The survey</a>
+          <a href="#survey">Your results</a>
           <a href="#learn">Keep learning</a>
           <a class="btn btn-gold btn-sm nav-cta" href="#quiz">Quick check</a>
         </nav>
@@ -512,7 +522,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   <a class="mlink" href="#calls" data-prog="calls"><span class="mono">03</span>Your first calls<span class="mdone" aria-hidden="true">Done</span></a>
   <a class="mlink" href="#welcome" data-prog="welcome"><span class="mono">04</span>The four jobs<span class="mdone" aria-hidden="true">Done</span></a>
   <a class="mlink" href="#yourcall" data-prog="yourcall"><span class="mono">05</span>Your call: four situations<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#survey" data-prog="survey"><span class="mono">06</span>The survey and where you stand<span class="mdone" aria-hidden="true">Done</span></a>
+  <a class="mlink" href="#survey" data-prog="survey"><span class="mono">06</span>Your assessment results<span class="mdone" aria-hidden="true">Done</span></a>
   <a class="mlink" href="#quiz" data-prog="quiz"><span class="mono">07</span>Knowledge check<span class="mdone" aria-hidden="true">Done</span></a>
   <a class="mlink" href="#nextstep" data-prog="nextstep"><span class="mono">08</span>Your next step<span class="mdone" aria-hidden="true">Done</span></a>
   <div class="mprog" id="mprogLine">0 of 8 sections complete</div>
@@ -546,7 +556,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <li>Turn pages with the arrows below, your keyboard arrows, or a swipe</li>
       <li>Each page starts with where you are and what comes next</li>
       <li>Read or watch, then do the short activity on the page: sort, flip, or make the call</li>
-      <li>Your completion is recorded in Oracle Learning; you retake the survey six months later</li>
+      <li>Your completion is recorded in Oracle Learning; you retake the assessment six months later</li>
     </ol>
   </div>
 </section>
@@ -563,7 +573,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div class="ov-card"><b>What this course is</b><p>The first course in Manager Foundations. It assumes you know nothing about management yet, and it starts there: the job, the ideas that hold up, the tasks that are coming, and one simple picture to keep it all in view.</p></div>
       <div class="ov-card"><b>Before and after</b><p>Before: start or finish your manager compliance courses (required, on your dashboard). After: the micro modules, short how-to lessons on each common task (1:1s, timecards, hiring, leave, and more). About 20 minutes, narrated.</p></div>
       <div class="ov-card"><b>You will be able to</b><ul><li>Say what changed and what the job is now</li><li>Use five ideas every good manager relies on, one habit each</li><li>Know what Vanderbilt will ask this year, and who helps</li><li>Make the call: handle it, ask PCB, route it, or report it</li><li>Keep the four jobs in view</li></ul></div>
-      <div class="ov-card"><b>How you finish</b><p>Eight sections track your progress: the activities on the way, the self-rating, and a five-question check (4 of 5). Recorded in Oracle Learning. You took the survey before this course and take it again six months after.</p></div>
+      <div class="ov-card"><b>How you finish</b><p>Eight sections track your progress: the activities on the way, the self-rating, and a five-question check (4 of 5). Recorded in Oracle Learning. You took the Manager Effectiveness Assessment before this course and take it again six months after.</p></div>
     </div>
     <span class="mono" style="display:block;margin:14px 0 8px">Module overviews</span>
     <div class="hw-grid reveal ov-mods">
@@ -571,7 +581,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div class="hw"><span class="hw-no" aria-hidden="true">02</span><h3>Five ideas, and safe to speak up</h3><p><b>Learn:</b> five ideas every good manager uses: setting priorities, clear expectations, psychological safety, purpose, and the people work. For each, what it is, how you apply it, and the value it brings. <b>Do:</b> read the five, then make the call in three moments that build or break trust.</p><span class="chip">Pages 5 to 6 &middot; 4 min</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">03</span><h3>What Vanderbilt will ask you to do</h3><p><b>Learn:</b> the manager tasks of year one, when each shows up, who helps, and the micro module for it. <b>Do:</b> open the four groups, then decide five situations: handle it, ask PCB, route it, or report it.</p><span class="chip">Pages 7 to 8 &middot; 4 min</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">04</span><h3>The four jobs of a manager</h3><p><b>Learn:</b> one picture that holds the whole job: get the work done, take care of your people, make things better, connect your team. <b>Do:</b> five short videos, flip the cards, then your call in four situations.</p><span class="chip">Pages 9 to 14 &middot; 6 min</span></div>
-      <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>The survey and where you stand</h3><p><b>Learn:</b> what the survey you already took was asking. <b>Do:</b> rate yourself on fifteen habits and get your micro-module order.</p><span class="chip">Page 15 &middot; 2 min</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>Your assessment results</h3><p><b>Learn:</b> what the Manager Effectiveness Assessment you already took was asking, sorted by the four jobs, and what the three bands mean. <b>Do:</b> enter your band and lowest job from the results email; get your micro-module order.</p><span class="chip">Page 15 &middot; 2 min</span></div>
     </div>
     <p class="hw-meta reveal" style="margin-top:10px">Then a five-question check (page 16), your next seven days (page 17), a keep-learning page of recommended courses, podcasts, and videos (page 18), and the wrap-up (page 19). The four jobs in module 4 come from research by Gary Yukl; we use it as a guide, and nobody is tested on the theory. <span id="progTopLine">Section tracking: you have 8 sections ahead.</span></p>
   </div>
@@ -755,7 +765,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <h2>A simple way to keep the whole job in view: four <em class="s">jobs</em>.</h2>
     </div>
     <div class="ask"><p><b>What you will learn</b>You now know what a manager is and what Vanderbilt will ask of you. This module gives you one simple picture to hold it all: four jobs, and the everyday habits inside each. Nothing new to memorize; it is the same work, sorted.</p><p><b>What Vanderbilt asks you to do</b>Do all four jobs every week, and notice which one this week needs most. Watch the video, then tap each card to see the habits inside.</p></div>
-    <div class="yukl"><b>Where this comes from</b><span>Research by Gary Yukl (<a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener">2012</a>): four kinds of manager behavior, fifteen habits</span><span>Vanderbilt uses it as a guide, in plain words</span><span>The survey you took before this course asks about the same fifteen habits</span></div>
+    <div class="yukl"><b>Where this comes from</b><span>Research by Gary Yukl (<a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener">2012</a>): four kinds of manager behavior, fifteen habits</span><span>Vanderbilt uses it as a guide, in plain words</span><span>The Manager Effectiveness Assessment you took before this course scores fourteen of these habits</span></div>
     <div class="vc-grid">
       <div>
         <div class="cv-wrap" data-cv="framework">
@@ -802,7 +812,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Fix it</h4><span class="def">When it breaks twice, find the cause.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 4 of 15 &middot; Yukl calls it problem solving</span><p class="hb no"><b>Stop doing this</b>The report rebuilt yourself because it is faster.</p><p class="hb yes"><b>Do this instead</b>The cause found, the handoff changed, the team told.</p></span></button></div>
       </div>
     </div>
-    <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this task-oriented behavior: planning, clarifying, monitoring, problem solving</span><span>The survey asks about these four habits</span><span>Micro modules that build them: Setting Expectations and Goals, Running 1:1s, Time and Attendance Approvals</span></div>
+    <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this task-oriented behavior: planning, clarifying, monitoring, problem solving</span><span>The assessment scores these habits</span><span>Micro modules that build them: Setting Expectations and Goals, Running 1:1s, Time and Attendance Approvals</span></div>
     <div class="keep" data-keep="task"></div>
   </div>
 </section>
@@ -832,7 +842,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">8</span><h4>Trust them</h4><span class="def">Hand over real decisions. Ask before you decide.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 8 of 15 &middot; Yukl calls it empowering</span><p class="hb no"><b>Stop doing this</b>The task delegated, every decision kept.</p><p class="hb yes"><b>Do this instead</b>The decision handed over with the boundary stated. The team asked before a new process is set.</p></span></button></div>
       </div>
     </div>
-    <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this relations-oriented behavior: supporting, developing, recognizing, empowering</span><span>The survey asks about these four habits</span><span>Micro modules that build them: Giving Feedback, FMLA and Leave, Flexible Work Arrangements</span></div>
+    <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this relations-oriented behavior: supporting, developing, recognizing, empowering</span><span>The assessment scores these habits</span><span>Micro modules that build them: Giving Feedback, FMLA and Leave, Flexible Work Arrangements</span></div>
     <div class="keep" data-keep="relations"></div>
   </div>
 </section>
@@ -862,7 +872,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">12</span><h4>Look back</h4><span class="def">Ten minutes after big work. Write it down.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 12 of 15 &middot; Yukl calls it collective learning</span><p class="hb no"><b>Stop doing this</b>Straight to the next project, no look back.</p><p class="hb yes"><b>Do this instead</b>What worked, what did not, what changes, written where the next person can find it.</p></span></button></div>
       </div>
     </div>
-    <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this change-oriented behavior: advocating, envisioning, encouraging innovation, collective learning</span><span>The survey asks about these four habits</span><span>Micro modules that build them: The Mission and the Vision, Areas of Focus</span></div>
+    <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this change-oriented behavior: advocating, envisioning, encouraging innovation, collective learning</span><span>The assessment scores these habits</span><span>Micro modules that build them: The Mission and the Vision, Areas of Focus</span></div>
     <div class="keep" data-keep="change"></div>
   </div>
 </section>
@@ -891,7 +901,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">15</span><h4>Speak up for your team</h4><span class="def">Facts, options, and a negotiated date.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 15 of 15 &middot; Yukl calls it representing</span><p class="hb no"><b>Stop doing this</b>Every request absorbed so nobody is upset. Or refused with no reason.</p><p class="hb yes"><b>Do this instead</b>The hours shown, the conflict named, two options offered, the date negotiated.</p></span></button></div>
       </div>
     </div>
-    <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this external behavior: networking, external monitoring, representing</span><span>The survey asks about these three habits</span><span>Micro modules that build them: How We Work Together, Requisitions and Hiring, Compensation Cycle and Merit Basics</span></div>
+    <div class="yukl foot"><b>Where this comes from</b><span>Yukl calls this external behavior: networking, external monitoring, representing</span><span>The assessment scores these habits</span><span>Micro modules that build them: How We Work Together, Requisitions and Hiring, Compensation Cycle and Merit Basics</span></div>
     <div class="keep" data-keep="external"></div>
   </div>
 </section>
@@ -900,7 +910,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 <section id="yourcall" class="th-light" aria-label="Your call: four situations">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 4 &middot; Page 14 of 19</b> Your call: four situations <i>&middot; You have all four jobs &middot; Next: module 5, the survey</i></p>
+      <p class="you-are"><b>Module 4 &middot; Page 14 of 19</b> Your call: four situations <i>&middot; You have all four jobs &middot; Next: module 5, your assessment results</i></p>
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your call</span></span>
       <h2>Four situations, one for each <em class="s">job</em>.</h2>
     </div>
@@ -920,41 +930,59 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
 
 
 <!-- ═══════════════════ 13 THE SURVEY AND YOUR PROFILE ═══════════════════ -->
-<section id="survey" class="th-light" aria-label="The survey and your profile">
+<section id="survey" class="th-light" aria-label="Your Manager Effectiveness Assessment results">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Module 5 &middot; Page 15 of 19</b> The survey, and where you stand <i>&middot; You have made your calls &middot; Next: a quick check</i></p>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The survey</span></span>
-      <h2>Where you <em class="s">stand</em>.</h2>
+      <p class="you-are"><b>Module 5 &middot; Page 15 of 19</b> Your assessment results <i>&middot; You have made your calls &middot; Next: a quick check</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your results</span></span>
+      <h2>Reading your <em class="s">results</em>.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>What the survey you already took was asking (how often you do the fifteen habits, nothing else) and how to read your results.</p><p><b>What Vanderbilt asks you to do</b>Rate yourself honestly now that you know the habits by name. Pick one habit to work on this week. Take the survey again six months after you finish.</p></div>
-    <div class="survey-grid">
-      <div class="survey">
-        <span class="sk">Done once &middot; again in six months</span>
-        <div>
-          <h4>The survey</h4>
-          <p>Before this course you completed a short survey, the Managerial Practices Survey. It asked how often you do each of the fifteen habits you just learned. It is not about personality or performance, and nobody passes or fails it. It shows you, and the program, where to start.</p>
-          <ol>
-            <li><b>You already took it,</b> before this course. Now that you know the fifteen habits by name, your results will read differently.</li>
-            <li><b>It asks about a typical month,</b> not your best week. An honest low score is worth more than a flattering one.</li>
-            <li><b>Read it as a picture across the four jobs.</b> Your Engagement Consultant can walk through your results with you.</li>
-            <li><b>You take it again six months after you finish this course,</b> so the change shows.</li>
-          </ol>
+    <div class="ask"><p><b>What you will learn</b>What the Manager Effectiveness Assessment you took before this course was asking, sorted by the four jobs, and how to read the results email.</p><p><b>What Vanderbilt asks you to do</b>Open your results email, enter your band and the job where your answers were lowest, and get your starting point: the micro modules in your order. Take the assessment again six months after you finish.</p></div>
+    <div class="survey-grid mea">
+      <div>
+        <div class="survey">
+          <span class="sk">Taken before this course &middot; again in six months</span>
+          <div>
+            <h4>The Manager Effectiveness Assessment</h4>
+            <p>Fourteen questions about how often you do the habits you just learned. Your results come to you by email as a score out of 70 and one of three bands. It is not about personality or performance, and nobody passes or fails it. It shows you, and the program, where to start.</p>
+            <ol>
+              <li><b>Developing Manager, under 35.</b> The fundamentals are not yet habits. Start with jobs 1 and 2; the micro modules for 1:1s, expectations, and feedback come first.</li>
+              <li><b>Strong Manager, 35 to 55.</b> Solid but uneven. Find the job where your answers were lowest and start there.</li>
+              <li><b>Advanced Manager, 56 and above.</b> The fundamentals happen without prompting. The step up is reach: jobs 3 and 4, shaping priorities beyond your team and building a team that learns without you in the room.</li>
+            </ol>
+          </div>
         </div>
+        <p class="how" style="margin-top:12px"><b>How this page works</b>1. Tap each job to see which questions it covers. 2. Enter your band from the email, and the job where your answers were lowest. 3. Your starting point appears, and your dashboard takes the same order.</p>
+        <div class="fw two mea-map" id="meaMap" data-map="mea">
+          <button type="button" class="fw-card" aria-expanded="false"><b>Job 1</b><strong>Get the work done.</strong><p>Four questions.</p><ul><li><b>Q11</b> Plan it <i>(mapped out action steps and resources before a complex project)</i></li><li><b>Q2</b> Say it <i>(told each person what success looks like, in specific terms)</i></li><li><b>Q3</b> Check it <i>(reviewed progress early enough to correct before the deadline)</i></li><li><b>Q1</b> Fix it <i>(found the root cause of a team problem and put a fix in place)</i></li></ul><span class="hint">Tap to open</span></button>
+          <button type="button" class="fw-card" aria-expanded="false"><b>Job 2</b><strong>Take care of your people.</strong><p>Four questions.</p><ul><li><b>Q6</b> Listen and help <i>(asked about workload or pressure before they raised it)</i></li><li><b>Q4</b> Grow them <i>(gave specific feedback they could act on that week)</i></li><li><b>Q5</b> Thank them <i>(recognized a contribution where peers could see it)</i></li><li><b>Q7</b> Trust them <i>(let someone choose their own method once the outcome was agreed)</i></li></ul><span class="hint">Tap to open</span></button>
+          <button type="button" class="fw-card" aria-expanded="false"><b>Job 3</b><strong>Make things better.</strong><p>Three questions.</p><ul><li><b>Q13</b> Describe where you are going <i>(a clear, inspiring picture of the coming year)</i></li><li><b>Q12</b> Let people try <i>(encouraged suggestions to improve how we work)</i></li><li><b>Q10</b> Look back <i>(ran a review after significant work so the team could apply it)</i></li><li><i>Explain the why is taught here and not scored on the assessment.</i></li></ul><span class="hint">Tap to open</span></button>
+          <button type="button" class="fw-card" aria-expanded="false"><b>Job 4</b><strong>Connect your team.</strong><p>Three questions.</p><ul><li><b>Q14</b> Know the people <i>(kept up relationships in other departments that help the team)</i></li><li><b>Q8</b> Watch for what is coming <i>(brought information from outside the unit that changed priorities)</i></li><li><b>Q9</b> Speak up for your team <i>(represented the team to a decision-maker outside the unit)</i></li></ul><span class="hint">Tap to open</span></button>
+        </div>
+        <p class="fw-status" id="meaStatus" role="status" aria-live="polite">0 of 4 jobs opened.</p>
       </div>
-      <div class="route reveal" id="assessBox">
+      <div class="route reveal" id="meaBox">
         <div class="route-head">
-          <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Rate yourself now</span></span>
-          <h3>How often do you do <em>this</em>?</h3>
-          <p>One habit at a time: rarely, sometimes, or often, thinking of a normal month with your current team. When you finish: a first picture of where you stand, the three habits to work on first, and the order your micro modules open in.</p>
+          <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Enter your result</span></span>
+          <h3>From your results <em>email</em>.</h3>
+          <p>Two things from the email, and one honest judgment. Nothing here is shared; it sets the order of your micro modules and the one habit for this week.</p>
         </div>
-        <div class="route-qs" id="assessQs"></div>
-        <div class="route-nav" id="assessNav"></div>
-        <div class="route-act">
-          <button type="button" class="btn btn-primary" id="assessShow" disabled>Show my profile</button>
-          <span class="route-hint" id="assessHint">Rate all fifteen to see your profile.</span>
+        <div class="mea-form">
+          <label><span class="mono">Your band</span><select id="meaBand"><option value="">Choose&hellip;</option><option value="developing">Developing Manager (under 35)</option><option value="strong">Strong Manager (35 to 55)</option><option value="advanced">Advanced Manager (56 and above)</option></select></label>
+          <label><span class="mono">Your score, if you have it</span><input id="meaScore" type="number" min="0" max="70" inputmode="numeric" placeholder="0 to 70"></label>
+          <div class="mea-jobs"><span class="mono">Where were your answers lowest?</span><div class="route-opts" role="group" aria-label="Pick the job where your answers were lowest" id="meaJobs">
+            <button type="button" data-job="task" aria-pressed="false">Job 1 &middot; Get the work done</button>
+            <button type="button" data-job="relations" aria-pressed="false">Job 2 &middot; Take care of your people</button>
+            <button type="button" data-job="change" aria-pressed="false">Job 3 &middot; Make things better</button>
+            <button type="button" data-job="external" aria-pressed="false">Job 4 &middot; Connect your team</button>
+          </div></div>
+          <div class="route-act">
+            <button type="button" class="btn btn-primary" id="meaShow" disabled>Set my starting point</button>
+            <span class="route-hint" id="meaHint">Pick your band and a job.</span>
+          </div>
+          <p class="hinttxt">No email yet? Ask your Engagement Consultant, or pick the job you already know needs you most.</p>
         </div>
-        <div class="route-out" id="assessOut" aria-live="polite"></div>
+        <div class="route-out" id="meaOut" aria-live="polite"></div>
       </div>
     </div>
   </div>
@@ -991,8 +1019,8 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
     </div>
     <div class="hw-list reveal" style="margin-top:12px">
       <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Open your dashboard today</h3><p>Your micro modules (how to do the common tasks) in your order, your compliance list, and who to call. <a href="../dashboard/">Open My Voyage</a> &middot; <a href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Manager Portal</a>.</p></div><span class="chip">Today</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one habit this week</h3><p id="ns2p">The one your self-rating pointed to. Do it once, on purpose, and notice what happened.</p></div><span class="chip">This week</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Take the survey again in six months</h3><p>The Futures Learning Hub sends it six months after you finish this course. Answer for a typical month, honestly, and compare it with the one you took before you started.</p></div><span class="chip">In six months</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one habit this week</h3><p id="ns2p">The one your results pointed to. Do it once, on purpose, and notice what happened.</p></div><span class="chip">This week</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Take the assessment again in six months</h3><p>The Futures Learning Hub sends the Manager Effectiveness Assessment again six months after you finish this course. Answer honestly, and compare the band with the one you started with.</p></div><span class="chip">In six months</span></div>
     </div>
     <div class="evidence reveal" id="tell-leader">
       <span class="e-label">Tell your unit leader</span>
@@ -1014,7 +1042,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Keep learning</span></span>
       <h2>What to take <em class="s">next</em>.</h2>
     </div>
-    <div class="ask"><p><b>What this page is</b>A short, chosen list, not the whole catalog: courses in Oracle Learning (they open with your Vanderbilt login), a few podcasts for the commute, and a few videos, grouped by the topics this course touched. Each one says why it is on the list.</p><p><b>How to use it</b>The micro modules on your dashboard come first; they teach the Vanderbilt way to do each task. Pick one item from here per month, on the topic your self-rating pointed to, and put it on your calendar.</p></div>
+    <div class="ask"><p><b>What this page is</b>A short, chosen list, not the whole catalog: courses in Oracle Learning (they open with your Vanderbilt login), a few podcasts for the commute, and a few videos, grouped by the topics this course touched. Each one says why it is on the list.</p><p><b>How to use it</b>The micro modules on your dashboard come first; they teach the Vanderbilt way to do each task. Pick one item from here per month, on the job your results pointed to, and put it on your calendar.</p></div>
     <div class="learn-top" id="learnTop"></div>
     <div class="learn-grid" id="learnGrid"></div>
     <div class="learn-media">
@@ -1030,7 +1058,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   <div class="wrap">
     <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Page 19 of 19 &middot; Wrap-up</span></span>
     <h2 class="metal">Now manage it the <em>same</em> way.</h2>
-    <p>Four jobs, one habit to try this week, and a dashboard that now knows where to start you. The micro modules are open; take the first one today. When the survey comes back around in six months, answer it honestly and see what changed. From first day to fully formed leader starts now.</p>
+    <p>Four jobs, one habit to try this week, and a dashboard that now knows where to start you. The micro modules are open; take the first one today. When the assessment comes back around in six months, answer it honestly and see what changed. From first day to fully formed leader starts now.</p>
     <a class="btn btn-gold" href="../dashboard/">Open My Voyage<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <p class="cta-alt">Have not taken the quick check yet? <a href="#quiz">It takes three minutes.</a></p>
     <p class="send-sign">The quality of Vanderbilt&rsquo;s future depends on the quality of its managers today.</p>
@@ -1069,7 +1097,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   <div class="oracle-modal">
     <span class="mono">Foundation complete</span>
     <h2 id="oracleTitle">You have completed the foundation.</h2>
-    <p id="oracleBody">All eight sections are done. Your micro modules are open on your dashboard. The survey comes back around six months from now.</p>
+    <p id="oracleBody">All eight sections are done. Your micro modules are open on your dashboard. The assessment comes back around six months from now.</p>
     <div class="oracle-actions">
       <a class="btn btn-gold" id="oracleGo" href="../dashboard/">Open My Voyage<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
       <button type="button" class="btn btn-ghost btn-sm" id="oracleLater">Stay here</button>
