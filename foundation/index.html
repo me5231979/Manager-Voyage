@@ -36,7 +36,7 @@
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=20260911g" />
+<link rel="stylesheet" href="../assets/css/course.css?v=20260911h" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
@@ -644,19 +644,19 @@ html.paged .recap-row b, html.paged .ov-card b, html.paged .fw-card b, html.page
 /* uniform card padding so title bars can run edge to edge */
 html.paged .recap-row > div, html.paged .ov-card, html.paged .fw-card, html.paged .isnot, html.paged .who, html.paged .operate, html.paged .mission-charge, html.paged .sim, html.paged #calls .sim, html.paged .evidence, html.paged .idea, html.paged .canon, html.paged .helpers.tabbed > .help-pane, html.paged .hw, html.paged .ov-mods .hw, html.paged .recap, html.paged .learn-comp, html.paged .pdf-card, html.paged .way, html.paged .survey, html.paged .dq, html.paged .sq, html.paged #tell-leader, html.paged .oracle-strip{ padding:var(--cpy) var(--cpx) calc(var(--cpy) + 2px); background:var(--card); }
 /* the title bar: the card's label, drawn as a bar under the gold rule */
-html.paged .recap-row > div > b, html.paged .ov-card > b, html.paged .fw-card > b, html.paged .isnot > .mono, html.paged .who > .mono, html.paged .operate > .mono, html.paged .mission-charge > .mono, html.paged .sim > .sim-head > .mno, html.paged .evidence > .e-label, html.paged .idea > .who-is, html.paged .canon > h5, html.paged .learn-comp > .mono, html.paged .pdf-card > .mono, html.paged .recap > .mono, html.paged .hw > .hw-no, html.paged .ov-mods .hw > .hw-no, html.paged .help-pane > h4{ display:block; margin:calc(-1 * var(--cpy)) calc(-1 * var(--cpx)) 10px; padding:7px var(--cpx); background:var(--vu-gold); border-bottom:0; color:var(--vu-black); grid-column:1 / -1; }
-html.paged .idea > .who-is{ display:flex; align-items:center; gap:8px; } html.paged .idea > .who-is .sub-listen{ border-color:var(--vu-black); color:var(--vu-black); background:transparent; } html.paged .idea > .who-is .sub-listen.playing{ background:var(--vu-black); color:var(--vu-gold); }
+html.paged .recap-row > div > b, html.paged .ov-card > b, html.paged .fw-card > b, html.paged .isnot > .mono, html.paged .who > .mono, html.paged .operate > .mono, html.paged .mission-charge > .mono, html.paged .sim > .sim-head > .mno, html.paged .evidence > .e-label, html.paged .idea > .who-is, html.paged .canon > h5, html.paged .learn-comp > .mono, html.paged .pdf-card > .mono, html.paged .recap > .mono, html.paged .hw > .hw-no, html.paged .ov-mods .hw > .hw-no, html.paged .help-pane > h4{ display:block; margin:calc(-1 * var(--cpy)) calc(-1 * var(--cpx)) 10px; padding:7px var(--cpx); background:none; border-bottom:1px solid var(--vu-gold); color:var(--vu-gold); grid-column:1 / -1; }
+html.paged .idea > .who-is{ display:flex; align-items:center; gap:8px; }
 html.paged .sim > .sim-head > .mno{ margin-bottom:8px; }
-html.paged .hw > .hw-no, html.paged .ov-mods .hw > .hw-no{ font-size:1.35rem; line-height:1; padding:6px var(--cpx); color:var(--vu-black); }
+html.paged .hw > .hw-no, html.paged .ov-mods .hw > .hw-no{ font-size:1.35rem; line-height:1; padding:6px var(--cpx); color:var(--vu-gold); }
 html.paged .hw h3, html.paged .ov-mods .hw h3{ margin-top:2px; }
-html.paged .help-pane > h4{ font-family:var(--serif); color:var(--vu-black); font-size:var(--fs-card-h); }
+html.paged .help-pane > h4{ font-family:var(--serif); color:var(--tx); font-size:var(--fs-card-h); }
 html.paged .mission-charge > .mono{ margin-left:calc(-1 * var(--cpx)); }
-html.paged .isnot{ border-top:3px solid var(--vu-gold); gap:10px 18px; } html.paged .isnot .mono{ color:var(--vu-black); } html.paged .isnot .x{ background:var(--vu-gold); color:var(--vu-black); }
+html.paged .isnot{ gap:10px 18px; } html.paged .isnot .mono{ color:var(--vu-gold); } html.paged .isnot .x{ background:var(--vu-gold); color:var(--vu-black); }
 html.paged .who{ gap:8px 16px; }
 html.paged .recap-row > div, html.paged .ov-card, html.paged .fw-card, html.paged .operate, html.paged .sim, html.paged .evidence, html.paged .idea, html.paged .canon, html.paged .who, html.paged .hw, html.paged .recap, html.paged .learn-comp, html.paged .pdf-card, html.paged .helpers.tabbed > .help-pane{ border:1px solid var(--bdg); border-top:0; }
 html.paged .sim{ border-left:1px solid var(--bd); } html.paged .evidence{ border-left:1px solid var(--bd); } html.paged .helpers.tabbed > .help-pane{ border-left:1px solid var(--bd); }
 /* column labels inside cards: mini bars */
-html.paged .idea p.blk > b, html.paged .help-cols > div > b, html.paged .helpers .help-cols b, html.paged .way b, html.paged .op-grid > div > b:first-child, html.paged .ask p b{ display:block; padding:0 0 4px; margin:0 0 6px; border:0; border-bottom:2px solid var(--vu-gold); background:none; color:var(--vu-gold); }
+html.paged .idea p.blk > b, html.paged .help-cols > div > b, html.paged .helpers .help-cols b, html.paged .way b, html.paged .op-grid > div > b:first-child, html.paged .ask p b{ display:block; padding:0 0 4px; margin:0 0 6px; border:0; border-bottom:1px solid var(--vu-gold); background:none; color:var(--vu-gold); }
 html.paged .idea .blk{ border-top:0; padding-top:0; }
 html.paged .op-grid > div > b:first-child{ font-family:var(--serif); font-size:var(--fs-card-h); color:var(--tx); letter-spacing:0; text-transform:none; }
 /* nothing shrinks to fit: the page scrolls instead */
@@ -666,7 +666,12 @@ html.paged .sim-pick{ min-width:0; max-width:none; } html.paged .sim-pick select
 html.paged #calls .calls-grid > div{ min-width:0; overflow:hidden; }
 html.paged .operate .op-lead{ max-width:none; }
 .op-link{ margin:10px 0 0; font-size:var(--fs-small); } .op-link a{ color:var(--link); border-bottom:1px solid var(--bdg); } .op-link a:hover{ color:var(--strong); }
-html.paged .fcard h4, html.paged .flip-grid.five .fcard h4{ font-family:var(--serif); font-weight:400; }
+html.paged h3, html.paged h4, html.paged .fcard h4, html.paged .flip-grid.five .fcard h4, html.paged .hw h3, html.paged .ov-mods .hw h3, html.paged .learn-comp h4, html.paged .vslot h4, html.paged .cv-wait b, html.paged .sim-head h3{ font-family:var(--serif); font-weight:400; letter-spacing:-.01em; }
+html.paged .qz legend, html.paged .dq .dq-s, html.paged .sq p{ font-family:var(--sans); }
+/* home: let the campus photo show, keep the copy in one column */
+html.paged .hero .meta-line{ max-width:none; }
+html.paged .hero .lead{ max-width:60ch; }
+
 </style>
 </head>
 <body>
