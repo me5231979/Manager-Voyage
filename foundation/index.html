@@ -36,7 +36,7 @@
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=20260911h" />
+<link rel="stylesheet" href="../assets/css/course.css?v=20260911i" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
@@ -672,6 +672,22 @@ html.paged .qz legend, html.paged .dq .dq-s, html.paged .sq p{ font-family:var(-
 html.paged .hero .meta-line{ max-width:none; }
 html.paged .hero .lead{ max-width:60ch; }
 
+
+/* five ideas: one footer line. Left: try the moment. Right: back and next. */
+html.paged .idea .try{ grid-column:1 / 4; border-top:1px solid var(--bd); padding-top:12px; margin-top:6px; min-width:0; }
+html.paged .idea-nav{ grid-column:4 / -1; justify-content:flex-end; border-top:1px solid var(--bd); padding-top:12px; margin-top:6px; }
+html.paged .idea .try .cq-h{ display:flex; flex-wrap:nowrap; align-items:center; gap:12px; margin:0; text-transform:none; letter-spacing:0; min-width:0; }
+html.paged .idea .try .cq-h .try-t{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+html.paged .idea .try .cq-h .try-btn{ white-space:nowrap; flex:0 0 auto; }
+html.paged .idea .try .cq-h{ max-width:none; }
+html.paged .idea .try .cq-h .mono{ font-size:var(--fs-lab); letter-spacing:.08em; white-space:nowrap; flex:0 0 auto; }
+html.paged .idea .try .cq-h .try-t{ font-family:var(--serif); font-size:var(--fs-card-h); color:var(--tx); line-height:1.2; }
+html.paged .idea .try .cq-h .sub-listen{ margin-left:0; }
+html.paged .idea .try .cq-h .try-btn{ margin-left:auto; }
+html.paged .idea.trying .try{ grid-column:1 / -1; border-top:0; padding-top:0; }
+html.paged .idea.trying .try .cq-h{ margin-bottom:8px; }
+html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-start; }
+@media (max-width:1100px){ html.paged .idea .try, html.paged .idea-nav{ grid-column:1 / -1; } html.paged .idea-nav{ border-top:0; padding-top:0; margin-top:0; justify-content:flex-start; } }
 </style>
 </head>
 <body>
