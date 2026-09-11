@@ -1,7 +1,7 @@
 /* ══════════ MANAGER VOYAGE · FOUNDATION · app engine ══════════
    Progress (thirteen tracked activities), the six segments' activities (flip
    cards, your call, quick check), the assessment result entry that
-   orders the 22 micro modules, the knowledge check, page narration, the
+   lists the eighteen micro modules, the knowledge check, page narration, the
    custom and public videos, and the SCORM hookup. State: localStorage
    mv-found-* plus, inside Oracle Learning, SCORM suspend_data. Nothing is
    sent anywhere else. */
@@ -116,7 +116,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20260912h';
+var MEDIA_V = '20260912i';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
@@ -551,17 +551,17 @@ var DRILLS = {
     { s:'Deciding which of three new requests the team does first this week.', a:0, x:'Yours now. Priorities are the manager’s call; if you do not make it, the loudest request will.' },
     { s:'Writing the monthly report your best analyst has always written.', a:1, x:'Still theirs. Your job is to check it before it is due, not to write it. Doing the work is the old job.' },
     { s:'Deciding whether someone qualifies for medical leave.', a:2, x:'The leave office decides. Your job is to send it there the same day, and never to ask for a diagnosis.' },
-    { s:'Making sure a new hire knows what is expected in their first month.', a:0, x:'Yours now. Nobody else will say it, and “clear is kind.” The Onboarding a New Hire micro module shows you how.' },
+    { s:'Making sure a new hire knows what is expected in their first month.', a:0, x:'Yours now. Nobody else will say it, and “clear is kind.”' },
     { s:'Investigating a complaint that a coworker is harassing someone.', a:2, x:'Equal Opportunity and Access investigates. Your job is to report it the same day, not to look into it yourself.' },
     { s:'Approving a timecard that shows 52 hours in one week.', a:0, x:'Yours now. Ask about the week before you approve, and fix what needs fixing. You are responsible for accuracy: timesheets and payroll must be right.' }
   ]},
   calls: { opts:['Handle it','Ask my HCM first','The leave office, the same day','EOA, the same day'], prog:'calls', verb:'decided', items:[
-    { s:'A team member asks for next Friday off for a wedding.', a:0, x:'Handle it. Check coverage, approve it in Oracle, and say yes out loud. The Time and Attendance Approvals micro module shows the steps.' },
+    { s:'A team member asks for next Friday off for a wedding.', a:0, x:'Handle it. Check coverage, approve it in UKG, and say yes out loud. The UKG micro module shows the steps.' },
     { s:'A team member says their doctor wants them out for three weeks after surgery.', a:2, x:'The leave office, the same day. It sounds like leave, so it is leave until the leave office says otherwise. Adjust the work; do not ask about the surgery.' },
     { s:'A team member says a coworker keeps making comments about her religion.', a:3, x:'EOA, the same day. You listen, you write down what was said, and you report it. You do not investigate or promise an outcome.' },
-    { s:'You want to raise someone’s pay because they took on more work.', a:1, x:'Ask your HCM first. Pay has a process and a cycle (the Compensation Cycle and Merit Basics micro module); your HCM tells you what is possible and when.' },
-    { s:'A seat on your team just opened and you want to fill it.', a:1, x:'Ask your HCM first. Hiring starts with a requisition and an approval chain (the Requisitions and Hiring micro module).' },
-    { s:'A team member’s work has slipped for a month and a talk did not fix it.', a:1, x:'Ask your HCM first. A performance concern has a fair process (Performance Concerns and Progressive Discipline); do not improvise it.' }
+    { s:'You want to raise someone’s pay because they took on more work.', a:1, x:'Ask your HCM first. Pay has a process and a cycle; your HCM tells you what is possible and when.' },
+    { s:'A seat on your team just opened and you want to fill it.', a:1, x:'Ask your HCM first. Hiring starts with a requisition and an approval chain. The Oracle for Managers: hiring micro module shows the steps.' },
+    { s:'A team member’s work has slipped for a month and a talk did not fix it.', a:1, x:'Ask your HCM first. A performance concern has a fair process; do not improvise it.' }
   ]},
   task: { opts:['Plan it','Say it','Check it','Fix it','Not managing, just doing the work'], prog:'task', verb:'named', items:[
     { s:'Before the quarter, set three priorities, assigned an owner to each, and decided what would move if a new request landed.', a:0, x:'Plan it: what, who, when, and what gives. Done before the quarter, not during it.' },
@@ -767,12 +767,17 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
   }
   var ltabs = $('.learn-tabs');
   if(ltabs) ltabs.addEventListener('click', function(e){ var t = e.target.closest('button[data-ltab]'); if(!t) return; var k = t.getAttribute('data-ltab'); $$('.learn-tabs button').forEach(function(b){ b.setAttribute('aria-selected', b === t ? 'true' : 'false'); }); $$('.learn-pane').forEach(function(pn){ pn.classList.toggle('cur', pn.getAttribute('data-lpane') === k); }); if(narr.playing) narrStop(); });
-  var comp = $('#learnComp'), C = window.MV_COMPLIANCE;
-  if(comp && C){
-    comp.innerHTML = '<span class="mono">Micro Modules</span><h4>' + esc(C.title) + '</h4><p>' + esc(C.note) + '</p><div class="comp-grid">' + C.items.map(function(it, i){
-      var t = typeof it === 'string' ? { title: it, type: 'Video' } : it, has = !!t.url;
-      return '<a class="comp-item' + (has ? '' : ' soon') + '" href="' + esc(t.url || C.url || '#') + '"' + (has || C.url ? ' target="_blank" rel="noopener"' : ' aria-disabled="true" title="Link coming from PCB"') + '><span class="no">' + (i + 1) + '</span><span class="ct"><i>' + esc(t.type || 'Video') + ' &middot; Oracle Learning</i><b>' + esc(t.title) + '</b></span><span class="go" aria-hidden="true">&#8599;</span></a>';
-    }).join('') + '</div>';
+  /* the micro modules, by track, from the same program data the dashboard uses */
+  var comp = $('#learnComp'), TR = (P && P.mrc && P.mrc.tracks) || [];
+  if(comp && TR.length){
+    var n = 0, total = TR.reduce(function(a, t){ return a + t.modules.length; }, 0);
+    comp.innerHTML = '<span class="mono">Micro Modules</span><h4>Your ' + (total === 18 ? 'eighteen' : total) + ' micro modules</h4><p>Short courses in Oracle Learning, one common task each, in the order the tracks come due. Each opens in Oracle Learning once its link is added.</p>' + TR.map(function(t){
+      var by = t.phase === 1 ? 'By Day 30' : 'By Day 60';
+      return '<div class="track-head"><span class="mono">' + esc(t.title) + '</span><b>' + esc(t.why) + '</b><span class="tw">' + esc(t.window) + ' &middot; ' + t.modules.length + (t.modules.length === 1 ? ' step' : ' modules') + '</span><p class="out">' + esc(t.outcome) + '</p></div><div class="comp-grid">' + t.modules.map(function(m){
+        n += 1; var has = !!m.oracleUrl;
+        return '<a class="comp-item' + (has ? '' : ' soon') + '" href="' + esc(m.oracleUrl || '#') + '"' + (has ? ' target="_blank" rel="noopener"' : ' aria-disabled="true" title="Link coming from PCB"') + '><span class="no">' + n + '</span><span class="ct"><i>' + esc(m.format || 'Video') + ' &middot; Oracle Learning &middot; ' + by + '</i><b>' + esc(m.title) + '</b><small>' + esc(m.desc || '') + '</small></span><span class="go" aria-hidden="true">&#8599;</span></a>';
+      }).join('') + '</div>';
+    }).join('');
   }
   /* simulator */
   var box = $('[data-sim]'), sel = $('#simSel'), out = $('#simOut'), SIM = window.MV_SIM || [];

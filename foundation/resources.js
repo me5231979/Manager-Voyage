@@ -183,7 +183,7 @@ window.MV_LEARN = [
   "why": "Free, practical guides a large company built for its own new managers."
  }
 ];
-window.MV_LEARN_TOPICS = [['oracle', 'Ten courses in Oracle Learning, in order'], ['outside', 'Outside Vanderbilt: podcasts, videos, and a guide']];
+window.MV_LEARN_TOPICS = [['oracle', 'Ten more courses in Oracle Learning, in order'], ['outside', 'Outside Vanderbilt: podcasts, videos, and a guide']];
 window.MV_SIM = [
  {
   "k": "leave",
@@ -403,29 +403,4 @@ window.MV_SIM = [
  }
 ];
 
-/* The manager compliance courses (required, in Oracle Learning). Taken before this course. */
-window.MV_COMPLIANCE = {
-  title: 'Your micro modules',
-  url: '', /* paste the Oracle Learning deep link to the micro module list here; until then the button opens Oracle Learning */
-  note: 'Short courses in Oracle Learning, one common task each. Take them after this course, in any order. Each opens in Oracle Learning once its link is added.',
-  items: [
-    { title: 'Labor Relations', type: 'Video', url: '' },
-    { title: 'Wage and Hour', type: 'Video', url: '' },
-    { title: 'Workers’ Compensation', type: 'Video', url: '' },
-    { title: 'Independent Contractors', type: 'Video', url: '' },
-    { title: 'Emergency Preparedness, Fire, and Workplace Safety', type: 'Video', url: '' },
-    { title: 'Employee Impairment', type: 'Video', url: '' },
-    { title: 'Protection of Minors, Part 1', type: 'Video', url: '' },
-    { title: 'Protection of Minors, Part 2', type: 'Video', url: '' },
-    { title: 'FMLA', type: 'Video', url: '' },
-    { title: 'Title IX', type: 'Video', url: '' },
-    { title: 'Responding to Discrimination and Harassment', type: 'Video', url: '' },
-    { title: 'Accommodations', type: 'Video', url: '' },
-    { title: 'UKG: manager training for timecards, time off, and schedules', type: 'eLearning', url: '' },
-    { title: 'Oracle for Managers: my team and directory search', type: 'Video', url: '' },
-    { title: 'Oracle for Managers: my knowledge and service requests', type: 'Video', url: '' },
-    { title: 'Oracle for Managers: hiring', type: 'Video', url: '' },
-    { title: 'Oracle for Managers: assigning learning to your team', type: 'Video', url: '' },
-    { title: 'Request your certificate of completion, and share feedback', type: 'Manual', url: '' }
-  ]
-};
+/* The eighteen micro modules live in assets/js/program-data.js (MV_PROGRAM.mrc.tracks), shared with the dashboard. */

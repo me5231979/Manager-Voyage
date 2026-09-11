@@ -10,6 +10,7 @@ const ROOT = path.join(__dirname, '..'), F = path.join(ROOT, 'foundation');
 const html = fs.readFileSync(path.join(F, 'index.html'), 'utf8');
 const app = fs.readFileSync(path.join(F, 'app.js'), 'utf8');
 const w = {}; vm.runInNewContext(fs.readFileSync(path.join(F, 'resources.js'), 'utf8'), { window: w });
+vm.runInNewContext(fs.readFileSync(path.join(F, '..', 'assets', 'js', 'program-data.js'), 'utf8'), { window: w });
 function block(src, start){ const a = src.indexOf(start); const b = src.indexOf('\n];', a); return vm.runInNewContext('([' + src.slice(a + start.length, b) + '\n])', {}); }
 function obj(src, start){ const a = src.indexOf(start); const b = src.indexOf('\n};', a); return vm.runInNewContext('({' + src.slice(a + start.length, b) + '\n})', {}); }
 const IDEAS = block(app, 'var IDEAS = [');
@@ -94,7 +95,7 @@ td{ vertical-align:top; padding:5pt 8pt 5pt 0; border-bottom:1px solid var(--bd)
   <div><span class="eyebrow">Manager Voyage · Manager Foundations · Course 1</span>
   <h1 style="margin-top:8pt">You are a manager <em>now</em>.</h1></div>
   <p class="lead">Everything in the course, on paper: what changed, what a manager is, five ideas that hold up, what Vanderbilt will ask of you this year, who helps, the four jobs, how to read your assessment results, and what to learn next.</p>
-  <div class="meta"><span>About 35 minutes online</span><span>19 pages · 5 topics</span><span>Before: manager compliance courses</span><span>After: the micro modules</span><span>Recorded in Oracle Learning</span></div>
+  <div class="meta"><span>About 35 minutes online</span><span>19 pages · 5 topics</span><span>Before: manager compliance courses</span><span>After: the eighteen micro modules in Oracle Learning</span><span>Recorded in Oracle Learning</span></div>
 </header>`);
 // at a glance
 H.push(`<section><span class="eyebrow">The course at a glance</span><h2>Five topics, one <em>picture</em>.</h2>
@@ -169,9 +170,10 @@ H.push(`<section><span class="eyebrow">Topic 5 · Your assessment</span><h2>Your
 <div class="box"><b class="k">In six months</b><strong>Take the assessment again</strong>Compare the score with the one you started with.</div></div>
 <div class="week" style="margin-top:8pt"><b>Tell your manager</b>“I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].”</div></section>`);
 // learning
-H.push(`<section class="learn"><span class="eyebrow">Keep learning</span><h2>What to take <em>next</em>.</h2><p class="tx2">Ten courses in Oracle Learning, in order, and ten things from outside. Micro modules first. Then one item a month, on the habit you are working on. Links are live in the PDF; in Oracle Learning you can also search by title.</p>`);
+H.push(`<section class="learn"><span class="eyebrow">Keep learning</span><h2>What to take <em>next</em>.</h2><p class="tx2">Your eighteen micro modules in Oracle Learning, in the three tracks you take them in, then a short chosen list: ten more courses, podcasts, videos, and a guide. Micro modules first: Systems by Day 30, People and Policy and safety by Day 60. Then one item a month, on the habit you are working on. Links are live in the PDF; in Oracle Learning you can also search by title.</p>`);
+const TR = (w.MV_PROGRAM && w.MV_PROGRAM.mrc && w.MV_PROGRAM.mrc.tracks) || []; let mn = 0;
+TR.forEach(t => { H.push(`<h3>${esc(t.title)} <span class="why" style="font-weight:400">${esc(t.window)} · ${esc(t.why)}</span></h3><p class="tx2" style="margin:0 0 4pt">${esc(t.outcome)}</p><ol start="${mn + 1}" style="margin:0 0 6pt;padding-left:16pt;font-size:9.5pt">` + t.modules.map(m => { mn += 1; return `<li style="break-inside:avoid">${m.oracleUrl ? `<a href="${esc(m.oracleUrl)}">${esc(m.title)}</a>` : esc(m.title)}${m.format && m.format !== 'Video' ? ' (' + esc(m.format) + ')' : ''}<span class="why"> ${esc(m.desc || '')}</span></li>`; }).join('') + '</ol>'); });
 [[TOP[0][1], i => i.type === 'oracle'], [TOP[1][1], i => i.type !== 'oracle']].forEach(g => { const items = L.filter(g[1]); if(!items.length) return; H.push(`<h3>${esc(g[0])}</h3><ul style="list-style:none;padding:0">` + items.map((i, n) => `<li><span class="k">${i.type === 'oracle' ? (n + 1) + ' · ' : ''}${kind(i.type)}</span> <a href="${esc(i.url)}">${esc(i.title)}</a><span class="why">${esc(i.why || '')}</span></li>`).join('') + '</ul>'); });
-const C = w.MV_COMPLIANCE; if(C) H.push(`<h3>${esc(C.title)}</h3><p class="tx2">${esc(C.note)}${C.url ? ` <a href="${esc(C.url)}">Open in Oracle Learning</a>.` : ''}</p><ol style="columns:2;column-gap:18pt;margin:4pt 0 0;padding-left:16pt;font-size:9.5pt">` + C.items.map(t => { const it = typeof t === 'string' ? { title: t } : t; return `<li style="break-inside:avoid">${it.url ? `<a href="${esc(it.url)}">${esc(it.title)}</a>` : esc(it.title)}${it.type && it.type !== 'Video' ? ' (' + esc(it.type) + ')' : ''}</li>`; }).join('') + '</ol>');
 H.push(`</section>
 <footer class="foot"><b>Vanderbilt University · People, Culture and Belonging · Futures Learning Hub.</b> Manager Voyage, Manager Foundations, Course 1: You Are a Manager Now. This guide mirrors the online course at the time it was generated; the online course is the current version. Questions about a situation: your HCM first, your Engagement Consultant for the bigger ones.</footer>
 </div></body></html>`);

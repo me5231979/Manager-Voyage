@@ -36,7 +36,7 @@
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=20260912h" />
+<link rel="stylesheet" href="../assets/css/course.css?v=20260912i" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
@@ -344,6 +344,11 @@ html.paged .sim-out .s-first p{ font-size:.95rem; }
 .comp-item .ct b{ display:block; font-weight:500; font-size:.84rem; line-height:1.25; }
 .comp-item .go{ color:var(--vu-gold); font-size:1rem; }
 .comp-item.soon{ opacity:.85; } .comp-item.soon .go{ opacity:.5; }
+.comp-item .ct small{ display:block; color:var(--tx2); font-size:.78rem; line-height:1.3; margin-top:2px; }
+.track-head{ margin-top:16px; padding-bottom:6px; border-bottom:1px solid var(--vu-gold); display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; }
+.track-head:first-of-type{ margin-top:8px; }
+.track-head .mono{ color:var(--vu-gold); } .track-head b{ font-family:var(--serif); font-weight:400; font-size:1.05rem; }
+.track-head span.tw{ color:var(--tx2); font-size:.86rem; } .track-head .out{ flex-basis:100%; color:var(--tx2); font-size:.86rem; margin:0; }
 .learn-comp ol{ display:none; }
 @media (max-width:1100px){ .comp-grid{ grid-template-columns:repeat(3,1fr); } } @media (max-width:900px){ .comp-grid{ grid-template-columns:1fr 1fr; } } @media (max-width:640px){ .comp-grid{ grid-template-columns:1fr; } }
 html.paged #ideas .drill-status{ margin-top:4px; font-size:.82rem; }
@@ -636,7 +641,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
    that needs more room scrolls. Each card opens with a title bar and
    carries a soft gradient so the copy reads as one block. */
 html.paged{ --fs-body:.95rem; --fs-small:.84rem; --fs-lab:.72rem; --fs-card-h:1.15rem; --cpx:16px; --cpy:12px; }
-html.paged .hw p, html.paged .ov-card p, html.paged .ov-card li, html.paged .op-grid p, html.paged .isnot p, html.paged .recap p, html.paged .hw-step p, html.paged #nextstep .hw-step p, html.paged .evidence p, html.paged .ask p, html.paged .turn p, html.paged #yourcall .turn p, html.paged .mission-list li, html.paged .ov-mods .hw p, html.paged .learn-comp p, html.paged .pdf-card .pdf-sub, html.paged #calls .sim-head p, html.paged .sim-head p, html.paged .sim-out p, html.paged .sim-out .s-who li, html.paged .split2 .module-head p, html.paged .module-head p, html.paged .fw-card p, html.paged .fw-card li, html.paged .dq .dq-s, html.paged .dq-x, html.paged .sq p, html.paged .sq-x, html.paged .scn-out p, html.paged .way > div, html.paged .way p, html.paged .help-cols p, html.paged .how, html.paged .more-watch li, html.paged .recap-row p, html.paged .idea p, html.paged .idea .side .week, html.paged .idea .side .tue, html.paged .fcard .def, html.paged .fcard .back p, html.paged .fcard .back .hb, html.paged .flip-grid.five .fcard .def, html.paged .flip-grid.five .fcard .back .hb, html.paged .who div, html.paged .survey p, html.paged .survey ol, html.paged .drill-status, html.paged #ideas .drill-status, html.paged .canon ol li, html.paged .sec-head p, html.paged .hero .outcomes li, html.paged .lframe.learn .lf-chip, html.paged .learn-top a, html.paged .comp-item .ct b, html.paged .scn-opts button, html.paged #yourcall .scn-opts button, html.paged .idea .try .scn .scn-opts button, html.paged .dq-opts button, html.paged .qz .opts label, html.paged .qz legend, html.paged .route-opts button, html.paged .mea-choice button, html.paged .idea-tabs button, html.paged .learn-tabs button, html.paged .oracle-strip p, html.paged .focus-list li, html.paged .gap-line, html.paged .vslot p, html.paged .yt-off p, html.paged .mission-charge .mission-list li, html.paged .idea .try .scn .scn-out:not(.show)::before, html.paged #yourcall .scn .scn-out:not(.show)::before{ font-size:var(--fs-body); line-height:1.5; }
+html.paged .hw p, html.paged .ov-card p, html.paged .ov-card li, html.paged .op-grid p, html.paged .isnot p, html.paged .recap p, html.paged .hw-step p, html.paged #nextstep .hw-step p, html.paged .evidence p, html.paged .ask p, html.paged .turn p, html.paged #yourcall .turn p, html.paged .mission-list li, html.paged .ov-mods .hw p, html.paged .learn-comp p, html.paged .pdf-card .pdf-sub, html.paged #calls .sim-head p, html.paged .sim-head p, html.paged .sim-out p, html.paged .sim-out .s-who li, html.paged .split2 .module-head p, html.paged .module-head p, html.paged .fw-card p, html.paged .fw-card li, html.paged .dq .dq-s, html.paged .dq-x, html.paged .sq p, html.paged .sq-x, html.paged .scn-out p, html.paged .way > div, html.paged .way p, html.paged .help-cols p, html.paged .how, html.paged .more-watch li, html.paged .recap-row p, html.paged .idea p, html.paged .idea .side .week, html.paged .idea .side .tue, html.paged .fcard .def, html.paged .fcard .back p, html.paged .fcard .back .hb, html.paged .flip-grid.five .fcard .def, html.paged .flip-grid.five .fcard .back .hb, html.paged .who div, html.paged .survey p, html.paged .survey ol, html.paged .drill-status, html.paged #ideas .drill-status, html.paged .canon ol li, html.paged .sec-head p, html.paged .hero .outcomes li, html.paged .lframe.learn .lf-chip, html.paged .learn-top a, html.paged .comp-item .ct b, html.paged .comp-item .ct small, html.paged .track-head span.tw, html.paged .track-head .out, html.paged .scn-opts button, html.paged #yourcall .scn-opts button, html.paged .idea .try .scn .scn-opts button, html.paged .dq-opts button, html.paged .qz .opts label, html.paged .qz legend, html.paged .route-opts button, html.paged .mea-choice button, html.paged .idea-tabs button, html.paged .learn-tabs button, html.paged .oracle-strip p, html.paged .focus-list li, html.paged .gap-line, html.paged .vslot p, html.paged .yt-off p, html.paged .mission-charge .mission-list li, html.paged .idea .try .scn .scn-out:not(.show)::before, html.paged #yourcall .scn .scn-out:not(.show)::before{ font-size:var(--fs-body); line-height:1.5; }
 html.paged .cv-cap, html.paged .stat span, html.paged .evidence .e-src, html.paged .recap .r-why, html.paged .sim-out .s-note, html.paged .focus-list li small, html.paged .hinttxt, html.paged .learn-top a small, html.paged .canon .c-fine, html.paged .who .mono, html.paged .flegal{ font-size:var(--fs-small); }
 html.paged .recap-row strong, html.paged .isnot b, html.paged .fw-card strong, html.paged .hw h3, html.paged .ov-mods .hw h3, html.paged .recap h3, html.paged .op-grid b, html.paged .help-pane h4, html.paged .sim-head h3, html.paged #calls .sim-head h3, html.paged .learn-comp h4, html.paged .pdf-card b, html.paged .survey h4, html.paged .hw-step h3, html.paged #nextstep .hw-step h3, html.paged .fcard h4, html.paged .flip-grid.five .fcard h4, html.paged .vslot h4, html.paged .who b{ font-size:var(--fs-card-h); line-height:1.25; }
 html.paged .who b{ font-family:var(--sans); font-weight:600; font-size:var(--fs-body); }
@@ -797,7 +802,7 @@ html.paged .idea .try .scn{ margin-top:0; }
       <span class="mono">Vanderbilt University &middot; Manager Voyage &middot; Manager Foundations &middot; Course 1 &middot; Page 1 of 19</span>
       <h1 class="metal">You are a manager <em>now</em>.</h1>
       <p class="hello" id="heroHello">Welcome aboard.</p>
-      <p class="lead">The first course in Manager Foundations. It covers the change from doing the work to managing it, five ideas that make a manager effective, the tasks Vanderbilt will ask of you in year one and who handles each, and the four jobs of a manager. Take it after your manager compliance courses and before the micro modules.</p>
+      <p class="lead">The first course in Manager Foundations, taken on the web after your manager compliance courses. It covers the change from doing the work to managing it, five ideas that make a manager effective, what Vanderbilt will ask of you in year one and who handles each task, and the four jobs of a manager. Then come the eighteen micro modules in Oracle Learning: Systems by Day 30, People and Policy and safety by Day 60.</p>
       <div class="cta-row"><a class="btn btn-gold" href="#mission">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="../dashboard/">My Voyage dashboard</a></div>
       <p class="listen-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span><b>Narration is on.</b> Every page is read as it turns. Tap <b>Auto</b> to turn it off, or <b>Listen</b> to replay a page.</span></p>
     </div>
@@ -929,7 +934,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="cv-wrap" data-cv="basics">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/basics-poster.jpg?v=20260912h" src="../assets/video/foundation/basics.mp4?v=20260912h" aria-label="What a manager is, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/basics.vtt?v=20260912h" srclang="en" label="English" default /></video>
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/basics-poster.jpg?v=20260912i" src="../assets/video/foundation/basics.mp4?v=20260912i" aria-label="What a manager is, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/basics.vtt?v=20260912i" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>What a manager is, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. What changed, what is new, what a manager is not, who helps. About ninety seconds.</p>
@@ -1032,7 +1037,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="cv-wrap" data-cv="framework">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/framework-poster.jpg?v=20260912h" src="../assets/video/foundation/framework.mp4?v=20260912h" aria-label="The four jobs, in about ninety seconds. Training video, about 90 seconds, with captions."><track kind="captions" src="../assets/video/foundation/framework.vtt?v=20260912h" srclang="en" label="English" default /></video>
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/framework-poster.jpg?v=20260912i" src="../assets/video/foundation/framework.mp4?v=20260912i" aria-label="The four jobs, in about ninety seconds. Training video, about 90 seconds, with captions."><track kind="captions" src="../assets/video/foundation/framework.vtt?v=20260912i" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>The four jobs, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. The four jobs and the habits inside each. About ninety seconds.</p>
@@ -1060,7 +1065,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="cv-wrap" data-cv="task">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/task-poster.jpg?v=20260912h" src="../assets/video/foundation/task.mp4?v=20260912h" aria-label="Job 1, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/task.vtt?v=20260912h" srclang="en" label="English" default /></video>
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/task-poster.jpg?v=20260912i" src="../assets/video/foundation/task.mp4?v=20260912i" aria-label="Job 1, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/task.vtt?v=20260912i" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Job 1, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
@@ -1088,7 +1093,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="cv-wrap" data-cv="relations">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/relations-poster.jpg?v=20260912h" src="../assets/video/foundation/relations.mp4?v=20260912h" aria-label="Job 2, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/relations.vtt?v=20260912h" srclang="en" label="English" default /></video>
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/relations-poster.jpg?v=20260912i" src="../assets/video/foundation/relations.mp4?v=20260912i" aria-label="Job 2, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/relations.vtt?v=20260912i" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Job 2, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
@@ -1116,7 +1121,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="cv-wrap" data-cv="change">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/change-poster.jpg?v=20260912h" src="../assets/video/foundation/change.mp4?v=20260912h" aria-label="Job 3, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/change.vtt?v=20260912h" srclang="en" label="English" default /></video>
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/change-poster.jpg?v=20260912i" src="../assets/video/foundation/change.mp4?v=20260912i" aria-label="Job 3, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/change.vtt?v=20260912i" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Job 3, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
@@ -1144,7 +1149,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="cv-wrap" data-cv="external">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/external-poster.jpg?v=20260912h" src="../assets/video/foundation/external.mp4?v=20260912h" aria-label="Job 4, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/external.vtt?v=20260912h" srclang="en" label="English" default /></video>
+          <video controls playsinline preload="metadata" poster="../assets/img/foundation/external-poster.jpg?v=20260912i" src="../assets/video/foundation/external.mp4?v=20260912i" aria-label="Job 4, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/external.vtt?v=20260912i" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Job 4, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
@@ -1260,15 +1265,16 @@ html.paged .idea .try .scn{ margin-top:0; }
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Keep learning</span></span>
       <h2>What to take <em class="s">next</em>.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>Ten courses in Oracle Learning, in order, and ten things from outside Vanderbilt: podcasts, videos, a guide.</p><p><b>Why it matters</b>Micro modules first. Then one item from here a month, on the habit you are working on.</p></div>
+    <div class="ask"><p><b>What you will learn</b>Your eighteen micro modules in Oracle Learning, in the three tracks you take them in, plus a short chosen list: ten more courses, podcasts, videos, and a guide.</p><p><b>Why it matters</b>Micro modules first: Systems by Day 30, People and Policy and safety by Day 60. Then one item from the other tabs a month, on the habit you are working on.</p></div>
     <a class="pdf-card reveal" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener"><span class="pdf-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>The printable guide (PDF)</b><span class="pdf-sub">Every detail of this course on paper: what changed, the five ideas, year one, who handles what, the four jobs, your results, and this list. Branded, letter size, links live.</span></span><span class="pdf-go">Open the PDF</span></a>
     <div class="learn-tabs" role="tablist" aria-label="Keep learning">
-      <button type="button" role="tab" aria-selected="true" data-ltab="oracle">Ten courses in Oracle Learning</button>
+      <button type="button" role="tab" aria-selected="true" data-ltab="comp">Micro Modules</button>
+      <button type="button" role="tab" aria-selected="false" data-ltab="oracle">More in Oracle Learning</button>
       <button type="button" role="tab" aria-selected="false" data-ltab="outside">Outside Vanderbilt</button>
       <button type="button" role="tab" aria-selected="false" data-ltab="watch">Watch</button>
-      <button type="button" role="tab" aria-selected="false" data-ltab="comp">Micro Modules</button>
     </div>
-    <div class="learn-pane cur" data-lpane="oracle"><div class="learn-top" id="learnTop"></div></div>
+    <div class="learn-pane cur" data-lpane="comp"><div class="learn-comp" id="learnComp"></div></div>
+    <div class="learn-pane" data-lpane="oracle"><div class="learn-top" id="learnTop"></div></div>
     <div class="learn-pane" data-lpane="outside"><div class="learn-grid" id="learnGrid"></div></div>
     <div class="learn-pane" data-lpane="watch">
     <div class="learn-media">
@@ -1278,7 +1284,6 @@ html.paged .idea .try .scn{ margin-top:0; }
       <div><span class="mono">Watch: psychological safety</span><div class="yt" data-embed="LhoLuui9gX8" data-title="Building a psychologically safe workplace"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
 </div>
     </div>
-    <div class="learn-pane" data-lpane="comp"><div class="learn-comp" id="learnComp"></div></div>
     <p class="hinttxt" style="margin-top:12px">Oracle Learning links open in a new tab. Podcasts and videos are public and free.</p>
   </div>
 </section>
@@ -1336,13 +1341,13 @@ html.paged .idea .try .scn{ margin-top:0; }
   </div>
 </div>
 
-<script src="../assets/js/config.js?v=20260912h"></script>
-<script src="../assets/js/program-data.js?v=20260912h"></script>
-<script src="../assets/js/scorm.js?v=20260912h"></script>
-<script src="../assets/js/oracle.js?v=20260912h"></script>
-<script src="narration-scripts.js?v=20260912h"></script>
-<script src="resources.js?v=20260912h"></script>
-<script src="pager.js?v=20260912h"></script>
-<script src="app.js?v=20260912h"></script>
+<script src="../assets/js/config.js?v=20260912i"></script>
+<script src="../assets/js/program-data.js?v=20260912i"></script>
+<script src="../assets/js/scorm.js?v=20260912i"></script>
+<script src="../assets/js/oracle.js?v=20260912i"></script>
+<script src="narration-scripts.js?v=20260912i"></script>
+<script src="resources.js?v=20260912i"></script>
+<script src="pager.js?v=20260912i"></script>
+<script src="app.js?v=20260912i"></script>
 </body>
 </html>
