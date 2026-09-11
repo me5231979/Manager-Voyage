@@ -116,7 +116,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20260911w';
+var MEDIA_V = '20260911x';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
@@ -134,7 +134,7 @@ function narrPlay(k){
     if(err && err.name === 'NotAllowedError'){
       narr.playing = false; narrUI();
       /* the browser will not play sound before the first tap: start on that tap, without nagging */
-      if(narr.auto && !narr.armed){ narr.armed = true; var arm = function(){ narr.armed = false; document.removeEventListener('pointerdown', arm, true); document.removeEventListener('keydown', arm, true); if(narr.auto && !narr.playing) window.setTimeout(narrPlay, 350); }; document.addEventListener('pointerdown', arm, true); document.addEventListener('keydown', arm, true); }
+      if(narr.auto && !narr.armed){ narr.armed = true; var arm = function(){ narr.armed = false; document.removeEventListener('pointerdown', arm, true); document.removeEventListener('keydown', arm, true); window.setTimeout(function(){ if(narr.auto && !narr.playing) narrPlay(); }, 350); }; document.addEventListener('pointerdown', arm, true); document.addEventListener('keydown', arm, true); }
       else if(!narr.auto) toast('Tap Listen to hear this page.');
     }
     else narrSpeak(text);
