@@ -402,3 +402,20 @@ window.MV_SIM = [
   "note": "Injury reporting steps to be confirmed by PCB."
  }
 ];
+
+/* The manager compliance courses (required, in Oracle Learning). Taken before this course. */
+window.MV_COMPLIANCE = {
+  title: 'Your manager compliance courses',
+  url: '', /* paste the Oracle Learning deep link to the manager compliance list here; until then the button opens Oracle Learning */
+  note: 'Required for every manager. Find them under My Learning in Oracle Learning and take them before this course; each is a short video unless marked.',
+  items: [
+    'Labor Relations', 'Wage and Hour', 'Workers\u2019 Compensation', 'Independent Contractors',
+    'Emergency Preparedness, Fire, and Workplace Safety', 'Employee Impairment',
+    'Protection of Minors, Part 1', 'Protection of Minors, Part 2', 'FMLA', 'Title IX',
+    'Responding to Discrimination and Harassment', 'Accommodations',
+    'UKG: manager training for timecards, time off, and schedules (eLearning)',
+    'Oracle for Managers: my team and directory search', 'Oracle for Managers: my knowledge and service requests',
+    'Oracle for Managers: hiring', 'Oracle for Managers: assigning learning to your team',
+    'Request your certificate of completion, and share feedback'
+  ]
+};

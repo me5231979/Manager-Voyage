@@ -262,14 +262,10 @@ html.paged #nextstep .hw-step .chip{ font-size:.64rem; padding:4px 8px; }
 @media (max-width:900px){ html.paged #nextstep .hw-list{ grid-template-columns:1fr; } }
 /* course overview */
 .ov-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
-.mission-grid{ display:grid; grid-template-columns:1.2fr 1fr; gap:16px; margin-top:16px; align-items:start; }
-.mission-list{ list-style:none; padding:0; margin:6px 0 0; display:grid; gap:8px; }
+.mission-grid{ margin-top:16px; }
+.mission-list{ list-style:none; padding:0; margin:6px 0 0; display:grid; gap:8px 24px; } .mission-list.three{ grid-template-columns:repeat(3,1fr); } @media (max-width:900px){ .mission-list.three{ grid-template-columns:1fr; } }
 .mission-list li{ padding-left:16px; position:relative; font-size:.95rem; color:var(--tx2); } .mission-list li::before{ content:''; position:absolute; left:0; top:.6em; width:7px; height:7px; border-radius:50%; background:var(--vu-gold); }
 .mission-list li b{ display:inline; font-family:var(--sans); font-weight:600; font-size:inherit; letter-spacing:0; text-transform:none; color:var(--tx); margin:0; }
-.mission-q{ margin:0; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:16px 18px; }
-.mission-q p{ font-family:var(--serif-i); font-style:italic; font-size:1.08rem; line-height:1.45; color:var(--tx); margin:0; }
-.mission-q .who{ display:block; margin-top:8px; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
-@media (max-width:900px){ .mission-grid{ grid-template-columns:1fr; } }
 .ov-card{ border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 14px; }
 .ov-card b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:4px; }
 .ov-card p{ font-size:.86rem; color:var(--tx2); }
@@ -369,6 +365,12 @@ html.paged .split2 .scn{ margin-top:8px; }
 .learn-grid li a:hover{ color:var(--strong); }
 .learn-grid li span{ display:block; color:var(--tx2); font-size:.8rem; }
 .learn-grid li i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.6rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-right:4px; }
+.learn-comp{ margin-top:16px; border:1px solid var(--bd); border-left:4px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:14px 18px; }
+.learn-comp h4{ font-family:var(--serif); font-weight:400; font-size:1.15rem; margin:2px 0 4px; }
+.learn-comp p{ color:var(--tx2); font-size:.92rem; margin:0 0 8px; }
+.learn-comp ol{ columns:3; column-gap:24px; margin:0; padding-left:20px; font-size:.9rem; } .learn-comp li{ break-inside:avoid; margin-bottom:3px; padding-left:2px; }
+.learn-comp a.btn{ margin-top:10px; }
+@media (max-width:1000px){ .learn-comp ol{ columns:2; } } @media (max-width:640px){ .learn-comp ol{ columns:1; } }
 .learn-media{ margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .learn-media .mono{ display:block; margin-bottom:6px; }
 @media (max-width:1000px){ .learn-top{ grid-template-columns:repeat(2,1fr); } .learn-grid{ grid-template-columns:1fr; } }
@@ -607,13 +609,12 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
     </div>
     <div class="mission-grid">
       <div class="week"><b>As a manager, your focus</b>
-        <ul class="mission-list">
+        <ul class="mission-list three">
           <li><b>Align.</b> Connect your team&rsquo;s work to the mission. Say the why.</li>
           <li><b>Progress.</b> Move it forward with speed, agility, and scale: decide, unblock, finish.</li>
           <li><b>Stay in touch with your manager.</b> Strategy, projects, priorities, and anything else, so your team hears it from you first.</li>
         </ul>
       </div>
-      <blockquote class="mission-q"><p>&ldquo;Our mission is not small. We are scaling Mount Everest. Climbing Everest requires courage and commitment. But it promises the professional experience of a lifetime to all who sign on. And we will support one another at every step of the way.&rdquo;</p><span class="who">Chancellor Diermeier</span></blockquote>
     </div>
   </div>
 </section>
@@ -1035,6 +1036,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
     <a class="pdf-card reveal" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener"><span class="pdf-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>The printable guide (PDF)</b><span class="pdf-sub">Every detail of this course on paper: what changed, the five ideas, year one, your first calls, the four jobs, your results, and this list. Branded, letter size, links live.</span></span><span class="pdf-go">Open the PDF</span></a>
     <div class="learn-top" id="learnTop"></div>
     <div class="learn-grid" id="learnGrid"></div>
+    <div class="learn-comp" id="learnComp"></div>
     <div class="learn-media">
       <div><span class="mono">Watch: feedback in three parts</span><div class="yt" data-embed="-oRKr5xA9N0" data-title="Give feedback with situation, behavior, impact"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=-oRKr5xA9N0" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
       <div><span class="mono">Watch: delegation and priorities</span><div class="yt" data-embed="dRhb0-CFBbk" data-title="Delegation and the urgent and important grid"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=dRhb0-CFBbk" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>

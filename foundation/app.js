@@ -660,6 +660,8 @@ var IDEAS = [
       return '<div><h4>' + esc(g[1]) + '</h4><ul>' + items.map(function(it){ return '<li><i>' + kind(it) + '</i><a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.title) + '</a><span>' + esc(it.why || '') + (it.src ? ' (' + esc(it.src) + ')' : '') + '</span></li>'; }).join('') + '</ul></div>';
     }).join('');
   }
+  var comp = $('#learnComp'), C = window.MV_COMPLIANCE;
+  if(comp && C){ comp.innerHTML = '<span class="mono">Before this course</span><h4>' + esc(C.title) + '</h4><p>' + esc(C.note) + '</p><ol>' + C.items.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ol>' + (C.url ? '<a class="btn btn-ghost btn-sm" href="' + esc(C.url) + '" target="_blank" rel="noopener">Open in Oracle Learning</a>' : ''); }
   /* simulator */
   var box = $('[data-sim]'), sel = $('#simSel'), out = $('#simOut'), SIM = window.MV_SIM || [];
   if(box && sel && out && SIM.length){
