@@ -30,7 +30,7 @@ window.MV_CONFIG = {
      again this many months after completing it. */
   surveyRetakeMonths: 6,
   /* Link to the Manager Effectiveness Assessment (Qualtrics, REDCap, Oracle survey). Empty until PCB supplies it. */
-  assessmentUrl: '',
+  assessmentUrl: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OX9aur7js0q0UGf6gPrsrSj0YUFCM_9NtEckOrGZTO9UMTRCTlc4WTZHRzE1MENNV0pRS0ZPV1FWMC4u',
 
   /* Profile and completion feed. A small proxy in front of Oracle HCM that
      returns the signed-in manager's record as JSON. See docs/ORACLE-INTEGRATION.md

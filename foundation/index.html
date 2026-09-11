@@ -36,7 +36,7 @@
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=3" />
+<link rel="stylesheet" href="../assets/css/course.css?v=20260911d" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
@@ -291,6 +291,63 @@ html.paged #nextstep .hw-step .chip{ font-size:.64rem; padding:4px 8px; }
 #yourcall .scn .scn-out:not(.show){ display:block; border:1px dashed var(--bd); border-radius:var(--r); min-height:100%; }
 #yourcall .scn .scn-out:not(.show)::before{ content:"What happens next appears here."; display:block; padding:14px; color:var(--tx3); font-size:.9rem; }
 @media (max-width:900px){ #yourcall .scn{ grid-template-columns:1fr; } #yourcall .scn .scn-out{ grid-column:1; grid-row:auto; } }
+.idea .try .scn{ display:grid; grid-template-columns:1.1fr 1fr; gap:6px 20px; align-items:start; padding:12px 16px; }
+.idea .try .scn .scn-s{ grid-column:1; max-width:none; font-size:1.02rem; line-height:1.35; margin-bottom:6px; }
+.idea .try .scn .scn-opts{ grid-column:1; gap:6px; margin-top:6px; } .idea .try .scn .scn-opts button{ padding:8px 12px; font-size:.9rem; line-height:1.3; }
+.idea .try .scn .scn-out{ grid-column:2; grid-row:1 / span 2; margin-top:0; padding-top:0; border-top:0; }
+.idea .try .scn .scn-out:not(.show){ display:block; border:1px dashed var(--bd); border-radius:var(--r); min-height:100%; }
+.idea .try .scn .scn-out:not(.show)::before{ content:"What happens next appears here."; display:block; padding:12px; color:var(--tx3); font-size:.88rem; }
+.idea .try{ padding-top:8px; margin-top:2px; } .idea .try .cq-h{ margin-bottom:4px; }
+.idea .side .week{ padding:8px 12px; font-size:.92rem; }
+.idea-nav{ margin-top:2px; }
+@media (max-width:1100px){ .idea.cur{ grid-template-columns:1fr 1fr; } } @media (max-width:900px){ .idea .try .scn{ grid-template-columns:1fr; } .idea .try .scn .scn-out{ grid-column:1; grid-row:auto; } }
+/* book mode: less air everywhere so pages fit one screen */
+html.paged .sec-head.tight{ margin-bottom:8px; }
+html.paged .sec-head.tight h2{ font-size:clamp(1.35rem,1.6vh + .8rem,2rem); }
+html.paged .you-are{ margin-bottom:6px; }
+html.paged .ask{ padding:8px 14px; margin-bottom:8px; } html.paged .ask p{ font-size:.9rem; line-height:1.4; }
+html.paged .turn{ padding:8px 14px; margin:8px 0 8px; } html.paged .turn p{ font-size:.92rem; }
+html.paged .ov-card{ padding:10px 12px; } html.paged .ov-card p{ font-size:.9rem; }
+html.paged .ov-mods{ grid-template-columns:repeat(5,1fr); gap:10px; } html.paged .ov-mods .hw p{ font-size:.86rem; } html.paged .ov-mods .hw h3{ font-size:1rem; }
+html.paged .operate{ padding:10px 16px 12px; } html.paged .operate .op-lead{ font-size:clamp(1.05rem,1.6vw,1.25rem); margin-bottom:8px; padding-bottom:8px; } html.paged .op-grid p{ font-size:.86rem; line-height:1.4; } html.paged .op-grid .op-no{ font-size:1.2rem; margin-bottom:2px; }
+html.paged .mission-charge{ padding:12px 18px 14px; margin-top:10px; } html.paged .mission-charge > p{ font-size:clamp(1.2rem,2vw,1.6rem); margin-bottom:8px; } html.paged .mission-list li{ font-size:.9rem; } html.paged .mission-charge .mission-list{ padding-top:8px; }
+html.paged .mission-grid,html.paged .ov-grid{ gap:10px; }
+html.paged .isnot{ padding:10px 14px 12px; margin-top:10px; } html.paged .isnot b{ font-size:1.02rem; } html.paged .isnot p{ font-size:.86rem; }
+html.paged .fw-status{ margin-top:6px; }
+/* read, then try: the moment opens in place of the four blocks so the tab stays one screen */
+.idea:not(.trying) .try .scn{ display:none; }
+.idea.trying .blk,.idea.trying .side{ display:none; }
+.idea .try .cq-h{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; } .idea .try .cq-h .try-btn{ margin-left:auto; }
+.idea.trying .try{ border-top:0; padding-top:0; }
+/* first calls: simulator and the decide drill side by side */
+html.paged #calls .calls-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; }
+html.paged #calls .calls-grid > div{ min-width:0; }
+html.paged #calls .sim{ margin-top:0; } html.paged #calls .sim-head h3{ font-size:1.15rem; } html.paged #calls .sim-head p{ font-size:.88rem; } html.paged #calls .recap-row{ margin-top:0; } html.paged #calls .recap-row > div{ padding:10px 12px; } html.paged #calls .decide-head{ display:none; }
+html.paged #ideas .ask, html.paged #calls .ask, html.paged #learn .ask{ display:none; }
+.learn-tabs{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 10px; }
+.learn-tabs button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:7px 14px; font:inherit; font-size:.86rem; cursor:pointer; }
+.learn-tabs button[aria-selected="true"]{ background:var(--vu-gold); color:var(--vu-black); border-color:var(--vu-gold); }
+.learn-pane{ display:none; } .learn-pane.cur{ display:block; }
+.learn-pane .learn-top,.learn-pane .learn-grid,.learn-pane .learn-comp,.learn-pane .learn-media{ margin-top:0; }
+html.paged .learn-top a{ padding:10px 12px; } html.paged .learn-top a small{ font-size:.78rem; }
+html.paged .pdf-card{ padding:10px 16px; margin-top:8px; } html.paged .pdf-card b{ font-size:1.05rem; } html.paged .pdf-card .pdf-sub{ font-size:.86rem; }
+/* the simulator answer scrolls inside its own panel; the page does not */
+html.paged .sim-out{ max-height:calc(100vh - 630px); min-height:140px; overflow:auto; padding-right:6px; }
+html.paged .sim-out .s-first p{ font-size:.95rem; }
+/* trying a moment: the four blocks and the headline give way to the moment */
+.idea.trying > h3,.idea.trying > .who-is{ display:none; }
+.comp-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:8px; }
+.comp-item{ display:grid; grid-template-columns:auto 1fr auto; gap:8px; align-items:center; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card2); padding:6px 9px; color:var(--tx); text-decoration:none; min-width:0; }
+.comp-item:hover{ border-color:var(--vu-gold); background:var(--card); }
+.comp-item .no{ font-family:var(--serif); font-size:1.1rem; color:var(--vu-gold); min-width:1.4em; }
+.comp-item .ct{ min-width:0; } .comp-item .ct i{ display:block; font-style:normal; font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); }
+.comp-item .ct b{ display:block; font-weight:500; font-size:.84rem; line-height:1.25; }
+.comp-item .go{ color:var(--vu-gold); font-size:1rem; }
+.comp-item.soon{ opacity:.85; } .comp-item.soon .go{ opacity:.5; }
+.learn-comp ol{ display:none; }
+@media (max-width:1100px){ .comp-grid{ grid-template-columns:repeat(3,1fr); } } @media (max-width:900px){ .comp-grid{ grid-template-columns:1fr 1fr; } } @media (max-width:640px){ .comp-grid{ grid-template-columns:1fr; } }
+html.paged #ideas .drill-status{ margin-top:4px; font-size:.82rem; }
+html.paged .learn-comp{ padding:10px 14px; } html.paged .learn-comp h4{ font-size:1.05rem; margin:0 0 2px; } html.paged .learn-comp p{ font-size:.86rem; margin-bottom:4px; }
 .mea-choice{ display:grid; gap:10px; margin-top:6px; }
 .mission-charge{ margin-top:18px; border:2px solid var(--tx); border-left:8px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:20px 24px 22px; }
 .mission-charge .mono{ display:block; margin-bottom:6px; }
@@ -417,7 +474,8 @@ html.paged .split2 .scn{ margin-top:8px; }
 .learn-comp ol{ columns:3; column-gap:24px; margin:0; padding-left:20px; font-size:.9rem; } .learn-comp li{ break-inside:avoid; margin-bottom:3px; padding-left:2px; }
 .learn-comp a.btn{ margin-top:10px; }
 @media (max-width:1000px){ .learn-comp ol{ columns:2; } } @media (max-width:640px){ .learn-comp ol{ columns:1; } }
-.learn-media{ margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.learn-media{ margin-top:16px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+@media (max-width:1100px){ .learn-media{ grid-template-columns:1fr 1fr; } }
 .learn-media .mono{ display:block; margin-bottom:6px; }
 @media (max-width:1000px){ .learn-top{ grid-template-columns:repeat(2,1fr); } .learn-grid{ grid-template-columns:1fr; } }
 @media (max-width:700px){ .learn-top,.learn-grid,.learn-media{ grid-template-columns:1fr; } }
@@ -488,17 +546,17 @@ details.deeper .d-body p{ margin:0 0 10px; font-size:.9rem; color:var(--tx2); }
 .idea-tabs button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:7px 14px; font:inherit; font-size:.86rem; cursor:pointer; }
 .idea-tabs button[aria-selected="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
 .idea-tabs button.seen:not([aria-selected="true"]){ border-color:var(--eyebrow); }
-.idea{ display:none; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:20px 22px; }
-.idea.cur{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px 20px; }
+.idea{ display:none; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:14px 18px; }
+.idea.cur{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px 18px; }
 .idea .col{ display:contents; }
 .idea .blk{ border-top:2px solid var(--eyebrow); padding-top:8px; }
 .idea > h3{ grid-column:1 / -1; }
 .idea .side{ grid-column:1 / -1; display:grid; grid-template-columns:1fr; }
 .idea .who-is{ grid-column:1 / -1; }
 .idea .who-is{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
-.idea h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.4rem,2.4vw,1.9rem); line-height:1.2; margin-top:6px; }
+.idea h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.25rem,2vw,1.6rem); line-height:1.2; margin-top:2px; }
 .idea h3 em{ font-family:var(--serif-i); font-style:italic; color:var(--strong); }
-.idea p{ font-size:.93rem; color:var(--tx2); margin-top:4px; }
+.idea p{ font-size:.88rem; line-height:1.45; color:var(--tx2); margin-top:4px; }
 .idea p b{ color:var(--tx); display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:2px; }
 .idea .side{ display:grid; gap:10px; align-content:start; }
 .idea .side .week{ margin-top:0; }
@@ -814,14 +872,20 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div role="listitem"><b>Leave office, same day</b><strong>Health or family time off.</strong><p>Never ask for a diagnosis.</p></div>
       <div role="listitem"><b>EOA, same day</b><strong>Discrimination, harassment, misconduct.</strong><p>You report; you do not investigate.</p></div>
     </div>
+    <div class="calls-grid">
+      <div>
     <div class="sim" id="simBox" data-sim>
       <div class="sim-head"><span class="mno">Situation simulator</span><h3>Something just landed on your desk. What now?</h3><p>Pick a situation: the first move, who handles what, what never to do, and the micro module for it.</p></div>
       <label class="sim-pick" for="simSel"><span class="mono">Pick a situation</span><select id="simSel"></select></label>
       <div class="sim-out" id="simOut" aria-live="polite"></div>
     </div>
-    <div class="module-head" style="margin-top:16px"><span class="mno">Decide</span><h3>What do you do first?</h3><p>Five situations. Tap the first thing you do.</p></div>
+      </div>
+      <div>
+    <div class="module-head decide-head" style="margin-top:16px"><span class="mno">Decide</span><h3>What do you do first?</h3><p>Five situations. Tap the first thing you do.</p></div>
     <div class="drill" id="callsDrill" data-drill="calls"></div>
     <p class="drill-status" id="callsStatus" role="status" aria-live="polite">0 of 5 decided.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1066,13 +1130,23 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
     </div>
     <div class="ask"><p><b>What you will learn</b>Ten courses in Oracle Learning, in order, and ten things from outside Vanderbilt: podcasts, videos, a guide.</p><p><b>Why it matters</b>Micro modules first. Then one item from here a month, on the habit you are working on.</p></div>
     <a class="pdf-card reveal" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener"><span class="pdf-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>The printable guide (PDF)</b><span class="pdf-sub">Every detail of this course on paper: what changed, the five ideas, year one, your first calls, the four jobs, your results, and this list. Branded, letter size, links live.</span></span><span class="pdf-go">Open the PDF</span></a>
-    <div class="learn-top" id="learnTop"></div>
-    <div class="learn-grid" id="learnGrid"></div>
-    <div class="learn-comp" id="learnComp"></div>
+    <div class="learn-tabs" role="tablist" aria-label="Keep learning">
+      <button type="button" role="tab" aria-selected="true" data-ltab="oracle">Ten courses in Oracle Learning</button>
+      <button type="button" role="tab" aria-selected="false" data-ltab="outside">Outside Vanderbilt</button>
+      <button type="button" role="tab" aria-selected="false" data-ltab="watch">Watch</button>
+      <button type="button" role="tab" aria-selected="false" data-ltab="comp">Before this course</button>
+    </div>
+    <div class="learn-pane cur" data-lpane="oracle"><div class="learn-top" id="learnTop"></div></div>
+    <div class="learn-pane" data-lpane="outside"><div class="learn-grid" id="learnGrid"></div></div>
+    <div class="learn-pane" data-lpane="watch">
     <div class="learn-media">
       <div><span class="mono">Watch: feedback in three parts</span><div class="yt" data-embed="-oRKr5xA9N0" data-title="Give feedback with situation, behavior, impact"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=-oRKr5xA9N0" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
       <div><span class="mono">Watch: delegation and priorities</span><div class="yt" data-embed="dRhb0-CFBbk" data-title="Delegation and the urgent and important grid"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=dRhb0-CFBbk" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+          <div><span class="mono">Watch: start with why</span><div class="yt" data-embed="lmyZMtPVodo" data-title="Start with why: how great leaders inspire action"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=lmyZMtPVodo" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+      <div><span class="mono">Watch: psychological safety</span><div class="yt" data-embed="LhoLuui9gX8" data-title="Building a psychologically safe workplace"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+</div>
     </div>
+    <div class="learn-pane" data-lpane="comp"><div class="learn-comp" id="learnComp"></div></div>
     <p class="hinttxt" style="margin-top:12px">Oracle Learning links open in a new tab. Podcasts and videos are public and free.</p>
   </div>
 </section>
@@ -1130,13 +1204,13 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </div>
 
-<script src="../assets/js/config.js?v=4"></script>
-<script src="../assets/js/program-data.js?v=4"></script>
-<script src="../assets/js/scorm.js?v=4"></script>
-<script src="../assets/js/oracle.js?v=4"></script>
-<script src="narration-scripts.js?v=4"></script>
-<script src="resources.js?v=4"></script>
-<script src="pager.js?v=4"></script>
-<script src="app.js?v=4"></script>
+<script src="../assets/js/config.js?v=20260911d"></script>
+<script src="../assets/js/program-data.js?v=20260911d"></script>
+<script src="../assets/js/scorm.js?v=20260911d"></script>
+<script src="../assets/js/oracle.js?v=20260911d"></script>
+<script src="narration-scripts.js?v=20260911d"></script>
+<script src="resources.js?v=20260911d"></script>
+<script src="pager.js?v=20260911d"></script>
+<script src="app.js?v=20260911d"></script>
 </body>
 </html>

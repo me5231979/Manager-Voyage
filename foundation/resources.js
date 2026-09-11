@@ -407,15 +407,25 @@ window.MV_SIM = [
 window.MV_COMPLIANCE = {
   title: 'Your manager compliance courses',
   url: '', /* paste the Oracle Learning deep link to the manager compliance list here; until then the button opens Oracle Learning */
-  note: 'Required for every manager. Find them under My Learning in Oracle Learning and take them before this course; each is a short video unless marked.',
+  note: 'Required for every manager, in Oracle Learning. Take them before this course. Each opens in Oracle Learning once its link is added.',
   items: [
-    'Labor Relations', 'Wage and Hour', 'Workers\u2019 Compensation', 'Independent Contractors',
-    'Emergency Preparedness, Fire, and Workplace Safety', 'Employee Impairment',
-    'Protection of Minors, Part 1', 'Protection of Minors, Part 2', 'FMLA', 'Title IX',
-    'Responding to Discrimination and Harassment', 'Accommodations',
-    'UKG: manager training for timecards, time off, and schedules (eLearning)',
-    'Oracle for Managers: my team and directory search', 'Oracle for Managers: my knowledge and service requests',
-    'Oracle for Managers: hiring', 'Oracle for Managers: assigning learning to your team',
-    'Request your certificate of completion, and share feedback'
+    { title: 'Labor Relations', type: 'Video', url: '' },
+    { title: 'Wage and Hour', type: 'Video', url: '' },
+    { title: 'Workers’ Compensation', type: 'Video', url: '' },
+    { title: 'Independent Contractors', type: 'Video', url: '' },
+    { title: 'Emergency Preparedness, Fire, and Workplace Safety', type: 'Video', url: '' },
+    { title: 'Employee Impairment', type: 'Video', url: '' },
+    { title: 'Protection of Minors, Part 1', type: 'Video', url: '' },
+    { title: 'Protection of Minors, Part 2', type: 'Video', url: '' },
+    { title: 'FMLA', type: 'Video', url: '' },
+    { title: 'Title IX', type: 'Video', url: '' },
+    { title: 'Responding to Discrimination and Harassment', type: 'Video', url: '' },
+    { title: 'Accommodations', type: 'Video', url: '' },
+    { title: 'UKG: manager training for timecards, time off, and schedules', type: 'eLearning', url: '' },
+    { title: 'Oracle for Managers: my team and directory search', type: 'Video', url: '' },
+    { title: 'Oracle for Managers: my knowledge and service requests', type: 'Video', url: '' },
+    { title: 'Oracle for Managers: hiring', type: 'Video', url: '' },
+    { title: 'Oracle for Managers: assigning learning to your team', type: 'Video', url: '' },
+    { title: 'Request your certificate of completion, and share feedback', type: 'Manual', url: '' }
   ]
 };

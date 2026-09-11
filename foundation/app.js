@@ -161,6 +161,20 @@ if(bbAuto) bbAuto.addEventListener('click', function(){
 });
 document.addEventListener('chart:page', function(){ narrStop(); if(narr.auto) window.setTimeout(narrPlay, reduce ? 0 : 380); });
 /* the gold line under the header tracks pages turned; the Progress button counts activities */
+/* fit each page to the viewport: shrink the content a little (never below 78%) before letting it scroll */
+var fitT = null;
+function fitPage(){
+  var pg = document.querySelector('.page.cur'); if(!pg) return;
+  var wrap = pg.querySelector('.wrap'); if(!wrap) return;
+  wrap.style.zoom = ''; var z = 1;
+  for(var i = 0; i < 12 && pg.scrollHeight > pg.clientHeight + 2 && z > 0.8; i++){ z = Math.round((z - 0.02) * 100) / 100; wrap.style.zoom = z; }
+  pg.classList.toggle('fitted', z < 1);
+}
+function fitSoon(){ if(fitT) window.clearTimeout(fitT); fitT = window.setTimeout(fitPage, 60); }
+document.addEventListener('chart:page', function(){ window.setTimeout(fitPage, 30); window.setTimeout(fitPage, 450); });
+window.addEventListener('resize', fitSoon);
+if(window.MutationObserver){ new MutationObserver(fitSoon).observe(document.getElementById('main') || document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['class', 'hidden', 'aria-expanded', 'aria-selected'] }); }
+window.setTimeout(fitPage, 80);
 function pageLine(){ if(!progFill || !window.chartPager) return; var c = window.chartPager.current(), n = window.chartPager.count || 1; progFill.style.width = ((c.index + 1) / n * 100) + '%'; }
 document.addEventListener('chart:page', pageLine); window.setTimeout(pageLine, 50);
 document.addEventListener('play', function(e){ if(e.target && e.target.tagName === 'VIDEO' && e.target.id !== 'heroVideo') narrStop(); }, true);
@@ -590,29 +604,34 @@ $$('[data-drill]').forEach(buildDrill);
 /* ══════════ five ideas, one at a time ══════════ */
 var IDEAS = [
   { who:'Setting priorities · the big rocks method', h:'Put first things <em>first</em>.',
-    what:'Picture a jar. Sand first (email, small requests) and the big rocks never fit. Big rocks first, and the sand settles around them. The big rocks are the few things that matter most.',
-    apply:'Monday, before email, name this week’s three big rocks for the team. Put them on the calendar. Tell the team, so they can protect them too.',
-    value:'Your calendar will fill itself, and the urgent is rarely the important. A team that knows this week’s three things wastes less and finishes more.',
+    what:'Picture a jar. Sand first (email, small requests) and the big rocks never fit. Big rocks first, and the sand settles around them.',
+    why:'Your calendar fills itself. Requests arrive faster than you can finish them, and the urgent ones are rarely the important ones. Without three named priorities, the loudest request decides for you.',
+    looks:'Monday, before email: three lines on a notepad. Said aloud at the huddle, on the calendar by nine. A request lands Wednesday; you ask which rock it moves.',
+    value:'A team that knows this week’s three things wastes less, argues less, and finishes more.',
     week:'Write your three big rocks before you open your inbox. Tell your team.' },
   { who:'Clear expectations and feedback · clear is kind', h:'Clear is kind. Unclear is <em>unkind</em>.',
-    what:'Softening expectations and delaying feedback feels nice. It does the opposite: people spend weeks guessing what you meant, and the problem grows.',
-    apply:'Say what you expect, by when, and what good looks like. Out loud and in writing. Give feedback close to the moment, in private, with the specific thing you noticed.',
+    what:'Say what you expect, by when, and what good looks like. Give feedback close to the moment, in private, on the specific thing.',
+    why:'Hinting feels kind and costs weeks. People guess, redo the work, and hear about the problem late, when it is bigger and harder to fix.',
+    looks:'“The summary needs the decision on page one, under three hundred words, by Thursday at three. Here is why.” Said in the 1:1, written in the follow-up.',
     value:'Fewer surprises at the deadline, fewer redo cycles, and a team that always knows where it stands.',
     week:'Say one thing you have been hinting at. Privately, plainly, kindly.' },
   { who:'Psychological safety', h:'People only speak up when it is <em>safe</em> to.',
-    what:'A team’s shared belief that nobody is punished or embarrassed for a question, a mistake, or a disagreement. The best teams report more mistakes, not fewer: they catch them early. It is not about being nice. It is about making the truth cheap to tell.',
-    apply:'Three moments decide it: bad news, a question in front of others, a mistake. Thank first, solve second, learn the cause later. Never in front of the team. Admit your own mistakes out loud.',
-    value:'You hear about problems while they are small. Late news is the most expensive kind.',
+    what:'A team’s shared belief that nobody is punished or embarrassed for a question, a mistake, or a disagreement. Not about being nice: about making the truth cheap to tell.',
+    why:'Late news is the most expensive kind. A team that fears the reaction hides mistakes until they are big, and stops asking questions before they become errors.',
+    looks:'Bad news lands: “Thank you for telling me today. What do we know, and what do you need from me?” A basic question in the meeting gets a straight answer. You say “I got that wrong” out loud.',
+    value:'You hear about problems while they are small. The best teams report more mistakes, not fewer, because they catch them early.',
     week:'When someone reports a problem, thank them first. Then solve it.' },
   { who:'Purpose · start with why, team first', h:'Explain the why. Take care of the people, and they take care of the <em>work</em>.',
-    what:'People do their best work when they know why it matters, not just what to do. And a team that feels looked after protects the work and each other.',
-    apply:'Before a task or a change, say the why: what it is for, who it helps, what happens if it slips. When credit comes, pass it down. When blame comes, take it first.',
-    value:'People who know the why make good decisions when you are not in the room. A team that trusts you tells you the truth and stays.',
+    what:'People do their best work when they know why it matters, not just what to do. A team that feels looked after protects the work and each other.',
+    why:'People who know the why make good decisions when you are not in the room. People who only know the what wait for you, or push back in the hallway.',
+    looks:'Before you hand out the new form: “Here is why. The old one loses a third of requests at the handoff.” Credit passed down in the team meeting. Blame taken first with your manager.',
+    value:'A team that trusts you tells you the truth, stays, and works through the hard weeks with you instead of around you.',
     week:'Explain the why behind one thing you have been asking for.' },
   { who:'The people work · a manager’s core responsibilities', h:'The people work is the manager’s <em>work</em>.',
-    what:'The professional standard for people managers is consistent on one point: hiring, onboarding, expectations, feedback, performance, time and leave, and hard conversations are the manager’s job, not PCB’s.',
-    apply:'You run the 1:1, give the feedback, start the leave request the same day, open the requisition. Your HCM is your first call when you are unsure; your Engagement Consultant, for the bigger questions. The micro modules teach each task.',
-    value:'Nothing waits for someone else to act. Your team gets answers from the person who knows them.',
+    what:'Hiring, onboarding, expectations, feedback, performance, time and leave, and hard conversations are the manager’s job, not PCB’s. PCB shows you how.',
+    why:'Nothing should wait for someone else to act. Your team gets answers from the person who knows them, and PCB spends its time on the hard cases, not the routine ones.',
+    looks:'You hold the 1:1. You give the feedback the week it happened. You send the leave request the same day. You call your HCM when you are unsure, not instead of acting.',
+    value:'Problems get handled while they are small, by the person closest to them, and your team knows who its manager is.',
     week:'Find out your HCM’s and your Engagement Consultant’s names, and how to reach them.' }
 ];
 (function(){
@@ -622,14 +641,14 @@ var IDEAS = [
   box.innerHTML = '<div class="idea-tabs" role="tablist" aria-label="The five ideas, by topic">' + IDEAS.map(function(it, i){ return '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-tab="' + i + '">' + (i + 1) + ' · ' + names[i] + '</button>'; }).join('') + '</div>' +
     IDEAS.map(function(it, i){
       return '<div class="idea' + (i === 0 ? ' cur' : '') + '" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' +
-        '<p class="blk"><b>What it is</b>' + esc(it.what) + '</p><p class="blk"><b>As a manager</b>' + esc(it.apply) + '</p><p class="blk"><b>The value</b>' + esc(it.value) + '</p>' +
+        '<p class="blk"><b>What it is</b>' + esc(it.what) + '</p><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p>' +
         '<div class="side"><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
-        '<div class="try"><p class="cq-h">Try it &middot; ' + esc(SCENARIOS[IDEA_SCN[i]].h) + subBtn('safe/m' + (i + 1)) + '</p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
+        '<div class="try"><p class="cq-h">Try it &middot; ' + esc(SCENARIOS[IDEA_SCN[i]].h) + subBtn('safe/m' + (i + 1)) + ' <button type="button" class="btn btn-primary btn-sm try-btn" data-try="1">Try it<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
         '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page for what Vanderbilt will ask of you.</span>') + '</div></div>';
     }).join('');
   function show(i){
     cur = i; seen[i] = 1;
-    $$('.idea', box).forEach(function(p, pi){ p.classList.toggle('cur', pi === i); });
+    $$('.idea', box).forEach(function(p, pi){ p.classList.toggle('cur', pi === i); if(pi !== i && p.classList.contains('trying')) trying(p, false); });
     $$('.idea-tabs button', box).forEach(function(t, ti){ t.setAttribute('aria-selected', ti === i ? 'true' : 'false'); t.classList.toggle('seen', !!seen[ti]); });
     paint();
     if(window.chartPager && window.chartPager.current().key === 'ideas'){ var f = $$('.idea', box)[i].querySelector('.idea-nav button'); if(f) f.focus({ preventScroll:true }); }
@@ -637,7 +656,9 @@ var IDEAS = [
   }
   function paint(){ var n = Object.keys(seen).length, f = Object.keys(found).length; if(status) status.textContent = n + ' of 5 ideas. ' + f + ' of 5 moments.' + (f === 5 ? ' Activity complete. Pick the idea you will try first.' : n === 5 && f < 5 ? ' Find the best response in each moment.' : ''); if(f === 5) progDone('safe'); }
   $$('.scn[data-scn]', box).forEach(buildScenario);
+  function trying(panel, on){ panel.classList.toggle('trying', on); var tb = panel.querySelector('.try-btn'); if(tb) tb.innerHTML = on ? 'Back to the idea' : 'Try it<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'; if(on) narrSub('safe/m' + (parseInt(panel.getAttribute('data-i'), 10) + 1)); }
   box.addEventListener('click', function(e){
+    var tb = e.target.closest('.try-btn'); if(tb){ var pn = tb.closest('.idea'); trying(pn, !pn.classList.contains('trying')); return; }
     var b = e.target.closest('.scn button[data-o]'); if(b){ var k = b.closest('.scn').getAttribute('data-scn'); if(SCENARIOS[k].opts[parseInt(b.getAttribute('data-o'), 10)].best){ found[k] = 1; paint(); } return; }
     var t = e.target.closest('button[data-tab]'); if(t){ show(parseInt(t.getAttribute('data-tab'), 10)); return; }
     if(e.target.closest('button[data-next]')){ show(Math.min(cur + 1, IDEAS.length - 1)); return; }
@@ -658,7 +679,7 @@ var TURNS = [
   { sel:'#jobsCalls',   prog:'yourcall', text:'Four situations, one per job. Tap the response you would give, then try the other two.' },
   { sel:'#meaChoice',   prog:'survey',   text:'Tap what is true for you.' },
   { sel:'#quizBox',     prog:'quiz',     text:'Five questions. Four of five finishes the course.' },
-  { sel:'.md-btn[data-prog="nextstep"]', prog:'nextstep', text:'Plan your seven days, then mark this done.' }
+  { sel:'#tell-leader', prog:'nextstep', text:'Copy the message, send it to your manager, then mark this done.' }
 ];
 function turnHTML(t){ return '<div class="turn"' + (t.prog ? ' data-turn="' + t.prog + '"' : '') + ' role="note"><span class="t-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div><span class="mono">Your turn</span><p>' + esc(t.text) + '</p></div></div>'; }
 TURNS.forEach(function(t){
@@ -690,8 +711,15 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
       return '<div><h4>' + esc(g[1]) + '</h4><ul>' + items.map(function(it){ return '<li><i>' + kind(it) + '</i><a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.title) + '</a><span>' + esc(it.why || '') + (it.src ? ' (' + esc(it.src) + ')' : '') + '</span></li>'; }).join('') + '</ul></div>';
     }).join('');
   }
+  var ltabs = $('.learn-tabs');
+  if(ltabs) ltabs.addEventListener('click', function(e){ var t = e.target.closest('button[data-ltab]'); if(!t) return; var k = t.getAttribute('data-ltab'); $$('.learn-tabs button').forEach(function(b){ b.setAttribute('aria-selected', b === t ? 'true' : 'false'); }); $$('.learn-pane').forEach(function(pn){ pn.classList.toggle('cur', pn.getAttribute('data-lpane') === k); }); if(narr.playing) narrStop(); });
   var comp = $('#learnComp'), C = window.MV_COMPLIANCE;
-  if(comp && C){ comp.innerHTML = '<span class="mono">Before this course</span><h4>' + esc(C.title) + '</h4><p>' + esc(C.note) + '</p><ol>' + C.items.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ol>' + (C.url ? '<a class="btn btn-ghost btn-sm" href="' + esc(C.url) + '" target="_blank" rel="noopener">Open in Oracle Learning</a>' : ''); }
+  if(comp && C){
+    comp.innerHTML = '<span class="mono">Before this course</span><h4>' + esc(C.title) + '</h4><p>' + esc(C.note) + '</p><div class="comp-grid">' + C.items.map(function(it, i){
+      var t = typeof it === 'string' ? { title: it, type: 'Video' } : it, has = !!t.url;
+      return '<a class="comp-item' + (has ? '' : ' soon') + '" href="' + esc(t.url || C.url || '#') + '"' + (has || C.url ? ' target="_blank" rel="noopener"' : ' aria-disabled="true" title="Link coming from PCB"') + '><span class="no">' + (i + 1) + '</span><span class="ct"><i>' + esc(t.type || 'Video') + ' &middot; Oracle Learning</i><b>' + esc(t.title) + '</b></span><span class="go" aria-hidden="true">&#8599;</span></a>';
+    }).join('') + '</div>';
+  }
   /* simulator */
   var box = $('[data-sim]'), sel = $('#simSel'), out = $('#simOut'), SIM = window.MV_SIM || [];
   if(box && sel && out && SIM.length){
