@@ -358,13 +358,15 @@ html.paged .split2 .scn{ margin-top:8px; }
 /* keep learning */
 .keep{ margin-top:16px; border-top:1px solid var(--bd); padding-top:10px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
 .keep .mono{ font-size:.68rem; margin-right:4px; }
-.turn{ display:flex; gap:14px; align-items:center; margin:14px 0 10px; background:var(--vu-black); color:#fff; border-left:6px solid var(--vu-gold); border-radius:var(--r); padding:12px 16px; }
+.turn{ display:flex; gap:14px; align-items:center; margin:14px 0 10px; background:#FFFFFF; color:var(--vu-black); border-left:6px solid var(--vu-gold); border-radius:var(--r); padding:12px 16px; box-shadow:0 2px 12px rgba(0,0,0,.35); }
 .turn .t-ic{ flex:0 0 auto; width:30px; height:30px; border-radius:50%; background:var(--vu-gold); color:var(--vu-black); display:grid; place-items:center; }
 .turn .t-ic svg{ width:16px; height:16px; }
-.turn .mono{ display:block; color:var(--vu-gold); font-size:.7rem; margin-bottom:1px; }
-.turn p{ margin:0; font-size:.98rem; line-height:1.35; color:#fff; }
-.turn.done{ background:var(--card); color:var(--tx); border:1px solid var(--bdg); border-left:6px solid var(--vu-gold); } .turn.done p{ color:var(--tx2); } .turn.done .mono{ color:var(--eyebrow); }
-.turn.done .t-ic{ background:var(--eyebrow); color:#fff; }
+.turn .mono{ display:block; color:var(--vu-black); font-size:.7rem; margin-bottom:1px; }
+.turn p{ margin:0; font-size:.98rem; line-height:1.35; color:var(--vu-black); }
+.turn.done{ background:transparent; color:var(--tx); border:1px solid var(--bdg); border-left:6px solid var(--vu-gold); box-shadow:none; } .turn.done p{ color:var(--tx2); } .turn.done .mono{ color:var(--eyebrow); }
+.turn.done .t-ic{ background:var(--vu-gold); color:var(--vu-black); }
+/* every accent is Vanderbilt gold on the black pages */
+.th-dark .big-score,.th-dark .quiz-result .big-score{ color:var(--vu-gold); } .th-dark .pbar.top .fill{ background:var(--vu-gold); }
 .pdf-card{ display:grid; grid-template-columns:auto 1fr auto; gap:16px; align-items:center; margin-top:14px; padding:14px 18px; border:1px solid var(--bdg); border-left:4px solid var(--vu-gold); background:var(--card); border-radius:var(--r); color:var(--tx); text-decoration:none; }
 .pdf-card:hover{ background:var(--card2); }
 .pdf-card .pdf-ic{ width:44px; height:44px; border-radius:50%; background:var(--eyebrow); color:var(--btn-tx); display:grid; place-items:center; } .pdf-card .pdf-ic svg{ width:24px; height:24px; }
@@ -617,7 +619,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="mission" class="th-cream" aria-label="The mission">
+<section id="mission" class="th-dark" aria-label="The mission">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Page 2 of 19</b> The mission <i>&middot; Next: course overview</i></p>
@@ -651,7 +653,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="overview" class="th-light" aria-label="Course overview">
+<section id="overview" class="th-dark" aria-label="Course overview">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Page 3 of 19</b> Course overview <i>&middot; Next: topic 1, what changed</i></p>
@@ -675,7 +677,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="shift" class="th-cream" aria-label="What changed">
+<section id="shift" class="th-dark" aria-label="What changed">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 1 &middot; Page 4 of 19</b> What changed <i>&middot; Next: what a manager is</i></p>
@@ -706,7 +708,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="basics" class="th-light" aria-label="What a manager is">
+<section id="basics" class="th-dark" aria-label="What a manager is">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 1 &middot; Page 5 of 19</b> What a manager is <i>&middot; Next: topic 2, five ideas</i></p>
@@ -745,7 +747,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="ideas" class="th-cream" aria-label="Five ideas">
+<section id="ideas" class="th-dark" aria-label="Five ideas">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 2 &middot; Page 6 of 19</b> Five ideas <i>&middot; Next: topic 3, your first year</i></p>
@@ -759,7 +761,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="year" class="th-cream" aria-label="Your first year">
+<section id="year" class="th-dark" aria-label="Your first year">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 3 &middot; Page 7 of 19</b> Your first year <i>&middot; Next: your first calls</i></p>
@@ -777,7 +779,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="calls" class="th-light" aria-label="Your first calls">
+<section id="calls" class="th-dark" aria-label="Your first calls">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 3 &middot; Page 8 of 19</b> Your first calls <i>&middot; Next: topic 4, the four jobs</i></p>
@@ -802,7 +804,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="welcome" class="th-cream" aria-label="The four jobs">
+<section id="welcome" class="th-dark" aria-label="The four jobs">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 4 &middot; Page 9 of 19</b> The four jobs <i>&middot; Next: job 1</i></p>
@@ -831,7 +833,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="task" class="th-light" aria-label="Job 1: get the work done">
+<section id="task" class="th-dark" aria-label="Job 1: get the work done">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 4 &middot; Page 10 of 19</b> Job 1: get the work done <i>&middot; Next: job 2</i></p>
@@ -859,7 +861,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="relations" class="th-cream" aria-label="Job 2: take care of your people">
+<section id="relations" class="th-dark" aria-label="Job 2: take care of your people">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 4 &middot; Page 11 of 19</b> Job 2: take care of your people <i>&middot; Next: job 3</i></p>
@@ -887,7 +889,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="change" class="th-light" aria-label="Job 3: make things better">
+<section id="change" class="th-dark" aria-label="Job 3: make things better">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 4 &middot; Page 12 of 19</b> Job 3: make things better <i>&middot; Next: job 4</i></p>
@@ -915,7 +917,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="external" class="th-cream" aria-label="Job 4: connect your team">
+<section id="external" class="th-dark" aria-label="Job 4: connect your team">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 4 &middot; Page 13 of 19</b> Job 4: connect your team <i>&middot; Next: your call</i></p>
@@ -942,7 +944,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="yourcall" class="th-light" aria-label="Your call">
+<section id="yourcall" class="th-dark" aria-label="Your call">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 4 &middot; Page 14 of 19</b> Your call <i>&middot; Next: topic 5, your results</i></p>
@@ -955,7 +957,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="survey" class="th-light" aria-label="Your Manager Effectiveness Assessment results">
+<section id="survey" class="th-dark" aria-label="Your Manager Effectiveness Assessment results">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Topic 5 &middot; Page 15 of 19</b> Your assessment results <i>&middot; Next: a quick check</i></p>
@@ -1013,7 +1015,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="quiz" class="th-cream" aria-label="Knowledge check">
+<section id="quiz" class="th-dark" aria-label="Knowledge check">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Page 16 of 19</b> A quick check <i>&middot; Five questions, one at a time &middot; Next: your seven days</i></p>
@@ -1027,7 +1029,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="nextstep" class="th-light" aria-label="What you now know and your next step">
+<section id="nextstep" class="th-dark" aria-label="What you now know and your next step">
   <div class="wrap">
     <div class="sec-head tight reveal" style="margin-bottom:0">
       <p class="you-are"><b>Page 17 of 19</b> Your next seven days <i>&middot; Next: keep learning</i></p>
@@ -1057,7 +1059,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="learn" class="th-cream" aria-label="Keep learning: recommended courses, podcasts, and videos">
+<section id="learn" class="th-dark" aria-label="Keep learning: recommended courses, podcasts, and videos">
   <div class="wrap">
     <div class="sec-head tight reveal">
       <p class="you-are"><b>Page 18 of 19</b> Keep learning <i>&middot; You have your next seven days &middot; Next: wrap-up</i></p>
