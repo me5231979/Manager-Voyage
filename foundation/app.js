@@ -471,6 +471,11 @@ var SCENARIOS = {
     { t:'Reply “We cannot do this” and copy your manager.', b:'Not speaking up, just escalating', best:false, out:'Your manager now owns a negotiation you could have had in one email, and the director hears “no” with no reason and no option. Speaking up for your team means the numbers and the options, not just a refusal.' }
   ]}
 };
+/* the best response should not always be B: place it at a varied, fixed position per scenario */
+(function(){
+  var POS = { idea1:2, idea2:0, safe1:1, idea4:2, idea5:0, task:1, relations:2, change:0, external:1 };
+  Object.keys(POS).forEach(function(k){ var sc = SCENARIOS[k]; if(!sc) return; var bi = -1; sc.opts.forEach(function(o, i){ if(o.best) bi = i; }); if(bi < 0 || bi === POS[k]) return; var o = sc.opts.splice(bi, 1)[0]; sc.opts.splice(POS[k], 0, o); });
+})();
 function buildScenario(el){
   var name = el.getAttribute('data-scn'), sc = SCENARIOS[name]; if(!sc) return;
   var tried = {};
@@ -667,6 +672,25 @@ var IDEAS = [
 })();
 
 
+/* ══════════ who helps you: four tabs, each with what they do, when to contact, how ══════════ */
+(function(){
+  var box = $('.helpers'); if(!box) return;
+  var tiles = $$(':scope > div', box); if(tiles.length < 4) return;
+  var C = (window.MV_CONFIG && MV_CONFIG.contacts) || {};
+  function link(url, label){ return url ? ' <a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(label) + '</a>' : ''; }
+  var H = [
+    { does:'The person you report to. Sets direction and priorities for your team, and the first to hear what your team needs.', when:'Every week in your own 1:1, and any time strategy, projects, or priorities shift. Before you say yes to a big request from another office.', how:'Your standing 1:1. A quick message when it cannot wait. Bring the ask and your recommendation.' },
+    { does:'Your go-to in PCB for HR issues, concerns, and support. Engagement, culture, and the bigger people questions for your business unit.', when:'When an issue is more than one transaction: a performance pattern, a hard conversation you want to plan, a team dynamic, a change to the team. Not the same-day questions; those go to your HCM.', how:'Email or a meeting request. Your unit’s Engagement Consultant is listed on the PCB site.' + link(C.engagementConsultants, 'Find yours') + ' Say what you have tried so far.' },
+    { does:'Embedded in most business units for immediate HR issues: pay, hiring, a performance concern, a policy question, a form you are not sure about.', when:'The same day a question comes up, before you act on your own. Your first call when you are unsure.', how:'Email, a call, or a walk down the hall; most HCMs sit with the business unit.' + link(C.hcm, 'Find yours') + ' Give the facts and what you need by when.' },
+    { does:'The leave office handles time off for health and family, including FMLA: eligibility, paperwork, dates. EOA takes reports of discrimination, harassment, and misconduct.', when:'The same day someone mentions leave, a health or family situation, or a concern about how they are being treated. You never ask for a diagnosis; you never investigate.', how:'Leave: send the request to the leave office and tell the person you did.' + link(C.leave, 'Leave office') + ' EOA: file a report or call.' + link(C.eoa, 'EOA') + ' Tell your HCM you did both.' }
+  ];
+  var tabs = tiles.map(function(t, i){ var ic = t.querySelector('.hic'); return '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-htab="' + i + '">' + (ic ? ic.outerHTML : '') + '<span>' + esc(t.querySelector('b').textContent) + '</span></button>'; }).join('');
+  var panes = tiles.map(function(t, i){ return '<div class="help-pane' + (i === 0 ? ' cur' : '') + '" role="tabpanel"><h4>' + esc(t.querySelector('b').textContent) + '</h4><div class="help-cols"><div><b>What they do</b><p>' + H[i].does + '</p></div><div><b>When you contact them</b><p>' + H[i].when + '</p></div><div><b>How you contact them</b><p>' + H[i].how + '</p></div></div></div>'; }).join('');
+  box.innerHTML = '<span class="mono">Who helps you</span><div class="help-tabs" role="tablist" aria-label="Who helps you">' + tabs + '</div>' + panes;
+  box.classList.add('tabbed'); box.removeAttribute('role');
+  box.addEventListener('click', function(e){ var t = e.target.closest('button[data-htab]'); if(!t) return; var i = t.getAttribute('data-htab'); $$('button[data-htab]', box).forEach(function(b){ b.setAttribute('aria-selected', b === t ? 'true' : 'false'); }); $$('.help-pane', box).forEach(function(pn, pi){ pn.classList.toggle('cur', String(pi) === i); }); if(narr.playing) narrStop(); });
+})();
+
 /* ══════════ "Your turn": a black callout above every activity, gold check when done ══════════ */
 var TURNS = [
   { sel:'#shiftDrill',  prog:'shift',    text:'Sort six things. Tap yours, your team member’s, or another office.' },
@@ -772,7 +796,9 @@ var QUIZ = [
   { seg:'Five ideas (page 6)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
   { seg:'Your first calls (page 9)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
   { seg:'The four jobs (page 10)', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
-];
+];/* the right answer sits at a different position on each question */
+(function(){ var POS = [0, 2, 3, 1, 2]; QUIZ.forEach(function(q, i){ var t = POS[i]; if(t === undefined || t === q.a || t >= q.opts.length) return; var o = q.opts.splice(q.a, 1)[0]; q.opts.splice(t, 0, o); q.a = t; }); })();
+
 (function(){
   var box = $('#quizBox'), status = $('#quizStatus'), done = $('#quizDone'); if(!box) return;
   var PASS = 4, cur = 0, score = 0, answered = {};
@@ -823,4 +849,6 @@ $$('[data-copytext]').forEach(function(b){
 });
 
 progRender();
+/* for tests and the guide builder */
+window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
 })();

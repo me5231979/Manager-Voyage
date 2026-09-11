@@ -348,6 +348,20 @@ html.paged .sim-out .s-first p{ font-size:.95rem; }
 @media (max-width:1100px){ .comp-grid{ grid-template-columns:repeat(3,1fr); } } @media (max-width:900px){ .comp-grid{ grid-template-columns:1fr 1fr; } } @media (max-width:640px){ .comp-grid{ grid-template-columns:1fr; } }
 html.paged #ideas .drill-status{ margin-top:4px; font-size:.82rem; }
 html.paged .learn-comp{ padding:10px 14px; } html.paged .learn-comp h4{ font-size:1.05rem; margin:0 0 2px; } html.paged .learn-comp p{ font-size:.86rem; margin-bottom:4px; }
+.helpers.tabbed{ display:block; }
+.helpers.tabbed > .mono{ display:block; margin-bottom:8px; }
+.help-tabs{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:10px; }
+.help-tabs button{ display:flex; align-items:center; gap:10px; border:1px solid var(--field-bd); border-top:3px solid transparent; background:var(--field); color:var(--tx); border-radius:var(--r); padding:8px 12px; font:inherit; font-family:var(--serif); font-size:1.02rem; cursor:pointer; text-align:left; }
+.help-tabs button .hic{ width:32px; height:32px; margin:0; flex:0 0 auto; } .help-tabs button .hic svg{ width:16px; height:16px; }
+.help-tabs button[aria-selected="true"]{ background:var(--card); border-color:var(--vu-gold); border-top-color:var(--vu-gold); }
+.helpers.tabbed > div{ display:block; border:0; padding:0; background:none; }
+.helpers.tabbed > .help-tabs{ display:grid; }
+.helpers.tabbed > .help-pane{ display:none; border:1px solid var(--bd); border-left:4px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 16px 14px; } .helpers.tabbed > .help-pane.cur{ display:block; }
+.help-pane h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; margin:0 0 8px; }
+.help-cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px 18px; }
+.help-cols b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; border-top:2px solid var(--vu-gold); padding-top:6px; }
+.help-cols p{ font-size:.9rem; line-height:1.45; color:var(--tx2); margin:0; } .help-cols a{ color:var(--link); border-bottom:1px solid var(--bdg); }
+@media (max-width:900px){ .help-tabs,.help-cols{ grid-template-columns:1fr 1fr; } }
 .mea-choice{ display:grid; gap:10px; margin-top:6px; }
 .mission-charge{ margin-top:18px; border:2px solid var(--tx); border-left:8px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:20px 24px 22px; }
 .mission-charge .mono{ display:block; margin-bottom:6px; }
