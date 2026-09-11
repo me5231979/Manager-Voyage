@@ -88,7 +88,7 @@
   function pillFor(id) {
     var s = statusOf(id);
     if (s === 'oracle') return '<span class="pill pill--oracle">Verified in Oracle</span>';
-    if (s === 'self') return '<span class="pill pill--self">Complete, self-reported</span>';
+    if (s === 'self') { var c = profile.completions[id]; return '<span class="pill pill--self">&#10003; Completed' + (c && c.at ? ' ' + fmtDate(c.at) : '') + '</span>'; }
     if (s === 'opened') return '<span class="pill pill--opened">Opened</span>';
     return '<span class="pill pill--todo">Not started</span>';
   }
@@ -134,8 +134,8 @@
     var mark = '';
     if (CFG.allowSelfReport !== false) {
       mark = done && statusOf(it.id) === 'self'
-        ? '<button type="button" class="item__minor item__minor--text" data-reopen="' + esc(it.id) + '">Undo</button>'
-        : (!done ? '<button type="button" class="item__minor" data-done="' + esc(it.id) + '" title="I finished this" aria-label="Mark ' + esc(it.title) + ' complete">&#10003;</button>' : '');
+        ? '<button type="button" class="item__minor item__minor--text" data-reopen="' + esc(it.id) + '" title="Back to not started">Undo</button>'
+        : (!done ? '<button type="button" class="btn btn--mark" data-done="' + esc(it.id) + '" aria-label="Mark ' + esc(it.title) + ' complete">Mark complete</button>' : '');
     }
     return '<article class="item item--row item--' + it.kind + (done ? ' item--done' : '') + '" data-item="' + esc(it.id) + '">' +
       '<div class="row__chips"><span class="typechip">' + esc(chip) + '</span>' + (it.oracleCode && /^R-/.test(it.oracleCode) ? '<span class="codechip">' + esc(it.oracleCode) + '</span>' : '') + '</div>' +
@@ -172,7 +172,7 @@
     var ordered = !!foundationOrder();
     var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · The assessment, the Foundation on the web, then eighteen micro modules in Oracle</span></div>' +
       '<p class="panel__lead">' + esc(P.mrc.summary) + ' Every module is interactive: simulators, scenario studios, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check, and Oracle records the date you pass it.</p>' +
-      lane(mea.title, 'Ten minutes · Before the Foundation course', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Retake the assessment in six months.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Mark it with the check once you have submitted it.') +
+      lane(mea.title, 'Ten minutes · Before the Foundation course', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Retake the assessment in six months.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Tap Mark complete once you have submitted it.') +
       lane(f.title, '35 minutes on the web · After the assessment', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation next. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;
     [1, 2].forEach(function (phase) {
@@ -252,7 +252,7 @@
     } else {
       how.className = 'howline';
       how.innerHTML = 'Two components are <b>required in your first 60 days</b>. Oracle Learning assigned them the day your role began, from your role and your work location in <b>' + esc(stateName(profile.state)) + '</b>. ' +
-        (CFG.profileEndpoint ? 'Completions recorded in Oracle appear here automatically.' : 'Open each item in Oracle; when you finish, mark it with the check and it is written to your record as self-reported.');
+        (CFG.profileEndpoint ? 'Completions recorded in Oracle appear here automatically.' : 'Open each item in Oracle; when you finish, tap Mark complete and it is written to your record as self-reported.');
     }
 
     var pv = $('#previewBar');
@@ -365,7 +365,7 @@
       var id = go.getAttribute('data-go');
       if (!isDone(id) && !profile.opened[id]) { profile.opened[id] = todayIso(); save(); renderDashboard(); }
       var goLocal = go.getAttribute('href') && !/^https?:/i.test(go.getAttribute('href'));
-      toast(goLocal ? 'Opening the Foundation course. Your progress is recorded when you finish it.' : id === 'MEA' ? 'Opened the assessment. Your results come by email; mark it with the check once you have submitted it.' : 'Opened in Oracle Learning. ' + (CFG.profileEndpoint ? 'Your completion syncs back here.' : 'Mark it with the check when you finish.'));
+      toast(goLocal ? 'Opening the Foundation course. Your progress is recorded when you finish it.' : id === 'MEA' ? 'Opened the assessment. Your results come by email; tap Mark complete once you have submitted it.' : 'Opened in Oracle Learning. ' + (CFG.profileEndpoint ? 'Your completion syncs back here.' : 'Tap Mark complete when you finish.'));
       return;
     }
     var d = e.target.closest('[data-done]');

@@ -185,7 +185,11 @@ details.lane .lane__note { margin-left: 1.1em; }
 .pill--self { color: var(--vu-oak); border: 1px solid rgba(148,110,36,.5); background: rgba(207,174,112,.16); }
 .pill--oracle { color: var(--vu-black); background: var(--vu-gold-flat); border: 1px solid var(--vu-gold-flat); }
 .pill--locked { color: #6a6a6a; border: 1px solid #d5d0c4; background: #f4f1ea; }
-.item__actions { display: flex; gap: .15rem; align-items: center; flex-wrap: nowrap; }
+.item__actions { display: flex; gap: .4rem; align-items: center; flex-wrap: nowrap; }
+.btn--mark { background: transparent; color: var(--vu-oak); border: 1px solid rgba(148,110,36,.55); }
+.btn--mark:hover { background: rgba(207,174,112,.16); border-color: var(--vu-oak); }
+.btn--mark::before { content: '\2610'; margin-right: .4rem; font-size: .95em; }
+.btn--mark:hover::before { content: '\2611'; }
 .item__actions .btn { padding: .45rem .9rem; font-size: .8rem; white-space: nowrap; }
 .item__minor { background: none; border: 0; cursor: pointer; font: 600 .95rem var(--font-sans); color: #9a9a9a; padding: .35rem .45rem; }
 .item__minor:hover { color: var(--vu-oak); }
