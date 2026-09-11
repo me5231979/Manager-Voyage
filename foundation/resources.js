@@ -405,9 +405,9 @@ window.MV_SIM = [
 
 /* The manager compliance courses (required, in Oracle Learning). Taken before this course. */
 window.MV_COMPLIANCE = {
-  title: 'Your manager compliance courses',
-  url: '', /* paste the Oracle Learning deep link to the manager compliance list here; until then the button opens Oracle Learning */
-  note: 'Required for every manager, in Oracle Learning. Take them before this course. Each opens in Oracle Learning once its link is added.',
+  title: 'Your micro modules',
+  url: '', /* paste the Oracle Learning deep link to the micro module list here; until then the button opens Oracle Learning */
+  note: 'Short courses in Oracle Learning, one common task each. Take them after this course, in any order. Each opens in Oracle Learning once its link is added.',
   items: [
     { title: 'Labor Relations', type: 'Video', url: '' },
     { title: 'Wage and Hour', type: 'Video', url: '' },

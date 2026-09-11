@@ -754,7 +754,7 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
   if(ltabs) ltabs.addEventListener('click', function(e){ var t = e.target.closest('button[data-ltab]'); if(!t) return; var k = t.getAttribute('data-ltab'); $$('.learn-tabs button').forEach(function(b){ b.setAttribute('aria-selected', b === t ? 'true' : 'false'); }); $$('.learn-pane').forEach(function(pn){ pn.classList.toggle('cur', pn.getAttribute('data-lpane') === k); }); if(narr.playing) narrStop(); });
   var comp = $('#learnComp'), C = window.MV_COMPLIANCE;
   if(comp && C){
-    comp.innerHTML = '<span class="mono">Micro Course Library</span><h4>' + esc(C.title) + '</h4><p>' + esc(C.note) + '</p><div class="comp-grid">' + C.items.map(function(it, i){
+    comp.innerHTML = '<span class="mono">Micro Modules</span><h4>' + esc(C.title) + '</h4><p>' + esc(C.note) + '</p><div class="comp-grid">' + C.items.map(function(it, i){
       var t = typeof it === 'string' ? { title: it, type: 'Video' } : it, has = !!t.url;
       return '<a class="comp-item' + (has ? '' : ' soon') + '" href="' + esc(t.url || C.url || '#') + '"' + (has || C.url ? ' target="_blank" rel="noopener"' : ' aria-disabled="true" title="Link coming from PCB"') + '><span class="no">' + (i + 1) + '</span><span class="ct"><i>' + esc(t.type || 'Video') + ' &middot; Oracle Learning</i><b>' + esc(t.title) + '</b></span><span class="go" aria-hidden="true">&#8599;</span></a>';
     }).join('') + '</div>';
