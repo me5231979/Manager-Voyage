@@ -45,6 +45,16 @@ def duration(path):
 
 def is_url(u): return isinstance(u, str) and u.startswith('https://')
 
+LOUD = 'I=-16:TP=-1.5:LRA=11'
+def loudnorm_linear(src):
+    """Two-pass loudness: measure, then apply a single linear gain. Linear mode
+    keeps the recording untouched apart from level; single-pass loudnorm
+    rides the gain dynamically and dulls the top end."""
+    out = run('ffmpeg', '-hide_banner', '-nostats', '-v', 'info', '-i', src, '-af', 'loudnorm=' + LOUD + ':print_format=json', '-f', 'null', '-')
+    m = json.loads(out[out.rfind('{'):out.rfind('}') + 1])
+    return 'loudnorm=%s:measured_I=%s:measured_TP=%s:measured_LRA=%s:measured_thresh=%s:offset=%s:linear=true' % (
+        LOUD, m['input_i'], m['input_tp'], m['input_lra'], m['input_thresh'], m['target_offset'])
+
 data = json.load(open(J))
 built, skipped = [], []
 
@@ -53,8 +63,8 @@ for key, url in (data.get('audio') or {}).items():
     raw = os.path.join(TMP, key + '.raw.mp3')
     if not fetch(url, raw): skipped.append('audio ' + key + ' (download failed)'); continue
     out = os.path.join(AUD, key + '.mp3')
-    # consistent loudness for the Listen button, small file
-    run('ffmpeg', '-y', '-v', 'error', '-i', raw, '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-ar', '44100', '-b:a', '96k', out)
+    # consistent loudness for the Listen button; one linear gain and a high bitrate keep the voice crisp
+    run('ffmpeg', '-y', '-v', 'error', '-i', raw, '-af', loudnorm_linear(raw), '-ar', '44100', '-c:a', 'libmp3lame', '-b:a', '192k', out)
     built.append('audio ' + key)
 
 def vtt_time(t):
@@ -151,9 +161,9 @@ for name, spec in (data.get('videos') or {}).items():
     fade = max(total - 0.8, 0)
     out = os.path.join(VID, name + '.mp4')
     run('ffmpeg', '-y', '-v', 'error', '-i', cat, '-i', npath,
-        '-filter_complex', '[1:a]adelay=%d|%d,loudnorm=I=-16:TP=-1.5:LRA=11,apad,afade=t=out:st=%.2f:d=0.8[a];[0:v]tpad=stop_mode=clone:stop_duration=%.2f,fade=t=in:d=0.6,fade=t=out:st=%.2f:d=0.8[v]' % (int(lead * 1000), int(lead * 1000), fade, short + 1.0, fade),
+        '-filter_complex', '[1:a]adelay=%d|%d,%s,apad,afade=t=out:st=%.2f:d=0.8[a];[0:v]tpad=stop_mode=clone:stop_duration=%.2f,fade=t=in:d=0.6,fade=t=out:st=%.2f:d=0.8[v]' % (int(lead * 1000), int(lead * 1000), loudnorm_linear(npath), fade, short + 1.0, fade),
         '-map', '[v]', '-map', '[a]', '-t', '%.2f' % total,
-        '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', out)
+        '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', out)
     run('ffmpeg', '-y', '-v', 'error', '-ss', '1.5', '-i', out, '-frames:v', '1', '-q:v', '3', os.path.join(IMG, name + '-poster.jpg'))
     if spec.get('text'):
         write_captions(spec['text'], lead, nd, os.path.join(VID, name + '.vtt'))
