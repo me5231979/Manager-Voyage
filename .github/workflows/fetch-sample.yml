@@ -1,15 +1,10 @@
 name: Fetch one audio sample
 # Downloads a single Runway clip into assets/audio/foundation so it can be
-# checked before a full media build. Run it from the Actions tab or the API.
+# checked before a full media build. Write {"name","url"} to .github/sample-url.json and push to main.
 on:
-  workflow_dispatch:
-    inputs:
-      url:
-        description: Signed Runway URL of the mp3
-        required: true
-      name:
-        description: File name without extension (letters, digits, dashes)
-        required: true
+  push:
+    branches: [main]
+    paths: ['.github/sample-url.json']
 permissions:
   contents: write
 concurrency:
@@ -24,15 +19,16 @@ jobs:
       - name: Download
         run: |
           set -e
-          name="${{ github.event.inputs.name }}"
+          name=$(python3 -c "import json;print(json.load(open('.github/sample-url.json'))['name'])")
+          url=$(python3 -c "import json;print(json.load(open('.github/sample-url.json'))['url'])")
           case "$name" in *[!A-Za-z0-9-]*) echo "bad name"; exit 1;; esac
-          curl -fsSL -o "assets/audio/foundation/$name.mp3" "${{ github.event.inputs.url }}"
+          curl -fsSL -o "assets/audio/foundation/$name.mp3" "$url"
           ls -la "assets/audio/foundation/$name.mp3"
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add assets/audio/foundation
-          git commit -m "Add audio sample ${{ github.event.inputs.name }}" || exit 0
+          git commit -m "Add audio sample $(python3 -c "import json;print(json.load(open('.github/sample-url.json'))['name'])")" || exit 0
           git pull --rebase -X theirs origin main
           git push origin HEAD:main
