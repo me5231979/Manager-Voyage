@@ -1,6 +1,6 @@
 {
   "_note": "Signed Runway URLs for the Foundation course media. They expire within about a day of generation; pushing this file to main runs .github/workflows/fetch-media.yml, which downloads and builds the media (narration, videos with captions, posters) and commits it. Regenerate with the Runway MCP (generate_speech, Leslie, eleven_multilingual_v2, from foundation/narration-scripts.js; generate_video, seedance-2-fast, 10s, 16:9, 720p, no audio) and replace the URLs here. The text fields are the caption source and must match the narration recording.",
-  "generated": "Narrator switched to the Eleanor voice (Runway, eleven_multilingual_v2) on every clip and video track. Audio keys map to assets/audio/foundation/<key>.mp3; video narration is muxed into assets/video/foundation/<name>.mp4.",
+  "generated": "Narrator: Eleanor (Runway, eleven_multilingual_v2) on every clip and video track, with the audio_filter clean-up (noise floor, tails, tone) applied before loudness. Audio keys map to assets/audio/foundation/<key>.mp3; video narration is muxed into assets/video/foundation/<name>.mp4.",
   "voice": "Leslie (eleven_multilingual_v2)",
   "videoModel": "seedance-2-fast 720p 10s",
   "audio": {
@@ -65,7 +65,8 @@
     "welcome-j2": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/f1f8e3d9-e971-4df7-a0c4-19a7017253c3/FLH_E_welcome_j2.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTBiZjdmYjE2YTZiNzI0OCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTI3MjYyNX0.8XOf7HDjsgpYdocrFFWUaRa_rC9m3u0c9zh23z7hf_U",
     "welcome-j3": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/8cf8cc2b-1cfd-4958-9ffd-a8fda5573d04/FLH_E_welcome_j3.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNDdmZWE2OWRkMDc2NmRkMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTI1NjczM30.9qquR3w7IVCX-zmYUxPk82yMAxfdTNzbVQ6yZDzRZRM",
     "welcome-j4": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/539ed034-1444-4b93-9a2a-0abadf801682/FLH_E_welcome_j4.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTAwNzk3NTQ1M2E2NmUzMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTIyOTY1Mn0.Xh_grGqivvPZr59jv-VSgEm0PXuWGjDgJnEhQAj-YV0",
-    "mission-1": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/ca36baab-49df-4015-96dc-a5ad26c5f146/FLH_E_mission_1.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTFjNDZmNmU5YWFlMTUyZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTI2NjE1OH0.YfavUn--CJHVCH7fh5XnBTMzmfbj1R4xiLw8Tgj3Vuw"
+    "mission-1": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/ca36baab-49df-4015-96dc-a5ad26c5f146/FLH_E_mission_1.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTFjNDZmNmU5YWFlMTUyZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTI2NjE1OH0.YfavUn--CJHVCH7fh5XnBTMzmfbj1R4xiLw8Tgj3Vuw",
+    "voice-eleanor": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/d6c3cd5e-dd4e-4284-8113-ef2ae15a7c68/FLH_voice_sample_Eleanor.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMjcwZDhlMDlkMTk0MjYzNCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTI4NjE1M30.dAQiyGD5hJTk2Eg1mADsNG-gUbmcLgtsuRGnNVtY5OI"
   },
   "videos": {
     "basics": {
@@ -198,5 +199,6 @@
       "text": "The fourth job is connecting your team to the rest of Vanderbilt. Your team needs things it does not control: approvals, information, help from other offices, and a fair hearing when someone asks too much. New managers do this job least, because nobody told them it was part of the job. Three habits. Know the people your team depends on: your HCM, your Engagement Consultant, Finance, a peer manager. By name, before you need them. Watch for what is coming, so the team hears it from you first. Speak up for your team: facts, options, and a negotiated date, before you say yes to the weekend. For example: the week before Commencement, Events asks a Student Affairs manager for her whole team on Friday. She already knows the events coordinator by name. The schedule was on her wall calendar in March. Over coffee, with the printed hours, she names the conflict and offers two options. He picks one, nobody works the weekend, and on Commencement morning the welcome tables are staffed and ready. This week: have coffee with one person your team depends on."
     }
   },
-  "credits": "Runway: seedance-2-fast 720p 16:9 5s clips (145 credits each), Leslie / eleven_multilingual_v2 narration. About 15,800 credits this round."
+  "credits": "Runway: seedance-2-fast 720p 16:9 5s clips (145 credits each), Leslie / eleven_multilingual_v2 narration. About 15,800 credits this round.",
+  "audio_filter": "highpass=f=90,equalizer=f=380:t=q:w=1.3:g=-4,afftdn=nf=-28:nr=30:tn=1,agate=threshold=0.035:ratio=6:attack=4:release=80:knee=3,treble=g=3.5:f=4000:w=0.6"
 }

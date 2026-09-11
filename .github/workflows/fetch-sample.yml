@@ -36,3 +36,5 @@ jobs:
           git commit -m "Add audio samples from sample-url.json" || exit 0
           git pull --rebase -X theirs origin main
           git push origin HEAD:main
+      - name: Publish to the live site
+        run: git push origin HEAD:gh-pages

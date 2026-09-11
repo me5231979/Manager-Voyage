@@ -57,6 +57,14 @@ def loudnorm_linear(src):
 
 data = json.load(open(J))
 built, skipped = [], []
+# Optional clean-up chain (noise floor, tails, tone) applied to every narration file before loudness.
+AUDIO_FILTER = data.get('audio_filter') or ''
+def cleaned(src, key):
+    """Return a path to the narration with the clean-up chain applied (a wav in TMP), or src when there is no chain."""
+    if not AUDIO_FILTER: return src
+    out = os.path.join(TMP, key + '.clean.wav')
+    run('ffmpeg', '-y', '-v', 'error', '-i', src, '-af', AUDIO_FILTER, '-ar', '44100', out)
+    return out
 
 for key, url in (data.get('audio') or {}).items():
     if not is_url(url): skipped.append('audio ' + key); continue
@@ -64,7 +72,8 @@ for key, url in (data.get('audio') or {}).items():
     if not fetch(url, raw): skipped.append('audio ' + key + ' (download failed)'); continue
     out = os.path.join(AUD, key + '.mp3')
     # consistent loudness for the Listen button; one linear gain and a high bitrate keep the voice crisp
-    run('ffmpeg', '-y', '-v', 'error', '-i', raw, '-af', loudnorm_linear(raw), '-ar', '44100', '-c:a', 'libmp3lame', '-b:a', '192k', out)
+    src = cleaned(raw, key)
+    run('ffmpeg', '-y', '-v', 'error', '-i', src, '-af', loudnorm_linear(src), '-ar', '44100', '-c:a', 'libmp3lame', '-b:a', '192k', out)
     built.append('audio ' + key)
 
 def vtt_time(t):
@@ -121,6 +130,7 @@ for name, spec in (data.get('videos') or {}).items():
         parts.append(n)
     npath = os.path.join(TMP, name + '.narr.mp3')
     if not ok or not fetch(narr, npath): skipped.append('video ' + name + ' (download failed)'); continue
+    npath = cleaned(npath, name + '-video')
     lst = os.path.join(TMP, name + '.txt')
     with open(lst, 'w') as f:
         for p in parts: f.write("file '%s'\n" % p)
