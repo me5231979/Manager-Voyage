@@ -192,7 +192,7 @@ window.MV_SIM = [
   "first": "Thank them, adjust the work you can adjust this week, and send the request to the leave office the same day. Tell them you have done so and what happens next.",
   "who": [
    "You: listen, adjust the load, route it the same day, keep their work private.",
-   "The leave office: decides eligibility (FMLA and Vanderbilt leave), paperwork, dates.",
+   "The leave office: decides eligibility (FMLA and Vanderbilt leave), paperwork, dates. FMLA requests go through Origami.",
    "Your HCM: if you are unsure whether something counts, or how to cover the work."
   ],
   "never": "Never ask for a diagnosis or medical detail. Never decide eligibility yourself. Never let the request sit while you “see how it goes.”",
