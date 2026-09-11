@@ -116,10 +116,12 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20260912o';
+var MEDIA_V = '20260912p';
+/* the course videos carry their own narration: nothing else should talk over them, and they should not talk over anything else */
+function pauseVideos(){ $$('video').forEach(function(v){ if(v.id !== 'heroVideo' && !v.paused){ try{ v.pause(); }catch(e){} } }); }
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
-  narrStop();
+  narrStop(); pauseVideos();
   if(!text){ toast('No narration on this page.'); return; }
   narr.key = k; narr.playing = true; narrUI();
   var a = new Audio('../assets/audio/foundation/' + k.replace(/\//g, '-') + '.mp3?v=' + MEDIA_V);
@@ -153,7 +155,7 @@ function subBtn(k){ return NARR[k] ? '<button type="button" class="sub-listen" d
 document.addEventListener('click', function(e){
   var b = e.target.closest('[data-narr]'); if(b){ e.preventDefault(); narrSub(b.getAttribute('data-narr'), true); return; }
   /* clicking into any activity stops whatever is playing, so the audio never talks over what the learner is doing */
-  if(e.target.closest('.scn button[data-o], [data-drill] button, .fw-card, .kq button, .sim, .mea-choice button, .md-btn')) { if(narr.playing) narrStop(); }
+  if(e.target.closest('.scn button[data-o], [data-drill] button, .fw-card, .flip-btn, .kq button, .sim, .mea-choice button, .md-btn, .idea-tabs button, button[data-htab], .learn-tabs button')) { pauseVideos(); if(narr.playing) narrStop(); }
 }, true);
 document.addEventListener('change', function(e){ if(e.target && (e.target.id === 'simSel' || e.target.closest('.sim')) && narr.playing) narrStop(); }, true);
 if(bbAuto) bbAuto.addEventListener('click', function(){
