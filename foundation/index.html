@@ -36,7 +36,7 @@
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=20260911r" />
+<link rel="stylesheet" href="../assets/css/course.css?v=20260911s" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
@@ -317,9 +317,13 @@ html.paged .fw-status{ margin-top:6px; }
 /* read, then try: the moment opens in place of the four blocks so the tab stays one screen */
 .idea .try .cq-h{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 /* first calls: simulator and the decide drill side by side */
-html.paged #calls .calls-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; }
+html.paged #calls .calls-grid{ display:grid; grid-template-columns:1fr; gap:20px; align-items:start; }
+html.paged #calls .sim-out.show{ grid-template-columns:1fr 1fr; }
+html.paged #calls .sim-out .s-first{ grid-column:1 / -1; }
+html.paged #calls .sim-pick{ max-width:640px; }
+html.paged #calls .decide-head{ display:block; margin-top:0 !important; } html.paged #calls .decide-head p{ display:none; }
 html.paged #calls .calls-grid > div{ min-width:0; }
-html.paged #calls .sim{ margin-top:0; } html.paged #calls .sim-head h3{ font-size:1.15rem; } html.paged #calls .sim-head p{ font-size:.88rem; } html.paged #calls .recap-row{ margin-top:0; } html.paged #calls .recap-row > div{ padding:10px 12px; } html.paged #calls .decide-head{ display:none; }
+html.paged #calls .sim{ margin-top:0; } html.paged #calls .sim-head h3{ font-size:1.15rem; } html.paged #calls .sim-head p{ font-size:.88rem; } html.paged #calls .recap-row{ margin-top:0; } html.paged #calls .recap-row > div{ padding:10px 12px; }
 html.paged #ideas .ask, html.paged #calls .ask, html.paged #learn .ask{ display:none; }
 .learn-tabs{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 10px; }
 .learn-tabs button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:7px 14px; font:inherit; font-size:.86rem; cursor:pointer; }
@@ -329,7 +333,7 @@ html.paged #ideas .ask, html.paged #calls .ask, html.paged #learn .ask{ display:
 html.paged .learn-top a{ padding:10px 12px; } html.paged .learn-top a small{ font-size:.78rem; }
 html.paged .pdf-card{ padding:10px 16px; margin-top:8px; } html.paged .pdf-card b{ font-size:1.05rem; } html.paged .pdf-card .pdf-sub{ font-size:.86rem; }
 /* the simulator answer scrolls inside its own panel; the page does not */
-html.paged .sim-out{ max-height:calc(100vh - 630px); min-height:140px; overflow:auto; padding-right:6px; }
+html.paged .sim-out{ max-height:none; min-height:0; overflow:visible; padding-right:0; }
 html.paged .sim-out .s-first p{ font-size:.95rem; }
 /* trying a moment: the four blocks and the headline give way to the moment */
 .comp-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:8px; }
@@ -1316,13 +1320,13 @@ html.paged .idea .try .scn{ margin-top:0; }
   </div>
 </div>
 
-<script src="../assets/js/config.js?v=20260911r"></script>
-<script src="../assets/js/program-data.js?v=20260911r"></script>
-<script src="../assets/js/scorm.js?v=20260911r"></script>
-<script src="../assets/js/oracle.js?v=20260911r"></script>
-<script src="narration-scripts.js?v=20260911r"></script>
-<script src="resources.js?v=20260911r"></script>
-<script src="pager.js?v=20260911r"></script>
-<script src="app.js?v=20260911r"></script>
+<script src="../assets/js/config.js?v=20260911s"></script>
+<script src="../assets/js/program-data.js?v=20260911s"></script>
+<script src="../assets/js/scorm.js?v=20260911s"></script>
+<script src="../assets/js/oracle.js?v=20260911s"></script>
+<script src="narration-scripts.js?v=20260911s"></script>
+<script src="resources.js?v=20260911s"></script>
+<script src="pager.js?v=20260911s"></script>
+<script src="app.js?v=20260911s"></script>
 </body>
 </html>
