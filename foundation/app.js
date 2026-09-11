@@ -164,11 +164,10 @@ document.addEventListener('chart:page', function(){ narrStop(); if(narr.auto) wi
 /* fit each page to the viewport: shrink the content a little (never below 78%) before letting it scroll */
 var fitT = null;
 function fitPage(){
+  /* Pages no longer zoom down to fit: type stays one size, and a page that needs more room scrolls. */
   var pg = document.querySelector('.page.cur'); if(!pg) return;
-  var wrap = pg.querySelector('.wrap'); if(!wrap) return;
-  wrap.style.zoom = ''; var z = 1;
-  for(var i = 0; i < 12 && pg.scrollHeight > pg.clientHeight + 2 && z > 0.8; i++){ z = Math.round((z - 0.02) * 100) / 100; wrap.style.zoom = z; }
-  pg.classList.toggle('fitted', z < 1);
+  var wrap = pg.querySelector('.wrap'); if(wrap) wrap.style.zoom = '';
+  pg.classList.remove('fitted');
 }
 function fitSoon(){ if(fitT) window.clearTimeout(fitT); fitT = window.setTimeout(fitPage, 60); }
 document.addEventListener('chart:page', function(){ window.setTimeout(fitPage, 30); window.setTimeout(fitPage, 450); });

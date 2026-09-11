@@ -133,7 +133,7 @@ H.push(`<section><span class="eyebrow">Topic 1 · What changed</span><h2>Your jo
 // topic 2
 H.push(`<section><span class="eyebrow">Topic 2 · Five ideas</span><h2>Five ideas every good manager <em>relies</em> on.</h2>`);
 IDEAS.forEach((it, i) => { const lab = it.who; H.push(`<div class="idea"><span class="eyebrow">${i + 1} · ${esc(lab)}</span><h3 style="margin-top:3pt">${it.h}</h3>
-<div class="blocks"><p><b>What it is</b>${esc(it.what)}</p><p><b>As a manager</b>${esc(it.apply)}</p><p><b>The value</b>${esc(it.value)}</p></div>
+<div class="blocks"><p><b>What it is</b>${esc(it.what)}</p><p><b>Why adopt it</b>${esc(it.why)}</p><p><b>What it looks like in practice</b>${esc(it.looks)}</p><p><b>The value it brings</b>${esc(it.value)}</p></div>
 <div class="week"><b>Start this week</b>${esc(it.week)}</div></div>`); });
 H.push(`<h3>The ideas at work: three rules to keep</h3><div class="grid3">
 <div class="box cream"><b class="k">Bad news</b>Thank first. Solve second. Learn the cause later. Never in front of the team.</div>
