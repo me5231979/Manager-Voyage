@@ -262,7 +262,11 @@ html.paged #nextstep .hw-step .chip{ font-size:.64rem; padding:4px 8px; }
 @media (max-width:900px){ html.paged #nextstep .hw-list{ grid-template-columns:1fr; } }
 /* course overview */
 .ov-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
-.mission-grid{ margin-top:16px; }
+.mission-charge{ margin-top:18px; border:2px solid var(--tx); border-left:8px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:20px 24px 22px; }
+.mission-charge .mono{ display:block; margin-bottom:6px; }
+.mission-charge > p{ font-family:var(--serif); font-weight:400; font-size:clamp(1.5rem,2.8vw,2.1rem); line-height:1.2; color:var(--tx); margin:0 0 14px; max-width:30ch; }
+.mission-charge > p em{ font-family:var(--serif-i); font-style:italic; color:var(--strong); }
+.mission-charge .mission-list{ border-top:1px solid var(--bd); padding-top:14px; }
 .mission-list{ list-style:none; padding:0; margin:6px 0 0; display:grid; gap:8px 24px; } .mission-list.three{ grid-template-columns:repeat(3,1fr); } @media (max-width:900px){ .mission-list.three{ grid-template-columns:1fr; } }
 .mission-list li{ padding-left:16px; position:relative; font-size:.95rem; color:var(--tx2); } .mission-list li::before{ content:''; position:absolute; left:0; top:.6em; width:7px; height:7px; border-radius:50%; background:var(--vu-gold); }
 .mission-list li b{ display:inline; font-family:var(--sans); font-weight:600; font-size:inherit; letter-spacing:0; text-transform:none; color:var(--tx); margin:0; }
@@ -601,20 +605,20 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The mission</span></span>
       <h2>Define the great university of the 21st century, and <em class="s">be</em> it.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>Vanderbilt&rsquo;s vision, how we operate, and what both ask of you as a manager.</p><p><b>Why it matters</b>Every team&rsquo;s work is part of the climb. Your focus as a manager is to keep your team&rsquo;s work aligned to the mission and moving it forward.</p></div>
+    <div class="ask"><p><b>What you will learn</b>Vanderbilt&rsquo;s vision, how we operate, and what both ask of you as a manager.</p><p><b>Why it matters</b>Every team&rsquo;s work is part of it. The mission is not achieved at the top; it is achieved team by team, and yours is one of them.</p></div>
     <div class="ov-grid">
       <div class="ov-card"><b>The vision</b><p>Vanderbilt will define the great university of the 21st century and be it, and help reclaim the essential role of leading research universities in driving American prosperity.</p></div>
       <div class="ov-card"><b>How we operate</b><p>Uncommon speed, agility, and scale. Exceptional core operations are the fuel; bold initiatives and industry leadership are what they power.</p></div>
       <div class="ov-card"><b>As we grow</b><p>Vanderbilt now works from more places: Nashville, San Francisco, West Palm Beach, New York City, and Chattanooga. As we grow, help your team understand how we operate, wherever they sit.</p></div>
     </div>
-    <div class="mission-grid">
-      <div class="week"><b>As a manager, your focus</b>
-        <ul class="mission-list three">
-          <li><b>Align.</b> Connect your team&rsquo;s work to the mission. Say the why.</li>
-          <li><b>Progress.</b> Move it forward with speed, agility, and scale: decide, unblock, finish.</li>
-          <li><b>Stay in touch with your manager.</b> Strategy, projects, priorities, and anything else, so your team hears it from you first.</li>
-        </ul>
-      </div>
+    <div class="mission-charge reveal">
+      <span class="mono">Your responsibility</span>
+      <p>As a manager, it is your responsibility to <em>embody</em> this mission and to lead your team to achieve it.</p>
+      <ul class="mission-list three">
+        <li><b>Embody it.</b> Speed, agility, and scale start with how you work. Your team watches what you do before it hears what you say.</li>
+        <li><b>Lead your team to achieve it.</b> Connect the team&rsquo;s work to the mission, say the why, then decide, unblock, and finish.</li>
+        <li><b>Stay in touch with your manager.</b> Strategy, projects, priorities, and anything else, so your team hears it from you first.</li>
+      </ul>
     </div>
   </div>
 </section>

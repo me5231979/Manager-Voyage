@@ -1,6 +1,6 @@
 {
  "_note": "Signed Runway URLs for the Foundation course media. They expire within about a day of generation; pushing this file to main runs .github/workflows/fetch-media.yml, which downloads and builds the media (narration, videos with captions, posters) and commits it. Regenerate with the Runway MCP (generate_speech, Leslie, eleven_multilingual_v2, from foundation/narration-scripts.js; generate_video, seedance-2-fast, 10s, 16:9, 720p, no audio) and replace the URLs here. The text fields are the caption source and must match the narration recording.",
- "generated": "2026-09-11 (mission page; your manager, not unit leader; no dashboard mentions)",
+ "generated": "2026-09-11 (mission page: embody the mission and lead your team to achieve it)",
  "voice": "Leslie (eleven_multilingual_v2)",
  "videoModel": "seedance-2-fast 720p 10s",
  "audio": {
@@ -44,7 +44,7 @@
   "welcome-j2": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/52ddbf1e-9fc7-4ccf-98c3-cb293be0903f/foundation_welcome_j2.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMjllOTJmNzM0MTY4MDdlNSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTE5NTg5MX0.ZM3P3DUJKWFhoDXevir5h0OEXS7TH-tLAA5fWCNuAgQ",
   "welcome-j3": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/705f253c-7f70-4167-a5f9-341e437a7176/foundation_welcome_j3.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNmY5M2M1ZDZlNmJhODFiNSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTE4NDIxNH0.l9i3ku37i38NH4p08DYmy9oMsZaxt152SIoX05ggupc",
   "welcome-j4": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/f5f3d268-5244-4d1a-8ea4-f96d93a0aa09/foundation_welcome_j4.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNTY0YjQ3MTZkYTJmMzNiNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTIyNjc3NH0.rNUyIPs1zsaeqqxWWjCRvl8HnVDOr6DmZmhftRM9VkI",
-  "mission-1": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/cab1ad98-11e8-4df5-9b6b-68a7e3f94cad/foundation_mission_1.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzNmYzJiYjI0YmQ3ZjJlMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTE3NjQ5OH0.h7HKDNwWm6ibqTtgNs7D2LAuOoxaO05l422EJig_v7w"
+  "mission-1": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/e336c8c5-85ba-4a21-acdb-f817f29efd35/foundation_mission_1_v2.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYzhkZDAyYmMwMWUwY2VmOSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTIzOTM1Nn0.iEvFJ6sPF04qpQBsmMETospcW9FK_JkJsmB5fMgUleo"
  },
  "videos": {
   "basics": {
