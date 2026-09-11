@@ -154,6 +154,9 @@ if(bbAuto) bbAuto.addEventListener('click', function(){
   else { toast('Auto-narration off.'); narrStop(); }
 });
 document.addEventListener('chart:page', function(){ narrStop(); if(narr.auto) window.setTimeout(narrPlay, reduce ? 0 : 380); });
+/* the gold line under the header tracks pages turned; the Progress button counts activities */
+function pageLine(){ if(!progFill || !window.chartPager) return; var c = window.chartPager.current(), n = window.chartPager.count || 1; progFill.style.width = ((c.index + 1) / n * 100) + '%'; }
+document.addEventListener('chart:page', pageLine); window.setTimeout(pageLine, 50);
 document.addEventListener('play', function(e){ if(e.target && e.target.tagName === 'VIDEO' && e.target.id !== 'heroVideo') narrStop(); }, true);
 document.addEventListener('visibilitychange', function(){ if(document.hidden && narr.playing) narrStop(); });
 narrUI();
@@ -259,7 +262,6 @@ function progRender(changedKey, nowDone){
   SECTIONS.forEach(function(s){ if(progIs(s.k)) doneN++; });
   var left = total - doneN;
   if(progCount) progCount.textContent = doneN + '/' + total;
-  if(progFill) progFill.style.width = (doneN / total * 100) + '%';
   if(progSum) progSum.textContent = doneN === total ? 'All ' + total + ' activities complete.' : doneN + ' of ' + total + ' activities complete. ' + left + ' left; each row is a shortcut.';
   if(progTop) progTop.textContent = doneN === 0 ? total + ' activities ahead.' : doneN === total ? 'All ' + total + ' activities complete.' : doneN + ' of ' + total + ' activities complete, ' + left + ' left.';
   if(mprogLine) mprogLine.textContent = doneN + ' of ' + total + ' activities complete';
