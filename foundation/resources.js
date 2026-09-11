@@ -161,7 +161,7 @@ window.MV_LEARN = [
   "src": "Harvard ManageMentor",
   "url": "https://www.youtube.com/watch?v=qLFAHMHWtIA",
   "yt": "qLFAHMHWtIA",
-  "why": "Your unit leader is the first person your team needs you connected to."
+  "why": "Your manager is the first person your team needs you connected to."
  },
  {
   "id": "v-delegate",

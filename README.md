@@ -39,7 +39,8 @@ row, and a rail with Up next, Milestones, and Who to call.
 
 "You are a manager now," the first course in Manager
 Foundations (after the manager compliance courses, before the micro modules).
-About twenty minutes, eighteen pages, five topics. It assumes the learner
+About twenty minutes, nineteen pages, five topics. It opens with the
+mission: the vision, how Vanderbilt operates, and what that asks of a manager. It assumes the learner
 knows nothing about management and starts there. Copy is deliberately short:
 each page is one idea, one activity.
 

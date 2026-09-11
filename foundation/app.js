@@ -351,6 +351,7 @@ function modalHide(){
 }
 var oLater = $('#oracleLater'), oOverlay = $('#oracleModal');
 if(oLater) oLater.addEventListener('click', modalHide);
+var oGo = $('#oracleGo'); if(oGo && oGo.tagName === 'BUTTON') oGo.addEventListener('click', modalHide);
 if(oOverlay) oOverlay.addEventListener('click', function(e){ if(e.target === oOverlay) modalHide(); });
 document.addEventListener('keydown', function(e){
   var m = $('#oracleModal'); if(!m || m.hidden) return;
@@ -447,7 +448,7 @@ var SCENARIOS = {
   external: { s:'A director in another unit emails you Monday: “We need your team to pull a full data reconciliation by Friday for our audit prep.” Your team’s own month-end close is the same week. Doing both is not possible without weekend work.', opts:[
     { t:'Say yes and ask the team to work the weekend. Better not to upset a director.', b:'The habit', best:false, out:'The audit prep ships, the team works the weekend, and next quarter the same director asks again, sooner, because it worked. Absorbing every request is what speaking up replaces.' },
     { t:'Reply the same day with the numbers: the hours the reconciliation takes, the month-end close it collides with, and two options, a partial pull by Friday with the rest the following Wednesday, or the full pull with the close pushed, and ask which the audit actually needs.', b:'Speak up for your team', best:true, out:'The director needed three of the seven tables by Friday and did not know the close was that week. You deliver three tables Thursday, the rest Wednesday, no weekend. The team saw you defend their month, politely and early.' },
-    { t:'Reply “We cannot do this” and copy your unit leader.', b:'Not speaking up, just escalating', best:false, out:'Your unit leader now owns a negotiation you could have had in one email, and the director hears “no” with no reason and no option. Speaking up for your team means the numbers and the options, not just a refusal.' }
+    { t:'Reply “We cannot do this” and copy your manager.', b:'Not speaking up, just escalating', best:false, out:'Your manager now owns a negotiation you could have had in one email, and the director hears “no” with no reason and no option. Speaking up for your team means the numbers and the options, not just a refusal.' }
   ]}
 };
 function buildScenario(el){
@@ -672,7 +673,7 @@ var IDEAS = [
         '<div><span class="s-lab">What it sounds like</span><p>' + esc(s.sounds) + '</p><span class="s-lab" style="margin-top:10px">Then</span><p>' + esc(s.then) + '</p></div>' +
         '<div><div class="s-who"><span class="s-lab">Who handles what</span><ul>' + s.who.map(function(w){ return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div><div class="s-never" style="margin-top:10px"><span class="s-lab">Never</span><p>' + esc(s.never) + '</p></div></div>' +
         '<div class="s-learn"><span class="s-lab" style="margin:0 4px 0 0">Learn it step by step</span>' +
-          (s.mod ? '<a class="chip-l mm" href="../dashboard/"><i>Micro module</i>' + esc(s.mod) + (mod && mod.format ? ' · ' + esc(mod.format) : '') + '</a>' : '') +
+          (s.mod ? '<span class="chip-l mm"><i>Micro module</i>' + esc(s.mod) + (mod && mod.format ? ' · ' + esc(mod.format) : '') + '</span>' : '') +
           (course ? chip(course) : '') + '</div>' +
         (s.note ? '<p class="s-note">' + esc(s.note) + '</p>' : '');
       out.classList.add('show');
@@ -720,7 +721,7 @@ var BANDS = {
     out.innerHTML = '<h4>Your starting <em>point</em>.</h4>' +
       '<p class="gap-line"><b>' + esc(B.name) + (d.score !== null && d.score !== '' ? ' &middot; ' + esc(String(d.score)) + ' of 70' : '') + '.</b> ' + esc(B.what) + '</p>' +
       '<p class="mono" style="margin-top:14px">Start with</p><ol class="focus-list">' + d.weak.map(function(k, i){ return '<li><b>' + (i + 1) + '</b><span>' + esc(CATS[k].name) + '<small>' + esc(CATS[k].short) + ' &middot; this week: ' + esc(CAT_HABIT[k]) + '</small></span></li>'; }).join('') + '</ol>' +
-      '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your dashboard now opens the micro modules for ' + esc(CATS[first].name.toLowerCase()) + ' first. Your Engagement Consultant can walk through the full results with you.</p>' +
+      '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your micro modules start with ' + esc(CATS[first].name.toLowerCase()) + '. Your Engagement Consultant can walk through the full results with you.</p>' +
       '<div class="route-act" style="margin-top:12px"><button type="button" class="btn btn-ghost btn-sm" id="meaRedo">Change it</button></div>';
     var ns = $('#ns2p'); if(ns) ns.textContent = 'Your results pointed to ' + CATS[first].name.toLowerCase() + '. This week: ' + CAT_HABIT[first] + '.';
     $('#meaRedo').addEventListener('click', function(){ out.innerHTML = ''; set('assess', null); });
@@ -744,11 +745,11 @@ function assessLoad(){ if(window.assessLoad) window.assessLoad(); }
 
 /* ══════════ knowledge check: five questions, one at a time, feedback after each ══════════ */
 var QUIZ = [
-  { seg:'What changed (page 3)', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
-  { seg:'Five ideas (page 5)', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
-  { seg:'Five ideas (page 5)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
-  { seg:'Your first calls (page 8)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
-  { seg:'The four jobs (page 9)', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
+  { seg:'What changed (page 4)', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
+  { seg:'Five ideas (page 6)', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
+  { seg:'Five ideas (page 6)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
+  { seg:'Your first calls (page 9)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
+  { seg:'The four jobs (page 10)', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
 ];
 (function(){
   var box = $('#quizBox'), status = $('#quizStatus'), done = $('#quizDone'); if(!box) return;

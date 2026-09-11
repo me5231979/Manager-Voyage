@@ -11,6 +11,7 @@ try{
   if(!main) throw new Error('no main');
   var PLAN = [
     { sel:'section.hero',     key:'home',      label:'Welcome',                      mode:'whole' },
+    { sel:'#mission',         key:'mission',   label:'The mission',                  mode:'whole' },
     { sel:'#overview',        key:'overview',  label:'Course overview',              mode:'whole' },
     { sel:'#shift',           key:'shift',     label:'What changed',                 mode:'whole' },
     { sel:'#basics',          key:'basics',    label:'What a manager is',            mode:'whole' },
