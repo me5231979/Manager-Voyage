@@ -442,8 +442,17 @@
       if (window.MVScorm && MVScorm.connected) MVScorm.incomplete();
       var straight = /[?&](view=dashboard|state=)/.test(location.search) && p.state;
       show(straight ? 'dashboard' : 'welcome');
-      if (CFG.profileEndpoint && CFG.profilePollMinutes) {
-        setInterval(function () { MVProfile.refresh(profile).then(function (q) { profile = q; if ($('#view-dashboard').classList.contains('active')) renderDashboard(); }); }, CFG.profilePollMinutes * 60000);
+      if (CFG.profileEndpoint) {
+        var lastPull = Date.now();
+        var pull = function () {
+          lastPull = Date.now();
+          MVProfile.refresh(profile).then(function (q) { profile = q; if ($('#view-dashboard').classList.contains('active')) renderDashboard(); });
+        };
+        if (CFG.profilePollMinutes) setInterval(pull, CFG.profilePollMinutes * 60000);
+        /* coming back from Oracle: re-check as soon as this tab is in front again (at most once every 20 seconds) */
+        var onBack = function () { if (!document.hidden && Date.now() - lastPull > 20000) pull(); };
+        document.addEventListener('visibilitychange', onBack);
+        window.addEventListener('focus', onBack);
       }
     });
   }

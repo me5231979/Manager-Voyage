@@ -52,10 +52,14 @@ Response contract:
 - `startDate` is the date the management assignment began. Day 1 and every
   deadline count from it.
 - `completions` is keyed by the ids in `assets/js/program-data.js`
-  (`R-001` to `R-020` for compliance, `MRC-F` for the foundation course,
-  `M1.1` to `M4.5` for the micro modules). Map them from Oracle Learning's
-  `learnerLearningRecords` (completed assignments) by learning item number.
-  A value of `true`, a date string, or an object all work.
+  (`R-001` to `R-020` for compliance, `MEA` for the Manager Effectiveness
+  Assessment, `MRC-F` for the foundation course, `MM-01` to `MM-18` for the
+  micro modules). Map them from Oracle Learning's `learnerLearningRecords`
+  (completed assignments) by learning item number. A value of `true`, a date
+  string, or an object all work.
+- The dashboard re-pulls the feed whenever its tab comes back to the front,
+  so a manager who finishes a course in Oracle and returns sees the row
+  turn to "Verified in Oracle" within a few seconds of Oracle recording it.
 
 An Oracle completion always outranks a self-reported one and cannot be
 undone from the dashboard.
