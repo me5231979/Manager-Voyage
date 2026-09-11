@@ -116,7 +116,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20260911v';
+var MEDIA_V = '20260911w';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
@@ -147,7 +147,7 @@ function narrSub(k, force){
   if(!NARR[k]){ if(force) toast('No narration for this one.'); else if(narr.playing) narrStop(); return; }
   if(narr.playing && narr.key === k){ narrStop(); return; }
   if(force) narr.on = true;
-  if(narr.on) narrPlay(k); else if(narr.playing) narrStop();
+  if(narr.on || narr.auto) narrPlay(k); else if(narr.playing) narrStop();
 }
 function subBtn(k){ return NARR[k] ? '<button type="button" class="sub-listen" data-narr="' + k + '" aria-pressed="false" aria-label="Listen to this one" title="Listen to this one"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="w1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="w2" d="M19 5a9 9 0 0 1 0 14"/></svg></button>' : ''; }
 document.addEventListener('click', function(e){

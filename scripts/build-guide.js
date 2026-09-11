@@ -141,7 +141,7 @@ H.push(`<h3>The ideas at work: three rules to keep</h3><div class="grid3">
 <div class="box cream"><b class="k">Change</b>The why before the what, in your own words, before the announcement.</div></div>
 <p class="tx2" style="margin-top:6pt;font-size:9pt">Sources: the big rocks method (Stephen Covey); clear is kind (Brené Brown); psychological safety (Amy Edmondson); start with why, leaders eat last (Simon Sinek); the people manager standard (SHRM).</p></section>`);
 // topic 3
-H.push(`<section><span class="eyebrow">Topic 3 · Your first year</span><h2>What Vanderbilt will ask you to do, and <em>when</em>.</h2><p class="tx2">Each task names its micro module in brackets. Each is a short how-to of its own.</p><div class="grid2">`);
+H.push(`<section><span class="eyebrow">Topic 3 · Your first year</span><h2>What Vanderbilt will ask you to do, and <em>when</em>.</h2><p class="tx2">As a manager you now have many tasks. Here they are, sorted by how often they come up.</p><div class="grid2">`);
 YEAR.forEach(c => H.push(`<div class="box"><b class="k">${esc(c.b)}</b><strong>${esc(c.h)}</strong><ul>${c.li.map(l => '<li>' + l + '</li>').join('')}</ul></div>`));
 H.push(`</div><h3>Your first calls</h3><p class="tx2">Most manager moments come down to one question: handle it myself, ask my HCM, send it to the leave office, or report it to EOA?</p>
 <div class="rule">
