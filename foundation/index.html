@@ -25,7 +25,7 @@
   jobs are based on Yukl (2012); his research is the guide, not the
   vocabulary. Built on the Working Smarter engine (../assets/css/course.css,
   pager.js) in the FLH brand. Every page is narrated (narration-scripts.js).
-  Progress: localStorage mv-found-* plus one JSON string with the assessment result (band, lowest job, module order);
+  Progress: localStorage mv-found-* plus one JSON string noting whether the learner reviewed the results email or still needs to take the assessment;
   in Oracle Learning the same state rides in SCORM suspend_data. Completion is
   reported through ../assets/js/oracle.js (SCORM, or MV_CONFIG.completionEndpoint).
   Assessment: managers complete the Manager Effectiveness Assessment (14 items,
@@ -274,6 +274,7 @@ html.paged #nextstep .hw-step .chip{ font-size:.64rem; padding:4px 8px; }
 .op-grid b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; margin-bottom:4px; }
 .op-grid p{ font-size:.93rem; color:var(--tx2); line-height:1.5; margin:0; }
 @media (max-width:900px){ .ov-grid.two,.op-grid{ grid-template-columns:1fr; } }
+.mea-choice{ display:grid; gap:10px; margin-top:6px; }
 .mission-charge{ margin-top:18px; border:2px solid var(--tx); border-left:8px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:20px 24px 22px; }
 .mission-charge .mono{ display:block; margin-bottom:6px; }
 .mission-charge > p{ font-family:var(--serif); font-weight:400; font-size:clamp(1.5rem,2.8vw,2.1rem); line-height:1.2; color:var(--tx); margin:0 0 14px; max-width:30ch; }
@@ -557,7 +558,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
           <a href="#ideas">Five ideas</a>
           <a href="#year">Your first year</a>
           <a href="#welcome">The four jobs</a>
-          <a href="#survey">Your results</a>
+          <a href="#survey">Your assessment</a>
           <a href="#learn">Keep learning</a>
           <a class="btn btn-gold btn-sm nav-cta" href="#quiz">Quick check</a>
         </nav>
@@ -674,7 +675,7 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div class="hw"><span class="hw-no" aria-hidden="true">02</span><h3>Five ideas every good manager relies on</h3><p>Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to try.</p><span class="chip">Page 6</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">03</span><h3>What Vanderbilt will ask you to do</h3><p>The tasks of year one, when they show up, and your first calls: handle it, ask, route, or report.</p><span class="chip">Pages 7 to 8</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">04</span><h3>The four jobs of a manager</h3><p>Get the work done, take care of your people, make things better, connect your team. One page each, then your call.</p><span class="chip">Pages 9 to 14</span></div>
-      <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>Your assessment results</h3><p>What the Manager Effectiveness Assessment asked, and your starting point.</p><span class="chip">Page 15</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>Your assessment</h3><p>What your results email tells you, and where the score should go.</p><span class="chip">Page 15</span></div>
     </div>
     <p class="hw-meta reveal" style="margin-top:10px">Then a quick check, your next seven days, a keep-learning list, and the wrap-up. <span id="progTopLine">8 activities ahead.</span></p>
   </div>
@@ -959,57 +960,35 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
   </div>
 </section>
 
-<section id="survey" class="th-dark" aria-label="Your Manager Effectiveness Assessment results">
+<section id="survey" class="th-dark" aria-label="Your Manager Effectiveness Assessment">
   <div class="wrap">
     <div class="sec-head tight reveal">
-      <p class="you-are"><b>Topic 5 &middot; Page 15 of 19</b> Your assessment results <i>&middot; Next: a quick check</i></p>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your results</span></span>
-      <h2>Reading your <em class="s">results</em>.</h2>
+      <p class="you-are"><b>Topic 5 &middot; Page 15 of 19</b> Your assessment <i>&middot; Next: a quick check</i></p>
+      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your assessment</span></span>
+      <h2>Your score, and where it should <em class="s">go</em>.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>What the Manager Effectiveness Assessment asked, sorted by job, and what the three bands mean.</p><p><b>Why it matters</b>Your results set where you start. Enter your band and lowest job; your micro modules take the same order.</p></div>
+    <div class="ask"><p><b>What you will learn</b>What your results email tells you, and what to do with it.</p><p><b>Why it matters</b>The assessment measures how often you do the habits in this course. The aim, over this course and the ones after, is a higher score.</p></div>
     <div class="survey-grid mea">
       <div>
         <div class="survey">
           <span class="sk">Taken before this course &middot; again in six months</span>
           <div>
             <h4>The Manager Effectiveness Assessment</h4>
-            <p>Fourteen questions on how often you do these habits. Results by email: a score out of 70 and a band. Nobody passes or fails.</p>
-            <ol>
-              <li><b>Developing, under 35.</b> The fundamentals are not yet habits. Start with jobs 1 and 2.</li>
-              <li><b>Strong, 35 to 55.</b> Solid but uneven. Start with your lowest job.</li>
-              <li><b>Advanced, 56 and above.</b> The fundamentals are habits. The step up is reach: jobs 3 and 4.</li>
-            </ol>
+            <p>Fourteen questions on how often you do the habits in this course: planning, clear expectations, checking work, feedback, thanks, trust, explaining the why, speaking up for your team. Your score and feedback came by email.</p>
           </div>
         </div>
-        
-        <div class="fw two mea-map" id="meaMap" data-map="mea">
-          <button type="button" class="fw-card" aria-expanded="false"><b>Job 1</b><strong>Get the work done.</strong><p>Four questions.</p><ul><li><b>Q11</b> Plan it <i>(mapped out action steps and resources before a complex project)</i></li><li><b>Q2</b> Say it <i>(told each person what success looks like, in specific terms)</i></li><li><b>Q3</b> Check it <i>(reviewed progress early enough to correct before the deadline)</i></li><li><b>Q1</b> Fix it <i>(found the root cause of a team problem and put a fix in place)</i></li></ul><span class="hint">Tap to open</span></button>
-          <button type="button" class="fw-card" aria-expanded="false"><b>Job 2</b><strong>Take care of your people.</strong><p>Four questions.</p><ul><li><b>Q6</b> Listen and help <i>(asked about workload or pressure before they raised it)</i></li><li><b>Q4</b> Grow them <i>(gave specific feedback they could act on that week)</i></li><li><b>Q5</b> Thank them <i>(recognized a contribution where peers could see it)</i></li><li><b>Q7</b> Trust them <i>(let someone choose their own method once the outcome was agreed)</i></li></ul><span class="hint">Tap to open</span></button>
-          <button type="button" class="fw-card" aria-expanded="false"><b>Job 3</b><strong>Make things better.</strong><p>Three questions.</p><ul><li><b>Q13</b> Describe where you are going <i>(a clear, inspiring picture of the coming year)</i></li><li><b>Q12</b> Let people try <i>(encouraged suggestions to improve how we work)</i></li><li><b>Q10</b> Look back <i>(ran a review after significant work so the team could apply it)</i></li><li><i>Explain the why is taught here and not scored on the assessment.</i></li></ul><span class="hint">Tap to open</span></button>
-          <button type="button" class="fw-card" aria-expanded="false"><b>Job 4</b><strong>Connect your team.</strong><p>Three questions.</p><ul><li><b>Q14</b> Know the people <i>(kept up relationships in other departments that help the team)</i></li><li><b>Q8</b> Watch for what is coming <i>(brought information from outside the unit that changed priorities)</i></li><li><b>Q9</b> Speak up for your team <i>(represented the team to a decision-maker outside the unit)</i></li></ul><span class="hint">Tap to open</span></button>
-        </div>
-        <p class="fw-status" id="meaStatus" role="status" aria-live="polite">0 of 4 jobs opened.</p>
+        <div class="week" style="margin-top:12px"><b>Where you need to be</b>The score is out of 70, and it is a direction, not a grade. Every point up is a habit you do more often. Over this course and the micro modules that follow, the aim is a higher score when you retake it in six months.</div>
       </div>
       <div class="route reveal" id="meaBox">
         <div class="route-head">
-          <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Enter your result</span></span>
-          <h3>From your results <em>email</em>.</h3>
-          <p>Nothing here is shared. It sets your micro-module order and one habit for this week.</p>
+          <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Your results email</span></span>
+          <h3>Review it, or take the <em>assessment</em>.</h3>
+          <p>Nothing here is shared.</p>
         </div>
-        <div class="mea-form">
-          <label><span class="mono">Your band</span><select id="meaBand"><option value="">Choose&hellip;</option><option value="developing">Developing Manager (under 35)</option><option value="strong">Strong Manager (35 to 55)</option><option value="advanced">Advanced Manager (56 and above)</option></select></label>
-          <label><span class="mono">Your score, if you have it</span><input id="meaScore" type="number" min="0" max="70" inputmode="numeric" placeholder="0 to 70"></label>
-          <div class="mea-jobs"><span class="mono">Where were your answers lowest?</span><div class="route-opts" role="group" aria-label="Pick the job where your answers were lowest" id="meaJobs">
-            <button type="button" data-job="task" aria-pressed="false">Job 1 &middot; Get the work done</button>
-            <button type="button" data-job="relations" aria-pressed="false">Job 2 &middot; Take care of your people</button>
-            <button type="button" data-job="change" aria-pressed="false">Job 3 &middot; Make things better</button>
-            <button type="button" data-job="external" aria-pressed="false">Job 4 &middot; Connect your team</button>
-          </div></div>
-          <div class="route-act">
-            <button type="button" class="btn btn-primary" id="meaShow" disabled>Set my starting point</button>
-            <span class="route-hint" id="meaHint">Pick your band and a job.</span>
-          </div>
-          <p class="hinttxt">No email yet? Pick the job you already know needs you most.</p>
+        <div class="route-opts mea-choice" id="meaChoice" role="group" aria-label="Which is true for you">
+          <button type="button" data-choice="reviewed" aria-pressed="false">I reviewed my results email</button>
+          <button type="button" data-choice="retake" aria-pressed="false">I did not get an email</button>
+          <button type="button" data-choice="take" aria-pressed="false">I have not taken it yet</button>
         </div>
         <div class="route-out" id="meaOut" aria-live="polite"></div>
       </div>
@@ -1045,9 +1024,9 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <div role="listitem"><b>Job 4</b><strong>Connect your team.</strong><p>Know the people, watch for what is coming, speak up with facts.</p></div>
     </div>
     <div class="hw-list reveal" style="margin-top:12px">
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Take your first micro module today</h3><p>They come in your order, starting with the job your results pointed to.</p></div><span class="chip">Today</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one habit this week</h3><p id="ns2p">The one your results pointed to. Do it once, on purpose, and notice what happened.</p></div><span class="chip">This week</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Take the assessment again in six months</h3><p>It comes back six months after you finish. Compare the band with the one you started with.</p></div><span class="chip">In six months</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Take your first micro module today</h3><p>Start with the habit you know needs you most.</p></div><span class="chip">Today</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one habit this week</h3><p id="ns2p">Pick one habit from this course. Do it once, on purpose, and notice what happened.</p></div><span class="chip">This week</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>Take the assessment again in six months</h3><p>It comes back six months after you finish. Compare the score with the one you started with.</p></div><span class="chip">In six months</span></div>
     </div>
     <div class="evidence reveal" id="tell-leader">
       <span class="e-label">Tell your manager</span>

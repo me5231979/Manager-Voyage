@@ -29,6 +29,8 @@ window.MV_CONFIG = {
   /* The Manager Effectiveness Assessment: taken before the Foundation course and
      again this many months after completing it. */
   surveyRetakeMonths: 6,
+  /* Link to the Manager Effectiveness Assessment (Qualtrics, REDCap, Oracle survey). Empty until PCB supplies it. */
+  assessmentUrl: '',
 
   /* Profile and completion feed. A small proxy in front of Oracle HCM that
      returns the signed-in manager's record as JSON. See docs/ORACLE-INTEGRATION.md

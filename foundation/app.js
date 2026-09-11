@@ -151,9 +151,9 @@ function subBtn(k){ return NARR[k] ? '<button type="button" class="sub-listen" d
 document.addEventListener('click', function(e){
   var b = e.target.closest('[data-narr]'); if(b){ e.preventDefault(); narrSub(b.getAttribute('data-narr'), true); return; }
   /* clicking into any activity stops whatever is playing, so the audio never talks over what the learner is doing */
-  if(e.target.closest('.scn button[data-o], [data-drill] button, .flip-btn, .fw-card, .kq button, .sim, .mea-jobs button, .md-btn, #meaShow')) { if(narr.playing) narrStop(); }
+  if(e.target.closest('.scn button[data-o], [data-drill] button, .flip-btn, .fw-card, .kq button, .sim, .mea-choice button, .md-btn')) { if(narr.playing) narrStop(); }
 }, true);
-document.addEventListener('change', function(e){ if(e.target && (e.target.id === 'simSel' || e.target.closest('.sim, .mea-form')) && narr.playing) narrStop(); }, true);
+document.addEventListener('change', function(e){ if(e.target && (e.target.id === 'simSel' || e.target.closest('.sim')) && narr.playing) narrStop(); }, true);
 if(bbAuto) bbAuto.addEventListener('click', function(){
   narr.auto = !narr.auto; narr.on = narr.auto; set('auto', narr.auto ? '1' : '0'); narrUI();
   if(narr.auto){ toast('Auto-narration on. Each page is read as it turns.'); narrPlay(); }
@@ -249,7 +249,7 @@ var SECTIONS = [
   { k:'calls',     no:'03', name:'Your first calls',        how:'Decide five situations' },
   { k:'welcome',   no:'04', name:'The four jobs',           how:'Open all four' },
   { k:'yourcall',  no:'05', name:'Your call',               how:'Find the Vanderbilt way in four situations' },
-  { k:'survey',    no:'06', name:'Your results',            how:'Enter your band and lowest job' },
+  { k:'survey',    no:'06', name:'Your assessment',         how:'Review your results email, or take the assessment' },
   { k:'quiz',      no:'07', name:'A quick check',           how:'Score 4 of 5' },
   { k:'nextstep',  no:'08', name:'Your next seven days',    how:'Mark it done once planned' }
 ];
@@ -396,7 +396,7 @@ if(window.MVScorm && MVScorm.connected) scormAdopt();
 $$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){ var f = btn.classList.toggle('flipped'); btn.setAttribute('aria-expanded', f ? 'true' : 'false'); }); });
 [{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', narr:'welcome/j', done:' Activity complete. The next four pages take one job each.' },
  { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:null, narr:'year/g', done:' All four open. Turn the page to make your first calls.' },
- { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, narr:null, done:' Now enter your band and lowest job on the right.' }].forEach(function(cfg){
+ { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, narr:null, done:'' }].forEach(function(cfg){
   var map = $(cfg.map), status = $(cfg.status); if(!map) return;
   var cards = $$('.fw-card', map), seen = {};
   cards.forEach(function(c, i){
@@ -656,7 +656,7 @@ var TURNS = [
   { sel:'#fwMap',       prog:'welcome',  text:'Tap each of the four jobs to open it.' },
   { sel:'.flip-grid',   prog:null,       text:'Flip each card: what to stop, what to do instead.', all:true },
   { sel:'#jobsCalls',   prog:'yourcall', text:'Four situations, one per job. Tap the response you would give, then try the other two.' },
-  { sel:'#meaMap',      prog:'survey',   text:'Tap each job to see its questions, then enter your band and lowest job on the right.' },
+  { sel:'#meaChoice',   prog:'survey',   text:'Tap what is true for you.' },
   { sel:'#quizBox',     prog:'quiz',     text:'Five questions. Four of five finishes the course.' },
   { sel:'.md-btn[data-prog="nextstep"]', prog:'nextstep', text:'Plan your seven days, then mark this done.' }
 ];
@@ -716,64 +716,26 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
 
 /* ══════════ module 5: your assessment results → starting point and module order ══════════ */
 var CATS = { task:{ name:'Get the work done', short:'Job 1' }, relations:{ name:'Take care of your people', short:'Job 2' }, change:{ name:'Make things better', short:'Job 3' }, external:{ name:'Connect your team', short:'Job 4' } };
-/* which micro-module tracks practice each job, for the dashboard order */
-var CAT_TRACKS = { task:['T1','T3'], relations:['T2','T3'], change:['T4'], external:['T4'] };
-var CAT_HABIT = { task:'check it: look at one piece of work before it is due', relations:'thank them: one specific thank-you, by name, this week', change:'look back: one ten-minute review after a piece of work', external:'know the people: coffee with one person your team depends on' };
-var BANDS = {
-  developing:{ name:'Developing Manager', what:'The fundamentals are not yet habits. That is normal in year one, and it is exactly what this program is for. Start with jobs 1 and 2: the 1:1, clear expectations, and specific feedback. Everything else builds on those.' },
-  strong:{ name:'Strong Manager', what:'Solid but uneven. Some habits are already yours; others happen when you remember. The fastest gain is the job where your answers were lowest: make its habits weekly, on the calendar, so they stop depending on memory.' },
-  advanced:{ name:'Advanced Manager', what:'The fundamentals happen without prompting, which is rarer than it sounds. The step up is reach: jobs 3 and 4, shaping how work gets prioritized beyond your own team, and building a team that learns without you in the room.' }
-};
+/* Your assessment: review the results email, or take the assessment. One tap marks the activity done. */
 (function(){
-  var band = $('#meaBand'), score = $('#meaScore'), jobs = $('#meaJobs'), show = $('#meaShow'), hint = $('#meaHint'), out = $('#meaOut');
-  if(!band || !jobs || !show) return;
-  var picked = [];
-  function sync(){
-    var ok = band.value && picked.length; show.disabled = !ok;
-    if(hint) hint.textContent = ok ? 'Ready.' : !band.value ? 'Pick your band from the email.' : 'Pick the job where your answers were lowest.';
-  }
-  jobs.addEventListener('click', function(e){
-    var b = e.target.closest('button[data-job]'); if(!b) return;
-    var k = b.getAttribute('data-job'), i = picked.indexOf(k);
-    if(i > -1) picked.splice(i, 1); else { picked.push(k); if(picked.length > 2) picked.shift(); }
-    $$('button[data-job]', jobs).forEach(function(x){ x.setAttribute('aria-pressed', picked.indexOf(x.getAttribute('data-job')) > -1 ? 'true' : 'false'); });
-    sync();
-  });
-  band.addEventListener('change', sync);
-  function order(weak){
-    var tscore = {};
-    Object.keys(CAT_TRACKS).forEach(function(c){ CAT_TRACKS[c].forEach(function(t){ tscore[t] = tscore[t] || 0; tscore[t] += (weak.indexOf(c) > -1 ? (2 - weak.indexOf(c)) : 0); }); });
-    var o = [];
-    if(P){ [1, 2].forEach(function(phase){ P.mrc.tracks.filter(function(t){ return t.phase === phase; }).sort(function(x, y){ return tscore[y.id] - tscore[x.id]; }).forEach(function(t){ t.modules.forEach(function(m){ o.push(m.id); }); }); }); }
-    return o;
-  }
-  function render(d){
-    var B = BANDS[d.band]; if(!B || !out) return;
-    var first = d.weak[0];
-    out.innerHTML = '<h4>Your starting <em>point</em>.</h4>' +
-      '<p class="gap-line"><b>' + esc(B.name) + (d.score !== null && d.score !== '' ? ' &middot; ' + esc(String(d.score)) + ' of 70' : '') + '.</b> ' + esc(B.what) + '</p>' +
-      '<p class="mono" style="margin-top:14px">Start with</p><ol class="focus-list">' + d.weak.map(function(k, i){ return '<li><b>' + (i + 1) + '</b><span>' + esc(CATS[k].name) + '<small>' + esc(CATS[k].short) + ' &middot; this week: ' + esc(CAT_HABIT[k]) + '</small></span></li>'; }).join('') + '</ol>' +
-      '<p class="hinttxt" style="margin-top:12px">Saved to this browser and your Oracle record. Your micro modules start with ' + esc(CATS[first].name.toLowerCase()) + '. Your Engagement Consultant can walk through the full results with you.</p>' +
-      '<div class="route-act" style="margin-top:12px"><button type="button" class="btn btn-ghost btn-sm" id="meaRedo">Change it</button></div>';
-    var ns = $('#ns2p'); if(ns) ns.textContent = 'Your results pointed to ' + CATS[first].name.toLowerCase() + '. This week: ' + CAT_HABIT[first] + '.';
-    $('#meaRedo').addEventListener('click', function(){ out.innerHTML = ''; set('assess', null); });
-  }
-  show.addEventListener('click', function(){
-    var d = { band:band.value, score: score && score.value !== '' ? Math.max(0, Math.min(70, parseInt(score.value, 10) || 0)) : null, weak:picked.slice(), weakest:picked[0], at:new Date().toISOString() };
-    d.order = order(d.weak); d.focus = d.weak.map(function(k){ return CAT_HABIT[k]; });
-    set('assess', JSON.stringify(d));
-    try{ localStorage.setItem('mv.foundation.v1', get('assess')); }catch(e){}
-    render(d); progDone('survey');
-    if(window.chartPager) window.chartPager.goToEl(out);
-  });
-  window.assessLoad = function(){
-    var raw = get('assess'); if(!raw) return;
-    try{ var d = JSON.parse(raw); if(!d || !d.band) return; band.value = d.band; if(score && d.score !== null && d.score !== undefined) score.value = d.score; picked = (d.weak || []).slice();
-      $$('button[data-job]', jobs).forEach(function(x){ x.setAttribute('aria-pressed', picked.indexOf(x.getAttribute('data-job')) > -1 ? 'true' : 'false'); }); sync(); render(d); }catch(e){}
+  var box = $('#meaChoice'), out = $('#meaOut'); if(!box || !out) return;
+  var url = (window.MV_CONFIG && MV_CONFIG.assessmentUrl) || '';
+  var link = url ? '<a class="btn btn-primary" href="' + esc(url) + '" target="_blank" rel="noopener">Open the assessment</a>' : '<span class="hinttxt">Ask your Engagement Consultant for the assessment link; it takes about ten minutes.</span>';
+  var MSG = {
+    reviewed:'<h4>Good. Keep the <em>email</em>.</h4><p>It is your starting score. In six months you take the assessment again; the aim is a higher score, one habit at a time.</p>',
+    retake:'<h4>Take the assessment <em>now</em>.</h4><p>Your results and feedback arrive by email. Keep them; you compare against them in six months.</p><div class="route-act" style="margin-top:12px">' + link + '</div>',
+    take:'<h4>Take it before you go <em>further</em>.</h4><p>Fourteen questions, about ten minutes. Your score and feedback arrive by email, and you compare against them in six months.</p><div class="route-act" style="margin-top:12px">' + link + '</div>'
   };
-  sync(); window.assessLoad();
+  function render(c){ $$('button[data-choice]', box).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-choice') === c ? 'true' : 'false'); }); out.innerHTML = MSG[c] || ''; }
+  box.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-choice]'); if(!b) return;
+    var c = b.getAttribute('data-choice');
+    set('assess', JSON.stringify({ status:c, at:new Date().toISOString() }));
+    render(c); progDone('survey');
+  });
+  window.assessLoad = function(){ var raw = get('assess'); if(!raw) return; try{ var d = JSON.parse(raw); if(d && d.status) render(d.status); }catch(e){} };
+  window.assessLoad();
 })();
-function assessLoad(){ if(window.assessLoad) window.assessLoad(); }
 
 /* ══════════ knowledge check: five questions, one at a time, feedback after each ══════════ */
 var QUIZ = [

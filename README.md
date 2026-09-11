@@ -58,8 +58,9 @@ each page is one idea, one activity.
    HCM, the leave office, or EOA)
 4. Topic 4, the four jobs of a manager (Yukl, in plain words): a video and
    flip cards per job, one page each, then four situations for your call
-5. Topic 5, your Manager Effectiveness Assessment results: the 14 items
-   sorted by job, the three bands, and a results entry that sets module order
+5. Topic 5, your assessment: review the results email from the Manager
+   Effectiveness Assessment (or take it), and where the score should go over
+   this course and the ones after; retaken six months later
 6. A five-question check (4 of 5), the next seven days, the keep-learning
    page (ten Oracle Learning courses in order plus ten outside podcasts,
    videos, and a guide, from foundation/resources.js; the only place the
@@ -75,10 +76,10 @@ and the framework).
 
 Printable guide: `node scripts/build-guide.js` rebuilds foundation/guide.html
 and foundation/Manager-Foundations-Course-1.pdf from the course itself
-(index.html maps, app.js ideas and bands, resources.js list and situations).
+(index.html maps, app.js ideas, resources.js list and situations).
 Re-run it after editing the course. The PDF is linked from the keep-learning
 page and shipped in the SCORM package.
 
-- Assessment: the Manager Effectiveness Assessment (14 items, out of 70, three bands: Developing under 35, Strong 35 to 55, Advanced 56 and above) is completed before the course, results are emailed, and it is retaken six months after completion. Open items:
+- Assessment: the Manager Effectiveness Assessment (14 items, out of 70) is completed before the course, results and feedback are emailed, and it is retaken six months after completion. The course asks the learner to review the email or take the assessment (link in assets/js/config.js, assessmentUrl). Open items:
   confirm the YouTube video IDs still resolve (each has an open-on-YouTube
   link).

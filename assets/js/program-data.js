@@ -120,7 +120,7 @@ window.MV_PROGRAM = {
         { n: 2, title: 'Five ideas, and safe to speak up', format: 'Flip cards plus your call', desc: 'Setting priorities, clear expectations, psychological safety, purpose, and the people work: what each is, how you apply it, and the value it brings. Then three moments that build trust or break it.' },
         { n: 3, title: 'What Vanderbilt will ask you to do', format: 'Tap-to-open map plus decisions', desc: 'The manager tasks of year one, when each shows up, the micro module for it, and five situations: handle it, ask PCB, route it, or report it.' },
         { n: 4, title: 'The four jobs of a manager', format: 'Five videos, cards, your call', desc: 'Get the work done, take care of your people, make things better, connect your team. One page each, then four situations.' },
-        { n: 5, title: 'Your assessment results', format: 'Results entry', desc: 'What the Manager Effectiveness Assessment you already took was asking, sorted by the four jobs; what the three bands mean; enter your band and lowest job to set your micro-module order.' }
+        { n: 5, title: 'Your assessment', format: 'Review', desc: 'Review your Manager Effectiveness Assessment results email, or take the assessment, and where the score should go over this course and the ones after.' }
       ]
     },
     tracks: [

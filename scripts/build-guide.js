@@ -12,7 +12,7 @@ const app = fs.readFileSync(path.join(F, 'app.js'), 'utf8');
 const w = {}; vm.runInNewContext(fs.readFileSync(path.join(F, 'resources.js'), 'utf8'), { window: w });
 function block(src, start){ const a = src.indexOf(start); const b = src.indexOf('\n];', a); return vm.runInNewContext('([' + src.slice(a + start.length, b) + '\n])', {}); }
 function obj(src, start){ const a = src.indexOf(start); const b = src.indexOf('\n};', a); return vm.runInNewContext('({' + src.slice(a + start.length, b) + '\n})', {}); }
-const IDEAS = block(app, 'var IDEAS = ['), BANDS = obj(app, 'var BANDS = {');
+const IDEAS = block(app, 'var IDEAS = [');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const strip = s => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 function cards(id){
@@ -21,7 +21,7 @@ function cards(id){
   while((m = re.exec(seg))){ const c = m[1]; out.push({ b: strip((c.match(/<b>(.*?)<\/b>/) || [])[1] || ''), h: strip((c.match(/<strong>(.*?)<\/strong>/) || [])[1] || ''), p: strip((c.match(/<p>(.*?)<\/p>/) || [])[1] || ''), li: [...c.matchAll(/<li>(.*?)<\/li>/gs)].map(x => x[1].replace(/<i>/g, '<i>').replace(/<b>/g, '<b>')) }); }
   return out;
 }
-const YEAR = cards('yearMap'), JOBS = cards('fwMap'), MEA = cards('meaMap');
+const YEAR = cards('yearMap'), JOBS = cards('fwMap');
 const names = ['Priorities', 'Clear expectations', 'Psychological safety', 'Purpose', 'The people work'];
 const TOP = w.MV_LEARN_TOPICS, L = w.MV_LEARN, SIM = w.MV_SIM;
 const kind = t => t === 'oracle' ? 'Oracle Learning' : t === 'video' ? 'Video' : t === 'podcast' ? 'Podcast' : 'Guide';
@@ -102,7 +102,7 @@ H.push(`<section><span class="eyebrow">The course at a glance</span><h2>Five top
 <div class="topic"><span class="n">02</span><div><b>Five ideas every good manager relies on</b><span class="tx2">Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to try.</span></div><span class="pg">Page 6</span></div>
 <div class="topic"><span class="n">03</span><div><b>What Vanderbilt will ask you to do</b><span class="tx2">The tasks of year one, when they show up, and your first calls: handle it, ask, route, or report.</span></div><span class="pg">Pages 7 to 8</span></div>
 <div class="topic"><span class="n">04</span><div><b>The four jobs of a manager</b><span class="tx2">Get the work done, take care of your people, make things better, connect your team. One page each, then your call.</span></div><span class="pg">Pages 9 to 14</span></div>
-<div class="topic"><span class="n">05</span><div><b>Your assessment results</b><span class="tx2">What the Manager Effectiveness Assessment asked, and your starting point.</span></div><span class="pg">Page 15</span></div>
+<div class="topic"><span class="n">05</span><div><b>Your assessment</b><span class="tx2">What your results email tells you, and where the score should go.</span></div><span class="pg">Page 15</span></div>
 <p class="tx2" style="margin-top:6pt">Then a five-question check (4 of 5 finishes the course), your next seven days, a keep-learning list, and the wrap-up. Eight activities track progress; completion is recorded in Oracle Learning.</p></section>`);
 // mission
 H.push(`<section><span class="eyebrow">The mission</span><h2>Define the great university of the 21st century, and <em>be</em> it.</h2>
@@ -160,15 +160,13 @@ H.push(`</div><div class="grid2" style="margin-top:8pt">
 <div class="box cream"><b class="k">The habit to stop</b>Doing the work yourself. When you are tempted to just do it, that is the moment to manage instead.</div>
 <div class="box cream"><b class="k">The one thing to route</b>Anything that sounds like leave goes to the leave office the same day. You adjust the load; they decide eligibility.</div></div></section>`);
 // topic 5
-H.push(`<section><span class="eyebrow">Topic 5 · Your results</span><h2>Reading your Manager Effectiveness Assessment <em>results</em>.</h2>
-<p class="tx2">Taken before this course, and again six months after. Fourteen questions on how often you do these habits. Results by email: a score out of 70 and a band. Nobody passes or fails.</p><div class="grid3">`);
-[['Developing, under 35', BANDS.developing.what], ['Strong, 35 to 55', BANDS.strong.what], ['Advanced, 56 and above', BANDS.advanced.what]].forEach(b => H.push(`<div class="box gold"><strong>${esc(b[0])}</strong><span style="font-size:9.5pt">${esc(b[1])}</span></div>`));
-H.push(`</div><h3>Which questions belong to which job</h3><div class="grid2">`);
-MEA.forEach(c => H.push(`<div class="box"><b class="k">${esc(c.b)}</b><strong>${esc(c.h)}</strong><ul>${c.li.map(l => '<li>' + l + '</li>').join('')}</ul></div>`));
-H.push(`</div><h3>Your next seven days</h3><div class="grid3">
-<div class="box"><b class="k">Today</b><strong>Take your first micro module</strong>They come in your order, starting with the job your results pointed to.</div>
-<div class="box"><b class="k">This week</b><strong>Practice one habit</strong>The one your results pointed to. Do it once, on purpose, and notice what happened.</div>
-<div class="box"><b class="k">In six months</b><strong>Take the assessment again</strong>Compare the band with the one you started with.</div></div>
+H.push(`<section><span class="eyebrow">Topic 5 · Your assessment</span><h2>Your score, and where it should <em>go</em>.</h2>
+<p class="tx2">Before this course you took the Manager Effectiveness Assessment: fourteen questions on how often you do the habits in this course. Your score and feedback came by email. Review it. If you did not get one, or have not taken it yet, take the assessment.</p>
+<div class="week"><b>Where you need to be</b>The score is out of 70, and it is a direction, not a grade. Every point up is a habit you do more often. Over this course and the micro modules that follow, the aim is a higher score when you retake it in six months.</div>
+<h3>Your next seven days</h3><div class="grid3">
+<div class="box"><b class="k">Today</b><strong>Take your first micro module</strong>Start with the habit you know needs you most.</div>
+<div class="box"><b class="k">This week</b><strong>Practice one habit</strong>Pick one from this course. Do it once, on purpose, and notice what happened.</div>
+<div class="box"><b class="k">In six months</b><strong>Take the assessment again</strong>Compare the score with the one you started with.</div></div>
 <div class="week" style="margin-top:8pt"><b>Tell your manager</b>“I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].”</div></section>`);
 // learning
 H.push(`<section class="learn"><span class="eyebrow">Keep learning</span><h2>What to take <em>next</em>.</h2><p class="tx2">Ten courses in Oracle Learning, in order, and ten things from outside. Micro modules first. Then one item a month, on the job your results pointed to. Links are live in the PDF; in Oracle Learning you can also search by title.</p>`);
