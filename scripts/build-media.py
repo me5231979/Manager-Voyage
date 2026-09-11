@@ -123,14 +123,31 @@ for name, spec in (data.get('videos') or {}).items():
     # clips to cover it, an imperceptible slow-down (at most 8 percent) closes a
     # small gap, and if a video still falls short the last frame holds and the
     # build prints a warning so more clips get added.
-    stretch = min(max(total / vd, 1.0), 1.2)   # slow, steady shots tolerate a fifth slower
+    stretch = min(max(total / vd, 1.0), 1.12)  # a slow-down under an eighth is not noticed
     if stretch > 1.005:
         slow = os.path.join(TMP, name + '.slow.mp4')
         run('ffmpeg', '-y', '-v', 'error', '-i', cat, '-vf', 'setpts=%.4f*PTS,fps=24' % stretch, '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-pix_fmt', 'yuv420p', slow)
         cat = slow; vd = duration(cat)
     short = max(total - vd, 0)
     if short > 0.5:
-        sys.stderr.write('WARNING: %s footage is %.1fs short of its narration; holding the last frame. Add a clip.\n' % (name, short))
+        # still short: a quick-cut reprise (the middle 2.5s of each clip, in
+        # order) carries the narration to its end instead of a frozen frame
+        fill = []
+        need = short + 0.3; i = 0
+        while need > 0 and parts:
+            src = parts[i % len(parts)]
+            seg = os.path.join(TMP, '%s.fill%d.mp4' % (name, i))
+            run('ffmpeg', '-y', '-v', 'error', '-ss', '1.2', '-t', '%.2f' % min(2.5, need), '-i', src, '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-pix_fmt', 'yuv420p', seg)
+            fill.append(seg); need -= 2.5; i += 1
+        lst2 = os.path.join(TMP, name + '.fill.txt')
+        with open(lst2, 'w') as f:
+            f.write("file '%s'\n" % cat)
+            for p in fill: f.write("file '%s'\n" % p)
+        cat2 = os.path.join(TMP, name + '.cat2.mp4')
+        run('ffmpeg', '-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', lst2, '-c', 'copy', cat2)
+        cat = cat2; vd = duration(cat)
+        sys.stderr.write('NOTE: %s footage was %.1fs short of its narration; %d quick-cut reprise shots fill it.\n' % (name, short, len(fill)))
+        short = max(total - vd, 0)
     fade = max(total - 0.8, 0)
     out = os.path.join(VID, name + '.mp4')
     run('ffmpeg', '-y', '-v', 'error', '-i', cat, '-i', npath,
