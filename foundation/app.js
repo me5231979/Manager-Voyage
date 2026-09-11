@@ -74,7 +74,8 @@ $$('.reveal').forEach(function(el){ el.classList.add('in'); });
    words in narration-scripts.js. If the file is missing (or blocked inside
    an LMS), the browser's own speech synthesis reads the same words. */
 var NARR = window.MV_NARR || {};
-var narr = { audio:null, playing:false, key:'', auto: get('auto') === '1', on: get('auto') === '1', utter:null };
+/* narration is on by default; Auto off is remembered as '0' */
+var narr = { audio:null, playing:false, key:'', auto: get('auto') !== '0', on: get('auto') !== '0', utter:null };
 var bbListen = $('#bbListen'), bbListenT = $('#bbListenT'), bbAuto = $('#bbAuto'), narrToast = $('#narrToast'), toastT = null;
 function toast(msg){
   if(!narrToast) return;
@@ -128,7 +129,12 @@ function narrPlay(k){
   if(pr && pr.catch) pr.catch(function(err){
     if(narr.audio !== a) return;
     narr.audio = null;
-    if(err && err.name === 'NotAllowedError'){ narr.playing = false; narrUI(); toast('Tap Listen to hear this page.'); }
+    if(err && err.name === 'NotAllowedError'){
+      narr.playing = false; narrUI();
+      /* the browser will not play sound before the first tap: start on that tap, without nagging */
+      if(narr.auto && !narr.armed){ narr.armed = true; var arm = function(){ narr.armed = false; document.removeEventListener('pointerdown', arm, true); document.removeEventListener('keydown', arm, true); if(narr.auto && !narr.playing) window.setTimeout(narrPlay, 350); }; document.addEventListener('pointerdown', arm, true); document.addEventListener('keydown', arm, true); }
+      else if(!narr.auto) toast('Tap Listen to hear this page.');
+    }
     else narrSpeak(text);
   });
 }
@@ -149,7 +155,7 @@ document.addEventListener('click', function(e){
 }, true);
 document.addEventListener('change', function(e){ if(e.target && (e.target.id === 'simSel' || e.target.closest('.sim, .mea-form')) && narr.playing) narrStop(); }, true);
 if(bbAuto) bbAuto.addEventListener('click', function(){
-  narr.auto = !narr.auto; narr.on = narr.auto; set('auto', narr.auto ? '1' : null); narrUI();
+  narr.auto = !narr.auto; narr.on = narr.auto; set('auto', narr.auto ? '1' : '0'); narrUI();
   if(narr.auto){ toast('Auto-narration on. Each page is read as it turns.'); narrPlay(); }
   else { toast('Auto-narration off.'); narrStop(); }
 });
