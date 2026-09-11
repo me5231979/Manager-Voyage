@@ -2,7 +2,7 @@
   "_note": "ElevenLabs narration. The build workflow reads this file, generates every clip in foundation/narration-scripts.js with this voice, keeps the raw files in assets/audio/foundation/source, and rebuilds the course audio and videos. Change voice_id or voice_settings and push to re-record; only clips whose text or settings changed are regenerated. Pushing any change to this file re-runs the build.",
   "voice_id": "i4CzbCVWoqvD0P1QJCUL",
   "model_id": "eleven_multilingual_v2",
-  "output_format": "mp3_44100_192",
+  "output_format": "mp3_44100_128",
   "voice_settings": {
     "stability": 0.55,
     "similarity_boost": 0.8,

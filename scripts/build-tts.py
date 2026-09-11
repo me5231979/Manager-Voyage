@@ -19,6 +19,10 @@ SRC = os.path.join(ROOT, 'assets', 'audio', 'foundation', 'source')
 os.makedirs(SRC, exist_ok=True)
 KEY = os.environ.get('ELEVENLABS_API_KEY', '').strip()
 
+class Quota(Exception): pass
+SCOPE = os.path.join(ROOT, '.github', 'tts-commit-scope')   # tells the workflow what is safe to commit: 'source' or 'all'
+def scope(v): open(SCOPE, 'w').write(v)
+
 def scripts():
     js = "const vm=require('vm'),fs=require('fs');const w={};vm.runInNewContext(fs.readFileSync(%r,'utf8'),{window:w});console.log(JSON.stringify({narr:w.MV_NARR||{},video:w.MV_VIDEO_NARR||{}}))" % os.path.join(ROOT, 'foundation', 'narration-scripts.js')
     return json.loads(subprocess.run(['node', '-e', js], check=True, stdout=subprocess.PIPE, text=True).stdout)
@@ -38,7 +42,7 @@ def speak(text, dest):
         except urllib.error.HTTPError as e:
             msg = e.read()[:400].decode('utf-8', 'replace')
             if e.code in (401, 403): raise SystemExit('ElevenLabs refused the key (%d): %s' % (e.code, msg))
-            if e.code == 402 or 'quota' in msg.lower(): raise SystemExit('ElevenLabs quota exhausted: ' + msg)
+            if e.code == 402 or 'quota' in msg.lower(): raise Quota('ElevenLabs quota exhausted: ' + msg)
             sys.stderr.write('attempt %d failed (%d): %s\n' % (attempt + 1, e.code, msg))
         except Exception as e:
             sys.stderr.write('attempt %d failed: %s\n' % (attempt + 1, e))
@@ -49,16 +53,25 @@ S = scripts()
 cache = json.load(open(CACHE_P)) if os.path.exists(CACHE_P) else {}
 jobs = [('audio', k.replace('/', '-'), t) for k, t in S['narr'].items()] + [('video', n, S['video'][n]) for n in MAN.get('videos', {}) if n in S['video']]
 made, kept = [], []
+stopped = None
 for kind, key, text in jobs:
     fname = ('video-' + key if kind == 'video' else key) + '.mp3'
     dest = os.path.join(SRC, fname)
     h = sig(text)
     if cache.get(fname) == h and os.path.isfile(dest): kept.append(fname); continue
-    speak(text, dest); cache[fname] = h; made.append(fname)
+    try: speak(text, dest)
+    except Quota as e:
+        if os.path.exists(dest): os.remove(dest)
+        stopped = str(e); break
+    cache[fname] = h; made.append(fname)
     time.sleep(0.5)
 json.dump(cache, open(CACHE_P, 'w'), indent=1, sort_keys=True)
 print('generated %d, unchanged %d' % (len(made), len(kept)))
 for f in made: print('  new', f)
+scope('source')   # the raw clips made so far are paid for: keep them whatever happens next
+if stopped:
+    missing = len(jobs) - len(made) - len(kept)
+    raise SystemExit('%s\nStopped with %d clips still to generate. The %d made so far are kept; add characters to the ElevenLabs plan and re-run to finish.' % (stopped, missing, len(made)))
 
 # hand the raw files to the media build through a manifest whose sources are local paths
 m = json.loads(json.dumps(MAN))
@@ -72,3 +85,4 @@ mp = os.path.join(tempfile.mkdtemp(prefix='mv-tts-'), 'manifest.json')
 json.dump(m, open(mp, 'w'))
 env = dict(os.environ, MV_MANIFEST=mp)
 subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'build-media.py')], check=True, env=env)
+scope('all')

@@ -1,2 +1,3 @@
 *.zip
 mv-media-*/
+.github/tts-commit-scope

@@ -21,14 +21,25 @@ jobs:
       - name: Install ffmpeg
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
       - name: Generate and build
+        id: gen
+        continue-on-error: true
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
         run: python3 scripts/build-tts.py
-      - name: Commit
+      - name: Commit what is safe to keep
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets .github/tts-cache.json
-          if git diff --cached --quiet; then echo "No media changes"; else git commit -m "Narration built with ElevenLabs (from tts.json and narration-scripts.js)"; git pull --rebase -X theirs origin main; git push origin HEAD:main; fi
+          scope=$(cat .github/tts-commit-scope 2>/dev/null || echo none); rm -f .github/tts-commit-scope
+          echo "commit scope: $scope"
+          case "$scope" in
+            all) git add assets .github/tts-cache.json; msg="Narration built with ElevenLabs (from tts.json and narration-scripts.js)";;
+            source) git add assets/audio/foundation/source .github/tts-cache.json; msg="ElevenLabs source clips generated so far (build not finished)";;
+            *) echo "nothing to commit"; exit 0;;
+          esac
+          if git diff --cached --quiet; then echo "No changes"; else git commit -m "$msg"; git pull --rebase -X theirs origin main; git push origin HEAD:main; fi
       - name: Publish to the live site
         run: git push origin HEAD:gh-pages
+      - name: Report
+        if: steps.gen.outcome == 'failure'
+        run: echo "The ElevenLabs build did not finish. See the Generate and build step." && exit 1
