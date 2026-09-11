@@ -1,5 +1,5 @@
 {
- "note": "Each video is instructional first (what the topic is, why it matters, the habits), then one short example drawn from the course scenario. B-roll spans dining, facilities, lab, library and grounds; no IT service desk. No clip is used in more than one video.",
+ "note": "Roles: B dining, F facilities, R lab, C library, E grounds, O office and Student Affairs. Every video mixes all six; no clip is shared across videos.",
  "style": "Documentary, photorealistic, natural light, 16:9. Collegiate gothic red brick and limestone, magnolias and oaks only as setting, never the subject. Diverse, ordinary-looking real staff, mid-twenties to sixties, friendly demeanor. No text, signs, logos, or readable screens.",
  "videos": {
   "basics": {
@@ -121,7 +121,408 @@
     "Close-up: Carlos writes one name and 'coffee' on a notepad in the truck cab.",
     "Carlos closes the trailer gate at the end of the day, crew heading home, warm light on the brick behind."
    ],
-   "script": "Job four: connect your team to the rest of Vanderbilt. Your team needs things it does not control: approvals, information, help from other offices, and a fair hearing when someone asks too much. New managers do this job least, because nobody told them it was part of the job. Three habits. Know the people your team depends on: your HCM, your Engagement Consultant, Finance, a peer manager. By name, before you need them. Watch for what is coming, so the team hears it from you first. Speak up for your team: facts, options, and a negotiated date, before you say yes to the weekend. For example: the week before Commencement, Events asks a grounds supervisor for his whole crew on Friday. He already knows the events coordinator by name. The schedule was on his wall calendar in March. At a picnic table with the printed hours, he names the conflict and offers two options. She picks one, nobody works the weekend, and on Commencement morning the chairs are in rows. This week: have coffee with one person your team depends on."
+   "script": "Job four: connect your team to the rest of Vanderbilt. Your team needs things it does not control: approvals, information, help from other offices, and a fair hearing when someone asks too much. New managers do this job least, because nobody told them it was part of the job. Three habits. Know the people your team depends on: your HCM, your Engagement Consultant, Finance, a peer manager. By name, before you need them. Watch for what is coming, so the team hears it from you first. Speak up for your team: facts, options, and a negotiated date, before you say yes to the weekend. For example: the week before Commencement, Events asks a Student Affairs manager for her whole team on Friday. She already knows the events coordinator by name. The schedule was on her wall calendar in March. Over coffee, with the printed hours, she names the conflict and offers two options. He picks one, nobody works the weekend, and on Commencement morning the welcome tables are staffed and ready. This week: have coffee with one person your team depends on."
   }
+ },
+ "office_clips": {
+  "O01": "Office: a manager and a staff member review a printed form together at a desk.",
+  "O02": "Office: a five-person team meeting, one at the whiteboard sketching a three-item plan.",
+  "O03": "Student Affairs: a staff member at the welcome desk answers two students in the student center.",
+  "O04": "Office: two colleagues plan the week on a sticky-note board.",
+  "O05": "Office: a manager walks through an open-plan office and stops to chat at a desk.",
+  "O06": "Office: a staff member checks a timesheet on a laptop and approves it.",
+  "O07": "Office: a one-on-one in a small office, the manager listening and taking a note.",
+  "O08": "Office: a manager thanks a colleague in the break room in front of the team.",
+  "O09": "Student Affairs: three staff lay out badges and lanyards while planning orientation.",
+  "O10": "Office: a staff member at dual monitors, a colleague leans in with a question.",
+  "O11": "Office: a manager on a video call with colleagues in other cities.",
+  "O12": "Office: two managers from different offices talk over coffee outside a campus cafe.",
+  "O13": "Office: a standing huddle, the manager hands out a one-page plan."
+ },
+ "shot_order": {
+  "basics": [
+   {
+    "id": "F00",
+    "shot": "Monday morning at a campus facilities yard: Marcus, a man in his fifties in a work shirt, walks toward a white utility truck with a tablet, crew arriving, brick buildings behind."
+   },
+   {
+    "id": "B00",
+    "shot": "Morning in a bright campus dining hall kitchen; Dana, a woman in her forties in a black apron, ties it on and looks over a busy stainless line, staff already at work, steam rising."
+   },
+   {
+    "id": "F01",
+    "shot": "Marcus and his crew of four in a quick huddle at the truck tailgate; he points at the tablet, they nod, easy smiles."
+   },
+   {
+    "id": "R00",
+    "shot": "A bright university research lab in the morning: Tom, a man in his forties in a lab coat, walks in and greets a team of four at their benches, smiles all round."
+   },
+   {
+    "id": "C00",
+    "shot": "A library service desk under tall arched windows: Aisha, a woman in her forties, opens the desk with two staff, morning light on wooden counters."
+   },
+   {
+    "id": "E00",
+    "shot": "Early morning on a campus lawn: Carlos, a man in his fifties in a work shirt and cap, and his grounds crew unload mowers from a trailer, brick buildings behind."
+   },
+   {
+    "id": "O01",
+    "shot": "Office: a manager and a staff member review a printed form together at a desk."
+   },
+   {
+    "id": "B01",
+    "shot": "Dana plating vegetables alongside her cooks at the line, fast hands, focused, the team around her."
+   },
+   {
+    "id": "F02",
+    "shot": "Close on a hand scrolling a four-item list on a tablet by the truck (unreadable)."
+   },
+   {
+    "id": "R01",
+    "shot": "Listen and help: a lab technician in her thirties speaks quietly with Tom by a window, he listens closely, kind, then nods."
+   },
+   {
+    "id": "C02",
+    "shot": "Explain the why: Aisha stands at a small staff meeting in a reading room, explaining in her own words, staff listening and nodding, a laptop closed."
+   },
+   {
+    "id": "E01",
+    "shot": "A request lands: Carlos reads a message on his phone by the trailer, thinks, not rattled."
+   },
+   {
+    "id": "O02",
+    "shot": "Office: a five-person team meeting, one at the whiteboard sketching a three-item plan."
+   },
+   {
+    "id": "B02",
+    "shot": "Close-up of Dana’s hands plating fast, tongs and towel, steam rising."
+   },
+   {
+    "id": "F03",
+    "shot": "Job one: a technician on a ladder checks a light fixture in a brick corridor while Marcus reviews a work-order list on the tablet below."
+   },
+   {
+    "id": "R02",
+    "shot": "Tom moves a marker on the lab planning board; the technician, relieved, thanks him."
+   }
+  ],
+  "framework": [
+   {
+    "id": "E02",
+    "shot": "Two riding mowers cross the lawn at dawn; Carlos watches with a coffee."
+   },
+   {
+    "id": "F04",
+    "shot": "Job two: a young technician asks Marcus a question at a boiler panel; Marcus crouches beside her and shows her the gauge, patient, both smiling."
+   },
+   {
+    "id": "R03",
+    "shot": "Route it: Tom at a laptop in a small office sends one message, then closes the lid and returns to the lab, decisive."
+   },
+   {
+    "id": "C03",
+    "shot": "A staff member asks a question; Aisha writes it on a notepad, takes it seriously, warm."
+   },
+   {
+    "id": "E03",
+    "shot": "Know the people: Carlos shakes hands with an events coordinator on the quad, both smiling, clearly not their first meeting."
+   },
+   {
+    "id": "O04",
+    "shot": "Office: two colleagues plan the week on a sticky-note board."
+   },
+   {
+    "id": "B03",
+    "shot": "A young cook waits beside a rack of trays, looking toward Dana for a decision while she keeps plating; a small paper schedule on a clipboard hangs unused."
+   },
+   {
+    "id": "F05",
+    "shot": "Job three: Marcus at a laptop in a small facilities office, a colleague beside him, trying a new work-order screen together, curious not stressed."
+   },
+   {
+    "id": "R04",
+    "shot": "Tom walks a bright corridor beside the technician, talking gently; she nods."
+   },
+   {
+    "id": "C04",
+    "shot": "Describe where you are going: Aisha and a staffer look over the library floor from a mezzanine, she gestures toward the stacks."
+   },
+   {
+    "id": "E04",
+    "shot": "Carlos on the phone by the truck, relaxed, one hand gesturing, a colleague from another office visible across the lawn waving."
+   },
+   {
+    "id": "O05",
+    "shot": "Office: a manager walks through an open-plan office and stops to chat at a desk."
+   },
+   {
+    "id": "B05",
+    "shot": "Dana steps back from the line, wipes her hands, and looks at the whole kitchen, taking it in; the mood turns calm."
+   },
+   {
+    "id": "F06",
+    "shot": "Job four: Marcus meets an events coordinator with a clipboard on the campus green, they walk and talk, gesturing toward a lawn."
+   },
+   {
+    "id": "R05",
+    "shot": "Grow them: Tom beside a young postdoc at a microscope, letting her lead, asking a question, both engaged."
+   },
+   {
+    "id": "C05",
+    "shot": "Let people try: a young staff member tests a new book cart routine in the stacks, Aisha watches, curious and encouraging."
+   }
+  ],
+  "task": [
+   {
+    "id": "B04",
+    "shot": "Wide: six cooks working the line in rhythm; Dana at the pass, calm and proud."
+   },
+   {
+    "id": "R06",
+    "shot": "Thank them: at a short lab meeting, Tom thanks one technician by name; the team claps lightly, the technician grins."
+   },
+   {
+    "id": "C06",
+    "shot": "Aisha and the young staffer with the empty cart, a high five after the trial."
+   },
+   {
+    "id": "E05",
+    "shot": "Carlos steps into a brick office lobby and greets the front desk by name."
+   },
+   {
+    "id": "O06",
+    "shot": "Office: a staff member checks a timesheet on a laptop and approves it."
+   },
+   {
+    "id": "B06",
+    "shot": "Morning line-up: Dana counts three points on her fingers, a cook nods."
+   },
+   {
+    "id": "F07",
+    "shot": "Marcus checks a repaired light fixture with a technician; it lights; thumbs up."
+   },
+   {
+    "id": "R07",
+    "shot": "Trust them: Tom hands a clipboard to a technician who takes the lead on a bench setup while Tom steps back."
+   },
+   {
+    "id": "C07",
+    "shot": "The new system on a desk screen (unreadable), a staffer using it while helping a smiling patron."
+   },
+   {
+    "id": "E06",
+    "shot": "Watch for what is coming: Carlos and a crew member look at a wall calendar in the grounds shop, he points to a date next month."
+   },
+   {
+    "id": "O07",
+    "shot": "Office: a one-on-one in a small office, the manager listening and taking a note."
+   },
+   {
+    "id": "B07",
+    "shot": "At a small steel prep table, Dana and two cooks lean over a paper schedule as she points to three items and they nod."
+   },
+   {
+    "id": "F08",
+    "shot": "Four quick beats in one shot: the crew loading the truck, a repair finished, a thank-you handshake, a phone call by the truck door."
+   },
+   {
+    "id": "R08",
+    "shot": "A technician sets up glassware on her own; Tom out of focus behind, arms folded."
+   },
+   {
+    "id": "C08",
+    "shot": "Two staff raise a hand to volunteer at the meeting; Aisha nods, pleased."
+   }
+  ],
+  "relations": [
+   {
+    "id": "R10",
+    "shot": "The lab team at lunch in the break room, laughing."
+   },
+   {
+    "id": "C09",
+    "shot": "Look back: the team around a table with a few sticky notes, ten minutes, someone laughs, Aisha notes one change."
+   },
+   {
+    "id": "E07",
+    "shot": "Morning huddle at the grounds shop door; Carlos explains the week, the crew laughs."
+   },
+   {
+    "id": "O08",
+    "shot": "Office: a manager thanks a colleague in the break room in front of the team."
+   },
+   {
+    "id": "B08",
+    "shot": "Close on Dana's hands approving a timecard on a tablet at the kitchen pass, a cook standing by with a coffee, relaxed."
+   },
+   {
+    "id": "F09",
+    "shot": "Marcus pauses by the truck at midday, looks at the day's list, decides, and taps one item; a technician waits nearby."
+   },
+   {
+    "id": "R09",
+    "shot": "The technician with the family situation, back a week later, greeted warmly by teammates at the door."
+   },
+   {
+    "id": "C10",
+    "shot": "Move-in weekend: a line at the desk, staff handling it with ease, Aisha helping at the end of the counter."
+   },
+   {
+    "id": "E08",
+    "shot": "Speak up: Carlos and the events coordinator at a picnic table with a printed schedule, he shows two options, she nods and picks one."
+   },
+   {
+    "id": "O09",
+    "shot": "Student Affairs: three staff lay out badges and lanyards while planning orientation."
+   },
+   {
+    "id": "B09",
+    "shot": "Dana and a dishwasher in his fifties talk quietly by the back door, he explains something, she listens and nods with warmth."
+   },
+   {
+    "id": "F10",
+    "shot": "The crew eats lunch on the tailgate under an oak, laughing."
+   },
+   {
+    "id": "R11",
+    "shot": "A one-on-one at a small table by a tall window: Tom and a team member, coffees, easy conversation."
+   },
+   {
+    "id": "C11",
+    "shot": "Aisha hands a book to a patron with a smile, a colleague beside her."
+   },
+   {
+    "id": "E09",
+    "shot": "The crew at work on the lawn: edging, planting, a tent frame going up in the background, everyone moving with purpose."
+   }
+  ],
+  "change": [
+   {
+    "id": "C01",
+    "shot": "Aisha reads the announcement email at the desk, thoughtful, then looks up at her team."
+   },
+   {
+    "id": "E10",
+    "shot": "The tent frame rises as grounds crew and events staff lift a pole together."
+   },
+   {
+    "id": "O10",
+    "shot": "Office: a staff member at dual monitors, a colleague leans in with a question."
+   },
+   {
+    "id": "B10",
+    "shot": "The dining line at lunch: Dana's team serving smiling students, Dana watching from the end of the line, arms relaxed, pleased."
+   },
+   {
+    "id": "F11",
+    "shot": "Marcus walks a brick corridor with a clipboard, waves to a staff member."
+   },
+   {
+    "id": "R12",
+    "shot": "Close-up: Tom's hand writes a short thank-you note on a card."
+   },
+   {
+    "id": "C12",
+    "shot": "Aisha walks the stacks beside a young staffer explaining an idea; she listens."
+   },
+   {
+    "id": "E11",
+    "shot": "Carlos brings coffee to a Finance colleague at an office doorway in a brick building, a quick friendly chat."
+   },
+   {
+    "id": "O11",
+    "shot": "Office: a manager on a video call with colleagues in other cities."
+   },
+   {
+    "id": "B11",
+    "shot": "Dana tastes a sauce from a cook’s spoon at the stove, approves, both grin."
+   },
+   {
+    "id": "F12",
+    "shot": "Marcus and the crew back at the yard at dusk, tools put away, a laugh shared, the tower of a brick building soft behind."
+   },
+   {
+    "id": "R13",
+    "shot": "The technician finds a folded card by her microscope, opens it, smiles."
+   },
+   {
+    "id": "C13",
+    "shot": "Close-up: a hand adds one sticky note to a small board: three notes total."
+   },
+   {
+    "id": "E12",
+    "shot": "Commencement morning: chairs in rows on a green lawn, the crew stepping back, proud, Carlos nodding."
+   },
+   {
+    "id": "O12",
+    "shot": "Office: two managers from different offices talk over coffee outside a campus cafe."
+   }
+  ],
+  "external": [
+   {
+    "id": "O03",
+    "shot": "Student Affairs: a staff member at the welcome desk answers two students in the student center."
+   },
+   {
+    "id": "O13",
+    "shot": "Office: a standing huddle, the manager hands out a one-page plan."
+   },
+   {
+    "id": "B12",
+    "shot": "Dana on the office phone beside the kitchen, smiling, laptop open."
+   },
+   {
+    "id": "F13",
+    "shot": "Close-up: a hand pins a printed four-square sheet on a corkboard in the facilities office."
+   },
+   {
+    "id": "R14",
+    "shot": "The lab at the end of the day, lights warm, the team leaving together in conversation, Tom last out, switching off a lamp."
+   },
+   {
+    "id": "C14",
+    "shot": "Aisha writes three short lines on a staff-room whiteboard; two staff nod."
+   },
+   {
+    "id": "E13",
+    "shot": "Families arrive across the lawn toward the chairs; the crew watches, pleased."
+   },
+   {
+    "id": "B13",
+    "shot": "Dana walks the dining hall floor, greets a colleague from another office, exchanges a laugh."
+   },
+   {
+    "id": "F14",
+    "shot": "Close: a hand draws two lines on a white sheet, four squares, taps one."
+   },
+   {
+    "id": "R15",
+    "shot": "Tom walks a brick campus path at dusk, relaxed, nodding to a passing colleague."
+   },
+   {
+    "id": "C15",
+    "shot": "Aisha locks the desk drawer at closing, looks around the calm library, satisfied."
+   },
+   {
+    "id": "E14",
+    "shot": "Close-up: Carlos writes one name and 'coffee' on a notepad in the truck cab."
+   },
+   {
+    "id": "B14",
+    "shot": "Close-up: Dana writes a three-item list on a notepad at a corner table, coffee beside it, kitchen soft behind."
+   },
+   {
+    "id": "F15",
+    "shot": "Marcus closes the truck door and walks toward a brick building in golden light, tablet under his arm."
+   },
+   {
+    "id": "E15",
+    "shot": "Carlos closes the trailer gate at the end of the day, crew heading home, warm light on the brick behind."
+   },
+   {
+    "id": "B15",
+    "shot": "Dana pushes through the kitchen doors at end of shift, a cook calls something after her, she turns and smiles; warm afternoon light."
+   }
+  ]
  }
 }

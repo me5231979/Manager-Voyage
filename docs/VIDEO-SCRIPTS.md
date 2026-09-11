@@ -101,7 +101,7 @@ Shots, in order:
 
 ## external
 
-Job four: connect your team to the rest of Vanderbilt. Your team needs things it does not control: approvals, information, help from other offices, and a fair hearing when someone asks too much. New managers do this job least, because nobody told them it was part of the job. Three habits. Know the people your team depends on: your HCM, your Engagement Consultant, Finance, a peer manager. By name, before you need them. Watch for what is coming, so the team hears it from you first. Speak up for your team: facts, options, and a negotiated date, before you say yes to the weekend. For example: the week before Commencement, Events asks a grounds supervisor for his whole crew on Friday. He already knows the events coordinator by name. The schedule was on his wall calendar in March. At a picnic table with the printed hours, he names the conflict and offers two options. She picks one, nobody works the weekend, and on Commencement morning the chairs are in rows. This week: have coffee with one person your team depends on.
+Job four: connect your team to the rest of Vanderbilt. Your team needs things it does not control: approvals, information, help from other offices, and a fair hearing when someone asks too much. New managers do this job least, because nobody told them it was part of the job. Three habits. Know the people your team depends on: your HCM, your Engagement Consultant, Finance, a peer manager. By name, before you need them. Watch for what is coming, so the team hears it from you first. Speak up for your team: facts, options, and a negotiated date, before you say yes to the weekend. For example: the week before Commencement, Events asks a Student Affairs manager for her whole team on Friday. She already knows the events coordinator by name. The schedule was on her wall calendar in March. Over coffee, with the printed hours, she names the conflict and offers two options. He picks one, nobody works the weekend, and on Commencement morning the welcome tables are staffed and ready. This week: have coffee with one person your team depends on.
 
 Shots, in order:
 1. A request lands: Carlos reads a message on his phone by the trailer, thinks, not rattled.
@@ -116,3 +116,31 @@ Shots, in order:
 10. Families arrive across the lawn toward the chairs; the crew watches, pleased.
 11. Close-up: Carlos writes one name and 'coffee' on a notepad in the truck cab.
 12. Carlos closes the trailer gate at the end of the day, crew heading home, warm light on the brick behind.
+
+
+## Office and Student Affairs footage
+
+Thirteen clips of office staff were added so every video shows dining, facilities, lab, library, grounds, and office roles. No clip is shared across videos.
+
+- **O01** Office: a manager and a staff member review a printed form together at a desk.
+- **O02** Office: a five-person team meeting, one at the whiteboard sketching a three-item plan.
+- **O03** Student Affairs: a staff member at the welcome desk answers two students in the student center.
+- **O04** Office: two colleagues plan the week on a sticky-note board.
+- **O05** Office: a manager walks through an open-plan office and stops to chat at a desk.
+- **O06** Office: a staff member checks a timesheet on a laptop and approves it.
+- **O07** Office: a one-on-one in a small office, the manager listening and taking a note.
+- **O08** Office: a manager thanks a colleague in the break room in front of the team.
+- **O09** Student Affairs: three staff lay out badges and lanyards while planning orientation.
+- **O10** Office: a staff member at dual monitors, a colleague leans in with a question.
+- **O11** Office: a manager on a video call with colleagues in other cities.
+- **O12** Office: two managers from different offices talk over coffee outside a campus cafe.
+- **O13** Office: a standing huddle, the manager hands out a one-page plan.
+
+### Shot order per video
+
+- **basics**: F00, B00, F01, R00, C00, E00, O01, B01, F02, R01, C02, E01, O02, B02, F03, R02
+- **framework**: E02, F04, R03, C03, E03, O04, B03, F05, R04, C04, E04, O05, B05, F06, R05, C05
+- **task**: B04, R06, C06, E05, O06, B06, F07, R07, C07, E06, O07, B07, F08, R08, C08
+- **relations**: R10, C09, E07, O08, B08, F09, R09, C10, E08, O09, B09, F10, R11, C11, E09
+- **change**: C01, E10, O10, B10, F11, R12, C12, E11, O11, B11, F12, R13, C13, E12, O12
+- **external**: O03, O13, B12, F13, R14, C14, E13, B13, F14, R15, C15, E14, B14, F15, E15, B15

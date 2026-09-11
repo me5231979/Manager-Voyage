@@ -116,7 +116,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20260911z';
+var MEDIA_V = '20260912b';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
