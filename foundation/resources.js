@@ -15,20 +15,20 @@ window.MV_LEARN = [
   "why": "The whole first-year job in one course: expectations, delegation, feedback, and the shift from doing to managing."
  },
  {
-  "id": "OLC2538027",
-  "type": "oracle",
-  "topic": "start",
-  "title": "Leading at VU - Compliance and Supervisory Fundamentals",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002258801629",
-  "why": "What Vanderbilt requires of a supervisor: the policies and duties behind module 3."
- },
- {
   "id": "OLC3681769",
   "type": "oracle",
   "topic": "oneonones",
   "title": "A Manager's Guide to Conducting Effective One-on-One Meetings",
   "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857334221",
   "why": "How to run the weekly 1:1 so it is worth both people’s time."
+ },
+ {
+  "id": "OLC3572118",
+  "type": "oracle",
+  "topic": "oneonones",
+  "title": "How to Have Productive One-on-One Meetings",
+  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856581889",
+  "why": "Making the weekly 1:1 productive: the agenda, the questions to ask, and the follow-through."
  },
  {
   "id": "OLC3637033",
