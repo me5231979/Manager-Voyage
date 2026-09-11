@@ -663,7 +663,8 @@ var TURNS = [
 function turnHTML(t){ return '<div class="turn"' + (t.prog ? ' data-turn="' + t.prog + '"' : '') + ' role="note"><span class="t-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div><span class="mono">Your turn</span><p>' + esc(t.text) + '</p></div></div>'; }
 TURNS.forEach(function(t){
   var els = t.all ? $$(t.sel) : [$(t.sel)].filter(Boolean);
-  els.forEach(function(el){ var wrap = document.createElement('div'); wrap.innerHTML = turnHTML(t); el.parentNode.insertBefore(wrap.firstChild, el); });
+  /* wrap the activity so the callout sits above it without taking a grid cell of its own */
+  els.forEach(function(el){ var wrap = document.createElement('div'); wrap.className = 'turn-wrap'; el.parentNode.insertBefore(wrap, el); wrap.innerHTML = turnHTML(t); wrap.appendChild(el); });
 });
 function turnDone(k){ $$('.turn[data-turn="' + k + '"]').forEach(function(t){ t.classList.add('done'); t.querySelector('.t-ic').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>'; t.querySelector('.mono').textContent = 'Done'; }); }
 SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
