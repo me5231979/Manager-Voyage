@@ -55,6 +55,7 @@ html.paged .hw p{ font-size:.875rem; }
 /* compact section heads for short pages */
 html.paged .sec-head p{ font-size:1.02rem; margin-top:12px; }
 html.paged .sec-head.tight{ margin-bottom:clamp(10px,1.6vh,18px); }
+#yourcall .sec-head.tight{ margin-bottom:8px; }
 .lframe.learn{ margin:0 0 10px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
 .lframe.learn .lf-chip{ margin:0; display:flex; flex-direction:column; gap:3px; font-size:.86rem; }
 html.paged .split2 .scn .scn-s{ font-size:1.1rem; }
@@ -274,6 +275,22 @@ html.paged #nextstep .hw-step .chip{ font-size:.64rem; padding:4px 8px; }
 .op-grid b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; margin-bottom:4px; }
 .op-grid p{ font-size:.93rem; color:var(--tx2); line-height:1.5; margin:0; }
 @media (max-width:900px){ .ov-grid.two,.op-grid{ grid-template-columns:1fr; } }
+/* the scenario pages fit one screen: tighter scenario card, options, and callout */
+#yourcall .scn{ padding:clamp(12px,1.6vw,18px) clamp(14px,2vw,22px); margin-top:8px; }
+#yourcall .scn-s{ font-size:clamp(1.02rem,1.5vh + .5rem,1.25rem); line-height:1.35; margin-bottom:10px; }
+#yourcall .scn-opts{ gap:8px; } #yourcall .scn-opts button{ padding:9px 14px; font-size:.92rem; line-height:1.35; }
+#yourcall .turn{ padding:8px 14px; margin-bottom:6px; } #yourcall .turn p{ font-size:.92rem; }
+#yourcall .ask{ display:none; }
+#yourcall .scn-out{ padding-top:0; border-top:0; }
+#yourcall .cq-nav{ margin-top:8px; }
+#yourcall .cq-h{ margin-bottom:4px; }
+#yourcall .scn{ display:grid; grid-template-columns:1.1fr 1fr; gap:6px 22px; align-items:start; }
+#yourcall .scn .scn-s{ grid-column:1; max-width:none; }
+#yourcall .scn .scn-opts{ grid-column:1; }
+#yourcall .scn .scn-out{ grid-column:2; grid-row:1 / span 2; margin-top:0; align-self:stretch; }
+#yourcall .scn .scn-out:not(.show){ display:block; border:1px dashed var(--bd); border-radius:var(--r); min-height:100%; }
+#yourcall .scn .scn-out:not(.show)::before{ content:"What happens next appears here."; display:block; padding:14px; color:var(--tx3); font-size:.9rem; }
+@media (max-width:900px){ #yourcall .scn{ grid-template-columns:1fr; } #yourcall .scn .scn-out{ grid-column:1; grid-row:auto; } }
 .mea-choice{ display:grid; gap:10px; margin-top:6px; }
 .mission-charge{ margin-top:18px; border:2px solid var(--tx); border-left:8px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:20px 24px 22px; }
 .mission-charge .mono{ display:block; margin-bottom:6px; }
