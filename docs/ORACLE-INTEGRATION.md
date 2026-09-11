@@ -93,7 +93,7 @@ Items with none of these show "Link coming soon".
 
 `MVOracle.reportCompletion(id, { score, max, passed, note })` records a
 completion from a course on this site (the Foundation course calls it when
-all eight sections are done, with the quick-check score):
+all thirteen activities are done, with the quick-check score):
 
 - Inside Oracle Learning (SCORM launch): the SCO is marked complete, the
   score is written (`cmi.core.score.*` or `cmi.score.*`), and an interaction

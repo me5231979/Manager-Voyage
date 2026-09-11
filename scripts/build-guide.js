@@ -99,11 +99,11 @@ td{ vertical-align:top; padding:5pt 8pt 5pt 0; border-bottom:1px solid var(--bd)
 // at a glance
 H.push(`<section><span class="eyebrow">The course at a glance</span><h2>Five topics, one <em>picture</em>.</h2>
 <div class="topic"><span class="n">01</span><div><b>What changed, and what a manager is</b><span class="tx2">The one change, three things that are new, what a manager is not, who helps you here.</span></div><span class="pg">Pages 4 to 5</span></div>
-<div class="topic"><span class="n">02</span><div><b>Five ideas every good manager relies on</b><span class="tx2">Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to try.</span></div><span class="pg">Page 6</span></div>
+<div class="topic"><span class="n">02</span><div><b>Five ideas every good manager relies on</b><span class="tx2">Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to apply it.</span></div><span class="pg">Page 6</span></div>
 <div class="topic"><span class="n">03</span><div><b>What Vanderbilt will ask you to do</b><span class="tx2">The tasks of year one, when they show up, and your first calls: handle it, ask, route, or report.</span></div><span class="pg">Pages 7 to 8</span></div>
 <div class="topic"><span class="n">04</span><div><b>The four jobs of a manager</b><span class="tx2">Get the work done, take care of your people, make things better, connect your team. One page each, then your call.</span></div><span class="pg">Pages 9 to 14</span></div>
 <div class="topic"><span class="n">05</span><div><b>Your assessment</b><span class="tx2">What your results email tells you, and where the score should go.</span></div><span class="pg">Page 15</span></div>
-<p class="tx2" style="margin-top:6pt">Then a five-question check (4 of 5 finishes the course), your next seven days, a keep-learning list, and the wrap-up. Eight activities track progress; completion is recorded in Oracle Learning.</p></section>`);
+<p class="tx2" style="margin-top:6pt">Then a five-question check (4 of 5 finishes the course), your next seven days, a keep-learning list, and the wrap-up. Thirteen activities track progress; completion is recorded in Oracle Learning.</p></section>`);
 // mission
 H.push(`<section><span class="eyebrow">The mission</span><h2>Define the great university of the 21st century, and <em>be</em> it.</h2>
 <div class="grid3">
@@ -125,7 +125,7 @@ H.push(`<section><span class="eyebrow">Topic 1 · What changed</span><h2>Your jo
 <div class="grid3">
 <div class="box cream"><strong>Not the person who does everyone’s work</strong>When you want to just do it yourself, manage instead.</div>
 <div class="box cream"><strong>Not a friend first</strong>Warm and fair. The team needs a manager more than another friend.</div>
-<div class="box cream"><strong>Not the police</strong>Some things you send on, the same day. Knowing which is part of the job.</div></div>
+<div class="box cream"><strong>Not the police</strong>You do not investigate, judge, or enforce. Report harassment, discrimination, injuries, or threats to the right office the same day. They handle it. You support your team.</div></div>
 <h3>What a manager is</h3>
 <p><b>A manager is the person responsible for a team’s work, and for the people who do it.</b></p>
 <div class="grid2"><div class="box gold"><b class="k">Three questions, every week</b><ul><li>Does everyone know what to do this week?</li><li>Is anyone stuck, struggling, or waiting on me?</li><li>What is coming that the team should hear from me first?</li></ul></div>

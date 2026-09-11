@@ -66,7 +66,7 @@ each page is one idea, one activity.
    videos, and a guide, from foundation/resources.js; the only place the
    course recommends learning, plus the printable guide), and the wrap-up
 
-Eight tracked activities. Audio follows the learner's clicks: every page has
+Thirteen tracked activities. Audio follows the learner's clicks: every page has
 a Listen clip, and every tab, moment, situation, and map card has its own
 short clip (narration-scripts.js keys like ideas/t1, safe/m1, yourcall/s1,
 year/g1, welcome/j1). Opening one stops whatever was playing; tapping its

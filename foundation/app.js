@@ -1,5 +1,5 @@
 /* ══════════ MANAGER VOYAGE · FOUNDATION · app engine ══════════
-   Progress (eight tracked sections), the six segments' activities (flip
+   Progress (thirteen tracked activities), the six segments' activities (flip
    cards, your call, quick check), the assessment result entry that
    orders the 22 micro modules, the knowledge check, page narration, the
    custom and public videos, and the SCORM hookup. State: localStorage
@@ -259,12 +259,17 @@ $$('.yt[data-embed]').forEach(function(box){
 var SECTIONS = [
   { k:'shift',     no:'01', name:'What changed',            how:'Sort six things' },
   { k:'safe',      no:'02', name:'Five ideas at work',      how:'Find the best response in each idea’s moment' },
-  { k:'calls',     no:'03', name:'Your first calls',        how:'Decide five situations' },
-  { k:'welcome',   no:'04', name:'The four jobs',           how:'Open all four' },
-  { k:'yourcall',  no:'05', name:'Your call',               how:'Find the Vanderbilt way in four situations' },
-  { k:'survey',    no:'06', name:'Your assessment',         how:'Review your results email, or take the assessment' },
-  { k:'quiz',      no:'07', name:'A quick check',           how:'Score 4 of 5' },
-  { k:'nextstep',  no:'08', name:'Your next seven days',    how:'Mark it done once planned' }
+  { k:'year',      no:'03', name:'Your first year',         how:'Open all four groups' },
+  { k:'calls',     no:'04', name:'Your first calls',        how:'Decide five situations' },
+  { k:'welcome',   no:'05', name:'The four jobs',           how:'Open all four' },
+  { k:'task',      no:'06', name:'Get the work done',       how:'Flip all four cards' },
+  { k:'relations', no:'07', name:'Take care of your people', how:'Flip all four cards' },
+  { k:'change',    no:'08', name:'Make things better',      how:'Flip all four cards' },
+  { k:'external',  no:'09', name:'Connect your team',       how:'Flip every card' },
+  { k:'yourcall',  no:'10', name:'Your call',               how:'Find the Vanderbilt way in four situations' },
+  { k:'survey',    no:'11', name:'Your assessment',         how:'Review your results email, or take the assessment' },
+  { k:'quiz',      no:'12', name:'A quick check',           how:'Score 4 of 5' },
+  { k:'nextstep',  no:'13', name:'Your next seven days',    how:'Mark it done once planned' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }
 function progWrite(k, v){ set('p-' + k, v ? '1' : null); }
@@ -342,13 +347,13 @@ if(progReset) progReset.addEventListener('click', function(){
 });
 if(!store){ var pw = $('#progStorageNote'); if(pw) pw.hidden = false; }
 
-/* ── completion modal (fires once when all eight are done) ── */
+/* ── completion modal (fires once when all thirteen are done) ── */
 var doneSeen = get('done-seen') === '1';
 var modalReturn = null, modalTimer = null;
 function allDone(){
   if(window.MVOracle){
     var qs = get('quiz-score'), qm = get('quiz-max');
-    MVOracle.reportCompletion('MRC-F', { score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: all eight sections', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })() } });
+    MVOracle.reportCompletion('MRC-F', { score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: all thirteen activities', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })() } });
   } else if(window.MVScorm && MVScorm.connected) MVScorm.complete();
   if(doneSeen) return;
   doneSeen = true; set('done-seen', '1');
@@ -397,7 +402,7 @@ function scormAdopt(){
   if(d.a){ set('assess', JSON.stringify(d.a)); assessLoad(); }
   if(d.seen){ doneSeen = true; set('done-seen', '1'); }
   if(sc.name && !profile.name){ profile.name = sc.name; paintHello(); }
-  var t = $('#oracleStripText'); if(t) t.textContent = 'You opened this course from Oracle Learning. Your completion is recorded automatically once all eight activities are done.';
+  var t = $('#oracleStripText'); if(t) t.textContent = 'You opened this course from Oracle Learning. Your completion is recorded automatically once all thirteen activities are done.';
   var f = $('#oracleFine'); if(f) f.textContent = 'Recorded in Oracle Learning' + (sc.name ? ' for ' + sc.name : '') + '.';
   sc.incomplete();
   progRender();
@@ -406,9 +411,17 @@ window.addEventListener('mv-scorm-connected', scormAdopt);
 if(window.MVScorm && MVScorm.connected) scormAdopt();
 
 /* ══════════ flip cards, the framework map, fact or fiction ══════════ */
-$$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){ var f = btn.classList.toggle('flipped'); btn.setAttribute('aria-expanded', f ? 'true' : 'false'); }); });
+$$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){ var f = btn.classList.toggle('flipped'); btn.setAttribute('aria-expanded', f ? 'true' : 'false'); if(f) flipSeen(btn); }); });
+/* each flip-card page is an activity: flip every card on the page and it is done */
+var FLIP_PAGES = ['task', 'relations', 'change', 'external'];
+function flipSeen(btn){
+  var sec = btn.closest('section'); if(!sec || FLIP_PAGES.indexOf(sec.id) < 0) return;
+  var all = $$('.flip-btn', sec), n = all.filter(function(b){ return b.classList.contains('flipped'); }).length;
+  var st = $('.flip-status', sec); if(st) st.textContent = n + ' of ' + all.length + ' cards flipped.' + (n === all.length ? ' Activity complete.' : '');
+  if(n === all.length) progDone(sec.id);
+}
 [{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', narr:'welcome/j', done:' Activity complete. The next four pages take one job each.' },
- { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:null, narr:'year/g', done:' All four open. Turn the page to make your first calls.' },
+ { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:'year', narr:'year/g', done:' Activity complete. Turn the page to make your first calls.' },
  { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, narr:null, done:'' }].forEach(function(cfg){
   var map = $(cfg.map), status = $(cfg.status); if(!map) return;
   var cards = $$('.fw-card', map), seen = {};
@@ -647,12 +660,12 @@ var IDEAS = [
       return '<div class="idea' + (i === 0 ? ' cur' : '') + '" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' +
         '<p class="blk"><b>What it is</b>' + esc(it.what) + '</p><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p>' +
         '<div class="side"><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
-        '<div class="try"><p class="cq-h"><span class="mono">Try it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + ' <button type="button" class="btn btn-primary btn-sm try-btn" data-try="1">Try it<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
+        '<div class="try"><p class="cq-h"><span class="mono">Apply it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + '<span class="try-note">Show you understood the idea. Tap the response you would give, then try the other two.</span></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
         '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page for what Vanderbilt will ask of you.</span>') + '</div></div>';
     }).join('');
   function show(i){
     cur = i; seen[i] = 1;
-    $$('.idea', box).forEach(function(p, pi){ p.classList.toggle('cur', pi === i); if(pi !== i && p.classList.contains('trying')) trying(p, false); });
+    $$('.idea', box).forEach(function(p, pi){ p.classList.toggle('cur', pi === i); });
     $$('.idea-tabs button', box).forEach(function(t, ti){ t.setAttribute('aria-selected', ti === i ? 'true' : 'false'); t.classList.toggle('seen', !!seen[ti]); });
     paint();
     if(window.chartPager && window.chartPager.current().key === 'ideas'){ var f = $$('.idea', box)[i].querySelector('.idea-nav button'); if(f) f.focus({ preventScroll:true }); }
@@ -660,9 +673,7 @@ var IDEAS = [
   }
   function paint(){ var n = Object.keys(seen).length, f = Object.keys(found).length; if(status) status.textContent = n + ' of 5 ideas. ' + f + ' of 5 moments.' + (f === 5 ? ' Activity complete. Pick the idea you will try first.' : n === 5 && f < 5 ? ' Find the best response in each moment.' : ''); if(f === 5) progDone('safe'); }
   $$('.scn[data-scn]', box).forEach(buildScenario);
-  function trying(panel, on){ panel.classList.toggle('trying', on); var tb = panel.querySelector('.try-btn'); if(tb) tb.innerHTML = on ? 'Back to the idea' : 'Try it<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'; if(on) narrSub('safe/m' + (parseInt(panel.getAttribute('data-i'), 10) + 1)); }
   box.addEventListener('click', function(e){
-    var tb = e.target.closest('.try-btn'); if(tb){ var pn = tb.closest('.idea'); trying(pn, !pn.classList.contains('trying')); return; }
     var b = e.target.closest('.scn button[data-o]'); if(b){ var k = b.closest('.scn').getAttribute('data-scn'); if(SCENARIOS[k].opts[parseInt(b.getAttribute('data-o'), 10)].best){ found[k] = 1; paint(); } return; }
     var t = e.target.closest('button[data-tab]'); if(t){ show(parseInt(t.getAttribute('data-tab'), 10)); return; }
     if(e.target.closest('button[data-next]')){ show(Math.min(cur + 1, IDEAS.length - 1)); return; }
@@ -685,21 +696,24 @@ var IDEAS = [
     { does:'Equal Opportunity and Access takes reports of discrimination, harassment, sexual misconduct, and retaliation.', when:'The same day you see it or hear about it, including a concern about how someone is being treated. You report; you never investigate.', how:'File a report or call EOA.' + link(C.eoa, 'EOA') + ' Tell your HCM you did.' }
   ];
   var tabs = tiles.map(function(t, i){ var ic = t.querySelector('.hic'); return '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-htab="' + i + '">' + (ic ? ic.outerHTML : '') + '<span>' + esc(t.querySelector('b').textContent) + '</span></button>'; }).join('');
-  var panes = tiles.map(function(t, i){ return '<div class="help-pane' + (i === 0 ? ' cur' : '') + '" role="tabpanel"><h4>' + esc(t.querySelector('b').textContent) + '</h4><div class="help-cols"><div><b>What they do</b><p>' + H[i].does + '</p></div><div><b>When you contact them</b><p>' + H[i].when + '</p></div><div><b>How you contact them</b><p>' + H[i].how + '</p></div></div></div>'; }).join('');
+  var panes = tiles.map(function(t, i){ return '<div class="help-pane' + (i === 0 ? ' cur' : '') + '" role="tabpanel"><h4>' + esc(t.querySelector('b').textContent) + subBtn('basics/h' + (i + 1)) + '</h4><div class="help-cols"><div><b>What they do</b><p>' + H[i].does + '</p></div><div><b>When you contact them</b><p>' + H[i].when + '</p></div><div><b>How you contact them</b><p>' + H[i].how + '</p></div></div></div>'; }).join('');
   box.innerHTML = '<span class="mono">Who helps you</span><div class="help-tabs" role="tablist" aria-label="Who helps you">' + tabs + '</div>' + panes;
   box.classList.add('tabbed'); box.removeAttribute('role');
-  box.addEventListener('click', function(e){ var t = e.target.closest('button[data-htab]'); if(!t) return; var i = t.getAttribute('data-htab'); $$('button[data-htab]', box).forEach(function(b){ b.setAttribute('aria-selected', b === t ? 'true' : 'false'); }); $$('.help-pane', box).forEach(function(pn, pi){ pn.classList.toggle('cur', String(pi) === i); }); if(narr.playing) narrStop(); });
+  box.addEventListener('click', function(e){ var t = e.target.closest('button[data-htab]'); if(!t) return; var i = t.getAttribute('data-htab'); $$('button[data-htab]', box).forEach(function(b){ b.setAttribute('aria-selected', b === t ? 'true' : 'false'); }); $$('.help-pane', box).forEach(function(pn, pi){ pn.classList.toggle('cur', String(pi) === i); }); narrSub('basics/h' + (parseInt(i, 10) + 1)); });
 })();
 
 /* ══════════ "Your turn": a black callout above every activity, gold check when done ══════════ */
 var TURNS = [
   { sel:'#shiftDrill',  prog:'shift',    text:'Sort six things. Tap yours, your team member’s, or another office.' },
-  { sel:'#ideasBox',    prog:'safe',     text:'Read each idea, then try its moment. Tap the response you would give, and try the other two.' },
-  { sel:'#yearMap',     prog:null,       text:'Tap each group to open it and hear it.' },
+  { sel:'#ideasBox',    prog:'safe',     text:'Read each idea, then apply it in the moment below it. Tap the response you would give, and try the other two.' },
+  { sel:'#yearMap',     prog:'year',     text:'Tap each group to open it and hear it.' },
   { sel:'#simBox',      prog:null,       text:'Pick a situation to see the first move and who handles what.' },
   { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations. Tap the first thing you would do.' },
   { sel:'#fwMap',       prog:'welcome',  text:'Tap each of the four jobs to open it.' },
-  { sel:'.flip-grid',   prog:null,       text:'Flip each card: what to stop, what to do instead.', all:true },
+  { sel:'#task .flip-grid',      prog:'task',      text:'Flip each card: what to stop, what to do instead.' },
+  { sel:'#relations .flip-grid', prog:'relations', text:'Flip each card: what to stop, what to do instead.' },
+  { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card: what to stop, what to do instead.' },
+  { sel:'#external .flip-grid',  prog:'external',  text:'Flip each card: what to stop, what to do instead.' },
   { sel:'#jobsCalls',   prog:'yourcall', text:'Tap the response you would give, then try the other two.' },
   { sel:'#meaChoice',   prog:'survey',   text:'Tap what is true for you.' },
   { sel:'#quizBox',     prog:'quiz',     text:'Five questions. Four of five finishes the course.' },
@@ -709,7 +723,8 @@ function turnHTML(t){ return '<div class="turn"' + (t.prog ? ' data-turn="' + t.
 TURNS.forEach(function(t){
   var els = t.all ? $$(t.sel) : [$(t.sel)].filter(Boolean);
   /* wrap the activity so the callout sits above it without taking a grid cell of its own */
-  els.forEach(function(el){ var wrap = document.createElement('div'); wrap.className = 'turn-wrap'; el.parentNode.insertBefore(wrap, el); wrap.innerHTML = turnHTML(t); wrap.appendChild(el); });
+  els.forEach(function(el){ var wrap = document.createElement('div'); wrap.className = 'turn-wrap'; el.parentNode.insertBefore(wrap, el); wrap.innerHTML = turnHTML(t); wrap.appendChild(el);
+    if(FLIP_PAGES.indexOf(t.prog) >= 0){ var st = document.createElement('p'); st.className = 'hinttxt flip-status'; st.setAttribute('role', 'status'); st.setAttribute('aria-live', 'polite'); st.textContent = '0 of ' + $$('.flip-btn', el).length + ' cards flipped.'; wrap.appendChild(st); } });
 });
 function turnDone(k){ $$('.turn[data-turn="' + k + '"]').forEach(function(t){ t.classList.add('done'); t.querySelector('.t-ic').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>'; t.querySelector('.mono').textContent = 'Done'; }); }
 SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
@@ -739,7 +754,7 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
   if(ltabs) ltabs.addEventListener('click', function(e){ var t = e.target.closest('button[data-ltab]'); if(!t) return; var k = t.getAttribute('data-ltab'); $$('.learn-tabs button').forEach(function(b){ b.setAttribute('aria-selected', b === t ? 'true' : 'false'); }); $$('.learn-pane').forEach(function(pn){ pn.classList.toggle('cur', pn.getAttribute('data-lpane') === k); }); if(narr.playing) narrStop(); });
   var comp = $('#learnComp'), C = window.MV_COMPLIANCE;
   if(comp && C){
-    comp.innerHTML = '<span class="mono">Before this course</span><h4>' + esc(C.title) + '</h4><p>' + esc(C.note) + '</p><div class="comp-grid">' + C.items.map(function(it, i){
+    comp.innerHTML = '<span class="mono">Micro Course Library</span><h4>' + esc(C.title) + '</h4><p>' + esc(C.note) + '</p><div class="comp-grid">' + C.items.map(function(it, i){
       var t = typeof it === 'string' ? { title: it, type: 'Video' } : it, has = !!t.url;
       return '<a class="comp-item' + (has ? '' : ' soon') + '" href="' + esc(t.url || C.url || '#') + '"' + (has || C.url ? ' target="_blank" rel="noopener"' : ' aria-disabled="true" title="Link coming from PCB"') + '><span class="no">' + (i + 1) + '</span><span class="ct"><i>' + esc(t.type || 'Video') + ' &middot; Oracle Learning</i><b>' + esc(t.title) + '</b></span><span class="go" aria-hidden="true">&#8599;</span></a>';
     }).join('') + '</div>';

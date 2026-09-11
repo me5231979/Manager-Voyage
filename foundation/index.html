@@ -36,7 +36,7 @@
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=20260911k" />
+<link rel="stylesheet" href="../assets/css/course.css?v=20260911m" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
@@ -315,10 +315,7 @@ html.paged .mission-grid,html.paged .ov-grid{ gap:10px; }
 html.paged .isnot{ padding:10px 14px 12px; margin-top:10px; } html.paged .isnot b{ font-size:1.02rem; } html.paged .isnot p{ font-size:.86rem; }
 html.paged .fw-status{ margin-top:6px; }
 /* read, then try: the moment opens in place of the four blocks so the tab stays one screen */
-.idea:not(.trying) .try .scn{ display:none; }
-.idea.trying .blk,.idea.trying .side{ display:none; }
-.idea .try .cq-h{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; } .idea .try .cq-h .try-btn{ margin-left:auto; }
-.idea.trying .try{ border-top:0; padding-top:0; }
+.idea .try .cq-h{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 /* first calls: simulator and the decide drill side by side */
 html.paged #calls .calls-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; }
 html.paged #calls .calls-grid > div{ min-width:0; }
@@ -335,7 +332,6 @@ html.paged .pdf-card{ padding:10px 16px; margin-top:8px; } html.paged .pdf-card 
 html.paged .sim-out{ max-height:calc(100vh - 630px); min-height:140px; overflow:auto; padding-right:6px; }
 html.paged .sim-out .s-first p{ font-size:.95rem; }
 /* trying a moment: the four blocks and the headline give way to the moment */
-.idea.trying > h3,.idea.trying > .who-is{ display:none; }
 .comp-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:8px; }
 .comp-item{ display:grid; grid-template-columns:auto 1fr auto; gap:8px; align-items:center; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card2); padding:6px 9px; color:var(--tx); text-decoration:none; min-width:0; }
 .comp-item:hover{ border-color:var(--vu-gold); background:var(--card); }
@@ -357,7 +353,7 @@ html.paged .learn-comp{ padding:10px 14px; } html.paged .learn-comp h4{ font-siz
 .helpers.tabbed > div{ display:block; border:0; padding:0; background:none; }
 .helpers.tabbed > .help-tabs{ display:grid; }
 .helpers.tabbed > .help-pane{ display:none; border:1px solid var(--bd); border-left:4px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 16px 14px; } .helpers.tabbed > .help-pane.cur{ display:block; }
-.help-pane h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; margin:0 0 8px; }
+.help-pane h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; margin:0 0 8px; display:flex; align-items:center; gap:10px; }
 .help-cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px 18px; }
 .helpers .help-cols b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; border-top:2px solid var(--vu-gold); padding-top:6px; }
 .help-cols p{ font-size:.9rem; line-height:1.45; color:var(--tx2); margin:0; } .help-cols a{ color:var(--link); border-bottom:1px solid var(--bdg); }
@@ -668,26 +664,36 @@ html.paged .operate .op-lead{ max-width:none; }
 .op-link{ margin:10px 0 0; font-size:var(--fs-small); } .op-link a{ color:var(--link); border-bottom:1px solid var(--bdg); } .op-link a:hover{ color:var(--strong); }
 html.paged h3, html.paged h4, html.paged .fcard h4, html.paged .flip-grid.five .fcard h4, html.paged .hw h3, html.paged .ov-mods .hw h3, html.paged .learn-comp h4, html.paged .vslot h4, html.paged .cv-wait b, html.paged .sim-head h3{ font-family:var(--serif); font-weight:400; letter-spacing:-.01em; }
 html.paged .qz legend, html.paged .dq .dq-s, html.paged .sq p{ font-family:var(--sans); }
-/* home: let the campus photo show, keep the copy in one column */
-html.paged .hero .meta-line{ max-width:none; }
-html.paged .hero .lead{ max-width:60ch; }
+/* home: copy and Begin on the left, an outcomes panel with the course facts on the right, how-it-works across the bottom */
+.hero .hero-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:22px 56px; align-items:center; }
+.hero .hero-copy{ min-width:0; }
+.hero .hero-panel{ min-width:0; border:1px solid rgba(207,174,112,.5); background:rgba(28,28,28,.78); border-radius:var(--r); padding:20px 24px 22px; }
+.hero .hero-panel .panel-h{ display:block; padding-bottom:6px; margin-bottom:12px; border-bottom:1px solid var(--vu-gold); }
+.hero .hero-panel .panel-h.second{ margin-top:18px; }
+.hero .hero-panel .outcomes{ margin-top:0; max-width:none; }
+html.paged .hero .hero-panel .outcomes{ columns:auto; display:flex; flex-direction:column; gap:7px; }
+.hero .facts{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:0; }
+.hero .facts div{ display:flex; flex-direction:column; min-width:0; }
+.hero .facts b{ font-family:var(--cond); font-weight:700; font-size:2rem; line-height:1; color:var(--vu-gold); letter-spacing:.01em; }
+.hero .facts span{ font-size:var(--fs-small, .84rem); color:rgba(255,255,255,.72); margin-top:5px; }
+.hero .hero-panel .meta-line{ margin-top:14px; max-width:none; }
+html.paged .hero .hero-panel .meta-line{ margin-top:14px; }
+html.paged .hero .lead{ max-width:52ch; }
+html.paged .hero .cta-row{ margin-top:18px; }
+.hero .hero-copy .listen-line{ margin-top:16px; max-width:52ch; }
+html.paged .hero .hw-mini{ grid-column:1 / -1; margin-top:6px; }
+@media (max-width:1000px){ .hero .hero-grid{ grid-template-columns:1fr; gap:18px; } .hero .facts{ grid-template-columns:repeat(2,1fr); } }
 
 
-/* five ideas: one footer line. Left: try the moment. Right: back and next. */
-html.paged .idea .try{ grid-column:1 / 4; border-top:1px solid var(--bd); padding-top:12px; margin-top:6px; min-width:0; }
-html.paged .idea-nav{ grid-column:4 / -1; justify-content:flex-end; border-top:1px solid var(--bd); padding-top:12px; margin-top:6px; }
-html.paged .idea .try .cq-h{ display:flex; flex-wrap:nowrap; align-items:center; gap:12px; margin:0; text-transform:none; letter-spacing:0; min-width:0; }
-html.paged .idea .try .cq-h .try-t{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
-html.paged .idea .try .cq-h .try-btn{ white-space:nowrap; flex:0 0 auto; }
-html.paged .idea .try .cq-h{ max-width:none; }
+/* five ideas: the scenario is always shown under the idea. "Apply it" title, then the moment, then back and next. */
+html.paged .idea .try{ grid-column:1 / -1; border-top:1px solid var(--bd); padding-top:12px; margin-top:6px; min-width:0; }
+html.paged .idea-nav{ grid-column:1 / -1; justify-content:flex-end; margin-top:4px; }
+html.paged .idea .try .cq-h{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; margin:0 0 8px; text-transform:none; letter-spacing:0; min-width:0; max-width:none; }
 html.paged .idea .try .cq-h .mono{ font-size:var(--fs-lab); letter-spacing:.08em; white-space:nowrap; flex:0 0 auto; }
 html.paged .idea .try .cq-h .try-t{ font-family:var(--serif); font-size:var(--fs-card-h); color:var(--tx); line-height:1.2; }
 html.paged .idea .try .cq-h .sub-listen{ margin-left:0; }
-html.paged .idea .try .cq-h .try-btn{ margin-left:auto; }
-html.paged .idea.trying .try{ grid-column:1 / -1; border-top:0; padding-top:0; }
-html.paged .idea.trying .try .cq-h{ margin-bottom:8px; }
-html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-start; }
-@media (max-width:1100px){ html.paged .idea .try, html.paged .idea-nav{ grid-column:1 / -1; } html.paged .idea-nav{ border-top:0; padding-top:0; margin-top:0; justify-content:flex-start; } }
+html.paged .idea .try .cq-h .try-note{ flex:1 1 100%; font-family:var(--sans); font-size:var(--fs-small); color:var(--tx2); line-height:1.45; }
+html.paged .idea .try .scn{ margin-top:0; }
 </style>
 </head>
 <body>
@@ -719,7 +725,7 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
 
 <div class="prog-panel" id="progPanel" role="region" aria-label="Your progress" hidden>
   <div class="pp-h">Your progress</div>
-  <p class="prog-sum" id="progSum">0 of 8 activities complete.</p>
+  <p class="prog-sum" id="progSum">0 of 13 activities complete.</p>
   <ol class="prog-list" id="progList"></ol>
   <p class="prog-fine">Progress is saved in this browser and, when you open this course from Oracle Learning, in your Oracle record. Reset it anytime in the footer.</p>
   <p class="prog-fine prog-warn" id="progStorageNote" hidden>Heads up: your browser is blocking saved progress (this happens in private browsing). Marks work during this visit but reset when you close the tab.</p>
@@ -735,7 +741,7 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
   <a class="mlink" href="#survey" data-prog="survey"><span class="mono">06</span>Your assessment results<span class="mdone" aria-hidden="true">Done</span></a>
   <a class="mlink" href="#quiz" data-prog="quiz"><span class="mono">07</span>Knowledge check<span class="mdone" aria-hidden="true">Done</span></a>
   <a class="mlink" href="#nextstep" data-prog="nextstep"><span class="mono">08</span>Your next step<span class="mdone" aria-hidden="true">Done</span></a>
-  <div class="mprog" id="mprogLine">0 of 8 activities complete</div>
+  <div class="mprog" id="mprogLine">0 of 13 activities complete</div>
   <div class="mfoot">Manager Voyage &middot; Futures Learning Hub</div>
 </nav>
 
@@ -747,25 +753,37 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
     <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="../assets/img/hero-poster.jpg" aria-hidden="true"><source src="../assets/video/hero-montage.mp4" type="video/mp4" /></video>
     <div class="hero-scrim"></div>
   </div>
-  <div class="wrap">
-    <span class="mono">Vanderbilt University &middot; Manager Voyage &middot; Manager Foundations &middot; Course 1 &middot; Page 1 of 19</span>
-    <h1 class="metal">You are a manager <em>now</em>.</h1>
-    <p class="hello" id="heroHello">Welcome aboard.</p>
-    <p class="lead">This course starts at the beginning. What changed, what a manager is, five ideas that hold up, what Vanderbilt will ask of you this year, and one picture to keep it all in view. Take your manager compliance courses first. The micro modules come after.</p>
-    <ul class="outcomes" aria-label="By the end, you will be able to">
-      <li><b>Say</b> what changed, and what the job is now</li>
-      <li><b>Use</b> five ideas every good manager relies on</li>
-      <li><b>Know</b> what Vanderbilt will ask this year, and who helps</li>
-      <li><b>Decide</b>: handle it, ask your HCM, route it, or report it</li>
-      <li><b>Keep</b> the four jobs of a manager in view</li>
-    </ul>
-    <p class="meta-line"><b>About 35 minutes &middot; 19 pages &middot; 5 topics</b> &middot; self-paced &middot; recorded in Oracle Learning</p>
-    <p class="listen-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span><b>Narration is on.</b> Every page is read as it turns, and each tab has its own clip. Tap <b>Auto</b> to turn it off, or <b>Listen</b> to replay a page.</span></p>
-    <div class="cta-row"><a class="btn btn-gold" href="#overview">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="mono">Vanderbilt University &middot; Manager Voyage &middot; Manager Foundations &middot; Course 1 &middot; Page 1 of 19</span>
+      <h1 class="metal">You are a manager <em>now</em>.</h1>
+      <p class="hello" id="heroHello">Welcome aboard.</p>
+      <p class="lead">This course starts at the beginning. What changed, what a manager is, five ideas that hold up, what Vanderbilt will ask of you this year, and one picture to keep it all in view. Take your manager compliance courses first. The micro modules come after.</p>
+      <div class="cta-row"><a class="btn btn-gold" href="#mission">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      <p class="listen-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span><b>Narration is on.</b> Every page is read as it turns. Tap <b>Auto</b> to turn it off, or <b>Listen</b> to replay a page.</span></p>
+    </div>
+    <aside class="hero-panel" aria-label="Course at a glance">
+      <span class="mono panel-h">By the end, you can</span>
+      <ul class="outcomes">
+        <li><b>Say</b> what changed, and what the job is now</li>
+        <li><b>Use</b> five ideas every good manager relies on</li>
+        <li><b>Know</b> what Vanderbilt will ask this year, and who helps</li>
+        <li><b>Decide</b>: handle it, ask your HCM, route it, or report it</li>
+        <li><b>Keep</b> the four jobs of a manager in view</li>
+      </ul>
+      <span class="mono panel-h second">At a glance</span>
+      <div class="facts" role="list">
+        <div role="listitem"><b>35</b><span>minutes</span></div>
+        <div role="listitem"><b>19</b><span>pages</span></div>
+        <div role="listitem"><b>5</b><span>topics</span></div>
+        <div role="listitem"><b>13</b><span>activities</span></div>
+      </div>
+      <p class="meta-line">Self-paced &middot; recorded in Oracle Learning</p>
+    </aside>
     <ol class="hw-mini" aria-label="How this course works">
       <li>Turn pages with the arrows, your keyboard, or a swipe</li>
       <li>Each page: a short read or video, then one activity</li>
-      <li>Eight activities track your progress</li>
+      <li>Thirteen activities track your progress</li>
     </ol>
   </div>
 </section>
@@ -815,17 +833,17 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
     <div class="ov-grid">
       <div class="ov-card"><b>What this is</b><p>The first course in Manager Foundations. It assumes you know nothing about management yet.</p></div>
       <div class="ov-card"><b>Before and after</b><p>Before: your manager compliance courses. After: the micro modules, one common task each.</p></div>
-      <div class="ov-card"><b>How you finish</b><p>Eight activities and a five-question check (4 of 5). Recorded in Oracle Learning.</p></div>
+      <div class="ov-card"><b>How you finish</b><p>Thirteen activities and a five-question check (4 of 5). Recorded in Oracle Learning.</p></div>
     </div>
     <span class="mono" style="display:block;margin:14px 0 8px">The topics</span>
     <div class="hw-grid reveal ov-mods">
       <div class="hw"><span class="hw-no" aria-hidden="true">01</span><h3>What changed, and what a manager is</h3><p>The one change, three things that are new, who helps you here.</p><span class="chip">Pages 4 to 5</span></div>
-      <div class="hw"><span class="hw-no" aria-hidden="true">02</span><h3>Five ideas every good manager relies on</h3><p>Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to try.</p><span class="chip">Page 6</span></div>
+      <div class="hw"><span class="hw-no" aria-hidden="true">02</span><h3>Five ideas every good manager relies on</h3><p>Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to apply it.</p><span class="chip">Page 6</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">03</span><h3>What Vanderbilt will ask you to do</h3><p>The tasks of year one, when they show up, and your first calls: handle it, ask, route, or report.</p><span class="chip">Pages 7 to 8</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">04</span><h3>The four jobs of a manager</h3><p>Get the work done, take care of your people, make things better, connect your team. One page each, then your call.</p><span class="chip">Pages 9 to 14</span></div>
       <div class="hw"><span class="hw-no" aria-hidden="true">05</span><h3>Your assessment</h3><p>What your results email tells you, and where the score should go.</p><span class="chip">Page 15</span></div>
     </div>
-    <p class="hw-meta reveal" style="margin-top:10px">Then a quick check, your next seven days, a keep-learning list, and the wrap-up. <span id="progTopLine">8 activities ahead.</span></p>
+    <p class="hw-meta reveal" style="margin-top:10px">Then a quick check, your next seven days, a keep-learning list, and the wrap-up. <span id="progTopLine">13 activities ahead.</span></p>
   </div>
 </section>
 
@@ -848,7 +866,7 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
           <span class="mono">What a manager is not</span>
           <div role="listitem"><span class="x" aria-hidden="true">&times;</span><b>Not the person who does everyone&rsquo;s work</b><p>When you want to just do it yourself, manage instead.</p></div>
           <div role="listitem"><span class="x" aria-hidden="true">&times;</span><b>Not a friend first</b><p>Warm and fair. The team needs a manager more than another friend.</p></div>
-          <div role="listitem"><span class="x" aria-hidden="true">&times;</span><b>Not the police</b><p>Some things you send on, the same day. Knowing which is part of the job.</p></div>
+          <div role="listitem"><span class="x" aria-hidden="true">&times;</span><b>Not the police</b><p>You do not investigate, judge, or enforce. Report harassment, discrimination, injuries, or threats to the right office the same day. They handle it. You support your team.</p></div>
         </div>
       </div>
       <div>
@@ -907,7 +925,7 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Five ideas</span></span>
       <h2>Five ideas every good manager <em class="s">relies</em> on.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>Setting priorities, clear expectations, psychological safety, purpose, and the people work. What each is, how you apply it, the value it brings, and one moment to try it.</p><p><b>Why it matters</b>You do not need a theory of management. You need a few ideas that hold up, and each one turns into something you can do this week.</p></div>
+    <div class="ask"><p><b>What you will learn</b>Setting priorities, clear expectations, psychological safety, purpose, and the people work. What each is, how you apply it, the value it brings, and one moment to apply it.</p><p><b>Why it matters</b>You do not need a theory of management. You need a few ideas that hold up, and each one turns into something you can do this week.</p></div>
     <div class="ideas" id="ideasBox" data-ideas></div>
     <p class="drill-status" id="ideasStatus" role="status" aria-live="polite">1 of 5 ideas. 0 of 5 moments.</p>
     <div class="yukl foot"><b>Sources</b><span>Setting priorities: the big rocks method (Stephen Covey)</span><span>Clear is kind (Bren&eacute; Brown)</span><span>Psychological safety (Amy Edmondson)</span><span>Start with why, leaders eat last (Simon Sinek)</span><span>The people manager standard (SHRM)</span></div>
@@ -1190,7 +1208,7 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
 <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="nextstep" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
       </div>
     </div>
-    <p class="hinttxt" id="oracleStripText" style="margin-top:12px">When you open this course from Oracle Learning, your completion is recorded automatically once all eight activities are done. Outside Oracle, progress stays in this browser.</p>
+    <p class="hinttxt" id="oracleStripText" style="margin-top:12px">When you open this course from Oracle Learning, your completion is recorded automatically once all thirteen activities are done. Outside Oracle, progress stays in this browser.</p>
   </div>
 </section>
 
@@ -1207,7 +1225,7 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
       <button type="button" role="tab" aria-selected="true" data-ltab="oracle">Ten courses in Oracle Learning</button>
       <button type="button" role="tab" aria-selected="false" data-ltab="outside">Outside Vanderbilt</button>
       <button type="button" role="tab" aria-selected="false" data-ltab="watch">Watch</button>
-      <button type="button" role="tab" aria-selected="false" data-ltab="comp">Before this course</button>
+      <button type="button" role="tab" aria-selected="false" data-ltab="comp">Micro Course Library</button>
     </div>
     <div class="learn-pane cur" data-lpane="oracle"><div class="learn-top" id="learnTop"></div></div>
     <div class="learn-pane" data-lpane="outside"><div class="learn-grid" id="learnGrid"></div></div>
@@ -1215,7 +1233,7 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
     <div class="learn-media">
       <div><span class="mono">Watch: feedback in three parts</span><div class="yt" data-embed="-oRKr5xA9N0" data-title="Give feedback with situation, behavior, impact"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=-oRKr5xA9N0" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
       <div><span class="mono">Watch: delegation and priorities</span><div class="yt" data-embed="dRhb0-CFBbk" data-title="Delegation and the urgent and important grid"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=dRhb0-CFBbk" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
-          <div><span class="mono">Watch: start with why</span><div class="yt" data-embed="lmyZMtPVodo" data-title="Start with why: how great leaders inspire action"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=lmyZMtPVodo" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+          <div><span class="mono">Watch: start with why</span><div class="yt" data-embed="2Ss78LfY3nE" data-title="Start with why: how great leaders inspire action"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=2Ss78LfY3nE" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
       <div><span class="mono">Watch: psychological safety</span><div class="yt" data-embed="LhoLuui9gX8" data-title="Building a psychologically safe workplace"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
 </div>
     </div>
@@ -1268,7 +1286,7 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
   <div class="oracle-modal">
     <span class="mono">Foundation complete</span>
     <h2 id="oracleTitle">You have completed the foundation.</h2>
-    <p id="oracleBody">All eight activities are done. Your micro modules are next. The assessment comes back around six months from now.</p>
+    <p id="oracleBody">All thirteen activities are done. Your micro modules are next. The assessment comes back around six months from now.</p>
     <div class="oracle-actions">
       <button type="button" class="btn btn-gold" id="oracleGo">Done</button>
       <button type="button" class="btn btn-ghost btn-sm" id="oracleLater">Stay here</button>
@@ -1277,13 +1295,13 @@ html.paged .idea.trying .idea-nav{ grid-column:1 / -1; justify-content:flex-star
   </div>
 </div>
 
-<script src="../assets/js/config.js?v=20260911f"></script>
-<script src="../assets/js/program-data.js?v=20260911f"></script>
-<script src="../assets/js/scorm.js?v=20260911f"></script>
-<script src="../assets/js/oracle.js?v=20260911f"></script>
-<script src="narration-scripts.js?v=20260911f"></script>
-<script src="resources.js?v=20260911f"></script>
-<script src="pager.js?v=20260911f"></script>
-<script src="app.js?v=20260911f"></script>
+<script src="../assets/js/config.js?v=20260911m"></script>
+<script src="../assets/js/program-data.js?v=20260911m"></script>
+<script src="../assets/js/scorm.js?v=20260911m"></script>
+<script src="../assets/js/oracle.js?v=20260911m"></script>
+<script src="narration-scripts.js?v=20260911m"></script>
+<script src="resources.js?v=20260911m"></script>
+<script src="pager.js?v=20260911m"></script>
+<script src="app.js?v=20260911m"></script>
 </body>
 </html>

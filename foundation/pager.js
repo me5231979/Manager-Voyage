@@ -31,9 +31,10 @@ try{
     { sel:'section.cta',      key:'end',       label:'Wrap-up',                      mode:'whole', extras:['footer'] }
   ];
   var TRACKED = [
-    ['welcome','01','The four jobs'], ['task','02','Job 1: get the work done'], ['relations','03','Job 2: take care of your people'],
-    ['change','04','Job 3: make things better'], ['external','05','Job 4: connect your team'], ['survey','06','The survey'],
-    ['quiz','07','Quick check'], ['nextstep','08','Your next step']
+    ['shift','01','What changed'], ['safe','02','Five ideas at work'], ['year','03','Your first year'], ['calls','04','Your first calls'],
+    ['welcome','05','The four jobs'], ['task','06','Job 1: get the work done'], ['relations','07','Job 2: take care of your people'],
+    ['change','08','Job 3: make things better'], ['external','09','Job 4: connect your team'], ['yourcall','10','Your call'],
+    ['survey','11','Your assessment'], ['quiz','12','Quick check'], ['nextstep','13','Your next seven days']
   ];
   var pages = [], secFirst = {};
   var topSpan = document.getElementById('top');

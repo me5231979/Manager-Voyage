@@ -149,8 +149,8 @@ window.MV_LEARN = [
   "topic": "trust",
   "title": "Why good leaders make you feel safe",
   "src": "TED",
-  "url": "https://www.youtube.com/watch?v=lmyZMtPVodo",
-  "yt": "lmyZMtPVodo",
+  "url": "https://www.youtube.com/watch?v=2Ss78LfY3nE",
+  "yt": "2Ss78LfY3nE",
   "why": "The circle of safety, in one story."
  },
  {
