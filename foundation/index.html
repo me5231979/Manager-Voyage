@@ -36,7 +36,7 @@
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=20260911t" />
+<link rel="stylesheet" href="../assets/css/course.css?v=20260911u" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
@@ -710,6 +710,20 @@ html.paged .hero .hw-mini{ grid-column:1 / -1; margin-top:6px; }
 @media (max-width:1000px){ .hero .hero-grid{ grid-template-columns:1fr; gap:18px; } .hero .facts{ grid-template-columns:repeat(2,1fr); } }
 
 
+/* five ideas: the intro panel shows first; a tab or the list opens an idea */
+html.paged .idea-intro.cur{ display:grid; grid-template-columns:1.1fr 1fr; gap:10px 32px; align-items:start; }
+html.paged .idea-intro > .who-is, html.paged .idea-intro > h3{ grid-column:1 / -1; }
+.idea-intro .intro-copy p{ margin-top:8px; max-width:none; }
+.idea-intro .intro-copy p b{ color:var(--tx); font-weight:600; }
+.idea-intro .intro-cta{ margin-top:14px; }
+.intro-list{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.intro-list button{ width:100%; display:flex; align-items:center; gap:12px; text-align:left; border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:var(--r); padding:8px 12px; font:inherit; cursor:pointer; }
+.intro-list button:hover{ border-color:var(--vu-gold); }
+.intro-list .il-no{ font-family:var(--cond); font-weight:700; font-size:1.1rem; color:var(--vu-gold); width:22px; flex:0 0 auto; }
+.intro-list .il-t{ display:flex; flex-direction:column; min-width:0; }
+.intro-list .il-t b{ font-family:var(--serif); font-weight:400; font-size:var(--fs-card-h, 1.15rem); line-height:1.2; }
+.intro-list .il-t span{ font-size:var(--fs-small, .84rem); color:var(--tx2); line-height:1.4; }
+@media (max-width:900px){ html.paged .idea-intro.cur{ grid-template-columns:1fr; } }
 /* five ideas: the scenario is always shown under the idea. "Apply it" title, then the moment, then back and next. */
 html.paged .idea .try{ grid-column:1 / -1; border-top:1px solid var(--bd); padding-top:12px; margin-top:6px; min-width:0; }
 html.paged .idea-nav{ grid-column:1 / -1; justify-content:flex-end; margin-top:4px; }
@@ -952,7 +966,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     </div>
     <div class="ask"><p><b>What you will learn</b>Setting priorities, clear expectations, psychological safety, purpose, and the people work. What each is, how you apply it, the value it brings, and one moment to apply it.</p><p><b>Why it matters</b>You do not need a theory of management. You need a few ideas that hold up, and each one turns into something you can do this week.</p></div>
     <div class="ideas" id="ideasBox" data-ideas></div>
-    <p class="drill-status" id="ideasStatus" role="status" aria-live="polite">1 of 5 ideas. 0 of 5 moments.</p>
+    <p class="drill-status" id="ideasStatus" role="status" aria-live="polite">0 of 5 ideas. 0 of 5 moments.</p>
     <div class="yukl foot"><b>Sources</b><span>Setting priorities: the big rocks method (Stephen Covey)</span><span>Clear is kind (Bren&eacute; Brown)</span><span>Psychological safety (Amy Edmondson)</span><span>Start with why, leaders eat last (Simon Sinek)</span><span>The people manager standard (SHRM)</span></div>
   </div>
 </section>
@@ -1320,13 +1334,13 @@ html.paged .idea .try .scn{ margin-top:0; }
   </div>
 </div>
 
-<script src="../assets/js/config.js?v=20260911t"></script>
-<script src="../assets/js/program-data.js?v=20260911t"></script>
-<script src="../assets/js/scorm.js?v=20260911t"></script>
-<script src="../assets/js/oracle.js?v=20260911t"></script>
-<script src="narration-scripts.js?v=20260911t"></script>
-<script src="resources.js?v=20260911t"></script>
-<script src="pager.js?v=20260911t"></script>
-<script src="app.js?v=20260911t"></script>
+<script src="../assets/js/config.js?v=20260911u"></script>
+<script src="../assets/js/program-data.js?v=20260911u"></script>
+<script src="../assets/js/scorm.js?v=20260911u"></script>
+<script src="../assets/js/oracle.js?v=20260911u"></script>
+<script src="narration-scripts.js?v=20260911u"></script>
+<script src="resources.js?v=20260911u"></script>
+<script src="pager.js?v=20260911u"></script>
+<script src="app.js?v=20260911u"></script>
 </body>
 </html>

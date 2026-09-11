@@ -655,11 +655,17 @@ var IDEAS = [
 ];
 (function(){
   var box = $('#ideasBox'), status = $('#ideasStatus'); if(!box) return;
-  var cur = 0, seen = { 0:1 }, found = {};
+  var cur = -1, seen = {}, found = {};
   var names = ['Priorities', 'Clear expectations', 'Psychological safety', 'Purpose', 'The people work'], IDEA_SCN = ['idea1', 'idea2', 'safe1', 'idea4', 'idea5'];
-  box.innerHTML = '<div class="idea-tabs" role="tablist" aria-label="The five ideas, by topic">' + IDEAS.map(function(it, i){ return '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-tab="' + i + '">' + (i + 1) + ' · ' + names[i] + '</button>'; }).join('') + '</div>' +
+  var ONE = ['Put first things first.', 'Clear is kind. Unclear is unkind.', 'People only speak up when it is safe to.', 'Explain the why, and put the team first.', 'The people work is the manager’s work.'];
+  box.innerHTML = '<div class="idea-tabs" role="tablist" aria-label="The five ideas, by topic">' + IDEAS.map(function(it, i){ return '<button type="button" role="tab" aria-selected="false" data-tab="' + i + '">' + (i + 1) + ' · ' + names[i] + '</button>'; }).join('') + '</div>' +
+    '<div class="idea idea-intro cur" role="region" aria-label="About the five ideas"><span class="who-is">Start here</span><h3>Five ideas that hold <em>up</em>.</h3>' +
+      '<div class="intro-copy"><p>You do not need a theory of management. You need a few ideas that hold up, and each one turns into something you can do this week. These five come from people who spent years studying what good managers do.</p>' +
+      '<p><b>How this works.</b> Each idea gives you four things: what it is, why to adopt it, what it looks like in practice, and the value it brings. Then one thing to start this week, and a short moment to apply it.</p>' +
+      '<p class="intro-cta"><button type="button" class="btn btn-primary btn-sm" data-tab="0">Start with idea 1<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></p></div>' +
+      '<ol class="intro-list" aria-label="The five ideas">' + IDEAS.map(function(it, i){ return '<li><button type="button" data-tab="' + i + '"><span class="il-no">' + (i + 1) + '</span><span class="il-t"><b>' + names[i] + '</b><span>' + ONE[i] + '</span></span></button></li>'; }).join('') + '</ol></div>' +
     IDEAS.map(function(it, i){
-      return '<div class="idea' + (i === 0 ? ' cur' : '') + '" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' +
+      return '<div class="idea" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' +
         '<p class="blk"><b>What it is</b>' + esc(it.what) + '</p><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p>' +
         '<div class="side"><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
         '<div class="try"><p class="cq-h"><span class="mono">Apply it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + '<span class="try-note">Show you understood the idea. Tap the response you would give, then try the other two.</span></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
@@ -667,10 +673,11 @@ var IDEAS = [
     }).join('');
   function show(i){
     cur = i; seen[i] = 1;
-    $$('.idea', box).forEach(function(p, pi){ p.classList.toggle('cur', pi === i); });
+    var intro = box.querySelector('.idea-intro'); if(intro) intro.classList.remove('cur');
+    $$('.idea[data-i]', box).forEach(function(p, pi){ p.classList.toggle('cur', pi === i); });
     $$('.idea-tabs button', box).forEach(function(t, ti){ t.setAttribute('aria-selected', ti === i ? 'true' : 'false'); t.classList.toggle('seen', !!seen[ti]); });
     paint();
-    if(window.chartPager && window.chartPager.current().key === 'ideas'){ var f = $$('.idea', box)[i].querySelector('.idea-nav button'); if(f) f.focus({ preventScroll:true }); }
+    if(window.chartPager && window.chartPager.current().key === 'ideas'){ var f = $$('.idea[data-i]', box)[i].querySelector('.idea-nav button'); if(f) f.focus({ preventScroll:true }); }
     narrSub('ideas/t' + (i + 1));
   }
   function paint(){ var n = Object.keys(seen).length, f = Object.keys(found).length; if(status) status.textContent = n + ' of 5 ideas. ' + f + ' of 5 moments.' + (f === 5 ? ' Activity complete. Pick the idea you will try first.' : n === 5 && f < 5 ? ' Find the best response in each moment.' : ''); if(f === 5) progDone('safe'); }
@@ -678,7 +685,7 @@ var IDEAS = [
   box.addEventListener('click', function(e){
     var b = e.target.closest('.scn button[data-o]'); if(b){ var k = b.closest('.scn').getAttribute('data-scn'); if(SCENARIOS[k].opts[parseInt(b.getAttribute('data-o'), 10)].best){ found[k] = 1; paint(); } return; }
     var t = e.target.closest('button[data-tab]'); if(t){ show(parseInt(t.getAttribute('data-tab'), 10)); return; }
-    if(e.target.closest('button[data-next]')){ show(Math.min(cur + 1, IDEAS.length - 1)); return; }
+    if(e.target.closest('button[data-next]')){ show(Math.min(Math.max(cur, 0) + 1, IDEAS.length - 1)); return; }
     if(e.target.closest('button[data-prev]')){ show(Math.max(cur - 1, 0)); }
   });
 })();
