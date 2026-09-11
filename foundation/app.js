@@ -307,7 +307,7 @@ function bbDoneSync(){
 }
 if(bbDoneBtn) bbDoneBtn.addEventListener('click', function(){ var k = bbDoneBtn.getAttribute('data-prog'); if(k) progToggle(k); });
 document.addEventListener('chart:page', bbDoneSync);
-function progDone(k){ if(progIs(k)) return; progWrite(k, true); progRender(k, true); }
+function progDone(k){ if(progIs(k)) return; progWrite(k, true); progRender(k, true); if(window.turnDone) turnDone(k); }
 function progToggle(k){ var v = !progIs(k); progWrite(k, v); progRender(k, v); }
 function progOpen(open){ if(!progPanel || !progBtn) return; progPanel.hidden = !open; progBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
 if(progBtn) progBtn.addEventListener('click', function(){ progOpen(progPanel && progPanel.hidden); });
@@ -644,6 +644,29 @@ var IDEAS = [
     if(e.target.closest('button[data-prev]')){ show(Math.max(cur - 1, 0)); }
   });
 })();
+
+
+/* ══════════ "Your turn": a black callout above every activity, gold check when done ══════════ */
+var TURNS = [
+  { sel:'#shiftDrill',  prog:'shift',    text:'Sort six things. Tap yours, your team member’s, or another office.' },
+  { sel:'#ideasBox',    prog:'safe',     text:'Read each idea, then try its moment. Tap the response you would give, and try the other two.' },
+  { sel:'#yearMap',     prog:null,       text:'Tap each group to open it and hear it.' },
+  { sel:'#simBox',      prog:null,       text:'Pick a situation to see the first move and who handles what.' },
+  { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations. Tap the first thing you would do.' },
+  { sel:'#fwMap',       prog:'welcome',  text:'Tap each of the four jobs to open it.' },
+  { sel:'.flip-grid',   prog:null,       text:'Flip each card: what to stop, what to do instead.', all:true },
+  { sel:'#jobsCalls',   prog:'yourcall', text:'Four situations, one per job. Tap the response you would give, then try the other two.' },
+  { sel:'#meaMap',      prog:'survey',   text:'Tap each job to see its questions, then enter your band and lowest job on the right.' },
+  { sel:'#quizBox',     prog:'quiz',     text:'Five questions. Four of five finishes the course.' },
+  { sel:'.md-btn[data-prog="nextstep"]', prog:'nextstep', text:'Plan your seven days, then mark this done.' }
+];
+function turnHTML(t){ return '<div class="turn"' + (t.prog ? ' data-turn="' + t.prog + '"' : '') + ' role="note"><span class="t-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div><span class="mono">Your turn</span><p>' + esc(t.text) + '</p></div></div>'; }
+TURNS.forEach(function(t){
+  var els = t.all ? $$(t.sel) : [$(t.sel)].filter(Boolean);
+  els.forEach(function(el){ var wrap = document.createElement('div'); wrap.innerHTML = turnHTML(t); el.parentNode.insertBefore(wrap.firstChild, el); });
+});
+function turnDone(k){ $$('.turn[data-turn="' + k + '"]').forEach(function(t){ t.classList.add('done'); t.querySelector('.t-ic').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>'; t.querySelector('.mono').textContent = 'Done'; }); }
+SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
 
 /* ══════════ recommended learning: page strips, the keep-learning page, the situation simulator ══════════ */
 (function(){

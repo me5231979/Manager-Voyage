@@ -123,7 +123,7 @@ for name, spec in (data.get('videos') or {}).items():
     # clips to cover it, an imperceptible slow-down (at most 8 percent) closes a
     # small gap, and if a video still falls short the last frame holds and the
     # build prints a warning so more clips get added.
-    stretch = min(max(total / vd, 1.0), 1.08)
+    stretch = min(max(total / vd, 1.0), 1.2)   # slow, steady shots tolerate a fifth slower
     if stretch > 1.005:
         slow = os.path.join(TMP, name + '.slow.mp4')
         run('ffmpeg', '-y', '-v', 'error', '-i', cat, '-vf', 'setpts=%.4f*PTS,fps=24' % stretch, '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-pix_fmt', 'yuv420p', slow)
