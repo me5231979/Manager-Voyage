@@ -115,12 +115,14 @@ function narrSpeak(text){
     window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
   }catch(e){ narr.playing = false; narrUI(); }
 }
+/* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
+var MEDIA_V = '20260911r';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
   if(!text){ toast('No narration on this page.'); return; }
   narr.key = k; narr.playing = true; narrUI();
-  var a = new Audio('../assets/audio/foundation/' + k.replace(/\//g, '-') + '.mp3');
+  var a = new Audio('../assets/audio/foundation/' + k.replace(/\//g, '-') + '.mp3?v=' + MEDIA_V);
   a.preload = 'auto';
   a.addEventListener('ended', function(){ if(narr.audio === a){ narr.audio = null; narr.playing = false; narrUI(); } });
   a.addEventListener('error', function(){ if(narr.audio === a){ narr.audio = null; narrSpeak(text); } });
