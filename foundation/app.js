@@ -116,7 +116,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20260912c';
+var MEDIA_V = '20260912e';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
@@ -153,7 +153,7 @@ function subBtn(k){ return NARR[k] ? '<button type="button" class="sub-listen" d
 document.addEventListener('click', function(e){
   var b = e.target.closest('[data-narr]'); if(b){ e.preventDefault(); narrSub(b.getAttribute('data-narr'), true); return; }
   /* clicking into any activity stops whatever is playing, so the audio never talks over what the learner is doing */
-  if(e.target.closest('.scn button[data-o], [data-drill] button, .flip-btn, .fw-card, .kq button, .sim, .mea-choice button, .md-btn')) { if(narr.playing) narrStop(); }
+  if(e.target.closest('.scn button[data-o], [data-drill] button, .fw-card, .kq button, .sim, .mea-choice button, .md-btn')) { if(narr.playing) narrStop(); }
 }, true);
 document.addEventListener('change', function(e){ if(e.target && (e.target.id === 'simSel' || e.target.closest('.sim')) && narr.playing) narrStop(); }, true);
 if(bbAuto) bbAuto.addEventListener('click', function(){
@@ -413,7 +413,13 @@ window.addEventListener('mv-scorm-connected', scormAdopt);
 if(window.MVScorm && MVScorm.connected) scormAdopt();
 
 /* ══════════ flip cards, the framework map, fact or fiction ══════════ */
-$$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){ var f = btn.classList.toggle('flipped'); btn.setAttribute('aria-expanded', f ? 'true' : 'false'); if(f) flipSeen(btn); }); });
+/* each habit card has its own clip: it plays when the card is flipped open (if the learner is listening) */
+$$('.flip-btn').forEach(function(btn){
+  var sec = btn.closest('section'), grid = btn.closest('.flip-grid');
+  var key = sec && grid ? sec.id + '/c' + ($$('.flip-btn', grid).indexOf(btn) + 1) : '';
+  if(key && NARR[key]) btn.setAttribute('data-nk', key);
+  btn.addEventListener('click', function(){ var f = btn.classList.toggle('flipped'); btn.setAttribute('aria-expanded', f ? 'true' : 'false'); if(f){ flipSeen(btn); if(key && NARR[key]) narrSub(key); } else if(narr.playing && narr.key === key) narrStop(); });
+});
 /* each flip-card page is an activity: flip every card on the page and it is done */
 var FLIP_PAGES = ['task', 'relations', 'change', 'external'];
 function flipSeen(btn){
