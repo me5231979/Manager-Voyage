@@ -34,6 +34,7 @@
   function greeting() { var h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
   function stateName(s) { return (P.states[s] || {}).name || ''; }
   function courseUrl(it) {
+    if (it.url) return it.url;
     if (window.MVOracle) return MVOracle.courseUrl(it);
     if (it.oracleUrl) return it.oracleUrl;
     if (it.localUrl) return it.localUrl;
@@ -61,7 +62,11 @@
   }
   function mrcItems() {
     var f = P.mrc.foundation;
-    var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The web course, about thirty-five minutes: what changed, five ideas, your first year, who handles what, the four jobs of a manager, and your assessment. Thirteen narrated activities and a quick check.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
+    var mea = { id: 'MEA', kind: 'assessment', area: 'mrc', track: null, title: 'Manager Effectiveness Assessment', minutes: 10, source: 'Microsoft Forms', url: CFG.assessmentUrl || null,
+      desc: 'Fourteen questions on how often you do the habits the course teaches. Your score and feedback come by email and set your starting point.',
+      why: 'Taken before the Foundation course so the course meets you where you are, and again in six months to see the change.',
+      dueIso: addDays(profile.startDate, 3), dueLabel: 'Before the Foundation course' };
+    var out = [mea, Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The web course, about thirty-five minutes: what changed, five ideas, your first year, who handles what, the four jobs of a manager, and your assessment results. Thirteen narrated activities and a quick check.', dueIso: addDays(profile.startDate, 7), dueLabel: 'After the assessment, by Day 7' })];
     orderedTracks().forEach(function (t) {
       t.modules.forEach(function (m) {
         out.push(Object.assign({}, m, { kind: 'course', area: 'mrc', track: t, oracleCode: m.id, minutes: 15,
@@ -100,7 +105,7 @@
       scoDone = true;
       if (window.MVScorm && MVScorm.connected) MVScorm.complete();
       confetti();
-      toast('Both required components are complete. Your cohort invitation follows from Oracle.');
+      toast('Manager Foundations is complete and recorded. The four-week cohort is optional; an invitation follows from Oracle.');
     }
   }
 
@@ -114,23 +119,23 @@
   function rowHTML(it) {
     var url = courseUrl(it);
     var done = isDone(it.id);
-    var chip = it.kind === 'legal' ? 'Required by law' : it.kind === 'advisory' ? 'Vanderbilt policy' : it.kind === 'foundation' ? 'Foundation' : (it.format || 'Module');
+    var chip = it.kind === 'legal' ? 'Required by law' : it.kind === 'advisory' ? 'Vanderbilt policy' : it.kind === 'foundation' ? 'Foundation' : it.kind === 'assessment' ? 'Assessment' : (it.format || 'Module');
     var meta = [];
     if (it.mins || it.minutes) meta.push('<span>' + (it.mins || it.minutes) + ' min</span>');
-    meta.push('<span class="srcbadge">Oracle Learning</span>');
+    meta.push('<span class="srcbadge">' + esc(it.source || 'Oracle Learning') + '</span>');
     if (it.audience) meta.push('<span>' + esc(it.audience === 'Manager' ? 'Supervisor version' : 'All staff version') + '</span>');
     if (it.cadence) meta.push('<span>' + esc(it.cadence) + '</span>');
     meta.push(dueHtml(it));
     var why = it.why ? '<details class="item__why"><summary>Why you take it</summary><p>' + esc(it.why) + (it.note ? ' <b>' + esc(it.note) + '</b>' : '') + '</p></details>' : '';
     var local = !!url && !/^https?:/i.test(url);
     var cta = url
-      ? '<a class="btn" data-go="' + esc(it.id) + '" href="' + esc(url) + '"' + (local ? '' : ' target="_blank" rel="noopener"') + '>' + (done ? 'Revisit' : statusOf(it.id) === 'opened' ? 'Continue' : local ? 'Open the course' : 'Open in Oracle') + '</a>'
+      ? '<a class="btn" data-go="' + esc(it.id) + '" href="' + esc(url) + '"' + (local ? '' : ' target="_blank" rel="noopener"') + '>' + (done ? (it.kind === 'assessment' ? 'Take it again' : 'Revisit') : statusOf(it.id) === 'opened' ? 'Continue' : local ? 'Open the course' : it.kind === 'assessment' ? 'Take the assessment' : 'Open in Oracle') + '</a>'
       : '<span class="btn is-disabled" title="Oracle link coming soon">Link coming soon</span>';
     var mark = '';
     if (CFG.allowSelfReport !== false) {
       mark = done && statusOf(it.id) === 'self'
         ? '<button type="button" class="item__minor item__minor--text" data-reopen="' + esc(it.id) + '">Undo</button>'
-        : (!done ? '<button type="button" class="item__minor" data-done="' + esc(it.id) + '" title="I finished this in Oracle" aria-label="Mark ' + esc(it.title) + ' complete">&#10003;</button>' : '');
+        : (!done ? '<button type="button" class="item__minor" data-done="' + esc(it.id) + '" title="I finished this" aria-label="Mark ' + esc(it.title) + ' complete">&#10003;</button>' : '');
     }
     return '<article class="item item--row item--' + it.kind + (done ? ' item--done' : '') + '" data-item="' + esc(it.id) + '">' +
       '<div class="row__chips"><span class="typechip">' + esc(chip) + '</span>' + (it.oracleCode && /^R-/.test(it.oracleCode) ? '<span class="codechip">' + esc(it.oracleCode) + '</span>' : '') + '</div>' +
@@ -161,12 +166,14 @@
   }
   function panelMrc() {
     var items = mrcItems();
-    var f = items[0];
+    var mea = items.filter(function (it) { return it.kind === 'assessment'; })[0];
+    var f = items.filter(function (it) { return it.kind === 'foundation'; })[0];
     var fDone = isDone(f.id);
     var ordered = !!foundationOrder();
-    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · Foundation on the web, eighteen micro modules in Oracle</span></div>' +
+    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · The assessment, the Foundation on the web, then eighteen micro modules in Oracle</span></div>' +
       '<p class="panel__lead">' + esc(P.mrc.summary) + ' Every module is interactive: simulators, scenario studios, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check, and Oracle records the date you pass it.</p>' +
-      lane(f.title, '35 minutes on the web · Completed first', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation first. It unlocks the micro modules and orders them from your self-assessment.'));
+      lane(mea.title, 'Ten minutes · Before the Foundation course', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Retake the assessment in six months.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Mark it with the check once you have submitted it.') +
+      lane(f.title, '35 minutes on the web · After the assessment', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation next. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;
     [1, 2].forEach(function (phase) {
       var tracks = orderedTracks().filter(function (t) { return t.phase === phase; });
@@ -202,7 +209,7 @@
     return '<div class="panel__head"><h2>The four-week <em>cohort</em>.</h2><span>Component 04 · Optional · Quarterly · 100 seats</span></div>' +
       '<p class="panel__lead">' + esc(P.cohort.summary) + '</p>' +
       '<div class="eligible' + (ok ? '' : ' eligible--locked') + '"><div>' + (ok
-        ? '<b>You are eligible.</b> Both required components are complete. Oracle sends the next quarterly invitation; you can also ask for a seat now.'
+        ? '<b>You are eligible, and Manager Foundations is already complete.</b> The cohort is optional. Oracle sends the next quarterly invitation; you can also ask for a seat now.'
         : '<b>' + open + ' required item' + (open === 1 ? '' : 's') + ' to go.</b> ' + esc(P.cohort.eligibility) + ' Units outside the central budget are billed per seat.') + '</div>' +
       (ok && req ? '<a class="btn" href="' + esc(req) + '" target="_blank" rel="noopener">Request a seat</a>' : ok ? '<span class="btn is-disabled">Request link coming soon</span>' : '<span class="pill pill--locked">Unlocks at Day 60 completion</span>') + '</div>' +
       '<div class="cardgrid">' + P.cohort.weeks.map(function (w) {
@@ -266,7 +273,7 @@
     }
     $('#areaTiles').innerHTML = AREAS.map(function (a) {
       var c = a.count(), on = a.id === area;
-      var count = c ? (c.done === c.total && c.total ? 'All ' + c.total + ' complete' : (c.total - c.done) + ' to go · ' + c.total + ' items') : (a.id === 'portal' ? 'Open from Day 1' : (bothRequiredDone() ? 'You are eligible' : 'Unlocks at Day 60'));
+      var count = c ? (c.done === c.total && c.total ? 'All ' + c.total + ' complete' : (c.total - c.done) + ' to go · ' + c.total + ' items') : (a.id === 'portal' ? 'Open from Day 1' : (bothRequiredDone() ? 'Optional · You are eligible' : 'Optional · Opens at Day 60'));
       var badge = a.id === 'compliance' ? (c && c.done === c.total && c.total ? '<span class="cattile__badge cattile__badge--ok">Done</span>' : '<span class="cattile__badge">Deadlines</span>') : '';
       var bar = c ? '<span class="cattile__bar" aria-hidden="true"><i style="width:' + (c.total ? Math.round(c.done / c.total * 100) : 0) + '%"></i></span>' : '';
       return '<button type="button" role="tab" aria-selected="' + on + '" class="cattile ' + (a.cls || '') + (on ? ' on' : '') + '" data-tile="' + a.id + '">' +
@@ -291,12 +298,12 @@
     }).join('') : '<li class="empty">All caught up. Well sailed.</li>';
 
     /* milestones */
-    var m1 = mrcItems().filter(function (it) { return it.kind === 'foundation' || (it.track && it.track.phase === 1); }).every(function (it) { return isDone(it.id); });
+    var m1 = mrcItems().filter(function (it) { return it.kind === 'assessment' || it.kind === 'foundation' || (it.track && it.track.phase === 1); }).every(function (it) { return isDone(it.id); });
     var ms = [
       { t: 'Day 1', s: 'Assigned in Oracle. Portal open.', d: true },
-      { t: 'Day 30', s: 'Foundation course and Systems track complete.', d: m1, now: day <= 30 },
-      { t: 'Day 60', s: 'Compliance, People, and Policy and safety complete. Recorded against your job profile.', d: bothRequiredDone(), now: day > 30 && day <= 60 },
-      { t: 'Cohort', s: bothRequiredDone() ? 'Invitation follows from Oracle.' : 'Unlocks when both required components are complete.', d: false, now: day > 60 }
+      { t: 'Day 30', s: 'Assessment, Foundation course, and Systems track complete.', d: m1, now: day <= 30 },
+      { t: 'Day 60', s: 'Compliance, People, and Policy and safety complete. Manager Foundations is done and recorded against your job profile.', d: bothRequiredDone(), now: day > 30 && day <= 60 },
+      { t: 'Cohort', s: 'Optional. ' + (bothRequiredDone() ? 'You are eligible: the invitation follows from Oracle, or ask for a seat.' : 'Opens once the required components are complete.'), d: false, now: day > 60 }
     ];
     $('#milestones').innerHTML = ms.map(function (x) {
       return '<div class="milestone' + (x.d ? ' done' : '') + (x.now && !x.d ? ' now' : '') + '"><i>' + (x.d ? '&#10003;' : '') + '</i><div><b>' + esc(x.t) + '</b><small>' + esc(x.s) + '</small></div></div>';
@@ -358,7 +365,7 @@
       var id = go.getAttribute('data-go');
       if (!isDone(id) && !profile.opened[id]) { profile.opened[id] = todayIso(); save(); renderDashboard(); }
       var goLocal = go.getAttribute('href') && !/^https?:/i.test(go.getAttribute('href'));
-      toast(goLocal ? 'Opening the Foundation course. Your progress is recorded when you finish it.' : 'Opened in Oracle Learning. ' + (CFG.profileEndpoint ? 'Your completion syncs back here.' : 'Mark it with the check when you finish.'));
+      toast(goLocal ? 'Opening the Foundation course. Your progress is recorded when you finish it.' : id === 'MEA' ? 'Opened the assessment. Your results come by email; mark it with the check once you have submitted it.' : 'Opened in Oracle Learning. ' + (CFG.profileEndpoint ? 'Your completion syncs back here.' : 'Mark it with the check when you finish.'));
       return;
     }
     var d = e.target.closest('[data-done]');
