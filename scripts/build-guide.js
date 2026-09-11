@@ -100,7 +100,7 @@ td{ vertical-align:top; padding:5pt 8pt 5pt 0; border-bottom:1px solid var(--bd)
 H.push(`<section><span class="eyebrow">The course at a glance</span><h2>Five topics, one <em>picture</em>.</h2>
 <div class="topic"><span class="n">01</span><div><b>What changed, and what a manager is</b><span class="tx2">The one change, three things that are new, what a manager is not, who helps you here.</span></div><span class="pg">Pages 4 to 5</span></div>
 <div class="topic"><span class="n">02</span><div><b>Five ideas every good manager relies on</b><span class="tx2">Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to apply it.</span></div><span class="pg">Page 6</span></div>
-<div class="topic"><span class="n">03</span><div><b>What Vanderbilt will ask you to do</b><span class="tx2">The tasks of year one, when they show up, and your first calls: handle it, ask, route, or report.</span></div><span class="pg">Pages 7 to 8</span></div>
+<div class="topic"><span class="n">03</span><div><b>What Vanderbilt will ask you to do</b><span class="tx2">The tasks of year one, when they show up, and who handles what: handle it, ask, route, or report.</span></div><span class="pg">Pages 7 to 8</span></div>
 <div class="topic"><span class="n">04</span><div><b>The four jobs of a manager</b><span class="tx2">Get the work done, take care of your people, make things better, connect your team. One page each, then your call.</span></div><span class="pg">Pages 9 to 14</span></div>
 <div class="topic"><span class="n">05</span><div><b>Your assessment</b><span class="tx2">What your results email tells you, and where the score should go.</span></div><span class="pg">Page 15</span></div>
 <p class="tx2" style="margin-top:6pt">Then a five-question check (4 of 5 finishes the course), your next seven days, a keep-learning list, and the wrap-up. Thirteen activities track progress; completion is recorded in Oracle Learning.</p></section>`);
@@ -143,7 +143,7 @@ H.push(`<h3>The ideas at work: three rules to keep</h3><div class="grid3">
 // topic 3
 H.push(`<section><span class="eyebrow">Topic 3 · Your first year</span><h2>What Vanderbilt will ask you to do, and <em>when</em>.</h2><p class="tx2">As a manager you now have many tasks. Here they are, sorted by how often they come up.</p><div class="grid2">`);
 YEAR.forEach(c => H.push(`<div class="box"><b class="k">${esc(c.b)}</b><strong>${esc(c.h)}</strong><ul>${c.li.map(l => '<li>' + l + '</li>').join('')}</ul></div>`));
-H.push(`</div><h3>Your first calls</h3><p class="tx2">Most manager moments come down to one question: handle it myself, ask my HCM, send it to the leave office, or report it to EOA?</p>
+H.push(`</div><h3>Who handles what</h3><p class="tx2">Most manager moments come down to one question: handle it myself, ask my HCM, send it to the leave office, or report it to EOA?</p>
 <div class="rule">
 <div class="box gold"><strong>Handle it</strong>A normal manager task. Time off, a timecard question, a 1:1, feedback.</div>
 <div class="box gold"><strong>Ask my HCM first</strong>There is a process. Pay, hiring, a performance concern, anything unsure.</div>

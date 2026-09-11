@@ -17,7 +17,7 @@ try{
     { sel:'#basics',          key:'basics',    label:'What a manager is',            mode:'whole' },
     { sel:'#ideas',           key:'ideas',     label:'Five ideas',                   mode:'whole' },
     { sel:'#year',            key:'year',      label:'Your first year',              mode:'whole' },
-    { sel:'#calls',           key:'calls',     label:'Your first calls',             mode:'whole' },
+    { sel:'#calls',           key:'calls',     label:'Who handles what',             mode:'whole' },
     { sel:'#welcome',         key:'welcome',   label:'The four jobs',                mode:'whole' },
     { sel:'#task',            key:'task',      label:'Job 1: get the work done',     mode:'whole' },
     { sel:'#relations',       key:'relations', label:'Job 2: your people',           mode:'whole' },
@@ -31,7 +31,7 @@ try{
     { sel:'section.cta',      key:'end',       label:'Wrap-up',                      mode:'whole', extras:['footer'] }
   ];
   var TRACKED = [
-    ['shift','01','What changed'], ['safe','02','Five ideas at work'], ['year','03','Your first year'], ['calls','04','Your first calls'],
+    ['shift','01','What changed'], ['safe','02','Five ideas at work'], ['year','03','Your first year'], ['calls','04','Who handles what'],
     ['welcome','05','The four jobs'], ['task','06','Job 1: get the work done'], ['relations','07','Job 2: take care of your people'],
     ['change','08','Job 3: make things better'], ['external','09','Job 4: connect your team'], ['yourcall','10','Your call'],
     ['survey','11','Your assessment'], ['quiz','12','Quick check'], ['nextstep','13','Your next seven days']

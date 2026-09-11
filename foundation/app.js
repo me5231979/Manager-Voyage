@@ -116,7 +116,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20260911x';
+var MEDIA_V = '20260911z';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
@@ -262,7 +262,7 @@ var SECTIONS = [
   { k:'shift',     no:'01', name:'What changed',            how:'Sort six things' },
   { k:'safe',      no:'02', name:'Five ideas at work',      how:'Find the best response in each idea’s moment' },
   { k:'year',      no:'03', name:'Your first year',         how:'Open all four groups' },
-  { k:'calls',     no:'04', name:'Your first calls',        how:'Decide five situations' },
+  { k:'calls',     no:'04', name:'Who handles what',        how:'Decide five situations' },
   { k:'welcome',   no:'05', name:'The four jobs',           how:'Open all four' },
   { k:'task',      no:'06', name:'Get the work done',       how:'Flip all four cards' },
   { k:'relations', no:'07', name:'Take care of your people', how:'Flip all four cards' },
@@ -423,7 +423,7 @@ function flipSeen(btn){
   if(n === all.length) progDone(sec.id);
 }
 [{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', narr:'welcome/j', done:' Activity complete. The next four pages take one job each.' },
- { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:'year', narr:'year/g', done:' Activity complete. Turn the page to make your first calls.' },
+ { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:'year', narr:'year/g', done:' Activity complete. Turn the page to learn who handles what.' },
  { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, narr:null, done:'' }].forEach(function(cfg){
   var map = $(cfg.map), status = $(cfg.status); if(!map) return;
   var cards = $$('.fw-card', map), seen = {};
@@ -818,7 +818,7 @@ var QUIZ = [
   { seg:'What changed (page 4)', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
   { seg:'Five ideas (page 6)', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
   { seg:'Five ideas (page 6)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
-  { seg:'Your first calls (page 9)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
+  { seg:'Who handles what (page 9)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
   { seg:'The four jobs (page 10)', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
 ];/* the right answer sits at a different position on each question */
 (function(){ var POS = [0, 2, 3, 1, 2]; QUIZ.forEach(function(q, i){ var t = POS[i]; if(t === undefined || t === q.a || t >= q.opts.length) return; var o = q.opts.splice(q.a, 1)[0]; q.opts.splice(t, 0, o); q.a = t; }); })();

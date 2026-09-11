@@ -53,7 +53,7 @@ each page is one idea, one activity.
    start this week, and a moment to try it (three responses, consequences
    shown); the best response in all five is one activity
 3. Topic 3, what Vanderbilt will ask you to do in year one (a tap-to-open
-   map by cadence, each item naming its micro module), then your first calls:
+   map by cadence, each item naming its micro module), then who handles what:
    a situation simulator and five situations to decide (handle it, ask your
    HCM, the leave office, or EOA)
 4. Topic 4, the four jobs of a manager (Yukl, in plain words): a video and
