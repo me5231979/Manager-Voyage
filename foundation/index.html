@@ -262,6 +262,18 @@ html.paged #nextstep .hw-step .chip{ font-size:.64rem; padding:4px 8px; }
 @media (max-width:900px){ html.paged #nextstep .hw-list{ grid-template-columns:1fr; } }
 /* course overview */
 .ov-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.ov-grid.two{ grid-template-columns:1fr 1fr; }
+.operate{ margin-top:16px; border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:16px 20px 18px; }
+.operate .mono{ display:block; margin-bottom:6px; }
+.operate .op-lead{ font-family:var(--serif); font-size:clamp(1.15rem,2vw,1.45rem); line-height:1.3; color:var(--tx); margin:0 0 14px; max-width:58ch; }
+.operate .op-lead em{ font-family:var(--serif-i); font-style:italic; color:var(--strong); }
+.op-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px 22px; }
+.operate .op-lead{ border-bottom:1px solid var(--bd); padding-bottom:14px; }
+.operate .op-sub{ display:block; margin:0 0 8px; }
+.op-grid .op-no{ display:block; font-family:var(--serif); font-style:normal; font-size:1.6rem; line-height:1; color:var(--vu-gold); margin-bottom:6px; }
+.op-grid b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; margin-bottom:4px; }
+.op-grid p{ font-size:.93rem; color:var(--tx2); line-height:1.5; margin:0; }
+@media (max-width:900px){ .ov-grid.two,.op-grid{ grid-template-columns:1fr; } }
 .mission-charge{ margin-top:18px; border:2px solid var(--tx); border-left:8px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:20px 24px 22px; }
 .mission-charge .mono{ display:block; margin-bottom:6px; }
 .mission-charge > p{ font-family:var(--serif); font-weight:400; font-size:clamp(1.5rem,2.8vw,2.1rem); line-height:1.2; color:var(--tx); margin:0 0 14px; max-width:30ch; }
@@ -606,10 +618,19 @@ html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
       <h2>Define the great university of the 21st century, and <em class="s">be</em> it.</h2>
     </div>
     <div class="ask"><p><b>What you will learn</b>Vanderbilt&rsquo;s vision, how we operate, and what both ask of you as a manager.</p><p><b>Why it matters</b>Every team&rsquo;s work is part of it. The mission is not achieved at the top; it is achieved team by team, and yours is one of them.</p></div>
-    <div class="ov-grid">
+    <div class="ov-grid two">
       <div class="ov-card"><b>The vision</b><p>Vanderbilt will define the great university of the 21st century and be it, and help reclaim the essential role of leading research universities in driving American prosperity.</p></div>
-      <div class="ov-card"><b>How we operate</b><p>Uncommon speed, agility, and scale. Exceptional core operations are the fuel; bold initiatives and industry leadership are what they power.</p></div>
       <div class="ov-card"><b>As we grow</b><p>Vanderbilt now works from more places: Nashville, San Francisco, West Palm Beach, New York City, and Chattanooga. As we grow, help your team understand how we operate, wherever they sit.</p></div>
+    </div>
+    <div class="operate reveal">
+      <span class="mono">How we operate</span>
+      <p class="op-lead">To achieve the vision, Vanderbilt operates at <em>uncommon speed, agility, and scale</em>, addressing relevant societal challenges through education and research. Three areas of focus make that real.</p>
+      <span class="mono op-sub">Areas of focus</span>
+      <div class="op-grid">
+        <div><i class="op-no" aria-hidden="true">1</i><b>Exceptional Core Operations</b><p>With speed, agility and scale, Vanderbilt will distinguish itself with innovative and impactful capabilities to ensure that we have the talent, resources and reputation necessary to deliver on our vision.</p></div>
+        <div><i class="op-no" aria-hidden="true">2</i><b>Bold Strategic Initiatives</b><p>With &ldquo;exceptional core operations&rdquo; as our fuel, Vanderbilt will pursue increasingly bold initiatives that enable and enhance the reach and impact of our education and research mission.</p></div>
+        <div><i class="op-no" aria-hidden="true">3</i><b>Values Leadership</b><p>Through strategic advocacy efforts and modeling the role of an essential research university, Vanderbilt will stimulate industry change and combat existential threats to our education and research mission.</p></div>
+      </div>
     </div>
     <div class="mission-charge reveal">
       <span class="mono">Your responsibility</span>
