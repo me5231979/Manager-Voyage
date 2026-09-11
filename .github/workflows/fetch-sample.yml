@@ -1,0 +1,38 @@
+name: Fetch one audio sample
+# Downloads a single Runway clip into assets/audio/foundation so it can be
+# checked before a full media build. Run it from the Actions tab or the API.
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Signed Runway URL of the mp3
+        required: true
+      name:
+        description: File name without extension (letters, digits, dashes)
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: media-build
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - name: Download
+        run: |
+          set -e
+          name="${{ github.event.inputs.name }}"
+          case "$name" in *[!A-Za-z0-9-]*) echo "bad name"; exit 1;; esac
+          curl -fsSL -o "assets/audio/foundation/$name.mp3" "${{ github.event.inputs.url }}"
+          ls -la "assets/audio/foundation/$name.mp3"
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/audio/foundation
+          git commit -m "Add audio sample ${{ github.event.inputs.name }}" || exit 0
+          git pull --rebase -X theirs origin main
+          git push origin HEAD:main
