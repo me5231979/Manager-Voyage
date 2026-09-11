@@ -12,43 +12,7 @@ window.MV_LEARN = [
   "topic": "start",
   "title": "New Manager Foundations",
   "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857233710",
-  "pages": [
-   "shift",
-   "basics"
-  ],
   "why": "The whole first-year job in one course: expectations, delegation, feedback, and the shift from doing to managing."
- },
- {
-  "id": "OLC3659593",
-  "type": "oracle",
-  "topic": "start",
-  "title": "Making the Move from Individual Contributor to Manager",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857168571",
-  "pages": [
-   "shift"
-  ],
-  "why": "The mindset change this page is about, at more length."
- },
- {
-  "id": "OLC3605777",
-  "type": "oracle",
-  "topic": "start",
-  "title": "Avoiding New Manager Mistakes",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856838381",
-  "pages": [
-   "shift",
-   "basics"
-  ],
-  "why": "The mistakes almost every new manager makes, and how to skip them."
- },
- {
-  "id": "OLC3628745",
-  "type": "oracle",
-  "topic": "start",
-  "title": "Essential Lessons for First-Time Managers",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856981789",
-  "pages": [],
-  "why": "Short lessons on the moments that catch first-time managers off guard."
  },
  {
   "id": "OLC2538027",
@@ -56,224 +20,7 @@ window.MV_LEARN = [
   "topic": "start",
   "title": "Leading at VU - Compliance and Supervisory Fundamentals",
   "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002258801629",
-  "pages": [
-   "basics",
-   "calls",
-   "year"
-  ],
   "why": "What Vanderbilt requires of a supervisor: the policies and duties behind module 3."
- },
- {
-  "id": "OLC1374027",
-  "type": "oracle",
-  "topic": "vanderbilt",
-  "title": "HRVU: Compliance Fundamentals Module 1 - Leader Responsibilities at Vanderbilt",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001747868191",
-  "pages": [
-   "year",
-   "calls"
-  ],
-  "why": "Leader responsibilities at Vanderbilt, module 1 of the compliance fundamentals."
- },
- {
-  "id": "OLC4601147",
-  "type": "oracle",
-  "topic": "vanderbilt",
-  "title": "Navigate: Using the Talent Marketplace for Career Growth at Vanderbilt",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300003063355965",
-  "pages": [],
-  "why": "Using the Talent Marketplace to grow your people, and yourself."
- },
- {
-  "id": "OLC1530008",
-  "type": "oracle",
-  "topic": "vanderbilt",
-  "title": "CliftonStrengths for VU Employees - Presented by ELE",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001840104160",
-  "pages": [],
-  "why": "CliftonStrengths for Vanderbilt employees, a good first 1:1 conversation starter."
- },
- {
-  "id": "OLC3637033",
-  "type": "oracle",
-  "topic": "priorities",
-  "title": "How to Manage Your Attention and Your Priorities",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857032602",
-  "pages": [
-   "ideas",
-   "task"
-  ],
-  "why": "The big rocks idea, applied to a manager’s calendar and inbox."
- },
- {
-  "id": "OLC3761569",
-  "type": "oracle",
-  "topic": "priorities",
-  "title": "How to Manage Your Time Successfully",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002865669994",
-  "pages": [
-   "task"
-  ],
-  "why": "A practical system for the week when everything is urgent."
- },
- {
-  "id": "OLC3563278",
-  "type": "oracle",
-  "topic": "priorities",
-  "title": "How to Have Fewer, Better Meetings",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856511938",
-  "pages": [
-   "task"
-  ],
-  "why": "Fewer, better meetings: the fastest way to give your team time back."
- },
- {
-  "id": "OLC3674417",
-  "type": "oracle",
-  "topic": "priorities",
-  "title": "Daily Habits for Effective People Management",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857290867",
-  "pages": [
-   "welcome",
-   "task"
-  ],
-  "why": "Small daily habits that keep the four jobs moving."
- },
- {
-  "id": "OLC3676201",
-  "type": "oracle",
-  "topic": "communication",
-  "title": "Communicating with Clarity as a Manager",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857301175",
-  "pages": [
-   "ideas",
-   "safe"
-  ],
-  "why": "Clear is kind, as a set of communication habits for managers."
- },
- {
-  "id": "OLC3675729",
-  "type": "oracle",
-  "topic": "communication",
-  "title": "Active Listening for Better Leadership Communication",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857298461",
-  "pages": [
-   "safe",
-   "relations"
-  ],
-  "why": "Listening so people keep bringing you the truth."
- },
- {
-  "id": "OLC4221224",
-  "type": "oracle",
-  "topic": "communication",
-  "title": "Communicating with Empathy",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002973185535",
-  "pages": [
-   "relations"
-  ],
-  "why": "Empathy as a working skill, not a personality trait."
- },
- {
-  "id": "OLC3672161",
-  "type": "oracle",
-  "topic": "communication",
-  "title": "Communicating with Executives",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857277880",
-  "pages": [
-   "external"
-  ],
-  "why": "Speaking up for your team to leaders: short, factual, with options."
- },
- {
-  "id": "OLC3687089",
-  "type": "oracle",
-  "topic": "feedback",
-  "title": "How to Give Feedback People Can Actually Use",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857364847",
-  "pages": [
-   "ideas",
-   "relations"
-  ],
-  "why": "Feedback people can act on: specific, timely, kind."
- },
- {
-  "id": "OLC3695081",
-  "type": "oracle",
-  "topic": "feedback",
-  "title": "Delivering Employee Feedback",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857411852",
-  "pages": [
-   "calls",
-   "relations"
-  ],
-  "why": "The everyday feedback conversation, step by step."
- },
- {
-  "id": "OLC970794",
-  "type": "oracle",
-  "topic": "feedback",
-  "title": "How to Manage Difficult Conversations",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001635326767",
-  "pages": [
-   "safe",
-   "calls"
-  ],
-  "why": "How to hold the conversation you have been putting off."
- },
- {
-  "id": "OLC3730593",
-  "type": "oracle",
-  "topic": "feedback",
-  "title": "Conflict Resolution Foundations",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857627948",
-  "pages": [],
-  "why": "Conflict on the team: what to do before it reaches PCB."
- },
- {
-  "id": "OLC3638569",
-  "type": "oracle",
-  "topic": "trust",
-  "title": "Creating Safe Spaces for Tough Conversations at Work",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857043461",
-  "pages": [
-   "safe"
-  ],
-  "why": "Making it safe to raise hard things, in practice."
- },
- {
-  "id": "OLC4104179",
-  "type": "oracle",
-  "topic": "trust",
-  "title": "Building Team Trust as a Manager",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002942090959",
-  "pages": [
-   "safe",
-   "ideas"
-  ],
-  "why": "Trust as something a manager builds on purpose, week by week."
- },
- {
-  "id": "OLC1530063",
-  "type": "oracle",
-  "topic": "trust",
-  "title": "BRAVING - Exploring the Anatomy of Trust - Presented by ELE",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001840224688",
-  "pages": [
-   "safe"
-  ],
-  "why": "BRAVING, the anatomy of trust, presented by Vanderbilt’s ELE series."
- },
- {
-  "id": "OLC3628017",
-  "type": "oracle",
-  "topic": "trust",
-  "title": "A Manager's Guide to Inclusive Teams",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856977603",
-  "pages": [
-   "relations"
-  ],
-  "why": "Running a team where everyone can do their best work."
  },
  {
   "id": "OLC3681769",
@@ -281,54 +28,47 @@ window.MV_LEARN = [
   "topic": "oneonones",
   "title": "A Manager's Guide to Conducting Effective One-on-One Meetings",
   "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857334221",
-  "pages": [
-   "year",
-   "task"
-  ],
   "why": "How to run the weekly 1:1 so it is worth both people’s time."
  },
  {
-  "id": "OLC3572118",
+  "id": "OLC3637033",
   "type": "oracle",
-  "topic": "oneonones",
-  "title": "How to Have Productive One-on-One Meetings",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856581889",
-  "pages": [
-   "year"
-  ],
-  "why": "Making 1:1s productive: agenda, questions, follow-through."
+  "topic": "priorities",
+  "title": "How to Manage Your Attention and Your Priorities",
+  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857032602",
+  "why": "The big rocks idea, applied to a manager’s calendar and inbox."
  },
  {
-  "id": "OLC953010",
+  "id": "OLC3676201",
   "type": "oracle",
-  "topic": "hiring",
-  "title": "Conducting an Effective Hiring Interview",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001634756092",
-  "pages": [
-   "year",
-   "calls"
-  ],
-  "why": "Interviewing well: structured questions, fair comparison, fewer regrets."
+  "topic": "communication",
+  "title": "Communicating with Clarity as a Manager",
+  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857301175",
+  "why": "Clear is kind, as a set of communication habits for managers."
  },
  {
-  "id": "OLC4032225",
+  "id": "OLC3687089",
   "type": "oracle",
-  "topic": "hiring",
-  "title": "Creating a Great Onboarding Experience",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002921696670",
-  "pages": [
-   "year"
-  ],
-  "why": "The first ninety days, from the new hire’s side."
+  "topic": "feedback",
+  "title": "How to Give Feedback People Can Actually Use",
+  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857364847",
+  "why": "Feedback people can act on: specific, timely, kind."
  },
  {
-  "id": "OLC3624345",
+  "id": "OLC970794",
   "type": "oracle",
-  "topic": "hiring",
-  "title": "Diverse Talent in Recruiting and Hiring",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856954404",
-  "pages": [],
-  "why": "Widening the pool and keeping the process fair."
+  "topic": "feedback",
+  "title": "How to Manage Difficult Conversations",
+  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001635326767",
+  "why": "How to hold the conversation you have been putting off."
+ },
+ {
+  "id": "OLC4104179",
+  "type": "oracle",
+  "topic": "trust",
+  "title": "Building Team Trust as a Manager",
+  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002942090959",
+  "why": "Trust as something a manager builds on purpose, week by week."
  },
  {
   "id": "OLC4278149",
@@ -336,53 +76,7 @@ window.MV_LEARN = [
   "topic": "performance",
   "title": "Performance Management Foundations for Managers",
   "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002987329225",
-  "pages": [
-   "year",
-   "calls"
-  ],
   "why": "Goals, check-ins, and reviews as one cycle instead of one event."
- },
- {
-  "id": "OLC3727537",
-  "type": "oracle",
-  "topic": "coaching",
-  "title": "Coaching Skills for Leaders and Managers",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857610240",
-  "pages": [
-   "relations"
-  ],
-  "why": "Coaching questions that grow people instead of solving for them."
- },
- {
-  "id": "OLC3674201",
-  "type": "oracle",
-  "topic": "coaching",
-  "title": "Coaching and Developing Employees",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857289611",
-  "pages": [
-   "relations"
-  ],
-  "why": "Developing people on the job, not just at review time."
- },
- {
-  "id": "OLC3599937",
-  "type": "oracle",
-  "topic": "coaching",
-  "title": "Be a Better Manager by Motivating Your Team",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856793745",
-  "pages": [
-   "relations"
-  ],
-  "why": "What actually motivates people at work, and what does not."
- },
- {
-  "id": "OLC3675521",
-  "type": "oracle",
-  "topic": "coaching",
-  "title": "Driving Employee Engagement as a People Manager",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857297257",
-  "pages": [],
-  "why": "Engagement as a manager’s weekly work, not an annual survey."
  },
  {
   "id": "OLC1131984",
@@ -390,72 +84,34 @@ window.MV_LEARN = [
   "topic": "change",
   "title": "Leading Your Team through Change",
   "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001660927784",
-  "pages": [
-   "change"
-  ],
   "why": "Leading your team through a change you did not choose."
  },
  {
-  "id": "OLC3628649",
-  "type": "oracle",
-  "topic": "change",
-  "title": "Change Management Tips for Leaders",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856981237",
-  "pages": [
-   "change"
-  ],
-  "why": "Short, practical tips for the manager in the middle of a change."
+  "id": "p-mt",
+  "type": "podcast",
+  "topic": "oneonones",
+  "title": "Manager Tools Basics",
+  "src": "podcast series",
+  "url": "https://www.manager-tools.com/manager-tools-basics",
+  "why": "The core casts: one-on-ones, feedback, coaching, delegation. Start with the one-on-ones episodes."
  },
  {
-  "id": "OLC3610777",
-  "type": "oracle",
-  "topic": "external",
-  "title": "How to Manage Your Manager",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856874219",
-  "pages": [
-   "external"
-  ],
-  "why": "Managing up: what your unit leader needs from you, and how to ask for what you need."
+  "id": "p-hbr",
+  "type": "podcast",
+  "topic": "start",
+  "title": "Succeeding as a first-time manager",
+  "src": "HBR IdeaCast",
+  "url": "https://hbr.org/podcast/2023/06/succeeding-as-a-first-time-manager",
+  "why": "Three new managers on the surprises of the first year."
  },
  {
-  "id": "OLC3577302",
-  "type": "oracle",
-  "topic": "wellbeing",
-  "title": "A Leader's Guide to Reducing Team Burnout",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856623753",
-  "pages": [],
-  "why": "Spotting burnout on your team early, and what a manager can do."
- },
- {
-  "id": "OLC3673729",
-  "type": "oracle",
-  "topic": "wellbeing",
-  "title": "Building Resilience as a Leader",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857286897",
-  "pages": [],
-  "why": "Your own resilience in year one."
- },
- {
-  "id": "OLC3614577",
-  "type": "oracle",
-  "topic": "books",
-  "title": "Crucial Conversations (getAbstract Summary)",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856898122",
-  "pages": [
-   "safe"
-  ],
-  "why": "Crucial Conversations, summarized."
- },
- {
-  "id": "OLC3743191",
-  "type": "oracle",
-  "topic": "books",
-  "title": "Dare to Lead: Brave Work. Tough Conversations. Whole Hearts.",
-  "url": "https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002858836297",
-  "pages": [
-   "ideas"
-  ],
-  "why": "Dare to Lead, the book behind clear is kind, summarized."
+  "id": "p-worklife",
+  "type": "podcast",
+  "topic": "trust",
+  "title": "Is it safe to speak up at work?",
+  "src": "WorkLife (TED)",
+  "url": "https://www.ted.com/podcasts/worklife",
+  "why": "Psychological safety across creative teams, astronauts, and athletes."
  },
  {
   "id": "v-sbi",
@@ -465,62 +121,7 @@ window.MV_LEARN = [
   "src": "Center for Creative Leadership",
   "url": "https://www.youtube.com/watch?v=-oRKr5xA9N0",
   "yt": "-oRKr5xA9N0",
-  "pages": [
-   "relations",
-   "calls"
-  ],
   "why": "The simplest feedback structure there is, in a few minutes."
- },
- {
-  "id": "v-candor",
-  "type": "video",
-  "topic": "feedback",
-  "title": "Candid feedback that still cares, in six minutes",
-  "src": "Radical Candor",
-  "url": "https://www.youtube.com/watch?v=YLBDkz0TwLM",
-  "yt": "YLBDkz0TwLM",
-  "pages": [
-   "ideas"
-  ],
-  "why": "Care personally and challenge directly: the two dials of good feedback."
- },
- {
-  "id": "v-delegate",
-  "type": "video",
-  "topic": "priorities",
-  "title": "Delegation and priorities: the urgent and important grid",
-  "src": "LDP Series",
-  "url": "https://www.youtube.com/watch?v=dRhb0-CFBbk",
-  "yt": "dRhb0-CFBbk",
-  "pages": [
-   "task",
-   "shift"
-  ],
-  "why": "What to do yourself, what to delegate, what to drop."
- },
- {
-  "id": "v-role",
-  "type": "video",
-  "topic": "start",
-  "title": "The role of a manager, from someone who learned it the hard way",
-  "src": "a product design VP on her first year as a manager",
-  "url": "https://www.youtube.com/watch?v=t1KskLsRECk",
-  "yt": "t1KskLsRECk",
-  "pages": [
-   "basics"
-  ],
-  "why": "Outcomes, not tasks: what a manager is actually for."
- },
- {
-  "id": "v-oxygen",
-  "type": "video",
-  "topic": "start",
-  "title": "What a large company found in its best managers",
-  "src": "Google’s Project Oxygen",
-  "url": "https://www.youtube.com/watch?v=ICnUGpjgbI0",
-  "yt": "ICnUGpjgbI0",
-  "pages": [],
-  "why": "Ten behaviors, most of them job 1 and job 2."
  },
  {
   "id": "v-rocks",
@@ -530,7 +131,6 @@ window.MV_LEARN = [
   "src": "FranklinCovey",
   "url": "https://www.youtube.com/watch?v=j6m9WnNdpSw",
   "yt": "j6m9WnNdpSw",
-  "pages": [],
   "why": "The jar, the rocks, and the sand."
  },
  {
@@ -541,7 +141,6 @@ window.MV_LEARN = [
   "src": "TEDxHGSE",
   "url": "https://www.youtube.com/watch?v=LhoLuui9gX8",
   "yt": "LhoLuui9gX8",
-  "pages": [],
   "why": "Why the best teams report more mistakes."
  },
  {
@@ -552,9 +151,6 @@ window.MV_LEARN = [
   "src": "TED",
   "url": "https://www.youtube.com/watch?v=lmyZMtPVodo",
   "yt": "lmyZMtPVodo",
-  "pages": [
-   "welcome"
-  ],
   "why": "The circle of safety, in one story."
  },
  {
@@ -565,85 +161,17 @@ window.MV_LEARN = [
   "src": "Harvard ManageMentor",
   "url": "https://www.youtube.com/watch?v=qLFAHMHWtIA",
   "yt": "qLFAHMHWtIA",
-  "pages": [
-   "external"
-  ],
   "why": "Your unit leader is the first person your team needs you connected to."
  },
  {
-  "id": "v-drive",
+  "id": "v-delegate",
   "type": "video",
-  "topic": "coaching",
-  "title": "What really motivates people at work",
-  "src": "RSA Animate",
-  "url": "https://www.youtube.com/watch?v=u6XAPnuFjJc",
-  "yt": "u6XAPnuFjJc",
-  "pages": [
-   "change"
-  ],
-  "why": "Autonomy, mastery, purpose, in eleven animated minutes."
- },
- {
-  "id": "v-empathy",
-  "type": "video",
-  "topic": "communication",
-  "title": "Empathy versus sympathy, in three minutes",
-  "src": "RSA Shorts",
-  "url": "https://www.youtube.com/watch?v=1Evwgu369Jw",
-  "yt": "1Evwgu369Jw",
-  "pages": [
-   "safe"
-  ],
-  "why": "The difference between feeling with someone and fixing them."
- },
- {
-  "id": "p-mt",
-  "type": "podcast",
-  "topic": "oneonones",
-  "title": "Manager Tools Basics",
-  "src": "podcast series",
-  "url": "https://www.manager-tools.com/manager-tools-basics",
-  "pages": [
-   "year",
-   "task"
-  ],
-  "why": "The core casts: one-on-ones, feedback, coaching, delegation. Start with the one-on-ones episodes."
- },
- {
-  "id": "p-hbr",
-  "type": "podcast",
-  "topic": "start",
-  "title": "Succeeding as a first-time manager",
-  "src": "HBR IdeaCast",
-  "url": "https://hbr.org/podcast/2023/06/succeeding-as-a-first-time-manager",
-  "pages": [
-   "shift"
-  ],
-  "why": "Three new managers on the surprises of the first year."
- },
- {
-  "id": "p-worklife",
-  "type": "podcast",
-  "topic": "trust",
-  "title": "Is it safe to speak up at work?",
-  "src": "WorkLife (TED)",
-  "url": "https://www.ted.com/podcasts/worklife",
-  "pages": [
-   "safe"
-  ],
-  "why": "Psychological safety across creative teams, astronauts, and athletes."
- },
- {
-  "id": "p-cfl",
-  "type": "podcast",
-  "topic": "coaching",
-  "title": "Coaching for Leaders",
-  "src": "podcast series",
-  "url": "https://coachingforleaders.com/",
-  "pages": [
-   "relations"
-  ],
-  "why": "Weekly, practical, searchable by topic; start with the listening episodes."
+  "topic": "priorities",
+  "title": "Delegation and priorities: the urgent and important grid",
+  "src": "LDP Series",
+  "url": "https://www.youtube.com/watch?v=dRhb0-CFBbk",
+  "yt": "dRhb0-CFBbk",
+  "why": "What to do yourself, what to delegate, what to drop."
  },
  {
   "id": "g-rework",
@@ -652,14 +180,10 @@ window.MV_LEARN = [
   "title": "Manager guides: one-on-ones, feedback, coaching with GROW",
   "src": "Google re:Work",
   "url": "https://rework.withgoogle.com/intl/en/subjects/managers",
-  "pages": [
-   "year",
-   "welcome"
-  ],
   "why": "Free, practical guides a large company built for its own new managers."
  }
 ];
-window.MV_LEARN_TOPICS = [["start", "Start here: the new manager"], ["vanderbilt", "Vanderbilt specific"], ["priorities", "Priorities, time, and delegation"], ["communication", "Communication and listening"], ["feedback", "Feedback and hard conversations"], ["trust", "Trust, safety, and inclusion"], ["oneonones", "One-on-ones and meetings"], ["hiring", "Hiring and onboarding"], ["performance", "Performance"], ["coaching", "Coaching, growth, and motivation"], ["change", "Leading change"], ["external", "Managing up and across"], ["wellbeing", "Burnout and resilience"], ["books", "Books, summarized in Oracle Learning"]];
+window.MV_LEARN_TOPICS = [['oracle', 'Ten courses in Oracle Learning, in order'], ['outside', 'Outside Vanderbilt: podcasts, videos, and a guide']];
 window.MV_SIM = [
  {
   "k": "leave",

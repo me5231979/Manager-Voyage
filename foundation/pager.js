@@ -15,7 +15,6 @@ try{
     { sel:'#shift',           key:'shift',     label:'What changed',                 mode:'whole' },
     { sel:'#basics',          key:'basics',    label:'What a manager is',            mode:'whole' },
     { sel:'#ideas',           key:'ideas',     label:'Five ideas',                   mode:'whole' },
-    { sel:'#safe',            key:'safe', label:'The ideas at work',             mode:'whole' },
     { sel:'#year',            key:'year',      label:'Your first year',              mode:'whole' },
     { sel:'#calls',           key:'calls',     label:'Your first calls',             mode:'whole' },
     { sel:'#welcome',         key:'welcome',   label:'The four jobs',                mode:'whole' },

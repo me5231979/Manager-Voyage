@@ -208,7 +208,7 @@ window.MV_PROGRAM = {
 
   contacts: [
     { role: 'HCM', desc: 'Embedded in most business units. Your first call for an immediate HR issue: pay, hiring, a performance concern, a policy question.' },
-    { role: 'Engagement Consultant', desc: 'Your HR business partner: engagement, culture, manager support, and the bigger people questions for your business unit.' },
+    { role: 'Engagement Consultant', desc: 'Your go-to in PCB for HR issues, concerns, and support: engagement, culture, and the bigger people questions for your business unit.' },
     { role: 'Employee Relations (ER)', desc: 'Workplace concerns, investigations, performance and conduct cases.' },
     { role: 'Equal Opportunity and Access (EOA)', desc: 'Discrimination and harassment reporting, Title IX, accommodations.' },
     { role: 'Ombuds', desc: 'Confidential, informal, impartial help thinking through a situation.' },

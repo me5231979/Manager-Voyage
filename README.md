@@ -39,7 +39,7 @@ row, and a rail with Up next, Milestones, and Who to call.
 
 "You are a manager now," the first course in Manager
 Foundations (after the manager compliance courses, before the micro modules).
-About twenty minutes, nineteen pages, five topics. It assumes the learner
+About twenty minutes, eighteen pages, five topics. It assumes the learner
 knows nothing about management and starts there. Copy is deliberately short:
 each page is one idea, one activity.
 
@@ -49,8 +49,8 @@ each page is one idea, one activity.
 2. Topic 2, five ideas by topic (setting priorities, clear expectations,
    psychological safety, purpose, the people work; sources in a footnote),
    one tab each with what it is, as a manager, the value, and one thing to
-   start this week; then "the ideas at work": five moments, one per idea,
-   three responses each
+   start this week, and a moment to try it (three responses, consequences
+   shown); the best response in all five is one activity
 3. Topic 3, what Vanderbilt will ask you to do in year one (a tap-to-open
    map by cadence, each item naming its micro module), then your first calls:
    a situation simulator and five situations to decide (handle it, ask your
@@ -60,8 +60,9 @@ each page is one idea, one activity.
 5. Topic 5, your Manager Effectiveness Assessment results: the 14 items
    sorted by job, the three bands, and a results entry that sets module order
 6. A five-question check (4 of 5), the next seven days, the keep-learning
-   page (recommended Oracle Learning courses, podcasts, and videos from
-   foundation/resources.js, plus the printable guide), and the wrap-up
+   page (ten Oracle Learning courses in order plus ten outside podcasts,
+   videos, and a guide, from foundation/resources.js; the only place the
+   course recommends learning, plus the printable guide), and the wrap-up
 
 Eight tracked activities. Audio follows the learner's clicks: every page has
 a Listen clip, and every tab, moment, situation, and map card has its own

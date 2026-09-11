@@ -236,7 +236,7 @@ $$('.yt[data-embed]').forEach(function(box){
 /* ══════════ PROGRESS ══════════ */
 var SECTIONS = [
   { k:'shift',     no:'01', name:'What changed',            how:'Sort six things' },
-  { k:'safe',      no:'02', name:'The ideas at work',       how:'Find the best response in five moments' },
+  { k:'safe',      no:'02', name:'Five ideas at work',      how:'Find the best response in each idea’s moment' },
   { k:'calls',     no:'03', name:'Your first calls',        how:'Decide five situations' },
   { k:'welcome',   no:'04', name:'The four jobs',           how:'Open all four' },
   { k:'yourcall',  no:'05', name:'Your call',               how:'Find the Vanderbilt way in four situations' },
@@ -469,9 +469,9 @@ function buildScenario(el){
 }
 $$('[data-scn]').forEach(buildScenario);
 /* a stepper of scenarios, one at a time; done when the best response is found in each */
-var CALL_SETS = { safe:['idea1','idea2','safe1','idea4','idea5'], jobs:['task','relations','change','external'] };
+var CALL_SETS = { jobs:['task','relations','change','external'] };
 var CALL_HEADS = { task:'Job 1 · Get the work done', relations:'Job 2 · Take care of your people', change:'Job 3 · Make things better', external:'Job 4 · Connect your team' };
-var CALL_PROG = { safe:{ prog:'safe', noun:'moments', status:'#safeStatus', narr:'safe/m' }, jobs:{ prog:'yourcall', noun:'situations', status:'#jobsStatus', narr:'yourcall/s' } };
+var CALL_PROG = { jobs:{ prog:'yourcall', noun:'situations', status:'#jobsStatus', narr:'yourcall/s' } };
 function buildCalls(el){
   var name = el.getAttribute('data-calls'), keys = CALL_SETS[name]; if(!keys) return;
   var cfg = CALL_PROG[name], status = $(cfg.status), found = {}, cur = 0;
@@ -608,24 +608,28 @@ var IDEAS = [
 ];
 (function(){
   var box = $('#ideasBox'), status = $('#ideasStatus'); if(!box) return;
-  var cur = 0, seen = { 0:1 };
-  var names = ['Priorities', 'Clear expectations', 'Psychological safety', 'Purpose', 'The people work'];
+  var cur = 0, seen = { 0:1 }, found = {};
+  var names = ['Priorities', 'Clear expectations', 'Psychological safety', 'Purpose', 'The people work'], IDEA_SCN = ['idea1', 'idea2', 'safe1', 'idea4', 'idea5'];
   box.innerHTML = '<div class="idea-tabs" role="tablist" aria-label="The five ideas, by topic">' + IDEAS.map(function(it, i){ return '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-tab="' + i + '">' + (i + 1) + ' · ' + names[i] + '</button>'; }).join('') + '</div>' +
     IDEAS.map(function(it, i){
       return '<div class="idea' + (i === 0 ? ' cur' : '') + '" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' +
         '<p class="blk"><b>What it is</b>' + esc(it.what) + '</p><p class="blk"><b>As a manager</b>' + esc(it.apply) + '</p><p class="blk"><b>The value</b>' + esc(it.value) + '</p>' +
         '<div class="side"><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
-        '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page to see each one at work.</span>') + '</div></div>';
+        '<div class="try"><p class="cq-h">Try it &middot; ' + esc(SCENARIOS[IDEA_SCN[i]].h) + subBtn('safe/m' + (i + 1)) + '</p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
+        '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page for what Vanderbilt will ask of you.</span>') + '</div></div>';
     }).join('');
   function show(i){
     cur = i; seen[i] = 1;
     $$('.idea', box).forEach(function(p, pi){ p.classList.toggle('cur', pi === i); });
     $$('.idea-tabs button', box).forEach(function(t, ti){ t.setAttribute('aria-selected', ti === i ? 'true' : 'false'); t.classList.toggle('seen', !!seen[ti]); });
-    var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 5 ideas.' + (n === 5 ? ' Pick the one you will try first.' : '');
+    paint();
     if(window.chartPager && window.chartPager.current().key === 'ideas'){ var f = $$('.idea', box)[i].querySelector('.idea-nav button'); if(f) f.focus({ preventScroll:true }); }
     narrSub('ideas/t' + (i + 1));
   }
+  function paint(){ var n = Object.keys(seen).length, f = Object.keys(found).length; if(status) status.textContent = n + ' of 5 ideas. ' + f + ' of 5 moments.' + (f === 5 ? ' Activity complete. Pick the idea you will try first.' : n === 5 && f < 5 ? ' Find the best response in each moment.' : ''); if(f === 5) progDone('safe'); }
+  $$('.scn[data-scn]', box).forEach(buildScenario);
   box.addEventListener('click', function(e){
+    var b = e.target.closest('.scn button[data-o]'); if(b){ var k = b.closest('.scn').getAttribute('data-scn'); if(SCENARIOS[k].opts[parseInt(b.getAttribute('data-o'), 10)].best){ found[k] = 1; paint(); } return; }
     var t = e.target.closest('button[data-tab]'); if(t){ show(parseInt(t.getAttribute('data-tab'), 10)); return; }
     if(e.target.closest('button[data-next]')){ show(Math.min(cur + 1, IDEAS.length - 1)); return; }
     if(e.target.closest('button[data-prev]')){ show(Math.max(cur - 1, 0)); }
@@ -639,24 +643,18 @@ var IDEAS = [
   var MODS = {}; try{ (window.MV_PROGRAM.mrc.tracks || []).forEach(function(t){ t.modules.forEach(function(m){ MODS[m.title] = m; }); }); }catch(e){}
   function kind(it){ return it.type === 'oracle' ? 'Oracle Learning' : it.type === 'video' ? 'Video' : it.type === 'podcast' ? 'Podcast' : 'Guide'; }
   function chip(it){ return '<a class="chip-l" href="' + esc(it.url) + '" target="_blank" rel="noopener" title="' + esc(it.why || '') + '"><i>' + kind(it) + '</i>' + esc(it.title) + '</a>'; }
-  /* strips */
-  $$('[data-keep]').forEach(function(el){
-    var key = el.getAttribute('data-keep');
-    var items = L.filter(function(it){ return (it.pages || []).indexOf(key) > -1; }).slice(0, 4);
-    if(!items.length){ el.remove(); return; }
-    el.innerHTML = '<span class="mono">Keep learning</span>' + items.map(chip).join('') + '<a class="chip-l" href="#learn"><i>List</i>All recommendations</a>';
-  });
   /* the page */
   var top = $('#learnTop'), grid = $('#learnGrid');
   if(top){
-    var TOP = ['OLC3668481','OLC3681769','OLC3687089','OLC2538027','p-mt'];
-    top.innerHTML = '<span class="mono" style="grid-column:1 / -1">Start with these five</span>' + TOP.map(function(id){ var it = byId[id]; if(!it) return ''; return '<a href="' + esc(it.url) + '" target="_blank" rel="noopener"><i>' + kind(it) + '</i><b>' + esc(it.title) + '</b><small>' + esc(it.why || '') + '</small></a>'; }).join('');
+    var courses = L.filter(function(it){ return it.type === 'oracle'; });
+    top.innerHTML = '<span class="mono" style="grid-column:1 / -1">' + esc(T[0][1]) + '</span>' + courses.map(function(it, i){ return '<a href="' + esc(it.url) + '" target="_blank" rel="noopener"><span class="no" aria-hidden="true">' + (i + 1) + '</span><i>' + kind(it) + '</i><b>' + esc(it.title) + '</b><small>' + esc(it.why || '') + '</small></a>'; }).join('');
   }
   if(grid){
-    grid.innerHTML = T.map(function(t){
-      var items = L.filter(function(it){ return it.topic === t[0]; });
+    var groups = [['podcast', 'Podcasts'], ['video', 'Videos'], ['guide', 'Guides']];
+    grid.innerHTML = '<span class="mono">' + esc(T[1][1]) + '</span>' + groups.map(function(g){
+      var items = L.filter(function(it){ return it.type === g[0]; });
       if(!items.length) return '';
-      return '<div><h4>' + esc(t[1]) + '</h4><ul>' + items.map(function(it){ return '<li><i>' + kind(it) + '</i><a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.title) + '</a><span>' + esc(it.why || '') + (it.src && it.type !== 'oracle' ? ' (' + esc(it.src) + ')' : '') + '</span></li>'; }).join('') + '</ul></div>';
+      return '<div><h4>' + esc(g[1]) + '</h4><ul>' + items.map(function(it){ return '<li><i>' + kind(it) + '</i><a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.title) + '</a><span>' + esc(it.why || '') + (it.src ? ' (' + esc(it.src) + ')' : '') + '</span></li>'; }).join('') + '</ul></div>';
     }).join('');
   }
   /* simulator */
@@ -746,7 +744,7 @@ function assessLoad(){ if(window.assessLoad) window.assessLoad(); }
 var QUIZ = [
   { seg:'What changed (page 3)', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
   { seg:'Five ideas (page 5)', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
-  { seg:'The ideas at work (page 6)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
+  { seg:'Five ideas (page 5)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
   { seg:'Your first calls (page 8)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
   { seg:'The four jobs (page 9)', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
 ];
