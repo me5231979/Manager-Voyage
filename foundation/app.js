@@ -545,7 +545,7 @@ var DRILLS = {
     { s:'Deciding whether someone qualifies for medical leave.', a:2, x:'The leave office decides. Your job is to send it there the same day, and never to ask for a diagnosis.' },
     { s:'Making sure a new hire knows what is expected in their first month.', a:0, x:'Yours now. Nobody else will say it, and “clear is kind.” The Onboarding a New Hire micro module shows you how.' },
     { s:'Investigating a complaint that a coworker is harassing someone.', a:2, x:'Equal Opportunity and Access investigates. Your job is to report it the same day, not to look into it yourself.' },
-    { s:'Approving a timecard that shows 52 hours in one week.', a:0, x:'Yours now. Ask about the week before you approve; Vanderbilt trusts your signature, so look before you sign.' }
+    { s:'Approving a timecard that shows 52 hours in one week.', a:0, x:'Yours now. Ask about the week before you approve, and fix what needs fixing. You are responsible for accuracy: timesheets and payroll must be right.' }
   ]},
   calls: { opts:['Handle it','Ask my HCM first','The leave office, the same day','EOA, the same day'], prog:'calls', verb:'decided', items:[
     { s:'A team member asks for next Friday off for a wedding.', a:0, x:'Handle it. Check coverage, approve it in Oracle, and say yes out loud. The Time and Attendance Approvals micro module shows the steps.' },

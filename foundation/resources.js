@@ -268,7 +268,7 @@ window.MV_SIM = [
   "k": "timecard",
   "label": "A timecard question (a 52-hour week, a missed punch)",
   "sounds": "“The timecard shows 52 hours.” “I forgot to clock out Tuesday.”",
-  "first": "Ask about the week before you approve. Fix what needs fixing in Oracle. Vanderbilt trusts your signature, so look before you sign.",
+  "first": "Ask about the week before you approve. Fix what needs fixing in Oracle. You are responsible for your team, and accuracy is key: timesheets and payroll must be right.",
   "who": [
    "You: the question, the correction, the approval, and watching for a pattern.",
    "Your HCM: overtime rules and non-exempt pay questions."

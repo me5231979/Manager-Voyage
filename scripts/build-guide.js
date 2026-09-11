@@ -119,7 +119,7 @@ H.push(`<section><span class="eyebrow">The mission</span><h2>Define the great un
 H.push(`<section><span class="eyebrow">Topic 1 · What changed</span><h2>Your job used to be your work. Now it is the team’s work, and the <em>people</em>.</h2>
 <div class="grid3">
 <div class="box"><b class="k">New 1</b><strong>You decide.</strong>What matters this week, who does what, what waits.</div>
-<div class="box"><b class="k">New 2</b><strong>You approve.</strong>Timecards, time off, expenses. Look before you sign.</div>
+<div class="box"><b class="k">New 2</b><strong>You approve.</strong>Timecards, time off, expenses. You are responsible for your team, and accuracy is key. Timesheets, payroll, and every approval must be right.</div>
 <div class="box"><b class="k">New 3</b><strong>You are responsible for people.</strong>Fair treatment, a safe place to speak up, a chance to grow.</div></div>
 <h3>What a manager is not</h3>
 <div class="grid3">
