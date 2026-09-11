@@ -36,7 +36,7 @@
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=20260912c" />
+<link rel="stylesheet" href="../assets/css/course.css?v=20260912d" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
@@ -318,7 +318,7 @@ html.paged .fw-status{ margin-top:6px; }
 .idea .try .cq-h{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 /* who handles what: simulator and the decide drill side by side */
 html.paged #calls .calls-grid{ display:grid; grid-template-columns:1fr; gap:20px; align-items:start; }
-html.paged #calls .sim-out.show{ grid-template-columns:1fr 1fr; }
+html.paged #calls .sim-out.show{ grid-template-columns:1fr 1fr; } html.paged #calls .sim-out .s-note{ grid-column:1 / -1; }
 html.paged #calls .sim-out .s-first{ grid-column:1 / -1; }
 html.paged #calls .sim-pick{ max-width:640px; }
 html.paged #calls .decide-head{ display:block; margin-top:0 !important; } html.paged #calls .decide-head p{ display:none; }
@@ -1006,7 +1006,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="calls-grid">
       <div>
     <div class="sim" id="simBox" data-sim>
-      <div class="sim-head"><span class="mno">Situation simulator</span><h3>Something just landed on your desk. What now?</h3><p>Pick a situation: the first move, who handles what, what never to do, and the micro module for it.</p></div>
+      <div class="sim-head"><span class="mno">Situation simulator</span><h3>Something just landed on your desk. What now?</h3><p>Pick a situation: the first move, who handles what, and what never to do.</p></div>
       <label class="sim-pick" for="simSel"><span class="mono">Pick a situation</span><select id="simSel"></select></label>
       <div class="sim-out" id="simOut" aria-live="polite"></div>
     </div>
@@ -1334,13 +1334,13 @@ html.paged .idea .try .scn{ margin-top:0; }
   </div>
 </div>
 
-<script src="../assets/js/config.js?v=20260912c"></script>
-<script src="../assets/js/program-data.js?v=20260912c"></script>
-<script src="../assets/js/scorm.js?v=20260912c"></script>
-<script src="../assets/js/oracle.js?v=20260912c"></script>
-<script src="narration-scripts.js?v=20260912c"></script>
-<script src="resources.js?v=20260912c"></script>
-<script src="pager.js?v=20260912c"></script>
-<script src="app.js?v=20260912c"></script>
+<script src="../assets/js/config.js?v=20260912d"></script>
+<script src="../assets/js/program-data.js?v=20260912d"></script>
+<script src="../assets/js/scorm.js?v=20260912d"></script>
+<script src="../assets/js/oracle.js?v=20260912d"></script>
+<script src="narration-scripts.js?v=20260912d"></script>
+<script src="resources.js?v=20260912d"></script>
+<script src="pager.js?v=20260912d"></script>
+<script src="app.js?v=20260912d"></script>
 </body>
 </html>

@@ -780,9 +780,6 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
         '<div class="s-first"><span class="s-lab">Your first move, today</span><p>' + esc(s.first) + '</p></div>' +
         '<div><span class="s-lab">What it sounds like</span><p>' + esc(s.sounds) + '</p><span class="s-lab" style="margin-top:10px">Then</span><p>' + esc(s.then) + '</p></div>' +
         '<div><div class="s-who"><span class="s-lab">Who handles what</span><ul>' + s.who.map(function(w){ return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div><div class="s-never" style="margin-top:10px"><span class="s-lab">Never</span><p>' + esc(s.never) + '</p></div></div>' +
-        '<div class="s-learn"><span class="s-lab" style="margin:0 4px 0 0">Learn it step by step</span>' +
-          (s.mod ? '<span class="chip-l mm"><i>Micro module</i>' + esc(s.mod) + (mod && mod.format ? ' · ' + esc(mod.format) : '') + '</span>' : '') +
-          (course ? chip(course) : '') + '</div>' +
         (s.note ? '<p class="s-note">' + esc(s.note) + '</p>' : '');
       out.classList.add('show');
     }
