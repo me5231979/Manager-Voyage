@@ -39,31 +39,43 @@ row, and a rail with Up next, Milestones, and Who to call.
 
 "You are a manager now," the first course in Manager
 Foundations (after the manager compliance courses, before the micro modules).
-About twenty minutes, eighteen pages. It assumes the learner knows nothing
-about management and starts there.
+About twenty minutes, nineteen pages, five topics. It assumes the learner
+knows nothing about management and starts there. Copy is deliberately short:
+each page is one idea, one activity.
 
-1. Module 1, what changed and what a manager is: the one change, three
+1. Topic 1, what changed and what a manager is: the one change, three
    things that are new, what a manager is not, a sort activity (whose job is
    it now?), the definition, and who helps at Vanderbilt (80-second video)
-2. Module 2, five ideas by topic (setting priorities, clear expectations,
+2. Topic 2, five ideas by topic (setting priorities, clear expectations,
    psychological safety, purpose, the people work; sources in a footnote),
-   one at a time, then "safe to speak up": three moments
-   (bad news, a question, a mistake) with three responses each
-3. Module 3, what Vanderbilt will ask you to do in year one (a tap-to-open
-   map by cadence, each item naming its micro module), then five situations
-   to decide: handle it, ask your HCM, the leave office, or EOA
-4. Module 4, the four jobs of a manager (Yukl, in plain words): a video and
+   one tab each with what it is, as a manager, the value, and one thing to
+   start this week; then "the ideas at work": five moments, one per idea,
+   three responses each
+3. Topic 3, what Vanderbilt will ask you to do in year one (a tap-to-open
+   map by cadence, each item naming its micro module), then your first calls:
+   a situation simulator and five situations to decide (handle it, ask your
+   HCM, the leave office, or EOA)
+4. Topic 4, the four jobs of a manager (Yukl, in plain words): a video and
    flip cards per job, one page each, then four situations for your call
-5. Module 5, your Manager Effectiveness Assessment results: the 14 items
+5. Topic 5, your Manager Effectiveness Assessment results: the 14 items
    sorted by job, the three bands, and a results entry that sets module order
-6. A five-question check (4 of 5), the next seven days, and the wrap-up
+6. A five-question check (4 of 5), the next seven days, the keep-learning
+   page (recommended Oracle Learning courses, podcasts, and videos from
+   foundation/resources.js, plus the printable guide), and the wrap-up
 
-Eight tracked sections. Every page is narrated (narration-scripts.js).
-A situation simulator on the first-calls page (leave, ER, EOA, performance,
-and more) and a keep-learning page of recommended Oracle Learning courses,
-podcasts, and videos (foundation/resources.js; Oracle deep links from the
-active catalog export). Every module page ends with a keep-learning strip.
-six custom training videos (basics plus the four jobs and the framework).
+Eight tracked activities. Audio follows the learner's clicks: every page has
+a Listen clip, and every tab, moment, situation, and map card has its own
+short clip (narration-scripts.js keys like ideas/t1, safe/m1, yourcall/s1,
+year/g1, welcome/j1). Opening one stops whatever was playing; tapping its
+speaker, or the same tab again, stops it. Clicking into any activity stops
+the page narration. Six custom training videos (basics plus the four jobs
+and the framework).
+
+Printable guide: `node scripts/build-guide.js` rebuilds foundation/guide.html
+and foundation/Manager-Foundations-Course-1.pdf from the course itself
+(index.html maps, app.js ideas and bands, resources.js list and situations).
+Re-run it after editing the course. The PDF is linked from the keep-learning
+page and shipped in the SCORM package.
 
 - Assessment: the Manager Effectiveness Assessment (14 items, out of 70, three bands: Developing under 35, Strong 35 to 55, Advanced 56 and above) is completed before the course, results are emailed, and it is retaken six months after completion. Open items:
   confirm the YouTube video IDs still resolve (each has an open-on-YouTube

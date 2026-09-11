@@ -74,7 +74,7 @@ $$('.reveal').forEach(function(el){ el.classList.add('in'); });
    words in narration-scripts.js. If the file is missing (or blocked inside
    an LMS), the browser's own speech synthesis reads the same words. */
 var NARR = window.MV_NARR || {};
-var narr = { audio:null, playing:false, key:'', auto: get('auto') === '1', utter:null };
+var narr = { audio:null, playing:false, key:'', auto: get('auto') === '1', on: get('auto') === '1', utter:null };
 var bbListen = $('#bbListen'), bbListenT = $('#bbListenT'), bbAuto = $('#bbAuto'), narrToast = $('#narrToast'), toastT = null;
 function toast(msg){
   if(!narrToast) return;
@@ -92,6 +92,8 @@ function narrUI(){
     if(bbListenT) bbListenT.textContent = narr.playing ? 'Stop' : 'Listen';
   }
   if(bbAuto) bbAuto.setAttribute('aria-pressed', narr.auto ? 'true' : 'false');
+  $$('[data-narr]').forEach(function(b){ var on = narr.playing && narr.key === b.getAttribute('data-narr'); b.classList.toggle('playing', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.setAttribute('aria-label', on ? 'Stop' : 'Listen to this one'); });
+  $$('[data-nk]').forEach(function(c){ c.classList.toggle('playing', narr.playing && narr.key === c.getAttribute('data-nk')); });
 }
 function narrStop(){
   if(narr.audio){ try{ narr.audio.pause(); narr.audio.src = ''; }catch(e){} narr.audio = null; }
@@ -112,12 +114,12 @@ function narrSpeak(text){
     window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
   }catch(e){ narr.playing = false; narrUI(); }
 }
-function narrPlay(){
-  var k = narrKey(), text = NARR[k];
+function narrPlay(k){
+  k = k || narrKey(); var text = NARR[k];
   narrStop();
   if(!text){ toast('No narration on this page.'); return; }
   narr.key = k; narr.playing = true; narrUI();
-  var a = new Audio('../assets/audio/foundation/' + k.replace('/', '-') + '.mp3');
+  var a = new Audio('../assets/audio/foundation/' + k.replace(/\//g, '-') + '.mp3');
   a.preload = 'auto';
   a.addEventListener('ended', function(){ if(narr.audio === a){ narr.audio = null; narr.playing = false; narrUI(); } });
   a.addEventListener('error', function(){ if(narr.audio === a){ narr.audio = null; narrSpeak(text); } });
@@ -130,9 +132,24 @@ function narrPlay(){
     else narrSpeak(text);
   });
 }
-if(bbListen) bbListen.addEventListener('click', function(){ if(narr.playing) narrStop(); else narrPlay(); });
+if(bbListen) bbListen.addEventListener('click', function(){ if(narr.playing){ narr.on = false; narrStop(); } else { narr.on = true; narrPlay(); } });
+/* A section with its own clip: play it when the learner opens that section (if they are listening),
+   or when they tap its speaker. Tapping again stops it. Any of these stops the page narration first. */
+function narrSub(k, force){
+  if(!NARR[k]){ if(force) toast('No narration for this one.'); else if(narr.playing) narrStop(); return; }
+  if(narr.playing && narr.key === k){ narrStop(); return; }
+  if(force) narr.on = true;
+  if(narr.on) narrPlay(k); else if(narr.playing) narrStop();
+}
+function subBtn(k){ return NARR[k] ? '<button type="button" class="sub-listen" data-narr="' + k + '" aria-pressed="false" aria-label="Listen to this one" title="Listen to this one"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="w1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="w2" d="M19 5a9 9 0 0 1 0 14"/></svg></button>' : ''; }
+document.addEventListener('click', function(e){
+  var b = e.target.closest('[data-narr]'); if(b){ e.preventDefault(); narrSub(b.getAttribute('data-narr'), true); return; }
+  /* clicking into any activity stops whatever is playing, so the audio never talks over what the learner is doing */
+  if(e.target.closest('.scn button[data-o], [data-drill] button, .flip-btn, .fw-card, .kq button, .sim, .mea-jobs button, .md-btn, #meaShow')) { if(narr.playing) narrStop(); }
+}, true);
+document.addEventListener('change', function(e){ if(e.target && (e.target.id === 'simSel' || e.target.closest('.sim, .mea-form')) && narr.playing) narrStop(); }, true);
 if(bbAuto) bbAuto.addEventListener('click', function(){
-  narr.auto = !narr.auto; set('auto', narr.auto ? '1' : null); narrUI();
+  narr.auto = !narr.auto; narr.on = narr.auto; set('auto', narr.auto ? '1' : null); narrUI();
   if(narr.auto){ toast('Auto-narration on. Each page is read as it turns.'); narrPlay(); }
   else { toast('Auto-narration off.'); narrStop(); }
 });
@@ -218,14 +235,14 @@ $$('.yt[data-embed]').forEach(function(box){
 
 /* ══════════ PROGRESS ══════════ */
 var SECTIONS = [
-  { k:'shift',     no:'01', name:'What changed',                 how:'Sort the six situations' },
-  { k:'safe',      no:'02', name:'Safe to speak up',             how:'Find the response that keeps people talking, three times' },
-  { k:'calls',     no:'03', name:'Your first calls',             how:'Decide the five situations' },
-  { k:'welcome',   no:'04', name:'The four jobs',                how:'Open all four jobs' },
-  { k:'yourcall',  no:'05', name:'Your call: four situations',   how:'Find the Vanderbilt way in all four' },
-  { k:'survey',    no:'06', name:'Your assessment results',     how:'Enter your band and lowest job from the results email' },
-  { k:'quiz',      no:'07', name:'A quick check',                how:'Score four or more of five' },
-  { k:'nextstep',  no:'08', name:'Your next step',               how:'Mark it done once planned' }
+  { k:'shift',     no:'01', name:'What changed',            how:'Sort six things' },
+  { k:'safe',      no:'02', name:'The ideas at work',       how:'Find the best response in five moments' },
+  { k:'calls',     no:'03', name:'Your first calls',        how:'Decide five situations' },
+  { k:'welcome',   no:'04', name:'The four jobs',           how:'Open all four' },
+  { k:'yourcall',  no:'05', name:'Your call',               how:'Find the Vanderbilt way in four situations' },
+  { k:'survey',    no:'06', name:'Your results',            how:'Enter your band and lowest job' },
+  { k:'quiz',      no:'07', name:'A quick check',           how:'Score 4 of 5' },
+  { k:'nextstep',  no:'08', name:'Your next seven days',    how:'Mark it done once planned' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }
 function progWrite(k, v){ set('p-' + k, v ? '1' : null); }
@@ -243,9 +260,9 @@ function progRender(changedKey, nowDone){
   var left = total - doneN;
   if(progCount) progCount.textContent = doneN + '/' + total;
   if(progFill) progFill.style.width = (doneN / total * 100) + '%';
-  if(progSum) progSum.textContent = doneN === total ? 'All ' + total + ' sections complete. The foundation is poured.' : doneN + ' of ' + total + ' sections complete. ' + left + ' left; every row below is a shortcut.';
-  if(progTop) progTop.textContent = doneN === 0 ? 'Section tracking: you have ' + total + ' sections ahead.' : doneN === total ? 'Section tracking: all ' + total + ' sections complete.' : 'Section tracking: ' + doneN + ' of ' + total + ' complete, ' + left + ' left.';
-  if(mprogLine) mprogLine.textContent = doneN + ' of ' + total + ' sections complete';
+  if(progSum) progSum.textContent = doneN === total ? 'All ' + total + ' activities complete.' : doneN + ' of ' + total + ' activities complete. ' + left + ' left; each row is a shortcut.';
+  if(progTop) progTop.textContent = doneN === 0 ? total + ' activities ahead.' : doneN === total ? 'All ' + total + ' activities complete.' : doneN + ' of ' + total + ' activities complete, ' + left + ' left.';
+  if(mprogLine) mprogLine.textContent = doneN + ' of ' + total + ' activities complete';
   SECTIONS.forEach(function(s){
     var done = progIs(s.k);
     var row = progList ? progList.querySelector('[data-prog-row="' + s.k + '"]') : null;
@@ -262,7 +279,7 @@ function progRender(changedKey, nowDone){
       var sp = b.querySelector('span'); if(sp) sp.textContent = done ? 'Completed' : 'Done with this section';
     });
   });
-  if(changedKey && progStatus){ var sec = SECTIONS.filter(function(s){ return s.k === changedKey; })[0]; if(sec) progStatus.textContent = (nowDone ? 'Section complete: ' : 'Section reopened: ') + sec.name + '. ' + doneN + ' of ' + total + ' complete.'; }
+  if(changedKey && progStatus){ var sec = SECTIONS.filter(function(s){ return s.k === changedKey; })[0]; if(sec) progStatus.textContent = (nowDone ? 'Activity complete: ' : 'Activity reopened: ') + sec.name + '. ' + doneN + ' of ' + total + ' complete.'; }
   bbDoneSync();
   scormSave();
   if(doneN === total) allDone();
@@ -300,7 +317,7 @@ if(progReset) progReset.addEventListener('click', function(){
   set('assess', null); set('done-seen', null); doneSeen = false;
   var mo = $('#meaOut'); if(mo) mo.innerHTML = '';
   progRender();
-  if(progStatus) progStatus.textContent = 'Progress reset. 0 of ' + SECTIONS.length + ' sections complete; your starting point is cleared.';
+  if(progStatus) progStatus.textContent = 'Progress reset. 0 of ' + SECTIONS.length + ' activities complete; your starting point is cleared.';
 });
 if(!store){ var pw = $('#progStorageNote'); if(pw) pw.hidden = false; }
 
@@ -358,7 +375,7 @@ function scormAdopt(){
   if(d.a){ set('assess', JSON.stringify(d.a)); assessLoad(); }
   if(d.seen){ doneSeen = true; set('done-seen', '1'); }
   if(sc.name && !profile.name){ profile.name = sc.name; paintHello(); }
-  var t = $('#oracleStripText'); if(t) t.textContent = 'You opened this course from Oracle Learning. Your completion is recorded automatically once all eight sections are done.';
+  var t = $('#oracleStripText'); if(t) t.textContent = 'You opened this course from Oracle Learning. Your completion is recorded automatically once all eight activities are done.';
   var f = $('#oracleFine'); if(f) f.textContent = 'Recorded in Oracle Learning' + (sc.name ? ' for ' + sc.name : '') + '.';
   sc.incomplete();
   progRender();
@@ -368,35 +385,47 @@ if(window.MVScorm && MVScorm.connected) scormAdopt();
 
 /* ══════════ flip cards, the framework map, fact or fiction ══════════ */
 $$('.flip-btn').forEach(function(btn){ btn.addEventListener('click', function(){ var f = btn.classList.toggle('flipped'); btn.setAttribute('aria-expanded', f ? 'true' : 'false'); }); });
-[{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', done:' Section complete. The next four pages take one job each.' },
- { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:null, done:' All four open. Turn the page to make your first calls.' },
- { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, done:' Now enter your band and lowest job on the right.' }].forEach(function(cfg){
+[{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', narr:'welcome/j', done:' Activity complete. The next four pages take one job each.' },
+ { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:null, narr:'year/g', done:' All four open. Turn the page to make your first calls.' },
+ { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, narr:null, done:' Now enter your band and lowest job on the right.' }].forEach(function(cfg){
   var map = $(cfg.map), status = $(cfg.status); if(!map) return;
   var cards = $$('.fw-card', map), seen = {};
   cards.forEach(function(c, i){
+    if(cfg.narr && NARR[cfg.narr + (i + 1)]) c.setAttribute('data-nk', cfg.narr + (i + 1));
     c.addEventListener('click', function(){
       var open = c.getAttribute('aria-expanded') !== 'true';
       c.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if(cfg.narr){ if(open) narrSub(cfg.narr + (i + 1)); else if(narr.playing) narrStop(); }
       if(open){ seen[i] = 1; var n = Object.keys(seen).length; if(status) status.textContent = n + ' of ' + cards.length + ' ' + cfg.noun + ' opened.' + (n === cards.length ? cfg.done : ''); if(n === cards.length && cfg.prog) progDone(cfg.prog); }
     });
   });
 });
 /* ══════════ your call: one scenario, three responses, consequences ══════════ */
 var SCENARIOS = {
-  safe1: { h:'Moment 1 · Bad news', s:'Jordan tells you on Tuesday that the vendor missed its deadline and the launch will slip a week. She looks braced for your reaction.', opts:[
+  idea1: { h:'Priorities · Monday morning', s:'Monday, 8:05. Forty-one emails, two marked urgent, and a 1:1 with Sam at 9. The grant report your team owns is due Thursday and nobody has started it.', opts:[
+    { t:'Clear the inbox first. Then the day is yours.', b:'Sand first', best:false, out:'By ten the inbox is empty, and full again. The report is still not started and Sam’s 1:1 got moved. The sand went in first, and the big rocks did not fit.' },
+    { t:'Write the three things that matter this week, tell the team, then open email.', b:'Big rocks first', best:true, out:'Report owner named by 8:15, Sam’s 1:1 kept, the vendor decision made by noon. The forty-one emails fit around them. Most were sand.' },
+    { t:'Start the report yourself so it is done right.', b:'Doing the work instead of managing it', best:false, out:'The report gets written and your week does not. The team never learns what mattered, and Sam’s 1:1 slips again.' }
+  ]},
+  idea2: { h:'Clear expectations · The summary', s:'Priya’s summary has come back twice. Both times you wrote “looks good, maybe tighten it up a bit?” It is due tomorrow and it is still not what you need.', opts:[
+    { t:'“Maybe take one more pass when you get a chance.”', b:'Hinting', best:false, out:'Third draft, same problem. Priya has now spent three days guessing what “tighten” means. Unclear is unkind.' },
+    { t:'“It needs the decision on page one, under three hundred words, by three tomorrow. The director only reads the first page.”', b:'Clear is kind', best:true, out:'One draft, done by two. Priya knows what good looks like and why. The next one comes in right the first time.' },
+    { t:'Rewrite it yourself tonight and send it.', b:'Doing the work', best:false, out:'It ships. Priya learns nothing, and you now own every summary from here on.' }
+  ]},
+  safe1: { h:'Psychological safety · Bad news', s:'Jordan tells you on Tuesday that the vendor missed its deadline and the launch will slip a week. She looks braced for your reaction.', opts:[
     { t:'“Why am I only hearing about this now?”', b:'The reaction that ends early warnings', best:false, out:'A fair question and the wrong first sentence. Jordan learns that bad news gets a bad reaction. Next time you hear it later, or from someone else.' },
-    { t:'“Thank you for telling me today. What do we know, and what do you need from me?”', b:'Safe to speak up', best:true, out:'Jordan relaxes and gives you the full picture, and the meeting goes to the fix. Thank first, solve second, learn the cause later. She will bring you the next one earlier.' },
+    { t:'“Thank you for telling me today. What do we know, and what do you need from me?”', b:'Safe to speak up', best:true, out:'Jordan relaxes and gives you the full picture. Thank first, solve second, learn the cause later. She will bring you the next one earlier.' },
     { t:'“Okay. Let me handle it from here.”', b:'Kind, and it takes the work away', best:false, out:'It sounds supportive, and it tells Jordan she cannot be trusted with the recovery. Ask what she needs and let her run it with your help.' }
   ]},
-  safe2: { h:'Moment 2 · A question', s:'In the team meeting, your newest hire asks what sounds like a basic question about the intake process, in front of everyone.', opts:[
-    { t:'“We covered that in onboarding. Check the document.”', b:'The last question they ask in public', best:false, out:'Accurate, and now the whole team knows what a question costs. The next gap stays hidden until it becomes a mistake.' },
-    { t:'Answer it, then, with a smile, “Anyone else unclear on that one?”', b:'The laugh costs you the next question', best:false, out:'The answer was fine. The joke, however small, tells the room that questions are a little embarrassing. People stop asking, and you stop knowing.' },
-    { t:'“Good question. Here is the short version, and let us make sure it is in the document.”', b:'Safe to ask', best:true, out:'The new hire got the answer, the room learned that asking is normal, and the document gets better. That is thirty seconds well spent.' }
+  idea4: { h:'Purpose · The new form', s:'Central is replacing the intake form. You have to tell the team Friday. Two people have already said “here we go again” in the hallway.', opts:[
+    { t:'Forward the announcement: “FYI, new form starts Monday.”', b:'The what without the why', best:false, out:'The hallway version wins. The team hears what changed and nobody knows why, so it lands as one more thing done to them.' },
+    { t:'“Here is why: the old form lost a third of requests at the handoff. This fixes that. What worries you about it?”', b:'Start with why', best:true, out:'Still not loved, but understood. Two worries surface that central had not thought of, and you carry them back. Two people offer to test it early.' },
+    { t:'“I do not love it either, but it is what it is.”', b:'Joining the hallway', best:false, out:'Honest, and it costs the team its manager. Nobody’s concerns go anywhere.' }
   ]},
-  safe3: { h:'Moment 3 · A mistake', s:'You discover that a team member sent the wrong file to another department. Nobody outside has noticed yet.', opts:[
-    { t:'Fix it quietly yourself and say nothing.', b:'Nobody learns, and now you own it', best:false, out:'The problem goes away and the cause does not. They never learn what happened, you have taken on their work, and it will happen again.' },
-    { t:'“Walk me through what happened. Let us fix it together, then figure out what would have caught it.”', b:'Safe to make a mistake once', best:true, out:'The file is corrected within the hour, the person keeps their dignity, and the check that would have caught it goes into the process. Mistakes reported early are cheap; hidden ones are not.' },
-    { t:'Raise it in the team meeting as an example of what not to do.', b:'Public blame', best:false, out:'The team learns exactly one thing: never let the manager find out. The next mistake gets hidden.' }
+  idea5: { h:'The people work · Missed deadlines', s:'Dev has missed two deadlines this month. A coworker mentions it in passing. You are new, and you would rather PCB handled it.', opts:[
+    { t:'Email your HCM: “Can you talk to Dev about his deadlines?”', b:'Handing off your job', best:false, out:'Your HCM sends it back with one question: have you talked to him? The conversation is yours. PCB shows you how; it does not have it for you.' },
+    { t:'Have the conversation this week: what you noticed, what you expect, what he needs. Ask your HCM how to note it.', b:'The people work is your work', best:true, out:'Dev was waiting on data from another team and did not know it mattered to you. Fixed in fifteen minutes. Your HCM coached you on the note in five.' },
+    { t:'Wait for the performance review to bring it up.', b:'Letting it grow', best:false, out:'Four more months of missed deadlines, then a review that surprises him. Late feedback is wasted feedback.' }
   ]},
   task: { s:'It is Wednesday. The monthly report your team owns is due Friday. Priya, who builds it, has not mentioned it in two weeks, and you have not asked. A director just emailed you asking whether it will be on time.', opts:[
     { t:'Reply “yes” to the director, then build the report yourself Thursday night to be sure.', b:'Doing the work instead of managing it', best:false, out:'The report ships. You are now the person who builds it, Priya does not know she was doubted, and next month you are in the same spot. Doing the work is not the job; checking it is.' },
@@ -440,22 +469,22 @@ function buildScenario(el){
 }
 $$('[data-scn]').forEach(buildScenario);
 /* a stepper of scenarios, one at a time; done when the best response is found in each */
-var CALL_SETS = { safe:['safe1','safe2','safe3'], jobs:['task','relations','change','external'] };
+var CALL_SETS = { safe:['idea1','idea2','safe1','idea4','idea5'], jobs:['task','relations','change','external'] };
 var CALL_HEADS = { task:'Job 1 · Get the work done', relations:'Job 2 · Take care of your people', change:'Job 3 · Make things better', external:'Job 4 · Connect your team' };
-var CALL_PROG = { safe:{ prog:'safe', noun:'moments', status:'#safeStatus' }, jobs:{ prog:'yourcall', noun:'situations', status:'#jobsStatus' } };
+var CALL_PROG = { safe:{ prog:'safe', noun:'moments', status:'#safeStatus', narr:'safe/m' }, jobs:{ prog:'yourcall', noun:'situations', status:'#jobsStatus', narr:'yourcall/s' } };
 function buildCalls(el){
   var name = el.getAttribute('data-calls'), keys = CALL_SETS[name]; if(!keys) return;
   var cfg = CALL_PROG[name], status = $(cfg.status), found = {}, cur = 0;
   el.innerHTML = keys.map(function(k, i){
     var sc = SCENARIOS[k];
-    return '<div class="cq' + (i === 0 ? ' cur' : '') + '" data-k="' + k + '"><p class="cq-h">' + (i + 1) + ' of ' + keys.length + ' &middot; ' + esc(sc.h || CALL_HEADS[k] || '') + '</p><div class="scn" data-scn="' + k + '"></div><div class="cq-nav">' +
+    return '<div class="cq' + (i === 0 ? ' cur' : '') + '" data-k="' + k + '"><p class="cq-h">' + (i + 1) + ' of ' + keys.length + ' &middot; ' + esc(sc.h || CALL_HEADS[k] || '') + subBtn(cfg.narr + (i + 1)) + '</p><div class="scn" data-scn="' + k + '"></div><div class="cq-nav">' +
       (i < keys.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1" hidden>Next situation<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '') +
       (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + '</div></div>';
   }).join('');
   $$('.scn[data-scn]', el).forEach(buildScenario);
   function pips(){ return '<span class="pips" aria-hidden="true">' + keys.map(function(k){ return '<i class="' + (found[k] ? 'ok' : '') + '"></i>'; }).join('') + '</span>'; }
-  function paint(){ var n = Object.keys(found).length; if(status) status.innerHTML = pips() + '<span>' + n + ' of ' + keys.length + ' ' + cfg.noun + '.' + (n === keys.length ? ' Section complete.' : '') + '</span>'; if(n === keys.length) progDone(cfg.prog); }
-  function show(i){ $$('.cq', el).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); cur = i; var f = $$('.cq', el)[i].querySelector('button:not([hidden])'); if(f) f.focus({ preventScroll:true }); }
+  function paint(){ var n = Object.keys(found).length; if(status) status.innerHTML = pips() + '<span>' + n + ' of ' + keys.length + ' ' + cfg.noun + '.' + (n === keys.length ? ' Activity complete.' : '') + '</span>'; if(n === keys.length) progDone(cfg.prog); }
+  function show(i){ $$('.cq', el).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); cur = i; var f = $$('.cq', el)[i].querySelector('button:not([hidden])'); if(f) f.focus({ preventScroll:true }); narrSub(cfg.narr + (i + 1)); }
   el.addEventListener('click', function(e){
     if(e.target.closest('button[data-next]')){ show(cur + 1); return; }
     if(e.target.closest('button[data-prev]')){ show(cur - 1); return; }
@@ -542,7 +571,7 @@ function buildDrill(el){
     q.querySelector('.dq-x').innerHTML = '<b>' + (ok ? 'Right. ' : 'Not quite. The answer is ' + esc(d.opts[it.a]) + '. ') + '</b>' + esc(it.x);
     done[i] = ok ? 1 : 2; if(ok) right++;
     var n = Object.keys(done).length;
-    if(status) status.innerHTML = pips() + '<span>' + n + ' of ' + d.items.length + ' ' + d.verb + '.' + (n === d.items.length ? ' ' + right + ' of ' + d.items.length + ' right. Section complete.' : '') + '</span>';
+    if(status) status.innerHTML = pips() + '<span>' + n + ' of ' + d.items.length + ' ' + d.verb + '.' + (n === d.items.length ? ' ' + right + ' of ' + d.items.length + ' right. Activity complete.' : '') + '</span>';
     if(n === d.items.length) progDone(d.prog);
   });
   if(status) status.innerHTML = pips() + '<span>0 of ' + d.items.length + ' ' + d.verb + '.</span>';
@@ -552,29 +581,29 @@ $$('[data-drill]').forEach(buildDrill);
 /* ══════════ five ideas, one at a time ══════════ */
 var IDEAS = [
   { who:'Setting priorities · the big rocks method', h:'Put first things <em>first</em>.',
-    what:'A simple way to run a week. Picture a jar. Fill it with sand first (email, small requests, interruptions) and the big rocks never fit. Put the big rocks in first and the sand settles around them. The big rocks are the few things that matter most; everything else is sand.',
-    apply:'Monday, before email, name the three things that matter most this week for the team: the deadline you are working toward, the 1:1 you owe someone, the decision that is holding people up. Put them on the calendar, then let the small stuff fit around them. Tell the team what the big rocks are, so they can protect them too.',
-    value:'Your calendar will fill itself; requests arrive faster than you can finish them, and the urgent ones are rarely the important ones. Priorities are the part of the job nobody else can do now. A team that knows this week’s three things wastes less, argues less, and finishes more.',
-    week:'Write your three big rocks before you open your inbox, and tell your team what they are.' },
+    what:'Picture a jar. Sand first (email, small requests) and the big rocks never fit. Big rocks first, and the sand settles around them. The big rocks are the few things that matter most.',
+    apply:'Monday, before email, name this week’s three big rocks for the team. Put them on the calendar. Tell the team, so they can protect them too.',
+    value:'Your calendar will fill itself, and the urgent is rarely the important. A team that knows this week’s three things wastes less and finishes more.',
+    week:'Write your three big rocks before you open your inbox. Tell your team.' },
   { who:'Clear expectations and feedback · clear is kind', h:'Clear is kind. Unclear is <em>unkind</em>.',
-    what:'A rule for how managers communicate. Most managers soften expectations and delay feedback to be nice. The research on courage at work found it does the opposite: when you hint instead of say, people spend weeks guessing what you meant, the problem grows, and the eventual conversation is worse. Clear is the kind choice.',
-    apply:'Say what you expect, when it is due, and what good looks like, out loud and in writing. Give feedback close to the moment, in private, with the specific thing you noticed and why it matters. In a 1:1: “The report needs the summary on page one, by Thursday, and here is why.” Not: “Maybe take another look when you get a chance.”',
-    value:'Fewer surprises at the deadline, fewer redo cycles, and a team that trusts you because it always knows where it stands. The hard conversations get smaller, because nothing has been left to grow.',
+    what:'Softening expectations and delaying feedback feels nice. It does the opposite: people spend weeks guessing what you meant, and the problem grows.',
+    apply:'Say what you expect, by when, and what good looks like. Out loud and in writing. Give feedback close to the moment, in private, with the specific thing you noticed.',
+    value:'Fewer surprises at the deadline, fewer redo cycles, and a team that always knows where it stands.',
     week:'Say one thing you have been hinting at. Privately, plainly, kindly.' },
   { who:'Psychological safety', h:'People only speak up when it is <em>safe</em> to.',
-    what:'The belief, shared by a team, that nobody will be punished or embarrassed for asking a question, admitting a mistake, or disagreeing. The research that named it studied hospital teams and found the best teams reported more mistakes, not fewer: they were not making more, they felt safe enough to say so and fixed them early. It is not about being nice or lowering the bar. It is about making the truth cheap to tell.',
-    apply:'Three moments decide it: someone brings you bad news, asks a question in front of others, or makes a mistake. Thank first, solve second, learn the cause later, and never in front of the team. Ask “what do you need from me?” before “how did this happen?” Admit your own mistakes out loud.',
-    value:'You hear about problems while they are small. Questions get asked before they become errors. New ideas get tried. Late news is the most expensive kind, and this is what prevents it.',
-    week:'When someone reports a problem, thank them first, then solve it.' },
-  { who:'Purpose, and putting the team first · start with why', h:'Explain the why. Take care of the people, and they take care of the <em>work</em>.',
-    what:'Two related ideas about what a leader owes the team. First, people do their best work when they know why it matters, not just what to do. Second, the leader’s job is to make the people feel safe and looked after (the image is the officers who eat last), and a team that feels looked after protects the work and each other.',
-    apply:'Before you hand out a task or a change, say the why: what it is for, who it helps, what happens if it slips. When another office asks for the weekend, push back for the team before you say yes. When credit comes, pass it down; when blame comes, take it first.',
-    value:'People who know the why make good decisions when you are not in the room. A team that trusts you to look after it stays, tells you the truth, and works through the hard weeks with you instead of around you.',
+    what:'A team’s shared belief that nobody is punished or embarrassed for a question, a mistake, or a disagreement. The best teams report more mistakes, not fewer: they catch them early. It is not about being nice. It is about making the truth cheap to tell.',
+    apply:'Three moments decide it: bad news, a question in front of others, a mistake. Thank first, solve second, learn the cause later. Never in front of the team. Admit your own mistakes out loud.',
+    value:'You hear about problems while they are small. Late news is the most expensive kind.',
+    week:'When someone reports a problem, thank them first. Then solve it.' },
+  { who:'Purpose · start with why, team first', h:'Explain the why. Take care of the people, and they take care of the <em>work</em>.',
+    what:'People do their best work when they know why it matters, not just what to do. And a team that feels looked after protects the work and each other.',
+    apply:'Before a task or a change, say the why: what it is for, who it helps, what happens if it slips. When credit comes, pass it down. When blame comes, take it first.',
+    value:'People who know the why make good decisions when you are not in the room. A team that trusts you tells you the truth and stays.',
     week:'Explain the why behind one thing you have been asking for.' },
   { who:'The people work · a manager’s core responsibilities', h:'The people work is the manager’s <em>work</em>.',
-    what:'The professional standard for people managers is consistent on one point: the everyday people work is done by the manager, not by PCB. Hiring, onboarding, setting expectations, giving feedback, managing performance, handling time and leave, and having hard conversations are yours. At Vanderbilt, PCB shows you how (your HCM for the immediate question, your Engagement Consultant for the bigger one), tells you when a process applies, and steps in when something must be reported or investigated.',
-    apply:'You run the 1:1, give the feedback, start the leave request the same day, open the requisition, and call your HCM when you are unsure. The micro modules on your dashboard teach each task step by step.',
-    value:'Nothing waits for someone else to act. Your team gets answers from the person who knows them, and PCB spends its time helping you with the hard cases instead of chasing the routine ones.',
+    what:'The professional standard for people managers is consistent on one point: hiring, onboarding, expectations, feedback, performance, time and leave, and hard conversations are the manager’s job, not PCB’s.',
+    apply:'You run the 1:1, give the feedback, start the leave request the same day, open the requisition. Your HCM is your first call when you are unsure; your Engagement Consultant, for the bigger questions. The micro modules teach each task.',
+    value:'Nothing waits for someone else to act. Your team gets answers from the person who knows them.',
     week:'Find out your HCM’s and your Engagement Consultant’s names, and how to reach them.' }
 ];
 (function(){
@@ -583,9 +612,10 @@ var IDEAS = [
   var names = ['Priorities', 'Clear expectations', 'Psychological safety', 'Purpose', 'The people work'];
   box.innerHTML = '<div class="idea-tabs" role="tablist" aria-label="The five ideas, by topic">' + IDEAS.map(function(it, i){ return '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-tab="' + i + '">' + (i + 1) + ' · ' + names[i] + '</button>'; }).join('') + '</div>' +
     IDEAS.map(function(it, i){
-      return '<div class="idea' + (i === 0 ? ' cur' : '') + '" role="tabpanel" data-i="' + i + '"><div><span class="who-is">' + esc(it.who) + '</span><h3>' + it.h + '</h3><p><b>What it is</b>' + esc(it.what) + '</p><p><b>How you apply it as a manager</b>' + esc(it.apply) + '</p></div>' +
-        '<div class="side"><div class="tue"><b>The value it brings</b>' + esc(it.value) + '</div><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
-        '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page to practice the third one.</span>') + '</div></div>';
+      return '<div class="idea' + (i === 0 ? ' cur' : '') + '" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' +
+        '<p class="blk"><b>What it is</b>' + esc(it.what) + '</p><p class="blk"><b>As a manager</b>' + esc(it.apply) + '</p><p class="blk"><b>The value</b>' + esc(it.value) + '</p>' +
+        '<div class="side"><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
+        '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page to see each one at work.</span>') + '</div></div>';
     }).join('');
   function show(i){
     cur = i; seen[i] = 1;
@@ -593,6 +623,7 @@ var IDEAS = [
     $$('.idea-tabs button', box).forEach(function(t, ti){ t.setAttribute('aria-selected', ti === i ? 'true' : 'false'); t.classList.toggle('seen', !!seen[ti]); });
     var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 5 ideas.' + (n === 5 ? ' Pick the one you will try first.' : '');
     if(window.chartPager && window.chartPager.current().key === 'ideas'){ var f = $$('.idea', box)[i].querySelector('.idea-nav button'); if(f) f.focus({ preventScroll:true }); }
+    narrSub('ideas/t' + (i + 1));
   }
   box.addEventListener('click', function(e){
     var t = e.target.closest('button[data-tab]'); if(t){ show(parseInt(t.getAttribute('data-tab'), 10)); return; }
@@ -715,7 +746,7 @@ function assessLoad(){ if(window.assessLoad) window.assessLoad(); }
 var QUIZ = [
   { seg:'What changed (page 3)', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
   { seg:'Five ideas (page 5)', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
-  { seg:'Safe to speak up (page 6)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
+  { seg:'The ideas at work (page 6)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
   { seg:'Your first calls (page 8)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
   { seg:'The four jobs (page 9)', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
 ];

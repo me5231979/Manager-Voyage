@@ -15,7 +15,7 @@ try{
     { sel:'#shift',           key:'shift',     label:'What changed',                 mode:'whole' },
     { sel:'#basics',          key:'basics',    label:'What a manager is',            mode:'whole' },
     { sel:'#ideas',           key:'ideas',     label:'Five ideas',                   mode:'whole' },
-    { sel:'#safe',            key:'safe',      label:'Safe to speak up',             mode:'whole' },
+    { sel:'#safe',            key:'safe', label:'The ideas at work',             mode:'whole' },
     { sel:'#year',            key:'year',      label:'Your first year',              mode:'whole' },
     { sel:'#calls',           key:'calls',     label:'Your first calls',             mode:'whole' },
     { sel:'#welcome',         key:'welcome',   label:'The four jobs',                mode:'whole' },
@@ -26,7 +26,7 @@ try{
     { sel:'#yourcall',        key:'yourcall',  label:'Your call: four situations',   mode:'whole' },
     { sel:'#survey',          key:'survey',    label:'Your results',                   mode:'whole' },
     { sel:'#quiz',            key:'quiz',      label:'Quick check',                  mode:'whole' },
-    { sel:'#nextstep',        key:'nextstep',  label:'Your next step',               mode:'whole' },
+    { sel:'#nextstep',        key:'nextstep',  label:'Your next seven days',             mode:'whole' },
     { sel:'#learn',           key:'learn',     label:'Keep learning',                mode:'whole' },
     { sel:'section.cta',      key:'end',       label:'Wrap-up',                      mode:'whole', extras:['footer'] }
   ];
