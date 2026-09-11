@@ -166,6 +166,12 @@ html.paged .module-head p{ margin-top:8px; font-size:.95rem; }
 /* drill beside a public video */
 .split2{ display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(18px,3vw,36px); align-items:start; }
 .split2 .module-head{ margin-bottom:10px; }
+/* What changed: one column, the three new things and what a manager is not full width, the sort drill below them */
+.split2.stack{ grid-template-columns:1fr; gap:14px; }
+.split2.stack .isnot{ grid-template-columns:repeat(3,1fr); }
+.split2.stack .module-head{ margin-top:6px; }
+
+@media (max-width:900px){ .split2.stack .isnot{ grid-template-columns:1fr; } }
 .yt{ max-width:none; }
 .yt-thumb{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.55; }
 .yt-btn{ z-index:1; }
@@ -900,7 +906,7 @@ html.paged .idea .try .scn{ margin-top:0; }
       <h2>Your job used to be your work. Now it is the team&rsquo;s work, and the <em class="s">people</em>.</h2>
     </div>
     <div class="ask"><p><b>What you will learn</b>The one change that makes you a manager, and what a manager is not.</p><p><b>Why it matters</b>Most new managers keep doing the old job with a new title. The team waits for a manager who never shows up.</p></div>
-    <div class="split2">
+    <div class="split2 stack">
       <div>
         <div class="recap-row three" role="list" aria-label="Three things that are new">
           <div role="listitem"><b>New 1</b><strong>You decide.</strong><p>What matters this week, who does what, what waits.</p></div>
