@@ -1,0 +1,34 @@
+name: Build narration with ElevenLabs
+# Generates every narration clip with the voice in .github/tts.json, builds the
+# course audio and videos, commits them to main, and mirrors main to gh-pages.
+# Needs the ELEVENLABS_API_KEY repository secret.
+on:
+  push:
+    branches: [main]
+    paths: ['.github/tts.json', 'foundation/narration-scripts.js', 'scripts/build-tts.py']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: fetch-media
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Generate and build
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: python3 scripts/build-tts.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets .github/tts-cache.json
+          if git diff --cached --quiet; then echo "No media changes"; else git commit -m "Narration built with ElevenLabs (from tts.json and narration-scripts.js)"; git pull --rebase -X theirs origin main; git push origin HEAD:main; fi
+      - name: Publish to the live site
+        run: git push origin HEAD:gh-pages

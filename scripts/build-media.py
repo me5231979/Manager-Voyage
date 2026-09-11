@@ -14,7 +14,7 @@ an https URL is skipped)."""
 import json, os, subprocess, sys, tempfile, urllib.request, time, shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-J = os.path.join(ROOT, '.github', 'media-urls.json')
+J = os.environ.get('MV_MANIFEST') or os.path.join(ROOT, '.github', 'media-urls.json')
 AUD = os.path.join(ROOT, 'assets', 'audio', 'foundation')
 VID = os.path.join(ROOT, 'assets', 'video', 'foundation')
 IMG = os.path.join(ROOT, 'assets', 'img', 'foundation')
@@ -28,6 +28,10 @@ def run(*cmd):
     return r.stdout
 
 def fetch(url, dest):
+    if not is_url(url):
+        # a local file (the ElevenLabs build hands raw clips in this way)
+        if os.path.isfile(url): shutil.copyfile(url, dest); return True
+        return False
     for attempt in range(4):
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'manager-voyage-media/1.0'})
@@ -44,6 +48,7 @@ def duration(path):
     return float(out.strip())
 
 def is_url(u): return isinstance(u, str) and u.startswith('https://')
+def is_source(u): return is_url(u) or (isinstance(u, str) and os.path.isfile(u))
 
 LOUD = 'I=-16:TP=-1.5:LRA=11'
 def loudnorm_linear(src):
@@ -67,7 +72,7 @@ def cleaned(src, key):
     return out
 
 for key, url in (data.get('audio') or {}).items():
-    if not is_url(url): skipped.append('audio ' + key); continue
+    if not is_source(url): skipped.append('audio ' + key); continue
     raw = os.path.join(TMP, key + '.raw.mp3')
     if not fetch(url, raw): skipped.append('audio ' + key + ' (download failed)'); continue
     out = os.path.join(AUD, key + '.mp3')
@@ -117,6 +122,8 @@ for name, spec in (data.get('videos') or {}).items():
         skipped.append('video ' + name + ' (urls incomplete)'); continue
     parts = []
     ok = True
+    reel = os.path.join(VID, name + '-reel.mp4')   # the silent footage, kept in the repo so narration can be redone after the clip links expire
+    if not all(is_url(c) for c in clips): clips = []
     for i, c in enumerate(clips):
         p = os.path.join(TMP, '%s-%d.mp4' % (name, i))
         if not fetch(c, p): ok = False; break
@@ -129,13 +136,19 @@ for name, spec in (data.get('videos') or {}).items():
             '-map', '[v]', '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', n)
         parts.append(n)
     npath = os.path.join(TMP, name + '.narr.mp3')
-    if not ok or not fetch(narr, npath): skipped.append('video ' + name + ' (download failed)'); continue
+    if not fetch(narr, npath): skipped.append('video ' + name + ' (narration missing)'); continue
     npath = cleaned(npath, name + '-video')
-    lst = os.path.join(TMP, name + '.txt')
-    with open(lst, 'w') as f:
-        for p in parts: f.write("file '%s'\n" % p)
     cat = os.path.join(TMP, name + '.cat.mp4')
-    run('ffmpeg', '-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy', cat)
+    if ok and parts:
+        lst = os.path.join(TMP, name + '.txt')
+        with open(lst, 'w') as f:
+            for p in parts: f.write("file '%s'\n" % p)
+        run('ffmpeg', '-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy', cat)
+        shutil.copyfile(cat, reel)
+    elif os.path.isfile(reel):
+        shutil.copyfile(reel, cat); sys.stderr.write('video %s: using the saved footage reel\n' % name)
+    else:
+        skipped.append('video ' + name + ' (clips unavailable and no saved reel)'); continue
     vd, nd = duration(cat), duration(npath)
     lead, tail = 0.8, 1.2
     total = nd + lead + tail
