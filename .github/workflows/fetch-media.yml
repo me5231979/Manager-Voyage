@@ -29,6 +29,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/audio/foundation assets/video/foundation assets/img/foundation
-          if git diff --cached --quiet; then echo "No media changes"; else git commit -m "Add Foundation course narration and videos (built from media-urls.json)"; git pull --rebase origin main; git push origin HEAD:main; fi
+          if git diff --cached --quiet; then echo "No media changes"; else git commit -m "Add Foundation course narration and videos (built from media-urls.json)"; git pull --rebase -X theirs origin main; git push origin HEAD:main; fi
       - name: Mirror main to gh-pages
         run: git push -f origin HEAD:gh-pages
