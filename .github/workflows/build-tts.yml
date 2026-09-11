@@ -5,7 +5,7 @@ name: Build narration with ElevenLabs
 on:
   push:
     branches: [main]
-    paths: ['.github/tts.json', 'foundation/narration-scripts.js', 'scripts/build-tts.py']
+    paths: ['.github/tts.json', 'foundation/narration-scripts.js', 'scripts/build-tts.py', 'scripts/build-media.py']
   workflow_dispatch:
 permissions:
   contents: write

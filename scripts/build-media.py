@@ -118,11 +118,12 @@ def write_captions(text, start, dur, path):
 for name, spec in (data.get('videos') or {}).items():
     clips = [c for c in (spec.get('clips') or [])]
     narr = spec.get('narration')
-    if not clips or not all(is_url(c) for c in clips) or not is_url(narr):
-        skipped.append('video ' + name + ' (urls incomplete)'); continue
+    reel = os.path.join(VID, name + '-reel.mp4')   # the silent footage, kept in the repo so narration can be redone after the clip links expire
+    if not is_source(narr): skipped.append('video ' + name + ' (narration missing)'); continue
+    if not (clips and all(is_url(c) for c in clips)) and not os.path.isfile(reel):
+        skipped.append('video ' + name + ' (clip links incomplete and no saved reel)'); continue
     parts = []
     ok = True
-    reel = os.path.join(VID, name + '-reel.mp4')   # the silent footage, kept in the repo so narration can be redone after the clip links expire
     if not all(is_url(c) for c in clips): clips = []
     for i, c in enumerate(clips):
         p = os.path.join(TMP, '%s-%d.mp4' % (name, i))

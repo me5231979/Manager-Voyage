@@ -3,10 +3,9 @@ name: Fetch course media
 # .github/media-urls.json, builds the course media with ffmpeg, commits the
 # results to main, and mirrors main to gh-pages. The signed URLs expire within
 # a day of generation, so this runs as soon as the JSON changes.
+# Narration now comes from ElevenLabs (build-tts.yml). This workflow is kept
+# for the Runway video footage and runs only when started by hand.
 on:
-  push:
-    branches: [main]
-    paths: ['.github/media-urls.json', 'scripts/build-media.py']
   workflow_dispatch:
 permissions:
   contents: write
