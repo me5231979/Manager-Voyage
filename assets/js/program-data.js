@@ -114,7 +114,7 @@ window.MV_PROGRAM = {
     foundation: {
       id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, oracleItemId: null, oracleItemType: 'ORA_COURSE', localUrl: '../foundation/', minutes: 20, phase: 1,
       title: 'Foundation: You Are a Manager Now',
-      why: 'About twenty minutes, taken first. What changed when you became a manager, five ideas that hold up, what Vanderbilt will ask you to do this year, the four jobs of a manager, and your Manager Effectiveness Assessment results, which set the order of your micro modules.',
+      why: 'About thirty-five minutes, taken first. What changed when you became a manager, five ideas that hold up, what Vanderbilt will ask you to do this year, the four jobs of a manager, and your Manager Effectiveness Assessment results, which set the order of your micro modules.',
       segments: [
         { n: 1, title: 'What changed, and what a manager is', format: 'Sort activity plus video', desc: 'The one change that makes you a manager, three things that are new, what a manager is not, and who helps you at Vanderbilt.' },
         { n: 2, title: 'Five ideas, and safe to speak up', format: 'Flip cards plus your call', desc: 'Setting priorities, clear expectations, psychological safety, purpose, and the people work: what each is, how you apply it, and the value it brings. Then three moments that build trust or break it.' },

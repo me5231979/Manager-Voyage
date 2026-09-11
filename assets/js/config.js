@@ -32,6 +32,8 @@ window.MV_CONFIG = {
   /* Link to the Manager Effectiveness Assessment (Qualtrics, REDCap, Oracle survey). Empty until PCB supplies it. */
   /* Contact links for the who-helps-you tabs (PCB directory pages). Empty until supplied. */
   contacts: { engagementConsultants: '', hcm: '', leave: '', eoa: '' },
+  // the full vision and areas of focus, linked from the mission page
+  missionUrl: 'https://www.vanderbilt.edu/',
   assessmentUrl: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OX9aur7js0q0UGf6gPrsrSj0YUFCM_9NtEckOrGZTO9UMTRCTlc4WTZHRzE1MENNV0pRS0ZPV1FWMC4u',
 
   /* Profile and completion feed. A small proxy in front of Oracle HCM that

@@ -94,7 +94,7 @@ td{ vertical-align:top; padding:5pt 8pt 5pt 0; border-bottom:1px solid var(--bd)
   <div><span class="eyebrow">Manager Voyage · Manager Foundations · Course 1</span>
   <h1 style="margin-top:8pt">You are a manager <em>now</em>.</h1></div>
   <p class="lead">Everything in the course, on paper: what changed, what a manager is, five ideas that hold up, what Vanderbilt will ask of you this year, who helps, the four jobs, how to read your assessment results, and what to learn next.</p>
-  <div class="meta"><span>About 20 minutes online</span><span>19 pages · 5 topics</span><span>Before: manager compliance courses</span><span>After: the micro modules</span><span>Recorded in Oracle Learning</span></div>
+  <div class="meta"><span>About 35 minutes online</span><span>19 pages · 5 topics</span><span>Before: manager compliance courses</span><span>After: the micro modules</span><span>Recorded in Oracle Learning</span></div>
 </header>`);
 // at a glance
 H.push(`<section><span class="eyebrow">The course at a glance</span><h2>Five topics, one <em>picture</em>.</h2>

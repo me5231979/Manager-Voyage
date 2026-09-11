@@ -562,7 +562,7 @@ var DRILLS = {
     { s:'Explained the reason for the new travel system in the team meeting, in their own words, two days before the campus-wide email.', a:0, x:'Explain the why: in your own words, before the announcement, with objections taken seriously.' },
     { s:'Ran a ten-minute debrief after the orientation event and wrote the three changes for next year into the Portal template.', a:3, x:'Look back: what worked, what did not, what changes, written down.' },
     { s:'Told a team member who suggested a new way to run the weekly report, “Try it for two weeks and show me.”', a:2, x:'Let people try: the idea invited and allowed to be tried, small and soon.' },
-    { s:'Described to the team, in two sentences, what they will be able to do next year that they cannot do now, and how it connects to the Chancellor’s vision.', a:1, x:'Describe where we are going: a clear picture of next year and why it matters.' },
+    { s:'Described to the team, in two sentences, what they will be able to do next year that they cannot do now, and how it connects to the mission.', a:1, x:'Describe where we are going: a clear picture of next year and why it matters.' },
     { s:'Approved a flexible work request after checking the policy and the equity across the team.', a:4, x:'A different job. That is getting the work done and taking care of people (a decision with a process, and trust). Making things better is about the team getting better at what it does.' },
     { s:'Shared the checklist one person built with the whole team and made it the standard.', a:3, x:'Look back: what one person learned becomes the team’s.' }
   ]},
@@ -699,7 +699,7 @@ var TURNS = [
   { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations. Tap the first thing you would do.' },
   { sel:'#fwMap',       prog:'welcome',  text:'Tap each of the four jobs to open it.' },
   { sel:'.flip-grid',   prog:null,       text:'Flip each card: what to stop, what to do instead.', all:true },
-  { sel:'#jobsCalls',   prog:'yourcall', text:'Four situations, one per job. Tap the response you would give, then try the other two.' },
+  { sel:'#jobsCalls',   prog:'yourcall', text:'Tap the response you would give, then try the other two.' },
   { sel:'#meaChoice',   prog:'survey',   text:'Tap what is true for you.' },
   { sel:'#quizBox',     prog:'quiz',     text:'Five questions. Four of five finishes the course.' },
   { sel:'#tell-leader', prog:'nextstep', text:'Copy the message, send it to your manager, then mark this done.' }
@@ -849,5 +849,6 @@ $$('[data-copytext]').forEach(function(b){
 
 progRender();
 /* for tests and the guide builder */
+(function(){ var l = document.getElementById('missionLink'); var u = window.MV_CONFIG && window.MV_CONFIG.missionUrl; if(l && u) l.href = u; })();
 window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
 })();
