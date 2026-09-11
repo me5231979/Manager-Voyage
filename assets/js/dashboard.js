@@ -61,7 +61,7 @@
   }
   function mrcItems() {
     var f = P.mrc.foundation;
-    var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The four jobs of a manager in plain words: get the work done, take care of your people, make things better, connect your team. Then your assessment results set the order of your micro modules.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
+    var out = [Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The web course, about thirty-five minutes: what changed, five ideas, your first year, who handles what, the four jobs of a manager, and your assessment. Thirteen narrated activities and a quick check.', dueIso: addDays(profile.startDate, 7), dueLabel: 'First, by Day 7' })];
     orderedTracks().forEach(function (t) {
       t.modules.forEach(function (m) {
         out.push(Object.assign({}, m, { kind: 'course', area: 'mrc', track: t, oracleCode: m.id, minutes: 15,
@@ -164,9 +164,9 @@
     var f = items[0];
     var fDone = isDone(f.id);
     var ordered = !!foundationOrder();
-    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · About 4 hours</span></div>' +
+    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · Foundation on the web, eighteen micro modules in Oracle</span></div>' +
       '<p class="panel__lead">' + esc(P.mrc.summary) + ' Every module is interactive: simulators, scenario studios, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check, and Oracle records the date you pass it.</p>' +
-      lane(f.title, '20 minutes · Completed first', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation first. It unlocks the micro modules and orders them from your self-assessment.'));
+      lane(f.title, '35 minutes on the web · Completed first', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation first. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;
     [1, 2].forEach(function (phase) {
       var tracks = orderedTracks().filter(function (t) { return t.phase === phase; });
@@ -294,8 +294,8 @@
     var m1 = mrcItems().filter(function (it) { return it.kind === 'foundation' || (it.track && it.track.phase === 1); }).every(function (it) { return isDone(it.id); });
     var ms = [
       { t: 'Day 1', s: 'Assigned in Oracle. Portal open.', d: true },
-      { t: 'Day 30', s: 'Foundation, Systems, Vanderbilt and Nashville complete.', d: m1, now: day <= 30 },
-      { t: 'Day 60', s: 'Compliance, People, and Processes complete. Recorded against your job profile.', d: bothRequiredDone(), now: day > 30 && day <= 60 },
+      { t: 'Day 30', s: 'Foundation course and Systems track complete.', d: m1, now: day <= 30 },
+      { t: 'Day 60', s: 'Compliance, People, and Policy and safety complete. Recorded against your job profile.', d: bothRequiredDone(), now: day > 30 && day <= 60 },
       { t: 'Cohort', s: bothRequiredDone() ? 'Invitation follows from Oracle.' : 'Unlocks when both required components are complete.', d: false, now: day > 60 }
     ];
     $('#milestones').innerHTML = ms.map(function (x) {
@@ -357,7 +357,8 @@
     if (go) {
       var id = go.getAttribute('data-go');
       if (!isDone(id) && !profile.opened[id]) { profile.opened[id] = todayIso(); save(); renderDashboard(); }
-      toast('Opened in Oracle Learning. ' + (CFG.profileEndpoint ? 'Your completion syncs back here.' : 'Mark it with the check when you finish.'));
+      var goLocal = go.getAttribute('href') && !/^https?:/i.test(go.getAttribute('href'));
+      toast(goLocal ? 'Opening the Foundation course. Your progress is recorded when you finish it.' : 'Opened in Oracle Learning. ' + (CFG.profileEndpoint ? 'Your completion syncs back here.' : 'Mark it with the check when you finish.'));
       return;
     }
     var d = e.target.closest('[data-done]');
