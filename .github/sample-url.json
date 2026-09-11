@@ -1,4 +1,18 @@
-{
- "name": "voice-eleanor-v3",
- "url": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/d7b5519c-c4de-44a0-b433-b56c692599c7/FLH_voice_sample_Eleanor_v3.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZWRkNGFmNDJhZTk2NjgwOSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTI3MTQ5MH0.xaH9Ff6sAqsE-RC9G52sr5gBMVwwWGqMjKuURLaL93c"
-}
+[
+ {
+  "name": "voice-leslie",
+  "url": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/780bf86e-ba18-4a06-9182-85c21875ccaf/FLH_voice_sample_Leslie.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzBlZmYyMmY2YmJkNzZmMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTI3ODg5NX0.sPxGd6PPJFImy1zZ4qNmByqZUOQFWqj9QFuGnBatIiI"
+ },
+ {
+  "name": "voice-elias",
+  "url": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/e174b2f1-3669-4f7f-8f6e-cae11af7e739/FLH_voice_sample_Elias.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMGQ4OTA4ZmU2OWY2NDNlNCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTI4Mjk0Mn0.fb0TXhVLxMBB4adxvK359Dlp-JHXzY-f-J_ZK41WCoQ"
+ },
+ {
+  "name": "voice-bernard",
+  "url": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/2ca36821-74df-49f4-8ac5-c433127f9d05/FLH_voice_sample_Bernard.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODc4NTk0OGZhMWY5NWQ1ZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTIzMzY3OX0.1iAvt9vWNQDXOfEeU--8J2OBDVtbPyLH-7EKBbMyyic"
+ },
+ {
+  "name": "voice-maya",
+  "url": "https://dnznrvs05pmza.cloudfront.net/text_to_speech/b8a32de1-a5ee-4490-b433-2752d6571fa6/FLH_voice_sample_Maya.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNDcyMWQyNmQ3MDc4NDYyNSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc4OTI5OTY5M30.C21RQIROX_EiU_0AAlDh3MWp10V5uAvytLffgUcpSQM"
+ }
+]
