@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-14b',
+  version: '2026-09-14c',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -140,12 +140,12 @@ window.MV_PROGRAM = {
           { id: 'MM-05', oracleUrl: null, title: 'Expense and procurement approvals', format: 'Walkthrough', desc: 'Approving an expense report, the procurement requests that route to you, and when to ask before you approve.' }
         ] },
       { id: 'T2', title: 'People', phase: 2, window: 'Days 31 to 60',
-        why: 'The obligations that arrive with the title. Simulators for the high-risk moments.',
+        why: 'The obligations that arrive with the title. A simulator for the highest-risk moments.',
         outcome: 'By Day 60 you can recognize a leave request, route an accommodation, document a concern, and onboard a new hire.',
         modules: [
           { id: 'MM-06', oracleUrl: null, title: 'Employee Relations grounding: when to call, what to document', format: 'Video', desc: 'The situations that go to Employee Relations, what to write down and when, and what stays out of your notes.' },
           { id: 'MM-07', oracleUrl: null, title: 'EOA: reporting obligations and manager duty', format: 'Video', desc: 'What you must report to Equal Opportunity and Access, when, and your duty as a supervisor once you know.' },
-          { id: 'MM-08', oracleUrl: null, title: 'FMLA and leave simulator', format: 'Simulator', desc: 'A leave request that does not sound like one. Practice the conversation, then the handoff to the leave office.' },
+          { id: 'MM-08', oracleUrl: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300003110215584&learningItemType=ORA_COURSE', mins: 35, title: 'FMLA', format: 'eLearning', desc: 'A leave request that does not sound like one. Recognizing it, your obligations as a manager, and the handoff to the leave office.' },
           { id: 'MM-09', oracleUrl: null, title: 'Reasonable accommodations: the interactive process', format: 'Video', desc: 'Recognizing an accommodation request, the interactive process, your role versus EOA\'s role, and timelines.' },
           { id: 'MM-10', oracleUrl: null, title: 'Performance concerns and progressive discipline simulator', format: 'Simulator', desc: 'A performance concern from first conversation to written step, practiced end to end with Employee Relations in the loop.' },
           { id: 'MM-11', oracleUrl: null, title: 'Onboarding a new hire', format: 'Walkthrough', desc: 'The first-week checklist, the systems a new hire needs, and the check-ins that make the first ninety days work.' }
