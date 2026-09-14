@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-14d',
+  version: '2026-09-14e',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -132,9 +132,10 @@ window.MV_PROGRAM = {
     tracks: [
       { id: 'T1', title: 'Systems', phase: 1, window: 'Days 1 to 30',
         why: 'Where the work gets approved. UKG for time, Oracle HCM for HR.',
-        outcome: 'By Day 30 you can manage timekeeping, PTO, and schedules in UKG, open a requisition, and approve an expense.',
+        outcome: 'By Day 30 you can manage timekeeping, PTO, and schedules in UKG, handle exempt time off in Oracle, open a requisition, and approve an expense.',
         modules: [
           { id: 'MM-24', oracleUrl: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002726332894&learningItemType=ORA_SPECIALIZATION', title: 'UKG for managers: timekeeping, PTO, and schedules', format: 'Training series', desc: 'Manager training in UKG: approving timecards and PTO, fixing a missed punch, and building schedules.' },
+          { id: 'MM-25', oracleUrl: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002743072230&learningItemType=ORA_COURSE', title: 'Oracle Cloud: managing exempt time off', format: 'eLearning', desc: 'Time off for your exempt staff, handled in Oracle Cloud: requests, approvals, and balances.' },
           { id: 'MM-01', oracleUrl: null, title: 'Oracle HCM for managers: team view and approvals', format: 'Walkthrough', desc: 'Reading your team view and handling the approvals that come to you in Oracle HCM, the HR system.' },
           { id: 'MM-03', oracleUrl: null, title: 'Requisitions and the hiring workflow', format: 'Walkthrough', desc: 'Opening a requisition, the approval chain, and what your HCM needs from you at each step of a hire.' },
           { id: 'MM-05', oracleUrl: null, title: 'Expense and procurement approvals', format: 'Walkthrough', desc: 'Approving an expense report, the procurement requests that route to you, and when to ask before you approve.' }
