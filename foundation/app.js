@@ -76,6 +76,22 @@ $$('.reveal').forEach(function(el){ el.classList.add('in'); });
 var NARR = window.MV_NARR || {};
 /* narration is on by default; Auto off is remembered as '0' */
 var narr = { audio:null, playing:false, key:'', auto: get('auto') !== '0', on: get('auto') !== '0', utter:null };
+/* Where each clip stopped, by narration key. Stopping the audio (the Listen
+   toggle, tapping into an activity, turning the page) remembers the spot, and
+   the next play of that clip picks up there, so stepping away or taking notes
+   never means starting the narration over. A clip that plays to its natural
+   end forgets its spot and starts fresh next time. Survives a reload. */
+var narrPos = (function(){ try{ var v = JSON.parse(get('narrpos') || '{}'); return v && typeof v === 'object' ? v : {}; }catch(e){ return {}; } })();
+function narrPosSave(){ try{ set('narrpos', JSON.stringify(narrPos)); }catch(e){} }
+function narrRemember(){
+  if(!narr.audio || !narr.key) return;
+  var a = narr.audio, t = a.currentTime || 0;
+  /* only a meaningful spot is worth keeping: a couple of seconds in, and not
+     already at the tail end of a clip whose length we know */
+  if(t > 2 && (!a.duration || !isFinite(a.duration) || t < a.duration - 2)) narrPos[narr.key] = Math.max(0, t - 0.6);
+  else delete narrPos[narr.key];
+  narrPosSave();
+}
 var bbListen = $('#bbListen'), bbListenT = $('#bbListenT'), bbAuto = $('#bbAuto'), narrToast = $('#narrToast'), toastT = null;
 function toast(msg){
   if(!narrToast) return;
@@ -90,14 +106,19 @@ function narrUI(){
     bbListen.classList.toggle('playing', narr.playing);
     bbListen.setAttribute('aria-label', narr.playing ? 'Stop narration' : 'Listen to this page');
     bbListen.setAttribute('title', narr.playing ? 'Stop narration' : 'Listen to this page');
-    if(bbListenT) bbListenT.textContent = narr.playing ? 'Stop' : 'Listen';
+    var backAt = !narr.playing && narrPos[narrKey()] > 0;
+    if(backAt){
+      bbListen.setAttribute('aria-label', 'Resume narration where it stopped');
+      bbListen.setAttribute('title', 'Resume narration where it stopped');
+    }
+    if(bbListenT) bbListenT.textContent = narr.playing ? 'Stop' : backAt ? 'Resume' : 'Listen';
   }
   if(bbAuto) bbAuto.setAttribute('aria-pressed', narr.auto ? 'true' : 'false');
   $$('[data-narr]').forEach(function(b){ var on = narr.playing && narr.key === b.getAttribute('data-narr'); b.classList.toggle('playing', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.setAttribute('aria-label', on ? 'Stop' : 'Listen to this one'); });
   $$('[data-nk]').forEach(function(c){ c.classList.toggle('playing', narr.playing && narr.key === c.getAttribute('data-nk')); });
 }
 function narrStop(){
-  if(narr.audio){ try{ narr.audio.pause(); narr.audio.src = ''; }catch(e){} narr.audio = null; }
+  if(narr.audio){ try{ narrRemember(); narr.audio.pause(); narr.audio.src = ''; }catch(e){} narr.audio = null; }
   if(window.speechSynthesis){ try{ window.speechSynthesis.cancel(); }catch(e){} }
   narr.utter = null; narr.playing = false; narrUI();
 }
@@ -126,9 +147,15 @@ function narrPlay(k){
   narr.key = k; narr.playing = true; narrUI();
   var a = new Audio('../assets/audio/foundation/' + k.replace(/\//g, '-') + '.mp3?v=' + MEDIA_V);
   a.preload = 'auto';
-  a.addEventListener('ended', function(){ if(narr.audio === a){ narr.audio = null; narr.playing = false; narrUI(); } });
+  a.addEventListener('ended', function(){ if(narr.audio === a){ narr.audio = null; narr.playing = false; delete narrPos[k]; narrPosSave(); narrUI(); } });
   a.addEventListener('error', function(){ if(narr.audio === a){ narr.audio = null; narrSpeak(text); } });
   narr.audio = a;
+  /* pick up where this clip stopped, once the browser knows the file */
+  var backTo = narrPos[k] || 0;
+  if(backTo > 0){
+    var seek = function(){ try{ if(narr.audio === a && (!a.duration || !isFinite(a.duration) || backTo < a.duration - 1)) a.currentTime = backTo; }catch(e){} };
+    if(a.readyState >= 1) seek(); else a.addEventListener('loadedmetadata', seek);
+  }
   var pr = a.play();
   if(pr && pr.catch) pr.catch(function(err){
     if(narr.audio !== a) return;
