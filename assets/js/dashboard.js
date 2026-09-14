@@ -170,7 +170,7 @@
     var f = items.filter(function (it) { return it.kind === 'foundation'; })[0];
     var fDone = isDone(f.id);
     var ordered = !!foundationOrder();
-    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · The assessment, the Foundation on the web, then eighteen micro modules in Oracle</span></div>' +
+    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · The assessment, the Foundation on the web, then twenty-two micro modules in Oracle</span></div>' +
       '<p class="panel__lead">' + esc(P.mrc.summary) + ' Every module is interactive: simulators, scenario studios, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check, and Oracle records the date you pass it.</p>' +
       lane(mea.title, 'Ten minutes · Before the Foundation course', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Retake the assessment in six months.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Tap Mark complete once you have submitted it.') +
       lane(f.title, '35 minutes on the web · After the assessment', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation next. It unlocks the micro modules and orders them from your self-assessment.'));
@@ -179,7 +179,7 @@
       var tracks = orderedTracks().filter(function (t) { return t.phase === phase; });
       html += '<div class="lane"><div class="lane__title"><h3>' + (phase === 1 ? 'Days 1 to 30' : 'Days 31 to 60') + '</h3><span>' +
         esc(tracks.map(function (t) { return t.title; }).join(' and ')) + '</span></div>' +
-        '<p class="lane__note">' + (phase === 1 ? 'By Day 30 you can approve, hire, and explain the mission.' : 'By Day 60 you can run a 1:1, handle a leave request, and document a concern.') + '</p></div>';
+        '<p class="lane__note">' + (phase === 1 ? 'By Day 30 you can approve, hire, and explain the mission.' : 'By Day 60 you can run a 1:1, give feedback, handle a leave request, and document a concern.') + '</p></div>';
       tracks.forEach(function (t) {
         var mods = items.filter(function (it) { return it.track && it.track.id === t.id; });
         var open = !opened && mods.some(function (it) { return !isDone(it.id); });
@@ -191,7 +191,7 @@
   }
   function panelPortal() {
     var url = CFG.portalUrl || P.portal.url;
-    return '<div class="panel__head"><h2>Manager <em>Portal</em>.</h2><span>Component 03 · Always on · From Day 1</span></div>' +
+    return '<div class="panel__head"><h2>Manager <em>Portal</em>.</h2><span>Component 04 · Always on · From Day 1</span></div>' +
       '<p class="panel__lead">' + esc(P.portal.summary) + ' A manager who finished the cohort two years ago and a manager who started yesterday see the same hub.</p>' +
       '<div class="eligible"><div><b>Open from Day 1.</b> Nothing to complete here. Come back whenever you need a template, a policy, or a name.</div>' +
       (url ? '<a class="btn" href="' + esc(url) + '" target="_blank" rel="noopener">Open the Manager Portal</a>' : '<span class="btn is-disabled">Portal link coming soon</span>') + '</div>' +
@@ -206,7 +206,7 @@
     var ok = bothRequiredDone();
     var req = CFG.cohortRequestUrl || P.cohort.requestUrl;
     var open = requiredItems().filter(function (it) { return !isDone(it.id); }).length;
-    return '<div class="panel__head"><h2>The four-week <em>cohort</em>.</h2><span>Component 04 · Optional · Quarterly · 100 seats</span></div>' +
+    return '<div class="panel__head"><h2>The four-week <em>cohort</em>.</h2><span>Component 03 · Optional · Quarterly · 100 seats</span></div>' +
       '<p class="panel__lead">' + esc(P.cohort.summary) + '</p>' +
       '<div class="eligible' + (ok ? '' : ' eligible--locked') + '"><div>' + (ok
         ? '<b>You are eligible, and Manager Foundations is already complete.</b> The cohort is optional. Oracle sends the next quarterly invitation; you can also ask for a seat now.'
@@ -228,8 +228,8 @@
       count: function () { var c = myCompliance(); return { done: c.filter(function (i) { return isDone(i.id); }).length, total: c.length }; } },
     { id: 'mrc', num: '02 · Required', title: 'Manager Responsibilities Course', panel: panelMrc,
       count: function () { var c = mrcItems(); return { done: c.filter(function (i) { return isDone(i.id); }).length, total: c.length }; } },
-    { id: 'portal', num: '03 · Always on', title: 'Manager Portal', panel: panelPortal, count: function () { return null; } },
-    { id: 'cohort', num: '04 · Optional', title: 'Four-Week Cohort', panel: panelCohort, count: function () { return null; } }
+    { id: 'cohort', num: '03 · Optional', title: 'Four-Week Cohort', panel: panelCohort, count: function () { return null; } },
+    { id: 'portal', num: '04 · Always on', title: 'Manager Portal', panel: panelPortal, count: function () { return null; } }
   ];
 
   function renderDashboard() {
@@ -301,8 +301,8 @@
     var m1 = mrcItems().filter(function (it) { return it.kind === 'assessment' || it.kind === 'foundation' || (it.track && it.track.phase === 1); }).every(function (it) { return isDone(it.id); });
     var ms = [
       { t: 'Day 1', s: 'Assigned in Oracle. Portal open.', d: true },
-      { t: 'Day 30', s: 'Assessment, Foundation course, and Systems track complete.', d: m1, now: day <= 30 },
-      { t: 'Day 60', s: 'Compliance, People, and Policy and safety complete. Manager Foundations is done and recorded against your job profile.', d: bothRequiredDone(), now: day > 30 && day <= 60 },
+      { t: 'Day 30', s: 'Assessment, Foundation course, and the Systems and Vanderbilt & Nashville tracks complete.', d: m1, now: day <= 30 },
+      { t: 'Day 60', s: 'Compliance, People, and Processes complete. Manager Foundations is done and recorded against your job profile.', d: bothRequiredDone(), now: day > 30 && day <= 60 },
       { t: 'Cohort', s: 'Optional. ' + (bothRequiredDone() ? 'You are eligible: the invitation follows from Oracle, or ask for a seat.' : 'Opens once the required components are complete.'), d: false, now: day > 60 }
     ];
     $('#milestones').innerHTML = ms.map(function (x) {

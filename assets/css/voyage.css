@@ -116,7 +116,7 @@ body.view-light .nav { background: rgba(20,20,20,.96); }
   border: 1px solid rgba(176,65,62,.4); border-radius: 3px; padding: .14rem .5rem; margin-left: .4rem; vertical-align: middle; }
 .cattile__badge--ok { background: rgba(207,174,112,.16); color: var(--vu-oak); border-color: rgba(148,110,36,.5); }
 .cattile.on .cattile__badge { background: rgba(255,255,255,.15); color: #fff; border-color: rgba(255,255,255,.4); }
-.cattile__bar { height: 4px; background: #eee7d8; border-radius: 2px; margin-top: .7rem; overflow: hidden; }
+.cattile__bar { display: block; height: 4px; background: #eee7d8; border-radius: 2px; margin-top: .7rem; overflow: hidden; }
 .cattile__bar i { display: block; height: 100%; background: var(--vu-gold-flat); width: 0; transition: width .5s var(--ease); }
 .cattile.on .cattile__bar { background: rgba(255,255,255,.15); }
 

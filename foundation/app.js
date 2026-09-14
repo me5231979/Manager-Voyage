@@ -1,7 +1,7 @@
 /* ══════════ MANAGER VOYAGE · FOUNDATION · app engine ══════════
    Progress (thirteen tracked activities), the six segments' activities (flip
    cards, your call, quick check), the assessment result entry that
-   lists the eighteen micro modules, the knowledge check, page narration, the
+   lists the twenty-two micro modules, the knowledge check, page narration, the
    custom and public videos, and the SCORM hookup. State: localStorage
    mv-found-* plus, inside Oracle Learning, SCORM suspend_data. Nothing is
    sent anywhere else. */
@@ -773,7 +773,7 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
   var comp = $('#learnComp'), TR = (P && P.mrc && P.mrc.tracks) || [];
   if(comp && TR.length){
     var n = 0, total = TR.reduce(function(a, t){ return a + t.modules.length; }, 0);
-    comp.innerHTML = '<span class="mono">Micro Modules</span><h4>Your ' + (total === 18 ? 'eighteen' : total) + ' micro modules</h4><p>Short courses in Oracle Learning, one common task each, in the order the tracks come due. Each opens in Oracle Learning once its link is added.</p>' + TR.map(function(t){
+    comp.innerHTML = '<span class="mono">Micro Modules</span><h4>Your ' + (total === 22 ? 'twenty-two' : total === 18 ? 'eighteen' : total) + ' micro modules</h4><p>Short courses in Oracle Learning, one common task each, in the order the tracks come due. Each opens in Oracle Learning once its link is added.</p>' + TR.map(function(t){
       var by = t.phase === 1 ? 'By Day 30' : 'By Day 60';
       return '<div class="track-head"><span class="mono">' + esc(t.title) + '</span><b>' + esc(t.why) + '</b><span class="tw">' + esc(t.window) + ' &middot; ' + t.modules.length + (t.modules.length === 1 ? ' step' : ' modules') + '</span><p class="out">' + esc(t.outcome) + '</p></div><div class="comp-grid">' + t.modules.map(function(m){
         n += 1; var has = !!m.oracleUrl;

@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-12',
+  version: '2026-09-14',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -110,7 +110,7 @@ window.MV_PROGRAM = {
   mrc: {
     id: 'MRC', oracleCode: 'MRC', oracleUrl: null,
     title: 'Manager Responsibilities Course',
-    summary: 'Compliance tells you what the law requires. This course tells you what Vanderbilt requires: the Foundation course on the web, then eighteen micro modules in Oracle Learning on the systems you approve in, the people obligations you now carry, and the policies that keep your team safe.',
+    summary: 'Compliance tells you what the law requires. This course tells you what Vanderbilt requires: the Foundation course on the web, then twenty-two micro modules in Oracle Learning on the systems you approve in, the people obligations you now carry, the processes that run the role, and the Vanderbilt and Nashville story you now help tell.',
     foundation: {
       id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, oracleItemId: null, oracleItemType: 'ORA_COURSE', localUrl: '../foundation/', minutes: 35, phase: 1,
       title: 'Foundation: You Are a Manager Now',
@@ -123,63 +123,56 @@ window.MV_PROGRAM = {
         { n: 5, title: 'Your assessment and next seven days', format: 'Review, quick check, plan', desc: 'Your Manager Effectiveness Assessment results, a five-question check, and one habit to practice this week.' }
       ]
     },
-    /* The eighteen micro modules, as listed in Oracle Learning. Paste each Oracle deep link into oracleUrl when FLH has it. */
+    /* The twenty-two micro modules, each 15 minutes or less, as listed in Oracle Learning.
+       Four tracks: Systems, People, Processes, and Vanderbilt & Nashville.
+       Paste each Oracle deep link into oracleUrl when FLH has it. */
     tracks: [
       { id: 'T1', title: 'Systems', phase: 1, window: 'Days 1 to 30',
-        why: 'The systems you approve in from your first week.',
-        outcome: 'By Day 30 you can approve time, find your team in Oracle, open a hire, and assign learning.',
+        why: 'Where the work gets approved. Walkthroughs in Oracle HCM, the HR system, and Culture Amp, the performance system.',
+        outcome: 'By Day 30 you can approve time and absence, open a requisition, run your part of the performance cycle in Culture Amp, and approve an expense.',
         modules: [
-          { id: 'MM-13', oracleUrl: null, title: 'UKG: manager training for timecards, time off, and schedules', format: 'eLearning', desc: 'Approving timecards and time off, fixing a missed punch, and building schedules in UKG.' },
-          { id: 'MM-14', oracleUrl: null, title: 'Oracle for Managers: my team and directory search', format: 'Video', desc: 'Reading your team view, finding a direct report, and searching the directory.' },
-          { id: 'MM-15', oracleUrl: null, title: 'Oracle for Managers: my knowledge and service requests', format: 'Video', desc: 'Finding answers in Oracle knowledge and opening a service request when you need PCB.' },
-          { id: 'MM-16', oracleUrl: null, title: 'Oracle for Managers: hiring', format: 'Video', desc: 'Opening a requisition, the approval chain, and what your HCM needs from you and when.' },
-          { id: 'MM-17', oracleUrl: null, title: 'Oracle for Managers: assigning learning to your team', format: 'Video', desc: 'Assigning a course to a team member and tracking completions.' }
+          { id: 'MM-01', oracleUrl: null, title: 'Oracle HCM for managers: team view, approvals, absence', format: 'Walkthrough', desc: 'Reading your team view, the approvals that come to you, and handling an absence request in Oracle HCM.' },
+          { id: 'MM-02', oracleUrl: null, title: 'Time and attendance approvals', format: 'Walkthrough', desc: 'Approving timecards and time off, fixing a missed punch, and the deadlines payroll needs you to hit.' },
+          { id: 'MM-03', oracleUrl: null, title: 'Requisitions and the hiring workflow', format: 'Walkthrough', desc: 'Opening a requisition, the approval chain, and what your HCM needs from you at each step of a hire.' },
+          { id: 'MM-04', oracleUrl: null, title: 'Culture Amp: goals, check-ins, performance cycle', format: 'Walkthrough', desc: 'Setting goals, running check-ins, and where your part of the performance cycle happens in Culture Amp.' },
+          { id: 'MM-05', oracleUrl: null, title: 'Expense and procurement approvals', format: 'Walkthrough', desc: 'Approving an expense report, the procurement requests that route to you, and when to ask before you approve.' }
         ] },
       { id: 'T2', title: 'People', phase: 2, window: 'Days 31 to 60',
-        why: 'The people obligations you carry as a manager.',
-        outcome: 'By Day 60 you can recognize a leave request, route an accommodation, and report what must be reported.',
+        why: 'The obligations that arrive with the title. Simulators for the high-risk moments.',
+        outcome: 'By Day 60 you can recognize a leave request, route an accommodation, document a concern, and onboard a new hire.',
         modules: [
-          { id: 'MM-09', oracleUrl: null, title: 'FMLA', format: 'Video', desc: 'Recognizing a leave request even when it is not phrased as one, what to say, and the handoff to the leave office through Origami.' },
-          { id: 'MM-12', oracleUrl: null, title: 'Accommodations', format: 'Video', desc: 'The interactive process, your role versus EOA\'s role, and timelines.' },
-          { id: 'MM-10', oracleUrl: null, title: 'Title IX', format: 'Video', desc: 'What you must report, when, and to whom. Your duties as a supervisor.' },
-          { id: 'MM-11', oracleUrl: null, title: 'Responding to Discrimination and Harassment', format: 'Video', desc: 'What to do the same day you see it or hear about it. You report; you do not investigate.' },
-          { id: 'MM-06', oracleUrl: null, title: 'Employee Impairment', format: 'Video', desc: 'Recognizing signs of impairment at work, what to do in the moment, and who to call.' },
-          { id: 'MM-01', oracleUrl: null, title: 'Labor Relations', format: 'Video', desc: 'What a manager can and cannot say and do around organizing, and where to get help.' }
+          { id: 'MM-06', oracleUrl: null, title: 'Employee Relations grounding: when to call, what to document', format: 'Video', desc: 'The situations that go to Employee Relations, what to write down and when, and what stays out of your notes.' },
+          { id: 'MM-07', oracleUrl: null, title: 'EOA: reporting obligations and manager duty', format: 'Video', desc: 'What you must report to Equal Opportunity and Access, when, and your duty as a supervisor once you know.' },
+          { id: 'MM-08', oracleUrl: null, title: 'FMLA and leave simulator', format: 'Simulator', desc: 'A leave request that does not sound like one. Practice the conversation, then the handoff to the leave office.' },
+          { id: 'MM-09', oracleUrl: null, title: 'Reasonable accommodations: the interactive process', format: 'Video', desc: 'Recognizing an accommodation request, the interactive process, your role versus EOA\'s role, and timelines.' },
+          { id: 'MM-10', oracleUrl: null, title: 'Performance concerns and progressive discipline simulator', format: 'Simulator', desc: 'A performance concern from first conversation to written step, practiced end to end with Employee Relations in the loop.' },
+          { id: 'MM-11', oracleUrl: null, title: 'Onboarding a new hire', format: 'Walkthrough', desc: 'The first-week checklist, the systems a new hire needs, and the check-ins that make the first ninety days work.' }
         ] },
-      { id: 'T3', title: 'Policy and safety', phase: 2, window: 'Days 31 to 60',
-        why: 'The policies that keep your team, and Vanderbilt, on the right side of the rules.',
-        outcome: 'By Day 60 you can handle pay and hours questions, a workplace injury, an outside contractor, an emergency, and minors on campus.',
+      { id: 'T3', title: 'Processes', phase: 2, window: 'Days 31 to 60',
+        why: 'The operating rhythm of the role. Scenario studios and decision trees.',
+        outcome: 'By Day 60 you can set expectations, run a 1:1, give feedback, and handle a compensation or flexible work question.',
         modules: [
-          { id: 'MM-02', oracleUrl: null, title: 'Wage and Hour', format: 'Video', desc: 'Exempt and non-exempt, overtime, breaks, and the timekeeping rules you are responsible for.' },
-          { id: 'MM-03', oracleUrl: null, title: 'Workers\u2019 Compensation', format: 'Video', desc: 'What to do the day someone is hurt at work, and how the claim works.' },
-          { id: 'MM-04', oracleUrl: null, title: 'Independent Contractors', format: 'Video', desc: 'Who counts as a contractor, who does not, and how to engage one correctly.' },
-          { id: 'MM-05', oracleUrl: null, title: 'Emergency Preparedness, Fire, and Workplace Safety', format: 'Video', desc: 'Your role in an emergency, fire safety, and keeping the workplace safe.' },
-          { id: 'MM-07', oracleUrl: null, title: 'Protection of Minors, Part 1', format: 'Video', desc: 'Vanderbilt\'s rules when minors are on campus or in your programs.' },
-          { id: 'MM-08', oracleUrl: null, title: 'Protection of Minors, Part 2', format: 'Video', desc: 'Reporting duties, supervision standards, and program requirements.' }
+          { id: 'MM-12', oracleUrl: null, title: 'Setting expectations and goals', format: 'Scenario studio', desc: 'Turning a unit priority into clear expectations and goals a team member can act on.' },
+          { id: 'MM-13', oracleUrl: null, title: 'Running 1:1s', format: 'Scenario studio', desc: 'A working 1:1 rhythm: the agenda, the questions, and what to do with what you hear.' },
+          { id: 'MM-14', oracleUrl: null, title: 'Giving feedback', format: 'Scenario studio', desc: 'Reinforcing and redirecting feedback, practiced on realistic moments, without softening the message away.' },
+          { id: 'MM-15', oracleUrl: null, title: 'Compensation cycle and merit basics', format: 'Video', desc: 'How the compensation cycle runs, what merit can and cannot do, and how to talk about pay with your team.' },
+          { id: 'MM-16', oracleUrl: null, title: 'Flexible work arrangements', format: 'Decision tree', desc: 'What you can approve, what needs PCB, and how to keep an arrangement fair to the whole team.' },
+          { id: 'MM-17', oracleUrl: null, title: 'Offboarding and transitions', format: 'Decision tree', desc: 'The steps when someone leaves or transfers: access, knowledge handoff, and the last-week checklist.' }
         ] },
-      { id: 'T4', title: 'Finish', phase: 2, window: 'Days 31 to 60',
-        why: 'Close out the course.',
-        outcome: 'Your completion is on your Oracle record, and FLH hears what worked.',
+      { id: 'T4', title: 'Vanderbilt & Nashville', phase: 1, window: 'Days 1 to 30',
+        why: 'The institution and the city. A manager who understands the mission can explain the work.',
+        outcome: 'By Day 30 you can explain the mission, place your unit in the areas of focus, and tell the Nashville story to a new hire.',
         modules: [
-          { id: 'MM-18', oracleUrl: null, title: 'Request your certificate of completion, and share feedback', format: 'Manual', desc: 'Ask for your certificate and tell FLH what to improve.' }
+          { id: 'MM-18', oracleUrl: null, title: 'The mission and the vision: the great university of the 21st century', format: 'Video', desc: 'The vision in one sentence, what it asks of the university, and what it asks of managers.' },
+          { id: 'MM-19', oracleUrl: null, title: 'Areas of focus: institutional priorities and where your unit fits', format: 'Video', desc: 'The areas of focus, and how to connect your team\'s work to them out loud.' },
+          { id: 'MM-20', oracleUrl: null, title: 'Our campuses: Nashville and the newer locations beyond Tennessee', format: 'Video', desc: 'The Nashville campus and the newer locations, and what managing across them means.' },
+          { id: 'MM-21', oracleUrl: null, title: 'Nashville: the city as part of the job', format: 'Video', desc: 'The city your team lives and works in, and how Vanderbilt and Nashville shape each other.' },
+          { id: 'MM-22', oracleUrl: null, title: 'How we work together: schools, central units, and business units', format: 'Video', desc: 'Who does what across schools, central units, and business units, and how work moves between them.' }
         ] }
     ]
   },
 
-  /* -------- Component 03: Manager Portal -------- */
-  portal: {
-    id: 'PORTAL', url: 'https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/',
-    title: 'Manager Portal',
-    summary: 'Every template, framework, policy link, and contact from the course and the cohort. Open from Day 1, never taken away, and it grows with each cohort cycle.',
-    areas: [
-      { title: 'Templates', desc: '1:1 agenda, goal-setting worksheet, feedback prep, onboarding checklist, offboarding checklist.' },
-      { title: 'Frameworks', desc: 'The Manager Standard, the feedback model, the delegation ladder, the coach-or-correct decision guide.' },
-      { title: 'Policy links', desc: 'Leave, accommodations, flexible work, compensation cycle, progressive discipline, Code of Conduct.' },
-      { title: 'Who to call', desc: 'Your HCM, your Engagement Consultant, Employee Relations, Equal Opportunity and Access, Ombuds, Compliance.' }
-    ]
-  },
-
-  /* -------- Component 04: cohort -------- */
+  /* -------- Component 03: cohort -------- */
   cohort: {
     id: 'COHORT', oracleCode: 'COHORT', oracleUrl: null, requestUrl: null,
     title: 'Four-Week Cohort',
@@ -200,6 +193,19 @@ window.MV_PROGRAM = {
       { name: 'Yoodli', desc: 'AI conversation rehearsal with a simulated employee, with feedback on clarity and tone.' },
       { name: 'SparkWise', desc: 'Facilitated small-group peer labs on a live case.' },
       { name: 'AI Chat Agents', desc: 'FLH-built agents, any hour, grounded in Vanderbilt policy and the Manager Standard.' }
+    ]
+  },
+
+  /* -------- Component 04: Manager Portal -------- */
+  portal: {
+    id: 'PORTAL', url: 'https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/',
+    title: 'Manager Portal',
+    summary: 'Every template, framework, policy link, and contact from the course and the cohort. Open from Day 1, never taken away, and it grows with each cohort cycle.',
+    areas: [
+      { title: 'Templates', desc: '1:1 agenda, goal-setting worksheet, feedback prep, onboarding checklist, offboarding checklist.' },
+      { title: 'Frameworks', desc: 'The Manager Standard, the feedback model, the delegation ladder, the coach-or-correct decision guide.' },
+      { title: 'Policy links', desc: 'Leave, accommodations, flexible work, compensation cycle, progressive discipline, Code of Conduct.' },
+      { title: 'Who to call', desc: 'Your HCM, your Engagement Consultant, Employee Relations, Equal Opportunity and Access, Ombuds, Compliance.' }
     ]
   },
 
