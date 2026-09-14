@@ -109,9 +109,18 @@ try{
       bbCount = document.getElementById('bbCount'),
       prevBtn = document.getElementById('pgPrev'), nextBtn = document.getElementById('pgNext');
   if(bbDots){
-    bbDots.innerHTML = TRACKED.map(function(s){
-      return '<a class="bb-dot" href="#' + s[0] + '" data-rail="' + s[0] + '"' +
-        ' title="' + s[1] + ' · ' + s[2] + ' · not yet" aria-label="' + s[2] + ', not done">' +
+    /* one dot per page; pages whose activity is tracked keep data-rail so the
+       done fill still applies (the Five ideas page's activity key is 'safe') */
+    var railFor = { ideas:'safe' };
+    var trackedKeys = {};
+    TRACKED.forEach(function(s){ trackedKeys[s[0]] = s; });
+    bbDots.innerHTML = pages.map(function(p, i){
+      var rk = railFor[p.key] || p.key;
+      var t = trackedKeys[rk];
+      var name = 'Page ' + (i + 1) + ' of ' + pages.length + ' · ' + p.pgLabel;
+      return '<a class="bb-dot" href="#p/' + p.key + '/' + p.n + '" data-idx="' + i + '"' +
+        (t ? ' data-rail="' + rk + '"' : '') + ' data-name="' + name + '"' +
+        ' title="' + name + '" aria-label="' + name + '">' +
         '<span class="dot" aria-hidden="true"></span></a>';
     }).join('');
   }
@@ -156,9 +165,9 @@ try{
     if(prevBtn) prevBtn.disabled = cur === 0;
     if(nextBtn) nextBtn.disabled = cur === pages.length - 1;
     document.querySelectorAll('.bb-dot').forEach(function(a){
-      var on = a.getAttribute('data-rail') === p.key;
+      var on = parseInt(a.getAttribute('data-idx'), 10) === cur;
       a.classList.toggle('cur', on);
-      if(on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      if(on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
   }
   function clearAnim(){ pages.forEach(function(p){ p.el.classList.remove('pg-in-r','pg-in-l','pg-out','pg-out-l','pg-out-r'); }); }

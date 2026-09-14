@@ -1029,9 +1029,9 @@ a.bb-dot:focus-visible{ outline:2px solid var(--vu-highlight); outline-offset:1p
 .bb-btn[disabled]{ opacity:.35; cursor:default; }
 .bb-btn[disabled]:hover{ border-color:rgba(255,255,255,.25); color:#fff; }
 .bb-btn svg{ width:16px; height:16px; }
-@media (max-width:1000px){ .bb-done .bb-done-t{ display:none; } .bb-done{ width:44px; padding:0; } }
-@media (max-width:760px){ .bb-sec{ display:none; } .bb-left{ flex:0 0 auto; } .bb-dots{ flex:1; } .bb-ctl{ flex:0 0 auto; } }
-@media (max-width:420px){ a.bb-dot{ width:14px; } .bb-btn{ width:40px; } .bb-done{ width:40px; height:44px; } .bb-count{ font-size:.72rem; } .book-bar{ gap:6px; } }
+@media (max-width:1000px){ .bb-done .bb-done-t{ display:none; } .bb-done{ width:44px; padding:0; } a.bb-dot{ width:18px; } }
+@media (max-width:760px){ .bb-sec{ display:none; } .bb-left{ flex:0 0 auto; } .bb-dots{ flex:1; } .bb-ctl{ flex:0 0 auto; } a.bb-dot{ width:15px; } a.bb-dot .dot{ width:8px; height:8px; } }
+@media (max-width:420px){ a.bb-dot{ width:12px; } a.bb-dot .dot{ width:7px; height:7px; } .bb-btn{ width:40px; } .bb-done{ width:40px; height:44px; } .bb-count{ font-size:.72rem; } .book-bar{ gap:6px; } }
 
 /* ═══════════════════ CRIT ═══════════════════ */
 .cr-chips{ display:flex; flex-wrap:wrap; gap:10px; margin:-6px 0 18px; }

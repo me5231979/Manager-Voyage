@@ -190,7 +190,9 @@ if(bbAuto) bbAuto.addEventListener('click', function(){
   if(narr.auto){ toast('Auto-narration on. Each page is read as it turns.'); narrPlay(); }
   else { toast('Auto-narration off.'); narrStop(); }
 });
-document.addEventListener('chart:page', function(){ narrStop(); if(narr.auto) window.setTimeout(narrPlay, reduce ? 0 : 380); });
+/* turning the page starts that page's narration from the top; the remembered
+   spot is only for the Listen toggle within a page */
+document.addEventListener('chart:page', function(){ narrStop(); delete narrPos[narrKey()]; narrPosSave(); narrUI(); if(narr.auto) window.setTimeout(narrPlay, reduce ? 0 : 380); });
 /* the gold line under the header tracks pages turned; the Progress button counts activities */
 /* fit each page to the viewport: shrink the content a little (never below 78%) before letting it scroll */
 var fitT = null;
@@ -330,7 +332,7 @@ function progRender(changedKey, nowDone){
     }
     $$('.mlink[data-prog="' + s.k + '"]').forEach(function(a){ a.classList.toggle('done', done); });
     var dot = $('.bb-dot[data-rail="' + s.k + '"]');
-    if(dot){ dot.classList.toggle('done', done); dot.setAttribute('aria-label', s.name + ', ' + (done ? 'done' : 'not done')); dot.setAttribute('title', s.no + ' · ' + s.name + ' · ' + (done ? 'done' : 'not yet')); }
+    if(dot){ dot.classList.toggle('done', done); var base = dot.getAttribute('data-name') || s.name; dot.setAttribute('aria-label', base + ', activity ' + (done ? 'done' : 'not done')); dot.setAttribute('title', base + ' · ' + (done ? 'done' : 'not yet')); }
     $$('.md-btn[data-prog="' + s.k + '"]').forEach(function(b){
       b.setAttribute('aria-pressed', done ? 'true' : 'false');
       var sp = b.querySelector('span'); if(sp) sp.textContent = done ? 'Completed' : 'Done with this section';
