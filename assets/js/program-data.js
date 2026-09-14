@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-14',
+  version: '2026-09-14b',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -110,7 +110,7 @@ window.MV_PROGRAM = {
   mrc: {
     id: 'MRC', oracleCode: 'MRC', oracleUrl: null,
     title: 'Manager Responsibilities Course',
-    summary: 'Compliance tells you what the law requires. This course tells you what Vanderbilt requires: the Foundation course on the web, then twenty-two micro modules in Oracle Learning on the systems you approve in, the people obligations you now carry, the processes that run the role, and the Vanderbilt and Nashville story you now help tell.',
+    summary: 'Compliance tells you what the law requires. This course tells you what Vanderbilt requires: the Foundation course on the web, then supporting micro modules in Oracle Learning on the systems you approve in, the people obligations you now carry, the processes that run the role, and the Vanderbilt mission and ecosystem.',
     foundation: {
       id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, oracleItemId: null, oracleItemType: 'ORA_COURSE', localUrl: '../foundation/', minutes: 35, phase: 1,
       title: 'Foundation: You Are a Manager Now',
@@ -123,18 +123,20 @@ window.MV_PROGRAM = {
         { n: 5, title: 'Your assessment and next seven days', format: 'Review, quick check, plan', desc: 'Your Manager Effectiveness Assessment results, a five-question check, and one habit to practice this week.' }
       ]
     },
-    /* The twenty-two micro modules, each 15 minutes or less, as listed in Oracle Learning.
+    /* The micro modules, most 15 minutes or less, as listed in Oracle Learning.
        Four tracks: Systems, People, Processes, and Vanderbilt & Nashville.
-       Paste each Oracle deep link into oracleUrl when FLH has it. */
+       Performance management, Culture Amp goals, and one-on-ones live inside
+       one Oracle class (Performance Management Foundations for Managers), so
+       they are one linked module here, not three separate ones.
+       Paste each remaining Oracle deep link into oracleUrl when FLH has it. */
     tracks: [
       { id: 'T1', title: 'Systems', phase: 1, window: 'Days 1 to 30',
-        why: 'Where the work gets approved. Walkthroughs in Oracle HCM, the HR system, and Culture Amp, the performance system.',
-        outcome: 'By Day 30 you can approve time and absence, open a requisition, run your part of the performance cycle in Culture Amp, and approve an expense.',
+        why: 'Where the work gets approved. Walkthroughs in Oracle HCM, the HR system.',
+        outcome: 'By Day 30 you can approve time and absence, open a requisition, and approve an expense.',
         modules: [
           { id: 'MM-01', oracleUrl: null, title: 'Oracle HCM for managers: team view, approvals, absence', format: 'Walkthrough', desc: 'Reading your team view, the approvals that come to you, and handling an absence request in Oracle HCM.' },
           { id: 'MM-02', oracleUrl: null, title: 'Time and attendance approvals', format: 'Walkthrough', desc: 'Approving timecards and time off, fixing a missed punch, and the deadlines payroll needs you to hit.' },
           { id: 'MM-03', oracleUrl: null, title: 'Requisitions and the hiring workflow', format: 'Walkthrough', desc: 'Opening a requisition, the approval chain, and what your HCM needs from you at each step of a hire.' },
-          { id: 'MM-04', oracleUrl: null, title: 'Culture Amp: goals, check-ins, performance cycle', format: 'Walkthrough', desc: 'Setting goals, running check-ins, and where your part of the performance cycle happens in Culture Amp.' },
           { id: 'MM-05', oracleUrl: null, title: 'Expense and procurement approvals', format: 'Walkthrough', desc: 'Approving an expense report, the procurement requests that route to you, and when to ask before you approve.' }
         ] },
       { id: 'T2', title: 'People', phase: 2, window: 'Days 31 to 60',
@@ -149,11 +151,10 @@ window.MV_PROGRAM = {
           { id: 'MM-11', oracleUrl: null, title: 'Onboarding a new hire', format: 'Walkthrough', desc: 'The first-week checklist, the systems a new hire needs, and the check-ins that make the first ninety days work.' }
         ] },
       { id: 'T3', title: 'Processes', phase: 2, window: 'Days 31 to 60',
-        why: 'The operating rhythm of the role. Scenario studios and decision trees.',
-        outcome: 'By Day 60 you can set expectations, run a 1:1, give feedback, and handle a compensation or flexible work question.',
+        why: 'The operating rhythm of the role. The performance management foundations course, scenario studios, and decision trees.',
+        outcome: 'By Day 60 you can run the performance cycle in Culture Amp, set goals, hold effective one-on-ones, give feedback, and handle a compensation or flexible work question.',
         modules: [
-          { id: 'MM-12', oracleUrl: null, title: 'Setting expectations and goals', format: 'Scenario studio', desc: 'Turning a unit priority into clear expectations and goals a team member can act on.' },
-          { id: 'MM-13', oracleUrl: null, title: 'Running 1:1s', format: 'Scenario studio', desc: 'A working 1:1 rhythm: the agenda, the questions, and what to do with what you hear.' },
+          { id: 'MM-23', oracleUrl: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329264&learningItemType=ORA_CLASS', mins: 45, title: 'Performance Management Foundations for Managers', format: 'eLearning', desc: 'One Oracle class, three short pieces: Vanderbilt performance management, leading with goals in Culture Amp, and effective one-on-ones.' },
           { id: 'MM-14', oracleUrl: null, title: 'Giving feedback', format: 'Scenario studio', desc: 'Reinforcing and redirecting feedback, practiced on realistic moments, without softening the message away.' },
           { id: 'MM-15', oracleUrl: null, title: 'Compensation cycle and merit basics', format: 'Video', desc: 'How the compensation cycle runs, what merit can and cannot do, and how to talk about pay with your team.' },
           { id: 'MM-16', oracleUrl: null, title: 'Flexible work arrangements', format: 'Decision tree', desc: 'What you can approve, what needs PCB, and how to keep an arrangement fair to the whole team.' },
