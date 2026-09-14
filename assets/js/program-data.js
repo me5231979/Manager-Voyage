@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-14c',
+  version: '2026-09-14d',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -131,11 +131,11 @@ window.MV_PROGRAM = {
        Paste each remaining Oracle deep link into oracleUrl when FLH has it. */
     tracks: [
       { id: 'T1', title: 'Systems', phase: 1, window: 'Days 1 to 30',
-        why: 'Where the work gets approved. Walkthroughs in Oracle HCM, the HR system.',
-        outcome: 'By Day 30 you can approve time and absence, open a requisition, and approve an expense.',
+        why: 'Where the work gets approved. UKG for time, Oracle HCM for HR.',
+        outcome: 'By Day 30 you can manage timekeeping, PTO, and schedules in UKG, open a requisition, and approve an expense.',
         modules: [
-          { id: 'MM-01', oracleUrl: null, title: 'Oracle HCM for managers: team view, approvals, absence', format: 'Walkthrough', desc: 'Reading your team view, the approvals that come to you, and handling an absence request in Oracle HCM.' },
-          { id: 'MM-02', oracleUrl: null, title: 'Time and attendance approvals', format: 'Walkthrough', desc: 'Approving timecards and time off, fixing a missed punch, and the deadlines payroll needs you to hit.' },
+          { id: 'MM-24', oracleUrl: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002726332894&learningItemType=ORA_SPECIALIZATION', title: 'UKG for managers: timekeeping, PTO, and schedules', format: 'Training series', desc: 'Manager training in UKG: approving timecards and PTO, fixing a missed punch, and building schedules.' },
+          { id: 'MM-01', oracleUrl: null, title: 'Oracle HCM for managers: team view and approvals', format: 'Walkthrough', desc: 'Reading your team view and handling the approvals that come to you in Oracle HCM, the HR system.' },
           { id: 'MM-03', oracleUrl: null, title: 'Requisitions and the hiring workflow', format: 'Walkthrough', desc: 'Opening a requisition, the approval chain, and what your HCM needs from you at each step of a hire.' },
           { id: 'MM-05', oracleUrl: null, title: 'Expense and procurement approvals', format: 'Walkthrough', desc: 'Approving an expense report, the procurement requests that route to you, and when to ask before you approve.' }
         ] },
