@@ -201,13 +201,45 @@ window.MV_PROGRAM = {
   portal: {
     id: 'PORTAL', url: 'https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/',
     title: 'Manager Portal',
-    summary: 'Every template, framework, policy link, and contact from the course and the cohort. Open from Day 1, never taken away, and it grows with each cohort cycle.',
-    areas: [
-      { title: 'Templates', desc: '1:1 agenda, goal-setting worksheet, feedback prep, onboarding checklist, offboarding checklist.' },
-      { title: 'Frameworks', desc: 'The Manager Standard, the feedback model, the delegation ladder, the coach-or-correct decision guide.' },
-      { title: 'Policy links', desc: 'Leave, accommodations, flexible work, compensation cycle, progressive discipline, Code of Conduct.' },
-      { title: 'Who to call', desc: 'Your HCM, your Engagement Consultant, Employee Relations, Equal Opportunity and Access, Ombuds, Compliance.' }
-    ]
+    summary: 'One hub with every template, framework, policy link, and contact from the course and the cohort: open from Day 1, never taken away, kept current by PCB.',
+    /* Beyond the portal: outside resources a manager should actually use.
+       Every item names its source; specific episodes and videos are the ones
+       already vetted for the foundation course's Keep Learning page, and new
+       entries link only to canonical, long-stable pages. */
+    beyond: {
+      intro: 'Vetted outside resources, curated by the Futures Learning Hub. Each card names its source. All are free unless noted.',
+      groups: [
+        { title: 'Podcasts', items: [
+          { title: 'Manager Tools Basics', src: 'Manager Tools · Horstman and Auzenne', url: 'https://www.manager-tools.com/manager-tools-basics', why: 'The core casts: one-on-ones, feedback, coaching, delegation. Start with the one-on-ones episodes.' },
+          { title: 'HBR IdeaCast', src: 'Harvard Business Review', url: 'https://hbr.org/podcasts/ideacast', why: 'A weekly interview with a leading thinker on management and work.' },
+          { title: 'Coaching Real Leaders', src: 'Harvard Business Review · Muriel Wilkins', url: 'https://hbr.org/podcasts/coaching-real-leaders', why: 'Real, anonymous coaching sessions with leaders working through the problems you have.' },
+          { title: 'WorkLife with Adam Grant', src: 'TED', url: 'https://www.ted.com/podcasts/worklife', why: 'An organizational psychologist on psychological safety, feedback, and motivation.' },
+          { title: 'Radical Candor', src: 'Kim Scott and Amy Sandler', url: 'https://www.radicalcandor.com/podcast/', why: 'Caring personally while challenging directly, applied to real workplace situations.' }
+        ] },
+        { title: 'Videos', items: [
+          { title: 'Feedback in three parts: situation, behavior, impact', src: 'Center for Creative Leadership', url: 'https://www.youtube.com/watch?v=-oRKr5xA9N0', why: 'The simplest feedback structure there is, in a few minutes.' },
+          { title: 'The big rocks method, in two minutes', src: 'FranklinCovey', url: 'https://www.youtube.com/watch?v=j6m9WnNdpSw', why: 'The jar, the rocks, and the sand: the priorities model from the foundation course.' },
+          { title: 'Psychological safety, from the researcher who named it', src: 'Amy Edmondson · TEDxHGSE', url: 'https://www.youtube.com/watch?v=LhoLuui9gX8', why: 'Why the best teams report more mistakes.' },
+          { title: 'Why good leaders make you feel safe', src: 'Simon Sinek · TED', url: 'https://www.youtube.com/watch?v=2Ss78LfY3nE', why: 'The circle of safety, in one story.' },
+          { title: 'Managing your boss', src: 'Harvard ManageMentor', url: 'https://www.youtube.com/watch?v=qLFAHMHWtIA', why: 'Your manager is the first person your team needs you connected to.' },
+          { title: 'Delegation and priorities: the urgent and important grid', src: 'LDP Series', url: 'https://www.youtube.com/watch?v=dRhb0-CFBbk', why: 'What to do yourself, what to delegate, what to drop.' }
+        ] },
+        { title: 'Guides and sites', items: [
+          { title: 'Manager guides: one-on-ones, feedback, coaching with GROW', src: 'Google re:Work', url: 'https://rework.withgoogle.com/intl/en/subjects/managers', why: 'Free, practical guides a large company built for its own new managers.' },
+          { title: 'Ask a Manager', src: 'Alison Green', url: 'https://www.askamanager.org/', why: 'Two decades of plain-spoken answers to real workplace questions, searchable by topic.' },
+          { title: 'First Round Review', src: 'First Round Capital', url: 'https://review.firstround.com/', why: 'Long-form, practitioner-tested essays on management craft.' },
+          { title: 'Lara Hogan on management', src: 'Lara Hogan, author of Resilient Management', url: 'https://larahogan.me/blog/', why: 'Short, concrete posts for new managers: first one-on-ones, feedback, delegation.' },
+          { title: 'MIT Sloan Management Review', src: 'Massachusetts Institute of Technology', url: 'https://sloanreview.mit.edu/', why: 'Research-backed articles on leading teams and organizations.' },
+          { title: 'Performance and feedback science blog', src: 'Culture Amp', url: 'https://www.cultureamp.com/blog', why: 'From the platform Vanderbilt runs its performance cycle in.' }
+        ] },
+        { title: 'Books', items: [
+          { title: 'The Making of a Manager', src: 'Julie Zhuo · Portfolio, 2019', why: 'The first-time manager book: what to do when everyone looks to you.' },
+          { title: 'High Output Management', src: 'Andrew S. Grove · Vintage', why: 'The classic: a manager\'s output is the output of their team.' },
+          { title: 'The First 90 Days', src: 'Michael D. Watkins · Harvard Business Review Press', why: 'The transition playbook for your first three months in the role.' },
+          { title: 'Crucial Conversations', src: 'Grenny, Patterson, McMillan, Switzler, and Gregory · McGraw Hill', why: 'Tools for talking when the stakes are high and opinions differ.' }
+        ] }
+      ]
+    }
   },
 
   contacts: [

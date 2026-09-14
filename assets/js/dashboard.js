@@ -191,13 +191,20 @@
   }
   function panelPortal() {
     var url = CFG.portalUrl || P.portal.url;
+    var bey = P.portal.beyond;
     return '<div class="panel__head"><h2>Manager <em>Portal</em>.</h2><span>Component 04 · Always on · From Day 1</span></div>' +
       '<p class="panel__lead">' + esc(P.portal.summary) + ' A manager who finished the cohort two years ago and a manager who started yesterday see the same hub.</p>' +
       '<div class="eligible"><div><b>Open from Day 1.</b> Nothing to complete here. Come back whenever you need a template, a policy, or a name.</div>' +
       (url ? '<a class="btn" href="' + esc(url) + '" target="_blank" rel="noopener">Open the Manager Portal</a>' : '<span class="btn is-disabled">Portal link coming soon</span>') + '</div>' +
-      '<div class="cardgrid">' + P.portal.areas.map(function (a) {
-        return '<div class="card"><span class="card__kicker">In the Portal</span><h3>' + esc(a.title) + '</h3><p>' + esc(a.desc) + '</p></div>';
-      }).join('') + '</div>' +
+      (bey ? '<div class="lane"><div class="lane__title"><h3>Beyond the portal</h3><span>' + esc(bey.intro) + '</span></div>' +
+        bey.groups.map(function (g) {
+          return '<h4 class="lane__sub">' + esc(g.title) + '</h4><div class="cardgrid">' + g.items.map(function (r) {
+            var inner = '<span class="card__kicker">' + esc(r.src) + '</span><h3>' + esc(r.title) + '</h3><p>' + esc(r.why) + '</p>';
+            return r.url
+              ? '<a class="card card--link" href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '<span class="card__go" aria-hidden="true">&#8599;</span></a>'
+              : '<div class="card">' + inner + '</div>';
+          }).join('') + '</div>';
+        }).join('') + '</div>' : '') +
       '<div class="lane"><div class="lane__title"><h3>The people you will call</h3><span>Who does what</span></div><div class="cardgrid">' +
       P.contacts.map(function (c) { return '<div class="card"><span class="card__kicker">Contact</span><h3>' + esc(c.role) + '</h3><p>' + esc(c.desc) + '</p></div>'; }).join('') +
       '</div></div>';
