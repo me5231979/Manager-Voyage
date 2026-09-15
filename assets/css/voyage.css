@@ -155,8 +155,8 @@ body.view-light .nav { background: rgba(20,20,20,.96); }
 
 /* ---------- up next: the next three things, above everything else ---------- */
 .upnext { margin-top: 1.6rem; }
-.upnext__head, .sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-.upnext__head { margin-top: 0; }
+.upnext__head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.sec-h { display: block; margin-top: 2rem; }
 .upnext__head h2, .sec-h { font-family: var(--font-serif); font-weight: 400; font-size: 1.5rem; }
 .upnext__head h2 em, .sec-h em { font-style: italic; color: var(--vu-oak); }
 .upnext__head span { font: 600 .82rem var(--font-sans); color: var(--vu-oak); }
