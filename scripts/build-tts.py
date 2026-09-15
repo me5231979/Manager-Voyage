@@ -61,7 +61,8 @@ for kind, key, text in jobs:
     if cache.get(fname) == h and os.path.isfile(dest): kept.append(fname); continue
     try: speak(text, dest)
     except Quota as e:
-        if os.path.exists(dest): os.remove(dest)
+        # a refusal never wrote a body; only drop a truncated partial
+        if os.path.exists(dest) and os.path.getsize(dest) <= 1000: os.remove(dest)
         stopped = str(e); break
     cache[fname] = h; made.append(fname)
     time.sleep(0.5)
