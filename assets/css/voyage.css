@@ -364,6 +364,16 @@ a.card--link:hover h3 { text-decoration-color: var(--vu-oak); }
 .cw__chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .55rem; }
 .cw__chip { font: 700 .66rem var(--font-condensed); letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 3px; padding: .2rem .5rem; color: var(--ink-soft); }
 .cw__chip--live { background: var(--vu-black); color: #fff; border-color: var(--vu-black); }
+.cw__chip--std { border-color: var(--vu-gold-flat); color: var(--vu-oak); background: rgba(207, 174, 112, .14); }
+
+/* the six standards strip */
+.std { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: .8rem; }
+.std__item { border: 1px solid var(--line); border-top: 3px solid var(--vu-gold-flat); border-radius: 4px; padding: .7rem .85rem .75rem; background: #fff; }
+.std__item b { display: block; font-family: var(--font-serif); font-weight: 400; font-size: 1.05rem; line-height: 1.2; margin-bottom: .3rem; }
+.std__item p { margin: 0 0 .45rem; font-size: .84rem; line-height: 1.45; color: var(--ink-soft); }
+.std__meta { font: 700 .64rem var(--font-condensed); letter-spacing: .06em; text-transform: uppercase; color: var(--vu-oak); }
+@media (max-width: 900px) { .std { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .std { grid-template-columns: 1fr; } }
 .cwr { display: grid; grid-template-columns: 160px 1fr; gap: .3rem 1.2rem; padding: .85rem 1.2rem; border-top: 1px solid var(--line); }
 .cwr:first-child { border-top: 0; }
 .cwr--live { background: rgba(207,174,112,.12); }

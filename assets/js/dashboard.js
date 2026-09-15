@@ -167,6 +167,21 @@
       lane(stateName(profile.state) + ' requirements', 'Assigned from the work location', mine) +
       lane('Every location', 'Assigned to every Vanderbilt manager', all);
   }
+  /* The six standards, as a compact strip. `mode` is 'course' (which habits
+     teach each) or 'cohort' (which weeks build each). */
+  function standardsStrip(mode) {
+    var S = P.standards || [];
+    if (!S.length) return '';
+    return '<div class="lane lane--std"><div class="lane__title"><h3>The six standards</h3><span>' +
+      (mode === 'cohort' ? 'What Vanderbilt measures every manager on, and the week that builds each' : 'What Vanderbilt measures every manager on, and the Foundation habits that teach each') +
+      '</span></div><div class="std">' + S.map(function (st) {
+        var meta = mode === 'cohort'
+          ? 'Week' + (st.weeks.length === 1 ? ' ' : 's ') + st.weeks.join(', ') + ' · Playbook ' + st.playbook
+          : 'Habit' + (st.habits.length === 1 ? ' ' : 's ') + st.habits.slice().sort(function (a, b) { return a - b; }).join(', ');
+        return '<div class="std__item"><b>' + esc(st.name) + '</b><p>' + esc(st.desc) + '</p><span class="std__meta">' + esc(meta) + '</span></div>';
+      }).join('') + '</div><p class="lane__note">Based on Gary Yukl (2012). You rate yourself on each standard before the cohort and again at the capstone.</p></div>';
+  }
+
   function panelMrc() {
     var items = mrcItems();
     var mea = items.filter(function (it) { return it.kind === 'assessment'; })[0];
@@ -179,7 +194,9 @@
       '<li><b>First, the assessment.</b> Ten minutes; your score and feedback come by email.</li>' +
       '<li><b>Then the Foundation course,</b> about thirty-five minutes on the web.</li>' +
       '<li><b>Then the micro modules in Oracle Learning,</b> one common task each: the systems you approve in, the people obligations you carry, the processes that run the role, and the Vanderbilt mission and ecosystem.</li>' +
-      '<li><b>Every module is interactive</b> and ends with a knowledge check that Oracle records.</li></ul>' +
+      '<li><b>Every module is interactive</b> and ends with a knowledge check that Oracle records.</li>' +
+      '<li><b>All of it serves the six standards</b> Vanderbilt measures managers on: the Foundation course teaches the habits behind them, and the assessment scores how often you do them.</li></ul>' +
+      standardsStrip('course') +
       lane(mea.title, 'Ten minutes · Before the Foundation course', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Retake the assessment in six months.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Tap Mark complete once you have submitted it.') +
       lane(f.title, '35 minutes on the web · After the assessment', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation next. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;
@@ -234,6 +251,7 @@
       if (w.coreNote) chips.push(chip('Core module as prework'));
       if (w.n > 0 && !w.studio) chips.push(chip('No Scenario Studio'));
       if (w.discussion) chips.push(chip('Discussion · ' + w.discussion.mins + ' min · virtual'));
+      (w.standards || []).forEach(function (k) { var st = (P.standards || []).filter(function (x) { return x.key === k; })[0]; if (st) chips.push(chip('Builds: ' + st.name, 'cw__chip--std')); });
       var rows = '';
       if (w.live && w.n === 1) rows += row('Hybrid', w.live.when, '<b class="cwr__t">' + esc(w.live.title) + '.</b><p>' + esc(w.live.desc) + '</p>', 'cwr--live');
       if (w.core) rows += row('Core module', w.n === 0 ? 'Before the kickoff' : 'By Monday, released the Friday before', '<b class="cwr__t">' + esc(w.core.title) + '</b><span class="cw__by">' + esc(w.core.by) + '</span>' + (w.core.note ? '<p>' + esc(w.core.note) + '</p>' : '') + link(w.core.url, 'Open in Oracle Learning'));
@@ -253,6 +271,7 @@
         ? '<b>You are eligible, and Manager Foundations is already complete.</b> The cohort is optional but recommended. Oracle sends the next quarterly invitation; you can also ask for a seat now.'
         : '<b>' + open + ' item' + (open === 1 ? '' : 's') + ' on your Day 60 path to go.</b> ' + esc(C.eligibility) + ' Units outside the central budget are billed per seat.') + '</div>' +
       (ok && req ? '<a class="btn" href="' + esc(req) + '" target="_blank" rel="noopener">Request a seat</a>' : ok ? '<span class="btn is-disabled">Request link coming soon</span>' : '<span class="pill pill--locked">Unlocks at Day 60 completion</span>') + '</div>' +
+      standardsStrip('cohort') +
       '<div class="lane"><div class="lane__title"><h3>The weekly rhythm</h3><span>The same four beats, in the same order, every week</span></div>' +
       '<div class="rhythm">' + C.rhythm.map(function (r, i) {
         return '<div class="rhythm__step"><span class="rhythm__when">' + esc(r.when) + '</span><h4>' + esc(r.beat) + (r.tool ? ' <small>in ' + esc(r.tool) + '</small>' : '') + '</h4><p>' + esc(r.desc) + '</p><span class="rhythm__len">' + esc(r.mins) + '</span></div>';
