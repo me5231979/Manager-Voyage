@@ -62,7 +62,7 @@
   }
   function mrcItems() {
     var f = P.mrc.foundation;
-    var mea = { id: 'MEA', kind: 'assessment', area: 'mrc', track: null, title: 'Manager Effectiveness Assessment', minutes: 10, source: 'Microsoft Forms', url: CFG.assessmentUrl || null,
+    var mea = { id: 'MEA', kind: 'assessment', area: 'mrc', track: null, title: 'Manager Effectiveness Assessment', minutes: 5, source: 'Microsoft Forms', url: CFG.assessmentUrl || null,
       desc: 'Fourteen questions on how often you do the habits the course teaches. Your score and feedback come by email and set your starting point.',
       why: 'Taken before the Foundation course so the course meets you where you are, and again in six months to see the change.',
       dueIso: addDays(profile.startDate, 3), dueLabel: 'Before the Foundation course' };
@@ -176,12 +176,12 @@
     var day = dayOfPath();
     var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Strongly recommended · Days 1 to 60</span></div>' +
       '<ul class="panel__points">' +
-      '<li><b>First, the assessment.</b> Ten minutes; your score and feedback come by email.</li>' +
+      '<li><b>First, the assessment.</b> Six statements, a few minutes; your results and feedback come by email.</li>' +
       '<li><b>Then the Foundation course,</b> about thirty-five minutes on the web.</li>' +
       '<li><b>Then the micro modules in Oracle Learning,</b> one common task each: the systems you approve in, the people obligations you carry, the processes that run the role, and the Vanderbilt mission and ecosystem.</li>' +
       '<li><b>Every module is interactive</b> and ends with a knowledge check that Oracle records.</li>' +
       '</ul>' +
-      lane(mea.title, 'Ten minutes · Before the Foundation course', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Retake the assessment in six months.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Tap Mark complete once you have submitted it.') +
+      lane(mea.title, 'A few minutes · Before Manager Voyage', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Rate the same six statements again 90 days after you complete Manager Voyage.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Tap Mark complete once you have submitted it.') +
       lane(f.title, '35 minutes on the web · After the assessment', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation next. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;
     var p1done = items.filter(function (it) { return it.track && it.track.phase === 1; }).every(function (it) { return isDone(it.id); });

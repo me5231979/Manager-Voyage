@@ -888,9 +888,9 @@ var CATS = { task:{ name:'Get the work done', short:'Task-oriented' }, relations
   var url = (window.MV_CONFIG && MV_CONFIG.assessmentUrl) || '';
   var link = url ? '<a class="btn btn-primary" href="' + esc(url) + '" target="_blank" rel="noopener">Open the assessment</a>' : '<span class="hinttxt">Ask your Engagement Consultant for the assessment link; it takes about ten minutes.</span>';
   var MSG = {
-    reviewed:'<h4>Good. Keep the <em>email</em>.</h4><p>It is your starting score. In six months you take the assessment again; the aim is a higher score, one habit at a time.</p>',
-    retake:'<h4>Take the assessment <em>now</em>.</h4><p>Your results and feedback arrive by email. Keep them; you compare against them in six months.</p><div class="route-act" style="margin-top:12px">' + link + '</div>',
-    take:'<h4>Take it before you go <em>further</em>.</h4><p>Fourteen questions, about ten minutes. Your score and feedback arrive by email, and you compare against them in six months.</p><div class="route-act" style="margin-top:12px">' + link + '</div>'
+    reviewed:'<h4>Good. Keep the <em>email</em>.</h4><p>It is your starting point. Ninety days after you complete Manager Voyage you rate the same six statements again; the aim is a higher rating, one behavior at a time.</p>',
+    retake:'<h4>Take the assessment <em>now</em>.</h4><p>Your results and feedback arrive by email. Keep them; you compare against them ninety days after you complete Manager Voyage.</p><div class="route-act" style="margin-top:12px">' + link + '</div>',
+    take:'<h4>Take it before you go <em>further</em>.</h4><p>Six statements, rated from never to consistently, a few minutes. Your results and feedback arrive by email, and you compare against them ninety days after you complete Manager Voyage.</p><div class="route-act" style="margin-top:12px">' + link + '</div>'
   };
   function render(c){ $$('button[data-choice]', box).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-choice') === c ? 'true' : 'false'); }); out.innerHTML = MSG[c] || ''; }
   box.addEventListener('click', function(e){

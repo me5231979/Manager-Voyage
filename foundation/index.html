@@ -29,9 +29,11 @@
   Progress: localStorage mv-found-* plus one JSON string noting whether the learner reviewed the results email or still needs to take the assessment;
   in Oracle Learning the same state rides in SCORM suspend_data. Completion is
   reported through ../assets/js/oracle.js (SCORM, or MV_CONFIG.completionEndpoint).
-  Assessment: managers complete the Manager Effectiveness Assessment (14 items,
-  scored out of 70, three bands) before this course; results arrive by email;
-  they retake it six months after completing the course (module 5, next step).
+  Assessment: managers complete the Manager Effectiveness Assessment (six
+  self-rated statements, 1 to 5, never to consistently, informed by Yukl's
+  framework) before Manager Voyage; results arrive by email; they rate the
+  same six again 90 days after completing Manager Voyage, optionally at six
+  months (module 5, next step).
   Source: Yukl, G. (2012). Effective leadership behavior: what we know and
   what questions need more attention. Academy of Management Perspectives,
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
@@ -845,7 +847,7 @@ html.paged .idea .try .scn{ margin-top:0; }
         <li><b>Sort</b> the tasks of your first year by how often they come up</li>
         <li><b>Decide</b>, for a given situation, whether to handle it, ask your HCM, route it, or report it</li>
         <li><b>Identify</b> Yukl&rsquo;s four categories of manager behavior and the fifteen behaviors inside them, and the six statements the survey assesses</li>
-        <li><b>Interpret</b> your assessment score and set a target for six months</li>
+        <li><b>Interpret</b> your assessment results and set a target for the 90-day pulse</li>
       </ul>
       <p class="meta-line">About 35 minutes &middot; Self-paced &middot; Recorded in Oracle Learning</p>
     </aside>
@@ -1034,7 +1036,7 @@ html.paged .idea .try .scn{ margin-top:0; }
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Yukl&rsquo;s four categories</span></span>
       <h2>One picture for the whole job: four <em class="s">categories</em> of behavior.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>Gary Yukl&rsquo;s four categories of manager behavior and the fifteen behaviors inside them, which Vanderbilt looks for you to embody. Nothing new to memorize; it is the same work, sorted.</p><p><b>Why it matters</b>Every manager does all four, every week. The skill is noticing which one this week needs. The survey you took before this course, and take again after, assesses six statements built from these behaviors.</p></div>
+    <div class="ask"><p><b>What you will learn</b>Gary Yukl&rsquo;s four categories of manager behavior and the fifteen behaviors inside them, which Vanderbilt looks for you to embody. Nothing new to memorize; it is the same work, sorted.</p><p><b>Why it matters</b>Every manager does all four, every week. The skill is noticing which one this week needs. The survey you took before Manager Voyage, and take again 90 days after completing it, assesses six statements informed by these behaviors.</p></div>
     <div class="job-tabs" role="tablist" aria-label="The four categories">
       <button type="button" role="tab" aria-selected="true" data-job="over">The four categories</button>
       <button type="button" role="tab" aria-selected="false" data-job="task">Task-oriented &middot; Get the work done</button>
@@ -1061,8 +1063,8 @@ html.paged .idea .try .scn{ margin-top:0; }
     </div>
     <p class="fw-status" id="fwStatus" role="status" aria-live="polite">0 of 4 categories opened.</p>
     <div class="std-box reveal" id="stdBox" aria-labelledby="stdH">
-      <p class="mono" id="stdH">What the survey assesses &middot; six statements, before and after</p>
-      <p class="std-lead">The Manager Effectiveness Assessment you took before this course asks you to rate yourself on six statements. You rate them again after. Each statement is built from the Yukl behaviors on this page, so the course and the survey measure the same thing.</p>
+      <p class="mono" id="stdH">What the survey assesses &middot; six statements, before and 90 days after</p>
+      <p class="std-lead">The Manager Effectiveness Assessment you took before Manager Voyage asks you to rate yourself on six statements, from never to consistently. You rate the same six again 90 days after you complete Manager Voyage, and once more at six months if you choose. The statements are informed by Yukl&rsquo;s leadership-behavior framework, the categories on this page.</p>
       <div class="std6">
         <div><b>Create clarity</b><em>I make priorities, expectations, and what good looks like clear.</em><span>Task-oriented &middot; Clarifying, Planning, Envisioning change</span></div>
         <div><b>Coach and develop</b><em>I give timely feedback and help people build capability through their work.</em><span>Task and relations &middot; Monitoring operations, Developing</span></div>
@@ -1196,13 +1198,13 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="survey-grid mea">
       <div>
         <div class="survey">
-          <span class="sk">Taken before this course &middot; again in six months</span>
+          <span class="sk">Taken before Manager Voyage &middot; again 90 days after completion</span>
           <div>
             <h4>The Manager Effectiveness Assessment</h4>
-            <p>Six statements you rate yourself on, before this course and again after: create clarity, coach and develop, build trust, empower others, address issues, lead change. Each is built from the Yukl behaviors this course teaches. Your score and feedback came by email. <span id="meaEmailHint">Search your inbox for the results message from the Futures Learning Hub.</span></p>
+            <p>Six statements you rate yourself on, from never to consistently, before Manager Voyage and again 90 days after you complete it: create clarity, coach and develop, build trust, empower others, address issues, lead change. The statements are informed by Yukl&rsquo;s leadership-behavior framework, which this course teaches. Your score and feedback came by email. <span id="meaEmailHint">Search your inbox for the results message from the Futures Learning Hub.</span></p>
           </div>
         </div>
-        <div class="week" style="margin-top:12px"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. Over this course and the micro modules that follow, the aim is a higher rating on all six when you take it again.</div>
+        <div class="week" style="margin-top:12px"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. Over this course and the micro modules that follow, the aim is a higher rating on all six at 90 days, and again at the optional six-month pulse.</div>
       </div>
       <div class="route reveal" id="meaBox">
         <div class="route-head">
@@ -1253,7 +1255,7 @@ html.paged .idea .try .scn{ margin-top:0; }
       <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one habit this week</h3><p id="ns2p">Pick one habit from this course. Attach it to something you already do every week, such as your Monday 1:1s or your Friday wrap-up, and do it once, on purpose.</p></div><span class="chip">This week</span></div>
       <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>The Systems and Vanderbilt &amp; Nashville modules</h3><p>UKG and Oracle, and the mission: the micro modules in Oracle Learning that My voyage lists first.</p></div><span class="chip">By Day 30</span></div>
       <div class="hw-step"><span class="hw-no" aria-hidden="true">04</span><div><h3>Compliance courses, then the People and Processes modules</h3><p>Your compliance courses by their deadlines, then the people obligations and the processes that run the role.</p></div><span class="chip">By Day 60</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">05</span><div><h3>Take the assessment again</h3><p>Compare the score with the one you started with. Once Day 60 is complete, the cohort invitation follows from Oracle.</p></div><span class="chip">In six months</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">05</span><div><h3>Take the assessment again</h3><p>The same six statements, 90 days after you complete Manager Voyage. Compare with where you started. Once Day 60 is complete, the cohort invitation follows from Oracle.</p></div><span class="chip">90 days after</span></div>
     </div>
     <div class="habit-box reveal"><span class="mono">Step 02 &middot; Pick the one habit you will practice this week</span><div class="habit-pick" id="habitPick" role="group" aria-label="Pick one habit"></div></div>
     <div class="evidence reveal" id="tell-leader">
@@ -1339,7 +1341,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="oracle-modal">
     <span class="mono">Foundation complete</span>
     <h2 id="oracleTitle">You have completed the foundation.</h2>
-    <p id="oracleBody">Every activity is done. Mark the course complete on My voyage; your micro modules are next. The assessment comes back around six months from now.</p>
+    <p id="oracleBody">Every activity is done. Mark the course complete on My voyage; your micro modules are next. The assessment comes back around 90 days after you complete Manager Voyage.</p>
     <div class="oracle-actions">
       <button type="button" class="btn btn-gold" id="oracleGo">Done</button>
       <button type="button" class="btn btn-ghost btn-sm" id="oracleLater">Stay here</button>
@@ -1352,10 +1354,10 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="../assets/js/program-data.js?v=20260916b"></script>
 <script src="../assets/js/scorm.js?v=20260912p"></script>
 <script src="../assets/js/oracle.js?v=20260912p"></script>
-<script src="narration-scripts.js?v=20260916d"></script>
+<script src="narration-scripts.js?v=20260916e"></script>
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20260916c"></script>
+<script src="app.js?v=20260916d"></script>
 </body>
 </html>
