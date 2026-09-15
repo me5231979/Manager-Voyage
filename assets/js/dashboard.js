@@ -304,6 +304,7 @@
     if (showPreview) { $('#pvName').value = profile.name || ''; $('#pvState').value = profile.state || ''; $('#pvStart').value = profile.startDate || ''; }
 
     $('#syncBtn').hidden = !CFG.profileEndpoint;
+    $('#godBtn').hidden = !CFG.previewMode;
     var portalUrl = CFG.portalUrl || P.portal.url;
     var pb = $('#portalBtn');
     if (portalUrl) { pb.href = portalUrl; pb.classList.remove('is-disabled'); pb.textContent = 'Manager Portal'; }
@@ -353,6 +354,8 @@
       return '<div class="card who__card' + (c.sameDay ? ' who__card--urgent' : '') + '"><span class="card__kicker">' + (c.sameDay ? 'Same day' : 'Everyday help') + '</span><h3>' + esc(c.role) + '</h3>' +
         '<p><b>What they do.</b> ' + esc(c.desc) + '</p>' + (c.when ? '<p><b>When.</b> ' + esc(c.when) + '</p>' : '') + (c.how ? '<p><b>How.</b> ' + esc(c.how) + '</p>' : '') + link + '</div>';
     }).join('');
+
+    try { document.dispatchEvent(new CustomEvent('mv-rendered')); } catch (e) {}
 
     /* record line */
     var oracleN = Object.keys(profile.completions).filter(function (k) { return profile.completions[k].source === 'oracle'; }).length;
@@ -461,6 +464,22 @@
 
   $('#beginBtn').addEventListener('click', function (e) { e.preventDefault(); if (profile.state) show('dashboard'); else toast('Choose where your employees work first.'); });
   $('#changeStateBtn').addEventListener('click', function () { profile.state = ''; profile.stateSource = 'none'; area = null; show('welcome'); });
+  /* God mode, for testing: every item on the path is marked complete (self-reported, tagged god) so the
+     Day 31 to 60 tracks, the Day 60 milestone, and the cohort seat request all unlock. Off removes those marks. */
+  function godOn() { return Object.keys(profile.completions).some(function (k) { return profile.completions[k].god; }); }
+  function godPaint() { var b = $('#godBtn'); if (!b) return; var on = godOn(); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.textContent = on ? 'God mode: on' : 'God mode'; }
+  $('#godBtn').addEventListener('click', function () {
+    if (godOn()) {
+      Object.keys(profile.completions).forEach(function (k) { if (profile.completions[k].god) delete profile.completions[k]; });
+      scoDone = false; save(); renderDashboard(); toast('God mode off. Test completions cleared.');
+    } else {
+      if (!profile.state) { profile.state = 'TN'; profile.stateSource = 'self'; }
+      requiredItems().forEach(function (it) { if (!isDone(it.id)) profile.completions[it.id] = { at: todayIso(), source: 'self', god: true }; });
+      area = 'cohort'; save(); renderDashboard(); toast('God mode on. Everything is marked complete; the cohort is unlocked.');
+    }
+    godPaint();
+  });
+  document.addEventListener('mv-rendered', godPaint);
   $('#renameBtn').addEventListener('click', function () {
     var n = window.prompt('What should we call you?', profile.name || '');
     if (n && n.trim()) { profile.name = n.trim(); profile.firstName = MVProfile.firstName(n); profile.source = 'self'; save(); renderWelcome(); }

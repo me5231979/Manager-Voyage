@@ -382,3 +382,8 @@ a.card--link:hover h3 { text-decoration-color: var(--vu-oak); }
 .cw__link { display: inline-block; margin-top: .3rem; font: 600 .8rem var(--font-sans); color: var(--vu-oak); text-decoration: underline; text-underline-offset: 3px; }
 .cw__soon { display: inline-block; margin-top: .3rem; font: 600 .78rem var(--font-sans); color: #8a8a8a; }
 @media (max-width: 640px) { .cwr { grid-template-columns: 1fr; } .cw__head { grid-template-columns: 1fr; } }
+
+/* testing only */
+.btn--god { background: transparent; color: var(--vu-oak); border: 1px dashed rgba(148,110,36,.7); }
+.btn--god:hover { background: rgba(207,174,112,.16); box-shadow: none; }
+.btn--god[aria-pressed="true"] { background: var(--vu-black); color: var(--vu-gold-flat); border: 1px solid var(--vu-black); }
