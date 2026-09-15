@@ -344,3 +344,41 @@ a.card--link:hover h3 { text-decoration-color: var(--vu-oak); }
 
 /* ---------- footer tweaks ---------- */
 .footer__legal span b { color: rgba(255,255,255,.8); }
+
+/* ---------- the cohort: weekly rhythm and week cards ---------- */
+.rhythm { display: grid; gap: .9rem; margin-top: .9rem; grid-template-columns: 1fr; }
+@media (min-width: 720px) { .rhythm { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .rhythm { grid-template-columns: repeat(4, 1fr); } }
+.rhythm__step { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--vu-gold-flat); border-radius: var(--radius); padding: 1rem 1.1rem 1rem; }
+.rhythm__when { font: 700 .7rem var(--font-condensed); letter-spacing: .08em; text-transform: uppercase; color: var(--vu-oak); }
+.rhythm__step h4 { font-family: var(--font-serif); font-weight: 400; font-size: 1.12rem; line-height: 1.2; margin: .25rem 0 .35rem; }
+.rhythm__step h4 small { font: 600 .74rem var(--font-sans); color: var(--ink-soft); }
+.rhythm__step p { font-size: .84rem; color: var(--ink-soft); margin: 0; }
+.rhythm__len { display: inline-block; margin-top: .6rem; font: 600 .74rem var(--font-sans); color: var(--vu-black); background: rgba(207,174,112,.18); border-radius: 3px; padding: .12rem .5rem; }
+.cw { margin-top: 1rem; background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--vu-gold-flat); border-radius: var(--radius); }
+.cw__head { display: grid; grid-template-columns: auto 1fr; gap: .2rem 1rem; align-items: start; padding: 1rem 1.2rem .9rem; border-bottom: 1px solid var(--line); }
+.cw__no { font: 700 1.4rem var(--font-condensed); color: var(--vu-oak); line-height: 1; padding-top: .15rem; }
+.cw__head h3 { font-family: var(--font-serif); font-weight: 400; font-size: 1.3rem; line-height: 1.2; }
+.cw__when { font: 600 .78rem var(--font-sans); color: var(--ink-soft); margin-left: .4rem; }
+.cw__head p { font-size: .88rem; color: var(--ink-soft); margin-top: .25rem; max-width: 78ch; }
+.cw__chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .55rem; }
+.cw__chip { font: 700 .66rem var(--font-condensed); letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 3px; padding: .2rem .5rem; color: var(--ink-soft); }
+.cw__chip--live { background: var(--vu-black); color: #fff; border-color: var(--vu-black); }
+.cwr { display: grid; grid-template-columns: 160px 1fr; gap: .3rem 1.2rem; padding: .85rem 1.2rem; border-top: 1px solid var(--line); }
+.cwr:first-child { border-top: 0; }
+.cwr--live { background: rgba(207,174,112,.12); }
+.cwr__k { font: 700 .72rem var(--font-condensed); letter-spacing: .08em; text-transform: uppercase; color: var(--vu-oak); padding-top: .15rem; }
+.cwr__k small { display: block; font: 500 .76rem var(--font-sans); letter-spacing: 0; text-transform: none; color: var(--ink-soft); margin-top: .1rem; }
+.cwr__v { min-width: 0; font-size: .88rem; color: var(--ink-soft); }
+.cwr__t { display: block; font-family: var(--font-serif); font-weight: 400; font-size: 1.05rem; color: var(--vu-black); line-height: 1.25; margin-bottom: .2rem; }
+.cwr__v p { margin: 0; max-width: 72ch; }
+.cw__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.cw__list li b { display: block; color: var(--vu-black); font-weight: 600; }
+.cw__list--plain { list-style: disc; padding-left: 1.1rem; gap: .2rem; }
+.cw__list--plain li::marker { color: var(--vu-oak); }
+.cw__by { display: block; font-size: .78rem; color: var(--ink-soft); }
+.cw__note { display: block; font-size: .84rem; color: var(--ink-soft); margin-top: .1rem; max-width: 72ch; }
+.cw__opt { font: 600 .7rem var(--font-sans); color: var(--vu-oak); border: 1px solid rgba(148,110,36,.4); border-radius: 3px; padding: .05rem .35rem; margin-left: .3rem; vertical-align: middle; }
+.cw__link { display: inline-block; margin-top: .3rem; font: 600 .8rem var(--font-sans); color: var(--vu-oak); text-decoration: underline; text-underline-offset: 3px; }
+.cw__soon { display: inline-block; margin-top: .3rem; font: 600 .78rem var(--font-sans); color: #8a8a8a; }
+@media (max-width: 640px) { .cwr { grid-template-columns: 1fr; } .cw__head { grid-template-columns: 1fr; } }

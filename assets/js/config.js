@@ -50,6 +50,8 @@ window.MV_CONFIG = {
 
   /* Cohort seat request link. */
   cohortRequestUrl: null,
+  /* Cohort tool links: the manager-facing SparkWise workspace, Yoodli, the Playbook template, the AI agents. Empty until supplied. */
+  cohortLinks: { sparkwise: '', yoodli: '', playbook: '', agents: '' },
 
   /* Contact shown in the footer. */
   contactEmail: null,

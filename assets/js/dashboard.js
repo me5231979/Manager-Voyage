@@ -221,19 +221,50 @@
     var ok = bothRequiredDone();
     var req = CFG.cohortRequestUrl || P.cohort.requestUrl;
     var open = requiredItems().filter(function (it) { return !isDone(it.id); }).length;
+    var L = CFG.cohortLinks || {};
+    var C = P.cohort;
+    function chip(t, cls) { return '<span class="cw__chip' + (cls ? ' ' + cls : '') + '">' + esc(t) + '</span>'; }
+    function link(url, label) { return url ? '<a class="cw__link" href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(label) + '</a>' : '<span class="cw__soon">' + esc(label) + ' · link coming</span>'; }
+    function row(k, sub, body, cls) { return '<div class="cwr' + (cls ? ' ' + cls : '') + '"><div class="cwr__k">' + esc(k) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</div><div class="cwr__v">' + body + '</div></div>'; }
+    function weekCard(w) {
+      var chips = [];
+      if (w.n === 0) chips.push(chip('Online · own time'));
+      if (w.live && w.n === 1) chips.push(chip('Hybrid kickoff · 1 hour', 'cw__chip--live'));
+      if (w.live && w.n === 4) chips.push(chip('Hybrid capstone · 2 hours', 'cw__chip--live'));
+      if (w.coreNote) chips.push(chip('Core module as prework'));
+      if (w.n > 0 && !w.studio) chips.push(chip('No Scenario Studio'));
+      if (w.discussion) chips.push(chip('Discussion · ' + w.discussion.mins + ' min · virtual'));
+      var rows = '';
+      if (w.live && w.n === 1) rows += row('Hybrid', w.live.when, '<b class="cwr__t">' + esc(w.live.title) + '.</b><p>' + esc(w.live.desc) + '</p>', 'cwr--live');
+      if (w.core) rows += row('Core module', w.n === 0 ? 'Before the kickoff' : 'By Monday', '<ul class="cw__list">' + w.core.map(function (c) {
+        return '<li><b>' + esc(c.title) + '</b>' + (c.optional ? ' <span class="cw__opt">optional</span>' : '') + '<span class="cw__by">' + esc(c.by) + '</span>' + (c.note ? '<span class="cw__note">' + esc(c.note) + '</span>' : '') + link(c.url, 'Open in Oracle Learning') + '</li>';
+      }).join('') + '</ul>');
+      if (w.coreNote) rows += row('Core module', 'Done as prework', '<p>' + esc(w.coreNote) + '</p>');
+      if (w.lab) rows += row('Learning Lab', 'SparkWise · Tuesday or Wednesday · 45 min', '<b class="cwr__t">' + esc(w.lab.title) + '.</b><p>' + esc(w.lab.desc) + '</p>' + link(L.sparkwise, 'Open SparkWise'));
+      if (w.studio) rows += row('Scenario Studio', 'Yoodli · Thursday · 15 min', '<b class="cwr__t">' + esc(w.studio.title) + '.</b><p>' + esc(w.studio.desc) + '</p>' + link(L.yoodli, 'Open Yoodli'));
+      if (w.discussion) rows += row('Discussion', 'Friday · ' + w.discussion.mins + ' min · virtual · FLH facilitated', '<ul class="cw__list cw__list--plain">' + w.discussion.items.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>');
+      if (w.live && w.n === 4) rows += row('Hybrid', w.live.when, '<b class="cwr__t">' + esc(w.live.title) + '.</b><p>' + esc(w.live.desc) + '</p>', 'cwr--live');
+      if (w.playbook) rows += row('Playbook', w.n === 0 ? 'Bring it to the kickoff' : w.n === 4 ? 'Due before the capstone' : 'Due Sunday', '<b class="cwr__t">' + esc(w.playbook.title) + '.</b><p>' + esc(w.playbook.desc) + '</p>' + (L.playbook ? link(L.playbook, 'Open the Playbook template') : ''));
+      if (w.extra) rows += row('Before you start', '10 min', '<b class="cwr__t">' + esc(w.extra.title) + '.</b><p>' + esc(w.extra.desc) + '</p>');
+      return '<article class="cw"><div class="cw__head"><span class="cw__no">W' + w.n + '</span><div><h3>' + esc(w.title) + (w.when ? ' <span class="cw__when">' + esc(w.when) + '</span>' : '') + '</h3><p>' + esc(w.outcome) + '</p><div class="cw__chips">' + chips.join('') + '</div></div></div><div class="cw__rows">' + rows + '</div></article>';
+    }
     return '<div class="panel__head"><h2>The four-week <em>cohort</em>.</h2><span>Component 03 · Optional but recommended · Quarterly · 100 seats</span></div>' +
-      '<p class="panel__lead">' + esc(P.cohort.summary) + '</p>' +
+      '<p class="panel__lead">' + esc(C.summary) + '</p>' +
+      '<p class="panel__lead">' + esc(C.prerequisite) + '</p>' +
       '<div class="eligible' + (ok ? '' : ' eligible--locked') + '"><div>' + (ok
-        ? '<b>You are eligible, and Manager Foundations is already complete.</b> The cohort is optional. Oracle sends the next quarterly invitation; you can also ask for a seat now.'
-        : '<b>' + open + ' item' + (open === 1 ? '' : 's') + ' on your Day 60 path to go.</b> ' + esc(P.cohort.eligibility) + ' Units outside the central budget are billed per seat.') + '</div>' +
+        ? '<b>You are eligible, and Manager Foundations is already complete.</b> The cohort is optional but recommended. Oracle sends the next quarterly invitation; you can also ask for a seat now.'
+        : '<b>' + open + ' item' + (open === 1 ? '' : 's') + ' on your Day 60 path to go.</b> ' + esc(C.eligibility) + ' Units outside the central budget are billed per seat.') + '</div>' +
       (ok && req ? '<a class="btn" href="' + esc(req) + '" target="_blank" rel="noopener">Request a seat</a>' : ok ? '<span class="btn is-disabled">Request link coming soon</span>' : '<span class="pill pill--locked">Unlocks at Day 60 completion</span>') + '</div>' +
-      '<div class="cardgrid">' + P.cohort.weeks.map(function (w) {
-        return '<div class="card"><span class="card__kicker">Week ' + w.n + '</span><h3>' + esc(w.title) + '</h3><p>' + esc(w.desc) + '</p><p><b>' + esc(w.outcome) + '</b></p></div>';
-      }).join('') +
+      '<div class="lane"><div class="lane__title"><h3>The weekly rhythm</h3><span>The same four beats, in the same order, every week</span></div>' +
+      '<div class="rhythm">' + C.rhythm.map(function (r, i) {
+        return '<div class="rhythm__step"><span class="rhythm__when">' + esc(r.when) + '</span><h4>' + esc(r.beat) + (r.tool ? ' <small>in ' + esc(r.tool) + '</small>' : '') + '</h4><p>' + esc(r.desc) + '</p><span class="rhythm__len">' + esc(r.mins) + '</span></div>';
+      }).join('') + '</div><p class="lane__note">' + esc(C.playbookNote) + '</p></div>' +
+      '<div class="lane"><div class="lane__title"><h3>Week by week</h3><span>Prework, then four weeks</span></div>' + C.weeks.map(weekCard).join('') + '</div>' +
+      '<div class="cardgrid">' +
       '<div class="card card--wide"><span class="card__kicker">What you produce</span><h3>Three deliverables, presented at the capstone</h3>' +
-      P.cohort.deliverables.map(function (d) { return '<p><b>' + esc(d.title) + '.</b> ' + esc(d.desc) + '</p>'; }).join('') + '</div>' +
+      C.deliverables.map(function (d) { return '<p><b>' + esc(d.title) + '.</b> ' + esc(d.desc) + '</p>'; }).join('') + '</div>' +
       '<div class="card card--wide"><span class="card__kicker">Tools</span><h3>What powers the four weeks</h3>' +
-      P.cohort.tools.map(function (t) { return '<p><b>' + esc(t.name) + '.</b> ' + esc(t.desc) + '</p>'; }).join('') + '</div>' +
+      C.tools.map(function (t) { return '<p><b>' + esc(t.name) + '.</b> ' + esc(t.desc) + (L[t.key] ? ' <a class="cw__link" href="' + esc(L[t.key]) + '" target="_blank" rel="noopener">Open</a>' : '') + '</p>'; }).join('') + '</div>' +
       '</div>';
   }
 
