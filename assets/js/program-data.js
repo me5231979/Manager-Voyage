@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-15d',
+  version: '2026-09-15e',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -205,7 +205,6 @@ window.MV_PROGRAM = {
         extra: { title: 'The pulse, and the calendar', desc: 'Three questions on how confident you feel in the four conversations the cohort rehearses, asked again at the capstone. Then accept the calendar holds for all four weeks.' } },
       { n: 1, title: 'What it means to manage', outcome: 'Establishes the why before the how. By Friday you can say, in one sentence, what your team can expect from you.',
         live: { title: 'Kickoff, one hour, hybrid', when: 'Monday, in the room or online, location TBD', desc: 'The cohort meets. Management identity in one story from a Vanderbilt manager a year in, cohort norms, the Playbook introduced, and your Philosophy sentence read aloud and sharpened.' },
-        coreNote: 'Done as prework: New Manager Foundations.',
         lab: { title: 'Psychological safety: make the truth cheap to tell', desc: 'Live case: a team member brought bad news late, and the manager\'s first reaction decided whether it would happen again. Name the one reaction on your own team you would change.' },
         studio: null,
         discussion: { mins: 60, items: ['Debrief the kickoff and the Learning Lab: what surprised you.', 'Read your Philosophy sentence; a peer answers what your team would notice by Friday if it were true.', 'Commit: one thing you will say to your team on Monday.'] },
