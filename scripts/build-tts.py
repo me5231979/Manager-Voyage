@@ -41,8 +41,8 @@ def speak(text, dest):
             if os.path.getsize(dest) > 1000: return
         except urllib.error.HTTPError as e:
             msg = e.read()[:400].decode('utf-8', 'replace')
-            if e.code in (401, 403): raise SystemExit('ElevenLabs refused the key (%d): %s' % (e.code, msg))
             if e.code == 402 or 'quota' in msg.lower(): raise Quota('ElevenLabs quota exhausted: ' + msg)
+            if e.code in (401, 403): raise SystemExit('ElevenLabs refused the key (%d): %s' % (e.code, msg))
             sys.stderr.write('attempt %d failed (%d): %s\n' % (attempt + 1, e.code, msg))
         except Exception as e:
             sys.stderr.write('attempt %d failed: %s\n' % (attempt + 1, e))

@@ -39,7 +39,13 @@ jobs:
           esac
           if git diff --cached --quiet; then echo "No changes"; else git commit -m "$msg"; git pull --rebase -X theirs origin main; git push origin HEAD:main; fi
       - name: Publish to the live site
-        run: git push origin HEAD:gh-pages
+        run: |
+          git fetch -q origin gh-pages
+          if git merge-base --is-ancestor origin/gh-pages HEAD; then
+            git push origin HEAD:gh-pages
+          else
+            echo "gh-pages holds commits that main does not; leaving the live site alone."
+          fi
       - name: Report
         if: steps.gen.outcome == 'failure'
         run: echo "The ElevenLabs build did not finish. See the Generate and build step." && exit 1
