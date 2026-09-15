@@ -172,9 +172,11 @@ function narrPlay(k){
 if(bbListen) bbListen.addEventListener('click', function(){ if(narr.playing){ narr.on = false; narrStop(); } else { narr.on = true; narrPlay(); } });
 /* A section with its own clip: play it when the learner opens that section (if they are listening),
    or when they tap its speaker. Tapping again stops it. Any of these stops the page narration first. */
-function narrSub(k, force){
+function narrSub(k, force, restart){
   if(!NARR[k]){ if(force) toast('No narration for this one.'); else if(narr.playing) narrStop(); return; }
-  if(narr.playing && narr.key === k){ narrStop(); return; }
+  /* opening a section always reads it from the top; the remembered spot is only for the Listen toggle in the bottom bar */
+  if(restart){ delete narrPos[k]; narrPosSave(); }
+  else if(narr.playing && narr.key === k){ narrStop(); return; }
   if(force) narr.on = true;
   if(narr.on || narr.auto) narrPlay(k); else if(narr.playing) narrStop();
 }
@@ -758,7 +760,7 @@ var IDEAS = [
     tabs.forEach(function(t){ var on = t.getAttribute('data-job') === k; t.setAttribute('aria-selected', on ? 'true' : 'false'); if(on) t.classList.add('seen'); });
     panes.forEach(function(p){ var on = p.getAttribute('data-job') === k; p.classList.toggle('cur', on); p.hidden = !on; });
     var pg = document.querySelector('.page.cur'); if(pg) pg.scrollTop = 0;
-    if(k !== 'over' && NARR[k + '/1']) narrSub(k + '/1'); else if(narr.playing) narrStop();
+    if(k !== 'over' && NARR[k + '/1']) narrSub(k + '/1', false, true); else if(narr.playing) narrStop();
   }
   box.addEventListener('click', function(e){
     var t = e.target.closest('.job-tabs button[data-job]') || e.target.closest('#fwMap .fw-card[data-job]');
