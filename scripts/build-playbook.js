@@ -145,7 +145,7 @@ ${pulseRows()}
 </div>
 <h3>Before the kickoff</h3>
 ${check(['New Manager Foundations watched in Oracle Learning', 'The calendar holds accepted: the Learning Lab slot, the Scenario Studio, and the Friday discussion, all four weeks', 'The kickoff date, time, and room or link confirmed', 'The first sentence above written and ready to read aloud'])}
-<div class="box" style="margin-top:12pt"><b>Which of the four jobs have you been avoiding?</b> Get the work done through your team · Take care of your people · Make things better · Connect your team. Name it here; it becomes your thread through the four weeks.</div>
+<div class="box" style="margin-top:12pt"><b>Which of Yukl&rsquo;s four categories have you been avoiding?</b> Task-oriented, get the work done through your team · Relations-oriented, take care of your people · Change-oriented, make things better · External, connect your team. Name it here; it becomes your thread through the four weeks.</div>
 ${lines(2)}
 </section>`);
 
@@ -212,10 +212,10 @@ ${field('The performance conversation I rehearsed, then held', 'Honest about the
 H.push(`<section class="page">
 ${weekHead('', 'Integrated Management Model', 'Capstone deliverable · one page', 'How the four weeks connect for you. Synthesis, not attendance: one habit per job, in your words, and the sentence at the center that holds them together.')}
 <div class="model">
-<div class="q"><span class="eyebrow">Job 1 · Get the work done, through your team</span><b>Plan it, say it, check it, fix it</b><span class="small">My habit, and the week it comes from:</span>${lines(5)}</div>
-<div class="q"><span class="eyebrow">Job 2 · Take care of your people</span><b>Listen and help, grow them, thank them, trust them</b><span class="small">My habit, and the week it comes from:</span>${lines(5)}</div>
-<div class="q"><span class="eyebrow">Job 3 · Make things better</span><b>Explain the why, describe where we are going, let people try, look back</b><span class="small">My habit, and the week it comes from:</span>${lines(5)}</div>
-<div class="q"><span class="eyebrow">Job 4 · Connect your team</span><b>Know the people, watch for what is coming, speak up for your team</b><span class="small">My habit, and the week it comes from:</span>${lines(5)}</div>
+<div class="q"><span class="eyebrow">Task-oriented · Get the work done, through your team</span><b>Plan it, say it, check it, fix it</b><span class="small">My habit, and the week it comes from:</span>${lines(5)}</div>
+<div class="q"><span class="eyebrow">Relations-oriented · Take care of your people</span><b>Listen and help, grow them, thank them, trust them</b><span class="small">My habit, and the week it comes from:</span>${lines(5)}</div>
+<div class="q"><span class="eyebrow">Change-oriented · Make things better</span><b>Explain the why, describe where we are going, let people try, look back</b><span class="small">My habit, and the week it comes from:</span>${lines(5)}</div>
+<div class="q"><span class="eyebrow">External · Connect your team</span><b>Know the people, watch for what is coming, speak up for your team</b><span class="small">My habit, and the week it comes from:</span>${lines(5)}</div>
 </div>
 <div class="center"><span class="eyebrow">The sentence at the center</span><p class="small">How I manage, in one sentence. It should sound like the Philosophy from week 1, sharpened by three more weeks.</p>${lines(2)}</div>
 </section>`);

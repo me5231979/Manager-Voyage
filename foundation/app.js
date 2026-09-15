@@ -294,7 +294,7 @@ var SECTIONS = [
   { k:'safe',      no:'02', name:'Five ideas at work',      how:'Find the best response in each idea’s moment' },
   { k:'year',      no:'03', name:'Your first year',         how:'Open all four groups' },
   { k:'calls',     no:'04', name:'Who handles what',        how:'Decide five situations' },
-  { k:'welcome',   no:'05', name:'The four jobs',           how:'Open all four' },
+  { k:'welcome',   no:'05', name:'The four categories',     how:'Open all four' },
   { k:'task',      no:'06', name:'Get the work done',       how:'Flip all four cards' },
   { k:'relations', no:'07', name:'Take care of your people', how:'Flip all four cards' },
   { k:'change',    no:'08', name:'Make things better',      how:'Flip all four cards' },
@@ -459,7 +459,7 @@ function flipSeen(btn){
   var st = $('.flip-status', sec); if(st) st.textContent = n + ' of ' + all.length + ' cards flipped.' + (n === all.length ? ' Activity complete.' : '');
   if(n === all.length) progDone(sec.id);
 }
-[{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', narr:'welcome/j', done:' Activity complete. The four tabs above take one job each.' },
+[{ map:'#fwMap', status:'#fwStatus', noun:'categories', prog:'welcome', narr:'welcome/j', done:' Activity complete. The four tabs above take one category each.' },
  { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:'year', narr:'year/g', done:' Activity complete. Turn the page to learn who handles what.' },
  { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, narr:null, done:'' }].forEach(function(cfg){
   var map = $(cfg.map), status = $(cfg.status); if(!map) return;
@@ -549,7 +549,7 @@ function buildScenario(el){
 $$('[data-scn]').forEach(buildScenario);
 /* a stepper of scenarios, one at a time; done when the best response is found in each */
 var CALL_SETS = { jobs:['task','relations','change','external'] };
-var CALL_HEADS = { task:'Job 1 · Get the work done', relations:'Job 2 · Take care of your people', change:'Job 3 · Make things better', external:'Job 4 · Connect your team' };
+var CALL_HEADS = { task:'Task-oriented · Get the work done', relations:'Relations-oriented · Take care of your people', change:'Change-oriented · Make things better', external:'External · Connect your team' };
 var CALL_PROG = { jobs:{ prog:'yourcall', noun:'situations', status:'#jobsStatus', narr:'yourcall/s' } };
 function buildCalls(el){
   var name = el.getAttribute('data-calls'), keys = CALL_SETS[name]; if(!keys) return;
@@ -743,7 +743,7 @@ var IDEAS = [
 })();
 
 
-/* ══════════ the four jobs: one page, five tabs, each job with its own clip ══════════ */
+/* ══════════ the four categories: one page, five tabs, each category with its own clip ══════════ */
 (function(){
   var box = $('#welcome'); if(!box) return;
   var tabs = $$('.job-tabs button[data-job]', box), panes = $$('.job-pane', box); if(!tabs.length) return;
@@ -760,8 +760,8 @@ var IDEAS = [
 /* ══════════ next steps: pick one habit; it lands in the message to your manager ══════════ */
 (function(){
   var box = $('#habitPick'), p = $('#ns2p'), tell = $('#tellText'), copy = $('#copyTell'); if(!box) return;
-  var HABITS = [['Job 1', ['Plan it', 'Say it', 'Check it', 'Fix it']], ['Job 2', ['Listen and help', 'Grow them', 'Thank them', 'Trust them']],
-    ['Job 3', ['Explain the why', 'Describe where you are going', 'Let people try', 'Look back']], ['Job 4', ['Know the people', 'Watch for what is coming', 'Speak up for your team']]];
+  var HABITS = [['Task-oriented', ['Plan it', 'Say it', 'Check it', 'Fix it']], ['Relations-oriented', ['Listen and help', 'Grow them', 'Thank them', 'Trust them']],
+    ['Change-oriented', ['Explain the why', 'Describe where you are going', 'Let people try', 'Look back']], ['External', ['Know the people', 'Watch for what is coming', 'Speak up for your team']]];
   box.innerHTML = HABITS.map(function(g){ return '<span class="hp-job">' + g[0] + '</span>' + g[1].map(function(h){ return '<button type="button" data-habit="' + esc(h) + '" aria-pressed="false">' + esc(h) + '</button>'; }).join(''); }).join('');
   var BASE = 'I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].';
   function paint(h){
@@ -806,7 +806,7 @@ var TURNS = [
   { sel:'#yearMap',     prog:'year',     text:'Tap each group to open it and hear it.' },
   { sel:'#simBox',      prog:null,       text:'Pick a situation to see the first move and who handles what.' },
   { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations. Tap the first thing you would do.' },
-  { sel:'#fwMap',       prog:'welcome',  text:'Tap each of the four jobs to open it.' },
+  { sel:'#fwMap',       prog:'welcome',  text:'Tap each of the four categories to open it.' },
   { sel:'#task .flip-grid',      prog:'task',      text:'Flip each card: what to stop, what to do instead.' },
   { sel:'#relations .flip-grid', prog:'relations', text:'Flip each card: what to stop, what to do instead.' },
   { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card: what to stop, what to do instead.' },
@@ -881,7 +881,7 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
 })();
 
 /* ══════════ module 5: your assessment results → starting point and module order ══════════ */
-var CATS = { task:{ name:'Get the work done', short:'Job 1' }, relations:{ name:'Take care of your people', short:'Job 2' }, change:{ name:'Make things better', short:'Job 3' }, external:{ name:'Connect your team', short:'Job 4' } };
+var CATS = { task:{ name:'Get the work done', short:'Task-oriented' }, relations:{ name:'Take care of your people', short:'Relations-oriented' }, change:{ name:'Make things better', short:'Change-oriented' }, external:{ name:'Connect your team', short:'External' } };
 /* Your assessment: review the results email, or take the assessment. One tap marks the activity done. */
 (function(){
   var box = $('#meaChoice'), out = $('#meaOut'); if(!box || !out) return;
@@ -909,7 +909,7 @@ var QUIZ = [
   { seg:'Five ideas', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
   { seg:'Five ideas', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
   { seg:'Who handles what', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
-  { seg:'The four jobs', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
+  { seg:'The four categories', q:'Yukl sorts what effective managers do into four categories of behavior. In plain words, which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Task-oriented, relations-oriented, change-oriented, and external: get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
 ];/* the right answer sits at a different position on each question */
 (function(){ var POS = [0, 2, 3, 1, 2]; QUIZ.forEach(function(q, i){ var t = POS[i]; if(t === undefined || t === q.a || t >= q.opts.length) return; var o = q.opts.splice(q.a, 1)[0]; q.opts.splice(t, 0, o); q.a = t; }); })();
 

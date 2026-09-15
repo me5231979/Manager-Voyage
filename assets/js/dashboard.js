@@ -66,7 +66,7 @@
       desc: 'Fourteen questions on how often you do the habits the course teaches. Your score and feedback come by email and set your starting point.',
       why: 'Taken before the Foundation course so the course meets you where you are, and again in six months to see the change.',
       dueIso: addDays(profile.startDate, 3), dueLabel: 'Before the Foundation course' };
-    var out = [mea, Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The web course, about thirty-five minutes: what changed, five ideas, your first year, who handles what, the four jobs of a manager, and your assessment results. Narrated, with a short activity on every page and a quick check.', dueIso: addDays(profile.startDate, 7), dueLabel: 'After the assessment, by Day 7' })];
+    var out = [mea, Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The web course, about thirty-five minutes: what changed, five ideas, your first year, who handles what, Yukl\'s four categories of manager behavior, and your assessment results. Narrated, with a short activity on every page and a quick check.', dueIso: addDays(profile.startDate, 7), dueLabel: 'After the assessment, by Day 7' })];
     orderedTracks().forEach(function (t) {
       t.modules.forEach(function (m) {
         out.push(Object.assign({}, m, { kind: 'course', area: 'mrc', track: t, oracleCode: m.id, minutes: m.mins || 15,

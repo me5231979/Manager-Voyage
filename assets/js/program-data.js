@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-16c',
+  version: '2026-09-16d',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -110,12 +110,12 @@ window.MV_PROGRAM = {
     foundation: {
       id: 'MRC-F', oracleCode: 'MRC-F', oracleUrl: null, oracleItemId: null, oracleItemType: 'ORA_COURSE', localUrl: '../foundation/', minutes: 35, phase: 1,
       title: 'Foundation: You Are a Manager Now',
-      why: 'About thirty-five minutes on the web, taken first. What changed when you became a manager, five ideas that hold up, what Vanderbilt will ask you to do this year, who handles what, the four jobs of a manager, and your assessment. Thirteen activities, narrated, with a quick check at the end.',
+      why: 'About thirty-five minutes on the web, taken first. What changed when you became a manager, five ideas that hold up, what Vanderbilt will ask you to do this year, who handles what, Yukl\'s four categories of manager behavior with the six behaviors Vanderbilt looks for, and your assessment. Thirteen activities, narrated, with a quick check at the end.',
       segments: [
         { n: 1, title: 'What changed, and what a manager is', format: 'Sort activity plus video', desc: 'The one change that makes you a manager, three things that are new, what a manager is not, and who helps you at Vanderbilt.' },
         { n: 2, title: 'Five ideas every good manager relies on', format: 'Tabs plus a moment to apply each', desc: 'Setting priorities, clear expectations, psychological safety, purpose, and the people work: what each is, why to adopt it, what it looks like in practice, and the value it brings.' },
         { n: 3, title: 'Your first year, and who handles what', format: 'Tap-to-open map, simulator, decisions', desc: 'The manager tasks of year one by how often they come up, then five situations: handle it, ask your HCM, route it, or report it.' },
-        { n: 4, title: 'The four jobs of a manager', format: 'Five videos, habit cards, your call', desc: 'Get the work done, take care of your people, make things better, connect your team. One page each, then four situations.' },
+        { n: 4, title: 'Yukl\'s four categories of manager behavior', format: 'Five videos, habit cards, your call', desc: 'Task-oriented, relations-oriented, change-oriented, external: get the work done, take care of your people, make things better, connect your team. One page each, then four situations.' },
         { n: 5, title: 'Your assessment and next seven days', format: 'Review, quick check, plan', desc: 'Your Manager Effectiveness Assessment results, a five-question check, and one habit to practice this week.' }
       ]
     },
@@ -182,32 +182,32 @@ window.MV_PROGRAM = {
      drawn from Yukl (2012): task, relations, change, and external behaviors.
      `pulse` is the pre and post item, answered before the cohort and at the
      capstone (1 = not yet, 5 = every week). Replace the wording with the
-     official items when PCB publishes them. `habits` are the Foundation
+     official items if PCB revises them. `habits` are the Foundation
      course habit numbers; `weeks` are cohort weeks. */
   standards: [
     { key: 'clarity', name: 'Create clarity', short: 'Clarity', yukl: 'Planning and clarifying, task-oriented',
       desc: 'Every person can say what they own, by when, what good looks like, and why it matters.',
-      pulse: 'Each person on my team can state their priorities, deadlines, and what good looks like.',
+      pulse: 'I make priorities, expectations, and what good looks like clear.',
       habits: [1, 2, 10], weeks: [1, 2], playbook: 'Sections 1 and 2' },
     { key: 'coach', name: 'Coach and develop', short: 'Coach', yukl: 'Developing, relations-oriented',
       desc: 'Regular 1:1s, feedback while the work can still change, and a growth move for each person.',
-      pulse: 'I hold a coaching conversation, mostly questions, with each person at least monthly.',
+      pulse: 'I give timely feedback and help people build capability through their work.',
       habits: [3, 6], weeks: [2, 3, 4], playbook: 'Sections 2 and 3, Team Development Plan' },
     { key: 'trust', name: 'Build trust', short: 'Trust', yukl: 'Supporting and recognizing, relations-oriented',
       desc: 'People bring bad news early, are thanked by name, and are heard before decisions land.',
-      pulse: 'My team tells me bad news early, and I thank people specifically, by name, that week.',
+      pulse: 'I create an environment where people can speak up, ask questions, and learn from mistakes.',
       habits: [5, 7, 13], weeks: [1], playbook: 'Section 1' },
     { key: 'empower', name: 'Empower others', short: 'Empower', yukl: 'Empowering and encouraging innovation',
       desc: 'Decisions handed over with the boundary stated, small trials allowed, and not taken back.',
-      pulse: 'I have handed a real decision to a team member this month and did not take it back.',
+      pulse: 'I give people appropriate ownership and authority to make decisions.',
       habits: [8, 11], weeks: [3], playbook: 'Section 3' },
     { key: 'issues', name: 'Address issues', short: 'Issues', yukl: 'Monitoring and problem solving, plus representing',
       desc: 'Missed work named the week it happens, causes found, concerns routed the same day.',
-      pulse: 'When work or conduct slips, I name it within the week, specifically and without hinting.',
+      pulse: 'I address performance, people, or process problems early and constructively.',
       habits: [4, 3, 15], weeks: [2, 4], playbook: 'Sections 2 and 4' },
     { key: 'change', name: 'Lead change', short: 'Change', yukl: 'Advocating and envisioning change, collective learning, external monitoring',
       desc: 'The why explained in your own words, a picture of next year, and a look back after big work.',
-      pulse: 'My team can explain, in their own words, why the current change is happening.',
+      pulse: 'I connect change to the bigger picture and help my team adapt, learn, and try new ways of working.',
       habits: [9, 10, 12, 14], weeks: [4], playbook: 'Team Development Plan' }
   ],
 
@@ -215,7 +215,7 @@ window.MV_PROGRAM = {
     id: 'COHORT', oracleCode: 'COHORT', oracleUrl: null, requestUrl: null,
     title: 'Four-Week Cohort',
     summary: 'Where skill development happens. One hundred managers a quarter, in the same weekly rhythm: a Core module opens the topic, a Learning Lab works it with peers, a Scenario Studio rehearses the conversation, and a virtual Manager Voyage discussion closes the week around your Manager Playbook. A hybrid kickoff opens the four weeks and a hybrid capstone closes them.',
-    prerequisite: 'You arrive having finished the Foundation course. The cohort builds on its four jobs, its habits, and its people rather than reteaching them.',
+    prerequisite: 'You arrive having finished the Foundation course. The cohort builds on its four categories, its habits, and its people rather than reteaching them.',
     eligibility: 'Open to any manager who has completed the compliance courses and Manager Foundations. Oracle sends the invitation on completion.',
     rhythm: [
       { beat: 'Core module', when: 'By Monday', mins: '45 to 60 min', desc: 'A LinkedIn Learning course in Oracle Learning sets the topic and the vocabulary. Released at the close of the previous Friday, so it is prework for the week it serves.' },
