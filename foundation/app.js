@@ -459,8 +459,7 @@ function flipSeen(btn){
   var st = $('.flip-status', sec); if(st) st.textContent = n + ' of ' + all.length + ' cards flipped.' + (n === all.length ? ' Activity complete.' : '');
   if(n === all.length) progDone(sec.id);
 }
-[{ map:'#fwMap', status:'#fwStatus', noun:'categories', prog:'welcome', narr:'welcome/j', done:' Activity complete. The four tabs above take one category each.' },
- { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:'year', narr:'year/g', done:' Activity complete. Turn the page to learn who handles what.' },
+[{ map:'#yearMap', status:'#yearStatus', noun:'groups', prog:'year', narr:'year/g', done:' Activity complete. Turn the page to learn who handles what.' },
  { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, narr:null, done:'' }].forEach(function(cfg){
   var map = $(cfg.map), status = $(cfg.status); if(!map) return;
   var cards = $$('.fw-card', map), seen = {};
@@ -747,13 +746,24 @@ var IDEAS = [
 (function(){
   var box = $('#welcome'); if(!box) return;
   var tabs = $$('.job-tabs button[data-job]', box), panes = $$('.job-pane', box); if(!tabs.length) return;
+  var jstatus = $('#fwStatus'), jseen = {}, JOBS = ['task', 'relations', 'change', 'external'];
+  function mark(k){
+    if(JOBS.indexOf(k) < 0 || jseen[k]) return;
+    jseen[k] = 1; var n = Object.keys(jseen).length;
+    if(jstatus) jstatus.textContent = n + ' of 4 categories opened.' + (n === JOBS.length ? ' Activity complete.' : '');
+    if(n === JOBS.length) progDone('welcome');
+  }
   function show(k){
+    mark(k);
     tabs.forEach(function(t){ var on = t.getAttribute('data-job') === k; t.setAttribute('aria-selected', on ? 'true' : 'false'); if(on) t.classList.add('seen'); });
     panes.forEach(function(p){ var on = p.getAttribute('data-job') === k; p.classList.toggle('cur', on); p.hidden = !on; });
     var pg = document.querySelector('.page.cur'); if(pg) pg.scrollTop = 0;
     if(k !== 'over' && NARR[k + '/1']) narrSub(k + '/1'); else if(narr.playing) narrStop();
   }
-  box.addEventListener('click', function(e){ var t = e.target.closest('.job-tabs button[data-job]'); if(t) show(t.getAttribute('data-job')); });
+  box.addEventListener('click', function(e){
+    var t = e.target.closest('.job-tabs button[data-job]') || e.target.closest('#fwMap .fw-card[data-job]');
+    if(t) show(t.getAttribute('data-job'));
+  });
   window.showJob = show;
 })();
 
@@ -806,7 +816,7 @@ var TURNS = [
   { sel:'#yearMap',     prog:'year',     text:'Tap each group to open it and hear it.' },
   { sel:'#simBox',      prog:null,       text:'Pick a situation to see the first move and who handles what.' },
   { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations. Tap the first thing you would do.' },
-  { sel:'#fwMap',       prog:'welcome',  text:'Tap each of the four categories to open it.' },
+  { sel:'#fwMap',       prog:'welcome',  text:'Open each of the four categories. The pills above move between them.' },
   { sel:'#task .flip-grid',      prog:'task',      text:'Flip each card: what to stop, what to do instead.' },
   { sel:'#relations .flip-grid', prog:'relations', text:'Flip each card: what to stop, what to do instead.' },
   { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card: what to stop, what to do instead.' },

@@ -15,7 +15,9 @@ function block(src, start){ const a = src.indexOf(start); const b = src.indexOf(
 function obj(src, start){ const a = src.indexOf(start); const b = src.indexOf('\n};', a); return vm.runInNewContext('({' + src.slice(a + start.length, b) + '\n})', {}); }
 const IDEAS = block(app, 'var IDEAS = [');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const strip = s => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const ENT = { rsquo: '\u2019', lsquo: '\u2018', ldquo: '\u201c', rdquo: '\u201d', hellip: '\u2026', mdash: '\u2014', ndash: '\u2013', middot: '\u00b7', nbsp: ' ', quot: '"', lt: '<', gt: '>', amp: '&' };
+const unent = s => String(s).replace(/&(rsquo|lsquo|ldquo|rdquo|hellip|mdash|ndash|middot|nbsp|quot|lt|gt|amp);/g, (m, n) => ENT[n]);
+const strip = s => unent(s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim());
 function cards(id){
   const a = html.indexOf('id="' + id + '"'); const seg = html.slice(a, html.indexOf('</div>', html.indexOf('</button>', html.lastIndexOf('<button', html.indexOf('</div>\n', a) - 1))));
   const out = []; const re = /<button type="button" class="fw-card"[^>]*>(.*?)<\/button>/gs; let m;
@@ -68,7 +70,7 @@ p{ margin:0 0 6pt; } .tx2{ color:var(--tx2); }
 .box.cream{ background:var(--cream); } .box.gold{ border-left:3px solid var(--gold); }
 .box b.k{ display:block; font-family:'Antonio','Inter',sans-serif; font-weight:700; font-size:7.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2pt; }
 .box strong{ display:block; font-family:'Libre Caslon Display',Georgia,serif; font-weight:400; font-size:12.5pt; line-height:1.15; margin-bottom:3pt; }
-ul{ margin:3pt 0 0; padding-left:14pt; } li{ margin:0 0 2pt; } li i{ color:var(--tx2); font-style:normal; font-size:9.5pt; }
+ul{ margin:3pt 0 0; padding-left:14pt; } li{ margin:0 0 2pt; } li i{ color:var(--tx2); font-style:normal; font-size:9.5pt; } li em{ display:block; font-style:normal; font-family:Antonio,Impact,sans-serif; font-weight:700; font-size:7.5pt; letter-spacing:.06em; text-transform:uppercase; color:var(--oak); }
 table{ width:100%; border-collapse:collapse; font-size:9.5pt; break-inside:auto; } th{ text-align:left; font-family:'Antonio','Inter',sans-serif; font-weight:700; font-size:7.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); border-bottom:2px solid var(--gold); padding:4pt 6pt 4pt 0; }
 td{ vertical-align:top; padding:5pt 8pt 5pt 0; border-bottom:1px solid var(--bd); } tr{ break-inside:avoid; }
 .topic{ display:grid; grid-template-columns:34pt 1fr 76pt; gap:10pt; padding:7pt 0; border-bottom:1px solid var(--bd); align-items:start; }
@@ -155,19 +157,19 @@ H.push(`<section><span class="eyebrow">Quick reference · Something just landed 
 SIM.forEach(s => H.push(`<div class="sim"><b class="t">${esc(s.label)}</b><div class="grid2"><div><b>First move.</b> ${esc(s.first)}</div><div><b class="nv">Never.</b> ${esc(s.never)}${s.mod ? ' <span class="tx2">Micro module: ' + esc(s.mod) + '.</span>' : ''}</div></div></div>`));
 H.push(`</section>`);
 // topic 4
-H.push(`<section><span class="eyebrow">Topic 4 · The four categories</span><h2>One picture that holds the whole <em>job</em>.</h2><p class="tx2">Nothing new to memorize: the same work, sorted. The Manager Effectiveness Assessment scores the same habits.</p><div class="grid2">`);
+H.push(`<section><span class="eyebrow">Topic 4 · The four categories</span><h2>One picture that holds the whole <em>job</em>.</h2><p class="tx2">Nothing new to memorize: the same work, sorted. Each behavior is marked with the Vanderbilt behavior it serves, and those six are what the survey asks you to rate.</p><div class="grid2">`);
 JOBS.forEach(c => H.push(`<div class="box"><b class="k">${esc(c.b)}</b><strong>${esc(c.h)}</strong><span class="tx2">${esc(c.p)}</span><ul>${c.li.map(l => '<li>' + l + '</li>').join('')}</ul></div>`));
 H.push(`</div><div class="grid2" style="margin-top:8pt">
 <div class="box cream"><b class="k">The habit to stop</b>Doing the work yourself. When you are tempted to just do it, that is the moment to manage instead.</div>
 <div class="box cream"><b class="k">The one thing to route</b>Anything that sounds like leave goes to the leave office the same day. You adjust the load; they decide eligibility.</div></div></section>`);
 // topic 5
 H.push(`<section><span class="eyebrow">Topic 5 · Your assessment</span><h2>Your score, and where it should <em>go</em>.</h2>
-<p class="tx2">Before this course you took the Manager Effectiveness Assessment: fourteen questions on how often you do the habits in this course. Your score and feedback came by email. Review it. If you did not get one, or have not taken it yet, take the assessment.</p>
-<div class="week"><b>Where you need to be</b>The score is out of 70, and it is a direction, not a grade. Every point up is a habit you do more often. Over this course and the micro modules that follow, the aim is a higher score when you retake it in six months.</div>
+<p class="tx2">Before Manager Voyage you took the Manager Effectiveness Assessment: six statements, from creating clarity to leading change, each rated from never to consistently. They are informed by Yukl&rsquo;s framework, the one this course teaches. Your results and feedback came by email. Review them. If you did not get them, or have not taken it yet, take the assessment.</p>
+<div class="week"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. Over this course and the micro modules that follow, the aim is a higher rating on all six when you rate the same statements again, 90 days after you complete Manager Voyage.</div>
 <h3>Your next seven days</h3><div class="grid3">
 <div class="box"><b class="k">Today</b><strong>Take your first micro module</strong>Start with the habit you know needs you most.</div>
 <div class="box"><b class="k">This week</b><strong>Practice one habit</strong>Pick one from this course. Do it once, on purpose, and notice what happened.</div>
-<div class="box"><b class="k">In six months</b><strong>Take the assessment again</strong>Compare the score with the one you started with.</div></div>
+<div class="box"><b class="k">90 days after</b><strong>Rate the same six again</strong>Compare with where you started, once you have completed Manager Voyage.</div></div>
 <div class="week" style="margin-top:8pt"><b>Tell your manager</b>“I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].”</div></section>`);
 // learning
 H.push(`<section class="learn"><span class="eyebrow">Keep learning</span><h2>What to take <em>next</em>.</h2><p class="tx2">Your micro modules in Oracle Learning, in the four tracks you take them in, then a short chosen list: ten more courses, podcasts, videos, and a guide. Micro modules first: Systems and Vanderbilt &amp; Nashville by Day 30, People and Processes by Day 60. Then one item a month, on the habit you are working on. Links are live in the PDF; in Oracle Learning you can also search by title.</p>`);

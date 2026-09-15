@@ -39,7 +39,7 @@
   26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
-<link rel="stylesheet" href="../assets/css/course.css?v=20260916a" />
+<link rel="stylesheet" href="../assets/css/course.css?v=20260916b" />
 <style>
 .hero-video{ object-position:center 35%; }
 .hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
@@ -97,19 +97,14 @@ html.paged .module-head p{ margin-top:8px; font-size:.95rem; }
 .fw{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px; }
 .fw-card{ width:100%; text-align:left; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:16px 16px 14px; border-top:3px solid var(--eyebrow); cursor:pointer; color:var(--tx); font:inherit; transition:border-color .2s var(--ease); display:flex; flex-direction:column; }
 .fw-card:hover{ border-color:var(--bdg); }
-.std-box{ margin-top:16px; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 16px 14px; }
-.std-lead{ font-size:.92rem; color:var(--tx); line-height:1.45; margin-top:6px; }
-.std6{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px 12px; margin-top:10px; }
-.std6 div{ border-top:2px solid var(--vu-gold); padding-top:6px; }
-.std6 b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.02rem; line-height:1.2; }
-.std6 em{ display:block; font-style:italic; font-size:.88rem; color:var(--tx); line-height:1.4; margin-top:3px; }
-.std6 span{ display:block; font-size:.78rem; color:var(--tx2, var(--tx)); line-height:1.4; margin-top:4px; }
-@media (max-width:720px){ .std6{ grid-template-columns:1fr 1fr; } }
-@media (max-width:480px){ .std6{ grid-template-columns:1fr; } }
 .fw-card b{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
 .fw-card strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.2rem; line-height:1.15; margin:6px 0 6px; }
 .fw-card p{ font-size:.84rem; color:var(--tx2); }
 .fw-card ul{ list-style:none; margin-top:10px; display:none; gap:4px; }
+#fwMap .fw-card ul{ display:grid; gap:9px; }
+#fwMap .fw-card li em{ display:block; font-style:normal; color:var(--eyebrow); font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.07em; text-transform:uppercase; margin-top:1px; }
+#fwMap .fw-card .hint::after{ content:" \2192"; }
+#fwMap .fw-card:hover{ border-color:var(--eyebrow); }
 .fw-card li{ font-size:.86rem; color:var(--tx); padding-left:14px; position:relative; }
 .fw-card li i{ font-style:normal; color:var(--tx3); font-size:.78rem; }
 .fw-card li::before{ content:''; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:50%; background:var(--eyebrow); }
@@ -989,10 +984,10 @@ html.paged .idea .try .scn{ margin-top:0; }
     </div>
     <div class="ask"><p><b>What you will learn</b>As a manager you now have many tasks. Here they are, sorted by how often they come up.</p><p><b>Why it matters</b>Nothing here should surprise you when it lands. Know what is coming, and when.</p></div>
     <div class="fw two" id="yearMap" data-map="year">
-      <button type="button" class="fw-card" aria-expanded="false"><b>Every week</b><strong>Run the team.</strong><p>1:1s, checking work, approvals, feedback.</p><ul><li>A short 1:1 with each person</li><li>Look at work before it is due</li><li>Approve timecards and time off</li><li>Give feedback while it is useful, and thank people for specific work</li><li>Answer questions, or find who can</li></ul><span class="hint">Tap to open</span></button>
-      <button type="button" class="fw-card" aria-expanded="false"><b>Every month or quarter</b><strong>Keep it on track.</strong><p>Expenses, goals, a step back.</p><ul><li>Approve expenses and purchases</li><li>Set and check goals</li><li>Step back and check how the work, and the team, are going</li></ul><span class="hint">Tap to open</span></button>
-      <button type="button" class="fw-card" aria-expanded="false"><b>A few times a year</b><strong>The cycles.</strong><p>Reviews, hiring, onboarding.</p><ul><li>Performance reviews</li><li>Hiring when a seat opens</li><li>Onboarding a new hire</li><li>Someone leaving</li></ul><span class="hint">Tap to open</span></button>
-      <button type="button" class="fw-card" aria-expanded="false"><b>When it happens</b><strong>Know the process. Act the same day.</strong><p>Leave, flexible work, concerns, reports.</p><ul><li>A leave request, including FMLA</li><li>A flexible work request</li><li>An accommodation request</li><li>A concern about a coworker or manager</li><li>A performance concern</li><li>Something you must report</li></ul><span class="hint">Tap to open</span></button>
+      <button type="button" class="fw-card" aria-expanded="false"><b>Every week</b><strong>Run the team.</strong><p>1:1s, checking work, approvals, feedback.</p><ul><li>A short 1:1 with each person</li><li>Look at work before it is due</li><li>Approve timecards and time off</li><li>Give feedback while it is useful, and thank people for specific work</li><li>Answer questions, or find who can</li></ul><span class="hint">Open this category</span></button>
+      <button type="button" class="fw-card" aria-expanded="false"><b>Every month or quarter</b><strong>Keep it on track.</strong><p>Expenses, goals, a step back.</p><ul><li>Approve expenses and purchases</li><li>Set and check goals</li><li>Step back and check how the work, and the team, are going</li></ul><span class="hint">Open this category</span></button>
+      <button type="button" class="fw-card" aria-expanded="false"><b>A few times a year</b><strong>The cycles.</strong><p>Reviews, hiring, onboarding.</p><ul><li>Performance reviews</li><li>Hiring when a seat opens</li><li>Onboarding a new hire</li><li>Someone leaving</li></ul><span class="hint">Open this category</span></button>
+      <button type="button" class="fw-card" aria-expanded="false"><b>When it happens</b><strong>Know the process. Act the same day.</strong><p>Leave, flexible work, concerns, reports.</p><ul><li>A leave request, including FMLA</li><li>A flexible work request</li><li>An accommodation request</li><li>A concern about a coworker or manager</li><li>A performance concern</li><li>Something you must report</li></ul><span class="hint">Open this category</span></button>
     </div>
     <p class="fw-status" id="yearStatus" role="status" aria-live="polite">0 of 4 groups opened.</p>
   </div>
@@ -1036,7 +1031,7 @@ html.paged .idea .try .scn{ margin-top:0; }
       <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Yukl&rsquo;s four categories</span></span>
       <h2>One picture for the whole job: four <em class="s">categories</em> of behavior.</h2>
     </div>
-    <div class="ask"><p><b>What you will learn</b>Gary Yukl&rsquo;s four categories of manager behavior and the fifteen behaviors inside them, which Vanderbilt looks for you to embody. Nothing new to memorize; it is the same work, sorted.</p><p><b>Why it matters</b>Every manager does all four, every week. The skill is noticing which one this week needs. The survey you took before Manager Voyage, and take again 90 days after completing it, assesses six statements informed by these behaviors.</p></div>
+    <div class="ask"><p><b>What you will learn</b>Gary Yukl&rsquo;s four categories of manager behavior and the fifteen behaviors inside them, which Vanderbilt looks for you to embody. Nothing new to memorize; it is the same work, sorted.</p><p><b>Why it matters</b>Every manager does all four, every week. The skill is noticing which one this week needs. Each behavior below is marked with the Vanderbilt behavior it serves, and those six are what the survey asks you to rate.</p></div>
     <div class="job-tabs" role="tablist" aria-label="The four categories">
       <button type="button" role="tab" aria-selected="true" data-job="over">The four categories</button>
       <button type="button" role="tab" aria-selected="false" data-job="task">Task-oriented &middot; Get the work done</button>
@@ -1055,24 +1050,13 @@ html.paged .idea .try .scn{ margin-top:0; }
         <p class="hinttxt" style="margin-top:10px">The four categories and the fifteen behaviors are Gary Yukl&rsquo;s taxonomy of effective leadership behavior (<a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener">2012</a>; <a href="https://changingminds.org/disciplines/leadership/actions/yukl_taxonomy.htm" target="_blank" rel="noopener">summary</a>). The words in italics are the plain version. These are the behaviors Vanderbilt looks for you to embody.</p>
       </div>
       <div class="fw two" id="fwMap">
-      <button type="button" class="fw-card" aria-expanded="false"><b>Task-oriented</b><strong>Get the work done, through your team.</strong><p>Is the team&rsquo;s work getting done, and done well? You check it and unblock it; you do not do it yourself.</p><ul><li>Clarifying <i>(say it)</i></li><li>Planning <i>(plan it)</i></li><li>Monitoring operations <i>(check it)</i></li><li>Problem solving <i>(fix it)</i></li></ul><span class="hint">Tap to open</span></button>
-      <button type="button" class="fw-card" aria-expanded="false"><b>Relations-oriented</b><strong>Take care of your people.</strong><p>Are people growing, and staying?</p><ul><li>Supporting <i>(listen and help)</i></li><li>Developing <i>(grow them)</i></li><li>Recognizing <i>(thank them)</i></li><li>Empowering <i>(trust them)</i></li></ul><span class="hint">Tap to open</span></button>
-      <button type="button" class="fw-card" aria-expanded="false"><b>Change-oriented</b><strong>Make things better.</strong><p>Is the team getting better at what it does?</p><ul><li>Advocating change <i>(explain the why)</i></li><li>Envisioning change <i>(describe where you are going)</i></li><li>Encouraging innovation <i>(let people try)</i></li><li>Facilitating collective learning <i>(look back)</i></li></ul><span class="hint">Tap to open</span></button>
-      <button type="button" class="fw-card" aria-expanded="false"><b>External</b><strong>Connect your team to the rest of Vanderbilt.</strong><p>Does the team get what it needs from outside?</p><ul><li>Networking <i>(know the people)</i></li><li>External monitoring <i>(watch for what is coming)</i></li><li>Representing <i>(speak up for your team)</i></li></ul><span class="hint">Tap to open</span></button>
+      <button type="button" class="fw-card" data-job="task"><b>Task-oriented</b><strong>Get the work done, through your team.</strong><p>Is the team&rsquo;s work getting done, and done well? You check it and unblock it; you do not do it yourself.</p><ul><li>Clarifying <i>(say it)</i><em>Create clarity</em></li><li>Planning <i>(plan it)</i><em>Create clarity</em></li><li>Monitoring operations <i>(check it)</i><em>Coach and develop</em></li><li>Problem solving <i>(fix it)</i><em>Address issues</em></li></ul><span class="hint">Open this category</span></button>
+      <button type="button" class="fw-card" data-job="relations"><b>Relations-oriented</b><strong>Take care of your people.</strong><p>Are people growing, and staying?</p><ul><li>Supporting <i>(listen and help)</i><em>Build trust</em></li><li>Developing <i>(grow them)</i><em>Coach and develop</em></li><li>Recognizing <i>(thank them)</i><em>Build trust</em></li><li>Empowering <i>(trust them)</i><em>Empower others</em></li></ul><span class="hint">Open this category</span></button>
+      <button type="button" class="fw-card" data-job="change"><b>Change-oriented</b><strong>Make things better.</strong><p>Is the team getting better at what it does?</p><ul><li>Advocating change <i>(explain the why)</i><em>Lead change</em></li><li>Envisioning change <i>(describe where you are going)</i><em>Lead change</em></li><li>Encouraging innovation <i>(let people try)</i><em>Empower others</em></li><li>Facilitating collective learning <i>(look back)</i><em>Lead change</em></li></ul><span class="hint">Open this category</span></button>
+      <button type="button" class="fw-card" data-job="external"><b>External</b><strong>Connect your team to the rest of Vanderbilt.</strong><p>Does the team get what it needs from outside?</p><ul><li>Networking <i>(know the people)</i><em>Build trust</em></li><li>External monitoring <i>(watch for what is coming)</i><em>Lead change</em></li><li>Representing <i>(speak up for your team)</i><em>Address issues</em></li></ul><span class="hint">Open this category</span></button>
       </div>
     </div>
     <p class="fw-status" id="fwStatus" role="status" aria-live="polite">0 of 4 categories opened.</p>
-    <div class="std-box reveal" id="stdBox" aria-labelledby="stdH">
-      <p class="mono" id="stdH">What the survey assesses &middot; six statements, before and 90 days after</p>
-      <p class="std-lead">The Manager Effectiveness Assessment you took before Manager Voyage asks you to rate yourself on six statements, from never to consistently. You rate the same six again 90 days after you complete Manager Voyage, and once more at six months if you choose. The statements are informed by Yukl&rsquo;s leadership-behavior framework, the categories on this page.</p>
-      <div class="std6">
-        <div><b>Create clarity</b><em>I make priorities, expectations, and what good looks like clear.</em><span>Task-oriented &middot; Clarifying, Planning, Envisioning change</span></div>
-        <div><b>Coach and develop</b><em>I give timely feedback and help people build capability through their work.</em><span>Task and relations &middot; Monitoring operations, Developing</span></div>
-        <div><b>Build trust</b><em>I create an environment where people can speak up, ask questions, and learn from mistakes.</em><span>Relations-oriented &middot; Supporting, Recognizing, Networking</span></div>
-        <div><b>Empower others</b><em>I give people appropriate ownership and authority to make decisions.</em><span>Relations-oriented &middot; Empowering, Encouraging innovation</span></div>
-        <div><b>Address issues</b><em>I address performance, people, or process problems early and constructively.</em><span>Task-oriented &middot; Problem solving, Monitoring operations, Representing</span></div>
-        <div><b>Lead change</b><em>I connect change to the bigger picture and help my team adapt, learn, and try new ways of working.</em><span>Change-oriented and external &middot; Advocating change, Facilitating collective learning, External monitoring</span></div>
-      </div>
     </div>
     </div>
 <section id="task" class="job-pane" data-job="task" role="tabpanel" aria-label="Task-oriented: get the work done" hidden>
@@ -1358,6 +1342,6 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20260916d"></script>
+<script src="app.js?v=20260916e"></script>
 </body>
 </html>
