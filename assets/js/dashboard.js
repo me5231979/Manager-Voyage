@@ -451,6 +451,11 @@
   });
 
   var navPortal = $('#navPortal'); if (navPortal && (CFG.portalUrl || P.portal.url)) navPortal.href = CFG.portalUrl || P.portal.url;
+  /* the header's Who to call link on this page */
+  window.addEventListener('hashchange', function () {
+    if (location.hash !== '#who') return;
+    var who = $('#who'); if (who && $('#view-dashboard').classList.contains('active')) who.scrollIntoView({ block: 'start', behavior: 'auto' });
+  });
   $('#year').textContent = new Date().getFullYear();
   if (CFG.contactEmail) { var fc = $('#footerContact'); fc.hidden = false; fc.href = 'mailto:' + CFG.contactEmail; }
 

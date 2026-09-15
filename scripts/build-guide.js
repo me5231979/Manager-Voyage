@@ -95,16 +95,16 @@ td{ vertical-align:top; padding:5pt 8pt 5pt 0; border-bottom:1px solid var(--bd)
   <div><span class="eyebrow">Manager Voyage · Manager Foundations · Course 1</span>
   <h1 style="margin-top:8pt">You are a manager <em>now</em>.</h1></div>
   <p class="lead">Everything in the course, on paper: what changed, what a manager is, five ideas that hold up, what Vanderbilt will ask of you this year, who helps, the four jobs, how to read your assessment results, and what to learn next.</p>
-  <div class="meta"><span>About 35 minutes online</span><span>19 slides · 5 topics</span><span>Before: manager compliance courses</span><span>After: the supporting micro modules in Oracle Learning</span><span>Recorded in Oracle Learning</span></div>
+  <div class="meta"><span>About 35 minutes online</span><span>One idea per page</span><span>Before: manager compliance courses</span><span>After: the supporting micro modules in Oracle Learning</span><span>Recorded in Oracle Learning</span></div>
 </header>`);
 // at a glance
 H.push(`<section><span class="eyebrow">The course at a glance</span><h2>Five topics, one <em>picture</em>.</h2>
-<div class="topic"><span class="n">01</span><div><b>What changed, and what a manager is</b><span class="tx2">The one change, three things that are new, what a manager is not, who helps you here.</span></div><span class="pg">Pages 4 to 5</span></div>
-<div class="topic"><span class="n">02</span><div><b>Five ideas every good manager relies on</b><span class="tx2">Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to apply it.</span></div><span class="pg">Page 6</span></div>
-<div class="topic"><span class="n">03</span><div><b>What Vanderbilt will ask you to do</b><span class="tx2">The tasks of year one, when they show up, and who handles what: handle it, ask, route, or report.</span></div><span class="pg">Pages 7 to 8</span></div>
-<div class="topic"><span class="n">04</span><div><b>The four jobs of a manager</b><span class="tx2">Get the work done, take care of your people, make things better, connect your team. One page each, then your call.</span></div><span class="pg">Pages 9 to 14</span></div>
-<div class="topic"><span class="n">05</span><div><b>Your assessment</b><span class="tx2">What your results email tells you, and where the score should go.</span></div><span class="pg">Page 15</span></div>
-<p class="tx2" style="margin-top:6pt">Then a five-question check (4 of 5 finishes the course), your next seven days, a keep-learning list, and the wrap-up. Thirteen activities track progress; completion is recorded in Oracle Learning.</p></section>`);
+<div class="topic"><span class="n">01</span><div><b>What changed, and what a manager is</b><span class="tx2">The one change, three things that are new, what a manager is not, who helps you here.</span></div></div>
+<div class="topic"><span class="n">02</span><div><b>Five ideas every good manager relies on</b><span class="tx2">Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to apply it.</span></div></div>
+<div class="topic"><span class="n">03</span><div><b>What Vanderbilt will ask you to do</b><span class="tx2">The tasks of year one, when they show up, and who handles what: handle it, ask, route, or report.</span></div></div>
+<div class="topic"><span class="n">04</span><div><b>The four jobs of a manager</b><span class="tx2">Get the work done, take care of your people, make things better, connect your team. One tab each, then your call.</span></div></div>
+<div class="topic"><span class="n">05</span><div><b>Your assessment</b><span class="tx2">What your results email tells you, and where the score should go.</span></div></div>
+<p class="tx2" style="margin-top:6pt">Then a five-question check (4 of 5 finishes the course), your next seven days, a keep-learning list, and the wrap-up. Progress tracks each activity; completion is recorded in Oracle Learning.</p></section>`);
 // mission
 H.push(`<section><span class="eyebrow">The mission</span><h2>Define the great university of the 21st century, and <em>be</em> it.</h2>
 <div class="grid3">

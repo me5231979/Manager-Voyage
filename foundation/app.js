@@ -302,7 +302,7 @@ var SECTIONS = [
   { k:'yourcall',  no:'10', name:'Your call',               how:'Find the Vanderbilt way in four situations' },
   { k:'survey',    no:'11', name:'Your assessment',         how:'Review your results email, or take the assessment' },
   { k:'quiz',      no:'12', name:'A quick check',           how:'Score 4 of 5' },
-  { k:'nextstep',  no:'13', name:'Your next seven days',    how:'Mark it done once planned' }
+  { k:'nextstep',  no:'13', name:'Next steps',              how:'Pick one habit, then mark it done' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }
 function progWrite(k, v){ set('p-' + k, v ? '1' : null); }
@@ -386,7 +386,7 @@ var modalReturn = null, modalTimer = null;
 function allDone(){
   if(window.MVOracle){
     var qs = get('quiz-score'), qm = get('quiz-max');
-    MVOracle.reportCompletion('MRC-F', { score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: all thirteen activities', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })() } });
+    MVOracle.reportCompletion('MRC-F', { score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: every activity done', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })() } });
   } else if(window.MVScorm && MVScorm.connected) MVScorm.complete();
   if(doneSeen) return;
   doneSeen = true; set('done-seen', '1');
@@ -435,7 +435,7 @@ function scormAdopt(){
   if(d.a){ set('assess', JSON.stringify(d.a)); assessLoad(); }
   if(d.seen){ doneSeen = true; set('done-seen', '1'); }
   if(sc.name && !profile.name){ profile.name = sc.name; paintHello(); }
-  var t = $('#oracleStripText'); if(t) t.textContent = 'You opened this course from Oracle Learning. Your completion is recorded automatically once all thirteen activities are done.';
+  var t = $('#oracleStripText'); if(t) t.textContent = 'You opened this course from Oracle Learning. Your completion is recorded automatically once every activity is done.';
   var f = $('#oracleFine'); if(f) f.textContent = 'Recorded in Oracle Learning' + (sc.name ? ' for ' + sc.name : '') + '.';
   sc.incomplete();
   progRender();
@@ -459,7 +459,7 @@ function flipSeen(btn){
   var st = $('.flip-status', sec); if(st) st.textContent = n + ' of ' + all.length + ' cards flipped.' + (n === all.length ? ' Activity complete.' : '');
   if(n === all.length) progDone(sec.id);
 }
-[{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', narr:'welcome/j', done:' Activity complete. The next four pages take one job each.' },
+[{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', narr:'welcome/j', done:' Activity complete. The four tabs above take one job each.' },
  { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:'year', narr:'year/g', done:' Activity complete. Turn the page to learn who handles what.' },
  { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, narr:null, done:'' }].forEach(function(cfg){
   var map = $(cfg.map), status = $(cfg.status); if(!map) return;
@@ -657,10 +657,25 @@ function buildDrill(el){
 }
 $$('[data-drill]').forEach(buildDrill);
 
+var ROCKS_ART = '<div class="idea-art" aria-hidden="true"><svg viewBox="0 0 720 300" role="img">' +
+  '<text class="lab" x="40" y="20">Sand first: the rocks do not fit</text>' +
+  '<rect class="jar" x="40" y="70" width="240" height="150" rx="14"/>' +
+  '<rect class="sand" x="43" y="140" width="234" height="77" rx="8"/>' +
+  '<g class="grain"><circle cx="70" cy="160" r="2"/><circle cx="120" cy="180" r="2"/><circle cx="175" cy="155" r="2"/><circle cx="230" cy="195" r="2"/><circle cx="95" cy="205" r="2"/><circle cx="205" cy="170" r="2"/><circle cx="255" cy="150" r="2"/><circle cx="150" cy="205" r="2"/></g>' +
+  '<ellipse class="rock" cx="104" cy="116" rx="38" ry="26"/><ellipse class="rock" cx="206" cy="112" rx="42" ry="28"/><ellipse class="rock" cx="154" cy="62" rx="40" ry="26"/>' +
+  '<text x="40" y="248">Email and small requests go in first.</text><text x="40" y="266">The report, the hire, the 1:1s spill over the top.</text>' +
+  '<text class="lab" x="400" y="20">Rocks first: the sand settles around them</text>' +
+  '<rect class="jar" x="400" y="70" width="240" height="150" rx="14"/>' +
+  '<rect class="sand" x="403" y="92" width="234" height="125" rx="8"/>' +
+  '<ellipse class="rock" cx="456" cy="186" rx="40" ry="28"/><ellipse class="rock" cx="584" cy="188" rx="44" ry="28"/><ellipse class="rock" cx="520" cy="130" rx="42" ry="30"/>' +
+  '<g class="grain"><circle cx="420" cy="110" r="2"/><circle cx="470" cy="100" r="2"/><circle cx="570" cy="108" r="2"/><circle cx="620" cy="100" r="2"/><circle cx="430" cy="150" r="2"/><circle cx="615" cy="150" r="2"/><circle cx="520" cy="205" r="2"/><circle cx="412" cy="205" r="2"/><circle cx="628" cy="205" r="2"/></g>' +
+  '<text x="400" y="248">Three named priorities go in first.</text><text x="400" y="266">The small things fit in the gaps.</text>' +
+  '<text class="lab" x="40" y="294">Rocks: the high-impact work. Sand: quick, low-value wins.</text>' +
+  '</svg></div>';
 /* ══════════ five ideas, one at a time ══════════ */
 var IDEAS = [
   { who:'Setting priorities · the big rocks method', h:'Put first things <em>first</em>.',
-    what:'Picture a jar. Sand first (email, small requests) and the big rocks never fit. Big rocks first, and the sand settles around them.',
+    what:'Picture a jar. The rocks are the high-impact work: the report your team owns, the hire, your 1:1s. The sand is the quick, low-value wins: email, small requests. Sand first and the rocks never fit. Rocks first and the sand settles around them.',
     why:'Your calendar fills itself. Requests arrive faster than you can finish them, and the urgent ones are rarely the important ones. Without three named priorities, the loudest request decides for you.',
     looks:'Monday, before email: three lines on a notepad. Said aloud at the huddle, on the calendar by nine. A request lands Wednesday; you ask which rock it moves.',
     value:'A team that knows this week’s three things wastes less, argues less, and finishes more.',
@@ -702,7 +717,7 @@ var IDEAS = [
       '<p class="intro-cta"><button type="button" class="btn btn-primary btn-sm" data-tab="0">Start with idea 1<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></p></div>' +
       '<ol class="intro-list" aria-label="The five ideas">' + IDEAS.map(function(it, i){ return '<li><button type="button" data-tab="' + i + '"><span class="il-no">' + (i + 1) + '</span><span class="il-t"><b>' + names[i] + '</b><span>' + ONE[i] + '</span></span></button></li>'; }).join('') + '</ol></div>' +
     IDEAS.map(function(it, i){
-      return '<div class="idea" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' +
+      return '<div class="idea" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' + (i === 0 ? ROCKS_ART : '') +
         '<p class="blk"><b>What it is</b>' + esc(it.what) + '</p><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p>' +
         '<div class="side"><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
         '<div class="try"><p class="cq-h"><span class="mono">Apply it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + '<span class="try-note">Show you understood the idea. Tap the response you would give, then try the other two.</span></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
@@ -727,6 +742,42 @@ var IDEAS = [
   });
 })();
 
+
+/* ══════════ the four jobs: one page, five tabs, each job with its own clip ══════════ */
+(function(){
+  var box = $('#welcome'); if(!box) return;
+  var tabs = $$('.job-tabs button[data-job]', box), panes = $$('.job-pane', box); if(!tabs.length) return;
+  function show(k){
+    tabs.forEach(function(t){ var on = t.getAttribute('data-job') === k; t.setAttribute('aria-selected', on ? 'true' : 'false'); if(on) t.classList.add('seen'); });
+    panes.forEach(function(p){ var on = p.getAttribute('data-job') === k; p.classList.toggle('cur', on); p.hidden = !on; });
+    var pg = document.querySelector('.page.cur'); if(pg) pg.scrollTop = 0;
+    if(k !== 'over' && NARR[k + '/1']) narrSub(k + '/1'); else if(narr.playing) narrStop();
+  }
+  box.addEventListener('click', function(e){ var t = e.target.closest('.job-tabs button[data-job]'); if(t) show(t.getAttribute('data-job')); });
+  window.showJob = show;
+})();
+
+/* ══════════ next steps: pick one habit; it lands in the message to your manager ══════════ */
+(function(){
+  var box = $('#habitPick'), p = $('#ns2p'), tell = $('#tellText'), copy = $('#copyTell'); if(!box) return;
+  var HABITS = [['Job 1', ['Plan it', 'Say it', 'Check it', 'Fix it']], ['Job 2', ['Listen and help', 'Grow them', 'Thank them', 'Trust them']],
+    ['Job 3', ['Explain the why', 'Describe where you are going', 'Let people try', 'Look back']], ['Job 4', ['Know the people', 'Watch for what is coming', 'Speak up for your team']]];
+  box.innerHTML = HABITS.map(function(g){ return '<span class="hp-job">' + g[0] + '</span>' + g[1].map(function(h){ return '<button type="button" data-habit="' + esc(h) + '" aria-pressed="false">' + esc(h) + '</button>'; }).join(''); }).join('');
+  var BASE = 'I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].';
+  function paint(h){
+    $$('button[data-habit]', box).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-habit') === h ? 'true' : 'false'); });
+    if(!h) return;
+    var msg = BASE.replace('[habit]', h.toLowerCase());
+    if(p) p.textContent = 'You picked: ' + h.toLowerCase() + '. Attach it to something you already do every week, such as your Monday 1:1s or your Friday wrap-up, and do it once, on purpose. Notice what happened.';
+    if(tell) tell.textContent = '\u201c' + msg + '\u201d';
+    if(copy) copy.setAttribute('data-copytext', msg);
+  }
+  box.addEventListener('click', function(e){ var b = e.target.closest('button[data-habit]'); if(!b) return; var h = b.getAttribute('data-habit'); set('habit', h); paint(h); });
+  paint(get('habit') || '');
+})();
+
+/* the results email: name the sender and subject once PCB confirms them (config) */
+(function(){ var h = $('#meaEmailHint'), C = window.MV_CONFIG || {}; if(!h) return; if(C.assessmentEmailFrom || C.assessmentEmailSubject) h.textContent = 'Search your inbox for ' + (C.assessmentEmailSubject ? 'the subject \u201c' + C.assessmentEmailSubject + '\u201d' : 'the results message') + (C.assessmentEmailFrom ? ' from ' + C.assessmentEmailFrom : '') + '.'; })();
 
 /* ══════════ who helps you: four tabs, each with what they do, when to contact, how ══════════ */
 (function(){
@@ -854,11 +905,11 @@ var CATS = { task:{ name:'Get the work done', short:'Job 1' }, relations:{ name:
 
 /* ══════════ knowledge check: five questions, one at a time, feedback after each ══════════ */
 var QUIZ = [
-  { seg:'What changed (page 4)', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
-  { seg:'Five ideas (page 6)', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
-  { seg:'Five ideas (page 6)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
-  { seg:'Who handles what (page 8)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
-  { seg:'The four jobs (page 9)', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
+  { seg:'What changed', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
+  { seg:'Five ideas', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
+  { seg:'Five ideas', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
+  { seg:'Who handles what', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
+  { seg:'The four jobs', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
 ];/* the right answer sits at a different position on each question */
 (function(){ var POS = [0, 2, 3, 1, 2]; QUIZ.forEach(function(q, i){ var t = POS[i]; if(t === undefined || t === q.a || t >= q.opts.length) return; var o = q.opts.splice(q.a, 1)[0]; q.opts.splice(t, 0, o); q.a = t; }); })();
 

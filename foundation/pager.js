@@ -12,29 +12,23 @@ try{
   var PLAN = [
     { sel:'section.hero',     key:'home',      label:'Welcome',                      mode:'whole' },
     { sel:'#mission',         key:'mission',   label:'The mission',                  mode:'whole' },
-    { sel:'#overview',        key:'overview',  label:'Course overview',              mode:'whole' },
     { sel:'#shift',           key:'shift',     label:'What changed',                 mode:'whole' },
     { sel:'#basics',          key:'basics',    label:'What a manager is',            mode:'whole' },
     { sel:'#ideas',           key:'ideas',     label:'Five ideas',                   mode:'whole' },
     { sel:'#year',            key:'year',      label:'Your first year',              mode:'whole' },
     { sel:'#calls',           key:'calls',     label:'Who handles what',             mode:'whole' },
     { sel:'#welcome',         key:'welcome',   label:'The four jobs',                mode:'whole' },
-    { sel:'#task',            key:'task',      label:'Job 1: get the work done',     mode:'whole' },
-    { sel:'#relations',       key:'relations', label:'Job 2: your people',           mode:'whole' },
-    { sel:'#change',          key:'change',    label:'Job 3: make things better',    mode:'whole' },
-    { sel:'#external',        key:'external',  label:'Job 4: connect your team',     mode:'whole' },
     { sel:'#yourcall',        key:'yourcall',  label:'Your call: four situations',   mode:'whole' },
     { sel:'#survey',          key:'survey',    label:'Your assessment',                   mode:'whole' },
     { sel:'#quiz',            key:'quiz',      label:'Quick check',                  mode:'whole' },
-    { sel:'#nextstep',        key:'nextstep',  label:'Your next seven days',             mode:'whole' },
-    { sel:'#learn',           key:'learn',     label:'Keep learning',                mode:'whole' },
-    { sel:'section.cta',      key:'end',       label:'Wrap-up',                      mode:'whole', extras:['footer'] }
+    { sel:'#nextstep',        key:'nextstep',  label:'Next steps',                   mode:'whole' },
+    { sel:'#learn',           key:'learn',     label:'Keep learning',                mode:'whole', extras:['footer'] }
   ];
   var TRACKED = [
     ['shift','01','What changed'], ['safe','02','Five ideas at work'], ['year','03','Your first year'], ['calls','04','Who handles what'],
     ['welcome','05','The four jobs'], ['task','06','Job 1: get the work done'], ['relations','07','Job 2: take care of your people'],
     ['change','08','Job 3: make things better'], ['external','09','Job 4: connect your team'], ['yourcall','10','Your call'],
-    ['survey','11','Your assessment'], ['quiz','12','Quick check'], ['nextstep','13','Your next seven days']
+    ['survey','11','Your assessment'], ['quiz','12','Quick check'], ['nextstep','13','Next steps']
   ];
   var pages = [], secFirst = {};
   var topSpan = document.getElementById('top');
