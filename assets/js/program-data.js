@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-16b',
+  version: '2026-09-16c',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -80,14 +80,6 @@ window.MV_PROGRAM = {
       title: 'Harassment Prevention (Manager Essentials)',
       why: 'Vanderbilt policy: supervisors carry the duty to respond and escalate.',
       desc: 'Recognizing a concern, responding well in the moment, and getting it to Equal Opportunity and Access.' },
-    { id: 'R-015', oracleCode: 'R-015', oracleUrl: null, oracleItemId: null, mins: 20, state: 'ALL', audience: 'All Staff', type: 'Advisory', deadlineDays: 30, cadence: 'Annual',
-      title: 'Code of Conduct: Vanderbilt',
-      why: 'Every staff member affirms the Code of Conduct each year.',
-      desc: 'The commitments every Vanderbilt employee makes: integrity, respect, stewardship, and how to raise a concern.' },
-    { id: 'R-016', oracleCode: 'R-016', oracleUrl: null, oracleItemId: null, mins: 20, state: 'ALL', audience: 'Manager', type: 'Advisory', deadlineDays: 30, cadence: 'Annual',
-      title: 'Code of Conduct: Managers',
-      why: 'Managers model the Code and are accountable for it on their teams.',
-      desc: 'Conflicts of interest, gifts, records, fair treatment, and what to do when a team member raises a concern.' },
     { id: 'R-017', oracleCode: 'R-017', oracleUrl: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001966018198', mins: 30, state: 'ALL', audience: 'All Staff', type: 'Advisory', deadlineDays: 30, cadence: 'Annual',
       title: 'Foundational Cybersecurity Training',
       why: 'Vanderbilt policy: annual security awareness for everyone with a university account.',

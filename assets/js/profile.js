@@ -13,8 +13,8 @@
 
    Profile shape:
      { name, firstName, id, state, startDate, source, stateSource,
-       completions: { 'R-015': { at: '2026-08-30', source: 'oracle' }, ... },
-       opened: { 'R-015': '2026-08-29' } }
+       completions: { 'R-001': { at: '2026-08-30', source: 'oracle' }, ... },
+       opened: { 'R-001': '2026-08-29' } }
    ===================================================================== */
 (function () {
   'use strict';
