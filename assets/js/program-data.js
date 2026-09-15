@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-15e',
+  version: '2026-09-15f',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -197,10 +197,7 @@ window.MV_PROGRAM = {
     playbookNote: 'The Manager Playbook is the through-line: one section drafted each week and due by Sunday, then the whole thing presented at the capstone.',
     weeks: [
       { n: 0, title: 'Prework', when: 'The week before the kickoff', outcome: 'Everyone arrives from the same place. About ninety minutes on your own time, so the kickoff hour is spent on identity and norms, not on a course.',
-        core: [
-          { title: 'New Manager Foundations', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857233710', note: 'The identity shift, the first conversations with a team, and the habits that separate managers who settle in from those who stay stuck.' },
-          { title: 'Building Team Trust as a Manager', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002942090959', optional: true, note: 'For the psychological safety half of week 1.' }
-        ],
+        core: { title: 'New Manager Foundations', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857233710', note: 'The identity shift, the first conversations with a team, and the habits that separate managers who settle in from those who stay stuck.' },
         playbook: { title: 'The first sentence of your Philosophy', desc: 'One sentence: what your team can expect from you. Written before the kickoff and read aloud there.' },
         extra: { title: 'The pulse, and the calendar', desc: 'Three questions on how confident you feel in the four conversations the cohort rehearses, asked again at the capstone. Then accept the calendar holds for all four weeks.' } },
       { n: 1, title: 'What it means to manage', outcome: 'Establishes the why before the how. By Friday you can say, in one sentence, what your team can expect from you.',
@@ -210,36 +207,48 @@ window.MV_PROGRAM = {
         discussion: { mins: 60, items: ['Debrief the kickoff and the Learning Lab: what surprised you.', 'Read your Philosophy sentence; a peer answers what your team would notice by Friday if it were true.', 'Commit: one thing you will say to your team on Monday.'] },
         playbook: { title: 'Section 1: Manager Philosophy', desc: 'One page: the three things your team can expect from you, what you say when bad news lands, and your intent for the next 90 days.' } },
       { n: 2, title: 'Goal setting, 1:1s, and difficult conversations', outcome: 'Builds daily operating discipline. By Friday you have a 1:1 cadence on the calendar, three goals per person drafted, and one hard conversation held.',
-        core: [
-          { title: 'A Manager\'s Guide to Conducting Effective One-on-One Meetings', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857334221', note: 'The cadence, the agenda that belongs to the team member, and what a manager checks in the meeting.' },
-          { title: 'How to Manage Difficult Conversations', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001635326767', note: 'The second half of the hour.' },
-          { title: 'Setting Team and Employee Goals Using SMART Methodology', by: 'LinkedIn Learning, Mike Figliuolo', url: null, optional: true, note: 'For the goal-setting piece.' }
-        ],
+        core: { title: 'How to Manage Difficult Conversations', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001635326767', note: 'Saying what you noticed, what you expect, and by when, without hinting. The 1:1 and goal-setting pieces are in Go deeper.' },
         lab: { title: 'Conversation prep: the hard conversation you are holding', desc: 'Bring one real conversation you have been putting off. Peers help frame it in three lines: what you noticed, what you expect, what you need by when. Then three goals for one person, tested for clear-is-kind.' },
         studio: { title: 'The 1:1 that turns into a difficult conversation', desc: 'Dev has missed two deadlines and opens the 1:1 as if nothing is wrong. Say the observation, the expectation, and the date, and ask what he needs. Scored on specificity, hedging, and whether the date is said out loud.' },
         discussion: { mins: 30, items: ['The conversation you held this week, in one minute, and what you would say differently.', 'Three 1:1 frameworks on screen; steal one thing from a peer\'s.', 'Commit: the 1:1 cadence goes on the calendar before Monday.'] },
         playbook: { title: 'Section 2: 1:1 framework and conversation plan', desc: 'Your 1:1 cadence and agenda, what you check in the meeting, three goals per person for this quarter, and the opening sentence of the conversation you rehearsed.' } },
       { n: 3, title: 'Coaching and mentoring', outcome: 'Shifts you from directing to developing. By Friday you have handed over one real decision and held one coaching conversation that was mostly questions.',
-        core: [
-          { title: 'Coaching Skills for Leaders and Managers', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002857610240&learningItemType=ORA_COURSE', note: 'Asking instead of telling, the coaching conversation, and when to coach versus correct.' },
-          { title: 'Delegating Tasks', by: 'LinkedIn Learning, Dorie Clark', url: null, note: 'Handing over the decision and not just the task, and the boundary you state when you do.' }
-        ],
+        core: { title: 'Coaching Skills for Leaders and Managers', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002857610240&learningItemType=ORA_COURSE', note: 'Asking instead of telling, the coaching conversation, and when to coach versus correct.' },
         lab: { title: 'Delegation lab and coach-or-correct lab', desc: 'Two cases in one session: what you will hand off this month, to whom, at which rung of the ladder, with what boundary; then a real performance pattern and whether it needs coaching or correcting.' },
         studio: { title: 'A coaching conversation, then a handoff', desc: 'Priya wants to grow into a lead role and expects you to tell her how. Practice GROW, then hand her the decision about the intake process with one boundary and a check-in date.' },
         discussion: { mins: 30, items: ['The decision you delegated this week and what happened when you did not take it back.', 'One coach-or-correct case from the lab, decided together.', 'Commit: the stretch assignment you will offer one person next week.'] },
         playbook: { title: 'Section 3: Delegation and growth plan', desc: 'For each person: where they want to be in two years, one stretch assignment toward it, their rung on the delegation ladder and the next one, and your coaching cadence.' } },
       { n: 4, title: 'Performance management and developing talent', outcome: 'Closes the loop from learning to leading. At the capstone you present a finished Playbook, a one-page Integrated Management Model, and a 90-day Team Development Plan.',
-        core: [
-          { title: 'Performance Management Foundations for Managers', by: 'Vanderbilt, in Oracle Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329264&learningItemType=ORA_CLASS', note: 'The Vanderbilt process the week sits on top of. Take it first if you have not.' },
-          { title: 'Performance Management: Conducting Performance Reviews', by: 'LinkedIn Learning, Todd Dewett', url: null, note: 'Preparing, the conversation itself, and the follow-through.' },
-          { title: 'Managing Employee Performance Problems', by: 'LinkedIn Learning, Todd Dewett', url: null, optional: true, note: 'The second half of the hour.' }
-        ],
+        core: { title: 'Performance Management Foundations for Managers', by: 'Vanderbilt, in Oracle Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329264&learningItemType=ORA_CLASS', note: 'The Vanderbilt process: performance management, leading with goals, and effective one-on-ones. Skip if you completed it in your first 60 days; the Scenario Studio is the week\'s work.' },
         lab: { title: 'Team development accountability lab', desc: 'Present your draft 90-day Team Development Plan to four peers in five minutes; they challenge one goal, one growth move, and one date. The plan that survives is the one you present at the capstone.' },
         studio: { title: 'Two performance conversations', desc: 'Marcus, a strong performer, expects a promotion you cannot give this cycle: honest about the cycle, specific about what would change the answer, a growth move he can start now. Then redirecting feedback on a pattern a talk did not fix.' },
         discussion: { mins: 60, items: ['Rehearse the five-minute capstone presentation: the Integrated Management Model, then the Team Development Plan.', 'One piece of feedback each, using situation, behavior, impact.', 'The Playbook is declared finished, or the one section that is not gets a date.'] },
         live: { title: 'Capstone, two hours, hybrid', when: 'In the room or online', desc: 'Present the Integrated Management Model and the Team Development Plan to peers and your business unit leader. Deliverables are recorded in Oracle Learning against your job profile.' },
         playbook: { title: 'Section 4: Performance practice, and the whole Playbook finished', desc: 'How you run the performance cycle, your feedback approach, and how you handle a concern from first conversation to written step. Plus the two capstone deliverables.' } }
     ],
+    /* Go deeper: after the program, for the manager who wants more on a week's topic.
+       Inside Vanderbilt is Oracle Learning (LinkedIn Learning titles; url null means to add). */
+    deeper: {
+      intro: 'After the capstone, for the week you want more of. Nothing here is required; each item names the week it deepens.',
+      inside: [
+        { week: 1, title: 'Building Team Trust as a Manager', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002942090959', note: 'Trust as something a manager builds on purpose, week by week.' },
+        { week: 2, title: 'A Manager\'s Guide to Conducting Effective One-on-One Meetings', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857334221', note: 'The cadence, the agenda that belongs to the team member, and what a manager checks in the meeting.' },
+        { week: 2, title: 'How to Have Productive One-on-One Meetings', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002856581889', note: 'The shorter companion on running the meeting itself.' },
+        { week: 2, title: 'Setting Team and Employee Goals Using SMART Methodology', by: 'LinkedIn Learning, Mike Figliuolo', url: null, note: 'Goals that are specific enough to check in a 1:1.' },
+        { week: 3, title: 'Delegating Tasks', by: 'LinkedIn Learning, Dorie Clark', url: null, note: 'Handing over the decision and not just the task, and the boundary you state when you do.' },
+        { week: 4, title: 'Performance Management: Conducting Performance Reviews', by: 'LinkedIn Learning, Todd Dewett', url: null, note: 'Preparing, the conversation itself, and the follow-through.' },
+        { week: 4, title: 'Managing Employee Performance Problems', by: 'LinkedIn Learning, Todd Dewett', url: null, note: 'When a talk did not fix it.' }
+      ],
+      outside: [
+        { week: 1, title: 'Psychological safety, from the researcher who named it', by: 'Amy Edmondson, TEDxHGSE', url: 'https://www.youtube.com/watch?v=LhoLuui9gX8', note: 'Why the best teams report more mistakes.' },
+        { week: 2, title: 'Manager Tools Basics', by: 'Manager Tools, Horstman and Auzenne', url: 'https://www.manager-tools.com/manager-tools-basics', note: 'The core casts on one-on-ones and feedback.' },
+        { week: 2, title: 'Feedback in three parts: situation, behavior, impact', by: 'Center for Creative Leadership', url: 'https://www.youtube.com/watch?v=-oRKr5xA9N0', note: 'The simplest feedback structure there is.' },
+        { week: 3, title: 'Coaching Real Leaders', by: 'Harvard Business Review, Muriel Wilkins', url: 'https://hbr.org/podcasts/coaching-real-leaders', note: 'Real coaching sessions with leaders working through the problems you have.' },
+        { week: 3, title: 'Manager guides: one-on-ones, feedback, coaching with GROW', by: 'Google re:Work', url: 'https://rework.withgoogle.com/intl/en/subjects/managers', note: 'Free, practical guides a large company built for its own managers.' },
+        { week: 4, title: 'Radical Candor', by: 'Kim Scott and Amy Sandler', url: 'https://www.radicalcandor.com/podcast/', note: 'Caring personally while challenging directly, applied to real situations.' },
+        { week: 4, title: 'The First 90 Days', by: 'Michael D. Watkins, Harvard Business Review Press', url: null, note: 'The transition playbook, for you and for the person you just promoted.' }
+      ]
+    },
     deliverables: [
       { title: 'Manager Playbook', desc: 'Your written personal operating system: philosophy, 1:1 framework, delegation and growth plan, performance practice. One section a week.' },
       { title: 'Integrated Management Model', desc: 'A one-page model of how the four weeks connect for you. Synthesis, not attendance.' },

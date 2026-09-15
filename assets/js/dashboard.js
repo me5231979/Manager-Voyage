@@ -236,9 +236,7 @@
       if (w.discussion) chips.push(chip('Discussion · ' + w.discussion.mins + ' min · virtual'));
       var rows = '';
       if (w.live && w.n === 1) rows += row('Hybrid', w.live.when, '<b class="cwr__t">' + esc(w.live.title) + '.</b><p>' + esc(w.live.desc) + '</p>', 'cwr--live');
-      if (w.core) rows += row('Core module', w.n === 0 ? 'Before the kickoff' : 'By Monday', '<ul class="cw__list">' + w.core.map(function (c) {
-        return '<li><b>' + esc(c.title) + '</b>' + (c.optional ? ' <span class="cw__opt">optional</span>' : '') + '<span class="cw__by">' + esc(c.by) + '</span>' + (c.note ? '<span class="cw__note">' + esc(c.note) + '</span>' : '') + link(c.url, 'Open in Oracle Learning') + '</li>';
-      }).join('') + '</ul>');
+      if (w.core) rows += row('Core module', w.n === 0 ? 'Before the kickoff' : 'By Monday, released the Friday before', '<b class="cwr__t">' + esc(w.core.title) + '</b><span class="cw__by">' + esc(w.core.by) + '</span>' + (w.core.note ? '<p>' + esc(w.core.note) + '</p>' : '') + link(w.core.url, 'Open in Oracle Learning'));
       if (w.coreNote) rows += row('Core module', 'Done as prework', '<p>' + esc(w.coreNote) + '</p>');
       if (w.lab) rows += row('Learning Lab', 'SparkWise · Tuesday or Wednesday · 45 min', '<b class="cwr__t">' + esc(w.lab.title) + '.</b><p>' + esc(w.lab.desc) + '</p>' + link(L.sparkwise, 'Open SparkWise'));
       if (w.studio) rows += row('Scenario Studio', 'Yoodli · Thursday · 15 min', '<b class="cwr__t">' + esc(w.studio.title) + '.</b><p>' + esc(w.studio.desc) + '</p>' + link(L.yoodli, 'Open Yoodli'));
@@ -259,7 +257,14 @@
       '<div class="rhythm">' + C.rhythm.map(function (r, i) {
         return '<div class="rhythm__step"><span class="rhythm__when">' + esc(r.when) + '</span><h4>' + esc(r.beat) + (r.tool ? ' <small>in ' + esc(r.tool) + '</small>' : '') + '</h4><p>' + esc(r.desc) + '</p><span class="rhythm__len">' + esc(r.mins) + '</span></div>';
       }).join('') + '</div><p class="lane__note">' + esc(C.playbookNote) + '</p></div>' +
-      '<div class="lane"><div class="lane__title"><h3>Week by week</h3><span>Prework, then four weeks</span></div>' + C.weeks.map(weekCard).join('') + '</div>' +
+      '<div class="lane"><div class="lane__title"><h3>Week by week</h3><span>Prework, then four weeks, one Core module each</span></div>' + C.weeks.map(weekCard).join('') + '</div>' +
+      (C.deeper ? '<div class="lane"><div class="lane__title"><h3>Go deeper</h3><span>' + esc(C.deeper.intro) + '</span></div>' +
+        [['Inside Vanderbilt · Oracle Learning', C.deeper.inside, 'Open in Oracle Learning'], ['Outside Vanderbilt', C.deeper.outside, 'Open']].map(function (g) {
+          return '<h4 class="lane__sub">' + g[0] + '</h4><div class="cardgrid">' + g[1].map(function (r) {
+            var inner = '<span class="card__kicker">Week ' + r.week + ' · ' + esc(r.by) + '</span><h3>' + esc(r.title) + '</h3><p>' + esc(r.note) + '</p>';
+            return r.url ? '<a class="card card--link" href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '<span class="card__go" aria-hidden="true">&#8599;</span></a>' : '<div class="card">' + inner + '<span class="cw__soon">' + g[2] + ' · link coming</span></div>';
+          }).join('') + '</div>';
+        }).join('') + '</div>' : '') +
       '<div class="cardgrid">' +
       '<div class="card card--wide"><span class="card__kicker">What you produce</span><h3>Three deliverables, presented at the capstone</h3>' +
       C.deliverables.map(function (d) { return '<p><b>' + esc(d.title) + '.</b> ' + esc(d.desc) + '</p>'; }).join('') + '</div>' +
