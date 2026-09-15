@@ -172,11 +172,10 @@ function narrPlay(k){
 if(bbListen) bbListen.addEventListener('click', function(){ if(narr.playing){ narr.on = false; narrStop(); } else { narr.on = true; narrPlay(); } });
 /* A section with its own clip: play it when the learner opens that section (if they are listening),
    or when they tap its speaker. Tapping again stops it. Any of these stops the page narration first. */
-function narrSub(k, force, restart){
+function narrSub(k, force){
   if(!NARR[k]){ if(force) toast('No narration for this one.'); else if(narr.playing) narrStop(); return; }
-  /* opening a section always reads it from the top; the remembered spot is only for the Listen toggle in the bottom bar */
-  if(restart){ delete narrPos[k]; narrPosSave(); }
-  else if(narr.playing && narr.key === k){ narrStop(); return; }
+  /* every section, card and speaker button reads its clip from the top; only the Listen toggle in the bottom bar resumes */
+  delete narrPos[k]; narrPosSave();
   if(force) narr.on = true;
   if(narr.on || narr.auto) narrPlay(k); else if(narr.playing) narrStop();
 }
@@ -760,13 +759,26 @@ var IDEAS = [
     tabs.forEach(function(t){ var on = t.getAttribute('data-job') === k; t.setAttribute('aria-selected', on ? 'true' : 'false'); if(on) t.classList.add('seen'); });
     panes.forEach(function(p){ var on = p.getAttribute('data-job') === k; p.classList.toggle('cur', on); p.hidden = !on; });
     var pg = document.querySelector('.page.cur'); if(pg) pg.scrollTop = 0;
-    if(k !== 'over' && NARR[k + '/1']) narrSub(k + '/1', false, true); else if(narr.playing) narrStop();
+    if(k !== 'over' && NARR[k + '/1']) narrSub(k + '/1'); else if(narr.playing) narrStop();
   }
   box.addEventListener('click', function(e){
-    var t = e.target.closest('.job-tabs button[data-job]') || e.target.closest('#fwMap .fw-card[data-job]');
+    var t = e.target.closest('.job-tabs button[data-job]');
     if(t) show(t.getAttribute('data-job'));
   });
-  window.showJob = show;
+  window.showJob = show; window.markJob = mark;
+})();
+
+/* the four cards on the overview: tapping one plays that category's intro clip;
+   the control inside it opens the category. Either counts toward the activity. */
+(function(){
+  var map = $('#fwMap'); if(!map) return;
+  $$('.fw-card[data-job]', map).forEach(function(c, i){
+    var key = 'welcome/j' + (i + 1); c.setAttribute('data-nk', key);
+    function play(){ narrSub(key, true); if(window.markJob) markJob(c.getAttribute('data-job')); }
+    c.addEventListener('click', function(e){ if(e.target.closest('.fw-open')) return; play(); });
+    c.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); play(); } });
+  });
+  map.addEventListener('click', function(e){ var b = e.target.closest('.fw-open'); if(b){ e.stopPropagation(); if(window.showJob) showJob(b.getAttribute('data-open')); } });
 })();
 
 /* ══════════ next steps: pick one habit; it lands in the message to your manager ══════════ */
@@ -818,7 +830,7 @@ var TURNS = [
   { sel:'#yearMap',     prog:'year',     text:'Tap each group to open it and hear it.' },
   { sel:'#simBox',      prog:null,       text:'Pick a situation to see the first move and who handles what.' },
   { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations. Tap the first thing you would do.' },
-  { sel:'#fwMap',       prog:'welcome',  text:'Open each of the four categories. The pills above move between them.' },
+  { sel:'#fwMap',       prog:'welcome',  text:'Tap a card to hear its intro, or open the category. The pills above move between them.' },
   { sel:'#task .flip-grid',      prog:'task',      text:'Flip each card: what to stop, what to do instead.' },
   { sel:'#relations .flip-grid', prog:'relations', text:'Flip each card: what to stop, what to do instead.' },
   { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card: what to stop, what to do instead.' },
