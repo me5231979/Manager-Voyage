@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-16d',
+  version: '2026-09-16e',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -178,37 +178,37 @@ window.MV_PROGRAM = {
      a url are LinkedIn Learning courses already in Oracle; the rest are
      titles to add. Learning Lab titles are framed by topic until SparkWise
      confirms them. Tool links come from MV_CONFIG.cohortLinks. */
-  /* The six standards. Vanderbilt measures every manager on six behaviors,
-     drawn from Yukl (2012): task, relations, change, and external behaviors.
-     `pulse` is the pre and post item, answered before the cohort and at the
-     capstone (1 = not yet, 5 = every week). Replace the wording with the
-     official items if PCB revises them. `habits` are the Foundation
-     course habit numbers; `weeks` are cohort weeks. */
+  /* The six behaviors Vanderbilt looks for managers to embody, taught in
+     the web-based Manager Foundations course and measured by the Manager
+     Effectiveness Assessment before the course and six months after. They
+     are drawn from Yukl (2012): task, relations, change, and external
+     behaviors. `pulse` is the official self-rating item; `habits` are the
+     Foundation course habit numbers. */
   standards: [
     { key: 'clarity', name: 'Create clarity', short: 'Clarity', yukl: 'Planning and clarifying, task-oriented',
       desc: 'Every person can say what they own, by when, what good looks like, and why it matters.',
       pulse: 'I make priorities, expectations, and what good looks like clear.',
-      habits: [1, 2, 10], weeks: [1, 2], playbook: 'Sections 1 and 2' },
+      habits: [1, 2, 10] },
     { key: 'coach', name: 'Coach and develop', short: 'Coach', yukl: 'Developing, relations-oriented',
       desc: 'Regular 1:1s, feedback while the work can still change, and a growth move for each person.',
       pulse: 'I give timely feedback and help people build capability through their work.',
-      habits: [3, 6], weeks: [2, 3, 4], playbook: 'Sections 2 and 3, Team Development Plan' },
+      habits: [3, 6] },
     { key: 'trust', name: 'Build trust', short: 'Trust', yukl: 'Supporting and recognizing, relations-oriented',
       desc: 'People bring bad news early, are thanked by name, and are heard before decisions land.',
       pulse: 'I create an environment where people can speak up, ask questions, and learn from mistakes.',
-      habits: [5, 7, 13], weeks: [1], playbook: 'Section 1' },
+      habits: [5, 7, 13] },
     { key: 'empower', name: 'Empower others', short: 'Empower', yukl: 'Empowering and encouraging innovation',
       desc: 'Decisions handed over with the boundary stated, small trials allowed, and not taken back.',
       pulse: 'I give people appropriate ownership and authority to make decisions.',
-      habits: [8, 11], weeks: [3], playbook: 'Section 3' },
+      habits: [8, 11] },
     { key: 'issues', name: 'Address issues', short: 'Issues', yukl: 'Monitoring and problem solving, plus representing',
       desc: 'Missed work named the week it happens, causes found, concerns routed the same day.',
       pulse: 'I address performance, people, or process problems early and constructively.',
-      habits: [4, 3, 15], weeks: [2, 4], playbook: 'Sections 2 and 4' },
+      habits: [4, 3, 15] },
     { key: 'change', name: 'Lead change', short: 'Change', yukl: 'Advocating and envisioning change, collective learning, external monitoring',
       desc: 'The why explained in your own words, a picture of next year, and a look back after big work.',
       pulse: 'I connect change to the bigger picture and help my team adapt, learn, and try new ways of working.',
-      habits: [9, 10, 12, 14], weeks: [4], playbook: 'Team Development Plan' }
+      habits: [9, 10, 12, 14] }
   ],
 
   cohort: {
@@ -225,29 +225,29 @@ window.MV_PROGRAM = {
     ],
     playbookNote: 'The Manager Playbook is the through-line: one section drafted each week and due by Sunday, then the whole thing presented at the capstone.',
     weeks: [
-      { n: 0, standards: ['clarity'], title: 'Prework', when: 'The week before the kickoff', outcome: 'Everyone arrives from the same place. About ninety minutes on your own time, so the kickoff hour is spent on identity and norms, not on a course.',
+      { n: 0, title: 'Prework', when: 'The week before the kickoff', outcome: 'Everyone arrives from the same place. About ninety minutes on your own time, so the kickoff hour is spent on identity and norms, not on a course.',
         core: { title: 'New Manager Foundations', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857233710', note: 'The identity shift, the first conversations with a team, and the habits that separate managers who settle in from those who stay stuck.' },
         playbook: { title: 'The first sentence of your Philosophy', desc: 'One sentence: what your team can expect from you. Written before the kickoff and read aloud there.' },
-        extra: { title: 'The pulse, and the calendar', desc: 'Six questions, one per standard, on how often you do each behavior today, asked again at the capstone. Then accept the calendar holds for all four weeks.' } },
-      { n: 1, standards: ['clarity', 'trust'], title: 'What it means to manage', outcome: 'Establishes the why before the how. By Friday you can say, in one sentence, what your team can expect from you.',
+        extra: { title: 'The pulse, and the calendar', desc: 'Three questions on how confident you feel in the four conversations the cohort rehearses, asked again at the capstone. Then accept the calendar holds for all four weeks.' } },
+      { n: 1, title: 'What it means to manage', outcome: 'Establishes the why before the how. By Friday you can say, in one sentence, what your team can expect from you.',
         live: { title: 'Kickoff, one hour, hybrid', when: 'Monday, in the room or online, location TBD', desc: 'The cohort meets. Management identity in one story from a Vanderbilt manager a year in, cohort norms, the Playbook introduced, and your Philosophy sentence read aloud and sharpened.' },
         lab: { title: 'Psychological safety: make the truth cheap to tell', desc: 'Live case: a team member brought bad news late, and the manager\'s first reaction decided whether it would happen again. Name the one reaction on your own team you would change.' },
         studio: null,
         discussion: { mins: 60, items: ['Debrief the kickoff and the Learning Lab: what surprised you.', 'Read your Philosophy sentence; a peer answers what your team would notice by Friday if it were true.', 'Commit: one thing you will say to your team on Monday.'] },
         playbook: { title: 'Section 1: Manager Philosophy', desc: 'One page: the three things your team can expect from you, what you say when bad news lands, and your intent for the next 90 days.' } },
-      { n: 2, standards: ['clarity', 'coach', 'issues'], title: 'Goal setting, 1:1s, and difficult conversations', outcome: 'Builds daily operating discipline. By Friday you have a 1:1 cadence on the calendar, three goals per person drafted, and one hard conversation held.',
+      { n: 2, title: 'Goal setting, 1:1s, and difficult conversations', outcome: 'Builds daily operating discipline. By Friday you have a 1:1 cadence on the calendar, three goals per person drafted, and one hard conversation held.',
         core: { title: 'How to Manage Difficult Conversations', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001635326767', note: 'Saying what you noticed, what you expect, and by when, without hinting. The 1:1 and goal-setting pieces are in Go deeper.' },
         lab: { title: 'Conversation prep: the hard conversation you are holding', desc: 'Bring one real conversation you have been putting off. Peers help frame it in three lines: what you noticed, what you expect, what you need by when. Then three goals for one person, tested for clear-is-kind.' },
         studio: { title: 'The 1:1 that turns into a difficult conversation', desc: 'Dev has missed two deadlines and opens the 1:1 as if nothing is wrong. Say the observation, the expectation, and the date, and ask what he needs. Scored on specificity, hedging, and whether the date is said out loud.' },
         discussion: { mins: 30, items: ['The conversation you held this week, in one minute, and what you would say differently.', 'Three 1:1 frameworks on screen; steal one thing from a peer\'s.', 'Commit: the 1:1 cadence goes on the calendar before Monday.'] },
         playbook: { title: 'Section 2: 1:1 framework and conversation plan', desc: 'Your 1:1 cadence and agenda, what you check in the meeting, three goals per person for this quarter, and the opening sentence of the conversation you rehearsed.' } },
-      { n: 3, standards: ['coach', 'empower'], title: 'Coaching and mentoring', outcome: 'Shifts you from directing to developing. By Friday you have handed over one real decision and held one coaching conversation that was mostly questions.',
+      { n: 3, title: 'Coaching and mentoring', outcome: 'Shifts you from directing to developing. By Friday you have handed over one real decision and held one coaching conversation that was mostly questions.',
         core: { title: 'Coaching Skills for Leaders and Managers', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002857610240&learningItemType=ORA_COURSE', note: 'Asking instead of telling, the coaching conversation, and when to coach versus correct.' },
         lab: { title: 'Delegation lab and coach-or-correct lab', desc: 'Two cases in one session: what you will hand off this month, to whom, at which rung of the ladder, with what boundary; then a real performance pattern and whether it needs coaching or correcting.' },
         studio: { title: 'A coaching conversation, then a handoff', desc: 'Priya wants to grow into a lead role and expects you to tell her how. Practice GROW, then hand her the decision about the intake process with one boundary and a check-in date.' },
         discussion: { mins: 30, items: ['The decision you delegated this week and what happened when you did not take it back.', 'One coach-or-correct case from the lab, decided together.', 'Commit: the stretch assignment you will offer one person next week.'] },
         playbook: { title: 'Section 3: Delegation and growth plan', desc: 'For each person: where they want to be in two years, one stretch assignment toward it, their rung on the delegation ladder and the next one, and your coaching cadence.' } },
-      { n: 4, standards: ['coach', 'issues', 'change'], title: 'Performance management and developing talent', outcome: 'Closes the loop from learning to leading. At the capstone you present a finished Playbook, a one-page Integrated Management Model, and a 90-day Team Development Plan.',
+      { n: 4, title: 'Performance management and developing talent', outcome: 'Closes the loop from learning to leading. At the capstone you present a finished Playbook, a one-page Integrated Management Model, and a 90-day Team Development Plan.',
         core: { title: 'Performance Management Foundations for Managers', by: 'Vanderbilt, in Oracle Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329264&learningItemType=ORA_CLASS', note: 'The Vanderbilt process: performance management, leading with goals, and effective one-on-ones. Skip if you completed it in your first 60 days; the Scenario Studio is the week\'s work.' },
         lab: { title: 'Team development accountability lab', desc: 'Present your draft 90-day Team Development Plan to four peers in five minutes; they challenge one goal, one growth move, and one date. The plan that survives is the one you present at the capstone.' },
         studio: { title: 'Two performance conversations', desc: 'Marcus, a strong performer, expects a promotion you cannot give this cycle: honest about the cycle, specific about what would change the answer, a growth move he can start now. Then redirecting feedback on a pattern a talk did not fix.' },
