@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-15b',
+  version: '2026-09-15c',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -269,10 +269,10 @@ window.MV_PROGRAM = {
       desc: 'Time off for health and family, including FMLA, and injuries at work: eligibility, paperwork, dates, and the claim.',
       when: 'Contact them the same day someone mentions leave, a health or family situation, or gets hurt at work. Never ask for a diagnosis.',
       how: 'FMLA and leave requests go through Origami. Report a workplace injury the same day, then tell your HCM.' },
-    { role: 'Ombuds', key: 'ombuds',
-      desc: 'Confidential, informal, impartial help thinking through a situation, for you or for a team member.',
-      when: 'When you want to talk something through before deciding what to do, or a team member needs a confidential ear.',
-      how: 'Contact the Ombuds office directly. Conversations are off the record.' },
+    { role: 'The Hotline', key: 'hotline',
+      desc: 'Vanderbilt\'s confidential reporting line for concerns about misconduct, fraud, policy violations, or safety, for you or for a team member who would rather not go through a manager.',
+      when: 'When someone wants to raise a concern confidentially or anonymously, or when you are not sure a concern fits any other route. Reports of harassment, discrimination, or leave still go to EOA, Title IX, or Leave the same day.',
+      how: 'By phone or online, any hour. Tell your team it exists; you do not need to know who used it.' },
     { role: 'Compliance', key: 'compliance',
       desc: 'Policy questions and required training.',
       when: 'When you are unsure whether a policy applies, or a compliance course is overdue.',

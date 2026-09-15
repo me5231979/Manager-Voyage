@@ -31,7 +31,7 @@ window.MV_CONFIG = {
   surveyRetakeMonths: 6,
   /* Link to the Manager Effectiveness Assessment (Qualtrics, REDCap, Oracle survey). Empty until PCB supplies it. */
   /* Contact links for Who to call (PCB directory pages). Empty until supplied. */
-  contacts: { engagementConsultants: '', hcm: '', er: '', leave: '', eoa: '', titleIX: '', ombuds: '', compliance: '' },
+  contacts: { engagementConsultants: '', hcm: '', er: '', leave: '', eoa: '', titleIX: '', hotline: '', compliance: '' },
   /* The assessment results email, so the Foundation course can tell managers what to search their inbox for. Empty until PCB confirms. */
   assessmentEmailFrom: '',
   assessmentEmailSubject: '',
