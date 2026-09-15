@@ -170,7 +170,7 @@
     var f = items.filter(function (it) { return it.kind === 'foundation'; })[0];
     var fDone = isDone(f.id);
     var ordered = !!foundationOrder();
-    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · The assessment, the Foundation on the web, then the micro modules in Oracle</span></div>' +
+    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Strongly recommended · Days 1 to 60 · The assessment, the Foundation on the web, then the micro modules in Oracle</span></div>' +
       '<p class="panel__lead">' + esc(P.mrc.summary) + ' Every module is interactive: simulators, scenario studios, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check, and Oracle records the date you pass it.</p>' +
       lane(mea.title, 'Ten minutes · Before the Foundation course', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Retake the assessment in six months.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Tap Mark complete once you have submitted it.') +
       lane(f.title, '35 minutes on the web · After the assessment', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation next. It unlocks the micro modules and orders them from your self-assessment.'));
@@ -192,7 +192,7 @@
   function panelPortal() {
     var url = CFG.portalUrl || P.portal.url;
     var bey = P.portal.beyond;
-    return '<div class="panel__head"><h2>Manager <em>Portal</em>.</h2><span>Component 04 · Always on · From Day 1</span></div>' +
+    return '<div class="panel__head"><h2>Manager <em>Portal</em>.</h2><span>Component 04 · Always on · Your reference from Day 1</span></div>' +
       '<p class="panel__lead">' + esc(P.portal.summary) + ' A manager who finished the cohort two years ago and a manager who started yesterday see the same hub.</p>' +
       '<div class="eligible"><div><b>Open from Day 1.</b> Nothing to complete here. Come back whenever you need a template, a policy, or a name.</div>' +
       (url ? '<a class="btn" href="' + esc(url) + '" target="_blank" rel="noopener">Open the Manager Portal</a>' : '<span class="btn is-disabled">Portal link coming soon</span>') + '</div>' +
@@ -213,11 +213,11 @@
     var ok = bothRequiredDone();
     var req = CFG.cohortRequestUrl || P.cohort.requestUrl;
     var open = requiredItems().filter(function (it) { return !isDone(it.id); }).length;
-    return '<div class="panel__head"><h2>The four-week <em>cohort</em>.</h2><span>Component 03 · Optional · Quarterly · 100 seats</span></div>' +
+    return '<div class="panel__head"><h2>The four-week <em>cohort</em>.</h2><span>Component 03 · Optional but recommended · Quarterly · 100 seats</span></div>' +
       '<p class="panel__lead">' + esc(P.cohort.summary) + '</p>' +
       '<div class="eligible' + (ok ? '' : ' eligible--locked') + '"><div>' + (ok
         ? '<b>You are eligible, and Manager Foundations is already complete.</b> The cohort is optional. Oracle sends the next quarterly invitation; you can also ask for a seat now.'
-        : '<b>' + open + ' required item' + (open === 1 ? '' : 's') + ' to go.</b> ' + esc(P.cohort.eligibility) + ' Units outside the central budget are billed per seat.') + '</div>' +
+        : '<b>' + open + ' item' + (open === 1 ? '' : 's') + ' on your Day 60 path to go.</b> ' + esc(P.cohort.eligibility) + ' Units outside the central budget are billed per seat.') + '</div>' +
       (ok && req ? '<a class="btn" href="' + esc(req) + '" target="_blank" rel="noopener">Request a seat</a>' : ok ? '<span class="btn is-disabled">Request link coming soon</span>' : '<span class="pill pill--locked">Unlocks at Day 60 completion</span>') + '</div>' +
       '<div class="cardgrid">' + P.cohort.weeks.map(function (w) {
         return '<div class="card"><span class="card__kicker">Week ' + w.n + '</span><h3>' + esc(w.title) + '</h3><p>' + esc(w.desc) + '</p><p><b>' + esc(w.outcome) + '</b></p></div>';
@@ -233,10 +233,10 @@
   var AREAS = [
     { id: 'compliance', num: '01 · Required', title: 'Compliance Courses', panel: panelCompliance, cls: 'cattile--compliance',
       count: function () { var c = myCompliance(); return { done: c.filter(function (i) { return isDone(i.id); }).length, total: c.length }; } },
-    { id: 'mrc', num: '02 · Required', title: 'Manager Responsibilities Course', panel: panelMrc,
+    { id: 'mrc', num: '02 · Strongly recommended', title: 'Manager Responsibilities Course', panel: panelMrc,
       count: function () { var c = mrcItems(); return { done: c.filter(function (i) { return isDone(i.id); }).length, total: c.length }; } },
-    { id: 'cohort', num: '03 · Optional', title: 'Four-Week Cohort', panel: panelCohort, count: function () { return null; } },
-    { id: 'portal', num: '04 · Always on', title: 'Manager Portal', panel: panelPortal, count: function () { return null; } }
+    { id: 'cohort', num: '03 · Optional · Recommended', title: 'Four-Week Cohort', panel: panelCohort, count: function () { return null; } },
+    { id: 'portal', num: '04 · Always on · Reference', title: 'Manager Portal', panel: panelPortal, count: function () { return null; } }
   ];
 
   function renderDashboard() {
@@ -258,7 +258,7 @@
       how.innerHTML = '<b>Choose your work location</b> to see your compliance requirements. Everything else is the same for every manager.';
     } else {
       how.className = 'howline';
-      how.innerHTML = 'Two components are <b>required in your first 60 days</b>. Oracle Learning assigned them the day your role began, from your role and your work location in <b>' + esc(stateName(profile.state)) + '</b>. ' +
+      how.innerHTML = 'The compliance courses are <b>required in your first 60 days</b>, and the Manager Responsibilities Course is <b>strongly recommended</b> alongside them. Oracle Learning assigned both the day your role began, from your role and your work location in <b>' + esc(stateName(profile.state)) + '</b>. ' +
         (CFG.profileEndpoint ? 'Completions recorded in Oracle appear here automatically.' : 'Open each item in Oracle; when you finish, tap Mark complete and it is written to your record as self-reported.');
     }
 
@@ -310,7 +310,7 @@
       { t: 'Day 1', s: 'Assigned in Oracle. Portal open.', d: true },
       { t: 'Day 30', s: 'Assessment, Foundation course, and the Systems and Vanderbilt & Nashville tracks complete.', d: m1, now: day <= 30 },
       { t: 'Day 60', s: 'Compliance, People, and Processes complete. Manager Foundations is done and recorded against your job profile.', d: bothRequiredDone(), now: day > 30 && day <= 60 },
-      { t: 'Cohort', s: 'Optional. ' + (bothRequiredDone() ? 'You are eligible: the invitation follows from Oracle, or ask for a seat.' : 'Opens once the required components are complete.'), d: false, now: day > 60 }
+      { t: 'Cohort', s: 'Optional but recommended. ' + (bothRequiredDone() ? 'You are eligible: the invitation follows from Oracle, or ask for a seat.' : 'Opens once compliance and Manager Foundations are complete.'), d: false, now: day > 60 }
     ];
     $('#milestones').innerHTML = ms.map(function (x) {
       return '<div class="milestone' + (x.d ? ' done' : '') + (x.now && !x.d ? ' now' : '') + '"><i>' + (x.d ? '&#10003;' : '') + '</i><div><b>' + esc(x.t) + '</b><small>' + esc(x.s) + '</small></div></div>';

@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-14f',
+  version: '2026-09-15a',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -179,7 +179,7 @@ window.MV_PROGRAM = {
     id: 'COHORT', oracleCode: 'COHORT', oracleUrl: null, requestUrl: null,
     title: 'Four-Week Cohort',
     summary: 'Where skill development happens. One hundred managers a quarter. An in-person kickoff, four blended weeks with AI rehearsal and peer labs, and an in-person capstone where you present three deliverables to peers and your business unit leader.',
-    eligibility: 'Open to any manager who has completed both required components. Oracle sends the invitation on completion.',
+    eligibility: 'Open to any manager who has completed the compliance courses and Manager Foundations. Oracle sends the invitation on completion.',
     weeks: [
       { n: 1, title: 'What It Means to Manage', desc: 'In-person kickoff at the Student Life Center (3 hours). Management identity and psychological safety. Yoodli: identity articulation. SparkWise: psych safety lab. Playbook: Manager Philosophy draft.', outcome: 'Establishes the why before the how.' },
       { n: 2, title: 'Goal Setting, 1:1s, and Difficult Conversations', desc: 'Core module: Difficult Conversations. Yoodli: 1:1 and difficult conversation scenarios. SparkWise: conversation prep lab. Playbook: 1:1 framework and conversation plan.', outcome: 'Builds daily operating discipline.' },
