@@ -167,16 +167,6 @@
       lane(stateName(profile.state) + ' requirements', 'Assigned from the work location', mine) +
       lane('Every location', 'Assigned to every Vanderbilt manager', all);
   }
-  /* The six behaviors the Foundation course teaches, as a compact strip. */
-  function standardsStrip() {
-    var S = P.standards || [];
-    if (!S.length) return '';
-    return '<div class="lane lane--std"><div class="lane__title"><h3>The six behaviors</h3><span>What Vanderbilt looks for in every manager, and the Foundation habits that teach each</span></div><div class="std">' + S.map(function (st) {
-      var meta = 'Yukl: ' + st.yukl + ' · Habit' + (st.habits.length === 1 ? ' ' : 's ') + st.habits.slice().sort(function (a, b) { return a - b; }).join(', ');
-      return '<div class="std__item"><b>' + esc(st.name) + '</b><p>' + esc(st.pulse) + '</p><span class="std__meta">' + esc(meta) + '</span></div>';
-    }).join('') + '</div><p class="lane__note">Drawn from Gary Yukl\'s (2012) taxonomy. The Manager Effectiveness Assessment measures them before the course and again six months later.</p></div>';
-  }
-
   function panelMrc() {
     var items = mrcItems();
     var mea = items.filter(function (it) { return it.kind === 'assessment'; })[0];
@@ -190,8 +180,7 @@
       '<li><b>Then the Foundation course,</b> about thirty-five minutes on the web.</li>' +
       '<li><b>Then the micro modules in Oracle Learning,</b> one common task each: the systems you approve in, the people obligations you carry, the processes that run the role, and the Vanderbilt mission and ecosystem.</li>' +
       '<li><b>Every module is interactive</b> and ends with a knowledge check that Oracle records.</li>' +
-      '<li><b>All of it serves the six behaviors</b> Vanderbilt looks for in every manager: the Foundation course teaches the habits behind them, and the assessment measures how often you do them.</li></ul>' +
-      standardsStrip() +
+      '</ul>' +
       lane(mea.title, 'Ten minutes · Before the Foundation course', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Retake the assessment in six months.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Tap Mark complete once you have submitted it.') +
       lane(f.title, '35 minutes on the web · After the assessment', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation next. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;

@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-16e',
+  version: '2026-09-16f',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -178,39 +178,6 @@ window.MV_PROGRAM = {
      a url are LinkedIn Learning courses already in Oracle; the rest are
      titles to add. Learning Lab titles are framed by topic until SparkWise
      confirms them. Tool links come from MV_CONFIG.cohortLinks. */
-  /* The six behaviors Vanderbilt looks for managers to embody, taught in
-     the web-based Manager Foundations course and measured by the Manager
-     Effectiveness Assessment before the course and six months after. They
-     are drawn from Yukl (2012): task, relations, change, and external
-     behaviors. `pulse` is the official self-rating item; `habits` are the
-     Foundation course habit numbers. */
-  standards: [
-    { key: 'clarity', name: 'Create clarity', short: 'Clarity', yukl: 'Planning and clarifying, task-oriented',
-      desc: 'Every person can say what they own, by when, what good looks like, and why it matters.',
-      pulse: 'I make priorities, expectations, and what good looks like clear.',
-      habits: [1, 2, 10] },
-    { key: 'coach', name: 'Coach and develop', short: 'Coach', yukl: 'Developing, relations-oriented',
-      desc: 'Regular 1:1s, feedback while the work can still change, and a growth move for each person.',
-      pulse: 'I give timely feedback and help people build capability through their work.',
-      habits: [3, 6] },
-    { key: 'trust', name: 'Build trust', short: 'Trust', yukl: 'Supporting and recognizing, relations-oriented',
-      desc: 'People bring bad news early, are thanked by name, and are heard before decisions land.',
-      pulse: 'I create an environment where people can speak up, ask questions, and learn from mistakes.',
-      habits: [5, 7, 13] },
-    { key: 'empower', name: 'Empower others', short: 'Empower', yukl: 'Empowering and encouraging innovation',
-      desc: 'Decisions handed over with the boundary stated, small trials allowed, and not taken back.',
-      pulse: 'I give people appropriate ownership and authority to make decisions.',
-      habits: [8, 11] },
-    { key: 'issues', name: 'Address issues', short: 'Issues', yukl: 'Monitoring and problem solving, plus representing',
-      desc: 'Missed work named the week it happens, causes found, concerns routed the same day.',
-      pulse: 'I address performance, people, or process problems early and constructively.',
-      habits: [4, 3, 15] },
-    { key: 'change', name: 'Lead change', short: 'Change', yukl: 'Advocating and envisioning change, collective learning, external monitoring',
-      desc: 'The why explained in your own words, a picture of next year, and a look back after big work.',
-      pulse: 'I connect change to the bigger picture and help my team adapt, learn, and try new ways of working.',
-      habits: [9, 10, 12, 14] }
-  ],
-
   cohort: {
     id: 'COHORT', oracleCode: 'COHORT', oracleUrl: null, requestUrl: null,
     title: 'Four-Week Cohort',

@@ -760,8 +760,8 @@ var IDEAS = [
 /* ══════════ next steps: pick one habit; it lands in the message to your manager ══════════ */
 (function(){
   var box = $('#habitPick'), p = $('#ns2p'), tell = $('#tellText'), copy = $('#copyTell'); if(!box) return;
-  var HABITS = [['Task-oriented', ['Plan it', 'Say it', 'Check it', 'Fix it']], ['Relations-oriented', ['Listen and help', 'Grow them', 'Thank them', 'Trust them']],
-    ['Change-oriented', ['Explain the why', 'Describe where you are going', 'Let people try', 'Look back']], ['External', ['Know the people', 'Watch for what is coming', 'Speak up for your team']]];
+  var HABITS = [['Task-oriented', ['Clarifying', 'Planning', 'Monitoring operations', 'Problem solving']], ['Relations-oriented', ['Supporting', 'Developing', 'Recognizing', 'Empowering']],
+    ['Change-oriented', ['Advocating change', 'Envisioning change', 'Encouraging innovation', 'Facilitating collective learning']], ['External', ['Networking', 'External monitoring', 'Representing']]];
   box.innerHTML = HABITS.map(function(g){ return '<span class="hp-job">' + g[0] + '</span>' + g[1].map(function(h){ return '<button type="button" data-habit="' + esc(h) + '" aria-pressed="false">' + esc(h) + '</button>'; }).join(''); }).join('');
   var BASE = 'I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].';
   function paint(h){
