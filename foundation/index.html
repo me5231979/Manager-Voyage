@@ -745,32 +745,29 @@ html.paged .idea .try .cq-h .sub-listen{ margin-left:0; }
 html.paged .idea .try .cq-h .try-note{ flex:1 1 100%; font-family:var(--sans); font-size:var(--fs-small); color:var(--tx2); line-height:1.45; }
 html.paged .idea .try .scn{ margin-top:0; }
 </style>
+<link rel="stylesheet" href="../assets/css/nav.css?v=1">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 
-<header class="nav" id="nav">
-  <div class="wrap">
-    <div class="bar">
-      <a class="logo" href="#top" aria-label="Vanderbilt University, Manager Voyage foundation course home">
-        <img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="166" height="43" decoding="async" />
-      </a>
-      <div class="bar-r">
-        <nav class="links" aria-label="Primary">
-          <a href="#shift">What changed</a>
-          <a href="#ideas">Five ideas</a>
-          <a href="#year">Your first year</a>
-          <a href="#welcome">The four jobs</a>
-          <a href="#survey">Your assessment</a>
-          <a href="#learn">Keep learning</a>
-          <a class="btn btn-gold btn-sm nav-cta" href="#quiz">Quick check</a>
-        </nav>
-        <button class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel"><span class="pw">Progress</span> <b id="progCount">0/8</b></button>
-        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span class="b b1" aria-hidden="true"></span><span class="b b2" aria-hidden="true"></span><span class="b b3" aria-hidden="true"></span></button>
-      </div>
+<header class="gnav" id="nav">
+  <a class="gnav__brand" href="../dashboard/" aria-label="Manager Voyage, my voyage">
+    <img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="166" height="43" decoding="async" />
+  </a>
+  <div class="gnav__right">
+    <nav class="gnav__links" id="gnavLinks" aria-label="Manager Voyage">
+      <a href="../dashboard/">My voyage</a>
+      <a href="./" aria-current="page">Foundation course</a>
+      <a href="../dashboard/#who">Who to call</a>
+      <a href="../">About the program</a>
+      <a class="gnav__btn" href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Manager Portal</a>
+    </nav>
+    <div class="gnav__extra">
+      <button type="button" class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel"><span class="pw">Progress</span> <b id="progCount">0/13</b></button>
     </div>
+    <button type="button" class="gnav__burger" aria-label="Menu" aria-expanded="false" aria-controls="gnavLinks"><span></span><span></span><span></span></button>
   </div>
-  <span class="prog-track" aria-hidden="true"><span class="prog-fill" id="progFill"></span></span>
+  <span class="gnav__line" aria-hidden="true"><span class="prog-fill" id="progFill"></span></span>
 </header>
 
 <div class="prog-panel" id="progPanel" role="region" aria-label="Your progress" hidden>
@@ -782,18 +779,7 @@ html.paged .idea .try .scn{ margin-top:0; }
 </div>
 <p class="sr" id="progStatus" role="status" aria-live="polite"></p>
 
-<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-  <a class="mlink" href="#shift" data-prog="shift"><span class="mono">01</span>What changed<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#safe" data-prog="safe"><span class="mono">02</span>Safe to speak up<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#calls" data-prog="calls"><span class="mono">03</span>Who handles what<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#welcome" data-prog="welcome"><span class="mono">04</span>The four jobs<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#yourcall" data-prog="yourcall"><span class="mono">05</span>Your call: four situations<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#survey" data-prog="survey"><span class="mono">06</span>Your assessment results<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#quiz" data-prog="quiz"><span class="mono">07</span>Knowledge check<span class="mdone" aria-hidden="true">Done</span></a>
-  <a class="mlink" href="#nextstep" data-prog="nextstep"><span class="mono">08</span>Your next step<span class="mdone" aria-hidden="true">Done</span></a>
-  <div class="mprog" id="mprogLine">0 of 13 activities complete</div>
-  <div class="mfoot">Manager Voyage &middot; Futures Learning Hub</div>
-</nav>
+
 
 <main id="main"><span id="top"></span>
 
@@ -1353,6 +1339,7 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="../assets/js/oracle.js?v=20260912p"></script>
 <script src="narration-scripts.js?v=20260912p"></script>
 <script src="resources.js?v=20260912p"></script>
+<script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260912p"></script>
 <script src="app.js?v=20260912p"></script>
 </body>

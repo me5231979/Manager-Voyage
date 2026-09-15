@@ -845,7 +845,7 @@ footer{ background:var(--vu-black); color:#fff; border-top:1px solid rgba(207,17
 .prog-btn:hover{ border-color:var(--vu-gold); }
 .prog-track{ position:absolute; left:0; right:0; bottom:0; height:2px; pointer-events:none; }
 .prog-fill{ display:block; height:100%; width:0%; background:var(--vu-gold); transition:width .38s ease-out; }
-.prog-panel{ position:fixed; top:104px; right:clamp(8px,3vw,44px); z-index:220; width:min(380px, calc(100vw - 16px));
+.prog-panel{ position:fixed; top:calc(var(--nav-h) + 8px); right:clamp(8px,3vw,44px); z-index:220; width:min(380px, calc(100vw - 16px));
   max-height:min(72vh,600px); overflow:auto; background:var(--vu-black); color:#fff;
   border:1px solid rgba(207,174,112,.4); border-radius:var(--r); padding:20px 20px 16px; }
 .prog-panel[hidden]{ display:none; }

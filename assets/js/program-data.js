@@ -12,7 +12,7 @@
    No em or en dashes anywhere in this file.
    ===================================================================== */
 window.MV_PROGRAM = {
-  version: '2026-09-15a',
+  version: '2026-09-15b',
   programName: 'Manager Voyage',
   states: {
     TN: { name: 'Tennessee', campus: 'Nashville campus' },
@@ -125,7 +125,7 @@ window.MV_PROGRAM = {
     },
     /* The micro modules, most 15 minutes or less, as listed in Oracle Learning.
        Four tracks: Systems, People, Processes, and Vanderbilt & Nashville.
-       Performance management, Culture Amp goals, and one-on-ones live inside
+       Performance management, goals, and one-on-ones live inside
        one Oracle class (Performance Management Foundations for Managers), so
        they are one linked module here, not three separate ones.
        Paste each remaining Oracle deep link into oracleUrl when FLH has it. */
@@ -153,9 +153,9 @@ window.MV_PROGRAM = {
         ] },
       { id: 'T3', title: 'Processes', phase: 2, window: 'Days 31 to 60',
         why: 'The operating rhythm of the role. The performance management foundations course, scenario studios, and decision trees.',
-        outcome: 'By Day 60 you can run the performance cycle in Culture Amp, set goals, hold effective one-on-ones, give feedback, and handle a compensation or flexible work question.',
+        outcome: 'By Day 60 you can run the performance cycle in the performance platform, set goals, hold effective one-on-ones, give feedback, and handle a compensation or flexible work question.',
         modules: [
-          { id: 'MM-23', oracleUrl: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329264&learningItemType=ORA_CLASS', mins: 45, title: 'Performance Management Foundations for Managers', format: 'eLearning', desc: 'One Oracle class, three short pieces: Vanderbilt performance management, leading with goals in Culture Amp, and effective one-on-ones.' },
+          { id: 'MM-23', oracleUrl: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329264&learningItemType=ORA_CLASS', mins: 45, title: 'Performance Management Foundations for Managers', format: 'eLearning', desc: 'One Oracle class, three short pieces: Vanderbilt performance management, leading with goals in the performance platform, and effective one-on-ones.' },
           { id: 'MM-14', oracleUrl: null, title: 'Giving feedback', format: 'Scenario studio', desc: 'Reinforcing and redirecting feedback, practiced on realistic moments, without softening the message away.' },
           { id: 'MM-15', oracleUrl: null, title: 'Compensation cycle and merit basics', format: 'Video', desc: 'How the compensation cycle runs, what merit can and cannot do, and how to talk about pay with your team.' },
           { id: 'MM-16', oracleUrl: null, title: 'Flexible work arrangements', format: 'Decision tree', desc: 'What you can approve, what needs PCB, and how to keep an arrangement fair to the whole team.' },
@@ -230,8 +230,7 @@ window.MV_PROGRAM = {
           { title: 'Ask a Manager', src: 'Alison Green', url: 'https://www.askamanager.org/', why: 'Two decades of plain-spoken answers to real workplace questions, searchable by topic.' },
           { title: 'First Round Review', src: 'First Round Capital', url: 'https://review.firstround.com/', why: 'Long-form, practitioner-tested essays on management craft.' },
           { title: 'Lara Hogan on management', src: 'Lara Hogan, author of Resilient Management', url: 'https://larahogan.me/blog/', why: 'Short, concrete posts for new managers: first one-on-ones, feedback, delegation.' },
-          { title: 'MIT Sloan Management Review', src: 'Massachusetts Institute of Technology', url: 'https://sloanreview.mit.edu/', why: 'Research-backed articles on leading teams and organizations.' },
-          { title: 'Performance and feedback science blog', src: 'Culture Amp', url: 'https://www.cultureamp.com/blog', why: 'From the platform Vanderbilt runs its performance cycle in.' }
+          { title: 'MIT Sloan Management Review', src: 'Massachusetts Institute of Technology', url: 'https://sloanreview.mit.edu/', why: 'Research-backed articles on leading teams and organizations.' }
         ] },
         { title: 'Books', items: [
           { title: 'The Making of a Manager', src: 'Julie Zhuo · Portfolio, 2019', why: 'The first-time manager book: what to do when everyone looks to you.' },
@@ -243,12 +242,40 @@ window.MV_PROGRAM = {
     }
   },
 
+  /* Who to call. `key` names the link in MV_CONFIG.contacts; `sameDay`
+     marks the routes that cannot wait. Routing language to be confirmed by PCB. */
   contacts: [
-    { role: 'HCM', desc: 'Embedded in most business units. Your first call for an immediate HR issue: pay, hiring, a performance concern, a policy question.' },
-    { role: 'Engagement Consultant', desc: 'Your go-to in PCB for HR issues, concerns, and support: engagement, culture, and the bigger people questions for your business unit.' },
-    { role: 'Employee Relations (ER)', desc: 'Workplace concerns, investigations, performance and conduct cases.' },
-    { role: 'Equal Opportunity and Access (EOA)', desc: 'Discrimination and harassment reporting, Title IX, accommodations.' },
-    { role: 'Ombuds', desc: 'Confidential, informal, impartial help thinking through a situation.' },
-    { role: 'Compliance', desc: 'Policy questions and required training.' }
+    { role: 'Your HCM', key: 'hcm',
+      desc: 'Embedded in most business units. Your first call for an immediate HR issue: pay, hiring, a performance concern, a policy question, a form you are not sure about.',
+      when: 'The same day a question comes up, before you act on your own. When you are unsure, start here.',
+      how: 'Email, a call, or a walk down the hall. Give the facts and what you need by when.' },
+    { role: 'Your Engagement Consultant (EC)', key: 'engagementConsultants',
+      desc: 'Your go-to in PCB for the bigger people questions in your business unit: engagement, culture, team dynamics, and a hard conversation you want to plan.',
+      when: 'When an issue is more than one transaction: a performance pattern, a change to the team, a team dynamic, a retention worry. Same-day questions go to your HCM.',
+      how: 'Email or a meeting request. Your unit\'s EC is listed on the PCB site. Say what you have tried so far.' },
+    { role: 'Employee Relations Consultant (ERC)', key: 'er',
+      desc: 'Workplace concerns, investigations, performance and conduct cases, and progressive discipline.',
+      when: 'Before any formal step on a performance or conduct concern, and when a complaint about a coworker or a manager reaches you.',
+      how: 'Through your HCM, or contact Employee Relations directly. Bring dates, what was said, and what you have done so far.' },
+    { role: 'Equal Opportunity and Access (EOA)', key: 'eoa', sameDay: true,
+      desc: 'Reports of discrimination, harassment, and retaliation, and requests for a reasonable accommodation.',
+      when: 'Report the same day you see it or hear about it. You report; you do not investigate.',
+      how: 'File a report with EOA or call them. Then tell your HCM you did.' },
+    { role: 'Title IX Office', key: 'titleIX', sameDay: true,
+      desc: 'Sexual harassment, sexual assault, dating and domestic violence, and stalking involving anyone in the Vanderbilt community.',
+      when: 'Report the same day you learn of it. Supervisors are required to report; you do not investigate or promise confidentiality.',
+      how: 'File a report with the Title IX Office or call them. Then tell your HCM you did.' },
+    { role: 'Leave and Workers\' Compensation', key: 'leave', sameDay: true,
+      desc: 'Time off for health and family, including FMLA, and injuries at work: eligibility, paperwork, dates, and the claim.',
+      when: 'Contact them the same day someone mentions leave, a health or family situation, or gets hurt at work. Never ask for a diagnosis.',
+      how: 'FMLA and leave requests go through Origami. Report a workplace injury the same day, then tell your HCM.' },
+    { role: 'Ombuds', key: 'ombuds',
+      desc: 'Confidential, informal, impartial help thinking through a situation, for you or for a team member.',
+      when: 'When you want to talk something through before deciding what to do, or a team member needs a confidential ear.',
+      how: 'Contact the Ombuds office directly. Conversations are off the record.' },
+    { role: 'Compliance', key: 'compliance',
+      desc: 'Policy questions and required training.',
+      when: 'When you are unsure whether a policy applies, or a compliance course is overdue.',
+      how: 'Contact the Office of Compliance, or ask your HCM which policy applies.' }
   ]
 };
