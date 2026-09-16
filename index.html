@@ -65,7 +65,7 @@
   .hero .mark { position: absolute; right: -6%; top: 8%; width: clamp(320px, 38vw, 560px);
     opacity: .05; pointer-events: none; user-select: none; }
   .hero .wrap { position: relative; display: grid; gap: clamp(2rem, 4vw, 3.5rem);
-    grid-template-columns: 1.15fr .85fr; align-items: center; }
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; }
   @media (max-width: 880px) { .hero .wrap { grid-template-columns: 1fr; } }
   .hero .cta { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 2rem; }
   .means { border: 1px solid rgba(207,174,112,.45); border-left: 4px solid var(--vu-gold-flat);
@@ -316,17 +316,12 @@
       <div>
         <p class="eyebrow">Manager Voyage · Vanderbilt · People, Culture and Belonging</p>
         <h1>Manager <em>Voyage</em>.</h1>
-        <p class="lead" style="margin-top:1.25rem">Vanderbilt&rsquo;s management standard. Every new manager, the same path, from day one.</p>
+        <p class="lead" style="margin-top:1.25rem">Vanderbilt&rsquo;s management standard: the first structured, sequenced development journey for every manager, from the day the role begins. Four components, one journey. The compliance the law requires. A Foundations course on what Vanderbilt requires. A four-week cohort to practice it with a real team. A portal that never goes away. One framework behind all of it, and one measure of whether managers change how they lead.</p>
         <div class="cta">
           <a class="btn" href="dashboard/">Go to my voyage</a>
           <a class="btn btn--ghost" href="#overview">See how it works</a>
         </div>
       </div>
-      <aside class="goal" aria-label="The FY27 goal">
-        <p class="eyebrow">The FY27 goal</p>
-        <p>Launch the Vanderbilt Manager Standard, enroll 80% of M1 to M5 managers, and show measurable change in how they lead.</p>
-        <small>Reach from enrollment. Change from a six-item pulse, before and 90 days after.</small>
-      </aside>
     </div>
   </section>
 
@@ -343,9 +338,9 @@
       <h2>Sixty days that used to be left to <em>chance</em>.</h2>
       <p class="lead">A manager&rsquo;s first 60 days set patterns that last for years. Manager Voyage gives every one of them the same sequenced path: assigned on day one, tracked on one page, backed by people who never go away.</p>
       <div class="stats">
-        <div class="stat"><b>4,600</b><span>Staff led by Vanderbilt managers</span></div>
-        <div class="stat"><b>~400</b><span>New or promoted managers a year</span></div>
-        <div class="stat"><b>39</b><span>Business units, one standard</span></div>
+        <div class="stat"><b>4,600+</b><span>Staff led by Vanderbilt managers</span></div>
+        <div class="stat"><b>500+</b><span>Vanderbilt managers</span></div>
+        <div class="stat"><b>39</b><span>Business units on one standard</span></div>
         <div class="stat"><b>60</b><span>Days that matter most</span></div>
       </div>
       <h2 style="margin-top:3rem">Four components. One <em>journey</em>.</h2>
