@@ -262,6 +262,9 @@
   .tabs { display: flex; gap: .4rem; flex-wrap: wrap; margin: .6rem 0 1rem; }
   .tabs button { font: inherit; font-size: .85rem; border: 1px solid rgba(255,255,255,.3); background: transparent; color: var(--vu-white); border-radius: 999px; padding: .4rem .9rem; cursor: pointer; }
   .tabs button[aria-selected="true"] { background: var(--vu-gold-flat); color: var(--vu-black); border-color: var(--vu-gold-flat); }
+  .states { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem 2rem; margin-top: 1rem; }
+  @media (max-width: 760px) { .states { grid-template-columns: 1fr; } }
+  .states h4 { font-family: var(--serif); font-weight: 400; font-size: 1.15rem; margin: 0 0 .4rem; }
   .list { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
   .list li { display: grid; grid-template-columns: 1fr auto; gap: .6rem; align-items: baseline; border-top: 1px solid rgba(255,255,255,.1); padding-top: .5rem; }
   .list li .meta { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .62rem; color: rgba(255,255,255,.55); white-space: nowrap; }
@@ -424,11 +427,10 @@
   <section class="comp" id="c-compliance">
     <div class="wrap">
       <div class="comp__head"><div><p class="eyebrow">Component 01</p><h2>Compliance <em>courses</em>.</h2><p class="lead">What the law requires, where the team works. Assigned on day one.</p></div><div class="status"><span class="chip chip--req">Required</span><b>Days 1 to 60 · Annual</b></div></div>
-      <details class="acc"><summary>What is assigned, by location</summary><div class="acc__body">
+      <details class="acc" open><summary>What is assigned, by location</summary><div class="acc__body">
         <p>Legal courses carry a deadline. The rest are Vanderbilt policy. Supervisors take both versions.</p>
-        <div class="tabs" id="stateTabs" role="tablist" aria-label="Work location"></div>
-        <ul class="list" id="stateList"></ul>
-        <p style="margin-top:1.2rem"><b>Every location</b></p>
+        <div class="states" id="stateLists"></div>
+        <p style="margin-top:1.4rem"><b>Every location</b></p>
         <ul class="list" id="allList"></ul>
       </div></details>
       <details class="acc"><summary>Logistics</summary><div class="acc__body">
@@ -552,16 +554,14 @@
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   /* compliance, by location */
-  var states = Object.keys(P.states), cur = 'TN';
+  var states = Object.keys(P.states);
   function meta(c){ return (c.type === 'Legal' ? 'Required by law' : 'Vanderbilt policy') + ' · ' + c.audience + (c.deadlineDays ? ' · ' + c.deadlineDays + ' days' : ''); }
   function row(c){ return '<li><span>' + esc(c.title) + (c.note ? ' <small style="color:rgba(255,255,255,.55)">' + esc(c.note) + '</small>' : '') + '</span><span class="meta' + (c.type === 'Legal' ? ' req' : '') + '">' + esc(meta(c)) + '</span></li>'; }
-  function paintState(){
-    $('#stateTabs').innerHTML = states.map(function(k){ return '<button type="button" role="tab" aria-selected="' + (k === cur) + '" data-state="' + k + '">' + esc(P.states[k].name) + '</button>'; }).join('');
-    $('#stateList').innerHTML = P.compliance.filter(function(c){ return c.state === cur; }).map(row).join('') || '<li>No location-specific courses.</li>';
-  }
+  $('#stateLists').innerHTML = states.map(function(k){
+    var rows = P.compliance.filter(function(c){ return c.state === k; }).map(row).join('') || '<li>No location-specific courses.</li>';
+    return '<div><h4>' + esc(P.states[k].name) + '</h4><ul class="list">' + rows + '</ul></div>';
+  }).join('');
   $('#allList').innerHTML = P.compliance.filter(function(c){ return c.state === 'ALL'; }).map(row).join('');
-  $('#stateTabs').addEventListener('click', function(e){ var b = e.target.closest('[data-state]'); if(b){ cur = b.getAttribute('data-state'); paintState(); } });
-  paintState();
 
   /* foundations */
   $('#segList').innerHTML = (P.mrc.foundation.segments || []).map(function(s){ return '<li>' + esc(s.title) + '</li>'; }).join('');
