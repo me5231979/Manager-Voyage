@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Manager Voyage | Vanderbilt</title>
-<meta name="description" content="Manager Voyage is Vanderbilt University's structured management standard: compliance courses, the Manager Responsibilities Course, the Manager Portal, and a four-week cohort.">
+<meta name="description" content="Manager Voyage is Vanderbilt University's management standard: compliance courses, Manager Foundations, a four-week cohort, and the Manager Portal, built on Yukl's leadership-behavior framework and measured by a six-item pulse before and 90 days after.">
 <link rel="canonical" href="https://me5231979.github.io/Manager-Voyage/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Manager Voyage | Vanderbilt">
@@ -14,6 +14,7 @@
 <link rel="alternate icon" href="assets/img/favicon-96.png">
 <link rel="preload" href="assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/nav.css?v=1">
 <style>
   @font-face { font-family: 'Libre Caslon Display'; font-style: normal; font-weight: 400;
     src: url('assets/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2'); }
@@ -35,7 +36,7 @@
     --serif-i: 'Libre Caslon Text', 'Times New Roman', serif;
     --body: 'Inter', Arial, sans-serif;
     --cond: 'Antonio', Impact, sans-serif;
-    --nav-h: 64px;
+    --nav-h: 72px;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 12px); }
@@ -54,24 +55,6 @@
   .lead { font-size: clamp(1rem, 1.4vw, 1.15rem); color: rgba(255,255,255,.85); max-width: 62ch; }
   section { padding: clamp(56px, 8vw, 96px) 0; }
 
-  /* nav */
-  .nav { position: fixed; inset: 0 0 auto 0; height: var(--nav-h); z-index: 50;
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    padding: 0 clamp(16px, 3vw, 32px);
-    background: rgba(20,20,20,.97); border-bottom: 1px solid rgba(207,174,112,.18); }
-  .nav img { height: 40px; width: auto; }
-  .nav nav { display: flex; align-items: center; gap: clamp(.6rem, 2vw, 1.5rem); flex-wrap: wrap; }
-  .nav a { color: rgba(255,255,255,.85); text-decoration: none; font-size: .9rem; font-weight: 500; }
-  .nav a:hover { color: var(--vu-gold-flat); }
-  .btn { display: inline-block; font-family: var(--body); font-weight: 600; font-size: .95rem;
-    color: var(--vu-black); background: var(--vu-gold-flat); border: 1px solid var(--vu-gold-flat);
-    border-radius: 4px; padding: .7rem 1.2rem; text-decoration: none; transition: all .2s ease; }
-  .btn:hover { background: transparent; color: var(--vu-gold-flat); }
-  .btn--ghost { background: transparent; color: var(--vu-white); border-color: rgba(255,255,255,.4); }
-  .btn--ghost:hover { border-color: var(--vu-gold-flat); color: var(--vu-gold-flat); }
-  .nav .btn { padding: .45rem .85rem; font-size: .82rem; }
-  @media (max-width: 760px) { .nav nav a:not(.btn) { display: none; } }
-
   /* hero */
   .hero { position: relative; min-height: 88vh; display: grid; align-items: center;
     padding: calc(var(--nav-h) + 48px) 0 72px; overflow: hidden;
@@ -82,7 +65,7 @@
   .hero .mark { position: absolute; right: -6%; top: 8%; width: clamp(320px, 38vw, 560px);
     opacity: .05; pointer-events: none; user-select: none; }
   .hero .wrap { position: relative; display: grid; gap: clamp(2rem, 4vw, 3.5rem);
-    grid-template-columns: 1.15fr .85fr; align-items: center; }
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; }
   @media (max-width: 880px) { .hero .wrap { grid-template-columns: 1fr; } }
   .hero .cta { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 2rem; }
   .means { border: 1px solid rgba(207,174,112,.45); border-left: 4px solid var(--vu-gold-flat);
@@ -158,219 +141,432 @@
     html { scroll-behavior: auto; }
     .btn { transition: none; }
   }
+
+  /* buttons (this page does not load the site stylesheet) */
+  .btn { display: inline-block; background: var(--vu-gold-flat); color: var(--vu-black); text-decoration: none; font-weight: 600;
+    font-size: .95rem; padding: .8rem 1.6rem; border-radius: 4px; border: 1px solid var(--vu-gold-flat); transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(207,174,112,.25); }
+  .btn--ghost { background: transparent; color: var(--vu-white); border-color: rgba(255,255,255,.45); }
+  .btn--ghost:hover { border-color: var(--vu-gold-flat); color: var(--vu-gold-flat); box-shadow: none; }
+  /* detail sections that sit on the light band */
+  .band-light details.acc { border-color: rgba(28,28,28,.15); background: transparent; }
+  .band-light details.acc summary { color: var(--vu-black); }
+  .band-light details.acc summary small, .band-light .track .win { color: var(--vu-oak); }
+  .band-light details.acc summary::after { color: var(--vu-oak); }
+  .band-light details.acc .acc__body, .band-light .track ol, .band-light .who .c b { color: rgba(28,28,28,.85); }
+  .band-light .track p, .band-light .who .c p, .band-light .comp__head .status b { color: rgba(28,28,28,.7); }
+  .band-light .track, .band-light .who .c { border-color: rgba(28,28,28,.15); }
+  .band-light .who .c.urgent { border-color: rgba(155,46,39,.45); }
+  .band-light .who .c .sd { color: #9B2E27; }
+  .band-light .list li { border-color: rgba(28,28,28,.12); }
+  .band-light .list li .meta { color: rgba(28,28,28,.55); }
+  .band-light .list li .meta.req { color: #9B2E27; }
+  .band-light a { color: var(--vu-oak); }
+
+  /* foundations path */
+  .sub { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; margin: 2.5rem 0 0; }
+  .path { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.75rem; position: relative; }
+  .path::before { content: ""; position: absolute; left: 8%; right: 8%; top: 2.2rem; height: 2px; background: rgba(148,110,36,.35); z-index: 0; }
+  .path .p { position: relative; z-index: 1; background: #fff; border: 1px solid rgba(28,28,28,.15); border-top: 4px solid var(--vu-oak); border-radius: 6px; padding: 1.2rem 1.3rem 1.3rem; }
+  .path .n { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--vu-oak); color: #fff; font-family: var(--cond); font-weight: 700; font-size: 1.1rem; margin-bottom: .6rem; }
+  .path .when { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .66rem; color: var(--vu-oak); }
+  .path h3 { font-family: var(--serif); font-weight: 400; font-size: 1.35rem; margin: .2rem 0 .4rem; }
+  .path p { margin: 0; font-size: .93rem; color: rgba(28,28,28,.78); }
+  .path a.more { display: inline-block; margin-top: .8rem; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; font-size: .7rem; text-decoration: none; color: var(--vu-oak); }
+  .path a.more::after { content: " \2192"; }
+  .topics { display: grid; grid-template-columns: repeat(5, 1fr); gap: .7rem; margin-top: 1rem; }
+  .topics .t { background: #fff; border: 1px solid rgba(28,28,28,.15); border-radius: 6px; padding: .9rem 1rem; font-size: .92rem; line-height: 1.35; }
+  .topics .t b { display: block; font-family: var(--cond); font-weight: 700; letter-spacing: .08em; font-size: .68rem; color: var(--vu-oak); margin-bottom: .35rem; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+  .facts div { border-top: 2px solid var(--vu-oak); padding-top: .7rem; font-size: .93rem; color: rgba(28,28,28,.8); }
+  .facts b { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; color: var(--vu-oak); margin-bottom: .25rem; }
+  .band-light .tracks { margin-top: 1rem; }
+  .band-light .track { background: #fff; }
+  @media (max-width: 900px) { .topics { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 760px) { .path { grid-template-columns: 1fr; } .path::before { display: none; } .facts { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .topics { grid-template-columns: 1fr; } }
+
+  /* impact: timeline strip, targets, outcomes */
+  .tline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.6rem; position: relative; padding-top: 1.1rem; }
+  .tline::before { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 2px; background: rgba(207,174,112,.35); }
+  .tp { position: relative; padding-right: 1rem; }
+  .tp .dot { position: absolute; left: 0; top: -1.1rem; width: 14px; height: 14px; border-radius: 50%; background: var(--vu-gold-flat); box-shadow: 0 0 0 4px var(--vu-black); }
+  .tp .dot--open { background: var(--vu-black); border: 2px solid var(--vu-gold-flat); box-sizing: border-box; }
+  .tp b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.2rem; margin-bottom: .3rem; }
+  .tp p { margin: 0; font-size: .9rem; color: rgba(255,255,255,.75); }
+  .sub--tight { margin-top: 1.9rem; }
+  .targets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; }
+  .targets > div { border-top: 2px solid var(--vu-gold-flat); padding-top: .8rem; }
+  .targets .k { font-family: var(--cond); font-weight: 700; font-size: .7rem; letter-spacing: .1em; color: var(--vu-gold-flat); }
+  .targets b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.2rem; margin: .2rem 0 .3rem; }
+  .targets p { margin: 0; font-size: .88rem; color: rgba(255,255,255,.75); }
+  .outcomes { margin-top: 1rem; }
+  .cards--3 { grid-template-columns: repeat(3, 1fr); }
+  .outcomes .card { padding: 1.2rem 1.3rem; }
+  .outcomes .card h3 { font-size: 1.2rem; }
+  .outcomes .card p { font-size: .9rem; }
+  #impact details.acc { margin-top: 1.4rem; }
+  @media (max-width: 900px) { .targets { grid-template-columns: repeat(2, 1fr); } .cards--3 { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .tline { grid-template-columns: 1fr; padding-top: 0; } .tline::before { display: none; } .tp .dot { display: none; } .targets { grid-template-columns: 1fr; } }
+
+  /* ---- program site additions ---- */
+  .subnav { position: sticky; top: var(--nav-h); z-index: 40; background: rgba(28,28,28,.94); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(207,174,112,.25); }
+  .subnav .wrap { display: flex; gap: .2rem; overflow-x: auto; scrollbar-width: none; padding-top: .35rem; padding-bottom: .35rem; }
+  .subnav .wrap::-webkit-scrollbar { display: none; }
+  .subnav a { flex: 0 0 auto; color: rgba(255,255,255,.78); text-decoration: none; font-family: var(--cond); font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em; font-size: .7rem; padding: .55rem .75rem; border-radius: 4px; }
+  .subnav a:hover, .subnav a.on { color: var(--vu-black); background: var(--vu-gold-flat); }
+  .goal { border: 1px solid rgba(207,174,112,.45); border-left: 4px solid var(--vu-gold-flat); border-radius: 8px;
+    padding: 1.5rem 1.7rem; background: rgba(207,174,112,.06); }
+  .goal .eyebrow { margin-bottom: .5rem; }
+  .goal p { margin: 0; font-family: var(--serif); font-size: 1.25rem; line-height: 1.35; }
+  .goal small { display: block; margin-top: .9rem; color: rgba(255,255,255,.6); font-size: .8rem; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.75rem; }
+  @media (max-width: 800px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { border-top: 2px solid var(--vu-gold-flat); padding-top: .8rem; }
+  .stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 3.4vw, 2.6rem); color: var(--vu-gold-flat); line-height: 1; }
+  .stat span { display: block; color: rgba(255,255,255,.75); font-size: .9rem; margin-top: .35rem; }
+  .band-light .stat span { color: rgba(28,28,28,.75); } .band-light .stat b { color: var(--vu-oak); }
+  .chip { display: inline-block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+    font-size: .66rem; padding: .22rem .5rem; border-radius: 3px; border: 1px solid; margin-bottom: .7rem; }
+  .chip--req { color: #F0B6B0; border-color: rgba(240,182,176,.6); }
+  .chip--rec { color: var(--vu-gold-flat); border-color: rgba(207,174,112,.7); }
+  .chip--opt { color: rgba(255,255,255,.8); border-color: rgba(255,255,255,.35); }
+  .chip--on { color: #B9D6C4; border-color: rgba(185,214,196,.6); }
+  .band-light .chip--req { color: #9B2E27; border-color: rgba(155,46,39,.5); }
+  .band-light .chip--rec { color: var(--vu-oak); border-color: rgba(148,110,36,.6); }
+  .band-light .chip--opt { color: rgba(28,28,28,.75); border-color: rgba(28,28,28,.35); }
+  .band-light .chip--on { color: #2E6B48; border-color: rgba(46,107,72,.5); }
+  .card .when { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; color: var(--vu-gold-flat); margin: -.2rem 0 .6rem; }
+  .band-light .card .when { color: var(--vu-oak); }
+  .card a.more { display: inline-block; margin-top: .9rem; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; font-size: .7rem; text-decoration: none; }
+  .card a.more::after { content: " \2192"; }
+  /* framework */
+  .frame { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.75rem; }
+  @media (max-width: 900px) { .frame { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .frame { grid-template-columns: 1fr; } }
+  .frame .card ul { list-style: none; margin: .8rem 0 0; padding: 0; display: grid; gap: .35rem; }
+  .frame .card li { font-size: .92rem; padding-left: 1rem; position: relative; }
+  .frame .card li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--vu-gold-flat); }
+  .frame .card li i { font-style: normal; color: rgba(255,255,255,.55); font-size: .82rem; }
+  .band-light .frame .card li i { color: rgba(28,28,28,.55); }
+  .band-light .frame .card li::before { background: var(--vu-oak); }
+  .band-light .card h3 { color: var(--vu-black); }
+  table.tbl { width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: .93rem; }
+  table.tbl th, table.tbl td { text-align: left; vertical-align: top; padding: .75rem .8rem; border-top: 1px solid rgba(255,255,255,.14); }
+  table.tbl th { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; color: var(--vu-gold-flat); border-top: 0; }
+  table.tbl td b { font-weight: 600; }
+  .band-light table.tbl th { color: var(--vu-oak); } .band-light table.tbl td, .band-light table.tbl th { border-color: rgba(28,28,28,.15); }
+  .tblwrap { overflow-x: auto; }
+  .ties { display: grid; gap: 1rem; margin-top: 1.5rem; }
+  .tie { display: grid; grid-template-columns: 200px 1fr; gap: 1rem; border: 1px solid rgba(255,255,255,.14); border-radius: 6px; padding: 1.1rem 1.3rem; align-items: start; }
+  @media (max-width: 700px) { .tie { grid-template-columns: 1fr; } }
+  .tie b { font-family: var(--serif); font-weight: 400; font-size: 1.15rem; }
+  .tie p { margin: 0; color: rgba(255,255,255,.8); font-size: .95rem; }
+  .band-light .tie { border-color: rgba(28,28,28,.15); background: #fff; } .band-light .tie p { color: rgba(28,28,28,.8); }
+  /* history timeline */
+  .timeline { position: relative; margin-top: 2rem; padding-left: 28px; display: grid; gap: 1.4rem; }
+  .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: rgba(148,110,36,.4); }
+  .tl { position: relative; }
+  .tl::before { content: ""; position: absolute; left: -28px; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--vu-cream); border: 3px solid var(--vu-oak); }
+  .tl .when { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .7rem; color: var(--vu-oak); margin: 0 0 .2rem; }
+  .tl h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; margin: 0 0 .35rem; }
+  .tl p { margin: 0; color: rgba(28,28,28,.8); max-width: 70ch; font-size: .95rem; }
+  /* impact */
+  .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.75rem; }
+  @media (max-width: 760px) { .phases { grid-template-columns: 1fr; } }
+  .phase { border: 1px solid rgba(207,174,112,.4); border-top: 4px solid var(--vu-gold-flat); border-radius: 6px; padding: 1.2rem 1.3rem; }
+  .phase b { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--vu-gold-flat); margin-bottom: .4rem; }
+  .phase h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; margin: 0 0 .4rem; }
+  .phase p { margin: 0; font-size: .93rem; color: rgba(255,255,255,.8); }
+  .six td:first-child { white-space: nowrap; font-weight: 600; }
+  .six td:last-child i { font-style: normal; color: rgba(255,255,255,.55); font-size: .84rem; display: block; margin-top: .15rem; }
+  .card p.how { margin-top: .9rem; padding-top: .8rem; border-top: 1px solid rgba(207,174,112,.3); font-size: .88rem; }
+  .card p.how b { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .66rem; color: var(--vu-gold-flat); margin-bottom: .3rem; }
+  .measures { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: .6rem; }
+  .measures li { position: relative; padding-left: 1.6rem; font-size: .97rem; }
+  .measures li::before { content: "\2713"; position: absolute; left: 0; color: var(--vu-gold-flat); font-weight: 700; }
+  .guard { margin-top: 1.5rem; border-left: 3px solid var(--vu-gold-flat); padding: .6rem 1rem; color: rgba(255,255,255,.7); font-size: .88rem; }
+  /* component detail */
+  .comp { border-top: 1px solid rgba(207,174,112,.25); }
+  .comp__head { display: grid; grid-template-columns: 1fr auto; gap: 1rem 2rem; align-items: end; }
+  @media (max-width: 700px) { .comp__head { grid-template-columns: 1fr; } }
+  .comp__head .status { text-align: right; }
+  @media (max-width: 700px) { .comp__head .status { text-align: left; } }
+  .comp__head .status b { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .7rem; color: rgba(255,255,255,.6); }
+  details.acc { border: 0; border-top: 1px solid rgba(255,255,255,.14); border-radius: 0; margin-top: 0; background: transparent; }
+  details.acc:last-of-type { border-bottom: 1px solid rgba(255,255,255,.14); }
+  .comp .comp__head { margin-bottom: 1.4rem; }
+  details.acc summary { list-style: none; cursor: pointer; padding: 1rem .2rem; display: flex; align-items: center; gap: 1rem; font-family: var(--serif); font-size: 1.25rem; }
+  details.acc summary::-webkit-details-marker { display: none; }
+  details.acc summary::after { content: "+"; margin-left: auto; color: var(--vu-gold-flat); font-family: var(--cond); font-size: 1.4rem; line-height: 1; }
+  details.acc[open] summary::after { content: "\2212"; }
+  details.acc summary small { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .66rem; color: var(--vu-gold-flat); }
+  details.acc .acc__body { padding: 0 .2rem 1.3rem; color: rgba(255,255,255,.85); font-size: .95rem; }
+  details.acc .acc__body p { margin: 0 0 .7rem; max-width: 76ch; }
+  details.acc .acc__body ul { margin: .4rem 0 .8rem; padding-left: 1.2rem; }
+  details.acc .acc__body li { margin: .25rem 0; }
+  .tabs { display: flex; gap: .4rem; flex-wrap: wrap; margin: .6rem 0 1rem; }
+  .tabs button { font: inherit; font-size: .85rem; border: 1px solid rgba(255,255,255,.3); background: transparent; color: var(--vu-white); border-radius: 999px; padding: .4rem .9rem; cursor: pointer; }
+  .tabs button[aria-selected="true"] { background: var(--vu-gold-flat); color: var(--vu-black); border-color: var(--vu-gold-flat); }
+  .states { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem 2rem; margin-top: 1rem; }
+  @media (max-width: 760px) { .states { grid-template-columns: 1fr; } }
+  .states h4 { font-family: var(--serif); font-weight: 400; font-size: 1.15rem; margin: 0 0 .4rem; }
+  .list { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+  .list li { display: grid; grid-template-columns: 1fr auto; gap: .6rem; align-items: baseline; border-top: 1px solid rgba(255,255,255,.1); padding-top: .5rem; }
+  .list li .meta { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .62rem; color: rgba(255,255,255,.55); white-space: nowrap; }
+  .list li .meta.req { color: #F0B6B0; }
+  .tracks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: .5rem; }
+  @media (max-width: 760px) { .tracks { grid-template-columns: 1fr; } }
+  .track { border: 1px solid rgba(255,255,255,.14); border-radius: 6px; padding: 1rem 1.1rem; }
+  .track h4 { font-family: var(--serif); font-weight: 400; font-size: 1.15rem; margin: .2rem 0 .3rem; }
+  .track .win { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .66rem; color: var(--vu-gold-flat); }
+  .track p { font-size: .88rem; color: rgba(255,255,255,.75); margin: 0 0 .5rem; }
+  .track ol { margin: 0; padding-left: 1.1rem; font-size: .9rem; } .track ol li { margin: .2rem 0; }
+  .who { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; margin-top: 1.2rem; }
+  @media (max-width: 760px) { .who { grid-template-columns: 1fr; } }
+  .who .c { border: 1px solid rgba(255,255,255,.14); border-radius: 6px; padding: .9rem 1rem; }
+  .who .c.urgent { border-color: rgba(240,182,176,.5); }
+  .who .c b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.1rem; }
+  .who .c .sd { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; font-size: .62rem; color: #F0B6B0; }
+  .who .c p { margin: .3rem 0 0; font-size: .88rem; color: rgba(255,255,255,.75); }
+  .ctaband { background: var(--vu-gold-flat); color: var(--vu-black); }
+  .ctaband h2 em { color: var(--vu-black); }
+  .ctaband .lead { color: rgba(28,28,28,.8); }
+  .ctaband .cta { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .ctaband .btn { background: var(--vu-black); color: var(--vu-white); border-color: var(--vu-black); }
+  .ctaband .btn--ghost { background: transparent; color: var(--vu-black); border-color: rgba(28,28,28,.5); }
+  .note { color: rgba(255,255,255,.6); font-size: .85rem; margin-top: 1rem; }
+  .band-light .note { color: rgba(28,28,28,.6); }
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <a href="#top" aria-label="Vanderbilt University, top of page"><img src="assets/img/vu-lockup-white.png" alt="Vanderbilt University"></a>
-  <nav aria-label="Page sections">
-    <a href="#what">What it is</a>
-    <a href="#journey">The journey</a>
-    <a href="#cohort">The cohort</a>
-    <a href="#why">Why it matters</a>
-    <a class="btn" href="dashboard/">My voyage dashboard</a>
-  </nav>
+<header class="gnav" id="nav">
+  <a class="gnav__brand" href="#top" aria-label="Manager Voyage, top of page">
+    <img src="assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="250" height="65">
+  </a>
+  <div class="gnav__right">
+    <nav class="gnav__links" id="gnavLinks" aria-label="Manager Voyage">
+      <a href="dashboard/">My voyage</a>
+      <a href="foundation/">Foundation course</a>
+      <a href="dashboard/#who">Who to call</a>
+      <a href="./" aria-current="page">About the program</a>
+      <a class="gnav__btn" href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Manager Portal</a>
+    </nav>
+    <button type="button" class="gnav__burger" aria-label="Menu" aria-expanded="false" aria-controls="gnavLinks"><span></span><span></span><span></span></button>
+  </div>
 </header>
 
 <main id="top">
 
-  <!-- HERO -->
   <section class="hero" id="s-hero">
     <img class="mark" src="assets/img/vu-v-icon.png" alt="" aria-hidden="true">
     <div class="wrap">
       <div>
         <p class="eyebrow">Manager Voyage · Vanderbilt · People, Culture and Belonging</p>
-        <h1>What is Manager <em>Voyage</em>?</h1>
-        <p class="lead" style="margin-top:1.25rem">Every day Vanderbilt promotes or hires a new manager, a clock starts. The first 60 days set the patterns that define their leadership for years. Manager Voyage is not a training program. It is a <b>management standard</b>: the first structured, sequenced, institution-wide development journey for every manager at Vanderbilt.</p>
+        <h1>Manager <em>Voyage</em>.</h1>
+        <p class="lead" style="margin-top:1.25rem">Manager Voyage is Vanderbilt University&rsquo;s development program for managers. It gives every new manager the same structured path from the day they start: the compliance courses the law requires, a Foundations course on what Vanderbilt expects of a manager, an optional four-week cohort to practice those skills with a real team, and a portal of resources that stays available throughout their career. The program is built on one research-based framework and is measured with a survey taken before the program and again 90 days after.</p>
         <div class="cta">
-          <a class="btn" href="dashboard/">Open my voyage dashboard</a>
-          <a class="btn btn--ghost" href="#what">See the four components</a>
+          <a class="btn" href="dashboard/">Start your voyage</a>
+          <a class="btn btn--ghost" href="#overview">How the program works</a>
         </div>
       </div>
-      <aside class="means" aria-label="The voyage in four moves">
-        <h2>The <em>voyage</em></h2>
+    </div>
+  </section>
+
+  <nav class="subnav" aria-label="On this page">
+    <div class="wrap">
+      <a href="#overview">Overview</a><a href="#framework">The framework</a><a href="#history">How it was built</a><a href="#impact">Measuring impact</a>
+      <a href="#c-compliance">01 Compliance</a><a href="#c-foundations">02 Foundations</a><a href="#c-cohort">03 Cohort</a><a href="#c-portal">04 Portal</a>
+    </div>
+  </nav>
+
+  <section class="band-light" id="overview">
+    <div class="wrap">
+      <p class="eyebrow">Program overview</p>
+      <h2>What Manager Voyage <em>is</em>.</h2>
+      <p class="lead">A manager&rsquo;s first 60 days shape how they will lead for years, and until now Vanderbilt had no common standard for that period. Manager Voyage provides one. Courses are assigned automatically in Oracle Learning on the manager&rsquo;s first day, progress is tracked on a single dashboard called My voyage, and the people a new manager needs to reach are listed in one place.</p>
+      <div class="stats">
+        <div class="stat"><b>4,600+</b><span>Staff led by Vanderbilt managers</span></div>
+        <div class="stat"><b>500+</b><span>Vanderbilt managers</span></div>
+        <div class="stat"><b>39</b><span>Business units using the same standard</span></div>
+        <div class="stat"><b>60</b><span>Days covered by the initial path</span></div>
+      </div>
+      <h2 style="margin-top:3rem">The four <em>components</em>.</h2>
+      <p class="lead">The program has four parts. Compliance courses are required. Manager Foundations is strongly recommended. The four-week cohort is optional but recommended. The Manager Portal is available at all times.</p>
+      <div class="cards cards--4">
+        <div class="card"><span class="chip chip--req">01 · Required</span><h3>Compliance</h3><span class="when">Days 1 to 60</span><p>The legal and policy courses a manager must complete, matched to the state where their team works.</p><a class="more" href="#c-compliance">Courses by location</a></div>
+        <div class="card"><span class="chip chip--rec">02 · Strongly recommended</span><h3>Foundations</h3><span class="when">Days 1 to 60 · course by Day 7</span><p>What Vanderbilt expects of a manager: an assessment, a 35-minute course, and short modules in four tracks.</p><a class="more" href="#c-foundations">The course and the tracks</a></div>
+        <div class="card"><span class="chip chip--opt">03 · Optional but recommended</span><h3>Four-Week Cohort</h3><span class="when">After Day 60 · quarterly</span><p>Four weeks of guided practice with the manager&rsquo;s own team, for one hundred managers each quarter.</p><a class="more" href="#c-cohort">Schedule and logistics</a></div>
+        <div class="card"><span class="chip chip--on">04 · Always available</span><h3>Manager Portal</h3><span class="when">From Day 1</span><p>Templates, policy links, and contacts in one place, available from the first day onward.</p><a class="more" href="#c-portal">The portal and who to call</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="framework">
+    <div class="wrap">
+      <p class="eyebrow">The framework</p>
+      <h2>The framework behind the <em>program</em>.</h2>
+      <p class="lead">The Manager Voyage program is built on Gary Yukl&rsquo;s taxonomy of effective leadership behavior, a research-based model that sorts what effective managers do into four categories and fifteen specific behaviors. The Foundations course teaches these behaviors by name. The cohort gives managers structured practice in them. The portal provides the tools to carry them out. The survey measures how often managers report doing them.</p>
+      <div class="frame">
+        <div class="card"><span class="tag tag--ghost">Task-oriented</span><h3>Getting the work done through the team.</h3><ul><li>Clarifying <i>(say it)</i></li><li>Planning <i>(plan it)</i></li><li>Monitoring operations <i>(check it)</i></li><li>Problem solving <i>(fix it)</i></li></ul></div>
+        <div class="card"><span class="tag tag--ghost">Relations-oriented</span><h3>Taking care of the people on the team.</h3><ul><li>Supporting <i>(listen and help)</i></li><li>Developing <i>(grow them)</i></li><li>Recognizing <i>(thank them)</i></li><li>Empowering <i>(trust them)</i></li></ul></div>
+        <div class="card"><span class="tag tag--ghost">Change-oriented</span><h3>Improving how the team works.</h3><ul><li>Advocating change <i>(explain the why)</i></li><li>Envisioning change <i>(describe where you are going)</i></li><li>Encouraging innovation <i>(let people try)</i></li><li>Facilitating collective learning <i>(look back)</i></li></ul></div>
+        <div class="card"><span class="tag tag--ghost">External</span><h3>Connecting the team to the rest of Vanderbilt.</h3><ul><li>Networking <i>(know the people)</i></li><li>External monitoring <i>(watch for what is coming)</i></li><li>Representing <i>(speak up for your team)</i></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-light" id="history">
+    <div class="wrap">
+      <p class="eyebrow">How the program was built</p>
+      <h2>Developed with a pilot and an expert <em>group</em>.</h2>
+      <p class="lead">Manager Voyage was developed with the offices that new managers rely on, and tested with managers across the university before its wide launch.</p>
+      <div class="timeline">
+        <div class="tl"><p class="when">The expert group</p><h3>Subject-matter experts from seven divisions.</h3><p>They defined the routing rules, the who-to-call directory, and what a manager must be able to do by Day 30 and by Day 60.</p></div>
+        <div class="tl"><p class="when">The pilot · March 26, 2026</p><h3>Fifteen managers from eight business units.</h3><p>They completed the full program. Their feedback shaped the current design.</p></div>
+        <div class="tl"><p class="when">Now live</p><h3>Automatic assignment and the portal.</h3><p>Compliance courses and Manager Foundations are assigned automatically from the HR record. The Manager Portal is open to every manager.</p></div>
+        <div class="tl"><p class="when">November 1, 2026</p><h3>Wide launch.</h3><p>The program opens to all managers across the university, with the first full cohort of one hundred and the first pre-program survey.</p></div>
+      </div>
+      <p class="note">Names and quotes from the expert group and the pilot can be added here once cleared.</p>
+    </div>
+  </section>
+
+  <section id="impact">
+    <div class="wrap">
+      <p class="eyebrow">Measuring impact</p>
+      <h2>How we measure <em>impact</em>.</h2>
+      <p class="lead">Manager Voyage measures two things: reach and change. Reach is the share of managers enrolled, recorded in Oracle Learning. Change is measured with a ten-question survey covering six management behaviors, taken before the program and again 90 days after completion. The difference in a manager&rsquo;s own answers shows whether their day-to-day behavior has changed.</p>
+      <div class="tline">
+        <div class="tp"><span class="dot"></span><b>Before the program</b><p>Ten questions, six behaviors, rated 1 to 5 from never to consistently.</p></div>
+        <div class="tp"><span class="dot"></span><b>90 days after completion</b><p>The same ten questions. The change in answers is the measure.</p></div>
+        <div class="tp"><span class="dot dot--open"></span><b>Six months, optional</b><p>A third survey shows whether the change has lasted.</p></div>
+      </div>
+      <details class="acc"><summary>The six behaviors the survey measures</summary><div class="acc__body">
+      <div class="tblwrap"><table class="tbl six"><thead><tr><th>Behavior</th><th>What we ask</th></tr></thead><tbody>
+        <tr><td>Create clarity</td><td>I make priorities, expectations, and what good looks like clear.<i>Clarifying, planning</i></td></tr>
+        <tr><td>Coach and develop</td><td>I give timely feedback and help people build capability through their work.<i>Monitoring operations, developing</i></td></tr>
+        <tr><td>Build trust</td><td>I create an environment where people can speak up, ask questions, and learn from mistakes.<i>Supporting, recognizing, networking</i></td></tr>
+        <tr><td>Empower others</td><td>I give people appropriate ownership and authority to make decisions.<i>Empowering, encouraging innovation</i></td></tr>
+        <tr><td>Address issues</td><td>I address performance, people, or process problems early and constructively.<i>Problem solving, monitoring operations, representing</i></td></tr>
+        <tr><td>Lead change</td><td>I connect change to the bigger picture and help my team adapt, learn, and try new ways of working.<i>Advocating change, collective learning, external monitoring</i></td></tr>
+      </tbody></table></div>
+      </div></details>
+      <h3 class="sub sub--tight">The targets.</h3>
+      <div class="targets">
+        <div><span class="k">01</span><b>80% enrolled</b><p>Eighty percent of M1 to M5 managers enrolled in the program.</p></div>
+        <div><span class="k">02</span><b>Four of six improved</b><p>Each manager improving on at least four of the six behaviors between the two surveys.</p></div>
+        <div><span class="k">03</span><b>Most and least</b><p>The behavior that improved most, and the one that needs more support, identified for each cohort.</p></div>
+        <div><span class="k">04</span><b>The team&rsquo;s view</b><p>In a later phase, direct reports answer the same questions about their manager.</p></div>
+      </div>
+      <h3 class="sub sub--tight">The outcomes we expect, and how we will see them.</h3>
+      <div class="cards cards--3 outcomes">
+        <div class="card"><span class="tag tag--ghost">Engaged</span><h3>More engaged managers.</h3><p>Managers who understand the role, take ownership of it, and stay at Vanderbilt.</p><p class="how"><b>How we will see it</b>Enrollment and Day 60 completion in Oracle Learning against the 80% target. Cohort seats filled each quarter. Manager retention.</p></div>
+        <div class="card"><span class="tag tag--ghost">Supporting</span><h3>Managers who support their teams.</h3><p>Teams with clear expectations, timely feedback, and the confidence to raise concerns.</p><p class="how"><b>How we will see it</b>Survey gains on create clarity, coach and develop, build trust, empower others, and address issues. Later, the same questions answered by direct reports. Fewer avoidable Employee Relations and EOA cases.</p></div>
+        <div class="card"><span class="tag tag--ghost">Championing</span><h3>Managers who champion the mission.</h3><p>Managers who can explain Vanderbilt&rsquo;s purpose in their own words and connect their team&rsquo;s work to it.</p><p class="how"><b>How we will see it</b>Survey gains on lead change. Completion of the Vanderbilt &amp; Nashville track by Day 30. The manager items in the engagement survey.</p></div>
+      </div>
+      <p class="guard">The survey is informed by Yukl&rsquo;s leadership-behavior framework. It is an adaptation for Vanderbilt and is not a validated Yukl instrument.</p>
+    </div>
+  </section>
+
+  <section class="comp" id="c-compliance">
+    <div class="wrap">
+      <div class="comp__head"><div><p class="eyebrow">Component 01</p><h2>Compliance <em>courses</em>.</h2><p class="lead">These are the legal and policy courses every manager must complete. Oracle Learning assigns them on the manager&rsquo;s first day, based on the state where their team works.</p></div><div class="status"><span class="chip chip--req">Required</span><b>Days 1 to 60 · Renewed annually</b></div></div>
+      <details class="acc" open><summary>What is assigned, by location</summary><div class="acc__body">
+        <p>Courses required by law carry a deadline. The others are Vanderbilt policy. Supervisors complete both the all-staff version and the supervisor version.</p>
+        <div class="tabs" id="stateTabs" role="tablist" aria-label="Work location"></div>
+        <ul class="list" id="stateList"></ul>
+        <p style="margin-top:1.4rem"><b>Assigned in every location</b></p>
+        <ul class="list" id="allList"></ul>
+      </div></details>
+      <details class="acc"><summary>Logistics</summary><div class="acc__body">
         <ul>
-          <li><b>Day 1.</b> Oracle assigns the required components the day the role begins. The Manager Portal opens.</li>
-          <li><b>Days 1 to 60.</b> Compliance courses and the Manager Responsibilities Course, on the manager's own schedule.</li>
-          <li><b>Day 60.</b> Completion recorded in Oracle. The cohort invitation follows.</li>
-          <li><b>The cohort.</b> Four weeks, in person and blended, from compliant to capable.</li>
+          <li><b>Assignment.</b> Courses are assigned automatically in Oracle Learning when the HR record shows a management role. There is no enrollment step.</li>
+          <li><b>Delivery.</b> Courses are delivered through OpenSesame inside Oracle Learning, and each ends with a knowledge check.</li>
+          <li><b>Deadlines.</b> Courses required by law are due within 30 days; policy courses within 60. My voyage shows the dates and flags anything at risk.</li>
+          <li><b>Renewal.</b> Most courses renew every year, some every two years where the state allows.</li>
+          <li><b>Record.</b> Oracle Learning holds the official record of completion.</li>
         </ul>
-      </aside>
+      </div></details>
     </div>
   </section>
 
-  <!-- THE PROBLEM -->
-  <section class="band-light" id="problem">
+  <section class="comp band-light" id="c-foundations">
     <div class="wrap">
-      <p class="eyebrow">The unmanaged window</p>
-      <h2>Sixty days left to <em>chance</em>.</h2>
-      <p class="lead">Without structure, the first 60 days go the same way every time: compliance gaps, avoidable Employee Relations and Equal Opportunity and Access cases, and managers who were never shown what the role actually requires.</p>
-      <div class="cards cards--4">
-        <div class="card"><span class="tag tag--ghost">Scale</span><p class="big">4,600</p><p>Non-union staff led by Vanderbilt managers.</p></div>
-        <div class="card"><span class="tag tag--ghost">Each year</span><p class="big">~400</p><p>New or promoted managers enter roles.</p></div>
-        <div class="card"><span class="tag tag--ghost">Before Voyage</span><p class="big">0</p><p>Prior structured onboarding standard.</p></div>
-        <div class="card"><span class="tag tag--ghost">Highest risk</span><p class="big">60</p><p>Days of highest-risk manager decision-making.</p></div>
+      <div class="comp__head"><div><p class="eyebrow">Component 02</p><h2>Manager <em>Foundations</em>.</h2><p class="lead">Manager Foundations covers what Vanderbilt expects of a manager. It has three parts, completed in order.</p></div><div class="status"><span class="chip chip--rec">Strongly recommended</span><b>Days 1 to 60 · Also assigned to every current manager</b></div></div>
+      <div class="path">
+        <div class="p"><span class="n">01</span><span class="when">Before the course, and 90 days after the program</span><h3>The assessment</h3><p>Managers rate how often they do each of the six behaviors, from never to consistently. Results arrive by email. The same assessment is taken again 90 days after completing the program.</p></div>
+        <div class="p"><span class="n">02</span><span class="when">35 minutes · complete by Day 7</span><h3>The Foundation course</h3><p>You Are a Manager Now is a 35-minute web course. Each page covers one idea and includes a short activity. It is narrated, captioned, and available as a printable guide.</p><a class="more" href="foundation/">Open the Foundation course</a></div>
+        <div class="p"><span class="n">03</span><span class="when">Days 1 to 60 · in Oracle Learning</span><h3>The micro modules</h3><p>Short modules in Oracle Learning, each covering one common task. The Systems and Vanderbilt &amp; Nashville tracks are due by Day 30; the People and Processes tracks by Day 60.</p></div>
       </div>
+      <h3 class="sub">The Foundation course covers five topics.</h3>
+      <div class="topics" id="segList"></div>
+      <h3 class="sub">The micro modules are organized in four tracks.</h3>
+      <div class="tracks" id="trackList"></div>
+      <h3 class="sub">Logistics.</h3>
+      <div class="facts">
+        <div><b>Order</b>The assessment first, then the course by Day 7, then the tracks in their windows. My voyage shows what is next.</div>
+        <div><b>Where</b>The course runs on the web and inside Oracle Learning. The modules are in Oracle Learning, linked from the dashboard.</div>
+        <div><b>Completion</b>Completing everything by Day 60 is recorded against the job profile and triggers the cohort invitation.</div>
+      </div>
+      <p class="note"><a href="foundation/Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener">Printable course guide (PDF)</a></p>
     </div>
   </section>
 
-  <!-- WHAT -->
-  <section id="what">
+  <section class="comp" id="c-cohort">
     <div class="wrap">
-      <p class="eyebrow">What it is</p>
-      <h2>Four components. One <em>journey</em>.</h2>
-      <p class="lead">Two are required and assigned automatically. Two are always available. Oracle Learning does the assigning and holds the record; the dashboard is where you track your own way through.</p>
-      <div class="cards cards--4">
-        <div class="card card--gold">
-          <span class="tag">01 · Required · Days 1 to 60</span>
-          <h3>Compliance Courses</h3>
-          <p>Twenty state-specific courses, legal and advisory, matched to the manager's work location and delivered through OpenSesame inside Oracle. Compliance is the floor, not the bar.</p>
-        </div>
-        <div class="card card--gold">
-          <span class="tag">02 · Required · Days 1 to 60</span>
-          <h3>Manager Responsibilities Course</h3>
-          <p>The operating manual for the role. A 35-minute Foundation course on the web, then eighteen micro modules in Oracle Learning across three tracks: Systems, People, and Policy and safety. Short videos and walkthroughs, not slide decks.</p>
-        </div>
-        <div class="card">
-          <span class="tag tag--ghost">03 · Always on</span>
-          <h3>Manager Portal</h3>
-          <p>Every template, framework, policy link, and contact in one web hub. Open from Day 1, before any course is complete, and never taken away. It grows with each cohort cycle.</p>
-        </div>
-        <div class="card">
-          <span class="tag tag--ghost">04 · Optional · Quarterly</span>
-          <h3>Four-Week Cohort</h3>
-          <p>One hundred managers a quarter, open to anyone who has finished both required components. An in-person kickoff, four blended weeks with AI rehearsal and peer labs, and an in-person capstone.</p>
-        </div>
-      </div>
+      <div class="comp__head"><div><p class="eyebrow">Component 03</p><h2>The four-week <em>cohort</em>.</h2><p class="lead">The cohort is where managers practice the skills from Foundations with their own teams. It runs for four weeks, follows the same weekly rhythm, and serves one hundred managers each quarter.</p></div><div class="status"><span class="chip chip--opt">Optional but recommended</span><b>Quarterly · 100 seats</b></div></div>
+      <details class="acc" open><summary>Who can join, and when</summary><div class="acc__body">
+        <p>The cohort is open to any manager who has completed the compliance courses and Manager Foundations. Oracle sends the invitation when the Day 60 requirements are complete.</p>
+        <p>Units outside the central budget are billed per seat.</p>
+      </div></details>
+      <details class="acc"><summary>The weekly rhythm <small>The same four activities every week</small></summary><div class="acc__body">
+        <div class="cards cards--4" id="rhythm" style="margin-top:.5rem"></div>
+        <p class="note">The Manager Playbook connects the four weeks. Managers draft one section each week and present the finished Playbook at the capstone.</p>
+      </div></details>
+      <details class="acc"><summary>Week by week</summary><div class="acc__body">
+        <div class="tblwrap"><table class="tbl" id="weekTable"><thead><tr><th>Week</th><th>Topic</th><th>Core module</th><th>Learning Lab</th><th>Scenario Studio</th><th>Discussion</th><th>Playbook</th></tr></thead><tbody></tbody></table></div>
+      </div></details>
+      <details class="acc"><summary>What every participant produces</summary><div class="acc__body">
+        <div class="cards" id="deliverables" style="margin-top:.5rem"></div>
+      </div></details>
+      <details class="acc"><summary>Logistics</summary><div class="acc__body">
+        <ul>
+          <li><b>Kickoff.</b> A one-hour hybrid session on the Monday of week 1, in the room or online. The location is confirmed each quarter.</li>
+          <li><b>Capstone.</b> A two-hour hybrid session in week 4, where managers present their work to peers and their business unit leader.</li>
+          <li><b>Discussions.</b> Virtual sessions on Fridays, facilitated by the Futures Learning Hub: 60 minutes in weeks 1 and 4, 30 minutes in weeks 2 and 3.</li>
+          <li><b>Time.</b> About 90 minutes of prework, then two and a half to three hours a week, and about five hours in week 4 including the capstone.</li>
+          <li><b>Tools.</b> <span id="toolsLine"></span></li>
+        </ul>
+      </div></details>
     </div>
   </section>
 
-  <!-- JOURNEY -->
-  <section class="band-light" id="journey">
+  <section class="comp band-light" id="c-portal">
     <div class="wrap">
-      <p class="eyebrow">How the journey flows</p>
-      <h2>The system does the work. The manager does the <em>learning</em>.</h2>
-      <p class="lead">Compliance tells a manager what the law requires. The Manager Responsibilities Course tells them what Vanderbilt requires. The cohort turns a compliant manager into a capable one.</p>
-      <div class="steps">
-        <div class="step">
-          <span class="num" aria-hidden="true"></span>
-          <div>
-            <p class="when">Day 1 in role</p>
-            <h3>Assigned on arrival</h3>
-            <p>The HR record shows a management role. Oracle assigns the compliance courses and the Manager Responsibilities Course. Manager Portal access begins immediately.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="num" aria-hidden="true"></span>
-          <div>
-            <p class="when">Days 1 to 30</p>
-            <h3>Systems and story</h3>
-            <p>Foundation course and Systems track. By Day 30 the manager can approve time, open a hire, and explain the mission.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="num" aria-hidden="true"></span>
-          <div>
-            <p class="when">Days 31 to 60</p>
-            <h3>People and process</h3>
-            <p>People track and Policy and safety track, every module passed. By Day 60 the manager can handle a leave request, a pay question, and what must be reported.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="num" aria-hidden="true"></span>
-          <div>
-            <p class="when">Day 60</p>
-            <h3>Recorded and invited</h3>
-            <p>Completion is recorded in Oracle against the manager's job profile and triggers the next quarterly cohort invitation. Voluntary. Units outside the central budget are billed per seat.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="num" aria-hidden="true"></span>
-          <div>
-            <p class="when">Cohort and beyond</p>
-            <h3>From compliant to capable</h3>
-            <p>Four weeks of live sessions, AI practice, and peer labs, with deliverables recorded in Oracle. The Portal stays with the manager for good.</p>
-          </div>
-        </div>
-      </div>
+      <div class="comp__head"><div><p class="eyebrow">Component 04</p><h2>The Manager <em>Portal</em>.</h2><p class="lead">The Manager Portal is a single website with every template, policy link, and contact from the course and the cohort. It is available from a manager&rsquo;s first day and remains available throughout their career.</p></div><div class="status"><span class="chip chip--on">Always available</span><b>Maintained by People, Culture and Belonging</b></div></div>
+      <details class="acc" open><summary>What the portal contains</summary><div class="acc__body">
+        <p><a id="portalLink" href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Open the Manager Portal</a></p>
+        <p><b>Beyond the portal.</b> The portal also links to <span id="beyondLine"></span> All of these have been reviewed and are cited.</p>
+      </div></details>
+      <details class="acc" open><summary>Who to call <small>Same-day routes and everyday help</small></summary><div class="acc__body">
+        <p>A new manager does not need to know everything on the first day, but they do need to know who handles what. The HCM is the first call when a manager is unsure.</p>
+        <div class="who" id="whoList"></div>
+      </div></details>
     </div>
   </section>
 
-  <!-- COHORT -->
-  <section id="cohort">
+  <section class="ctaband">
     <div class="wrap">
-      <p class="eyebrow">The four-week cohort</p>
-      <h2>Where skill development <em>happens</em>.</h2>
-      <p class="lead">Each week pairs a core module with AI conversation rehearsal in Yoodli, a facilitated peer lab in SparkWise, and a section of the manager's own Playbook. FLH-built AI agents, grounded in Vanderbilt policy, are available any hour for guidance and conversation prep.</p>
-      <div class="cards cards--4">
-        <div class="card"><span class="tag">Week 1</span><h3>What it means to manage</h3><p>In-person kickoff at the Student Life Center. Management identity and psychological safety. Establishes the why before the how.</p></div>
-        <div class="card"><span class="tag">Week 2</span><h3>Goal setting, 1:1s, difficult conversations</h3><p>Rehearsed 1:1s and hard conversations. Builds daily operating discipline.</p></div>
-        <div class="card"><span class="tag">Week 3</span><h3>Coaching and mentoring</h3><p>Delegation and coach-or-correct peer labs. Shifts the manager from directing to developing.</p></div>
-        <div class="card"><span class="tag">Week 4</span><h3>Performance and developing talent</h3><p>Performance and talent conversations, then the in-person capstone. Closes the loop from learning to leading.</p></div>
+      <h2>Start with My <em>voyage</em>.</h2>
+      <p class="lead">My voyage is the dashboard where a manager sees what to do now, what comes next, and who to call. The Foundation course and the Manager Portal are open to every manager.</p>
+      <div class="cta">
+        <a class="btn" href="dashboard/">Start your voyage</a>
+        <a class="btn btn--ghost" href="foundation/">Open the Foundation course</a>
+        <a class="btn btn--ghost" href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Manager Portal</a>
       </div>
-      <div class="cards" style="grid-template-columns:1fr">
-        <div class="card card--gold">
-          <span class="tag">What every participant produces</span>
-          <p><b>Manager Playbook.</b> A written personal operating system: philosophy, 1:1 framework, feedback approach, delegation plan, performance practice.</p>
-          <p><b>Integrated Management Model.</b> A one-page model of how the four weeks connect for this manager. Synthesis, not attendance.</p>
-          <p><b>Team Development Plan.</b> A 90-day plan for the manager's actual team, presented at the capstone to peers and their business unit leader.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section class="band-light" id="why">
-    <div class="wrap">
-      <p class="eyebrow">Why it matters</p>
-      <h2>Three places the return <em>shows</em> up.</h2>
-      <p class="lead">Success is not measured by seat time. It shows up in team engagement, in case volume, and in the bench of leaders ready to step up.</p>
-      <div class="cards">
-        <div class="card">
-          <span class="tag">Team performance</span>
-          <h3>Managers who lead better</h3>
-          <p>Managers are the single greatest influence on team engagement. Voyage builds goal setting, 1:1s, and coaching before damage is done. Tracked in Culture Amp engagement scores.</p>
-        </div>
-        <div class="card">
-          <span class="tag">Lower ER and EOA cases</span>
-          <h3>Fewer preventable failures</h3>
-          <p>The most avoidable cases start with a manager never taught to handle a difficult conversation or to recognize when something must be escalated. The first 60 days are the most direct risk-reduction investment Vanderbilt can make.</p>
-        </div>
-        <div class="card">
-          <span class="tag">Promote from within</span>
-          <h3>A deeper leadership bench</h3>
-          <p>One standard across all 39 business units means graduates can be compared on the same evidence when promotion and succession decisions are made.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATUS -->
-  <section id="status">
-    <div class="wrap">
-      <p class="eyebrow">Where we are · September 2026</p>
-      <h2>Not in development. In <em>production</em>.</h2>
-      <p class="lead">The pilot is complete. Oracle auto-assignment is live. The Manager Portal is active. The first full quarterly cohort is ready to launch.</p>
-      <div class="cards cards--4">
-        <div class="card card--gold"><span class="tag">Live</span><h3>01 Compliance Courses</h3><p>Twenty state-specific courses auto-assigned on role entry.</p></div>
-        <div class="card card--gold"><span class="tag">Live</span><h3>02 Manager Responsibilities Course</h3><p>Foundation course plus eighteen micro modules. Also assigned once to every current manager.</p></div>
-        <div class="card card--gold"><span class="tag">Live</span><h3>03 Manager Portal</h3><p>Always-on hub for all managers, all divisions, from Day 1.</p></div>
-        <div class="card card--gold"><span class="tag">Launch ready</span><h3>04 Four-Week Cohort</h3><p>Pilot complete. First full quarterly cohort open, 100 seats.</p></div>
-      </div>
-      <div class="cards cards--4">
-        <div class="card"><span class="tag tag--ghost">Pilot</span><p class="big">15</p><p>Participants, launched March 26, 2026.</p></div>
-        <div class="card"><span class="tag tag--ghost">Pilot</span><p class="big">8</p><p>Business units represented.</p></div>
-        <div class="card"><span class="tag tag--ghost">Steering</span><p class="big">7</p><p>Divisions shaping the content.</p></div>
-        <div class="card"><span class="tag tag--ghost">Cohort</span><p class="big">100</p><p>Seats per quarter.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUOTE -->
-  <section class="quote">
-    <div class="wrap">
-      <blockquote>&ldquo;The quality of Vanderbilt&rsquo;s future depends on the quality of its managers today. Manager Voyage is how we <em>build</em> them.&rdquo;<cite>Futures Learning Hub · Office of People, Culture and Belonging</cite></blockquote>
     </div>
   </section>
 
@@ -382,19 +578,71 @@
       <img src="assets/img/vu-lockup-white.png" alt="Vanderbilt University">
       <p style="margin:.75rem 0 0">From first day to fully formed leader.</p>
     </div>
-    <nav aria-label="Page sections">
-      <a href="#what">Components</a>
-      <a href="#journey">Journey</a>
-      <a href="#cohort">Cohort</a>
-      <a href="#status">Status</a>
-      <a href="dashboard/">My dashboard</a>
+    <nav aria-label="Manager Voyage">
+      <a href="dashboard/">My voyage</a>
+      <a href="foundation/">Foundation course</a>
+      <a href="dashboard/#who">Who to call</a>
+      <a href="#overview">About the program</a>
     </nav>
     <span>© <span id="yr">2026</span> Vanderbilt University · Manager Voyage · People, Culture and Belonging</span>
   </div>
 </footer>
 
+<script src="assets/js/config.js?v=4"></script>
+<script src="assets/js/program-data.js?v=12"></script>
+<script src="assets/js/nav.js?v=1"></script>
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
+(function(){
+  var P = window.MV_PROGRAM, CFG = window.MV_CONFIG || {}; if(!P) return;
+  var $ = function(s){ return document.querySelector(s); };
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); };
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* compliance, by location */
+  var states = Object.keys(P.states), cur = 'TN';
+  function meta(c){ return (c.type === 'Legal' ? 'Required by law' : 'Vanderbilt policy') + ' · ' + c.audience + (c.deadlineDays ? ' · ' + c.deadlineDays + ' days' : ''); }
+  function row(c){ return '<li><span>' + esc(c.title) + (c.note ? ' <small style="color:rgba(255,255,255,.55)">' + esc(c.note) + '</small>' : '') + '</span><span class="meta' + (c.type === 'Legal' ? ' req' : '') + '">' + esc(meta(c)) + '</span></li>'; }
+  function paintState(){
+    $('#stateTabs').innerHTML = states.map(function(k){ return '<button type="button" role="tab" aria-selected="' + (k === cur) + '" data-state="' + k + '">' + esc(P.states[k].name) + '</button>'; }).join('');
+    $('#stateList').innerHTML = P.compliance.filter(function(c){ return c.state === cur; }).map(row).join('') || '<li>No location-specific courses.</li>';
+  }
+  $('#allList').innerHTML = P.compliance.filter(function(c){ return c.state === 'ALL'; }).map(row).join('');
+  $('#stateTabs').addEventListener('click', function(e){ var b = e.target.closest('[data-state]'); if(b){ cur = b.getAttribute('data-state'); paintState(); } });
+  paintState();
+
+  /* foundations */
+  $('#segList').innerHTML = (P.mrc.foundation.segments || []).map(function(s, i){ return '<div class="t"><b>Topic ' + (i + 1) + '</b>' + esc(s.title) + '</div>'; }).join('');
+  $('#trackList').innerHTML = P.mrc.tracks.slice().sort(function(a, b){ return (a.phase || 0) - (b.phase || 0); }).map(function(t){
+    return '<div class="track"><span class="win">' + esc(t.window) + '</span><h4>' + esc(t.title) + '</h4><ol>' + t.modules.map(function(m){ return '<li>' + esc(m.title) + (m.mins ? ' <small>(' + m.mins + ' min)</small>' : '') + '</li>'; }).join('') + '</ol></div>';
+  }).join('');
+
+  /* cohort */
+  var C = P.cohort;
+  $('#rhythm').innerHTML = C.rhythm.map(function(r){ return '<div class="card"><span class="tag tag--ghost">' + esc(r.when) + '</span><h3>' + esc(r.beat) + (r.tool ? ' <small>in ' + esc(r.tool) + '</small>' : '') + '</h3><p>' + esc(r.desc) + '</p><small>' + esc(r.mins) + '</small></div>'; }).join('');
+  $('#weekTable tbody').innerHTML = C.weeks.map(function(w){
+    var dim = function(t){ return '<span style="opacity:.55">' + t + '</span>'; };
+    var cell = function(x, alt){ return x ? '<b>' + esc(x.title) + '</b>' + (x.by ? '<br><small>' + esc(x.by) + '</small>' : '') : dim(alt || 'none'); };
+    return '<tr><td><b>' + (w.n === 0 ? 'Prework' : 'Week ' + w.n) + '</b>' + (w.when ? '<br><small>' + esc(w.when) + '</small>' : '') + (w.live ? '<br><small>' + esc(w.live.title) + '</small>' : '') + '</td>' +
+      '<td><b>' + esc(w.title) + '</b></td><td>' + cell(w.core, w.n === 1 ? 'Covered by the prework' : 'none') + '</td><td>' + (w.n === 0 ? dim('none') : cell(w.lab)) + '</td><td>' + cell(w.studio, w.n === 1 ? 'Starts in week 2' : w.n === 0 ? 'none' : 'none') + '</td>' +
+      '<td>' + (w.discussion ? w.discussion.mins + ' min, virtual' : '<span style="opacity:.5">none</span>') + '</td><td>' + cell(w.playbook) + '</td></tr>';
+  }).join('');
+  $('#deliverables').innerHTML = C.deliverables.map(function(d){ return '<div class="card"><h3>' + esc(d.title) + '</h3><p>' + esc(d.desc) + '</p></div>'; }).join('');
+  $('#toolsLine').textContent = C.tools.map(function(t){ return t.name; }).join('; ') + '.';
+
+  /* portal and who to call */
+  if(CFG.portalUrl) $('#portalLink').href = CFG.portalUrl;
+  var g = (P.portal.beyond && P.portal.beyond.groups) || [];
+  $('#beyondLine').textContent = g.map(function(x){ return x.items.length + ' ' + x.title.toLowerCase(); }).join(', ').replace(/, ([^,]*)$/, ', and $1') + ' for managers who want to go further.';
+  $('#whoList').innerHTML = P.contacts.map(function(c){ return '<div class="c' + (c.sameDay ? ' urgent' : '') + '"><b>' + esc(c.role) + '</b>' + (c.sameDay ? '<span class="sd">Same day</span>' : '') + '<p>' + esc(String(c.when).split('. ')[0].replace(/\.$/, '')) + '.</p></div>'; }).join('');
+
+  /* highlight the section in view on the sub-nav */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.subnav a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); }); } }); }, { rootMargin: '-40% 0px -55% 0px' });
+    secs.forEach(function(s){ if(s) io.observe(s); });
+  }
+})();
 </script>
 </body>
 </html>

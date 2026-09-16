@@ -845,7 +845,7 @@ footer{ background:var(--vu-black); color:#fff; border-top:1px solid rgba(207,17
 .prog-btn:hover{ border-color:var(--vu-gold); }
 .prog-track{ position:absolute; left:0; right:0; bottom:0; height:2px; pointer-events:none; }
 .prog-fill{ display:block; height:100%; width:0%; background:var(--vu-gold); transition:width .38s ease-out; }
-.prog-panel{ position:fixed; top:104px; right:clamp(8px,3vw,44px); z-index:220; width:min(380px, calc(100vw - 16px));
+.prog-panel{ position:fixed; top:calc(var(--nav-h) + 8px); right:clamp(8px,3vw,44px); z-index:220; width:min(380px, calc(100vw - 16px));
   max-height:min(72vh,600px); overflow:auto; background:var(--vu-black); color:#fff;
   border:1px solid rgba(207,174,112,.4); border-radius:var(--r); padding:20px 20px 16px; }
 .prog-panel[hidden]{ display:none; }
@@ -880,7 +880,7 @@ footer{ background:var(--vu-black); color:#fff; border-top:1px solid rgba(207,17
   transition:color .2s ease-out; }
 .preset:hover{ color:#fff; }
 .preset svg{ width:14px; height:14px; }
-@media (max-width:1280px){ .prog-btn .pw{ display:none; } } /* 1100-1280: pill shows just N/10 */
+@media (max-width:1000px){ .prog-btn .pw{ display:none; } } /* narrow: the pill shows just the count */
 @media (max-width:400px){ .prog-btn{ padding:8px 10px; } }
 
 /* ═══════════════════ BOOK MODE: STAGE + PAGES ═══════════════════
@@ -1029,9 +1029,9 @@ a.bb-dot:focus-visible{ outline:2px solid var(--vu-highlight); outline-offset:1p
 .bb-btn[disabled]{ opacity:.35; cursor:default; }
 .bb-btn[disabled]:hover{ border-color:rgba(255,255,255,.25); color:#fff; }
 .bb-btn svg{ width:16px; height:16px; }
-@media (max-width:1000px){ .bb-done .bb-done-t{ display:none; } .bb-done{ width:44px; padding:0; } }
-@media (max-width:760px){ .bb-sec{ display:none; } .bb-left{ flex:0 0 auto; } .bb-dots{ flex:1; } .bb-ctl{ flex:0 0 auto; } }
-@media (max-width:420px){ a.bb-dot{ width:14px; } .bb-btn{ width:40px; } .bb-done{ width:40px; height:44px; } .bb-count{ font-size:.72rem; } .book-bar{ gap:6px; } }
+@media (max-width:1000px){ .bb-done .bb-done-t{ display:none; } .bb-done{ width:44px; padding:0; } a.bb-dot{ width:18px; } }
+@media (max-width:760px){ .bb-sec{ display:none; } .bb-left{ flex:0 0 auto; } .bb-dots{ flex:1; } .bb-ctl{ flex:0 0 auto; } a.bb-dot{ width:15px; } a.bb-dot .dot{ width:8px; height:8px; } }
+@media (max-width:420px){ a.bb-dot{ width:12px; } a.bb-dot .dot{ width:7px; height:7px; } .bb-btn{ width:40px; } .bb-done{ width:40px; height:44px; } .bb-count{ font-size:.72rem; } .book-bar{ gap:6px; } }
 
 /* ═══════════════════ CRIT ═══════════════════ */
 .cr-chips{ display:flex; flex-wrap:wrap; gap:10px; margin:-6px 0 18px; }

@@ -28,7 +28,7 @@ row, and a rail with Up next, Milestones, and Who to call.
 - Status per item: Verified in Oracle, Complete (self-reported), Opened, Not started.
 - `assets/js/program-data.js` is the curriculum: 20 compliance courses (with
   Oracle Learn deep links from the Compliance Training Matrix), the foundation
-  course, eighteen micro modules across three tracks, the Portal, and the cohort.
+  course, supporting micro modules across four tracks, the Portal, and the cohort.
 - `assets/js/oracle.js` is the one place the site talks to Oracle (course links from item numbers, completion write-back); `assets/js/config.js` holds the Oracle feed URL, Portal URL, cohort request
   URL, and contact. See `docs/ORACLE-INTEGRATION.md` for the feed contract.
 - SCORM: `imsmanifest.xml` plus `assets/js/scorm.js`. Build the Oracle Learning
@@ -39,7 +39,7 @@ row, and a rail with Up next, Milestones, and Who to call.
 
 "You are a manager now," the first course in Manager
 Foundations (after the manager compliance courses, before the micro modules).
-About thirty-five minutes, nineteen pages, five topics. It opens with the
+About thirty-five minutes, thirteen pages, five topics. It opens with the
 mission: the vision, how Vanderbilt operates, and what that asks of a manager. It assumes the learner
 knows nothing about management and starts there. Copy is deliberately short:
 each page is one idea, one activity.

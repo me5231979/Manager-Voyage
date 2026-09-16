@@ -12,29 +12,23 @@ try{
   var PLAN = [
     { sel:'section.hero',     key:'home',      label:'Welcome',                      mode:'whole' },
     { sel:'#mission',         key:'mission',   label:'The mission',                  mode:'whole' },
-    { sel:'#overview',        key:'overview',  label:'Course overview',              mode:'whole' },
     { sel:'#shift',           key:'shift',     label:'What changed',                 mode:'whole' },
     { sel:'#basics',          key:'basics',    label:'What a manager is',            mode:'whole' },
     { sel:'#ideas',           key:'ideas',     label:'Five ideas',                   mode:'whole' },
     { sel:'#year',            key:'year',      label:'Your first year',              mode:'whole' },
     { sel:'#calls',           key:'calls',     label:'Who handles what',             mode:'whole' },
-    { sel:'#welcome',         key:'welcome',   label:'The four jobs',                mode:'whole' },
-    { sel:'#task',            key:'task',      label:'Job 1: get the work done',     mode:'whole' },
-    { sel:'#relations',       key:'relations', label:'Job 2: your people',           mode:'whole' },
-    { sel:'#change',          key:'change',    label:'Job 3: make things better',    mode:'whole' },
-    { sel:'#external',        key:'external',  label:'Job 4: connect your team',     mode:'whole' },
+    { sel:'#welcome',         key:'welcome',   label:'The four categories',                mode:'whole' },
     { sel:'#yourcall',        key:'yourcall',  label:'Your call: four situations',   mode:'whole' },
     { sel:'#survey',          key:'survey',    label:'Your assessment',                   mode:'whole' },
     { sel:'#quiz',            key:'quiz',      label:'Quick check',                  mode:'whole' },
-    { sel:'#nextstep',        key:'nextstep',  label:'Your next seven days',             mode:'whole' },
-    { sel:'#learn',           key:'learn',     label:'Keep learning',                mode:'whole' },
-    { sel:'section.cta',      key:'end',       label:'Wrap-up',                      mode:'whole', extras:['footer'] }
+    { sel:'#nextstep',        key:'nextstep',  label:'Next steps',                   mode:'whole' },
+    { sel:'#learn',           key:'learn',     label:'Keep learning',                mode:'whole', extras:['footer'] }
   ];
   var TRACKED = [
     ['shift','01','What changed'], ['safe','02','Five ideas at work'], ['year','03','Your first year'], ['calls','04','Who handles what'],
-    ['welcome','05','The four jobs'], ['task','06','Job 1: get the work done'], ['relations','07','Job 2: take care of your people'],
-    ['change','08','Job 3: make things better'], ['external','09','Job 4: connect your team'], ['yourcall','10','Your call'],
-    ['survey','11','Your assessment'], ['quiz','12','Quick check'], ['nextstep','13','Your next seven days']
+    ['welcome','05','The four categories'], ['task','06','Task-oriented: get the work done'], ['relations','07','Relations-oriented: take care of your people'],
+    ['change','08','Change-oriented: make things better'], ['external','09','External: connect your team'], ['yourcall','10','Your call'],
+    ['survey','11','Your assessment'], ['quiz','12','Quick check'], ['nextstep','13','Next steps']
   ];
   var pages = [], secFirst = {};
   var topSpan = document.getElementById('top');
@@ -109,9 +103,18 @@ try{
       bbCount = document.getElementById('bbCount'),
       prevBtn = document.getElementById('pgPrev'), nextBtn = document.getElementById('pgNext');
   if(bbDots){
-    bbDots.innerHTML = TRACKED.map(function(s){
-      return '<a class="bb-dot" href="#' + s[0] + '" data-rail="' + s[0] + '"' +
-        ' title="' + s[1] + ' · ' + s[2] + ' · not yet" aria-label="' + s[2] + ', not done">' +
+    /* one dot per page; pages whose activity is tracked keep data-rail so the
+       done fill still applies (the Five ideas page's activity key is 'safe') */
+    var railFor = { ideas:'safe' };
+    var trackedKeys = {};
+    TRACKED.forEach(function(s){ trackedKeys[s[0]] = s; });
+    bbDots.innerHTML = pages.map(function(p, i){
+      var rk = railFor[p.key] || p.key;
+      var t = trackedKeys[rk];
+      var name = 'Page ' + (i + 1) + ' of ' + pages.length + ' · ' + p.pgLabel;
+      return '<a class="bb-dot" href="#p/' + p.key + '/' + p.n + '" data-idx="' + i + '"' +
+        (t ? ' data-rail="' + rk + '"' : '') + ' data-name="' + name + '"' +
+        ' title="' + name + '" aria-label="' + name + '">' +
         '<span class="dot" aria-hidden="true"></span></a>';
     }).join('');
   }
@@ -156,9 +159,9 @@ try{
     if(prevBtn) prevBtn.disabled = cur === 0;
     if(nextBtn) nextBtn.disabled = cur === pages.length - 1;
     document.querySelectorAll('.bb-dot').forEach(function(a){
-      var on = a.getAttribute('data-rail') === p.key;
+      var on = parseInt(a.getAttribute('data-idx'), 10) === cur;
       a.classList.toggle('cur', on);
-      if(on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      if(on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
   }
   function clearAnim(){ pages.forEach(function(p){ p.el.classList.remove('pg-in-r','pg-in-l','pg-out','pg-out-l','pg-out-r'); }); }

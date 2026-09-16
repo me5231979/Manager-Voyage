@@ -30,8 +30,11 @@ window.MV_CONFIG = {
      again this many months after completing it. */
   surveyRetakeMonths: 6,
   /* Link to the Manager Effectiveness Assessment (Qualtrics, REDCap, Oracle survey). Empty until PCB supplies it. */
-  /* Contact links for the who-helps-you tabs (PCB directory pages). Empty until supplied. */
-  contacts: { engagementConsultants: '', hcm: '', leave: '', eoa: '' },
+  /* Contact links for Who to call (PCB directory pages). Empty until supplied. */
+  contacts: { engagementConsultants: '', hcm: '', er: '', leave: '', eoa: '', titleIX: '', hotline: '', compliance: '' },
+  /* The assessment results email, so the Foundation course can tell managers what to search their inbox for. Empty until PCB confirms. */
+  assessmentEmailFrom: '',
+  assessmentEmailSubject: '',
   // the full vision and areas of focus, linked from the mission page
   missionUrl: 'https://www.vanderbilt.edu/',
   assessmentUrl: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OX9aur7js0q0UGf6gPrsrSj0YUFCM_9NtEckOrGZTO9UMTRCTlc4WTZHRzE1MENNV0pRS0ZPV1FWMC4u',
@@ -47,6 +50,8 @@ window.MV_CONFIG = {
 
   /* Cohort seat request link. */
   cohortRequestUrl: null,
+  /* Cohort tool links: the manager-facing SparkWise workspace, Yoodli, the Playbook template, the AI agents. Empty until supplied. */
+  cohortLinks: { sparkwise: '', yoodli: '', playbook: '../cohort/Manager-Playbook.pdf', agents: '' },
 
   /* Contact shown in the footer. */
   contactEmail: null,

@@ -62,14 +62,14 @@
   }
   function mrcItems() {
     var f = P.mrc.foundation;
-    var mea = { id: 'MEA', kind: 'assessment', area: 'mrc', track: null, title: 'Manager Effectiveness Assessment', minutes: 10, source: 'Microsoft Forms', url: CFG.assessmentUrl || null,
+    var mea = { id: 'MEA', kind: 'assessment', area: 'mrc', track: null, title: 'Manager Effectiveness Assessment', minutes: 5, source: 'Microsoft Forms', url: CFG.assessmentUrl || null,
       desc: 'Fourteen questions on how often you do the habits the course teaches. Your score and feedback come by email and set your starting point.',
       why: 'Taken before the Foundation course so the course meets you where you are, and again in six months to see the change.',
       dueIso: addDays(profile.startDate, 3), dueLabel: 'Before the Foundation course' };
-    var out = [mea, Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The web course, about thirty-five minutes: what changed, five ideas, your first year, who handles what, the four jobs of a manager, and your assessment results. Thirteen narrated activities and a quick check.', dueIso: addDays(profile.startDate, 7), dueLabel: 'After the assessment, by Day 7' })];
+    var out = [mea, Object.assign({}, f, { kind: 'foundation', area: 'mrc', track: null, desc: 'The web course, about thirty-five minutes: what changed, five ideas, your first year, who handles what, Yukl\'s four categories of manager behavior, and your assessment results. Narrated, with a short activity on every page and a quick check.', dueIso: addDays(profile.startDate, 7), dueLabel: 'After the assessment, by Day 7' })];
     orderedTracks().forEach(function (t) {
       t.modules.forEach(function (m) {
-        out.push(Object.assign({}, m, { kind: 'course', area: 'mrc', track: t, oracleCode: m.id, minutes: 15,
+        out.push(Object.assign({}, m, { kind: 'course', area: 'mrc', track: t, oracleCode: m.id, minutes: m.mins || 15,
           dueIso: addDays(profile.startDate, t.phase === 1 ? 30 : 60), dueLabel: 'By Day ' + (t.phase === 1 ? 30 : 60) }));
       });
     });
@@ -159,9 +159,12 @@
     var all = items.filter(function (c) { return c.state === 'ALL'; });
     var legal = items.filter(function (c) { return c.kind === 'legal'; }).length;
     return '<div class="panel__head"><h2>Compliance <em>courses</em>.</h2><span>Component 01 · Required · Days 1 to 60</span></div>' +
-      '<p class="panel__lead">Oracle assigned these the day your role began, from your work location in <b>' + esc(stateName(profile.state)) + '</b>. ' +
-      '<b>' + legal + '</b> are required by state or federal law; missing a deadline creates institutional liability. The rest are Vanderbilt policy. Both are mandatory. As a manager you take the supervisor version in addition to the all-staff version. Compliance is the floor, not the bar.</p>' +
-      lane(stateName(profile.state) + ' requirements', 'Assigned from your work location', mine) +
+      '<ul class="panel__points">' +
+      '<li><b>Assigned the day your role began,</b> from where your employees work: <b>' + esc(stateName(profile.state)) + '</b>.</li>' +
+      '<li><b>' + legal + ' required by law.</b> Missing a deadline creates institutional liability. The rest are Vanderbilt policy; both are mandatory.</li>' +
+      '<li><b>Take the supervisor version</b> in addition to the all-staff version.</li>' +
+      '<li><b>Compliance is the floor, not the bar.</b></li></ul>' +
+      lane(stateName(profile.state) + ' requirements', 'Assigned from the work location', mine) +
       lane('Every location', 'Assigned to every Vanderbilt manager', all);
   }
   function panelMrc() {
@@ -170,55 +173,104 @@
     var f = items.filter(function (it) { return it.kind === 'foundation'; })[0];
     var fDone = isDone(f.id);
     var ordered = !!foundationOrder();
-    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Required · Days 1 to 60 · The assessment, the Foundation on the web, then eighteen micro modules in Oracle</span></div>' +
-      '<p class="panel__lead">' + esc(P.mrc.summary) + ' Every module is interactive: simulators, scenario studios, decision trees, and walkthroughs of the live systems. Each ends with a knowledge check, and Oracle records the date you pass it.</p>' +
-      lane(mea.title, 'Ten minutes · Before the Foundation course', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Retake the assessment in six months.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Tap Mark complete once you have submitted it.') +
+    var day = dayOfPath();
+    var html = '<div class="panel__head"><h2>Manager Responsibilities <em>Course</em>.</h2><span>Component 02 · Strongly recommended · Days 1 to 60</span></div>' +
+      '<ul class="panel__points">' +
+      '<li><b>First, the assessment.</b> Six statements, a few minutes; your results and feedback come by email.</li>' +
+      '<li><b>Then the Foundation course,</b> about thirty-five minutes on the web.</li>' +
+      '<li><b>Then the micro modules in Oracle Learning,</b> one common task each: the systems you approve in, the people obligations you carry, the processes that run the role, and the Vanderbilt mission and ecosystem.</li>' +
+      '<li><b>Every module is interactive</b> and ends with a knowledge check that Oracle records.</li>' +
+      '</ul>' +
+      lane(mea.title, 'A few minutes · Before Manager Voyage', [mea], isDone(mea.id) ? 'Done. Keep the results email; the Foundation course asks you to review it. Rate the same six statements again 90 days after you complete Manager Voyage.' : 'Take it first. Your score and feedback come by email, and the Foundation course starts from them. Tap Mark complete once you have submitted it.') +
       lane(f.title, '35 minutes on the web · After the assessment', [f], ordered ? 'Your assessment results set the order of the tracks below: weakest first inside each window.' : (fDone ? 'Foundation complete.' : 'Complete the foundation next. It unlocks the micro modules and orders them from your self-assessment.'));
     var opened = false;
+    var p1done = items.filter(function (it) { return it.track && it.track.phase === 1; }).every(function (it) { return isDone(it.id); });
     [1, 2].forEach(function (phase) {
       var tracks = orderedTracks().filter(function (t) { return t.phase === phase; });
-      html += '<div class="lane"><div class="lane__title"><h3>' + (phase === 1 ? 'Days 1 to 30' : 'Days 31 to 60') + '</h3><span>' +
-        esc(tracks.map(function (t) { return t.title; }).join(' and ')) + '</span></div>' +
-        '<p class="lane__note">' + (phase === 1 ? 'By Day 30 you can approve, hire, and explain the mission.' : 'By Day 60 you can run a 1:1, handle a leave request, and document a concern.') + '</p></div>';
+      /* the second window stays folded until the first is done or Day 30 has passed */
+      var phaseOpen = phase === 1 ? !(p1done && day > 30) : (p1done || day > 30);
+      var inner = '';
       tracks.forEach(function (t) {
         var mods = items.filter(function (it) { return it.track && it.track.id === t.id; });
-        var open = !opened && mods.some(function (it) { return !isDone(it.id); });
+        var open = phaseOpen && !opened && mods.some(function (it) { return !isDone(it.id); });
         if (open) opened = true;
-        html += lane('Track: ' + t.title, t.why, mods, '<b>Outcome.</b> ' + esc(t.outcome) + ' Open the track to see its ' + mods.length + ' modules.', !open);
+        inner += lane('Track: ' + t.title, t.why, mods, '<b>By the end.</b> ' + esc(t.outcome), !open);
       });
+      html += '<details class="lane phase"' + (phaseOpen ? ' open' : '') + '><summary><div class="lane__title"><h3>' + (phase === 1 ? 'Days 1 to 30' : 'Days 31 to 60') + '</h3><span>' +
+        esc(tracks.map(function (t) { return t.title; }).join(' and ')) + '</span><span class="lane__count">' + (phaseOpen ? '' : 'Opens after Day 30') + '</span></div>' +
+        '<p class="lane__note">' + (phase === 1 ? 'By Day 30 you can approve, hire, and explain the mission.' : 'By Day 60 you can run a 1:1, give feedback, handle a leave request, and document a concern.') + '</p></summary>' + inner + '</details>';
     });
     return html;
   }
   function panelPortal() {
     var url = CFG.portalUrl || P.portal.url;
-    return '<div class="panel__head"><h2>Manager <em>Portal</em>.</h2><span>Component 03 · Always on · From Day 1</span></div>' +
-      '<p class="panel__lead">' + esc(P.portal.summary) + ' A manager who finished the cohort two years ago and a manager who started yesterday see the same hub.</p>' +
-      '<div class="eligible"><div><b>Open from Day 1.</b> Nothing to complete here. Come back whenever you need a template, a policy, or a name.</div>' +
+    var bey = P.portal.beyond;
+    return '<div class="panel__head"><h2>Manager <em>Portal</em>.</h2><span>Component 04 · Always on · Reference</span></div>' +
+      '<div class="eligible"><div><b>' + esc(P.portal.summary) + '</b> Nothing to complete here. Come back whenever you need a template, a policy, or a name.</div>' +
       (url ? '<a class="btn" href="' + esc(url) + '" target="_blank" rel="noopener">Open the Manager Portal</a>' : '<span class="btn is-disabled">Portal link coming soon</span>') + '</div>' +
-      '<div class="cardgrid">' + P.portal.areas.map(function (a) {
-        return '<div class="card"><span class="card__kicker">In the Portal</span><h3>' + esc(a.title) + '</h3><p>' + esc(a.desc) + '</p></div>';
-      }).join('') + '</div>' +
-      '<div class="lane"><div class="lane__title"><h3>The people you will call</h3><span>Who does what</span></div><div class="cardgrid">' +
-      P.contacts.map(function (c) { return '<div class="card"><span class="card__kicker">Contact</span><h3>' + esc(c.role) + '</h3><p>' + esc(c.desc) + '</p></div>'; }).join('') +
-      '</div></div>';
+      (bey ? '<div class="lane"><div class="lane__title"><h3>Beyond the portal</h3><span>' + esc(bey.intro) + '</span></div>' +
+        bey.groups.map(function (g) {
+          return '<h4 class="lane__sub">' + esc(g.title) + '</h4><div class="cardgrid">' + g.items.map(function (r) {
+            var inner = '<span class="card__kicker">' + esc(r.src) + '</span><h3>' + esc(r.title) + '</h3><p>' + esc(r.why) + '</p>';
+            return r.url
+              ? '<a class="card card--link" href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '<span class="card__go" aria-hidden="true">&#8599;</span></a>'
+              : '<div class="card">' + inner + '</div>';
+          }).join('') + '</div>';
+        }).join('') + '</div>' : '');
   }
   function panelCohort() {
     var ok = bothRequiredDone();
     var req = CFG.cohortRequestUrl || P.cohort.requestUrl;
     var open = requiredItems().filter(function (it) { return !isDone(it.id); }).length;
-    return '<div class="panel__head"><h2>The four-week <em>cohort</em>.</h2><span>Component 04 · Optional · Quarterly · 100 seats</span></div>' +
-      '<p class="panel__lead">' + esc(P.cohort.summary) + '</p>' +
+    var L = CFG.cohortLinks || {};
+    var C = P.cohort;
+    function chip(t, cls) { return '<span class="cw__chip' + (cls ? ' ' + cls : '') + '">' + esc(t) + '</span>'; }
+    function link(url, label) { return url ? '<a class="cw__link" href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(label) + '</a>' : '<span class="cw__soon">' + esc(label) + ' · link coming</span>'; }
+    function row(k, sub, body, cls) { return '<div class="cwr' + (cls ? ' ' + cls : '') + '"><div class="cwr__k">' + esc(k) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</div><div class="cwr__v">' + body + '</div></div>'; }
+    function weekCard(w) {
+      var chips = [];
+      if (w.n === 0) chips.push(chip('Online · own time'));
+      if (w.live && w.n === 1) chips.push(chip('Hybrid kickoff · 1 hour', 'cw__chip--live'));
+      if (w.live && w.n === 4) chips.push(chip('Hybrid capstone · 2 hours', 'cw__chip--live'));
+      if (w.coreNote) chips.push(chip('Core module as prework'));
+      if (w.n > 0 && !w.studio) chips.push(chip('No Scenario Studio'));
+      if (w.discussion) chips.push(chip('Discussion · ' + w.discussion.mins + ' min · virtual'));
+      var rows = '';
+      if (w.live && w.n === 1) rows += row('Hybrid', w.live.when, '<b class="cwr__t">' + esc(w.live.title) + '.</b><p>' + esc(w.live.desc) + '</p>', 'cwr--live');
+      if (w.core) rows += row('Core module', w.n === 0 ? 'Before the kickoff' : 'By Monday, released the Friday before', '<b class="cwr__t">' + esc(w.core.title) + '</b><span class="cw__by">' + esc(w.core.by) + '</span>' + (w.core.note ? '<p>' + esc(w.core.note) + '</p>' : '') + link(w.core.url, 'Open in Oracle Learning'));
+      if (w.coreNote) rows += row('Core module', 'Done as prework', '<p>' + esc(w.coreNote) + '</p>');
+      if (w.lab) rows += row('Learning Lab', 'SparkWise · Tuesday or Wednesday · 45 min', '<b class="cwr__t">' + esc(w.lab.title) + '.</b><p>' + esc(w.lab.desc) + '</p>' + link(L.sparkwise, 'Open SparkWise'));
+      if (w.studio) rows += row('Scenario Studio', 'Yoodli · Thursday · 15 min', '<b class="cwr__t">' + esc(w.studio.title) + '.</b><p>' + esc(w.studio.desc) + '</p>' + link(L.yoodli, 'Open Yoodli'));
+      if (w.discussion) rows += row('Discussion', 'Friday · ' + w.discussion.mins + ' min · virtual · FLH facilitated', '<ul class="cw__list cw__list--plain">' + w.discussion.items.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>');
+      if (w.live && w.n === 4) rows += row('Hybrid', w.live.when, '<b class="cwr__t">' + esc(w.live.title) + '.</b><p>' + esc(w.live.desc) + '</p>', 'cwr--live');
+      if (w.playbook) rows += row('Playbook', w.n === 0 ? 'Bring it to the kickoff' : w.n === 4 ? 'Due before the capstone' : 'Due Sunday', '<b class="cwr__t">' + esc(w.playbook.title) + '.</b><p>' + esc(w.playbook.desc) + '</p>' + (L.playbook ? link(L.playbook, 'Open the Playbook template') : ''));
+      if (w.extra) rows += row('Before you start', '10 min', '<b class="cwr__t">' + esc(w.extra.title) + '.</b><p>' + esc(w.extra.desc) + '</p>');
+      return '<article class="cw"><div class="cw__head"><span class="cw__no">W' + w.n + '</span><div><h3>' + esc(w.title) + (w.when ? ' <span class="cw__when">' + esc(w.when) + '</span>' : '') + '</h3><p>' + esc(w.outcome) + '</p><div class="cw__chips">' + chips.join('') + '</div></div></div><div class="cw__rows">' + rows + '</div></article>';
+    }
+    return '<div class="panel__head"><h2>The four-week <em>cohort</em>.</h2><span>Component 03 · Optional but recommended · Quarterly · 100 seats</span></div>' +
+      '<p class="panel__lead">' + esc(C.summary) + '</p>' +
+      '<p class="panel__lead">' + esc(C.prerequisite) + '</p>' +
       '<div class="eligible' + (ok ? '' : ' eligible--locked') + '"><div>' + (ok
-        ? '<b>You are eligible, and Manager Foundations is already complete.</b> The cohort is optional. Oracle sends the next quarterly invitation; you can also ask for a seat now.'
-        : '<b>' + open + ' required item' + (open === 1 ? '' : 's') + ' to go.</b> ' + esc(P.cohort.eligibility) + ' Units outside the central budget are billed per seat.') + '</div>' +
+        ? '<b>You are eligible, and Manager Foundations is already complete.</b> The cohort is optional but recommended. Oracle sends the next quarterly invitation; you can also ask for a seat now.'
+        : '<b>' + open + ' item' + (open === 1 ? '' : 's') + ' on your Day 60 path to go.</b> ' + esc(C.eligibility) + ' Units outside the central budget are billed per seat.') + '</div>' +
       (ok && req ? '<a class="btn" href="' + esc(req) + '" target="_blank" rel="noopener">Request a seat</a>' : ok ? '<span class="btn is-disabled">Request link coming soon</span>' : '<span class="pill pill--locked">Unlocks at Day 60 completion</span>') + '</div>' +
-      '<div class="cardgrid">' + P.cohort.weeks.map(function (w) {
-        return '<div class="card"><span class="card__kicker">Week ' + w.n + '</span><h3>' + esc(w.title) + '</h3><p>' + esc(w.desc) + '</p><p><b>' + esc(w.outcome) + '</b></p></div>';
-      }).join('') +
+      '<div class="lane"><div class="lane__title"><h3>The weekly rhythm</h3><span>The same four beats, in the same order, every week</span></div>' +
+      '<div class="rhythm">' + C.rhythm.map(function (r, i) {
+        return '<div class="rhythm__step"><span class="rhythm__when">' + esc(r.when) + '</span><h4>' + esc(r.beat) + (r.tool ? ' <small>in ' + esc(r.tool) + '</small>' : '') + '</h4><p>' + esc(r.desc) + '</p><span class="rhythm__len">' + esc(r.mins) + '</span></div>';
+      }).join('') + '</div><p class="lane__note">' + esc(C.playbookNote) + '</p></div>' +
+      '<div class="lane"><div class="lane__title"><h3>Week by week</h3><span>Prework, then four weeks, one Core module each</span></div>' + C.weeks.map(weekCard).join('') + '</div>' +
+      (C.deeper ? '<div class="lane"><div class="lane__title"><h3>Go deeper</h3><span>' + esc(C.deeper.intro) + '</span></div>' +
+        [['Inside Vanderbilt · Oracle Learning', C.deeper.inside, 'Open in Oracle Learning'], ['Outside Vanderbilt', C.deeper.outside, 'Open']].map(function (g) {
+          return '<h4 class="lane__sub">' + g[0] + '</h4><div class="cardgrid">' + g[1].map(function (r) {
+            var inner = '<span class="card__kicker">Week ' + r.week + ' · ' + esc(r.by) + '</span><h3>' + esc(r.title) + '</h3><p>' + esc(r.note) + '</p>';
+            return r.url ? '<a class="card card--link" href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '<span class="card__go" aria-hidden="true">&#8599;</span></a>' : '<div class="card">' + inner + '<span class="cw__soon">' + g[2] + ' · link coming</span></div>';
+          }).join('') + '</div>';
+        }).join('') + '</div>' : '') +
+      '<div class="cardgrid">' +
       '<div class="card card--wide"><span class="card__kicker">What you produce</span><h3>Three deliverables, presented at the capstone</h3>' +
-      P.cohort.deliverables.map(function (d) { return '<p><b>' + esc(d.title) + '.</b> ' + esc(d.desc) + '</p>'; }).join('') + '</div>' +
+      C.deliverables.map(function (d) { return '<p><b>' + esc(d.title) + '.</b> ' + esc(d.desc) + '</p>'; }).join('') + '</div>' +
       '<div class="card card--wide"><span class="card__kicker">Tools</span><h3>What powers the four weeks</h3>' +
-      P.cohort.tools.map(function (t) { return '<p><b>' + esc(t.name) + '.</b> ' + esc(t.desc) + '</p>'; }).join('') + '</div>' +
+      C.tools.map(function (t) { return '<p><b>' + esc(t.name) + '.</b> ' + esc(t.desc) + (L[t.key] ? ' <a class="cw__link" href="' + esc(L[t.key]) + '" target="_blank" rel="noopener">Open</a>' : '') + '</p>'; }).join('') + '</div>' +
       '</div>';
   }
 
@@ -226,10 +278,10 @@
   var AREAS = [
     { id: 'compliance', num: '01 · Required', title: 'Compliance Courses', panel: panelCompliance, cls: 'cattile--compliance',
       count: function () { var c = myCompliance(); return { done: c.filter(function (i) { return isDone(i.id); }).length, total: c.length }; } },
-    { id: 'mrc', num: '02 · Required', title: 'Manager Responsibilities Course', panel: panelMrc,
+    { id: 'mrc', num: '02 · Strongly recommended', title: 'Manager Responsibilities Course', panel: panelMrc,
       count: function () { var c = mrcItems(); return { done: c.filter(function (i) { return isDone(i.id); }).length, total: c.length }; } },
-    { id: 'portal', num: '03 · Always on', title: 'Manager Portal', panel: panelPortal, count: function () { return null; } },
-    { id: 'cohort', num: '04 · Optional', title: 'Four-Week Cohort', panel: panelCohort, count: function () { return null; } }
+    { id: 'cohort', num: '03 · Optional · Recommended', title: 'Four-Week Cohort', panel: panelCohort, count: function () { return null; } },
+    { id: 'portal', num: '04 · Always on · Reference', title: 'Manager Portal', panel: panelPortal, count: function () { return null; } }
   ];
 
   function renderDashboard() {
@@ -240,10 +292,7 @@
       ' · ' + (stateName(profile.state) || 'Location not set') + ' · Started ' + fmtDate(profile.startDate);
 
     var req = requiredItems();
-    var done = req.filter(function (it) { return isDone(it.id); }).length;
-    var pct = req.length ? Math.round(done / req.length * 100) : 0;
-    $('#ringPct').textContent = pct + '%';
-    var C = 295.3; $('#ringBar').style.strokeDashoffset = String(C - C * pct / 100);
+    renderTimeline(day);
 
     var how = $('#howline');
     if (!profile.state) {
@@ -251,7 +300,7 @@
       how.innerHTML = '<b>Choose your work location</b> to see your compliance requirements. Everything else is the same for every manager.';
     } else {
       how.className = 'howline';
-      how.innerHTML = 'Two components are <b>required in your first 60 days</b>. Oracle Learning assigned them the day your role began, from your role and your work location in <b>' + esc(stateName(profile.state)) + '</b>. ' +
+      how.innerHTML = 'The compliance courses are <b>required in your first 60 days</b>, and the Manager Responsibilities Course is <b>strongly recommended</b> alongside them. Oracle Learning assigned both the day your role began, from your role and your work location in <b>' + esc(stateName(profile.state)) + '</b>. ' +
         (CFG.profileEndpoint ? 'Completions recorded in Oracle appear here automatically.' : 'Open each item in Oracle; when you finish, tap Mark complete and it is written to your record as self-reported.');
     }
 
@@ -261,6 +310,7 @@
     if (showPreview) { $('#pvName').value = profile.name || ''; $('#pvState').value = profile.state || ''; $('#pvStart').value = profile.startDate || ''; }
 
     $('#syncBtn').hidden = !CFG.profileEndpoint;
+    $('#godBtn').hidden = !CFG.previewMode;
     var portalUrl = CFG.portalUrl || P.portal.url;
     var pb = $('#portalBtn');
     if (portalUrl) { pb.href = portalUrl; pb.classList.remove('is-disabled'); pb.textContent = 'Manager Portal'; }
@@ -273,7 +323,7 @@
     }
     $('#areaTiles').innerHTML = AREAS.map(function (a) {
       var c = a.count(), on = a.id === area;
-      var count = c ? (c.done === c.total && c.total ? 'All ' + c.total + ' complete' : (c.total - c.done) + ' to go · ' + c.total + ' items') : (a.id === 'portal' ? 'Open from Day 1' : (bothRequiredDone() ? 'Optional · You are eligible' : 'Optional · Opens at Day 60'));
+      var count = c ? (c.done === c.total && c.total ? 'All complete' : (c.total - c.done) + ' to go') : (a.id === 'portal' ? 'Open from Day 1' : (bothRequiredDone() ? 'You are eligible' : 'Opens at Day 60'));
       var badge = a.id === 'compliance' ? (c && c.done === c.total && c.total ? '<span class="cattile__badge cattile__badge--ok">Done</span>' : '<span class="cattile__badge">Deadlines</span>') : '';
       var bar = c ? '<span class="cattile__bar" aria-hidden="true"><i style="width:' + (c.total ? Math.round(c.done / c.total * 100) : 0) + '%"></i></span>' : '';
       return '<button type="button" role="tab" aria-selected="' + on + '" class="cattile ' + (a.cls || '') + (on ? ' on' : '') + '" data-tile="' + a.id + '">' +
@@ -287,39 +337,63 @@
     var a = AREAS.filter(function (x) { return x.id === area; })[0] || AREAS[0];
     $('#panel').innerHTML = a.panel();
 
-    /* up next: not done, ordered by due date, legal first on ties */
+    /* up next: the three nearest things not done, ordered by due date, legal first on ties */
     var next = req.filter(function (it) { return !isDone(it.id); }).sort(function (x, y) {
       return (x.dueIso < y.dueIso ? -1 : x.dueIso > y.dueIso ? 1 : 0) || ((x.kind === 'legal' ? 0 : 1) - (y.kind === 'legal' ? 0 : 1));
-    }).slice(0, 4);
-    $('#upNext').innerHTML = next.length ? next.map(function (it) {
-      var url = courseUrl(it);
-      var inner = esc(it.title) + '<small>' + esc(it.dueLabel) + ' · ' + fmtDate(it.dueIso) + (it.dueIso < todayIso() ? ' · past due' : '') + '</small>';
-      return '<li>' + (url ? '<a data-go="' + esc(it.id) + '" href="' + esc(url) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div>' + inner + '</div>') + '</li>';
-    }).join('') : '<li class="empty">All caught up. Well sailed.</li>';
+    }).slice(0, 3);
+    var areaName = { compliance: 'Compliance', mrc: 'Manager Responsibilities Course' };
+    $('#upNext').innerHTML = next.length ? next.map(function (it, i) {
+      var url = courseUrl(it), local = !!url && !/^https?:/i.test(url), past = it.dueIso < todayIso();
+      var go = url ? '<a class="btn" data-go="' + esc(it.id) + '" href="' + esc(url) + '"' + (local ? '' : ' target="_blank" rel="noopener"') + '>' + (statusOf(it.id) === 'opened' ? 'Continue' : local ? 'Open the course' : it.kind === 'assessment' ? 'Take the assessment' : 'Open in Oracle') + '</a>' : '<span class="btn is-disabled">Link coming soon</span>';
+      var mark = CFG.allowSelfReport !== false ? '<button type="button" class="btn btn--mark" data-done="' + esc(it.id) + '" aria-label="Mark ' + esc(it.title) + ' complete">Mark complete</button>' : '';
+      return '<article class="next' + (i === 0 ? ' next--first' : '') + '"><span class="next__no" aria-hidden="true">' + (i + 1) + '</span><div class="next__body">' +
+        '<span class="card__kicker">' + esc(it.kind === 'assessment' ? 'Assessment' : it.kind === 'foundation' ? 'Foundation course' : it.track ? 'Micro module · ' + it.track.title : areaName[it.area] || '') + '</span>' +
+        '<h3>' + esc(it.title) + '</h3><p class="next__due' + (past ? ' past' : '') + '">' + (past ? 'Past due · ' : '') + esc(it.dueLabel) + ' · ' + fmtDate(it.dueIso) + (it.mins || it.minutes ? ' · ' + (it.mins || it.minutes) + ' min' : '') + '</p>' +
+        '<div class="next__act">' + go + mark + '</div></div></article>';
+    }).join('') : '<p class="next__empty">All caught up. Well sailed. The cohort invitation follows from Oracle.</p>';
+    $('#upnextSub').textContent = next.length ? 'The next things to do, in order' : 'Nothing waiting';
 
-    /* milestones */
-    var m1 = mrcItems().filter(function (it) { return it.kind === 'assessment' || it.kind === 'foundation' || (it.track && it.track.phase === 1); }).every(function (it) { return isDone(it.id); });
-    var ms = [
-      { t: 'Day 1', s: 'Assigned in Oracle. Portal open.', d: true },
-      { t: 'Day 30', s: 'Assessment, Foundation course, and Systems track complete.', d: m1, now: day <= 30 },
-      { t: 'Day 60', s: 'Compliance, People, and Policy and safety complete. Manager Foundations is done and recorded against your job profile.', d: bothRequiredDone(), now: day > 30 && day <= 60 },
-      { t: 'Cohort', s: 'Optional. ' + (bothRequiredDone() ? 'You are eligible: the invitation follows from Oracle, or ask for a seat.' : 'Opens once the required components are complete.'), d: false, now: day > 60 }
-    ];
-    $('#milestones').innerHTML = ms.map(function (x) {
-      return '<div class="milestone' + (x.d ? ' done' : '') + (x.now && !x.d ? ' now' : '') + '"><i>' + (x.d ? '&#10003;' : '') + '</i><div><b>' + esc(x.t) + '</b><small>' + esc(x.s) + '</small></div></div>';
+    /* who to call */
+    var CL = CFG.contacts || {};
+    $('#contacts').innerHTML = P.contacts.map(function (c) {
+      var link = c.key && CL[c.key] ? '<a class="who__link" href="' + esc(CL[c.key]) + '" target="_blank" rel="noopener">Contact</a>' : '';
+      return '<div class="card who__card' + (c.sameDay ? ' who__card--urgent' : '') + '"><span class="card__kicker">' + (c.sameDay ? 'Same day' : 'Everyday help') + '</span><h3>' + esc(c.role) + '</h3>' +
+        '<p><b>What they do.</b> ' + esc(c.desc) + '</p>' + (c.when ? '<p><b>When.</b> ' + esc(c.when) + '</p>' : '') + (c.how ? '<p><b>How.</b> ' + esc(c.how) + '</p>' : '') + link + '</div>';
     }).join('');
 
-    /* contacts */
-    $('#contacts').innerHTML = P.contacts.map(function (c) { return '<li><div>' + esc(c.role) + '<small>' + esc(c.desc) + '</small></div></li>'; }).join('');
+    try { document.dispatchEvent(new CustomEvent('mv-rendered')); } catch (e) {}
 
     /* record line */
     var oracleN = Object.keys(profile.completions).filter(function (k) { return profile.completions[k].source === 'oracle'; }).length;
     var selfN = Object.keys(profile.completions).length - oracleN;
     var src = profile.source === 'oracle' ? 'Oracle HCM' : profile.source === 'scorm' ? 'Oracle Learning' : profile.source === 'url' ? 'preview link' : 'this browser';
-    $('#syncline').innerHTML = 'Profile from <b>' + esc(src) + '</b>' + (profile.id ? ' · ID ' + esc(profile.id) : '') + '.<br>' +
-      '<b>' + oracleN + '</b> verified in Oracle · <b>' + selfN + '</b> self-reported.' +
-      (profile.feedAt ? '<br>Last sync ' + new Date(profile.feedAt).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }) + '.' : '') +
-      (profile.feedError ? '<br>Oracle feed unavailable: ' + esc(profile.feedError) + '.' : '');
+    $('#syncline').innerHTML = '<b>Your record.</b> Profile from ' + esc(src) + (profile.id ? ' · ID ' + esc(profile.id) : '') + ' · ' +
+      oracleN + ' verified in Oracle · ' + selfN + ' self-reported.' +
+      (profile.feedAt ? ' Last sync ' + new Date(profile.feedAt).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }) + '.' : '') +
+      (profile.feedError ? ' Oracle feed unavailable: ' + esc(profile.feedError) + '.' : '');
+  }
+
+  /* ---------- the timeline: one spine, Day 1 to Day 60, with the cohort beyond it ---------- */
+  function renderTimeline(day) {
+    var box = $('#timeline'); if (!box) return;
+    var items = mrcItems();
+    var m1 = items.filter(function (it) { return it.kind === 'assessment' || it.kind === 'foundation' || (it.track && it.track.phase === 1); }).every(function (it) { return isDone(it.id); });
+    var all = bothRequiredDone();
+    var nodes = [
+      { t: 'Day 1', s: 'Assigned in Oracle. The portal opens.', d: true },
+      { t: 'Day 30', s: 'Assessment and Foundation course. Systems and Vanderbilt & Nashville modules.', d: m1, now: day <= 30 && !m1 },
+      { t: 'Day 60', s: 'Compliance courses. People and Processes modules.', d: all, now: day > 30 && !all },
+      { t: 'The cohort', s: all ? 'You are eligible. The invitation follows from Oracle.' : 'Optional but recommended. Opens once Day 60 is complete.', d: false, now: all, after: true }
+    ];
+    /* the marker sits between the Day 1 and Day 60 node centers (12.5% to 62.5% of the track) */
+    var pos = 12.5 + Math.min(59, Math.max(0, day - 1)) / 59 * 50;
+    box.innerHTML = '<div class="tl__head"><span class="tl__title">Your voyage</span><span class="tl__you-line">' + (day <= P.windowDays ? 'You are on Day ' + day : 'Past Day 60') + '</span></div>' +
+      '<div class="tl__track"><span class="tl__fill" style="width:' + pos + '%"></span>' +
+      nodes.map(function (n, i) { return '<span class="tl__node' + (n.d ? ' done' : '') + (n.now && !n.d ? ' now' : '') + (n.after ? ' after' : '') + '" style="left:' + (12.5 + i * 25) + '%" aria-hidden="true">' + (n.d ? '&#10003;' : '') + '</span>'; }).join('') +
+      '<span class="tl__you" style="left:' + pos + '%" aria-hidden="true">You are here</span></div>' +
+      '<ol class="tl__labels">' + nodes.map(function (n) {
+        return '<li class="' + (n.d ? 'done' : '') + (n.now && !n.d ? ' now' : '') + '"><b>' + esc(n.t) + (n.d ? ' <span class="tl__ok">done</span>' : n.now ? ' <span class="tl__ok tl__ok--now">now</span>' : '') + '</b><small>' + esc(n.s) + '</small></li>';
+      }).join('') + '</ol>';
   }
 
   /* ---------- welcome ---------- */
@@ -394,9 +468,24 @@
     if (ar) { e.preventDefault(); area = ar.getAttribute('data-area'); show('dashboard'); return; }
   });
 
-  $('#beginBtn').addEventListener('click', function (e) { e.preventDefault(); if (profile.state) show('dashboard'); else toast('Choose your work location first.'); });
-  $('#navCta').addEventListener('click', function (e) { e.preventDefault(); if (profile.state) show('dashboard'); else show('welcome'); });
+  $('#beginBtn').addEventListener('click', function (e) { e.preventDefault(); if (profile.state) show('dashboard'); else toast('Choose where your employees work first.'); });
   $('#changeStateBtn').addEventListener('click', function () { profile.state = ''; profile.stateSource = 'none'; area = null; show('welcome'); });
+  /* God mode, for testing: every item on the path is marked complete (self-reported, tagged god) so the
+     Day 31 to 60 tracks, the Day 60 milestone, and the cohort seat request all unlock. Off removes those marks. */
+  function godOn() { return Object.keys(profile.completions).some(function (k) { return profile.completions[k].god; }); }
+  function godPaint() { var b = $('#godBtn'); if (!b) return; var on = godOn(); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.textContent = on ? 'God mode: on' : 'God mode'; }
+  $('#godBtn').addEventListener('click', function () {
+    if (godOn()) {
+      Object.keys(profile.completions).forEach(function (k) { if (profile.completions[k].god) delete profile.completions[k]; });
+      scoDone = false; save(); renderDashboard(); toast('God mode off. Test completions cleared.');
+    } else {
+      if (!profile.state) { profile.state = 'TN'; profile.stateSource = 'self'; }
+      requiredItems().forEach(function (it) { if (!isDone(it.id)) profile.completions[it.id] = { at: todayIso(), source: 'self', god: true }; });
+      area = 'cohort'; save(); renderDashboard(); toast('God mode on. Everything is marked complete; the cohort is unlocked.');
+    }
+    godPaint();
+  });
+  document.addEventListener('mv-rendered', godPaint);
   $('#renameBtn').addEventListener('click', function () {
     var n = window.prompt('What should we call you?', profile.name || '');
     if (n && n.trim()) { profile.name = n.trim(); profile.firstName = MVProfile.firstName(n); profile.source = 'self'; save(); renderWelcome(); }
@@ -417,10 +506,12 @@
     profile.opened = {}; scoDone = false; save(); renderDashboard(); toast('Progress reset.');
   });
 
-  var navEl = $('.nav'), burger = $('#navBurger');
-  window.addEventListener('scroll', function () { navEl.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
-  burger.addEventListener('click', function () { var open = navEl.classList.toggle('nav--open'); burger.setAttribute('aria-expanded', String(open)); });
-  $('#navLinks').addEventListener('click', function () { navEl.classList.remove('nav--open'); burger.setAttribute('aria-expanded', 'false'); });
+  var navPortal = $('#navPortal'); if (navPortal && (CFG.portalUrl || P.portal.url)) navPortal.href = CFG.portalUrl || P.portal.url;
+  /* the header's Who to call link on this page */
+  window.addEventListener('hashchange', function () {
+    if (location.hash !== '#who') return;
+    var who = $('#who'); if (who && $('#view-dashboard').classList.contains('active')) who.scrollIntoView({ block: 'start', behavior: 'auto' });
+  });
   $('#year').textContent = new Date().getFullYear();
   if (CFG.contactEmail) { var fc = $('#footerContact'); fc.hidden = false; fc.href = 'mailto:' + CFG.contactEmail; }
 
@@ -440,8 +531,10 @@
     MVProfile.resolve().then(function (p) {
       profile = p;
       if (window.MVScorm && MVScorm.connected) MVScorm.incomplete();
-      var straight = /[?&](view=dashboard|state=)/.test(location.search) && p.state;
+      /* My voyage is home: the welcome view only asks for the work location when nothing supplied it */
+      var straight = !!p.state;
       show(straight ? 'dashboard' : 'welcome');
+      if (straight && location.hash === '#who') { var who = $('#who'); if (who) setTimeout(function () { who.scrollIntoView({ block: 'start', behavior: 'auto' }); }, 120); }
       if (CFG.profileEndpoint) {
         var lastPull = Date.now();
         var pull = function () {

@@ -41,8 +41,8 @@ def speak(text, dest):
             if os.path.getsize(dest) > 1000: return
         except urllib.error.HTTPError as e:
             msg = e.read()[:400].decode('utf-8', 'replace')
-            if e.code in (401, 403): raise SystemExit('ElevenLabs refused the key (%d): %s' % (e.code, msg))
             if e.code == 402 or 'quota' in msg.lower(): raise Quota('ElevenLabs quota exhausted: ' + msg)
+            if e.code in (401, 403): raise SystemExit('ElevenLabs refused the key (%d): %s' % (e.code, msg))
             sys.stderr.write('attempt %d failed (%d): %s\n' % (attempt + 1, e.code, msg))
         except Exception as e:
             sys.stderr.write('attempt %d failed: %s\n' % (attempt + 1, e))
@@ -61,7 +61,8 @@ for kind, key, text in jobs:
     if cache.get(fname) == h and os.path.isfile(dest): kept.append(fname); continue
     try: speak(text, dest)
     except Quota as e:
-        if os.path.exists(dest): os.remove(dest)
+        # a refusal never wrote a body; only drop a truncated partial
+        if os.path.exists(dest) and os.path.getsize(dest) <= 1000: os.remove(dest)
         stopped = str(e); break
     cache[fname] = h; made.append(fname)
     time.sleep(0.5)

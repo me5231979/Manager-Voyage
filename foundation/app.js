@@ -1,7 +1,7 @@
 /* ══════════ MANAGER VOYAGE · FOUNDATION · app engine ══════════
    Progress (thirteen tracked activities), the six segments' activities (flip
    cards, your call, quick check), the assessment result entry that
-   lists the eighteen micro modules, the knowledge check, page narration, the
+   lists the micro modules, the knowledge check, page narration, the
    custom and public videos, and the SCORM hookup. State: localStorage
    mv-found-* plus, inside Oracle Learning, SCORM suspend_data. Nothing is
    sent anywhere else. */
@@ -76,6 +76,22 @@ $$('.reveal').forEach(function(el){ el.classList.add('in'); });
 var NARR = window.MV_NARR || {};
 /* narration is on by default; Auto off is remembered as '0' */
 var narr = { audio:null, playing:false, key:'', auto: get('auto') !== '0', on: get('auto') !== '0', utter:null };
+/* Where each clip stopped, by narration key. Stopping the audio (the Listen
+   toggle, tapping into an activity, turning the page) remembers the spot, and
+   the next play of that clip picks up there, so stepping away or taking notes
+   never means starting the narration over. A clip that plays to its natural
+   end forgets its spot and starts fresh next time. Survives a reload. */
+var narrPos = (function(){ try{ var v = JSON.parse(get('narrpos') || '{}'); return v && typeof v === 'object' ? v : {}; }catch(e){ return {}; } })();
+function narrPosSave(){ try{ set('narrpos', JSON.stringify(narrPos)); }catch(e){} }
+function narrRemember(){
+  if(!narr.audio || !narr.key) return;
+  var a = narr.audio, t = a.currentTime || 0;
+  /* only a meaningful spot is worth keeping: a couple of seconds in, and not
+     already at the tail end of a clip whose length we know */
+  if(t > 2 && (!a.duration || !isFinite(a.duration) || t < a.duration - 2)) narrPos[narr.key] = Math.max(0, t - 0.6);
+  else delete narrPos[narr.key];
+  narrPosSave();
+}
 var bbListen = $('#bbListen'), bbListenT = $('#bbListenT'), bbAuto = $('#bbAuto'), narrToast = $('#narrToast'), toastT = null;
 function toast(msg){
   if(!narrToast) return;
@@ -90,14 +106,19 @@ function narrUI(){
     bbListen.classList.toggle('playing', narr.playing);
     bbListen.setAttribute('aria-label', narr.playing ? 'Stop narration' : 'Listen to this page');
     bbListen.setAttribute('title', narr.playing ? 'Stop narration' : 'Listen to this page');
-    if(bbListenT) bbListenT.textContent = narr.playing ? 'Stop' : 'Listen';
+    var backAt = !narr.playing && narrPos[narrKey()] > 0;
+    if(backAt){
+      bbListen.setAttribute('aria-label', 'Resume narration where it stopped');
+      bbListen.setAttribute('title', 'Resume narration where it stopped');
+    }
+    if(bbListenT) bbListenT.textContent = narr.playing ? 'Stop' : backAt ? 'Resume' : 'Listen';
   }
   if(bbAuto) bbAuto.setAttribute('aria-pressed', narr.auto ? 'true' : 'false');
   $$('[data-narr]').forEach(function(b){ var on = narr.playing && narr.key === b.getAttribute('data-narr'); b.classList.toggle('playing', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.setAttribute('aria-label', on ? 'Stop' : 'Listen to this one'); });
   $$('[data-nk]').forEach(function(c){ c.classList.toggle('playing', narr.playing && narr.key === c.getAttribute('data-nk')); });
 }
 function narrStop(){
-  if(narr.audio){ try{ narr.audio.pause(); narr.audio.src = ''; }catch(e){} narr.audio = null; }
+  if(narr.audio){ try{ narrRemember(); narr.audio.pause(); narr.audio.src = ''; }catch(e){} narr.audio = null; }
   if(window.speechSynthesis){ try{ window.speechSynthesis.cancel(); }catch(e){} }
   narr.utter = null; narr.playing = false; narrUI();
 }
@@ -126,9 +147,15 @@ function narrPlay(k){
   narr.key = k; narr.playing = true; narrUI();
   var a = new Audio('../assets/audio/foundation/' + k.replace(/\//g, '-') + '.mp3?v=' + MEDIA_V);
   a.preload = 'auto';
-  a.addEventListener('ended', function(){ if(narr.audio === a){ narr.audio = null; narr.playing = false; narrUI(); } });
+  a.addEventListener('ended', function(){ if(narr.audio === a){ narr.audio = null; narr.playing = false; delete narrPos[k]; narrPosSave(); narrUI(); } });
   a.addEventListener('error', function(){ if(narr.audio === a){ narr.audio = null; narrSpeak(text); } });
   narr.audio = a;
+  /* pick up where this clip stopped, once the browser knows the file */
+  var backTo = narrPos[k] || 0;
+  if(backTo > 0){
+    var seek = function(){ try{ if(narr.audio === a && (!a.duration || !isFinite(a.duration) || backTo < a.duration - 1)) a.currentTime = backTo; }catch(e){} };
+    if(a.readyState >= 1) seek(); else a.addEventListener('loadedmetadata', seek);
+  }
   var pr = a.play();
   if(pr && pr.catch) pr.catch(function(err){
     if(narr.audio !== a) return;
@@ -147,7 +174,8 @@ if(bbListen) bbListen.addEventListener('click', function(){ if(narr.playing){ na
    or when they tap its speaker. Tapping again stops it. Any of these stops the page narration first. */
 function narrSub(k, force){
   if(!NARR[k]){ if(force) toast('No narration for this one.'); else if(narr.playing) narrStop(); return; }
-  if(narr.playing && narr.key === k){ narrStop(); return; }
+  /* every section, card and speaker button reads its clip from the top; only the Listen toggle in the bottom bar resumes */
+  delete narrPos[k]; narrPosSave();
   if(force) narr.on = true;
   if(narr.on || narr.auto) narrPlay(k); else if(narr.playing) narrStop();
 }
@@ -163,7 +191,9 @@ if(bbAuto) bbAuto.addEventListener('click', function(){
   if(narr.auto){ toast('Auto-narration on. Each page is read as it turns.'); narrPlay(); }
   else { toast('Auto-narration off.'); narrStop(); }
 });
-document.addEventListener('chart:page', function(){ narrStop(); if(narr.auto) window.setTimeout(narrPlay, reduce ? 0 : 380); });
+/* turning the page starts that page's narration from the top; the remembered
+   spot is only for the Listen toggle within a page */
+document.addEventListener('chart:page', function(){ narrStop(); delete narrPos[narrKey()]; narrPosSave(); narrUI(); if(narr.auto) window.setTimeout(narrPlay, reduce ? 0 : 380); });
 /* the gold line under the header tracks pages turned; the Progress button counts activities */
 /* fit each page to the viewport: shrink the content a little (never below 78%) before letting it scroll */
 var fitT = null;
@@ -265,7 +295,7 @@ var SECTIONS = [
   { k:'safe',      no:'02', name:'Five ideas at work',      how:'Find the best response in each idea’s moment' },
   { k:'year',      no:'03', name:'Your first year',         how:'Open all four groups' },
   { k:'calls',     no:'04', name:'Who handles what',        how:'Decide five situations' },
-  { k:'welcome',   no:'05', name:'The four jobs',           how:'Open all four' },
+  { k:'welcome',   no:'05', name:'The four categories',     how:'Open all four' },
   { k:'task',      no:'06', name:'Get the work done',       how:'Flip all four cards' },
   { k:'relations', no:'07', name:'Take care of your people', how:'Flip all four cards' },
   { k:'change',    no:'08', name:'Make things better',      how:'Flip all four cards' },
@@ -273,7 +303,7 @@ var SECTIONS = [
   { k:'yourcall',  no:'10', name:'Your call',               how:'Find the Vanderbilt way in four situations' },
   { k:'survey',    no:'11', name:'Your assessment',         how:'Review your results email, or take the assessment' },
   { k:'quiz',      no:'12', name:'A quick check',           how:'Score 4 of 5' },
-  { k:'nextstep',  no:'13', name:'Your next seven days',    how:'Mark it done once planned' }
+  { k:'nextstep',  no:'13', name:'Next steps',              how:'Pick one habit, then mark it done' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }
 function progWrite(k, v){ set('p-' + k, v ? '1' : null); }
@@ -303,7 +333,7 @@ function progRender(changedKey, nowDone){
     }
     $$('.mlink[data-prog="' + s.k + '"]').forEach(function(a){ a.classList.toggle('done', done); });
     var dot = $('.bb-dot[data-rail="' + s.k + '"]');
-    if(dot){ dot.classList.toggle('done', done); dot.setAttribute('aria-label', s.name + ', ' + (done ? 'done' : 'not done')); dot.setAttribute('title', s.no + ' · ' + s.name + ' · ' + (done ? 'done' : 'not yet')); }
+    if(dot){ dot.classList.toggle('done', done); var base = dot.getAttribute('data-name') || s.name; dot.setAttribute('aria-label', base + ', activity ' + (done ? 'done' : 'not done')); dot.setAttribute('title', base + ' · ' + (done ? 'done' : 'not yet')); }
     $$('.md-btn[data-prog="' + s.k + '"]').forEach(function(b){
       b.setAttribute('aria-pressed', done ? 'true' : 'false');
       var sp = b.querySelector('span'); if(sp) sp.textContent = done ? 'Completed' : 'Done with this section';
@@ -357,7 +387,7 @@ var modalReturn = null, modalTimer = null;
 function allDone(){
   if(window.MVOracle){
     var qs = get('quiz-score'), qm = get('quiz-max');
-    MVOracle.reportCompletion('MRC-F', { score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: all thirteen activities', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })() } });
+    MVOracle.reportCompletion('MRC-F', { score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: every activity done', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })() } });
   } else if(window.MVScorm && MVScorm.connected) MVScorm.complete();
   if(doneSeen) return;
   doneSeen = true; set('done-seen', '1');
@@ -406,7 +436,7 @@ function scormAdopt(){
   if(d.a){ set('assess', JSON.stringify(d.a)); assessLoad(); }
   if(d.seen){ doneSeen = true; set('done-seen', '1'); }
   if(sc.name && !profile.name){ profile.name = sc.name; paintHello(); }
-  var t = $('#oracleStripText'); if(t) t.textContent = 'You opened this course from Oracle Learning. Your completion is recorded automatically once all thirteen activities are done.';
+  var t = $('#oracleStripText'); if(t) t.textContent = 'You opened this course from Oracle Learning. Your completion is recorded automatically once every activity is done.';
   var f = $('#oracleFine'); if(f) f.textContent = 'Recorded in Oracle Learning' + (sc.name ? ' for ' + sc.name : '') + '.';
   sc.incomplete();
   progRender();
@@ -430,8 +460,7 @@ function flipSeen(btn){
   var st = $('.flip-status', sec); if(st) st.textContent = n + ' of ' + all.length + ' cards flipped.' + (n === all.length ? ' Activity complete.' : '');
   if(n === all.length) progDone(sec.id);
 }
-[{ map:'#fwMap', status:'#fwStatus', noun:'jobs', prog:'welcome', narr:'welcome/j', done:' Activity complete. The next four pages take one job each.' },
- { map:'#yearMap', status:'#yearStatus', noun:'groups', prog:'year', narr:'year/g', done:' Activity complete. Turn the page to learn who handles what.' },
+[{ map:'#yearMap', status:'#yearStatus', noun:'groups', prog:'year', narr:'year/g', done:' Activity complete. Turn the page to learn who handles what.' },
  { map:'#meaMap', status:'#meaStatus', noun:'jobs', prog:null, narr:null, done:'' }].forEach(function(cfg){
   var map = $(cfg.map), status = $(cfg.status); if(!map) return;
   var cards = $$('.fw-card', map), seen = {};
@@ -520,7 +549,7 @@ function buildScenario(el){
 $$('[data-scn]').forEach(buildScenario);
 /* a stepper of scenarios, one at a time; done when the best response is found in each */
 var CALL_SETS = { jobs:['task','relations','change','external'] };
-var CALL_HEADS = { task:'Job 1 · Get the work done', relations:'Job 2 · Take care of your people', change:'Job 3 · Make things better', external:'Job 4 · Connect your team' };
+var CALL_HEADS = { task:'Task-oriented · Get the work done', relations:'Relations-oriented · Take care of your people', change:'Change-oriented · Make things better', external:'External · Connect your team' };
 var CALL_PROG = { jobs:{ prog:'yourcall', noun:'situations', status:'#jobsStatus', narr:'yourcall/s' } };
 function buildCalls(el){
   var name = el.getAttribute('data-calls'), keys = CALL_SETS[name]; if(!keys) return;
@@ -567,7 +596,7 @@ var DRILLS = {
   ]},
   task: { opts:['Plan it','Say it','Check it','Fix it','Not managing, just doing the work'], prog:'task', verb:'named', items:[
     { s:'Before the quarter, set three priorities, assigned an owner to each, and decided what would move if a new request landed.', a:0, x:'Plan it: what, who, when, and what gives. Done before the quarter, not during it.' },
-    { s:'In the first 1:1 of the month, confirmed with each person what they own, the deadline, and what “done well” means, and wrote it in Culture Amp.', a:1, x:'Say it: said out loud, confirmed back, written where the team can see it.' },
+    { s:'In the first 1:1 of the month, confirmed with each person what they own, the deadline, and what “done well” means, and wrote it where the team can see it.', a:1, x:'Say it: said out loud, confirmed back, written where the team can see it.' },
     { s:'Looked at the half-finished slide deck in the weekly 1:1 rather than the finished one on the due date.', a:2, x:'Check it: the work looked at before the deadline, while there is still time to steer.' },
     { s:'Stayed late to rebuild the report personally after the process broke for the second time this month.', a:4, x:'Doing the work is not managing it. Finding out why the process breaks and changing something would be fix it.' },
     { s:'After the second failure, traced it to a handoff nobody owned, assigned the handoff, and told the team.', a:3, x:'Fix it: cause found, decision made, team told.' },
@@ -628,10 +657,25 @@ function buildDrill(el){
 }
 $$('[data-drill]').forEach(buildDrill);
 
+var ROCKS_ART = '<div class="idea-art" aria-hidden="true"><svg viewBox="0 0 720 300" role="img">' +
+  '<text class="lab" x="40" y="20">Sand first: the rocks do not fit</text>' +
+  '<rect class="jar" x="40" y="70" width="240" height="150" rx="14"/>' +
+  '<rect class="sand" x="43" y="140" width="234" height="77" rx="8"/>' +
+  '<g class="grain"><circle cx="70" cy="160" r="2"/><circle cx="120" cy="180" r="2"/><circle cx="175" cy="155" r="2"/><circle cx="230" cy="195" r="2"/><circle cx="95" cy="205" r="2"/><circle cx="205" cy="170" r="2"/><circle cx="255" cy="150" r="2"/><circle cx="150" cy="205" r="2"/></g>' +
+  '<ellipse class="rock" cx="104" cy="116" rx="38" ry="26"/><ellipse class="rock" cx="206" cy="112" rx="42" ry="28"/><ellipse class="rock" cx="154" cy="62" rx="40" ry="26"/>' +
+  '<text x="40" y="248">Email and small requests go in first.</text><text x="40" y="266">The report, the hire, the 1:1s spill over the top.</text>' +
+  '<text class="lab" x="400" y="20">Rocks first: the sand settles around them</text>' +
+  '<rect class="jar" x="400" y="70" width="240" height="150" rx="14"/>' +
+  '<rect class="sand" x="403" y="92" width="234" height="125" rx="8"/>' +
+  '<ellipse class="rock" cx="456" cy="186" rx="40" ry="28"/><ellipse class="rock" cx="584" cy="188" rx="44" ry="28"/><ellipse class="rock" cx="520" cy="130" rx="42" ry="30"/>' +
+  '<g class="grain"><circle cx="420" cy="110" r="2"/><circle cx="470" cy="100" r="2"/><circle cx="570" cy="108" r="2"/><circle cx="620" cy="100" r="2"/><circle cx="430" cy="150" r="2"/><circle cx="615" cy="150" r="2"/><circle cx="520" cy="205" r="2"/><circle cx="412" cy="205" r="2"/><circle cx="628" cy="205" r="2"/></g>' +
+  '<text x="400" y="248">Three named priorities go in first.</text><text x="400" y="266">The small things fit in the gaps.</text>' +
+  '<text class="lab" x="40" y="294">Rocks: the high-impact work. Sand: quick, low-value wins.</text>' +
+  '</svg></div>';
 /* ══════════ five ideas, one at a time ══════════ */
 var IDEAS = [
   { who:'Setting priorities · the big rocks method', h:'Put first things <em>first</em>.',
-    what:'Picture a jar. Sand first (email, small requests) and the big rocks never fit. Big rocks first, and the sand settles around them.',
+    what:'Picture a jar. The rocks are the high-impact work: the report your team owns, the hire, your 1:1s. The sand is the quick, low-value wins: email, small requests. Sand first and the rocks never fit. Rocks first and the sand settles around them.',
     why:'Your calendar fills itself. Requests arrive faster than you can finish them, and the urgent ones are rarely the important ones. Without three named priorities, the loudest request decides for you.',
     looks:'Monday, before email: three lines on a notepad. Said aloud at the huddle, on the calendar by nine. A request lands Wednesday; you ask which rock it moves.',
     value:'A team that knows this week’s three things wastes less, argues less, and finishes more.',
@@ -673,7 +717,7 @@ var IDEAS = [
       '<p class="intro-cta"><button type="button" class="btn btn-primary btn-sm" data-tab="0">Start with idea 1<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></p></div>' +
       '<ol class="intro-list" aria-label="The five ideas">' + IDEAS.map(function(it, i){ return '<li><button type="button" data-tab="' + i + '"><span class="il-no">' + (i + 1) + '</span><span class="il-t"><b>' + names[i] + '</b><span>' + ONE[i] + '</span></span></button></li>'; }).join('') + '</ol></div>' +
     IDEAS.map(function(it, i){
-      return '<div class="idea" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' +
+      return '<div class="idea" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' + (i === 0 ? ROCKS_ART : '') +
         '<p class="blk"><b>What it is</b>' + esc(it.what) + '</p><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p>' +
         '<div class="side"><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
         '<div class="try"><p class="cq-h"><span class="mono">Apply it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + '<span class="try-note">Show you understood the idea. Tap the response you would give, then try the other two.</span></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
@@ -698,6 +742,66 @@ var IDEAS = [
   });
 })();
 
+
+/* ══════════ the four categories: one page, five tabs, each category with its own clip ══════════ */
+(function(){
+  var box = $('#welcome'); if(!box) return;
+  var tabs = $$('.job-tabs button[data-job]', box), panes = $$('.job-pane', box); if(!tabs.length) return;
+  var jstatus = $('#fwStatus'), jseen = {}, JOBS = ['task', 'relations', 'change', 'external'];
+  function mark(k){
+    if(JOBS.indexOf(k) < 0 || jseen[k]) return;
+    jseen[k] = 1; var n = Object.keys(jseen).length;
+    if(jstatus) jstatus.textContent = n + ' of 4 categories opened.' + (n === JOBS.length ? ' Activity complete.' : '');
+    if(n === JOBS.length) progDone('welcome');
+  }
+  function show(k){
+    mark(k);
+    tabs.forEach(function(t){ var on = t.getAttribute('data-job') === k; t.setAttribute('aria-selected', on ? 'true' : 'false'); if(on) t.classList.add('seen'); });
+    panes.forEach(function(p){ var on = p.getAttribute('data-job') === k; p.classList.toggle('cur', on); p.hidden = !on; });
+    var pg = document.querySelector('.page.cur'); if(pg) pg.scrollTop = 0;
+    if(k !== 'over' && NARR[k + '/1']) narrSub(k + '/1'); else if(narr.playing) narrStop();
+  }
+  box.addEventListener('click', function(e){
+    var t = e.target.closest('.job-tabs button[data-job]');
+    if(t) show(t.getAttribute('data-job'));
+  });
+  window.showJob = show; window.markJob = mark;
+})();
+
+/* the four cards on the overview: tapping one plays that category's intro clip;
+   the control inside it opens the category. Either counts toward the activity. */
+(function(){
+  var map = $('#fwMap'); if(!map) return;
+  $$('.fw-card[data-job]', map).forEach(function(c, i){
+    var key = 'welcome/j' + (i + 1); c.setAttribute('data-nk', key);
+    function play(){ narrSub(key, true); if(window.markJob) markJob(c.getAttribute('data-job')); }
+    c.addEventListener('click', function(e){ if(e.target.closest('.fw-open')) return; play(); });
+    c.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); play(); } });
+  });
+  map.addEventListener('click', function(e){ var b = e.target.closest('.fw-open'); if(b){ e.stopPropagation(); if(window.showJob) showJob(b.getAttribute('data-open')); } });
+})();
+
+/* ══════════ next steps: pick one habit; it lands in the message to your manager ══════════ */
+(function(){
+  var box = $('#habitPick'), p = $('#ns2p'), tell = $('#tellText'), copy = $('#copyTell'); if(!box) return;
+  var HABITS = [['Task-oriented', ['Clarifying', 'Planning', 'Monitoring operations', 'Problem solving']], ['Relations-oriented', ['Supporting', 'Developing', 'Recognizing', 'Empowering']],
+    ['Change-oriented', ['Advocating change', 'Envisioning change', 'Encouraging innovation', 'Facilitating collective learning']], ['External', ['Networking', 'External monitoring', 'Representing']]];
+  box.innerHTML = HABITS.map(function(g){ return '<span class="hp-job">' + g[0] + '</span>' + g[1].map(function(h){ return '<button type="button" data-habit="' + esc(h) + '" aria-pressed="false">' + esc(h) + '</button>'; }).join(''); }).join('');
+  var BASE = 'I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].';
+  function paint(h){
+    $$('button[data-habit]', box).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-habit') === h ? 'true' : 'false'); });
+    if(!h) return;
+    var msg = BASE.replace('[habit]', h.toLowerCase());
+    if(p) p.textContent = 'You picked: ' + h.toLowerCase() + '. Attach it to something you already do every week, such as your Monday 1:1s or your Friday wrap-up, and do it once, on purpose. Notice what happened.';
+    if(tell) tell.textContent = '\u201c' + msg + '\u201d';
+    if(copy) copy.setAttribute('data-copytext', msg);
+  }
+  box.addEventListener('click', function(e){ var b = e.target.closest('button[data-habit]'); if(!b) return; var h = b.getAttribute('data-habit'); set('habit', h); paint(h); });
+  paint(get('habit') || '');
+})();
+
+/* the results email: name the sender and subject once PCB confirms them (config) */
+(function(){ var h = $('#meaEmailHint'), C = window.MV_CONFIG || {}; if(!h) return; if(C.assessmentEmailFrom || C.assessmentEmailSubject) h.textContent = 'Search your inbox for ' + (C.assessmentEmailSubject ? 'the subject \u201c' + C.assessmentEmailSubject + '\u201d' : 'the results message') + (C.assessmentEmailFrom ? ' from ' + C.assessmentEmailFrom : '') + '.'; })();
 
 /* ══════════ who helps you: four tabs, each with what they do, when to contact, how ══════════ */
 (function(){
@@ -726,7 +830,7 @@ var TURNS = [
   { sel:'#yearMap',     prog:'year',     text:'Tap each group to open it and hear it.' },
   { sel:'#simBox',      prog:null,       text:'Pick a situation to see the first move and who handles what.' },
   { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations. Tap the first thing you would do.' },
-  { sel:'#fwMap',       prog:'welcome',  text:'Tap each of the four jobs to open it.' },
+  { sel:'#fwMap',       prog:'welcome',  text:'Tap a card to hear its intro, or open the category. The pills above move between them.' },
   { sel:'#task .flip-grid',      prog:'task',      text:'Flip each card: what to stop, what to do instead.' },
   { sel:'#relations .flip-grid', prog:'relations', text:'Flip each card: what to stop, what to do instead.' },
   { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card: what to stop, what to do instead.' },
@@ -773,7 +877,7 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
   var comp = $('#learnComp'), TR = (P && P.mrc && P.mrc.tracks) || [];
   if(comp && TR.length){
     var n = 0, total = TR.reduce(function(a, t){ return a + t.modules.length; }, 0);
-    comp.innerHTML = '<span class="mono">Micro Modules</span><h4>Your ' + (total === 18 ? 'eighteen' : total) + ' micro modules</h4><p>Short courses in Oracle Learning, one common task each, in the order the tracks come due. Each opens in Oracle Learning once its link is added.</p>' + TR.map(function(t){
+    comp.innerHTML = '<span class="mono">Micro Modules</span><h4>Your micro modules, by track</h4><p>Short courses in Oracle Learning, one common task each, in the order the tracks come due. Each opens in Oracle Learning once its link is added.</p>' + TR.map(function(t){
       var by = t.phase === 1 ? 'By Day 30' : 'By Day 60';
       return '<div class="track-head"><span class="mono">' + esc(t.title) + '</span><b>' + esc(t.why) + '</b><span class="tw">' + esc(t.window) + ' &middot; ' + t.modules.length + (t.modules.length === 1 ? ' step' : ' modules') + '</span><p class="out">' + esc(t.outcome) + '</p></div><div class="comp-grid">' + t.modules.map(function(m){
         n += 1; var has = !!m.oracleUrl;
@@ -801,16 +905,16 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
 })();
 
 /* ══════════ module 5: your assessment results → starting point and module order ══════════ */
-var CATS = { task:{ name:'Get the work done', short:'Job 1' }, relations:{ name:'Take care of your people', short:'Job 2' }, change:{ name:'Make things better', short:'Job 3' }, external:{ name:'Connect your team', short:'Job 4' } };
+var CATS = { task:{ name:'Get the work done', short:'Task-oriented' }, relations:{ name:'Take care of your people', short:'Relations-oriented' }, change:{ name:'Make things better', short:'Change-oriented' }, external:{ name:'Connect your team', short:'External' } };
 /* Your assessment: review the results email, or take the assessment. One tap marks the activity done. */
 (function(){
   var box = $('#meaChoice'), out = $('#meaOut'); if(!box || !out) return;
   var url = (window.MV_CONFIG && MV_CONFIG.assessmentUrl) || '';
   var link = url ? '<a class="btn btn-primary" href="' + esc(url) + '" target="_blank" rel="noopener">Open the assessment</a>' : '<span class="hinttxt">Ask your Engagement Consultant for the assessment link; it takes about ten minutes.</span>';
   var MSG = {
-    reviewed:'<h4>Good. Keep the <em>email</em>.</h4><p>It is your starting score. In six months you take the assessment again; the aim is a higher score, one habit at a time.</p>',
-    retake:'<h4>Take the assessment <em>now</em>.</h4><p>Your results and feedback arrive by email. Keep them; you compare against them in six months.</p><div class="route-act" style="margin-top:12px">' + link + '</div>',
-    take:'<h4>Take it before you go <em>further</em>.</h4><p>Fourteen questions, about ten minutes. Your score and feedback arrive by email, and you compare against them in six months.</p><div class="route-act" style="margin-top:12px">' + link + '</div>'
+    reviewed:'<h4>Good. Keep the <em>email</em>.</h4><p>It is your starting point. Ninety days after you complete Manager Voyage you rate the same six statements again; the aim is a higher rating, one behavior at a time.</p>',
+    retake:'<h4>Take the assessment <em>now</em>.</h4><p>Your results and feedback arrive by email. Keep them; you compare against them ninety days after you complete Manager Voyage.</p><div class="route-act" style="margin-top:12px">' + link + '</div>',
+    take:'<h4>Take it before you go <em>further</em>.</h4><p>Six statements, rated from never to consistently, a few minutes. Your results and feedback arrive by email, and you compare against them ninety days after you complete Manager Voyage.</p><div class="route-act" style="margin-top:12px">' + link + '</div>'
   };
   function render(c){ $$('button[data-choice]', box).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-choice') === c ? 'true' : 'false'); }); out.innerHTML = MSG[c] || ''; }
   box.addEventListener('click', function(e){
@@ -825,11 +929,11 @@ var CATS = { task:{ name:'Get the work done', short:'Job 1' }, relations:{ name:
 
 /* ══════════ knowledge check: five questions, one at a time, feedback after each ══════════ */
 var QUIZ = [
-  { seg:'What changed (page 4)', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
-  { seg:'Five ideas (page 6)', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
-  { seg:'Five ideas (page 6)', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
-  { seg:'Who handles what (page 8)', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
-  { seg:'The four jobs (page 9)', q:'One simple way to keep the whole manager job in view is four jobs. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
+  { seg:'What changed', q:'You became a manager. What is your job now?', opts:['My own work, done faster','The team’s work, and the people who do it','Whatever my own manager did','Approving things'], a:1, x:'The team’s work and the people who do it. You decide, you approve, and you are responsible for people. Doing everyone’s work is the old job.' },
+  { seg:'Five ideas', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
+  { seg:'Five ideas', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
+  { seg:'Who handles what', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
+  { seg:'The four categories', q:'Yukl sorts what effective managers do into four categories of behavior. In plain words, which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Task-oriented, relations-oriented, change-oriented, and external: get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
 ];/* the right answer sits at a different position on each question */
 (function(){ var POS = [0, 2, 3, 1, 2]; QUIZ.forEach(function(q, i){ var t = POS[i]; if(t === undefined || t === q.a || t >= q.opts.length) return; var o = q.opts.splice(q.a, 1)[0]; q.opts.splice(t, 0, o); q.a = t; }); })();
 

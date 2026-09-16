@@ -53,7 +53,7 @@ Response contract:
   deadline count from it.
 - `completions` is keyed by the ids in `assets/js/program-data.js`
   (`R-001` to `R-020` for compliance, `MEA` for the Manager Effectiveness
-  Assessment, `MRC-F` for the foundation course, `MM-01` to `MM-18` for the
+  Assessment, `MRC-F` for the foundation course, `MM-` prefixed ids for the
   micro modules). Map them from Oracle Learning's `learnerLearningRecords`
   (completed assignments) by learning item number. A value of `true`, a date
   string, or an object all work.
