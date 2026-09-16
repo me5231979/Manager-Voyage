@@ -192,6 +192,8 @@
   .band-light .chip--rec { color: var(--vu-oak); border-color: rgba(148,110,36,.6); }
   .band-light .chip--opt { color: rgba(28,28,28,.75); border-color: rgba(28,28,28,.35); }
   .band-light .chip--on { color: #2E6B48; border-color: rgba(46,107,72,.5); }
+  .card .when { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; color: var(--vu-gold-flat); margin: -.2rem 0 .6rem; }
+  .band-light .card .when { color: var(--vu-oak); }
   .card a.more { display: inline-block; margin-top: .9rem; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; font-size: .7rem; text-decoration: none; }
   .card a.more::after { content: " \2192"; }
   /* framework */
@@ -349,10 +351,10 @@
       <h2 style="margin-top:3rem">Four components. One <em>journey</em>.</h2>
       <p class="lead">Compliance is required. Foundations is strongly recommended. The cohort is optional but recommended. The portal is always on.</p>
       <div class="cards cards--4">
-        <div class="card"><span class="chip chip--req">01 · Required</span><h3>Compliance</h3><p>What the law requires, matched to where the team works. The floor, not the bar.</p><a class="more" href="#c-compliance">By location</a></div>
-        <div class="card"><span class="chip chip--rec">02 · Strongly recommended</span><h3>Foundations</h3><p>What Vanderbilt requires. An assessment, a 35-minute course, and micro modules in four tracks.</p><a class="more" href="#c-foundations">The course and the tracks</a></div>
-        <div class="card"><span class="chip chip--opt">03 · Optional but recommended</span><h3>Four-Week Cohort</h3><p>Four weeks of practice with a real team. One hundred seats a quarter.</p><a class="more" href="#c-cohort">Rhythm and logistics</a></div>
-        <div class="card"><span class="chip chip--on">04 · Always on</span><h3>Manager Portal</h3><p>Every template, policy link, and contact. Open from day one, never taken away.</p><a class="more" href="#c-portal">The portal and who to call</a></div>
+        <div class="card"><span class="chip chip--req">01 · Required</span><h3>Compliance</h3><span class="when">Days 1 to 60</span><p>What the law requires, matched to where the team works. The floor, not the bar.</p><a class="more" href="#c-compliance">By location</a></div>
+        <div class="card"><span class="chip chip--rec">02 · Strongly recommended</span><h3>Foundations</h3><span class="when">Days 1 to 60 · course by Day 7</span><p>What Vanderbilt requires. An assessment, a 35-minute course, and micro modules in four tracks.</p><a class="more" href="#c-foundations">The course and the tracks</a></div>
+        <div class="card"><span class="chip chip--opt">03 · Optional but recommended</span><h3>Four-Week Cohort</h3><span class="when">After Day 60 · quarterly</span><p>Four weeks of practice with a real team. One hundred seats a quarter.</p><a class="more" href="#c-cohort">Rhythm and logistics</a></div>
+        <div class="card"><span class="chip chip--on">04 · Always on</span><h3>Manager Portal</h3><span class="when">From Day 1</span><p>Every template, policy link, and contact. Open from day one, never taken away.</p><a class="more" href="#c-portal">The portal and who to call</a></div>
       </div>
 
     </div>
