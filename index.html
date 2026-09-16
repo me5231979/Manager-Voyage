@@ -163,6 +163,29 @@
   .band-light .list li .meta.req { color: #9B2E27; }
   .band-light a { color: var(--vu-oak); }
 
+  /* foundations path */
+  .sub { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; margin: 2.5rem 0 0; }
+  .path { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.75rem; position: relative; }
+  .path::before { content: ""; position: absolute; left: 8%; right: 8%; top: 2.2rem; height: 2px; background: rgba(148,110,36,.35); z-index: 0; }
+  .path .p { position: relative; z-index: 1; background: #fff; border: 1px solid rgba(28,28,28,.15); border-top: 4px solid var(--vu-oak); border-radius: 6px; padding: 1.2rem 1.3rem 1.3rem; }
+  .path .n { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--vu-oak); color: #fff; font-family: var(--cond); font-weight: 700; font-size: 1.1rem; margin-bottom: .6rem; }
+  .path .when { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .66rem; color: var(--vu-oak); }
+  .path h3 { font-family: var(--serif); font-weight: 400; font-size: 1.35rem; margin: .2rem 0 .4rem; }
+  .path p { margin: 0; font-size: .93rem; color: rgba(28,28,28,.78); }
+  .path a.more { display: inline-block; margin-top: .8rem; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; font-size: .7rem; text-decoration: none; color: var(--vu-oak); }
+  .path a.more::after { content: " \2192"; }
+  .topics { display: grid; grid-template-columns: repeat(5, 1fr); gap: .7rem; margin-top: 1rem; }
+  .topics .t { background: #fff; border: 1px solid rgba(28,28,28,.15); border-radius: 6px; padding: .9rem 1rem; font-size: .92rem; line-height: 1.35; }
+  .topics .t b { display: block; font-family: var(--cond); font-weight: 700; letter-spacing: .08em; font-size: .68rem; color: var(--vu-oak); margin-bottom: .35rem; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+  .facts div { border-top: 2px solid var(--vu-oak); padding-top: .7rem; font-size: .93rem; color: rgba(28,28,28,.8); }
+  .facts b { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; color: var(--vu-oak); margin-bottom: .25rem; }
+  .band-light .tracks { margin-top: 1rem; }
+  .band-light .track { background: #fff; }
+  @media (max-width: 900px) { .topics { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 760px) { .path { grid-template-columns: 1fr; } .path::before { display: none; } .facts { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .topics { grid-template-columns: 1fr; } }
+
   /* ---- program site additions ---- */
   .subnav { position: sticky; top: var(--nav-h); z-index: 40; background: rgba(28,28,28,.94); backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(207,174,112,.25); }
@@ -447,26 +470,23 @@
 
   <section class="comp band-light" id="c-foundations">
     <div class="wrap">
-      <div class="comp__head"><div><p class="eyebrow">Component 02</p><h2>Manager <em>Foundations</em>.</h2><p class="lead">What Vanderbilt requires. The assessment, a 35-minute course, and micro modules in four tracks.</p></div><div class="status"><span class="chip chip--rec">Strongly recommended</span><b>Days 1 to 60 · Also assigned to every current manager</b></div></div>
-      <details class="acc"><summary>The assessment <small>Before, and 90 days after</small></summary><div class="acc__body">
-        <p>Six statements, rated never to consistently. Taken before Manager Voyage, and again 90 days after completion. Results by email.</p>
-      </div></details>
-      <details class="acc"><summary>The course: You Are a Manager Now <small>35 minutes · narrated</small></summary><div class="acc__body">
-        <p>One idea per page. An activity on every page. Narrated, captioned, printable.</p>
-        <ol id="segList" style="padding-left:1.2rem"></ol>
-        <p style="margin-top:.8rem"><a href="foundation/">Open the course</a> · <a href="foundation/Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener">Printable guide</a></p>
-      </div></details>
-      <details class="acc"><summary>The micro modules <small>Four tracks in Oracle Learning</small></summary><div class="acc__body">
-        <p>One common task each. Systems and Vanderbilt &amp; Nashville by Day 30. People and Processes by Day 60.</p>
-        <div class="tracks" id="trackList"></div>
-      </div></details>
-      <details class="acc"><summary>Logistics</summary><div class="acc__body">
-        <ul>
-          <li><b>Order.</b> Assessment, course by Day 7, then the tracks. My voyage shows what is next.</li>
-          <li><b>Where.</b> The course on the web or in Oracle. The modules in Oracle, linked from the dashboard.</li>
-          <li><b>Completion.</b> Day 60 completion is recorded and triggers the cohort invitation.</li>
-        </ul>
-      </div></details>
+      <div class="comp__head"><div><p class="eyebrow">Component 02</p><h2>Manager <em>Foundations</em>.</h2><p class="lead">What Vanderbilt requires, in three steps.</p></div><div class="status"><span class="chip chip--rec">Strongly recommended</span><b>Days 1 to 60 · Also assigned to every current manager</b></div></div>
+      <div class="path">
+        <div class="p"><span class="n">01</span><span class="when">Before, and 90 days after</span><h3>The assessment</h3><p>Rate yourself, never to consistently. Results by email. Again 90 days after you finish.</p></div>
+        <div class="p"><span class="n">02</span><span class="when">35 minutes · by Day 7</span><h3>The course</h3><p>You Are a Manager Now. One idea per page, an activity on every page. Narrated, captioned, printable.</p><a class="more" href="foundation/">Open the course</a></div>
+        <div class="p"><span class="n">03</span><span class="when">Days 1 to 60 · Oracle Learning</span><h3>The micro modules</h3><p>One common task each, in four tracks. Systems and Vanderbilt &amp; Nashville by Day 30. People and Processes by Day 60.</p></div>
+      </div>
+      <h3 class="sub">The course, in five topics.</h3>
+      <div class="topics" id="segList"></div>
+      <h3 class="sub">The micro modules, in four tracks.</h3>
+      <div class="tracks" id="trackList"></div>
+      <h3 class="sub">Logistics.</h3>
+      <div class="facts">
+        <div><b>Order</b>Assessment, course, then the tracks. My voyage shows what is next.</div>
+        <div><b>Where</b>The course on the web or in Oracle. The modules in Oracle, linked from the dashboard.</div>
+        <div><b>Completion</b>Day 60 completion is recorded and triggers the cohort invitation.</div>
+      </div>
+      <p class="note"><a href="foundation/Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener">Printable course guide (PDF)</a></p>
     </div>
   </section>
 
@@ -564,8 +584,8 @@
   $('#allList').innerHTML = P.compliance.filter(function(c){ return c.state === 'ALL'; }).map(row).join('');
 
   /* foundations */
-  $('#segList').innerHTML = (P.mrc.foundation.segments || []).map(function(s){ return '<li>' + esc(s.title) + '</li>'; }).join('');
-  $('#trackList').innerHTML = P.mrc.tracks.map(function(t){
+  $('#segList').innerHTML = (P.mrc.foundation.segments || []).map(function(s, i){ return '<div class="t"><b>Topic ' + (i + 1) + '</b>' + esc(s.title) + '</div>'; }).join('');
+  $('#trackList').innerHTML = P.mrc.tracks.slice().sort(function(a, b){ return (a.phase || 0) - (b.phase || 0); }).map(function(t){
     return '<div class="track"><span class="win">' + esc(t.window) + '</span><h4>' + esc(t.title) + '</h4><ol>' + t.modules.map(function(m){ return '<li>' + esc(m.title) + (m.mins ? ' <small>(' + m.mins + ' min)</small>' : '') + '</li>'; }).join('') + '</ol></div>';
   }).join('');
 
