@@ -186,6 +186,29 @@
   @media (max-width: 760px) { .path { grid-template-columns: 1fr; } .path::before { display: none; } .facts { grid-template-columns: 1fr; } }
   @media (max-width: 520px) { .topics { grid-template-columns: 1fr; } }
 
+  /* impact: timeline strip, targets, outcomes */
+  .tline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.6rem; position: relative; padding-top: 1.1rem; }
+  .tline::before { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 2px; background: rgba(207,174,112,.35); }
+  .tp { position: relative; padding-right: 1rem; }
+  .tp .dot { position: absolute; left: 0; top: -1.1rem; width: 14px; height: 14px; border-radius: 50%; background: var(--vu-gold-flat); box-shadow: 0 0 0 4px var(--vu-black); }
+  .tp .dot--open { background: var(--vu-black); border: 2px solid var(--vu-gold-flat); box-sizing: border-box; }
+  .tp b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.2rem; margin-bottom: .3rem; }
+  .tp p { margin: 0; font-size: .9rem; color: rgba(255,255,255,.75); }
+  .sub--tight { margin-top: 1.9rem; }
+  .targets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; }
+  .targets > div { border-top: 2px solid var(--vu-gold-flat); padding-top: .8rem; }
+  .targets .k { font-family: var(--cond); font-weight: 700; font-size: .7rem; letter-spacing: .1em; color: var(--vu-gold-flat); }
+  .targets b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.2rem; margin: .2rem 0 .3rem; }
+  .targets p { margin: 0; font-size: .88rem; color: rgba(255,255,255,.75); }
+  .outcomes { margin-top: 1rem; }
+  .cards--3 { grid-template-columns: repeat(3, 1fr); }
+  .outcomes .card { padding: 1.2rem 1.3rem; }
+  .outcomes .card h3 { font-size: 1.2rem; }
+  .outcomes .card p { font-size: .9rem; }
+  #impact details.acc { margin-top: 1.4rem; }
+  @media (max-width: 900px) { .targets { grid-template-columns: repeat(2, 1fr); } .cards--3 { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .tline { grid-template-columns: 1fr; padding-top: 0; } .tline::before { display: none; } .tp .dot { display: none; } .targets { grid-template-columns: 1fr; } }
+
   /* ---- program site additions ---- */
   .subnav { position: sticky; top: var(--nav-h); z-index: 40; background: rgba(28,28,28,.94); backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(207,174,112,.25); }
@@ -259,6 +282,8 @@
   .phase p { margin: 0; font-size: .93rem; color: rgba(255,255,255,.8); }
   .six td:first-child { white-space: nowrap; font-weight: 600; }
   .six td:last-child i { font-style: normal; color: rgba(255,255,255,.55); font-size: .84rem; display: block; margin-top: .15rem; }
+  .card p.how { margin-top: .9rem; padding-top: .8rem; border-top: 1px solid rgba(207,174,112,.3); font-size: .88rem; }
+  .card p.how b { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .66rem; color: var(--vu-gold-flat); margin-bottom: .3rem; }
   .measures { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: .6rem; }
   .measures li { position: relative; padding-left: 1.6rem; font-size: .97rem; }
   .measures li::before { content: "\2713"; position: absolute; left: 0; color: var(--vu-gold-flat); font-weight: 700; }
@@ -342,10 +367,10 @@
       <div>
         <p class="eyebrow">Manager Voyage · Vanderbilt · People, Culture and Belonging</p>
         <h1>Manager <em>Voyage</em>.</h1>
-        <p class="lead" style="margin-top:1.25rem">Vanderbilt&rsquo;s management standard: the first structured, sequenced development journey for every manager, from the day the role begins. Four components, one journey. The compliance the law requires. A Foundations course on what Vanderbilt requires. A four-week cohort to practice it with a real team. A portal that never goes away. One framework behind all of it, and one measure of whether managers change how they lead.</p>
+        <p class="lead" style="margin-top:1.25rem">Manager Voyage is Vanderbilt University&rsquo;s development program for managers. It gives every new manager the same structured path from the day they start: the compliance courses the law requires, a Foundations course on what Vanderbilt expects of a manager, an optional four-week cohort to practice those skills with a real team, and a portal of resources that stays available throughout their career. The program is built on one research-based framework and is measured with a survey taken before the program and again 90 days after.</p>
         <div class="cta">
           <a class="btn" href="dashboard/">Start your voyage</a>
-          <a class="btn btn--ghost" href="#overview">See how it works</a>
+          <a class="btn btn--ghost" href="#overview">How the program works</a>
         </div>
       </div>
     </div>
@@ -353,7 +378,7 @@
 
   <nav class="subnav" aria-label="On this page">
     <div class="wrap">
-      <a href="#overview">Overview</a><a href="#framework">The framework</a><a href="#history">How it was built</a><a href="#impact">Impact</a>
+      <a href="#overview">Overview</a><a href="#framework">The framework</a><a href="#history">How it was built</a><a href="#impact">Measuring impact</a>
       <a href="#c-compliance">01 Compliance</a><a href="#c-foundations">02 Foundations</a><a href="#c-cohort">03 Cohort</a><a href="#c-portal">04 Portal</a>
     </div>
   </nav>
@@ -361,64 +386,63 @@
   <section class="band-light" id="overview">
     <div class="wrap">
       <p class="eyebrow">Program overview</p>
-      <h2>Sixty days that used to be left to <em>chance</em>.</h2>
-      <p class="lead">A manager&rsquo;s first 60 days set patterns that last for years. Manager Voyage gives every one of them the same sequenced path: assigned on day one, tracked on one page, backed by people who never go away.</p>
+      <h2>What Manager Voyage <em>is</em>.</h2>
+      <p class="lead">A manager&rsquo;s first 60 days shape how they will lead for years, and until now Vanderbilt had no common standard for that period. Manager Voyage provides one. Courses are assigned automatically in Oracle Learning on the manager&rsquo;s first day, progress is tracked on a single dashboard called My voyage, and the people a new manager needs to reach are listed in one place.</p>
       <div class="stats">
         <div class="stat"><b>4,600+</b><span>Staff led by Vanderbilt managers</span></div>
         <div class="stat"><b>500+</b><span>Vanderbilt managers</span></div>
-        <div class="stat"><b>39</b><span>Business units on one standard</span></div>
-        <div class="stat"><b>60</b><span>Days that matter most</span></div>
+        <div class="stat"><b>39</b><span>Business units using the same standard</span></div>
+        <div class="stat"><b>60</b><span>Days covered by the initial path</span></div>
       </div>
-      <h2 style="margin-top:3rem">Four components. One <em>journey</em>.</h2>
-      <p class="lead">Compliance is required. Foundations is strongly recommended. The cohort is optional but recommended. The portal is always on.</p>
+      <h2 style="margin-top:3rem">The four <em>components</em>.</h2>
+      <p class="lead">The program has four parts. Compliance courses are required. Manager Foundations is strongly recommended. The four-week cohort is optional but recommended. The Manager Portal is available at all times.</p>
       <div class="cards cards--4">
-        <div class="card"><span class="chip chip--req">01 · Required</span><h3>Compliance</h3><span class="when">Days 1 to 60</span><p>What the law requires, matched to where the team works. The floor, not the bar.</p><a class="more" href="#c-compliance">By location</a></div>
-        <div class="card"><span class="chip chip--rec">02 · Strongly recommended</span><h3>Foundations</h3><span class="when">Days 1 to 60 · course by Day 7</span><p>What Vanderbilt requires. An assessment, a 35-minute course, and micro modules in four tracks.</p><a class="more" href="#c-foundations">The course and the tracks</a></div>
-        <div class="card"><span class="chip chip--opt">03 · Optional but recommended</span><h3>Four-Week Cohort</h3><span class="when">After Day 60 · quarterly</span><p>Four weeks of practice with a real team. One hundred seats a quarter.</p><a class="more" href="#c-cohort">Rhythm and logistics</a></div>
-        <div class="card"><span class="chip chip--on">04 · Always on</span><h3>Manager Portal</h3><span class="when">From Day 1</span><p>Every template, policy link, and contact. Open from day one, never taken away.</p><a class="more" href="#c-portal">The portal and who to call</a></div>
+        <div class="card"><span class="chip chip--req">01 · Required</span><h3>Compliance</h3><span class="when">Days 1 to 60</span><p>The legal and policy courses a manager must complete, matched to the state where their team works.</p><a class="more" href="#c-compliance">Courses by location</a></div>
+        <div class="card"><span class="chip chip--rec">02 · Strongly recommended</span><h3>Foundations</h3><span class="when">Days 1 to 60 · course by Day 7</span><p>What Vanderbilt expects of a manager: an assessment, a 35-minute course, and short modules in four tracks.</p><a class="more" href="#c-foundations">The course and the tracks</a></div>
+        <div class="card"><span class="chip chip--opt">03 · Optional but recommended</span><h3>Four-Week Cohort</h3><span class="when">After Day 60 · quarterly</span><p>Four weeks of guided practice with the manager&rsquo;s own team, for one hundred managers each quarter.</p><a class="more" href="#c-cohort">Schedule and logistics</a></div>
+        <div class="card"><span class="chip chip--on">04 · Always available</span><h3>Manager Portal</h3><span class="when">From Day 1</span><p>Templates, policy links, and contacts in one place, available from the first day onward.</p><a class="more" href="#c-portal">The portal and who to call</a></div>
       </div>
-
     </div>
   </section>
 
   <section id="framework">
     <div class="wrap">
-      <p class="eyebrow">One framework behind every component</p>
-      <h2>Fifteen behaviors. Four categories. One <em>standard</em>.</h2>
-      <p class="lead">Everything rests on Gary Yukl&rsquo;s taxonomy of effective leadership behavior. Foundations teaches it. The cohort practices it. The portal equips it. The pulse measures it.</p>
+      <p class="eyebrow">The framework</p>
+      <h2>The framework behind the <em>program</em>.</h2>
+      <p class="lead">The Manager Voyage program is built on Gary Yukl&rsquo;s taxonomy of effective leadership behavior, a research-based model that sorts what effective managers do into four categories and fifteen specific behaviors. The Foundations course teaches these behaviors by name. The cohort gives managers structured practice in them. The portal provides the tools to carry them out. The survey measures how often managers report doing them.</p>
       <div class="frame">
-        <div class="card"><span class="tag tag--ghost">Task-oriented</span><h3>Get the work done, through your team.</h3><ul><li>Clarifying <i>(say it)</i></li><li>Planning <i>(plan it)</i></li><li>Monitoring operations <i>(check it)</i></li><li>Problem solving <i>(fix it)</i></li></ul></div>
-        <div class="card"><span class="tag tag--ghost">Relations-oriented</span><h3>Take care of your people.</h3><ul><li>Supporting <i>(listen and help)</i></li><li>Developing <i>(grow them)</i></li><li>Recognizing <i>(thank them)</i></li><li>Empowering <i>(trust them)</i></li></ul></div>
-        <div class="card"><span class="tag tag--ghost">Change-oriented</span><h3>Make things better.</h3><ul><li>Advocating change <i>(explain the why)</i></li><li>Envisioning change <i>(describe where you are going)</i></li><li>Encouraging innovation <i>(let people try)</i></li><li>Facilitating collective learning <i>(look back)</i></li></ul></div>
-        <div class="card"><span class="tag tag--ghost">External</span><h3>Connect your team to Vanderbilt.</h3><ul><li>Networking <i>(know the people)</i></li><li>External monitoring <i>(watch for what is coming)</i></li><li>Representing <i>(speak up for your team)</i></li></ul></div>
+        <div class="card"><span class="tag tag--ghost">Task-oriented</span><h3>Getting the work done through the team.</h3><ul><li>Clarifying <i>(say it)</i></li><li>Planning <i>(plan it)</i></li><li>Monitoring operations <i>(check it)</i></li><li>Problem solving <i>(fix it)</i></li></ul></div>
+        <div class="card"><span class="tag tag--ghost">Relations-oriented</span><h3>Taking care of the people on the team.</h3><ul><li>Supporting <i>(listen and help)</i></li><li>Developing <i>(grow them)</i></li><li>Recognizing <i>(thank them)</i></li><li>Empowering <i>(trust them)</i></li></ul></div>
+        <div class="card"><span class="tag tag--ghost">Change-oriented</span><h3>Improving how the team works.</h3><ul><li>Advocating change <i>(explain the why)</i></li><li>Envisioning change <i>(describe where you are going)</i></li><li>Encouraging innovation <i>(let people try)</i></li><li>Facilitating collective learning <i>(look back)</i></li></ul></div>
+        <div class="card"><span class="tag tag--ghost">External</span><h3>Connecting the team to the rest of Vanderbilt.</h3><ul><li>Networking <i>(know the people)</i></li><li>External monitoring <i>(watch for what is coming)</i></li><li>Representing <i>(speak up for your team)</i></li></ul></div>
       </div>
     </div>
   </section>
 
   <section class="band-light" id="history">
     <div class="wrap">
-      <p class="eyebrow">How it was built</p>
-      <h2>On the bedrock of a wide pilot and an expert <em>group</em>.</h2>
-      <p class="lead">Not written in a room. Shaped by the people who take new managers&rsquo; calls, tested with managers across the university, and rebuilt from what they said.</p>
+      <p class="eyebrow">How the program was built</p>
+      <h2>Developed with a pilot and an expert <em>group</em>.</h2>
+      <p class="lead">Manager Voyage was developed with the offices that new managers rely on, and tested with managers across the university before its wide launch.</p>
       <div class="timeline">
-        <div class="tl"><p class="when">The expert group</p><h3>Seven divisions shaped the content.</h3><p>They set the routing rules, the who-to-call map, and what a manager must know by Day 30 and Day 60.</p></div>
-        <div class="tl"><p class="when">The pilot · March 26, 2026</p><h3>Fifteen managers, eight business units.</h3><p>They ran the whole journey. Their feedback shaped every screen.</p></div>
-        <div class="tl"><p class="when">Live</p><h3>Assigned from the HR record.</h3><p>Compliance and Foundations assign on day one. The portal is open to every manager.</p></div>
-        <div class="tl"><p class="when">November 1, 2026</p><h3>Wide launch.</h3><p>Every manager, every unit. The first full cohort of one hundred, and the first pre-program pulse.</p></div>
+        <div class="tl"><p class="when">The expert group</p><h3>Subject-matter experts from seven divisions.</h3><p>They defined the routing rules, the who-to-call directory, and what a manager must be able to do by Day 30 and by Day 60.</p></div>
+        <div class="tl"><p class="when">The pilot · March 26, 2026</p><h3>Fifteen managers from eight business units.</h3><p>They completed the full program. Their feedback shaped the current design.</p></div>
+        <div class="tl"><p class="when">Now live</p><h3>Automatic assignment and the portal.</h3><p>Compliance courses and Manager Foundations are assigned automatically from the HR record. The Manager Portal is open to every manager.</p></div>
+        <div class="tl"><p class="when">November 1, 2026</p><h3>Wide launch.</h3><p>The program opens to all managers across the university, with the first full cohort of one hundred and the first pre-program survey.</p></div>
       </div>
-      <p class="note">Names and quotes from the expert group and the pilot go here as they are cleared.</p>
+      <p class="note">Names and quotes from the expert group and the pilot can be added here once cleared.</p>
     </div>
   </section>
 
   <section id="impact">
     <div class="wrap">
-      <p class="eyebrow">Measures of impact</p>
-      <h2>Short. Behavioral. <em>Honest</em>.</h2>
-      <p class="lead">Seat time proves nothing. We measure reach from enrollment, and change from the same ten-question survey taken before the program and 90 days after.</p>
-      <div class="phases">
-        <div class="phase"><b>1 · Pre</b><h3>Before Manager Voyage.</h3><p>Ten questions across six behaviors. A 1 to 5 scale, never to consistently.</p></div>
-        <div class="phase"><b>2 · Post</b><h3>Ninety days after.</h3><p>The same ten questions. The difference is the measure.</p></div>
-        <div class="phase"><b>3 · Sustain</b><h3>Six months, optional.</h3><p>Does the change stick?</p></div>
+      <p class="eyebrow">Measuring impact</p>
+      <h2>How we measure <em>impact</em>.</h2>
+      <p class="lead">Manager Voyage measures two things: reach and change. Reach is the share of managers enrolled, recorded in Oracle Learning. Change is measured with a ten-question survey covering six management behaviors, taken before the program and again 90 days after completion. The difference in a manager&rsquo;s own answers shows whether their day-to-day behavior has changed.</p>
+      <div class="tline">
+        <div class="tp"><span class="dot"></span><b>Before the program</b><p>Ten questions, six behaviors, rated 1 to 5 from never to consistently.</p></div>
+        <div class="tp"><span class="dot"></span><b>90 days after completion</b><p>The same ten questions. The change in answers is the measure.</p></div>
+        <div class="tp"><span class="dot dot--open"></span><b>Six months, optional</b><p>A third survey shows whether the change has lasted.</p></div>
       </div>
       <details class="acc"><summary>The six behaviors the survey measures</summary><div class="acc__body">
       <div class="tblwrap"><table class="tbl six"><thead><tr><th>Behavior</th><th>What we ask</th></tr></thead><tbody>
@@ -430,39 +454,40 @@
         <tr><td>Lead change</td><td>I connect change to the bigger picture and help my team adapt, learn, and try new ways of working.<i>Advocating change, collective learning, external monitoring</i></td></tr>
       </tbody></table></div>
       </div></details>
-      <h3 style="font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:2.5rem 0 0">What success looks like.</h3>
-      <ul class="measures">
-        <li>80% of M1 to M5 managers enrolled.</li>
-        <li>Managers improving on at least four of the six.</li>
-        <li>The behavior that gained most, and the one that needs more support.</li>
-        <li>Next: direct reports answer the same questions.</li>
-      </ul>
-      <h3 style="font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:2.5rem 0 0">Outcomes we expect to see.</h3>
-      <div class="cards" style="margin-top:1.25rem">
-        <div class="card"><span class="tag tag--ghost">Engaged</span><h3>More engaged managers.</h3><p>Managers who know the job, own it, and stay.</p></div>
-        <div class="card"><span class="tag tag--ghost">Supporting</span><h3>Managers who support their teams.</h3><p>Clear expectations, timely feedback, and people who can speak up.</p></div>
-        <div class="card"><span class="tag tag--ghost">Championing</span><h3>Managers who champion the mission.</h3><p>Vanderbilt&rsquo;s purpose explained in their own words, and carried into their team&rsquo;s work.</p></div>
+      <h3 class="sub sub--tight">The targets.</h3>
+      <div class="targets">
+        <div><span class="k">01</span><b>80% enrolled</b><p>Eighty percent of M1 to M5 managers enrolled in the program.</p></div>
+        <div><span class="k">02</span><b>Four of six improved</b><p>Each manager improving on at least four of the six behaviors between the two surveys.</p></div>
+        <div><span class="k">03</span><b>Most and least</b><p>The behavior that improved most, and the one that needs more support, identified for each cohort.</p></div>
+        <div><span class="k">04</span><b>The team&rsquo;s view</b><p>In a later phase, direct reports answer the same questions about their manager.</p></div>
       </div>
-<p class="guard">Describe the pulse as informed by Yukl&rsquo;s leadership-behavior framework. Never as a validated Yukl instrument.</p>
+      <h3 class="sub sub--tight">The outcomes we expect, and how we will see them.</h3>
+      <div class="cards cards--3 outcomes">
+        <div class="card"><span class="tag tag--ghost">Engaged</span><h3>More engaged managers.</h3><p>Managers who understand the role, take ownership of it, and stay at Vanderbilt.</p><p class="how"><b>How we will see it</b>Enrollment and Day 60 completion in Oracle Learning against the 80% target. Cohort seats filled each quarter. Manager retention.</p></div>
+        <div class="card"><span class="tag tag--ghost">Supporting</span><h3>Managers who support their teams.</h3><p>Teams with clear expectations, timely feedback, and the confidence to raise concerns.</p><p class="how"><b>How we will see it</b>Survey gains on create clarity, coach and develop, build trust, empower others, and address issues. Later, the same questions answered by direct reports. Fewer avoidable Employee Relations and EOA cases.</p></div>
+        <div class="card"><span class="tag tag--ghost">Championing</span><h3>Managers who champion the mission.</h3><p>Managers who can explain Vanderbilt&rsquo;s purpose in their own words and connect their team&rsquo;s work to it.</p><p class="how"><b>How we will see it</b>Survey gains on lead change. Completion of the Vanderbilt &amp; Nashville track by Day 30. The manager items in the engagement survey.</p></div>
+      </div>
+      <p class="guard">The survey is informed by Yukl&rsquo;s leadership-behavior framework. It is an adaptation for Vanderbilt and is not a validated Yukl instrument.</p>
     </div>
   </section>
 
   <section class="comp" id="c-compliance">
     <div class="wrap">
-      <div class="comp__head"><div><p class="eyebrow">Component 01</p><h2>Compliance <em>courses</em>.</h2><p class="lead">What the law requires, where the team works. Assigned on day one.</p></div><div class="status"><span class="chip chip--req">Required</span><b>Days 1 to 60 · Annual</b></div></div>
+      <div class="comp__head"><div><p class="eyebrow">Component 01</p><h2>Compliance <em>courses</em>.</h2><p class="lead">These are the legal and policy courses every manager must complete. Oracle Learning assigns them on the manager&rsquo;s first day, based on the state where their team works.</p></div><div class="status"><span class="chip chip--req">Required</span><b>Days 1 to 60 · Renewed annually</b></div></div>
       <details class="acc" open><summary>What is assigned, by location</summary><div class="acc__body">
-        <p>Legal courses carry a deadline. The rest are Vanderbilt policy. Supervisors take both versions.</p>
-        <div class="states" id="stateLists"></div>
-        <p style="margin-top:1.4rem"><b>Every location</b></p>
+        <p>Courses required by law carry a deadline. The others are Vanderbilt policy. Supervisors complete both the all-staff version and the supervisor version.</p>
+        <div class="tabs" id="stateTabs" role="tablist" aria-label="Work location"></div>
+        <ul class="list" id="stateList"></ul>
+        <p style="margin-top:1.4rem"><b>Assigned in every location</b></p>
         <ul class="list" id="allList"></ul>
       </div></details>
       <details class="acc"><summary>Logistics</summary><div class="acc__body">
         <ul>
-          <li><b>Assignment.</b> Automatic in Oracle on role entry. No enrollment step.</li>
-          <li><b>Delivery.</b> OpenSesame in Oracle Learning, each with a knowledge check.</li>
-          <li><b>Deadlines.</b> Legal courses in 30 days, advisory in 60. My voyage flags anything at risk.</li>
-          <li><b>Renewal.</b> Annual, or biennial where the state allows.</li>
-          <li><b>Record.</b> Oracle holds the official completion.</li>
+          <li><b>Assignment.</b> Courses are assigned automatically in Oracle Learning when the HR record shows a management role. There is no enrollment step.</li>
+          <li><b>Delivery.</b> Courses are delivered through OpenSesame inside Oracle Learning, and each ends with a knowledge check.</li>
+          <li><b>Deadlines.</b> Courses required by law are due within 30 days; policy courses within 60. My voyage shows the dates and flags anything at risk.</li>
+          <li><b>Renewal.</b> Most courses renew every year, some every two years where the state allows.</li>
+          <li><b>Record.</b> Oracle Learning holds the official record of completion.</li>
         </ul>
       </div></details>
     </div>
@@ -470,21 +495,21 @@
 
   <section class="comp band-light" id="c-foundations">
     <div class="wrap">
-      <div class="comp__head"><div><p class="eyebrow">Component 02</p><h2>Manager <em>Foundations</em>.</h2><p class="lead">What Vanderbilt requires, in three steps.</p></div><div class="status"><span class="chip chip--rec">Strongly recommended</span><b>Days 1 to 60 · Also assigned to every current manager</b></div></div>
+      <div class="comp__head"><div><p class="eyebrow">Component 02</p><h2>Manager <em>Foundations</em>.</h2><p class="lead">Manager Foundations covers what Vanderbilt expects of a manager. It has three parts, completed in order.</p></div><div class="status"><span class="chip chip--rec">Strongly recommended</span><b>Days 1 to 60 · Also assigned to every current manager</b></div></div>
       <div class="path">
-        <div class="p"><span class="n">01</span><span class="when">Before, and 90 days after</span><h3>The assessment</h3><p>Rate yourself, never to consistently. Results by email. Again 90 days after you finish.</p></div>
-        <div class="p"><span class="n">02</span><span class="when">35 minutes · by Day 7</span><h3>The course</h3><p>You Are a Manager Now. One idea per page, an activity on every page. Narrated, captioned, printable.</p><a class="more" href="foundation/">Open the course</a></div>
-        <div class="p"><span class="n">03</span><span class="when">Days 1 to 60 · Oracle Learning</span><h3>The micro modules</h3><p>One common task each, in four tracks. Systems and Vanderbilt &amp; Nashville by Day 30. People and Processes by Day 60.</p></div>
+        <div class="p"><span class="n">01</span><span class="when">Before the course, and 90 days after the program</span><h3>The assessment</h3><p>Managers rate how often they do each of the six behaviors, from never to consistently. Results arrive by email. The same assessment is taken again 90 days after completing the program.</p></div>
+        <div class="p"><span class="n">02</span><span class="when">35 minutes · complete by Day 7</span><h3>The course</h3><p>You Are a Manager Now is a 35-minute web course. Each page covers one idea and includes a short activity. It is narrated, captioned, and available as a printable guide.</p><a class="more" href="foundation/">Open the course</a></div>
+        <div class="p"><span class="n">03</span><span class="when">Days 1 to 60 · in Oracle Learning</span><h3>The micro modules</h3><p>Short modules in Oracle Learning, each covering one common task. The Systems and Vanderbilt &amp; Nashville tracks are due by Day 30; the People and Processes tracks by Day 60.</p></div>
       </div>
-      <h3 class="sub">The course, in five topics.</h3>
+      <h3 class="sub">The course covers five topics.</h3>
       <div class="topics" id="segList"></div>
-      <h3 class="sub">The micro modules, in four tracks.</h3>
+      <h3 class="sub">The micro modules are organized in four tracks.</h3>
       <div class="tracks" id="trackList"></div>
       <h3 class="sub">Logistics.</h3>
       <div class="facts">
-        <div><b>Order</b>Assessment, course, then the tracks. My voyage shows what is next.</div>
-        <div><b>Where</b>The course on the web or in Oracle. The modules in Oracle, linked from the dashboard.</div>
-        <div><b>Completion</b>Day 60 completion is recorded and triggers the cohort invitation.</div>
+        <div><b>Order</b>The assessment first, then the course by Day 7, then the tracks in their windows. My voyage shows what is next.</div>
+        <div><b>Where</b>The course runs on the web and inside Oracle Learning. The modules are in Oracle Learning, linked from the dashboard.</div>
+        <div><b>Completion</b>Completing everything by Day 60 is recorded against the job profile and triggers the cohort invitation.</div>
       </div>
       <p class="note"><a href="foundation/Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener">Printable course guide (PDF)</a></p>
     </div>
@@ -492,14 +517,14 @@
 
   <section class="comp" id="c-cohort">
     <div class="wrap">
-      <div class="comp__head"><div><p class="eyebrow">Component 03</p><h2>The four-week <em>cohort</em>.</h2><p class="lead">Where skill development happens. Four weeks, one rhythm, one hundred managers a quarter.</p></div><div class="status"><span class="chip chip--opt">Optional but recommended</span><b>Quarterly · 100 seats</b></div></div>
-      <details class="acc"><summary>Who, and when</summary><div class="acc__body">
-        <p>Open to any manager who has finished compliance and Foundations. Oracle sends the invitation at Day 60.</p>
+      <div class="comp__head"><div><p class="eyebrow">Component 03</p><h2>The four-week <em>cohort</em>.</h2><p class="lead">The cohort is where managers practice the skills from Foundations with their own teams. It runs for four weeks, follows the same weekly rhythm, and serves one hundred managers each quarter.</p></div><div class="status"><span class="chip chip--opt">Optional but recommended</span><b>Quarterly · 100 seats</b></div></div>
+      <details class="acc" open><summary>Who can join, and when</summary><div class="acc__body">
+        <p>The cohort is open to any manager who has completed the compliance courses and Manager Foundations. Oracle sends the invitation when the Day 60 requirements are complete.</p>
         <p>Units outside the central budget are billed per seat.</p>
       </div></details>
-      <details class="acc"><summary>The weekly rhythm <small>Four beats, every week</small></summary><div class="acc__body">
+      <details class="acc"><summary>The weekly rhythm <small>The same four activities every week</small></summary><div class="acc__body">
         <div class="cards cards--4" id="rhythm" style="margin-top:.5rem"></div>
-        <p class="note">The Playbook is the through-line: one section a week, the whole thing at the capstone.</p>
+        <p class="note">The Manager Playbook connects the four weeks. Managers draft one section each week and present the finished Playbook at the capstone.</p>
       </div></details>
       <details class="acc"><summary>Week by week</summary><div class="acc__body">
         <div class="tblwrap"><table class="tbl" id="weekTable"><thead><tr><th>Week</th><th>Topic</th><th>Core module</th><th>Learning Lab</th><th>Scenario Studio</th><th>Discussion</th><th>Playbook</th></tr></thead><tbody></tbody></table></div>
@@ -509,10 +534,10 @@
       </div></details>
       <details class="acc"><summary>Logistics</summary><div class="acc__body">
         <ul>
-          <li><b>Kickoff.</b> One hour, hybrid, Monday of week 1. Location confirmed each quarter.</li>
-          <li><b>Capstone.</b> Two hours, hybrid, week 4. Presented to peers and the business unit leader.</li>
-          <li><b>Discussions.</b> Fridays, virtual. Sixty minutes in weeks 1 and 4, thirty in weeks 2 and 3.</li>
-          <li><b>Time.</b> About 90 minutes of prework, then two and a half to three hours a week. Five in week 4.</li>
+          <li><b>Kickoff.</b> A one-hour hybrid session on the Monday of week 1, in the room or online. The location is confirmed each quarter.</li>
+          <li><b>Capstone.</b> A two-hour hybrid session in week 4, where managers present their work to peers and their business unit leader.</li>
+          <li><b>Discussions.</b> Virtual sessions on Fridays, facilitated by the Futures Learning Hub: 60 minutes in weeks 1 and 4, 30 minutes in weeks 2 and 3.</li>
+          <li><b>Time.</b> About 90 minutes of prework, then two and a half to three hours a week, and about five hours in week 4 including the capstone.</li>
           <li><b>Tools.</b> <span id="toolsLine"></span></li>
         </ul>
       </div></details>
@@ -521,13 +546,13 @@
 
   <section class="comp band-light" id="c-portal">
     <div class="wrap">
-      <div class="comp__head"><div><p class="eyebrow">Component 04</p><h2>The Manager <em>Portal</em>.</h2><p class="lead">Every template, policy link, and contact. Open from day one, never taken away.</p></div><div class="status"><span class="chip chip--on">Always on</span><b>Kept current by People, Culture and Belonging</b></div></div>
-      <details class="acc"><summary>What is in it</summary><div class="acc__body">
+      <div class="comp__head"><div><p class="eyebrow">Component 04</p><h2>The Manager <em>Portal</em>.</h2><p class="lead">The Manager Portal is a single website with every template, policy link, and contact from the course and the cohort. It is available from a manager&rsquo;s first day and remains available throughout their career.</p></div><div class="status"><span class="chip chip--on">Always available</span><b>Maintained by People, Culture and Belonging</b></div></div>
+      <details class="acc" open><summary>What the portal contains</summary><div class="acc__body">
         <p><a id="portalLink" href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Open the Manager Portal</a></p>
-        <p><b>Beyond the portal.</b> <span id="beyondLine"></span> All vetted, all cited.</p>
+        <p><b>Beyond the portal.</b> The portal also links to <span id="beyondLine"></span> All of these have been reviewed and are cited.</p>
       </div></details>
-      <details class="acc"><summary>Who to call <small>Same-day routes, and everyday help</small></summary><div class="acc__body">
-        <p>Nobody knows everything on day one. Everyone knows who to call. When in doubt, the HCM.</p>
+      <details class="acc" open><summary>Who to call <small>Same-day routes and everyday help</small></summary><div class="acc__body">
+        <p>A new manager does not need to know everything on the first day, but they do need to know who handles what. The HCM is the first call when a manager is unsure.</p>
         <div class="who" id="whoList"></div>
       </div></details>
     </div>
@@ -535,8 +560,8 @@
 
   <section class="ctaband">
     <div class="wrap">
-      <h2>From first day to fully formed <em>leader</em>.</h2>
-      <p class="lead">The quality of Vanderbilt&rsquo;s future depends on the quality of its managers today. This is how we build them.</p>
+      <h2>Start with My <em>voyage</em>.</h2>
+      <p class="lead">My voyage is the dashboard where a manager sees what to do now, what comes next, and who to call. The Foundation course and the Manager Portal are open to every manager.</p>
       <div class="cta">
         <a class="btn" href="dashboard/">Start your voyage</a>
         <a class="btn btn--ghost" href="foundation/">Open the Foundation course</a>
@@ -574,14 +599,16 @@
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   /* compliance, by location */
-  var states = Object.keys(P.states);
+  var states = Object.keys(P.states), cur = 'TN';
   function meta(c){ return (c.type === 'Legal' ? 'Required by law' : 'Vanderbilt policy') + ' · ' + c.audience + (c.deadlineDays ? ' · ' + c.deadlineDays + ' days' : ''); }
   function row(c){ return '<li><span>' + esc(c.title) + (c.note ? ' <small style="color:rgba(255,255,255,.55)">' + esc(c.note) + '</small>' : '') + '</span><span class="meta' + (c.type === 'Legal' ? ' req' : '') + '">' + esc(meta(c)) + '</span></li>'; }
-  $('#stateLists').innerHTML = states.map(function(k){
-    var rows = P.compliance.filter(function(c){ return c.state === k; }).map(row).join('') || '<li>No location-specific courses.</li>';
-    return '<div><h4>' + esc(P.states[k].name) + '</h4><ul class="list">' + rows + '</ul></div>';
-  }).join('');
+  function paintState(){
+    $('#stateTabs').innerHTML = states.map(function(k){ return '<button type="button" role="tab" aria-selected="' + (k === cur) + '" data-state="' + k + '">' + esc(P.states[k].name) + '</button>'; }).join('');
+    $('#stateList').innerHTML = P.compliance.filter(function(c){ return c.state === cur; }).map(row).join('') || '<li>No location-specific courses.</li>';
+  }
   $('#allList').innerHTML = P.compliance.filter(function(c){ return c.state === 'ALL'; }).map(row).join('');
+  $('#stateTabs').addEventListener('click', function(e){ var b = e.target.closest('[data-state]'); if(b){ cur = b.getAttribute('data-state'); paintState(); } });
+  paintState();
 
   /* foundations */
   $('#segList').innerHTML = (P.mrc.foundation.segments || []).map(function(s, i){ return '<div class="t"><b>Topic ' + (i + 1) + '</b>' + esc(s.title) + '</div>'; }).join('');
@@ -605,7 +632,7 @@
   /* portal and who to call */
   if(CFG.portalUrl) $('#portalLink').href = CFG.portalUrl;
   var g = (P.portal.beyond && P.portal.beyond.groups) || [];
-  $('#beyondLine').textContent = g.map(function(x){ return x.items.length + ' ' + x.title.toLowerCase(); }).join(', ').replace(/, ([^,]*)$/, ', and $1') + '.';
+  $('#beyondLine').textContent = g.map(function(x){ return x.items.length + ' ' + x.title.toLowerCase(); }).join(', ').replace(/, ([^,]*)$/, ', and $1') + ' for managers who want to go further.';
   $('#whoList').innerHTML = P.contacts.map(function(c){ return '<div class="c' + (c.sameDay ? ' urgent' : '') + '"><b>' + esc(c.role) + '</b>' + (c.sameDay ? '<span class="sd">Same day</span>' : '') + '<p>' + esc(String(c.when).split('. ')[0].replace(/\.$/, '')) + '.</p></div>'; }).join('');
 
   /* highlight the section in view on the sub-nav */
