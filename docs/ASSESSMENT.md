@@ -18,7 +18,7 @@ One scale for every item. Stem shown once at the top of the form:
 | 2 | Rarely | Less than once a month |
 | 3 | Sometimes | About once a month |
 | 4 | Often | Most weeks |
-| 5 | Almost always | Every week, without being reminded |
+| 5 | Always | Every week, without being reminded |
 
 Anchors carry a time meaning so two managers reading "often" score the same
 behavior the same way. All items are worded as first-person, present-tense
