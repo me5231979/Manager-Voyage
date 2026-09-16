@@ -149,7 +149,7 @@
   .btn--ghost { background: transparent; color: var(--vu-white); border-color: rgba(255,255,255,.45); }
   .btn--ghost:hover { border-color: var(--vu-gold-flat); color: var(--vu-gold-flat); box-shadow: none; }
   /* detail sections that sit on the light band */
-  .band-light details.acc { border-color: rgba(28,28,28,.15); background: #fff; }
+  .band-light details.acc { border-color: rgba(28,28,28,.15); background: transparent; }
   .band-light details.acc summary { color: var(--vu-black); }
   .band-light details.acc summary small, .band-light .track .win { color: var(--vu-oak); }
   .band-light details.acc summary::after { color: var(--vu-oak); }
@@ -245,13 +245,15 @@
   .comp__head .status { text-align: right; }
   @media (max-width: 700px) { .comp__head .status { text-align: left; } }
   .comp__head .status b { display: block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .7rem; color: rgba(255,255,255,.6); }
-  details.acc { border: 1px solid rgba(255,255,255,.14); border-radius: 6px; margin-top: .9rem; background: rgba(255,255,255,.02); }
-  details.acc summary { list-style: none; cursor: pointer; padding: 1rem 1.3rem; display: flex; align-items: center; gap: 1rem; font-family: var(--serif); font-size: 1.25rem; }
+  details.acc { border: 0; border-top: 1px solid rgba(255,255,255,.14); border-radius: 0; margin-top: 0; background: transparent; }
+  details.acc:last-of-type { border-bottom: 1px solid rgba(255,255,255,.14); }
+  .comp .comp__head { margin-bottom: 1.4rem; }
+  details.acc summary { list-style: none; cursor: pointer; padding: 1rem .2rem; display: flex; align-items: center; gap: 1rem; font-family: var(--serif); font-size: 1.25rem; }
   details.acc summary::-webkit-details-marker { display: none; }
   details.acc summary::after { content: "+"; margin-left: auto; color: var(--vu-gold-flat); font-family: var(--cond); font-size: 1.4rem; line-height: 1; }
   details.acc[open] summary::after { content: "\2212"; }
   details.acc summary small { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .66rem; color: var(--vu-gold-flat); }
-  details.acc .acc__body { padding: 0 1.3rem 1.3rem; color: rgba(255,255,255,.85); font-size: .95rem; }
+  details.acc .acc__body { padding: 0 .2rem 1.3rem; color: rgba(255,255,255,.85); font-size: .95rem; }
   details.acc .acc__body p { margin: 0 0 .7rem; max-width: 76ch; }
   details.acc .acc__body ul { margin: .4rem 0 .8rem; padding-left: 1.2rem; }
   details.acc .acc__body li { margin: .25rem 0; }
@@ -352,14 +354,7 @@
         <div class="card"><span class="chip chip--opt">03 · Optional but recommended</span><h3>Four-Week Cohort</h3><p>Four weeks of practice with a real team. One hundred seats a quarter.</p><a class="more" href="#c-cohort">Rhythm and logistics</a></div>
         <div class="card"><span class="chip chip--on">04 · Always on</span><h3>Manager Portal</h3><p>Every template, policy link, and contact. Open from day one, never taken away.</p><a class="more" href="#c-portal">The portal and who to call</a></div>
       </div>
-      <h2 style="margin-top:3rem">The system does the work. The manager does the <em>learning</em>.</h2>
-      <div class="steps">
-        <div class="step"><span class="num" aria-hidden="true"></span><div><p class="when">Day 1</p><h3>Assigned on arrival</h3><p>Oracle assigns the courses. The portal opens. My voyage shows the first 60 days on one page.</p></div></div>
-        <div class="step"><span class="num" aria-hidden="true"></span><div><p class="when">Days 1 to 30</p><h3>Systems and story</h3><p>Assessment, Foundation course, then Systems and Vanderbilt &amp; Nashville. By Day 30: approve time, open a hire, explain the mission.</p></div></div>
-        <div class="step"><span class="num" aria-hidden="true"></span><div><p class="when">Days 31 to 60</p><h3>People and process</h3><p>People and Processes. By Day 60: a leave request, a pay question, a performance concern, and what must be reported.</p></div></div>
-        <div class="step"><span class="num" aria-hidden="true"></span><div><p class="when">Day 60</p><h3>Recorded and invited</h3><p>Completion recorded in Oracle. The cohort invitation follows.</p></div></div>
-        <div class="step"><span class="num" aria-hidden="true"></span><div><p class="when">The cohort, and after</p><h3>From compliant to capable</h3><p>Four weeks with a real team, a Playbook, a capstone, a 90-day pulse. The portal stays for good.</p></div></div>
-      </div>
+
     </div>
   </section>
 
@@ -369,19 +364,19 @@
       <h2>Fifteen behaviors. Four categories. One <em>standard</em>.</h2>
       <p class="lead">Everything rests on Gary Yukl&rsquo;s taxonomy of effective leadership behavior. Foundations teaches it. The cohort practices it. The portal equips it. The pulse measures it.</p>
       <div class="frame">
-        <div class="card"><span class="tag tag--ghost">Task-oriented</span><h3>Get the work done, through your team.</h3><ul><li>Clarifying <i>(say it)</i></li><li>Planning <i>(plan it)</i></li><li>Monitoring operations <i>(check it)</i></li><li>Problem solving <i>(fix it)</i></li></ul></div>
-        <div class="card"><span class="tag tag--ghost">Relations-oriented</span><h3>Take care of your people.</h3><ul><li>Supporting <i>(listen and help)</i></li><li>Developing <i>(grow them)</i></li><li>Recognizing <i>(thank them)</i></li><li>Empowering <i>(trust them)</i></li></ul></div>
-        <div class="card"><span class="tag tag--ghost">Change-oriented</span><h3>Make things better.</h3><ul><li>Advocating change <i>(explain the why)</i></li><li>Envisioning change <i>(describe where you are going)</i></li><li>Encouraging innovation <i>(let people try)</i></li><li>Facilitating collective learning <i>(look back)</i></li></ul></div>
-        <div class="card"><span class="tag tag--ghost">External</span><h3>Connect your team to the rest of Vanderbilt.</h3><ul><li>Networking <i>(know the people)</i></li><li>External monitoring <i>(watch for what is coming)</i></li><li>Representing <i>(speak up for your team)</i></li></ul></div>
+        <div class="card"><span class="tag tag--ghost">Task-oriented</span><h3>Get the work done, through your team.</h3></div>
+        <div class="card"><span class="tag tag--ghost">Relations-oriented</span><h3>Take care of your people.</h3></div>
+        <div class="card"><span class="tag tag--ghost">Change-oriented</span><h3>Make things better.</h3></div>
+        <div class="card"><span class="tag tag--ghost">External</span><h3>Connect your team to Vanderbilt.</h3></div>
       </div>
-      <h3 style="font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:2.5rem 0 0">How each component ties in.</h3>
-      <div class="ties">
-        <div class="tie"><b>01 Compliance</b><p>The legal floor under <em>address issues</em>: what a manager must recognize, route, and report.</p></div>
-        <div class="tie"><b>02 Foundations</b><p>Teaches the fifteen behaviors by name, with what to stop and what to do instead.</p></div>
-        <div class="tie"><b>03 Cohort</b><p>One category a week, practiced with a real team and written into the Playbook.</p></div>
-        <div class="tie"><b>04 Portal</b><p>The tools and contacts for all four categories, always on.</p></div>
-      </div>
-      <p class="guard">The pulse is informed by Yukl&rsquo;s framework. It is not a validated Yukl instrument, and we never call it one.</p>
+      <details class="acc"><summary>The fifteen behaviors</summary><div class="acc__body">
+        <div class="frame" style="margin-top:.5rem">
+          <div class="card"><span class="tag tag--ghost">Task-oriented</span><ul><li>Clarifying <i>(say it)</i></li><li>Planning <i>(plan it)</i></li><li>Monitoring operations <i>(check it)</i></li><li>Problem solving <i>(fix it)</i></li></ul></div>
+          <div class="card"><span class="tag tag--ghost">Relations-oriented</span><ul><li>Supporting <i>(listen and help)</i></li><li>Developing <i>(grow them)</i></li><li>Recognizing <i>(thank them)</i></li><li>Empowering <i>(trust them)</i></li></ul></div>
+          <div class="card"><span class="tag tag--ghost">Change-oriented</span><ul><li>Advocating change <i>(explain the why)</i></li><li>Envisioning change <i>(describe where you are going)</i></li><li>Encouraging innovation <i>(let people try)</i></li><li>Facilitating collective learning <i>(look back)</i></li></ul></div>
+          <div class="card"><span class="tag tag--ghost">External</span><ul><li>Networking <i>(know the people)</i></li><li>External monitoring <i>(watch for what is coming)</i></li><li>Representing <i>(speak up for your team)</i></li></ul></div>
+        </div>
+      </div></details>
     </div>
   </section>
 
@@ -394,7 +389,7 @@
         <div class="tl"><p class="when">The expert group</p><h3>Seven divisions shaped the content.</h3><p>They set the routing rules, the who-to-call map, and what a manager must know by Day 30 and Day 60.</p></div>
         <div class="tl"><p class="when">The pilot · March 26, 2026</p><h3>Fifteen managers, eight business units.</h3><p>They ran the whole journey. Their feedback shaped every screen.</p></div>
         <div class="tl"><p class="when">Live</p><h3>Assigned from the HR record.</h3><p>Compliance and Foundations assign on day one. The portal is open to every manager.</p></div>
-        <div class="tl"><p class="when">September 2026</p><h3>The first full quarterly cohort.</h3><p>One hundred seats. The first pre-program pulse is taken here.</p></div>
+        <div class="tl"><p class="when">November 1, 2026</p><h3>Wide launch.</h3><p>Every manager, every unit. The first full cohort of one hundred, and the first pre-program pulse.</p></div>
       </div>
       <p class="note">Names and quotes from the expert group and the pilot go here as they are cleared.</p>
     </div>
@@ -410,6 +405,7 @@
         <div class="phase"><b>2 · Post</b><h3>Ninety days after.</h3><p>The same six. The difference is the measure.</p></div>
         <div class="phase"><b>3 · Sustain</b><h3>Six months, optional.</h3><p>Does the change stick?</p></div>
       </div>
+      <details class="acc"><summary>The six statements</summary><div class="acc__body">
       <div class="tblwrap"><table class="tbl six"><thead><tr><th>Behavior</th><th>Pulse item</th></tr></thead><tbody>
         <tr><td>Create clarity</td><td>I make priorities, expectations, and what good looks like clear.<i>Clarifying, planning</i></td></tr>
         <tr><td>Coach and develop</td><td>I give timely feedback and help people build capability through their work.<i>Monitoring operations, developing</i></td></tr>
@@ -418,25 +414,22 @@
         <tr><td>Address issues</td><td>I address performance, people, or process problems early and constructively.<i>Problem solving, monitoring operations, representing</i></td></tr>
         <tr><td>Lead change</td><td>I connect change to the bigger picture and help my team adapt, learn, and try new ways of working.<i>Advocating change, collective learning, external monitoring</i></td></tr>
       </tbody></table></div>
+      </div></details>
       <h3 style="font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:2.5rem 0 0">What success looks like.</h3>
       <ul class="measures">
         <li>80% of M1 to M5 managers enrolled.</li>
         <li>Managers improving on at least four of the six.</li>
-        <li>Average change across the six.</li>
         <li>The behavior that gained most, and the one that needs more support.</li>
+        <li>Next: direct reports answer the same six.</li>
       </ul>
-      <div class="cards" style="margin-top:2rem">
-        <div class="card"><span class="tag tag--ghost">Next</span><h3>Ask the team the same six.</h3><p>Self-report shows perceived change. Direct reports show real change.</p></div>
-        <div class="card"><span class="tag tag--ghost">Where the return shows up</span><h3>Engagement, cases, and the bench.</h3><p>Better engagement. Fewer avoidable ER and EOA cases. A deeper bench, judged on the same evidence across 39 units.</p></div>
-      </div>
-      <p class="guard">Describe the pulse as informed by Yukl&rsquo;s leadership-behavior framework. Never as a validated Yukl instrument.</p>
+<p class="guard">Describe the pulse as informed by Yukl&rsquo;s leadership-behavior framework. Never as a validated Yukl instrument.</p>
     </div>
   </section>
 
   <section class="comp" id="c-compliance">
     <div class="wrap">
       <div class="comp__head"><div><p class="eyebrow">Component 01</p><h2>Compliance <em>courses</em>.</h2><p class="lead">What the law requires, where the team works. Assigned on day one.</p></div><div class="status"><span class="chip chip--req">Required</span><b>Days 1 to 60 · Annual</b></div></div>
-      <details class="acc" open><summary>What is assigned, by location</summary><div class="acc__body">
+      <details class="acc"><summary>What is assigned, by location</summary><div class="acc__body">
         <p>Legal courses carry a deadline. The rest are Vanderbilt policy. Supervisors take both versions.</p>
         <div class="tabs" id="stateTabs" role="tablist" aria-label="Work location"></div>
         <ul class="list" id="stateList"></ul>
@@ -458,7 +451,7 @@
   <section class="comp band-light" id="c-foundations">
     <div class="wrap">
       <div class="comp__head"><div><p class="eyebrow">Component 02</p><h2>Manager <em>Foundations</em>.</h2><p class="lead">What Vanderbilt requires. The assessment, a 35-minute course, and micro modules in four tracks.</p></div><div class="status"><span class="chip chip--rec">Strongly recommended</span><b>Days 1 to 60 · Also assigned to every current manager</b></div></div>
-      <details class="acc" open><summary>The assessment <small>Before, and 90 days after</small></summary><div class="acc__body">
+      <details class="acc"><summary>The assessment <small>Before, and 90 days after</small></summary><div class="acc__body">
         <p>Six statements, rated never to consistently. Taken before Manager Voyage, and again 90 days after completion. Results by email.</p>
       </div></details>
       <details class="acc"><summary>The course: You Are a Manager Now <small>35 minutes · narrated</small></summary><div class="acc__body">
@@ -483,7 +476,7 @@
   <section class="comp" id="c-cohort">
     <div class="wrap">
       <div class="comp__head"><div><p class="eyebrow">Component 03</p><h2>The four-week <em>cohort</em>.</h2><p class="lead">Where skill development happens. Four weeks, one rhythm, one hundred managers a quarter.</p></div><div class="status"><span class="chip chip--opt">Optional but recommended</span><b>Quarterly · 100 seats</b></div></div>
-      <details class="acc" open><summary>Who, and when</summary><div class="acc__body">
+      <details class="acc"><summary>Who, and when</summary><div class="acc__body">
         <p>Open to any manager who has finished compliance and Foundations. Oracle sends the invitation at Day 60.</p>
         <p>Units outside the central budget are billed per seat.</p>
       </div></details>
@@ -512,11 +505,11 @@
   <section class="comp band-light" id="c-portal">
     <div class="wrap">
       <div class="comp__head"><div><p class="eyebrow">Component 04</p><h2>The Manager <em>Portal</em>.</h2><p class="lead">Every template, policy link, and contact. Open from day one, never taken away.</p></div><div class="status"><span class="chip chip--on">Always on</span><b>Kept current by People, Culture and Belonging</b></div></div>
-      <details class="acc" open><summary>What is in it</summary><div class="acc__body">
+      <details class="acc"><summary>What is in it</summary><div class="acc__body">
         <p><a id="portalLink" href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/" target="_blank" rel="noopener">Open the Manager Portal</a></p>
         <p><b>Beyond the portal.</b> <span id="beyondLine"></span> All vetted, all cited.</p>
       </div></details>
-      <details class="acc" open><summary>Who to call <small>Same-day routes, and everyday help</small></summary><div class="acc__body">
+      <details class="acc"><summary>Who to call <small>Same-day routes, and everyday help</small></summary><div class="acc__body">
         <p>Nobody knows everything on day one. Everyone knows who to call. When in doubt, the HCM.</p>
         <div class="who" id="whoList"></div>
       </div></details>
