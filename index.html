@@ -65,8 +65,8 @@
   .hero .mark { position: absolute; right: -6%; top: 8%; width: clamp(320px, 38vw, 560px);
     opacity: .05; pointer-events: none; user-select: none; }
   .hero .wrap { position: relative; display: grid; gap: clamp(2rem, 4vw, 3.5rem);
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; }
-  @media (max-width: 880px) { .hero .wrap { grid-template-columns: 1fr; } }
+    grid-template-columns: 1fr; align-items: center; }
+  .hero .lead { max-width: 78ch; font-size: clamp(1.05rem, 1.5vw, 1.25rem); }
   .hero .cta { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 2rem; }
   .means { border: 1px solid rgba(207,174,112,.45); border-left: 4px solid var(--vu-gold-flat);
     border-radius: 8px; padding: 1.6rem 1.7rem; background: rgba(207,174,112,.06); }
