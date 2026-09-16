@@ -35,7 +35,7 @@ Order on the form is as listed. The job label is not shown to the respondent.
 | 3 | 1 Get the work done | Monitoring | I look at work while it is still in progress, well before the due date, so there is time to help. |
 | 4 | 2 Take care of your people | Supporting | When I see someone under pressure, I move a deadline or a task that same week and check back with them. |
 | 5 | 2 Take care of your people | Recognizing | I thank a person for a specific piece of work, by name, within the same week it happened. |
-| 6 | 2 Take care of your people | Empowering | I ask my team for their view before I decide, and I let their answer change the decision. |
+| 6 | 2 Take care of your people | Empowering | Before I make a decision that changes how my team works, I ask for their view and let it shape what I decide. |
 | 7 | 3 Make things better | Advocating change | When a change is coming, I explain the reason to my team in my own words before the official announcement reaches them. |
 | 8 | 3 Make things better | Collective learning | After a large piece of work, I hold a short look-back with the team: what worked, what did not, what we change. |
 | 9 | 4 Connect your team | External monitoring | I watch what is coming from the rest of Vanderbilt, such as cycles, deadlines, and system changes, so my team hears it from me first. |
@@ -222,7 +222,7 @@ habits below are where the next change comes from."
 | 3 | In one one-on-one, ask to see where the work stands before it is due. |
 | 4 | Ask one person who looks stretched what you can move this week, then move it. |
 | 5 | Thank one person for one specific thing, by name, before Friday. |
-| 6 | Before your next decision, ask the team first and let the answer change it. |
+| 6 | Before your next decision that changes how the team works, ask them first and let it shape the call. |
 | 7 | Take the next change to your own team meeting first and say why in your own words. |
 | 8 | After the next big piece of work, hold a ten-minute look-back. |
 | 9 | Read next month's calendar and tell the team one thing that is coming. |
