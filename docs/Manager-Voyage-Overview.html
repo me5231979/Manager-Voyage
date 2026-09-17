@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Manager Voyage at a glance</title>
-<meta name="description" content="One-page overview of Vanderbilt University's Manager Voyage program: the path, the four components, the framework, and how impact is measured.">
+<meta name="description" content="One-page overview of Vanderbilt University's Manager Voyage program: what it is, its four components, and the framework behind it.">
 <style>
   @font-face { font-family: 'Libre Caslon Display'; font-weight: 400; src: url('../assets/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2'); }
   @font-face { font-family: 'Libre Caslon Text'; font-style: italic; font-weight: 400; src: url('../assets/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2'); }
@@ -23,63 +23,49 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--cream); }
   html { height: auto; }
-  body { width: 8.5in; height: 10.96in; overflow: hidden; font-family: var(--body); color: var(--ink); font-size: 8.4pt; line-height: 1.38; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .eyebrow { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .09em; font-size: 7.2pt; color: var(--oak); margin: 0; }
+  body { width: 8.5in; height: 10.96in; overflow: hidden; font-family: var(--body); color: var(--ink); font-size: 10pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .eyebrow { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .09em; font-size: 8pt; color: var(--oak); margin: 0 0 6px; }
   em { font-family: var(--serif-i); font-style: italic; color: var(--gold); }
-  .b { font-weight: 600; }
 
   /* header band */
-  .head { position: relative; background: var(--black); color: var(--white); padding: .34in .5in .3in; overflow: hidden; display: grid; grid-template-columns: 1fr auto; gap: .3in; align-items: end; }
+  .head { position: relative; background: var(--black); color: var(--white); padding: .38in .6in .36in; overflow: hidden; display: grid; grid-template-columns: 1fr auto; gap: .4in; align-items: end; }
   .head::before { content: ''; position: absolute; inset: 0; background: radial-gradient(9in 3in at 90% 0%, rgba(207,174,112,.18), transparent 60%); }
   .head > * { position: relative; }
-  .head .eyebrow { color: var(--gold); margin-bottom: 6px; }
-  .head h1 { font-family: var(--serif); font-weight: 400; font-size: 30pt; line-height: 1; margin: 0 0 8px; letter-spacing: -.01em; }
-  .head p { margin: 0; font-size: 9.2pt; line-height: 1.45; color: rgba(255,255,255,.86); max-width: 5.6in; }
-  .head img { width: 1.55in; display: block; margin-bottom: 4px; }
+  .head .eyebrow { color: var(--gold); margin-bottom: 10px; }
+  .head h1 { font-family: var(--serif); font-weight: 400; font-size: 32pt; line-height: 1; margin: 0 0 10px; letter-spacing: -.01em; }
+  .head p { margin: 0; font-size: 10.2pt; line-height: 1.5; color: rgba(255,255,255,.88); max-width: 5.9in; }
+  .head img { width: 1.6in; display: block; margin-bottom: 6px; }
 
-  .page { padding: .2in .5in .1in; display: grid; gap: .13in; }
-  h2 { font-family: var(--serif); font-weight: 400; font-size: 13pt; line-height: 1.1; margin: 0 0 5px; }
-
-  /* the path */
-  .path { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; position: relative; margin-top: 4px; }
-  .path::before { content: ''; position: absolute; left: 6px; right: 6px; top: 7px; height: 2px; background: var(--gold); }
-  .step { position: relative; padding: 16px 10px 0 0; }
-  .step::before { content: ''; position: absolute; left: 0; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--cream); border: 3px solid var(--oak); }
-  .step.last::before { background: var(--oak); }
-  .step b { display: block; font-family: var(--cond); font-weight: 700; font-size: 10.5pt; letter-spacing: .04em; text-transform: uppercase; color: var(--ink); line-height: 1; margin-bottom: 3px; }
-  .step span { display: block; font-size: 7.8pt; color: var(--ink2); line-height: 1.35; }
+  .page { padding: .28in .6in .2in; display: grid; gap: .22in; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 16pt; line-height: 1.1; margin: 0 0 8px; }
+  .lead { margin: 0; font-size: 9.8pt; color: var(--ink2); max-width: 6.6in; }
 
   /* four components */
-  .comps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
-  .comp { background: #fff; border: 1px solid var(--rule); border-top: 3px solid var(--gold); border-radius: 5px; padding: 9px 10px 10px; display: flex; flex-direction: column; }
-  .comp .num { font-family: var(--cond); font-weight: 700; font-size: 18pt; line-height: 1; color: var(--gold); }
-  .comp .tag { font-family: var(--cond); font-weight: 700; font-size: 6.8pt; letter-spacing: .08em; text-transform: uppercase; color: var(--oak); margin: 4px 0 3px; }
-  .comp h3 { font-family: var(--serif); font-weight: 400; font-size: 12pt; line-height: 1.1; margin: 0 0 2px; }
-  .comp .when { font-size: 7.4pt; color: var(--ink3); margin-bottom: 6px; }
-  .comp p { margin: 0; font-size: 8pt; color: var(--ink2); }
-  .comp p + p { margin-top: 4px; }
+  .comps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .comp { background: #fff; border: 1px solid var(--rule); border-top: 3px solid var(--gold); border-radius: 6px; padding: 12px 13px 13px; }
+  .comp .num { font-family: var(--cond); font-weight: 700; font-size: 20pt; line-height: 1; color: var(--gold); display: block; }
+  .comp .tag { display: block; font-family: var(--cond); font-weight: 700; font-size: 7.6pt; letter-spacing: .08em; text-transform: uppercase; color: var(--oak); margin: 8px 0 4px; }
+  .comp h3 { font-family: var(--serif); font-weight: 400; font-size: 12.5pt; line-height: 1.1; margin: 0 0 6px; }
+  .comp p { margin: 0; font-size: 8.8pt; line-height: 1.42; color: var(--ink2); }
 
-  /* two-column lower band */
-  .two { display: grid; grid-template-columns: 1.55fr 1fr; gap: 12px; align-items: start; }
-  .fw { display: grid; grid-template-columns: repeat(4, auto); gap: 10px; }
-  .fw div { border-left: 2px solid var(--gold); padding-left: 7px; }
-  .fw b { display: block; font-family: var(--serif); font-weight: 400; font-size: 9.4pt; line-height: 1.15; white-space: nowrap; }
-  .fw i { display: block; font-style: normal; font-size: 7.2pt; color: var(--ink3); margin: 1px 0 4px; }
-  .fw ul { list-style: none; margin: 0; padding: 0; font-size: 7.4pt; white-space: nowrap; color: var(--ink2); line-height: 1.38; }
-  .measure { background: var(--black); color: #fff; border-radius: 5px; padding: 10px 12px 11px; }
-  .measure h2 { color: #fff; }
-  .measure .eyebrow { color: var(--gold); }
-  .measure .rows { display: grid; gap: 6px; margin-top: 2px; }
-  .measure .row { display: grid; grid-template-columns: .72in 1fr; gap: 6px; font-size: 7.7pt; line-height: 1.38; color: rgba(255,255,255,.86); }
-  .measure .row b { font-family: var(--cond); font-weight: 700; font-size: 8.4pt; letter-spacing: .05em; text-transform: uppercase; color: var(--gold); line-height: 1.3; padding-top: 1px; }
+  /* framework */
+  .fw { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 12px; }
+  .fw div { border-left: 3px solid var(--gold); padding-left: 12px; }
+  .fw b { display: block; font-family: var(--serif); font-weight: 400; font-size: 12pt; line-height: 1.15; }
+  .fw i { display: block; font-style: normal; font-size: 8.6pt; color: var(--ink3); margin: 2px 0 8px; }
+  .fw ul { list-style: none; margin: 0; padding: 0; font-size: 9.2pt; color: var(--ink2); line-height: 1.45; }
 
-  /* stats and foot */
-  .foot { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; border-top: 1px solid var(--rule); padding-top: 9px; }
-  .stats { display: flex; gap: 18px; }
-  .stat b { display: block; font-family: var(--cond); font-weight: 700; font-size: 15pt; line-height: 1; color: var(--oak); white-space: nowrap; }
-  .stat span { display: block; font-size: 7pt; color: var(--ink3); margin-top: 2px; line-height: 1.25; }
-  .start { text-align: right; font-size: 7.8pt; color: var(--ink2); line-height: 1.4; }
-  .start b { display: block; font-family: var(--serif); font-weight: 400; font-size: 11pt; color: var(--ink); }
+  /* measure + foot */
+  .measure { background: var(--black); color: #fff; border-radius: 6px; padding: 12px 18px 13px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; }
+  .measure .eyebrow { color: var(--gold); margin: 0 0 4px; }
+  .measure b { font-family: var(--serif); font-weight: 400; font-size: 14pt; line-height: 1.1; display: block; }
+  .measure p { margin: 0; font-size: 9.2pt; line-height: 1.5; color: rgba(255,255,255,.88); }
+  .foot { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; border-top: 1px solid var(--rule); padding-top: 14px; }
+  .stats { display: flex; gap: 28px; }
+  .stat b { display: block; font-family: var(--cond); font-weight: 700; font-size: 17pt; line-height: 1; color: var(--oak); white-space: nowrap; }
+  .stat span { display: block; font-size: 8pt; color: var(--ink3); margin-top: 3px; line-height: 1.3; }
+  .start { text-align: right; font-size: 8.6pt; color: var(--ink2); line-height: 1.5; }
+  .start b { display: block; font-family: var(--serif); font-weight: 400; font-size: 12.5pt; color: var(--ink); }
   .start a { color: var(--oak); text-decoration: none; font-weight: 500; }
 </style>
 </head>
@@ -88,26 +74,13 @@
 <header class="head">
   <div>
     <p class="eyebrow">Manager Voyage &middot; Vanderbilt University &middot; People, Culture and Belonging</p>
-    <h1>Manager <em>Voyage</em> at a glance.</h1>
-    <p>One structured path for every Vanderbilt manager from the day they start: the compliance courses the law requires, a Foundations course on what Vanderbilt expects of a manager, an optional four-week cohort to practice with a real team, and a portal that stays with them for the rest of their career. Built on one research-based framework and measured with a survey before the program and 90 days after.</p>
+    <h1>Manager <em>Voyage</em>.</h1>
+    <p>Vanderbilt University&rsquo;s development program for managers. It gives every manager the same structured path from the day they start: the compliance courses the law requires, a Foundations course on what Vanderbilt expects of a manager, an optional four-week cohort to practice with a real team, and a portal of resources that stays with them throughout their career.</p>
   </div>
   <img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University">
 </header>
 
 <main class="page">
-
-  <section>
-    <p class="eyebrow">The path</p>
-    <h2>The first 60 days, then the choice to go further.</h2>
-    <div class="path">
-      <div class="step"><b>Day 1</b><span>Courses assigned in Oracle Learning from the HR record. Assessment taken. Portal and My voyage open.</span></div>
-      <div class="step"><b>Day 7</b><span>The 35-minute Foundation course, <i>You Are a Manager Now</i>, complete.</span></div>
-      <div class="step"><b>Day 30</b><span>Law-required compliance courses done. Systems and Vanderbilt &amp; Nashville modules done.</span></div>
-      <div class="step"><b>Day 60</b><span>All compliance and Foundations complete and recorded against the job profile. Cohort invitation sent.</span></div>
-      <div class="step"><b>After 60</b><span>Optional four-week cohort, offered quarterly. Portal used throughout.</span></div>
-      <div class="step last"><b>90 days</b><span>Assessment taken again. The change in a manager&rsquo;s own answers is the measure.</span></div>
-    </div>
-  </section>
 
   <section>
     <p class="eyebrow">The four components</p>
@@ -116,57 +89,47 @@
         <span class="num">01</span>
         <span class="tag">Required</span>
         <h3>Compliance</h3>
-        <span class="when">Days 1 to 60 &middot; renewed annually</span>
-        <p>The legal and policy courses every manager must complete, matched to the state where the team works. Assigned automatically on Day 1; no enrollment step.</p>
-        <p>Law-required courses due in 30 days, policy courses in 60. Oracle Learning holds the record.</p>
+        <p>The legal and policy courses every manager must complete, assigned automatically in Oracle Learning and matched to where the team works.</p>
       </div>
       <div class="comp">
         <span class="num">02</span>
         <span class="tag">Strongly recommended</span>
         <h3>Manager Foundations</h3>
-        <span class="when">Days 1 to 60 &middot; course by Day 7</span>
-        <p>Three parts, in order: the assessment, the 35-minute Foundation course, and short micro modules in Oracle Learning.</p>
-        <p>Four tracks: Systems and Vanderbilt &amp; Nashville by Day 30, People and Processes by Day 60.</p>
+        <p>What Vanderbilt expects of a manager: a short self-assessment, a 35-minute course, and micro modules in four tracks.</p>
       </div>
       <div class="comp">
         <span class="num">03</span>
         <span class="tag">Optional, recommended</span>
         <h3>Four-week cohort</h3>
-        <span class="when">After Day 60 &middot; quarterly &middot; 100 seats</span>
-        <p>Guided practice with the manager&rsquo;s own team. Each week: a core module, a learning lab, a scenario studio, and a Friday discussion.</p>
-        <p>Managers build a Manager Playbook and present it at the capstone.</p>
+        <p>Guided practice with the manager&rsquo;s own team, offered quarterly. Managers build a Manager Playbook and present it at the capstone.</p>
       </div>
       <div class="comp">
         <span class="num">04</span>
         <span class="tag">Always available</span>
         <h3>Manager Portal</h3>
-        <span class="when">From Day 1, for a career</span>
-        <p>One site with every template, policy link, and contact from the course and the cohort, plus who to call for same-day routes.</p>
-        <p>Maintained by People, Culture and Belonging.</p>
+        <p>One site with every template, policy link, and contact from the course and the cohort, including who to call.</p>
       </div>
     </div>
   </section>
 
-  <section class="two">
+  <section>
+    <p class="eyebrow">The framework</p>
+    <h2>Four categories, fifteen behaviors.</h2>
+    <p class="lead">Manager Voyage draws on a research-based framework of effective leadership behavior that organizes what strong managers do into four broad categories and fifteen specific behaviors. The Foundations course introduces these behaviors explicitly and gives managers opportunities to practice them. The cohort gives structured practice. The portal provides the tools. The survey measures how often managers report doing them.</p>
+    <div class="fw">
+      <div><b>Task-oriented</b><i>Get the work done</i><ul><li>Clarifying</li><li>Planning</li><li>Monitoring operations</li><li>Problem solving</li></ul></div>
+      <div><b>Relations-oriented</b><i>Take care of your people</i><ul><li>Supporting</li><li>Developing</li><li>Recognizing</li><li>Empowering</li></ul></div>
+      <div><b>Change-oriented</b><i>Make things better</i><ul><li>Advocating change</li><li>Envisioning change</li><li>Encouraging innovation</li><li>Collective learning</li></ul></div>
+      <div><b>External</b><i>Connect your team</i><ul><li>Networking</li><li>External monitoring</li><li>Representing</li></ul></div>
+    </div>
+  </section>
+
+  <section class="measure">
     <div>
-      <p class="eyebrow">The framework</p>
-      <h2>Four categories, fifteen behaviors.</h2>
-      <div class="fw">
-        <div><b>Task-oriented</b><i>Get the work done</i><ul><li>Clarifying</li><li>Planning</li><li>Monitoring operations</li><li>Problem solving</li></ul></div>
-        <div><b>Relations-oriented</b><i>Take care of your people</i><ul><li>Supporting</li><li>Developing</li><li>Recognizing</li><li>Empowering</li></ul></div>
-        <div><b>Change-oriented</b><i>Make things better</i><ul><li>Advocating change</li><li>Envisioning change</li><li>Encouraging innovation</li><li>Collective learning</li></ul></div>
-        <div><b>External</b><i>Connect your team</i><ul><li>Networking</li><li>External monitoring</li><li>Representing</li></ul></div>
-      </div>
-    </div>
-    <div class="measure">
       <p class="eyebrow">Measuring impact</p>
-      <h2>Reach and change.</h2>
-      <div class="rows">
-        <div class="row"><b>Reach</b><span>Share of managers enrolled, from Oracle Learning. Target: 80% of M1 to M5 managers.</span></div>
-        <div class="row"><b>Change</b><span>A ten-question survey on how often managers do the behaviors, taken before the program and 90 days after. The difference is the measure.</span></div>
-        <div class="row"><b>Then</b><span>An optional six-month follow-up, and in a later phase the same questions answered by direct reports.</span></div>
-      </div>
+      <b>Reach and change.</b>
     </div>
+    <p>Reach is the share of managers enrolled, recorded in Oracle Learning. Change is a ten-question survey on how often managers do these behaviors, taken before the program and again 90 days after. The difference in a manager&rsquo;s own answers is the measure.</p>
   </section>
 
   <section class="foot">
@@ -174,13 +137,12 @@
       <div class="stat"><b>500+</b><span>Vanderbilt managers</span></div>
       <div class="stat"><b>4,600+</b><span>Staff they lead</span></div>
       <div class="stat"><b>39</b><span>Business units, one standard</span></div>
-      <div class="stat"><b>Mar 2026</b><span>Pilot: 15 managers,<br>8 business units</span></div>
-      <div class="stat"><b>Nov 1, 2026</b><span>Wide launch,<br>first cohort of 100</span></div>
+      <div class="stat"><b>60</b><span>Days on the initial path</span></div>
     </div>
     <div class="start">
       <b>Start with <em>My voyage</em>.</b>
       <a href="https://me5231979.github.io/Manager-Voyage/dashboard/">me5231979.github.io/Manager-Voyage</a><br>
-      Questions: People, Culture and Belonging &middot; Futures Learning Hub
+      People, Culture and Belonging &middot; Futures Learning Hub
     </div>
   </section>
 
