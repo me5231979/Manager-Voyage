@@ -34,13 +34,8 @@ var NARR = window.MV_NARR || {};
 var narr = { audio:null, playing:false, key:'', auto: get('auto') !== '0', on: get('auto') !== '0', utter:null };
 var narrPos = (function(){ try{ var v = JSON.parse(get('narrpos') || '{}'); return v && typeof v === 'object' ? v : {}; }catch(e){ return {}; } })();
 function narrPosSave(){ try{ set('narrpos', JSON.stringify(narrPos)); }catch(e){} }
-function narrRemember(){
-  if(!narr.audio || !narr.key) return;
-  var a = narr.audio, t = a.currentTime || 0;
-  if(t > 2 && (!a.duration || !isFinite(a.duration) || t < a.duration - 2)) narrPos[narr.key] = Math.max(0, t - 0.6);
-  else delete narrPos[narr.key];
-  narrPosSave();
-}
+/* every play starts from the top: a page you come back to is read again from its first word */
+function narrRemember(){ }
 var bbListen = $('#bbListen'), bbListenT = $('#bbListenT'), bbAuto = $('#bbAuto'), narrToast = $('#narrToast'), toastT = null;
 function toast(msg){
   if(!narrToast) return;
@@ -53,8 +48,8 @@ function narrUI(){
   if(bbListen){
     bbListen.setAttribute('aria-pressed', narr.playing ? 'true' : 'false');
     bbListen.classList.toggle('playing', narr.playing);
-    var backAt = !narr.playing && narrPos[narrKey()] > 0;
-    var label = narr.playing ? 'Stop narration' : backAt ? 'Resume narration where it stopped' : 'Listen to this page';
+    var backAt = false;
+    var label = narr.playing ? 'Stop narration' : 'Listen to this page';
     bbListen.setAttribute('aria-label', label); bbListen.setAttribute('title', label);
     if(bbListenT) bbListenT.textContent = narr.playing ? 'Stop' : backAt ? 'Resume' : 'Listen';
   }
@@ -80,7 +75,7 @@ function narrSpeak(text){
     window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
   }catch(e){ narr.playing = false; narrUI(); }
 }
-var MEDIA_V = '1';
+var MEDIA_V = '2';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
