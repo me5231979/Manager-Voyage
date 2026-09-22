@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hiring in New York takeaway</title>
+<meta name="description" content="One-page takeaway for Vanderbilt hiring leaders with roles in New York: the four practices, the two-phase background check, the conditional offer script, salary history, and the fair interview.">
+<style>
+  @font-face { font-family: 'Libre Caslon Display'; font-weight: 400; src: url('../../assets/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Libre Caslon Text'; font-style: italic; font-weight: 400; src: url('../../assets/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 400; src: url('../../assets/fonts/inter-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 500; src: url('../../assets/fonts/inter-latin-500-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 600; src: url('../../assets/fonts/inter-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Antonio'; font-weight: 700; src: url('../../assets/fonts/antonio-latin-700-normal.woff2') format('woff2'); }
+  :root {
+    --black: #1C1C1C; --gold: #CFAE70; --oak: #946E24; --cream: #F5F3EF;
+    --ink: #1C1C1C; --ink2: #4a4640; --ink3: #7a7368; --rule: #ddd6c8; --no: #8a3b2f;
+    --serif: 'Libre Caslon Display', 'Times New Roman', serif;
+    --serif-i: 'Libre Caslon Text', 'Times New Roman', serif;
+    --body: 'Inter', Arial, sans-serif;
+    --cond: 'Antonio', Impact, sans-serif;
+  }
+  @page { size: letter; margin: 0; }
+  * { box-sizing: border-box; }
+  html { height: auto; }
+  html, body { margin: 0; padding: 0; background: var(--cream); }
+  body { width: 8.5in; height: 10.96in; overflow: hidden; font-family: var(--body); color: var(--ink); font-size: 8.6pt; line-height: 1.42; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .eyebrow { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .09em; font-size: 7.4pt; color: var(--oak); margin: 0 0 5px; }
+  em { font-family: var(--serif-i); font-style: italic; color: var(--gold); }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 12.5pt; line-height: 1.1; margin: 0 0 7px; }
+
+  .head { position: relative; background: var(--black); color: #fff; padding: .3in .5in .28in; overflow: hidden; display: grid; grid-template-columns: 1fr auto; gap: .3in; align-items: end; }
+  .head::before { content: ''; position: absolute; inset: 0; background: radial-gradient(9in 3in at 90% 0%, rgba(207,174,112,.18), transparent 60%); }
+  .head > * { position: relative; }
+  .head .eyebrow { color: var(--gold); margin-bottom: 6px; }
+  .head h1 { font-family: var(--serif); font-weight: 400; font-size: 26pt; line-height: 1; margin: 0 0 7px; }
+  .head p { margin: 0; font-size: 9pt; line-height: 1.45; color: rgba(255,255,255,.86); max-width: 5.8in; }
+  .head img { width: 1.5in; display: block; margin-bottom: 4px; }
+
+  .page { padding: .2in .5in .18in; display: grid; gap: .14in; }
+
+  /* four practices */
+  .bp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+  .bp > div { border: 1px solid var(--rule); border-radius: 5px; background: #fff; padding: 9px 10px 10px 11px; position: relative; }
+  .bp .n { font-family: var(--cond); font-weight: 700; font-size: 16pt; line-height: 1; color: var(--gold); display: block; margin-bottom: 3px; }
+  .bp b { display: block; font-family: var(--serif); font-weight: 400; font-size: 10.5pt; line-height: 1.15; color: var(--oak); margin-bottom: 3px; }
+  .bp p { margin: 0; font-size: 7.9pt; color: var(--ink2); line-height: 1.4; }
+
+  /* sequence */
+  .seq { display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr; gap: 6px; align-items: stretch; }
+  .seq .ph { border: 1px solid var(--rule); border-radius: 5px; background: #fff; padding: 8px 10px 9px; }
+  .seq .ph.offer { border: 2px solid var(--gold); }
+  .seq .ph .eyebrow { margin-bottom: 2px; }
+  .seq .ph b { display: block; font-family: var(--serif); font-weight: 400; font-size: 10.5pt; line-height: 1.15; margin-bottom: 4px; }
+  .seq .ph ul { list-style: none; margin: 0; padding: 0; }
+  .seq .ph li { font-size: 7.8pt; color: var(--ink2); padding-left: 10px; position: relative; line-height: 1.38; }
+  .seq .ph li::before { content: ''; position: absolute; left: 0; top: .5em; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+  .seq .arrow { align-self: center; text-align: center; color: var(--gold); font-family: var(--cond); font-weight: 700; font-size: 14pt; }
+
+  /* script */
+  .script { border: 2px solid var(--gold); border-radius: 5px; background: #fff; padding: 10px 14px 11px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; align-items: center; }
+  .script blockquote { margin: 0; font-family: var(--serif); font-size: 12pt; line-height: 1.3; }
+  .script blockquote em { color: var(--oak); }
+  .script .nots { font-size: 7.9pt; color: var(--ink2); line-height: 1.4; border-left: 1px solid var(--rule); padding-left: 12px; }
+  .script .nots b { display: block; font-family: var(--cond); font-weight: 700; font-size: 7.2pt; letter-spacing: .07em; text-transform: uppercase; color: var(--no); margin-bottom: 2px; }
+
+  /* two columns: salary and interview */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .box { border: 1px solid var(--rule); border-radius: 5px; background: #fff; padding: 9px 11px 10px; }
+  .box ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
+  .box li { font-size: 7.9pt; color: var(--ink); padding-left: 15px; position: relative; line-height: 1.38; }
+  .box li::before { position: absolute; left: 0; top: 0; font-family: var(--cond); font-weight: 700; }
+  .box .no li::before { content: '\2715'; color: var(--no); }
+  .box .yes li::before { content: '\2713'; color: var(--oak); }
+  .box .lab { display: block; font-family: var(--cond); font-weight: 700; font-size: 7pt; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); margin: 6px 0 3px; }
+  .box .lab:first-of-type { margin-top: 0; }
+  .box p.note { margin: 6px 0 0; font-size: 7.6pt; color: var(--ink2); line-height: 1.38; border-top: 1px solid var(--rule); padding-top: 5px; }
+  .box p.note b { color: var(--ink); }
+  .box ol { margin: 0; padding-left: 14px; display: grid; gap: 3px; }
+  .box ol li { padding-left: 0; font-size: 7.9pt; line-height: 1.38; color: var(--ink); }
+  .box ol li::before { content: none; }
+  .box ol li b { font-weight: 600; }
+
+  .foot { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; border-top: 1px solid var(--rule); padding-top: 7px; font-size: 7.4pt; color: var(--ink2); line-height: 1.4; }
+  .foot b { color: var(--ink); font-weight: 600; }
+  .foot .r { text-align: right; color: var(--ink3); }
+</style>
+</head>
+<body>
+
+<header class="head">
+  <div>
+    <p class="eyebrow">Vanderbilt University &middot; People, Culture and Belonging &middot; For hiring leaders</p>
+    <h1>Hiring in New <em>York</em>.</h1>
+    <p>The takeaway from the module. Four rules change how you interview and make an offer for a role based in New York: background checks run in two phases, the offer is conditional until they finish, salary history is off the table, and every candidate gets the same fair interview. Your recruiter runs the process. Never get ahead of it.</p>
+  </div>
+  <img src="../../assets/img/vu-lockup-white.png" alt="Vanderbilt University">
+</header>
+
+<main class="page">
+
+  <section>
+    <p class="eyebrow">Hiring leader best practices</p>
+    <div class="bp">
+      <div><span class="n">1</span><b>Timely feedback</b><p>Send your interview feedback to your recruiter within the agreed timeline.</p></div>
+      <div><span class="n">2</span><b>Recruiter alignment</b><p>Align with your recruiter on the feedback and the decision to move forward.</p></div>
+      <div><span class="n">3</span><b>Phase 1 checks</b><p>Confirm with your recruiter that the non-criminal checks are complete before any offer.</p></div>
+      <div><span class="n">4</span><b>Conditional offer</b><p>Extend the verbal offer with the required conditional script. Your recruiter sends the written one.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The sequence</p>
+    <div class="seq">
+      <div class="ph"><p class="eyebrow">Phase 1 &middot; before any offer</p><b>Non-criminal checks.</b><ul><li>References, employment and education verification</li><li>Run by Recruiting; your recruiter confirms when complete</li><li>No verbal or written offer of any kind until then</li></ul></div>
+      <div class="arrow">&rarr;</div>
+      <div class="ph offer"><p class="eyebrow">The conditional offer</p><b>Verbal from you, written from your recruiter.</b><ul><li>After Phase 1 is complete and you and your recruiter agree</li><li>You say the script, nothing more</li><li>Recruiting sends the written conditional offer</li></ul></div>
+      <div class="arrow">&rarr;</div>
+      <div class="ph"><p class="eyebrow">Phase 2 &middot; after the written offer</p><b>Criminal background check.</b><ul><li>Begins only after the written conditional offer is issued</li><li>If something comes back, Recruiting runs the Fair Chance process with the candidate</li><li>You never decide that alone</li></ul></div>
+    </div>
+  </section>
+
+  <section class="script">
+    <div>
+      <p class="eyebrow">Required verbal offer language</p>
+      <blockquote>&ldquo;We&rsquo;re excited to extend you a <em>conditional offer</em>, pending successful completion of <em>background checks</em> and <em>final onboarding steps</em>&hellip;&rdquo;</blockquote>
+    </div>
+    <div class="nots"><b>Never add</b>&ldquo;The job is yours.&rdquo; &ldquo;It&rsquo;s just a formality.&rdquo; &ldquo;You can give notice.&rdquo; A fixed start date. Each one turns a conditional offer into a promise.</div>
+  </section>
+
+  <section class="two">
+    <div class="box">
+      <p class="eyebrow">Salary history &middot; NY Labor Law 194-a</p>
+      <span class="lab">You may not</span>
+      <ul class="no"><li>Ask what a candidate earns now or earned before, directly or indirectly</li><li>Ask a reference, former employer, or recruiter for it</li><li>Use prior pay to decide whether to offer, or what to offer</li></ul>
+      <span class="lab">You may</span>
+      <ul class="yes"><li>Ask what salary the candidate expects for this role</li><li>Share the pay range for the role; it is in the posting</li><li>Base the offer on the role, market data, and internal equity</li></ul>
+      <p class="note"><b>If a candidate volunteers a number:</b> let it pass. No follow-up questions, and it stays out of the offer discussion and your notes.</p>
+    </div>
+    <div class="box">
+      <p class="eyebrow">A fair interview</p>
+      <ol>
+        <li><b>Decide before you meet anyone.</b> Four to six competencies, one behavioral question each, what a strong answer sounds like.</li>
+        <li><b>Ask everyone the same questions,</b> in the same order. Probe on their answer, not with new questions.</li>
+        <li><b>Score before you talk.</b> Rate each answer against the rubric before the panel compares notes. Note what they said, not how they seemed.</li>
+        <li><b>Feedback within the timeline,</b> to your recruiter. Phase 1 cannot start without you.</li>
+      </ol>
+      <p class="note"><b>Never asked, in any form:</b> age or graduation year, family plans or children, citizenship or origin (work authorization is fine), religion, disability or health, arrests not pending or any sealed record, credit, salary history.</p>
+    </div>
+  </section>
+
+  <section class="foot">
+    <div><b>Questions:</b> your recruiter first, then a PCB HelpDesk ticket. Ask your recruiter for the New York Background Check Legislation handout. This page is guidance, not legal advice.</div>
+    <div class="r">Vanderbilt University &middot; Futures Learning Hub<br>People, Culture and Belonging</div>
+  </section>
+
+</main>
+</body>
+</html>
