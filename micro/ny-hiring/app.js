@@ -62,7 +62,7 @@ function narrStop(){
 }
 /* no synthetic fallback: if a clip cannot load, say so rather than read it in a browser voice */
 function narrSpeak(text){ narr.playing = false; narrUI(); toast('This page\'s narration could not load. Check your connection and tap Listen.'); }
-var MEDIA_V = '3';
+var MEDIA_V = '4';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
