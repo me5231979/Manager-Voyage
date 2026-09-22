@@ -1,6 +1,6 @@
-name: Fetch one audio sample
-# Downloads a single Runway clip into assets/audio/foundation so it can be
-# checked before a full media build. Write [{"name","url"}, ...] to .github/sample-url.json and push to main.
+name: Fetch audio clips
+# Downloads generated clips into assets/audio/<dir> (default foundation), levels
+# them, and publishes. Write [{"name","url","dir"?}, ...] to .github/sample-url.json and push to main.
 on:
   push:
     branches: [main]
@@ -16,23 +16,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { ref: main }
-      - name: Download
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Download and level
         run: |
           set -e
           python3 - <<'PY'
-          import json, re, subprocess
+          import json, os, re, subprocess
           d = json.load(open('.github/sample-url.json'))
           items = d if isinstance(d, list) else [d]
           for it in items:
               assert re.fullmatch(r'[A-Za-z0-9-]+', it['name']), it['name']
-              subprocess.run(['curl', '-fsSL', '-o', 'assets/audio/foundation/%s.mp3' % it['name'], it['url']], check=True)
-              print('fetched', it['name'])
+              sub = it.get('dir', 'foundation'); assert re.fullmatch(r'[a-z0-9-]+', sub), sub
+              os.makedirs('assets/audio/' + sub, exist_ok=True)
+              raw = '/tmp/%s.raw' % it['name']
+              subprocess.run(['curl', '-fsSL', '-o', raw, it['url']], check=True)
+              out = 'assets/audio/%s/%s.mp3' % (sub, it['name'])
+              if it.get('level', True):
+                  subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', raw, '-af', 'highpass=f=70,loudnorm=I=-16:TP=-1.5:LRA=11', '-ar', '44100', '-c:a', 'libmp3lame', '-b:a', '192k', out], check=True)
+              else:
+                  os.replace(raw, out)
+              print('fetched', out)
           PY
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/audio/foundation
+          git add assets/audio
           git commit -m "Add audio samples from sample-url.json" || exit 0
           git pull --rebase -X theirs origin main
           git push origin HEAD:main
