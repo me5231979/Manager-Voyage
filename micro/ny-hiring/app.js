@@ -1,4 +1,4 @@
-/* ══════════ MANAGER VOYAGE · HIRING IN NEW YORK · app engine ══════════
+/* ══════════ HIRING IN NEW YORK · app engine ══════════
    Progress (eight tracked activities), the activities (myth or fact, put
    the steps in order, the offer call, two ask-or-avoid sorts, three
    situations, the quick check), page narration, and the Oracle hookup.
@@ -224,7 +224,7 @@ function allDone(){
   var score = get('quiz-score'), sc = window.MVScorm;
   try{ if(sc && sc.connected){ if(score !== null && sc.score) sc.score(parseInt(score, 10), 5); if(sc.complete) sc.complete(); } }catch(e){}
   try{ if(window.MVOracle && window.MVOracle.reportCompletion) window.MVOracle.reportCompletion('MM-NYH', { score: score ? parseInt(score, 10) : null, max: 5, course: 'Hiring in New York' }); }catch(e){}
-  toast('Module complete. Mark it done on My voyage if it is on your list.');
+  toast('Module complete.');
 }
 
 /* ══════════ ask-or-avoid and myth-or-fact drills ══════════ */
@@ -443,7 +443,7 @@ $$('[data-copytext]').forEach(function(b){
 });
 
 /* links that PCB can set in config.js once confirmed */
-(function(){ var C = window.MV_CONFIG || {}; var h = $('#handoutLink'); if(h && C.nyBackgroundHandoutUrl) h.href = C.nyBackgroundHandoutUrl; var d = $('#helpdeskLink'); if(d && C.helpdeskUrl) d.href = C.helpdeskUrl; })();
+(function(){ var C = window.MV_CONFIG || {}; var h = $('#handoutSlot'); if(h && C.nyBackgroundHandoutUrl) h.innerHTML = '<a href="' + esc(C.nyBackgroundHandoutUrl) + '" target="_blank" rel="noopener">Open the handout</a>'; var d = $('#helpdeskLink'); if(d && C.helpdeskUrl) d.href = C.helpdeskUrl; })();
 
 progRender();
 window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, DRILLS: DRILLS };
