@@ -31,7 +31,7 @@ $$('.reveal').forEach(function(el){ el.classList.add('in'); });
    words in narration-scripts.js. There is no synthetic fallback. */
 var NARR = window.MV_NARR || {};
 var narr = { audio:null, playing:false, key:'', auto: get('auto') !== '0', on: get('auto') !== '0', utter:null };
-var narrPos = (function(){ try{ var v = JSON.parse(get('narrpos') || '{}'); return v && typeof v === 'object' ? v : {}; }catch(e){ return {}; } })();
+var narrPos = {}; set('narrpos', null);   /* positions saved by an earlier version are cleared: every clip starts from its first word */
 function narrPosSave(){ try{ set('narrpos', JSON.stringify(narrPos)); }catch(e){} }
 /* every play starts from the top: a page you come back to is read again from its first word */
 function narrRemember(){ }
@@ -73,11 +73,6 @@ function narrPlay(k){
   a.addEventListener('ended', function(){ if(narr.audio === a){ narr.audio = null; narr.playing = false; delete narrPos[k]; narrPosSave(); narrUI(); } });
   a.addEventListener('error', function(){ if(narr.audio === a){ narr.audio = null; narrSpeak(text); } });
   narr.audio = a;
-  var backTo = narrPos[k] || 0;
-  if(backTo > 0){
-    var seek = function(){ try{ if(narr.audio === a && (!a.duration || !isFinite(a.duration) || backTo < a.duration - 1)) a.currentTime = backTo; }catch(e){} };
-    if(a.readyState >= 1) seek(); else a.addEventListener('loadedmetadata', seek);
-  }
   var pr = a.play();
   if(pr && pr.catch) pr.catch(function(err){
     if(narr.audio !== a) return;
