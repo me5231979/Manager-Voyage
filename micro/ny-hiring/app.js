@@ -28,8 +28,7 @@ $$('.reveal').forEach(function(el){ el.classList.add('in'); });
 
 /* ══════════ NARRATION: Listen (this page) and Auto (every page) ══════════
    Plays ../../assets/audio/ny-hiring/<key>-<n>.mp3, recorded from the exact
-   words in narration-scripts.js. If the file is missing (or blocked inside
-   an LMS), the browser's own speech synthesis reads the same words. */
+   words in narration-scripts.js. There is no synthetic fallback. */
 var NARR = window.MV_NARR || {};
 var narr = { audio:null, playing:false, key:'', auto: get('auto') !== '0', on: get('auto') !== '0', utter:null };
 var narrPos = (function(){ try{ var v = JSON.parse(get('narrpos') || '{}'); return v && typeof v === 'object' ? v : {}; }catch(e){ return {}; } })();
@@ -61,21 +60,9 @@ function narrStop(){
   if(window.speechSynthesis){ try{ window.speechSynthesis.cancel(); }catch(e){} }
   narr.utter = null; narr.playing = false; narrUI();
 }
-function narrSpeak(text){
-  if(!window.speechSynthesis || !window.SpeechSynthesisUtterance){ narr.playing = false; narrUI(); toast('Narration is not available in this browser.'); return; }
-  try{
-    var u = new SpeechSynthesisUtterance(text);
-    u.rate = 1; u.pitch = 1; u.lang = 'en-US';
-    var voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
-    var pick = voices.filter(function(v){ return /^en(-|_)?(US|GB)?/i.test(v.lang) && /Google|Samantha|Karen|Daniel|Serena|Zira|Aria|Natural/i.test(v.name); })[0] || voices.filter(function(v){ return /^en/i.test(v.lang); })[0];
-    if(pick) u.voice = pick;
-    u.onend = function(){ if(narr.utter === u){ narr.utter = null; narr.playing = false; narrUI(); } };
-    u.onerror = function(){ if(narr.utter === u){ narr.utter = null; narr.playing = false; narrUI(); } };
-    narr.utter = u; narr.playing = true; narrUI();
-    window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
-  }catch(e){ narr.playing = false; narrUI(); }
-}
-var MEDIA_V = '2';
+/* no synthetic fallback: if a clip cannot load, say so rather than read it in a browser voice */
+function narrSpeak(text){ narr.playing = false; narrUI(); toast('This page\'s narration could not load. Check your connection and tap Listen.'); }
+var MEDIA_V = '3';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
