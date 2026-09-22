@@ -110,6 +110,12 @@ html.paged .sec-head.tight{ margin-bottom:clamp(10px,1.6vh,18px); }
 .bp p{ font-size:.86rem; color:var(--tx2); line-height:1.45; }
 @media (max-width:900px){ .bp{ grid-template-columns:1fr 1fr; } }
 @media (max-width:560px){ .bp{ grid-template-columns:1fr; } }
+/* the printable takeaway, called out */
+.takeaway{ display:grid; grid-template-columns:auto 1fr auto; gap:16px; align-items:center; margin-top:14px; border:2px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:14px 18px; }
+.takeaway svg{ width:36px; height:36px; color:var(--eyebrow); }
+.takeaway b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.2rem; line-height:1.15; margin-bottom:3px; }
+.takeaway p{ font-size:.9rem; color:var(--tx2); line-height:1.4; }
+@media (max-width:700px){ .takeaway{ grid-template-columns:auto 1fr; } .takeaway .btn{ grid-column:1 / -1; } }
 </style>
 </head>
 <body>
@@ -314,11 +320,15 @@ html.paged .sec-head.tight{ margin-bottom:clamp(10px,1.6vh,18px); }
       <div role="listitem"><span class="bp-n" aria-hidden="true">4</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><b>Conditional offer</b><p>Extend the verbal offer with the required conditional script. Your recruiter sends the written one.</p></div>
     </div>
     <p class="hinttxt" style="margin-top:10px">Then Phase 2 runs. If something comes back, Recruiting runs the Fair Chance process with the candidate. Nothing about salary history, at any point.</p>
+    <div class="takeaway">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6"/><path d="m9 15 3 3 3-3"/></svg>
+      <div><b>Printable takeaway</b><p>The sequence, the verbal offer script, the salary history rules, and the fair interview on one page. Keep it close for your next hire.</p></div>
+      <a class="btn btn-gold btn-sm" href="Hiring-in-New-York-Takeaway.pdf" target="_blank" rel="noopener">Download the PDF</a>
+    </div>
     <ul class="res" aria-label="Resources">
       <li><b>New York Background Check Legislation handout</b>The one-page reference from Recruiting. <span id="handoutSlot">Ask your recruiter for the current copy.</span></li>
       <li><b>Your recruiter</b>First call for any question about a New York hire, and the person who runs Phase 1, the written offer, and Phase 2.</li>
       <li><b>PCB HelpDesk</b>Submit a ticket for anything your recruiter cannot answer. <a id="helpdeskLink" href="https://www.vanderbilt.edu/pcb/" target="_blank" rel="noopener">Open the HelpDesk</a></li>
-      <li><b>Printable takeaway</b>The sequence, the script, and the do-not-ask lists on one page. <a href="Hiring-in-New-York-Takeaway.pdf" target="_blank" rel="noopener">Open the PDF</a></li>
       <li><b>The law itself</b><a href="https://www.nyc.gov/site/cchr/media/fair-chance-faqs.page" target="_blank" rel="noopener">NYC Fair Chance Act</a> &middot; <a href="https://www.nysenate.gov/legislation/laws/LAB/194-A" target="_blank" rel="noopener">Labor Law 194-a</a> &middot; <a href="https://dol.ny.gov/pay-transparency" target="_blank" rel="noopener">Pay transparency</a></li>
     </ul>
     <div class="mission-charge reveal">
@@ -332,6 +342,7 @@ html.paged .sec-head.tight{ margin-bottom:clamp(10px,1.6vh,18px); }
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;align-items:center">
       <button type="button" class="btn btn-gold btn-sm md-btn" data-prog="next" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this module</span></button>
+      <a class="btn btn-ghost btn-sm" href="Hiring-in-New-York-Takeaway.pdf" target="_blank" rel="noopener">Printable takeaway (PDF)</a>
     </div>
   </div>
 </section>
@@ -368,7 +379,7 @@ html.paged .sec-head.tight{ margin-bottom:clamp(10px,1.6vh,18px); }
 <script src="../../assets/js/config.js?v=20260912p"></script>
 <script src="../../assets/js/scorm.js?v=20260912p"></script>
 <script src="../../assets/js/oracle.js?v=20260912p"></script>
-<script src="narration-scripts.js?v=3"></script>
+<script src="narration-scripts.js?v=4"></script>
 <script src="../../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=2"></script>
 <script src="app.js?v=5"></script>
