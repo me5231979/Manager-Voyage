@@ -5,7 +5,7 @@ name: Build narration with ElevenLabs
 on:
   push:
     branches: [main]
-    paths: ['.github/tts.json', 'foundation/narration-scripts.js', 'scripts/build-tts.py', 'scripts/build-media.py']
+    paths: ['.github/tts.json', 'foundation/narration-scripts.js', 'micro/*/narration-scripts.js', 'scripts/build-tts.py', 'scripts/build-media.py']
   workflow_dispatch:
 permissions:
   contents: write
@@ -34,7 +34,7 @@ jobs:
           echo "commit scope: $scope"
           case "$scope" in
             all) git add assets .github/tts-cache.json; msg="Narration built with ElevenLabs (from tts.json and narration-scripts.js)";;
-            source) git add assets/audio/foundation/source .github/tts-cache.json; msg="ElevenLabs source clips generated so far (build not finished)";;
+            source) git add assets/audio/*/source .github/tts-cache.json; msg="ElevenLabs source clips generated so far (build not finished)";;
             *) echo "nothing to commit"; exit 0;;
           esac
           if git diff --cached --quiet; then echo "No changes"; else git commit -m "$msg"; git pull --rebase -X theirs origin main; git push origin HEAD:main; fi

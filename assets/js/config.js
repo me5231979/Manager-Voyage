@@ -46,6 +46,9 @@ window.MV_CONFIG = {
   profilePollMinutes: 10,             /* re-check completions this often while the page is open */
 
   /* Manager Portal link. */
+  /* Hiring in New York micro module: the Recruiting handout and the PCB HelpDesk. Null falls back to the Manager Portal. */
+  nyBackgroundHandoutUrl: null,
+  helpdeskUrl: null,
   portalUrl: 'https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/',
 
   /* Cohort seat request link. */

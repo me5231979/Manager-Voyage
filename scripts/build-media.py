@@ -15,7 +15,7 @@ import json, os, subprocess, sys, tempfile, urllib.request, time, shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 J = os.environ.get('MV_MANIFEST') or os.path.join(ROOT, '.github', 'media-urls.json')
-AUD = os.path.join(ROOT, 'assets', 'audio', 'foundation')
+AUD = os.environ.get('MV_AUDIO_DIR') or os.path.join(ROOT, 'assets', 'audio', 'foundation')
 VID = os.path.join(ROOT, 'assets', 'video', 'foundation')
 IMG = os.path.join(ROOT, 'assets', 'img', 'foundation')
 for d in (AUD, VID, IMG): os.makedirs(d, exist_ok=True)
