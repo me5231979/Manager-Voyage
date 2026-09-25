@@ -825,29 +825,30 @@ var IDEAS = [
 
 /* ══════════ "Your turn": a black callout above every activity, gold check when done ══════════ */
 var TURNS = [
-  { sel:'#shiftDrill',  prog:'shift',    text:'Sort six things. Tap yours, your team member’s, or another office.' },
-  { sel:'#ideasBox',    prog:'safe',     text:'Read each idea, then apply it in the moment below it. Tap the response you would give, and try the other two.' },
-  { sel:'#yearMap',     prog:'year',     text:'Tap each group to open it and hear it.' },
-  { sel:'#simBox',      prog:null,       text:'Pick a situation to see the first move and who handles what.' },
-  { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations. Tap the first thing you would do.' },
-  { sel:'#fwMap',       prog:'welcome',  text:'Tap a card to hear its intro, or open the category. The pills above move between them.' },
-  { sel:'#task .flip-grid',      prog:'task',      text:'Flip each card: what to stop, what to do instead.' },
-  { sel:'#relations .flip-grid', prog:'relations', text:'Flip each card: what to stop, what to do instead.' },
-  { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card: what to stop, what to do instead.' },
-  { sel:'#external .flip-grid',  prog:'external',  text:'Flip each card: what to stop, what to do instead.' },
-  { sel:'#jobsCalls',   prog:'yourcall', text:'Tap the response you would give, then try the other two.' },
-  { sel:'#meaChoice',   prog:'survey',   text:'Tap what is true for you.' },
-  { sel:'#quizBox',     prog:'quiz',     text:'Five questions. Four of five finishes the course.' },
-  { sel:'#tell-leader', prog:'nextstep', text:'Copy the message, send it to your manager, then mark this done.' }
+  { sel:'#shiftDrill',  prog:'shift',    text:'Sort six things: yours, a team member’s, or another office' },
+  { sel:'#ideasBox',    prog:'safe',     text:'Read each idea, then try its moment' },
+  { sel:'#yearMap',     prog:'year',     text:'Tap each group to open it' },
+  { sel:'#simBox',      prog:null,       text:'Pick a situation' },
+  { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations' },
+  { sel:'#fwMap',       prog:'welcome',  text:'Tap a card, or open a category' },
+  { sel:'#task .flip-grid',      prog:'task',      text:'Flip each card' },
+  { sel:'#relations .flip-grid', prog:'relations', text:'Flip each card' },
+  { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card' },
+  { sel:'#external .flip-grid',  prog:'external',  text:'Flip each card' },
+  { sel:'#jobsCalls',   prog:'yourcall', text:'Try all three responses in each' },
+  { sel:'#meaChoice',   prog:'survey',   text:'Tap what is true for you' },
+  { sel:'#quizBox',     prog:'quiz',     text:'Four of five finishes the course' },
+  { sel:'#tell-leader', prog:'nextstep', text:'Copy the message, send it, then mark this done' }
 ];
-function turnHTML(t){ return '<div class="turn"' + (t.prog ? ' data-turn="' + t.prog + '"' : '') + ' role="note"><span class="t-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div><span class="mono">Your turn</span><p>' + esc(t.text) + '</p></div></div>'; }
+function turnHTML(t){ return '<p class="v-task"' + (t.prog ? ' data-task="' + t.prog + '"' : '') + '>' + t.text + '</p>'; }
 TURNS.forEach(function(t){
   var els = t.all ? $$(t.sel) : [$(t.sel)].filter(Boolean);
   /* wrap the activity so the callout sits above it without taking a grid cell of its own */
   els.forEach(function(el){ var wrap = document.createElement('div'); wrap.className = 'turn-wrap'; el.parentNode.insertBefore(wrap, el); wrap.innerHTML = turnHTML(t); wrap.appendChild(el);
     if(FLIP_PAGES.indexOf(t.prog) >= 0){ var st = document.createElement('p'); st.className = 'hinttxt flip-status'; st.setAttribute('role', 'status'); st.setAttribute('aria-live', 'polite'); st.textContent = '0 of ' + $$('.flip-btn', el).length + ' cards flipped.'; wrap.appendChild(st); } });
 });
-function turnDone(k){ $$('.turn[data-turn="' + k + '"]').forEach(function(t){ t.classList.add('done'); t.querySelector('.t-ic').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>'; t.querySelector('.mono').textContent = 'Done'; }); }
+function turnDone(k){ $$('.v-task[data-task="' + k + '"]').forEach(function(t){ t.classList.add('done'); }); }
+window.turnDone = turnDone;
 SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
 
 /* ══════════ recommended learning: page strips, the keep-learning page, the situation simulator ══════════ */
