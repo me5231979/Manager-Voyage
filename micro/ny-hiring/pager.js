@@ -18,7 +18,8 @@ try{
     { sel:'#interview',       key:'interview', label:'A fair interview',        mode:'whole' },
     { sel:'#yourcall',        key:'yourcall',  label:'Your call',               mode:'whole' },
     { sel:'#quiz',            key:'quiz',      label:'Quick check',             mode:'whole' },
-    { sel:'#next',            key:'next',      label:'Next steps',              mode:'whole', extras:['footer'] }
+    { sel:'#next',            key:'next',      label:'Next steps',              mode:'whole' },
+    { sel:'#end',             key:'end',       label:'The end',                 mode:'whole', extras:['footer'] }
   ];
   var TRACKED = [
     ['why','01','Why the rules exist'], ['sequence','02','The sequence'], ['offer','03','The conditional offer'], ['salary','04','Salary history'],

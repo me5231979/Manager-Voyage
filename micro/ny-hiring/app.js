@@ -62,7 +62,7 @@ function narrStop(){
 }
 /* no synthetic fallback: if a clip cannot load, say so rather than read it in a browser voice */
 function narrSpeak(text){ narr.playing = false; narrUI(); toast('This page\'s narration could not load. Check your connection and tap Listen.'); }
-var MEDIA_V = '4';
+var MEDIA_V = '5';
 function narrPlay(k){
   k = k || narrKey(); var text = NARR[k];
   narrStop();
@@ -94,7 +94,7 @@ if(bbAuto) bbAuto.addEventListener('click', function(){
 document.addEventListener('chart:page', function(){ if(narr.auto) narrPlay(); else if(narr.playing) narrStop(); narrUI(); });
 /* tapping into an activity stops the narration, so the two never talk over each other */
 document.addEventListener('click', function(e){
-  if(e.target.closest('.scn button[data-o], [data-drill] button, .order-list button, .kq button, .md-btn, .cq-nav button')){ if(narr.playing) narrStop(); }
+  if(e.target.closest('.scn button[data-o], [data-drill] button, .order-list button, .kq button, .md-btn, .cq-nav button, #commitList button')){ if(narr.playing) narrStop(); }
 });
 if(narr.auto && window.chartPager) window.setTimeout(function(){ narrPlay(); }, 300);
 narrUI();
@@ -128,6 +128,7 @@ function progRender(changedKey, nowDone){
   if(progSum) progSum.textContent = doneN === total ? 'All ' + total + ' activities complete.' : doneN + ' of ' + total + ' activities complete. ' + left + ' left; each row is a shortcut.';
   SECTIONS.forEach(function(s){
     var done = progIs(s.k);
+    if(done) turnDone(s.k);
     var row = progList ? progList.querySelector('[data-prog-row="' + s.k + '"]') : null;
     if(row){
       row.classList.toggle('done', done);
@@ -162,6 +163,7 @@ function bbDoneSync(){
 }
 if(bbDoneBtn) bbDoneBtn.addEventListener('click', function(){ var k = bbDoneBtn.getAttribute('data-prog'); if(k) progToggle(k); });
 document.addEventListener('chart:page', bbDoneSync);
+function turnDone(k){ $$('.v-task[data-task="' + k + '"]').forEach(function(t){ t.classList.add('done'); }); }
 function progDone(k){ if(progIs(k)) return; progWrite(k, true); progRender(k, true); }
 function progToggle(k){ var v = !progIs(k); progWrite(k, v); progRender(k, v); }
 function progOpen(open){ if(!progPanel || !progBtn) return; progPanel.hidden = !open; progBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
@@ -178,7 +180,8 @@ var resetBtn = $('#progReset');
 if(resetBtn) resetBtn.addEventListener('click', function(){
   if(!window.confirm('Reset your progress in this module?')) return;
   SECTIONS.forEach(function(s){ progWrite(s.k, false); });
-  set('quiz-score', null); narrPos = {}; narrPosSave();
+  set('quiz-score', null); set('commit', null); set('done-seen', null); doneSeen = false; narrPos = {}; narrPosSave();
+  $$('.v-task.done').forEach(function(t){ t.classList.remove('done'); }); $$('#commitList button[data-c]').forEach(function(b){ b.setAttribute('aria-checked', 'false'); });
   progRender(); toast('Progress reset.');
 });
 
@@ -197,12 +200,75 @@ function scormAdopt(){
 }
 window.addEventListener('mv-scorm-connected', scormAdopt);
 if(window.MVScorm && window.MVScorm.connected) scormAdopt();
+var doneSeen = get('done-seen') === '1', modalReturn = null;
 function allDone(){
   var score = get('quiz-score'), sc = window.MVScorm;
   try{ if(sc && sc.connected){ if(score !== null && sc.score) sc.score(parseInt(score, 10), 5); if(sc.complete) sc.complete(); } }catch(e){}
   try{ if(window.MVOracle && window.MVOracle.reportCompletion) window.MVOracle.reportCompletion('MM-NYH', { score: score ? parseInt(score, 10) : null, max: 5, course: 'Hiring in New York' }); }catch(e){}
-  toast('Module complete.');
+  if(doneSeen) return;
+  doneSeen = true; set('done-seen', '1');
+  window.setTimeout(modalShow, reduce ? 0 : 450);
 }
+function modalShow(){
+  var m = $('#oracleModal'); if(!m || !m.hidden) return;
+  narrStop();
+  var ae = document.activeElement; modalReturn = (ae && ae !== document.body) ? ae : null;
+  m.hidden = false;
+  if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); });
+  document.body.classList.add('oracle-open');
+  var go = $('#oracleGo'); if(go) go.focus();
+}
+function modalHide(){
+  var m = $('#oracleModal'); if(!m || m.hidden) return;
+  m.classList.remove('open'); document.body.classList.remove('oracle-open');
+  window.setTimeout(function(){ m.hidden = true; }, reduce ? 0 : 260);
+  if(modalReturn && modalReturn.focus){ try{ modalReturn.focus(); }catch(e){} } modalReturn = null;
+}
+(function(){
+  var go = $('#oracleGo'); if(go) go.addEventListener('click', modalHide);
+  var ov = $('#oracleModal'); if(ov) ov.addEventListener('click', function(e){ if(e.target === ov) modalHide(); });
+  document.addEventListener('keydown', function(e){
+    var m = $('#oracleModal'); if(!m || m.hidden) return;
+    if(e.key === 'Escape'){ modalHide(); return; }
+    if(e.key !== 'Tab') return;
+    var items = $$('a[href], button:not([disabled])', m); if(!items.length) return;
+    var first = items[0], last = items[items.length - 1], active = document.activeElement, idx = items.indexOf(active);
+    if(idx === -1){ e.preventDefault(); first.focus(); }
+    else if(e.shiftKey && active === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && active === last){ e.preventDefault(); first.focus(); }
+  });
+})();
+
+/* ══════════ next steps: the four practices, tapped to commit ══════════ */
+var COMMITS = [
+  ['Timely feedback', 'Send your interview feedback to your recruiter within the agreed timeline.'],
+  ['Recruiter alignment', 'Align with your recruiter on the feedback and the decision to move forward.'],
+  ['Phase 1 checks', 'Confirm with your recruiter that the non-criminal checks are complete before any offer.'],
+  ['Conditional offer', 'Extend the verbal offer with the required conditional script. Your recruiter sends the written one.']
+];
+(function(){
+  var list = $('#commitList'), status = $('#commitStatus'); if(!list) return;
+  var on = (function(){ try{ var v = JSON.parse(get('commit') || '[]'); return Array.isArray(v) ? v : []; }catch(e){ return []; } })();
+  list.innerHTML = COMMITS.map(function(t, i){ return '<button type="button" role="checkbox" aria-checked="false" data-c="' + i + '"><span class="cb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><b>' + esc(t[0]) + '</b><small>' + esc(t[1]) + '</small></button>'; }).join('');
+  function paint(){
+    $$('button[data-c]', list).forEach(function(b){ b.setAttribute('aria-checked', on[+b.getAttribute('data-c')] ? 'true' : 'false'); });
+    var n = on.filter(Boolean).length;
+    if(status) status.textContent = n + ' of ' + COMMITS.length + ' committed.' + (n === COMMITS.length ? ' Activity complete.' : '');
+    if(n === COMMITS.length) progDone('next');
+  }
+  list.addEventListener('click', function(e){ var b = e.target.closest('button[data-c]'); if(!b) return; var i = +b.getAttribute('data-c'); on[i] = !on[i]; set('commit', JSON.stringify(on)); paint(); });
+  paint();
+})();
+
+/* ══════════ exit: close the window when the LMS opened it, otherwise back to the start ══════════ */
+(function(){
+  var b = $('#exitBtn'); if(!b) return;
+  b.addEventListener('click', function(){
+    narrStop();
+    try{ window.close(); }catch(e){}
+    window.setTimeout(function(){ if(window.chartPager) window.chartPager.go(0, { focus:true }); toast('You can close this tab.'); }, 200);
+  });
+})();
 
 /* ══════════ ask-or-avoid and myth-or-fact drills ══════════ */
 var DRILLS = {
@@ -420,7 +486,7 @@ $$('[data-copytext]').forEach(function(b){
 });
 
 /* links that PCB can set in config.js once confirmed */
-(function(){ var C = window.MV_CONFIG || {}; var h = $('#handoutSlot'); if(h && C.nyBackgroundHandoutUrl) h.innerHTML = '<a href="' + esc(C.nyBackgroundHandoutUrl) + '" target="_blank" rel="noopener">Open the handout</a>'; var d = $('#helpdeskLink'); if(d && C.helpdeskUrl) d.href = C.helpdeskUrl; })();
+(function(){ var C = window.MV_CONFIG || {}; var h = $('#handoutSlot'); if(h && C.nyBackgroundHandoutUrl) h.innerHTML = '<a href="' + esc(C.nyBackgroundHandoutUrl) + '" target="_blank" rel="noopener">Open the handout</a>.'; var d = $('#helpdeskLink'); if(d && C.helpdeskUrl) d.href = C.helpdeskUrl; })();
 
 progRender();
 window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, DRILLS: DRILLS };
