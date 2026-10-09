@@ -39,7 +39,8 @@ try{ var dp = JSON.parse(localStorage.getItem('mv.manager.v1') || '{}'); if(dp.n
 try{ var q = new URLSearchParams(location.search); if(q.get('name')) profile.name = q.get('name'); if(q.get('state')) profile.state = String(q.get('state')).toUpperCase(); }catch(e){}
 function paintHello(){
   var h = $('#heroHello');
-  if(h) h.textContent = profile.name ? 'Welcome aboard, ' + firstName(profile.name) + '.' : 'Welcome aboard.';
+  /* name agnostic: the greeting never shows a learner name, whatever the profile holds */
+  if(h) h.textContent = 'Welcome aboard.';
 }
 paintHello();
 
