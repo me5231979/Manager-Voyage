@@ -46,15 +46,70 @@
 .v-hero .hero-media{ z-index:0; } .v-hero .hero-media::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(28,28,28,.25) 0%, rgba(28,28,28,.5) 45%, #1C1C1C 100%); }
 /* each topic: the heading and the why beside the activity, supporting detail full width below */
 @media (min-width:1001px){
-  .v-stage{ align-items:start; row-gap:clamp(18px,3vh,34px); }
+  .v-stage{ align-items:start; row-gap:clamp(16px,2.6vh,28px); grid-template-rows:auto auto minmax(0,1fr); }
   .v-stage > .v-copy{ display:contents; }
   .v-stage > .v-copy > .v-h{ grid-column:1; grid-row:1; }
-  .v-stage > .v-copy > .v-why{ grid-column:1; grid-row:2; margin-top:0; align-self:start; }
-  .v-stage > .v-act{ grid-column:2; grid-row:1 / span 2; align-self:center; }
-  .v-stage > .v-copy > :not(.v-h):not(.v-why){ grid-column:1 / -1; margin-top:0; }
-  .v-stage > .v-copy > .v-why{ max-width:46ch; }
+  .v-stage > .v-copy > .v-why{ grid-column:1; grid-row:2; margin-top:0; align-self:start; max-width:46ch; }
+  .v-stage > .v-copy > .v-side{ grid-column:1; grid-row:3; align-self:start; margin-top:0; }
+  .v-stage > .v-act{ grid-column:2; grid-row:1 / span 3; align-self:start; }
+  .v-stage > .v-copy > :not(.v-h):not(.v-why):not(.v-side){ grid-column:1 / -1; margin-top:0; }
   html.paged .v-copy .isnot{ grid-template-columns:repeat(3,1fr); gap:12px 22px; }
+  html.paged .page > section.v-sec{ justify-content:flex-start; padding-top:clamp(26px,4.5vh,52px); }
 }
+/* up next: one button at the end of every page */
+.v-next{ display:flex; align-items:center; justify-content:flex-end; gap:14px; margin-top:clamp(22px,3.5vh,40px); padding-top:16px; border-top:1px solid var(--bd); }
+.v-next .v-label{ color:var(--tx3); }
+.v-next .btn svg{ width:18px; height:18px; margin-left:8px; }
+/* the situations rail beside a stepper */
+.cq-rail{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.cq-rail button{ width:100%; display:grid; grid-template-columns:30px 1fr auto; align-items:center; gap:10px; text-align:left; background:var(--card); border:1px solid var(--bd); border-radius:var(--r); color:var(--tx2); padding:9px 12px; font:inherit; font-size:.92rem; cursor:pointer; }
+.cq-rail button b{ font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.06em; color:var(--eyebrow); }
+.cq-rail button .ok{ width:18px; height:18px; border-radius:50%; border:1px solid var(--bdg); display:grid; place-items:center; font-size:.7rem; color:transparent; }
+.cq-rail button[aria-current="true"]{ border-color:var(--eyebrow); color:var(--tx); }
+.cq-rail button.found .ok{ background:var(--eyebrow); border-color:var(--eyebrow); color:var(--btn-tx); }
+.cq-rail button:hover{ border-color:var(--eyebrow); }
+/* the four categories: a compass rose and one panel */
+.rose-grid{ display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:clamp(16px,2.4vw,32px); align-items:center; }
+@media (max-width:900px){ .rose-grid{ grid-template-columns:1fr; } }
+.rose-grid .v-rose{ margin:0 auto; }
+.rose-grid > .turn-wrap{ display:grid; justify-items:center; }
+.rose-grid > .turn-wrap > .v-task{ justify-self:start; }
+.v-rose .pt{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; padding:9px 13px; min-height:44px; cursor:pointer; white-space:nowrap; }
+.v-rose .pt.n{ left:50%; top:4%; } .v-rose .pt.e{ left:94%; top:50%; } .v-rose .pt.s{ left:50%; top:96%; } .v-rose .pt.w{ left:6%; top:50%; }
+.v-rose .pt.seen{ border-color:var(--eyebrow); }
+.v-rose .pt[aria-selected="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.v-rose .hub-text{ font-family:var(--cond); font-weight:700; font-size:11px; letter-spacing:.08em; text-transform:uppercase; fill:var(--eyebrow); text-anchor:middle; }
+.fw-panel{ border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:clamp(14px,1.8vw,22px); min-height:320px; }
+.fw-panel .fw-card{ border:0; background:none; padding:0; display:block; }
+.fw-panel .fw-card ul{ display:grid; }
+.fw-panel .fw-card .hint{ display:none; }
+.fw-panel .fw-card strong{ font-size:1.5rem; }
+.fw-panel .fw-card[hidden], .fw-panel .fw[hidden], .fw-panel .fw-video[hidden]{ display:none !important; }
+.fw-panel .fw{ grid-template-columns:1fr; margin-top:0; }
+.rose-grid{ align-items:start; }
+.fw-panel .fw-back{ margin-top:14px; background:none; border:0; color:var(--eyebrow); font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; padding:0; }
+.fw-panel .fw-back:hover{ text-decoration:underline; }
+.fw-panel .fw-hint{ margin-top:10px; color:var(--tx3); font-size:.86rem; }
+/* mission: areas of focus open one at a time */
+.op-grid details summary{ list-style:none; cursor:pointer; }
+.op-grid details summary::-webkit-details-marker{ display:none; }
+.op-grid details summary b{ margin-bottom:0; }
+.op-grid details summary b::after{ content:" +"; color:var(--eyebrow); }
+.op-grid details[open] summary b::after{ content:" \2212"; }
+.op-grid details p{ margin-top:8px; }
+/* keep learning: one track open at a time */
+.track-acc{ border-bottom:1px solid var(--bd); }
+.track-acc summary{ list-style:none; cursor:pointer; padding:12px 0; display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; }
+.track-acc summary::-webkit-details-marker{ display:none; }
+.track-acc summary::after{ content:"+"; margin-left:auto; color:var(--eyebrow); font-family:var(--cond); font-size:1.3rem; line-height:1; }
+.track-acc[open] summary::after{ content:"\2212"; }
+.track-acc summary .mono{ color:var(--vu-gold); } .track-acc summary b{ font-family:var(--serif); font-weight:400; font-size:1.05rem; }
+.track-acc summary .tw{ color:var(--tx2); font-size:.86rem; }
+.track-acc .out{ color:var(--tx2); font-size:.88rem; margin:0 0 10px; }
+.track-acc .comp-grid{ margin-bottom:14px; }
+/* next steps: two steps side by side, then the timeline */
+.habit-box.v-side .habit-pick button{ padding:6px 11px; font-size:.86rem; }
+.habit-box.v-side .hp-job{ margin-top:8px; }
 .v-copy .recap-row{ gap:10px; margin-top:16px; }
 .v-copy .isnot{ margin-top:12px; }
 .v-copy .operate{ margin-top:16px; }
@@ -945,9 +1000,9 @@ html.paged .idea .try .scn{ margin-top:0; }
       <p class="op-lead">Vanderbilt operates at <em>uncommon speed, agility, and scale</em>. Three areas of focus.</p>
       <span class="mono op-sub">Areas of focus</span>
       <div class="op-grid">
-        <div><i class="op-no" aria-hidden="true">1</i><b>Exceptional Core Operations</b><p>With speed, agility and scale, Vanderbilt will distinguish itself with innovative and impactful capabilities to ensure that we have the talent, resources and reputation necessary to deliver on our vision.</p></div>
-        <div><i class="op-no" aria-hidden="true">2</i><b>Bold Strategic Initiatives</b><p>With &ldquo;exceptional core operations&rdquo; as our fuel, Vanderbilt will pursue increasingly bold initiatives that enable and enhance the reach and impact of our education and research mission.</p></div>
-        <div><i class="op-no" aria-hidden="true">3</i><b>Values Leadership</b><p>Through strategic advocacy efforts and modeling the role of an essential research university, Vanderbilt will stimulate industry change and combat existential threats to our education and research mission.</p></div>
+        <div><details><summary><i class="op-no" aria-hidden="true">1</i><b>Exceptional Core Operations</b></summary><p>With speed, agility and scale, Vanderbilt will distinguish itself with innovative and impactful capabilities to ensure that we have the talent, resources and reputation necessary to deliver on our vision.</p></details></div>
+        <div><details><summary><i class="op-no" aria-hidden="true">2</i><b>Bold Strategic Initiatives</b></summary><p>With &ldquo;exceptional core operations&rdquo; as our fuel, Vanderbilt will pursue increasingly bold initiatives that enable and enhance the reach and impact of our education and research mission.</p></details></div>
+        <div><details><summary><i class="op-no" aria-hidden="true">3</i><b>Values Leadership</b></summary><p>Through strategic advocacy efforts and modeling the role of an essential research university, Vanderbilt will stimulate industry change and combat existential threats to our education and research mission.</p></details></div>
       </div>
       <p class="op-link"><a id="missionLink" href="https://www.vanderbilt.edu/" target="_blank" rel="noopener">Read the full vision and areas of focus at vanderbilt.edu</a></p>
     </div>
@@ -1098,10 +1153,8 @@ html.paged .idea .try .scn{ margin-top:0; }
 <section id="welcome" class="th-dark v-sec" aria-label="The four categories">
   <div class="wrap">
     <div class="v-rail" data-lesson="4"><span>Topic 4 of 6 &middot; The four categories</span></div>
-    <div class="v-cities-head">
-    <h2 class="v-h">One picture for the whole job: four <em>categories</em> of behavior.</h2>
-    <p class="v-why">Every manager does all four, every week. The skill is noticing which one this week needs. Each behavior below is marked with the Vanderbilt behavior it serves, and those six are what the survey asks you to rate.</p>
-    </div>
+    <h2 class="v-h sm">One picture for the whole job: four <em>categories</em> of behavior.</h2>
+    <p class="v-why">Every manager does all four, every week. The skill is noticing which one this week needs.</p>
     <div class="job-tabs" role="tablist" aria-label="The four categories">
       <button type="button" role="tab" aria-selected="true" data-job="over">The four categories</button>
       <button type="button" role="tab" aria-selected="false" data-job="task">Task-oriented &middot; Get the work done</button>
@@ -1110,24 +1163,31 @@ html.paged .idea .try .scn{ margin-top:0; }
       <button type="button" role="tab" aria-selected="false" data-job="external">External &middot; Connect your team</button>
     </div>
     <div class="job-pane cur" data-job="over" role="tabpanel">
-    <div class="vc-grid">
-      <div>
-        <div class="cv-wrap" data-cv="framework">
+    <div class="rose-grid">
+      <div class="v-rose" id="fwRose" aria-label="The four categories"></div>
+      <div class="fw-panel" id="fwPanel">
+        <div class="fw-video" id="fwVideo">
+          <div class="cv-wrap" data-cv="framework">
           <video controls playsinline preload="metadata" poster="../assets/img/foundation/framework-poster.jpg?v=20260912p" src="../assets/video/foundation/framework.mp4?v=20260912p" aria-label="The four categories, in about ninety seconds. Training video, about 90 seconds, with captions."><track kind="captions" src="../assets/video/foundation/framework.vtt?v=20260912p" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>The four categories, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. The four categories and the habits inside each. About ninety seconds.</p>
-        <p class="hinttxt" style="margin-top:10px">The four categories and the fifteen behaviors are Gary Yukl&rsquo;s taxonomy of effective leadership behavior (<a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener">2012</a>; <a href="https://changingminds.org/disciplines/leadership/actions/yukl_taxonomy.htm" target="_blank" rel="noopener">summary</a>). The words in italics are the plain version. These are the behaviors Vanderbilt looks for you to embody.</p>
-      </div>
-      <div class="fw two" id="fwMap">
-      <div class="fw-card" data-job="task" role="button" tabindex="0" aria-label="Hear the Task-oriented intro"><b>Task-oriented</b><strong>Get the work done, through your team.</strong><p>Is the team&rsquo;s work getting done, and done well? You check it and unblock it; you do not do it yourself.</p><ul><li>Planning <i>(plan it)</i><em>Create clarity</em></li><li>Clarifying <i>(say it)</i><em>Create clarity</em></li><li>Monitoring operations <i>(check it)</i><em>Coach and develop</em></li><li>Problem solving <i>(fix it)</i><em>Address issues</em></li></ul><span class="fw-foot"><span class="hint">Hear the intro</span><button type="button" class="fw-open" data-open="task">Open this category</button></span></div>
-      <div class="fw-card" data-job="relations" role="button" tabindex="0" aria-label="Hear the Relations-oriented intro"><b>Relations-oriented</b><strong>Take care of your people.</strong><p>Are people growing, and staying?</p><ul><li>Supporting <i>(listen and help)</i><em>Build trust</em></li><li>Developing <i>(grow them)</i><em>Coach and develop</em></li><li>Recognizing <i>(thank them)</i><em>Build trust</em></li><li>Empowering <i>(trust them)</i><em>Empower others</em></li></ul><span class="fw-foot"><span class="hint">Hear the intro</span><button type="button" class="fw-open" data-open="relations">Open this category</button></span></div>
-      <div class="fw-card" data-job="change" role="button" tabindex="0" aria-label="Hear the Change-oriented intro"><b>Change-oriented</b><strong>Make things better.</strong><p>Is the team getting better at what it does?</p><ul><li>Advocating change <i>(explain the why)</i><em>Lead change</em></li><li>Envisioning change <i>(describe where you are going)</i><em>Lead change</em></li><li>Encouraging innovation <i>(let people try)</i><em>Empower others</em></li><li>Facilitating collective learning <i>(look back)</i><em>Lead change</em></li></ul><span class="fw-foot"><span class="hint">Hear the intro</span><button type="button" class="fw-open" data-open="change">Open this category</button></span></div>
-      <div class="fw-card" data-job="external" role="button" tabindex="0" aria-label="Hear the External intro"><b>External</b><strong>Connect your team to the rest of Vanderbilt.</strong><p>Does the team get what it needs from outside?</p><ul><li>Networking <i>(know the people)</i><em>Build trust</em></li><li>External monitoring <i>(watch for what is coming)</i><em>Lead change</em></li><li>Representing <i>(speak up for your team)</i><em>Address issues</em></li></ul><span class="fw-foot"><span class="hint">Hear the intro</span><button type="button" class="fw-open" data-open="external">Open this category</button></span></div>
+          <p class="fw-hint">Watch the overview, then tap a point of the compass to see what each category asks of you.</p>
+        </div>
+        <div class="fw" id="fwMap" hidden>
+      <div class="fw-card" data-job="task" role="button" tabindex="0" aria-label="Hear the Task-oriented intro"><b>Task-oriented</b><strong>Get the work done, through your team.</strong><p>Is the team&rsquo;s work getting done, and done well? You check it and unblock it; you do not do it yourself.</p><ul><li>Planning <i>(plan it)</i><em>Create clarity</em></li><li>Clarifying <i>(say it)</i><em>Create clarity</em></li><li>Monitoring operations <i>(check it)</i><em>Coach and develop</em></li><li>Problem solving <i>(fix it)</i><em>Address issues</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="task">Open this category</button></span></div>
+      
+      <div class="fw-card" data-job="relations" role="button" tabindex="0" aria-label="Hear the Relations-oriented intro"><b>Relations-oriented</b><strong>Take care of your people.</strong><p>Are people growing, and staying?</p><ul><li>Supporting <i>(listen and help)</i><em>Build trust</em></li><li>Developing <i>(grow them)</i><em>Coach and develop</em></li><li>Recognizing <i>(thank them)</i><em>Build trust</em></li><li>Empowering <i>(trust them)</i><em>Empower others</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="relations">Open this category</button></span></div>
+      
+      <div class="fw-card" data-job="change" role="button" tabindex="0" aria-label="Hear the Change-oriented intro"><b>Change-oriented</b><strong>Make things better.</strong><p>Is the team getting better at what it does?</p><ul><li>Advocating change <i>(explain the why)</i><em>Lead change</em></li><li>Envisioning change <i>(describe where you are going)</i><em>Lead change</em></li><li>Encouraging innovation <i>(let people try)</i><em>Empower others</em></li><li>Facilitating collective learning <i>(look back)</i><em>Lead change</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="change">Open this category</button></span></div>
+      
+      <div class="fw-card" data-job="external" role="button" tabindex="0" aria-label="Hear the External intro"><b>External</b><strong>Connect your team to the rest of Vanderbilt.</strong><p>Does the team get what it needs from outside?</p><ul><li>Networking <i>(know the people)</i><em>Build trust</em></li><li>External monitoring <i>(watch for what is coming)</i><em>Lead change</em></li><li>Representing <i>(speak up for your team)</i><em>Address issues</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="external">Open this category</button></span></div>
+      
+        <button type="button" class="fw-back" id="fwBack">Back to the video</button>
+        </div>
       </div>
     </div>
     <p class="fw-status" id="fwStatus" role="status" aria-live="polite">0 of 4 categories opened.</p>
-    </div>
     </div>
 <section id="task" class="job-pane" data-job="task" role="tabpanel" aria-label="Task-oriented: get the work done" hidden>
   <div class="jwrap">
@@ -1255,7 +1315,7 @@ html.paged .idea .try .scn{ margin-top:0; }
           <span class="sk">Taken before Manager Voyage &middot; again 90 days after completion</span>
           <div>
             <h4>The Manager Effectiveness Assessment</h4>
-            <p>Six statements you rate yourself on, from never to consistently, before Manager Voyage and again 90 days after you complete it: create clarity, coach and develop, build trust, empower others, address issues, lead change. The statements are informed by Yukl&rsquo;s leadership-behavior framework, which this course teaches. Your score and feedback came by email. <span id="meaEmailHint">Search your inbox for the results message from the Futures Learning Hub.</span></p>
+            <p>Six statements, rated from never to consistently: create clarity, coach and develop, build trust, empower others, address issues, lead change. Your score came by email from the Futures Learning Hub. Search your inbox for it.</p>
           </div>
         </div>
         <div class="week" style="margin-top:12px"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. Over this course and the micro modules that follow, the aim is a higher rating on all six at 90 days, and again at the optional six-month pulse.</div>
@@ -1296,12 +1356,12 @@ html.paged .idea .try .scn{ margin-top:0; }
       <div class="v-copy">
         <h2 class="v-h">What to do, and <em>when</em>.</h2>
         <p class="v-why">Nobody builds every habit at once. Pick one, attach it to something you already do every week, and let the rest come with the micro modules.</p>
-    <div class="habit-box reveal"><span class="mono">Step 02 &middot; Pick the one habit you will practice this week</span><div class="habit-pick" id="habitPick" role="group" aria-label="Pick one habit"></div></div>
+    <div class="habit-box v-side reveal"><span class="mono">Step 1 &middot; Pick the one habit you will practice this week</span><div class="habit-pick" id="habitPick" role="group" aria-label="Pick one habit"></div></div>
       </div>
       <div class="v-act">
     <div class="evidence reveal" id="tell-leader">
-      <span class="e-label">Tell your manager</span>
-      <p>Commitments kept in private fade. Copy this, fill in the date, and send it today. <em id="tellText">&ldquo;I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].&rdquo;</em></p>
+      <span class="e-label">Step 2 &middot; Tell your manager</span>
+      <p>Pick your habit on the left, then copy this, fill in the date, and send it today. <em id="tellText">&ldquo;I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].&rdquo;</em></p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:center">
         <button type="button" class="btn btn-ghost btn-sm" id="copyTell" data-copytext="I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].">Copy the message</button>
         <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="nextstep" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
@@ -1311,11 +1371,11 @@ html.paged .idea .try .scn{ margin-top:0; }
       </div>
     </div>
     <div class="hw-list reveal" style="margin-top:12px">
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Mark this course complete on My voyage</h3><p>My voyage is your home page for the first 60 days. Mark the Foundation course complete there, then open the first micro module it lists under Up next.</p></div><span class="chip">Today</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one habit this week</h3><p id="ns2p">Pick one habit from this course. Attach it to something you already do every week, such as your Monday 1:1s or your Friday wrap-up, and do it once, on purpose.</p></div><span class="chip">This week</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>The Systems and Vanderbilt &amp; Nashville modules</h3><p>UKG and Oracle, and the mission: the micro modules in Oracle Learning that My voyage lists first.</p></div><span class="chip">By Day 30</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">04</span><div><h3>Compliance courses, then the People and Processes modules</h3><p>Your compliance courses by their deadlines, then the people obligations and the processes that run the role.</p></div><span class="chip">By Day 60</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">05</span><div><h3>Take the assessment again</h3><p>The same six statements, 90 days after you complete Manager Voyage. Compare with where you started. Once Day 60 is complete, the cohort invitation follows from Oracle.</p></div><span class="chip">90 days after</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Mark this course complete</h3><p>Then open the first micro module listed under Up next.</p></div><span class="chip">Today</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one habit this week</h3><p id="ns2p">Attach it to something you already do every week, and do it once, on purpose.</p></div><span class="chip">This week</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>The Systems and Vanderbilt &amp; Nashville modules</h3><p>UKG and Oracle, and the mission. The first micro modules in Oracle Learning.</p></div><span class="chip">By Day 30</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">04</span><div><h3>Compliance courses, then the People and Processes modules</h3><p>Compliance by its deadlines, then the people and process modules.</p></div><span class="chip">By Day 60</span></div>
+      <div class="hw-step"><span class="hw-no" aria-hidden="true">05</span><div><h3>Take the assessment again</h3><p>The same six statements, 90 days on. Compare with where you started.</p></div><span class="chip">90 days after</span></div>
     </div>
   </div>
 </section>
@@ -1404,6 +1464,6 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20261026a"></script>
+<script src="app.js?v=20261026b"></script>
 </body>
 </html>

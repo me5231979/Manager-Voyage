@@ -562,9 +562,16 @@ function buildCalls(el){
       (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + '</div></div>';
   }).join('');
   $$('.scn[data-scn]', el).forEach(buildScenario);
+  /* a rail of the situations in the copy column: where you are, what is found, and a way to jump */
+  var rail = null, copy = el.closest('.v-stage') && el.closest('.v-stage').querySelector('.v-copy');
+  if(copy){ rail = document.createElement('ol'); rail.className = 'v-side cq-rail'; rail.setAttribute('aria-label', 'Situations');
+    rail.innerHTML = keys.map(function(k, i){ var h = (SCENARIOS[k].h || CALL_HEADS[k] || '').split(' · '); return '<li><button type="button" data-go="' + i + '" aria-current="' + (i === 0 ? 'true' : 'false') + '"><b>0' + (i + 1) + '</b><span>' + esc(h[0]) + (h[1] ? '<br><small>' + esc(h[1]) + '</small>' : '') + '</span><span class="ok" aria-hidden="true">&#10003;</span></button></li>'; }).join('');
+    var why = copy.querySelector('.v-why'); if(why && why.nextSibling) copy.insertBefore(rail, why.nextSibling); else copy.appendChild(rail);
+    rail.addEventListener('click', function(e){ var b = e.target.closest('button[data-go]'); if(b) show(parseInt(b.getAttribute('data-go'), 10)); });
+  }
   function pips(){ return '<span class="pips" aria-hidden="true">' + keys.map(function(k){ return '<i class="' + (found[k] ? 'ok' : '') + '"></i>'; }).join('') + '</span>'; }
-  function paint(){ var n = Object.keys(found).length; if(status) status.innerHTML = pips() + '<span>' + n + ' of ' + keys.length + ' ' + cfg.noun + '.' + (n === keys.length ? ' Activity complete.' : '') + '</span>'; if(n === keys.length) progDone(cfg.prog); }
-  function show(i){ $$('.cq', el).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); cur = i; var f = $$('.cq', el)[i].querySelector('button:not([hidden])'); if(f) f.focus({ preventScroll:true }); narrSub(cfg.narr + (i + 1)); }
+  function paint(){ var n = Object.keys(found).length; if(status) status.innerHTML = pips() + '<span>' + n + ' of ' + keys.length + ' ' + cfg.noun + '.' + (n === keys.length ? ' Activity complete.' : '') + '</span>'; if(rail) $$('button[data-go]', rail).forEach(function(b, i){ b.classList.toggle('found', !!found[keys[i]]); }); if(n === keys.length) progDone(cfg.prog); }
+  function show(i){ $$('.cq', el).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); cur = i; if(rail) $$('button[data-go]', rail).forEach(function(b, bi){ b.setAttribute('aria-current', bi === i ? 'true' : 'false'); }); var f = $$('.cq', el)[i].querySelector('button:not([hidden])'); if(f) f.focus({ preventScroll:true }); narrSub(cfg.narr + (i + 1)); }
   el.addEventListener('click', function(e){
     if(e.target.closest('button[data-next]')){ show(cur + 1); return; }
     if(e.target.closest('button[data-prev]')){ show(cur - 1); return; }
@@ -769,16 +776,33 @@ var IDEAS = [
   window.showJob = show; window.markJob = mark;
 })();
 
-/* the four cards on the overview: tapping one plays that category's intro clip;
-   the control inside it opens the category. Either counts toward the activity. */
+/* the overview: a compass rose, one point per category. Tap a point to hear
+   that category's intro and see what it asks of you; open it from there. */
 (function(){
-  var map = $('#fwMap'); if(!map) return;
-  $$('.fw-card[data-job]', map).forEach(function(c, i){
-    var key = 'welcome/j' + (i + 1); c.setAttribute('data-nk', key);
-    function play(){ narrSub(key, true); if(window.markJob) markJob(c.getAttribute('data-job')); }
-    c.addEventListener('click', function(e){ if(e.target.closest('.fw-open')) return; play(); });
-    c.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); play(); } });
-  });
+  var rose = $('#fwRose'), panel = $('#fwPanel'), map = $('#fwMap'), vid = $('#fwVideo'), back = $('#fwBack'); if(!rose || !map) return;
+  var PTS = [['task', 'n', 'Task-oriented'], ['relations', 'e', 'Relations-oriented'], ['change', 's', 'Change-oriented'], ['external', 'w', 'External']];
+  function roseSVG(){
+    var t = '', i;
+    for(i = 0; i < 72; i++){ var a = i * 5 * Math.PI / 180, r1 = i % 18 === 0 ? 150 : i % 3 === 0 ? 156 : 160; t += '<line class="tick" x1="' + (200 + Math.sin(a) * r1).toFixed(1) + '" y1="' + (200 - Math.cos(a) * r1).toFixed(1) + '" x2="' + (200 + Math.sin(a) * 165).toFixed(1) + '" y2="' + (200 - Math.cos(a) * 165).toFixed(1) + '"/>'; }
+    function pt(ang, len, w, cls, key){ var a = ang * Math.PI / 180, sn = Math.sin(a), c = Math.cos(a), px = -c, py = -sn;
+      var tip = [200 + sn * len, 200 - c * len], l = [200 + sn * 22 + px * w, 200 - c * 22 + py * w], r = [200 + sn * 22 - px * w, 200 - c * 22 - py * w];
+      return '<path class="' + cls + '"' + (key ? ' data-pt="' + key + '"' : '') + ' d="M200 200L' + l.map(function(v){ return v.toFixed(1); }).join(' ') + 'L' + tip.map(function(v){ return v.toFixed(1); }).join(' ') + 'L' + r.map(function(v){ return v.toFixed(1); }).join(' ') + 'Z"/>'; }
+    var star = pt(45, 92, 12, 'minor') + pt(135, 92, 12, 'minor') + pt(225, 92, 12, 'minor') + pt(315, 92, 12, 'minor') + pt(0, 140, 22, '', 'n') + pt(90, 140, 22, '', 'e') + pt(180, 140, 22, '', 's') + pt(270, 140, 22, '', 'w');
+    return '<svg viewBox="0 0 400 400" aria-hidden="true"><circle class="ring2" cx="200" cy="200" r="178"/><circle class="ring" cx="200" cy="200" r="165"/>' + t + '<g class="star">' + star + '</g><circle class="hub" cx="200" cy="200" r="9"/><text class="hub-text" x="200" y="236">The whole job</text></svg>';
+  }
+  rose.innerHTML = roseSVG() + '<div role="tablist" aria-label="The four categories">' + PTS.map(function(p, i){ return '<button type="button" role="tab" class="pt ' + p[1] + '" aria-selected="false" data-job="' + p[0] + '" data-nk="welcome/j' + (i + 1) + '">' + p[2] + '</button>'; }).join('') + '</div>';
+  var cards = $$('.fw-card[data-job]', map);
+  function pick(k){
+    var idx = PTS.map(function(p){ return p[0]; }).indexOf(k); if(idx < 0) return;
+    $$('.pt', rose).forEach(function(b){ var on = b.getAttribute('data-job') === k; b.setAttribute('aria-selected', on ? 'true' : 'false'); if(on) b.classList.add('seen'); });
+    $$('.star path[data-pt]', rose).forEach(function(pth){ pth.classList.toggle('lit', pth.getAttribute('data-pt') === PTS[idx][1]); });
+    cards.forEach(function(c){ c.hidden = c.getAttribute('data-job') !== k; });
+    if(vid) vid.hidden = true; map.hidden = false;
+    narrSub('welcome/j' + (idx + 1), true);
+    if(window.markJob) markJob(k);
+  }
+  rose.addEventListener('click', function(e){ var b = e.target.closest('.pt[data-job]'); if(b) pick(b.getAttribute('data-job')); });
+  if(back) back.addEventListener('click', function(){ map.hidden = true; if(vid) vid.hidden = false; $$('.pt', rose).forEach(function(b){ b.setAttribute('aria-selected', 'false'); }); $$('.star path.lit', rose).forEach(function(pth){ pth.classList.remove('lit'); }); if(narr.playing) narrStop(); });
   map.addEventListener('click', function(e){ var b = e.target.closest('.fw-open'); if(b){ e.stopPropagation(); if(window.showJob) showJob(b.getAttribute('data-open')); } });
 })();
 
@@ -831,7 +855,7 @@ var TURNS = [
   { sel:'#yearMap',     prog:'year',     text:'Tap each group to open it' },
   { sel:'#simBox',      prog:null,       text:'Pick a situation' },
   { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations' },
-  { sel:'#fwMap',       prog:'welcome',  text:'Tap a card, or open a category' },
+  { sel:'#fwRose',  prog:'welcome', text:'Tap each point of the compass' },
   { sel:'#task .flip-grid',      prog:'task',      text:'Flip each card' },
   { sel:'#relations .flip-grid', prog:'relations', text:'Flip each card' },
   { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card' },
@@ -879,12 +903,12 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
   var comp = $('#learnComp'), TR = (P && P.mrc && P.mrc.tracks) || [];
   if(comp && TR.length){
     var n = 0, total = TR.reduce(function(a, t){ return a + t.modules.length; }, 0);
-    comp.innerHTML = '<span class="mono">Micro Modules</span><h4>Your micro modules, by track</h4><p>Short courses in Oracle Learning, one common task each, in the order the tracks come due. Each opens in Oracle Learning once its link is added.</p>' + TR.map(function(t){
+    comp.innerHTML = '<span class="mono">Micro Modules</span><h4>Your micro modules, by track</h4><p>Short courses in Oracle Learning, one common task each, in the order the tracks come due. Each opens in Oracle Learning once its link is added.</p>' + TR.map(function(t, ti){
       var by = t.phase === 1 ? 'By Day 30' : 'By Day 60';
-      return '<div class="track-head"><span class="mono">' + esc(t.title) + '</span><b>' + esc(t.why) + '</b><span class="tw">' + esc(t.window) + ' &middot; ' + t.modules.length + (t.modules.length === 1 ? ' step' : ' modules') + '</span><p class="out">' + esc(t.outcome) + '</p></div><div class="comp-grid">' + t.modules.map(function(m){
+      return '<details class="track-acc"' + (ti === 0 ? ' open' : '') + '><summary><span class="mono">' + esc(t.title) + '</span><b>' + esc(t.why) + '</b><span class="tw">' + esc(t.window) + ' &middot; ' + t.modules.length + (t.modules.length === 1 ? ' step' : ' modules') + '</span></summary><p class="out">' + esc(t.outcome) + '</p><div class="comp-grid">' + t.modules.map(function(m){
         n += 1; var has = !!m.oracleUrl;
         return '<a class="comp-item' + (has ? '' : ' soon') + '" href="' + esc(m.oracleUrl || '#') + '"' + (has ? ' target="_blank" rel="noopener"' : ' aria-disabled="true" title="Link coming from PCB"') + '><span class="no">' + n + '</span><span class="ct"><i>' + esc(m.format || 'Video') + ' &middot; Oracle Learning &middot; ' + by + '</i><b>' + esc(m.title) + '</b><small>' + esc(m.desc || '') + '</small></span><span class="go" aria-hidden="true">&#8599;</span></a>';
-      }).join('') + '</div>';
+      }).join('') + '</div></details>';
     }).join('');
   }
   /* simulator */
@@ -992,4 +1016,21 @@ progRender();
 /* for tests and the guide builder */
 (function(){ var l = document.getElementById('missionLink'); var u = window.MV_CONFIG && window.MV_CONFIG.missionUrl; if(l && u) l.href = u; })();
 window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
+/* ══════════ up next: one button at the end of every page, so the way forward is never a hunt ══════════ */
+(function(){
+  var pages = $$('.page'); if(pages.length < 2) return;
+  function titleOf(pg){
+    var rail = pg.querySelector('.v-rail span'); if(rail){ var t = rail.textContent.split('·'); return (t[t.length - 1] || '').trim(); }
+    var h = pg.querySelector('h2, h1'); return h ? h.textContent.replace(/\s+/g, ' ').trim() : 'Next page';
+  }
+  pages.forEach(function(pg, i){
+    if(i === pages.length - 1) return;
+    var sec = pg.querySelector('section.v-sec') || pg.querySelector('section'); if(!sec || sec.classList.contains('v-hero')) return;
+    var wrap = sec.querySelector('.wrap') || sec;
+    var d = document.createElement('div'); d.className = 'v-next';
+    d.innerHTML = '<span class="v-label">Up next</span><button type="button" class="btn btn-gold btn-sm" data-go-page="' + (i + 1) + '">' + esc(titleOf(pages[i + 1])) + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>';
+    wrap.appendChild(d);
+  });
+  document.addEventListener('click', function(e){ var b = e.target.closest('button[data-go-page]'); if(b && window.chartPager) chartPager.go(parseInt(b.getAttribute('data-go-page'), 10), { focus:true }); });
+})();
 })();
