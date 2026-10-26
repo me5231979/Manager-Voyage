@@ -665,21 +665,21 @@ function buildDrill(el){
 }
 $$('[data-drill]').forEach(buildDrill);
 
-var ROCKS_ART = '<div class="idea-art" aria-hidden="true"><svg viewBox="0 0 720 300" role="img">' +
+var ROCKS_ART = '<div class="idea-art anim" id="rocksArt" aria-hidden="true"><svg viewBox="0 0 720 300" role="img">' +
   '<text class="lab" x="40" y="20">Sand first: the rocks do not fit</text>' +
   '<rect class="jar" x="40" y="70" width="240" height="150" rx="14"/>' +
-  '<rect class="sand" x="43" y="140" width="234" height="77" rx="8"/>' +
-  '<g class="grain"><circle cx="70" cy="160" r="2"/><circle cx="120" cy="180" r="2"/><circle cx="175" cy="155" r="2"/><circle cx="230" cy="195" r="2"/><circle cx="95" cy="205" r="2"/><circle cx="205" cy="170" r="2"/><circle cx="255" cy="150" r="2"/><circle cx="150" cy="205" r="2"/></g>' +
-  '<ellipse class="rock" cx="104" cy="116" rx="38" ry="26"/><ellipse class="rock" cx="206" cy="112" rx="42" ry="28"/><ellipse class="rock" cx="154" cy="62" rx="40" ry="26"/>' +
+  '<rect class="sand pour" style="--d:.1s" x="43" y="140" width="234" height="77" rx="8"/>' +
+  '<g class="grain"><circle class="trickle" style="--d:.3s" cx="70" cy="160" r="2"/><circle class="trickle" style="--d:.5s" cx="120" cy="180" r="2"/><circle class="trickle" style="--d:.7s" cx="175" cy="155" r="2"/><circle class="trickle" style="--d:.4s" cx="230" cy="195" r="2"/><circle class="trickle" style="--d:.9s" cx="95" cy="205" r="2"/><circle class="trickle" style="--d:.6s" cx="205" cy="170" r="2"/><circle class="trickle" style="--d:1s" cx="255" cy="150" r="2"/><circle class="trickle" style="--d:.8s" cx="150" cy="205" r="2"/></g>' +
+  '<ellipse class="rock drop" style="--d:1.7s" cx="104" cy="116" rx="38" ry="26"/><ellipse class="rock drop" style="--d:2.1s" cx="206" cy="112" rx="42" ry="28"/><ellipse class="rock drop over" style="--d:2.5s" cx="154" cy="62" rx="40" ry="26"/>' +
   '<text x="40" y="248">Email and small requests go in first.</text><text x="40" y="266">The report, the hire, the 1:1s spill over the top.</text>' +
   '<text class="lab" x="400" y="20">Rocks first: the sand settles around them</text>' +
   '<rect class="jar" x="400" y="70" width="240" height="150" rx="14"/>' +
-  '<rect class="sand" x="403" y="92" width="234" height="125" rx="8"/>' +
-  '<ellipse class="rock" cx="456" cy="186" rx="40" ry="28"/><ellipse class="rock" cx="584" cy="188" rx="44" ry="28"/><ellipse class="rock" cx="520" cy="130" rx="42" ry="30"/>' +
-  '<g class="grain"><circle cx="420" cy="110" r="2"/><circle cx="470" cy="100" r="2"/><circle cx="570" cy="108" r="2"/><circle cx="620" cy="100" r="2"/><circle cx="430" cy="150" r="2"/><circle cx="615" cy="150" r="2"/><circle cx="520" cy="205" r="2"/><circle cx="412" cy="205" r="2"/><circle cx="628" cy="205" r="2"/></g>' +
+  '<ellipse class="rock drop" style="--d:.1s" cx="456" cy="186" rx="40" ry="28"/><ellipse class="rock drop" style="--d:.5s" cx="584" cy="188" rx="44" ry="28"/><ellipse class="rock drop" style="--d:.9s" cx="520" cy="130" rx="42" ry="30"/>' +
+  '<rect class="sand pour" style="--d:1.9s" x="403" y="92" width="234" height="125" rx="8"/>' +
+  '<g class="grain"><circle class="trickle" style="--d:2s" cx="420" cy="110" r="2"/><circle class="trickle" style="--d:2.2s" cx="470" cy="100" r="2"/><circle class="trickle" style="--d:2.4s" cx="570" cy="108" r="2"/><circle class="trickle" style="--d:2.1s" cx="620" cy="100" r="2"/><circle class="trickle" style="--d:2.6s" cx="430" cy="150" r="2"/><circle class="trickle" style="--d:2.3s" cx="615" cy="150" r="2"/><circle class="trickle" style="--d:2.8s" cx="520" cy="205" r="2"/><circle class="trickle" style="--d:2.5s" cx="412" cy="205" r="2"/><circle class="trickle" style="--d:2.9s" cx="628" cy="205" r="2"/></g>' +
   '<text x="400" y="248">Three named priorities go in first.</text><text x="400" y="266">The small things fit in the gaps.</text>' +
   '<text class="lab" x="40" y="294">Rocks: the high-impact work. Sand: quick, low-value wins.</text>' +
-  '</svg></div>';
+  '</svg><button type="button" class="art-replay" aria-label="Replay the animation">Replay</button></div>';
 /* ══════════ five ideas, one at a time ══════════ */
 var IDEAS = [
   { who:'Setting priorities · the big rocks method', h:'Put first things <em>first</em>.',
@@ -1016,6 +1016,15 @@ progRender();
 /* for tests and the guide builder */
 (function(){ var l = document.getElementById('missionLink'); var u = window.MV_CONFIG && window.MV_CONFIG.missionUrl; if(l && u) l.href = u; })();
 window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
+/* the big rocks jars: pour, drop, settle. Plays once the art is on screen; Replay runs it again. */
+(function(){
+  var art = $('#rocksArt'); if(!art) return;
+  function play(){ art.classList.remove('play'); void art.offsetWidth; art.classList.add('play'); }
+  if(reduce || !('IntersectionObserver' in window)){ art.classList.add('play', 'still'); return; }
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && e.intersectionRatio > .35){ play(); io.disconnect(); } }); }, { threshold:[.35] });
+  io.observe(art);
+  art.addEventListener('click', function(e){ if(e.target.closest('.art-replay')) play(); });
+})();
 /* ══════════ up next: one button at the end of every page, so the way forward is never a hunt ══════════ */
 (function(){
   var pages = $$('.page'); if(pages.length < 2) return;
