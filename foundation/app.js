@@ -798,18 +798,18 @@ function liveHTML(k){
   var cur = -1, seen = {}, found = {};
   var names = ['Priorities', 'Clear expectations', 'Psychological safety', 'Purpose', 'The people work'], IDEA_SCN = ['idea1', 'idea2', 'safe1', 'idea4', 'idea5'];
   var ONE = ['Put first things first.', 'Clear is kind. Unclear is unkind.', 'People only speak up when it is safe to.', 'Explain the why, and put the team first.', 'The people work is the manager’s work.'];
-  box.innerHTML = '<div class="idea-tabs" role="tablist" aria-label="The five ideas, by topic">' + IDEAS.map(function(it, i){ return '<button type="button" role="tab" aria-selected="false" data-tab="' + i + '">' + (i + 1) + ' · ' + names[i] + '</button>'; }).join('') + '</div>' +
+  box.innerHTML = '<div class="idea-tabs" role="tablist" aria-label="The five ideas, by topic">' + IDEAS.map(function(it, i){ return '<button type="button" role="tab" aria-selected="false" data-tab="' + i + '">' + (i + 1) + ' · ' + names[i] + (LIVE[IDEA_SCN[i]] ? ' <span class="live-badge">Live</span>' : '') + '</button>'; }).join('') + '</div>' +
     '<div class="idea idea-intro cur" role="region" aria-label="About the five ideas"><span class="who-is">Start here</span><h3>Five ideas that hold <em>up</em>.</h3>' +
       '<div class="intro-copy"><p>You do not need a theory of management. You need a few ideas that hold up, and each one turns into something you can do this week. These five come from people who spent years studying what good managers do.</p>' +
       '<p><b>How this works.</b> Each idea: what it is, one thing to start this week, and a moment to apply it. Open the detail if you want the why.</p>' +
       '<p class="intro-cta"><button type="button" class="btn btn-primary btn-sm" data-tab="0">Start with idea 1<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></p></div>' +
-      '<ol class="intro-list" aria-label="The five ideas">' + IDEAS.map(function(it, i){ return '<li><button type="button" data-tab="' + i + '"><span class="il-no">' + (i + 1) + '</span><span class="il-t"><b>' + names[i] + '</b><span>' + ONE[i] + '</span></span></button></li>'; }).join('') + '</ol></div>' +
+      '<ol class="intro-list" aria-label="The five ideas">' + IDEAS.map(function(it, i){ return '<li><button type="button" data-tab="' + i + '"><span class="il-no">' + (i + 1) + '</span><span class="il-t"><b>' + names[i] + (LIVE[IDEA_SCN[i]] ? ' <span class="live-badge">Live conversation</span>' : '') + '</b><span>' + ONE[i] + '</span></span></button></li>'; }).join('') + '</ol></div>' +
     IDEAS.map(function(it, i){
       return '<div class="idea" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' + (i === 0 ? ROCKS_ART : '') +
         '<div class="idea-core"><p class="blk"><b>What it is</b>' + esc(it.what) + '</p><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
+        (LIVE[IDEA_SCN[i]] ? liveHTML(IDEA_SCN[i]) : '') +
         '<details class="idea-more"><summary>Why it works, what it looks like, and what it brings</summary><div class="idea-more-grid"><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p></div></details>' +
         '<div class="try"><p class="cq-h"><span class="mono">Apply it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + '<span class="try-note">Show you understood the idea. Tap the response you would give, then try the other two.</span></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
-        (LIVE[IDEA_SCN[i]] ? liveHTML(IDEA_SCN[i]) : '') +
         '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page for what Vanderbilt will ask of you.</span>') + '</div></div>';
     }).join('');
   function show(i){
@@ -1107,6 +1107,19 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   io.observe(art);
   art.addEventListener('click', function(e){ if(e.target.closest('.art-replay')) play(); });
 })();
+/* ══════════ build check: if a newer build is published, say so instead of serving a stale page quietly ══════════ */
+(function(){
+  var stamp = document.querySelector('.build'); if(!stamp || !window.fetch) return;
+  var mine = (stamp.textContent.match(/Build\s+([0-9.a-z]+)/) || [])[1]; if(!mine) return;
+  fetch('build.json?ts=' + Date.now(), { cache:'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(j){
+    if(!j || !j.build || j.build === mine) return;
+    var bar = document.createElement('div'); bar.className = 'build-bar'; bar.setAttribute('role', 'status');
+    bar.innerHTML = '<span>A newer version of this course is available (build ' + esc(j.build) + '; you have ' + esc(mine) + ').</span><button type="button" class="btn btn-gold btn-sm" id="buildReload">Reload</button>';
+    document.body.appendChild(bar);
+    bar.querySelector('#buildReload').addEventListener('click', function(){ var u = new URL(location.href); u.searchParams.set('v', j.build.replace(/\W/g, '')); location.replace(u.toString()); });
+  }).catch(function(){});
+})();
+
 /* ══════════ up next: one button at the end of every page, so the way forward is never a hunt ══════════ */
 (function(){
   var pages = $$('.page'); if(pages.length < 2) return;
