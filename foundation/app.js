@@ -713,6 +713,86 @@ var IDEAS = [
     value:'Problems get handled while they are small, by the person closest to them, and your team knows who its manager is.',
     week:'Find out your HCM’s and your Engagement Consultant’s names, and how to reach them.' }
 ];
+/* ══════════ practice it live: a spoken conversation with the character, scored by what you did ══════════
+   The character is an ElevenLabs conversational agent. The page starts the session, shows the
+   transcript, and the agent calls record_outcome when the talk ends; that payload is the score. */
+var LIVE = {
+  idea5: { agent:'agent_8001m5wswdhrej0959pp630zjyza', who:'Dev', initial:'D', role:'Analyst on your team', mins:'About three minutes',
+    brief:'Dev has missed two deadlines this month. You asked to see him. Say what you noticed, say what you expect, ask what is in the way, and agree a next step. He answers back. Then you are scored on what you did, not what you picked.',
+    checks:[['named_what_noticed', 'You said what you noticed'], ['stated_expectation', 'You said what you expect from now on'], ['asked_what_you_need', 'You asked what was in the way, and listened'], ['agreed_next_step', 'You agreed a concrete next step']],
+    penalty:['handed_off_to_pcb', 'You handed it to PCB or your HCM. The people work is your work. PCB shows you how; it does not have the conversation for you.'],
+    way:'The Vanderbilt way: say it plainly, early, in private, and ask before you judge. Then call your HCM about how to note it, not whether to have it.', pass:3 }
+};
+function liveHTML(k){
+  var L = LIVE[k];
+  return '<div class="live" data-live="' + k + '"><div class="live-scene"><div class="live-avatar"><i class="ring r1"></i><i class="ring r2"></i><span>' + L.initial + '</span></div>' +
+    '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p>' + esc(L.brief) + '</p><p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Needs a microphone &middot; Optional</p></div></div>' +
+    '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-state" role="status" aria-live="polite"></span></div>' +
+    '<div class="live-log" aria-live="polite"></div><div class="live-score" hidden></div></div>';
+}
+(function(){
+  var SDK = 'https://cdn.jsdelivr.net/npm/@elevenlabs/client/+esm';
+  var sessions = {};
+  function el(root, sel){ return root.querySelector(sel); }
+  function setState(root, mode, text){ root.setAttribute('data-mode', mode); el(root, '.live-state').textContent = text || ''; }
+  function line(root, who, text){ var log = el(root, '.live-log'); var d = document.createElement('p'); d.className = 'live-line ' + who; d.innerHTML = '<b>' + (who === 'you' ? 'You' : esc(LIVE[root.getAttribute('data-live')].who)) + '</b>' + esc(text); log.appendChild(d); log.scrollTop = log.scrollHeight; }
+  function score(root, p){
+    var k = root.getAttribute('data-live'), L = LIVE[k], n = 0;
+    var rows = L.checks.map(function(c){ var ok = !!p[c[0]]; if(ok) n += 1; return '<li class="' + (ok ? 'ok' : 'no') + '"><i aria-hidden="true">' + (ok ? '&#10003;' : '&times;') + '</i>' + esc(c[1]) + '</li>'; }).join('');
+    var pen = L.penalty && p[L.penalty[0]];
+    var passed = n >= L.pass && !pen;
+    var box = el(root, '.live-score');
+    box.innerHTML = '<span class="mono">' + (passed ? 'You held the conversation' : 'Not yet') + ' &middot; ' + n + ' of ' + L.checks.length + '</span>' +
+      (p.summary ? '<p class="live-sum">' + esc(p.summary) + '</p>' : '') + '<ul class="live-checks">' + rows + '</ul>' +
+      (pen ? '<p class="live-pen">' + esc(L.penalty[1]) + '</p>' : '') + (p.tone === 'harsh' ? '<p class="live-pen">' + esc(L.who) + ' went quiet. Harsh gets compliance, not the truth.</p>' : '') +
+      '<p class="live-way">' + esc(L.way) + '</p><button type="button" class="btn btn-ghost btn-sm" data-live-again>Try it again</button>';
+    box.hidden = false; setState(root, 'done', passed ? 'Scored.' : 'Scored. Try it again when you are ready.');
+    if(passed && window.markIdeaMoment) markIdeaMoment(k);
+    try{ localStorage.setItem('mv-found-live-' + k, JSON.stringify({ n:n, pen:!!pen, at:Date.now() })); }catch(e){}
+  }
+  function fallback(root, why){
+    setState(root, 'off', '');
+    var L = LIVE[root.getAttribute('data-live')];
+    el(root, '.live-log').innerHTML = '<p class="live-off">' + esc(why) + ' You can still practice on the ElevenLabs page, or use the tap version above. <a href="https://elevenlabs.io/app/talk-to?agent_id=' + L.agent + '" target="_blank" rel="noopener">Talk to ' + esc(L.who) + ' in a new tab</a>.</p>';
+    el(root, '[data-live-start]').hidden = false; el(root, '[data-live-end]').hidden = true;
+  }
+  function start(root){
+    var k = root.getAttribute('data-live'), L = LIVE[k];
+    el(root, '.live-log').innerHTML = ''; el(root, '.live-score').hidden = true;
+    el(root, '[data-live-start]').hidden = true; el(root, '[data-live-end]').hidden = false;
+    setState(root, 'connecting', 'Asking for the microphone…');
+    if(narr.playing) narrStop(); pauseVideos();
+    var mic = navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? navigator.mediaDevices.getUserMedia({ audio:true }) : Promise.reject(new Error('nomic'));
+    mic.then(function(stream){ try{ stream.getTracks().forEach(function(t){ t.stop(); }); }catch(e){}
+      setState(root, 'connecting', 'Connecting to ' + L.who + '…');
+      return import(SDK);
+    }).then(function(mod){
+      var Conversation = mod.Conversation || (mod.default && mod.default.Conversation);
+      if(!Conversation) throw new Error('nosdk');
+      return Conversation.startSession({
+        agentId: L.agent, connectionType: 'webrtc',
+        clientTools: { record_outcome: function(p){ score(root, p || {}); return 'recorded'; } },
+        onConnect: function(){ setState(root, 'listening', L.who + ' is on. Speak when you are ready.'); },
+        onDisconnect: function(){ el(root, '[data-live-end]').hidden = true; el(root, '[data-live-start]').hidden = false; if(root.getAttribute('data-mode') !== 'done') setState(root, 'off', 'Conversation ended.' + (el(root, '.live-score').hidden ? ' No score was recorded. Start again and finish with a next step.' : '')); sessions[k] = null; },
+        onModeChange: function(m){ if(root.getAttribute('data-mode') === 'done') return; setState(root, m.mode === 'speaking' ? 'speaking' : 'listening', m.mode === 'speaking' ? L.who + ' is talking.' : 'Your turn.'); },
+        onMessage: function(msg){ if(msg && msg.message) line(root, msg.source === 'user' ? 'you' : 'them', msg.message); },
+        onError: function(e){ fallback(root, 'The conversation dropped.'); }
+      }).then(function(conv){ sessions[k] = conv; });
+    }).catch(function(err){
+      var why = err && err.message === 'nomic' ? 'This browser has no microphone access.' : err && (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') ? 'The microphone was not allowed.' : 'Live practice could not start here.';
+      fallback(root, why);
+    });
+  }
+  function end(root){ var k = root.getAttribute('data-live'); var c = sessions[k]; if(c && c.endSession) c.endSession(); sessions[k] = null; el(root, '[data-live-end]').hidden = true; el(root, '[data-live-start]').hidden = false; if(root.getAttribute('data-mode') !== 'done') setState(root, 'off', 'Ended.'); }
+  document.addEventListener('click', function(e){
+    var root = e.target.closest('.live'); if(!root) return;
+    if(e.target.closest('[data-live-start]') || e.target.closest('[data-live-again]')) start(root);
+    else if(e.target.closest('[data-live-end]')) end(root);
+  });
+  document.addEventListener('chart:page', function(){ Object.keys(sessions).forEach(function(k){ var r = document.querySelector('.live[data-live="' + k + '"]'); if(r && sessions[k]) end(r); }); });
+  window.MV_LIVE = { score: function(k, p){ var r = document.querySelector('.live[data-live="' + k + '"]'); if(r) score(r, p); }, LIVE: LIVE };
+})();
+
 (function(){
   var box = $('#ideasBox'), status = $('#ideasStatus'); if(!box) return;
   var cur = -1, seen = {}, found = {};
@@ -721,14 +801,15 @@ var IDEAS = [
   box.innerHTML = '<div class="idea-tabs" role="tablist" aria-label="The five ideas, by topic">' + IDEAS.map(function(it, i){ return '<button type="button" role="tab" aria-selected="false" data-tab="' + i + '">' + (i + 1) + ' · ' + names[i] + '</button>'; }).join('') + '</div>' +
     '<div class="idea idea-intro cur" role="region" aria-label="About the five ideas"><span class="who-is">Start here</span><h3>Five ideas that hold <em>up</em>.</h3>' +
       '<div class="intro-copy"><p>You do not need a theory of management. You need a few ideas that hold up, and each one turns into something you can do this week. These five come from people who spent years studying what good managers do.</p>' +
-      '<p><b>How this works.</b> Each idea gives you four things: what it is, why to adopt it, what it looks like in practice, and the value it brings. Then one thing to start this week, and a short moment to apply it.</p>' +
+      '<p><b>How this works.</b> Each idea: what it is, one thing to start this week, and a moment to apply it. Open the detail if you want the why.</p>' +
       '<p class="intro-cta"><button type="button" class="btn btn-primary btn-sm" data-tab="0">Start with idea 1<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></p></div>' +
       '<ol class="intro-list" aria-label="The five ideas">' + IDEAS.map(function(it, i){ return '<li><button type="button" data-tab="' + i + '"><span class="il-no">' + (i + 1) + '</span><span class="il-t"><b>' + names[i] + '</b><span>' + ONE[i] + '</span></span></button></li>'; }).join('') + '</ol></div>' +
     IDEAS.map(function(it, i){
       return '<div class="idea" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' + (i === 0 ? ROCKS_ART : '') +
-        '<p class="blk"><b>What it is</b>' + esc(it.what) + '</p><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p>' +
-        '<div class="side"><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
+        '<div class="idea-core"><p class="blk"><b>What it is</b>' + esc(it.what) + '</p><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
+        '<details class="idea-more"><summary>Why it works, what it looks like, and what it brings</summary><div class="idea-more-grid"><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p></div></details>' +
         '<div class="try"><p class="cq-h"><span class="mono">Apply it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + '<span class="try-note">Show you understood the idea. Tap the response you would give, then try the other two.</span></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
+        (LIVE[IDEA_SCN[i]] ? liveHTML(IDEA_SCN[i]) : '') +
         '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page for what Vanderbilt will ask of you.</span>') + '</div></div>';
     }).join('');
   function show(i){
@@ -742,6 +823,7 @@ var IDEAS = [
   }
   function paint(){ var n = Object.keys(seen).length, f = Object.keys(found).length; if(status) status.textContent = n + ' of 5 ideas. ' + f + ' of 5 moments.' + (f === 5 ? ' Activity complete. Pick the idea you will try first.' : n === 5 && f < 5 ? ' Find the best response in each moment.' : ''); if(f === 5) progDone('safe'); }
   $$('.scn[data-scn]', box).forEach(buildScenario);
+  window.markIdeaMoment = function(k){ found[k] = 1; paint(); };
   box.addEventListener('click', function(e){
     var b = e.target.closest('.scn button[data-o]'); if(b){ var k = b.closest('.scn').getAttribute('data-scn'); if(SCENARIOS[k].opts[parseInt(b.getAttribute('data-o'), 10)].best){ found[k] = 1; paint(); } return; }
     var t = e.target.closest('button[data-tab]'); if(t){ show(parseInt(t.getAttribute('data-tab'), 10)); return; }
