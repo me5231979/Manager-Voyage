@@ -47,6 +47,20 @@
     return 'standalone';
   }
 
+  /* Post one event record to the completion endpoint (a Power Automate HTTP trigger, or a proxy). */
+  function send(payload) {
+    if (!CFG.completionEndpoint) return false;
+    try {
+      var body = JSON.stringify(payload);
+      if (CFG.completionMode === 'flow') {
+        fetch(CFG.completionEndpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: body, keepalive: true }).catch(function () {});
+      } else {
+        fetch(CFG.completionEndpoint, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
+      }
+      return true;
+    } catch (e) { return false; }
+  }
+
   /* x: { at, score, max, passed, note, extra } all optional */
   function reportCompletion(id, x) {
     x = x || {};
@@ -85,5 +99,5 @@
 
   function localCompletions() { return readLocal(); }
 
-  window.MVOracle = { courseUrl: courseUrl, reportCompletion: reportCompletion, launchContext: launchContext, localCompletions: localCompletions, config: CFG };
+  window.MVOracle = { courseUrl: courseUrl, send: send, reportCompletion: reportCompletion, launchContext: launchContext, localCompletions: localCompletions, config: CFG };
 })();

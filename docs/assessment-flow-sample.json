@@ -1,0 +1,119 @@
+{
+  "event": "assessment",
+  "phase": "initial",
+  "course": "Manager Foundations, Course 1: You Are a Manager Now",
+  "name": "Taylor Example",
+  "email": "taylor.example@vanderbilt.edu",
+  "at": "2026-10-27T03:40:00.000Z",
+  "score": 28,
+  "max": 50,
+  "categories": [
+    {
+      "k": "Get the work done",
+      "avg": 2.7,
+      "pct": 42
+    },
+    {
+      "k": "Take care of your people",
+      "avg": 2.0,
+      "pct": 25
+    },
+    {
+      "k": "Make things better",
+      "avg": 3.0,
+      "pct": 50
+    },
+    {
+      "k": "Connect your team",
+      "avg": 4.0,
+      "pct": 75
+    }
+  ],
+  "answers": [
+    {
+      "n": 1,
+      "k": "Priorities",
+      "v": 2,
+      "label": "Rarely"
+    },
+    {
+      "n": 2,
+      "k": "Expectations",
+      "v": 3,
+      "label": "Sometimes"
+    },
+    {
+      "n": 3,
+      "k": "Checking work",
+      "v": 3,
+      "label": "Sometimes"
+    },
+    {
+      "n": 4,
+      "k": "Supporting",
+      "v": 1,
+      "label": "Never"
+    },
+    {
+      "n": 5,
+      "k": "Recognizing",
+      "v": 2,
+      "label": "Rarely"
+    },
+    {
+      "n": 6,
+      "k": "Empowering",
+      "v": 3,
+      "label": "Sometimes"
+    },
+    {
+      "n": 7,
+      "k": "Leading change",
+      "v": 4,
+      "label": "Often"
+    },
+    {
+      "n": 8,
+      "k": "Looking back",
+      "v": 2,
+      "label": "Rarely"
+    },
+    {
+      "n": 9,
+      "k": "Watching ahead",
+      "v": 3,
+      "label": "Sometimes"
+    },
+    {
+      "n": 10,
+      "k": "Representing",
+      "v": 5,
+      "label": "Always"
+    }
+  ],
+  "prior": null,
+  "feedback": [
+    {
+      "k": "Get the work done",
+      "label": "Developing",
+      "line": "You do this sometimes. Pick one specific moment this week and do it on purpose."
+    },
+    {
+      "k": "Take care of your people",
+      "label": "Start here",
+      "line": "This is the category to work on first. The course gives you one move for it; make that your action this week."
+    },
+    {
+      "k": "Make things better",
+      "label": "Developing",
+      "line": "You do this sometimes. Pick one specific moment this week and do it on purpose."
+    },
+    {
+      "k": "Connect your team",
+      "label": "Solid",
+      "line": "You do this most weeks. One more deliberate rep a week makes it a habit."
+    }
+  ],
+  "move": "Thank one person for one specific thing, by name.",
+  "page": "https://me5231979.github.io/Manager-Voyage/foundation/"
+}

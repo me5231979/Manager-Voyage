@@ -1124,7 +1124,7 @@ var TURNS = [
   { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card' },
   { sel:'#external .flip-grid',  prog:'external',  text:'Flip each card' },
   { sel:'#jobsCalls',   prog:'yourcall', text:'Have all four conversations' },
-  { sel:'#meaChoice',   prog:'survey',   text:'Tap what is true for you' },
+  { sel:'#meaBox',      prog:'survey',   text:'Take the assessment, or confirm you did' },
   { sel:'#quizBox',     prog:'quiz',     text:'Four of five finishes the course' },
   { sel:'#tell-leader', prog:'nextstep', text:'Copy the message, send it, then mark this done' }
 ];
@@ -1195,25 +1195,24 @@ SECTIONS.forEach(function(s){ if(progIs(s.k)) turnDone(s.k); });
 
 /* ══════════ module 5: your assessment results → starting point and module order ══════════ */
 var CATS = { task:{ name:'Get the work done', short:'Task-oriented' }, relations:{ name:'Take care of your people', short:'Relations-oriented' }, change:{ name:'Make things better', short:'Change-oriented' }, external:{ name:'Connect your team', short:'External' } };
-/* Your assessment: review the results email, or take the assessment. One tap marks the activity done. */
+/* Your assessment page: shows the result when there is one, or offers to take it. */
 (function(){
   var box = $('#meaChoice'), out = $('#meaOut'); if(!box || !out) return;
-  var url = (window.MV_CONFIG && MV_CONFIG.assessmentUrl) || '';
-  var link = url ? '<a class="btn btn-primary" href="' + esc(url) + '" target="_blank" rel="noopener">Open the assessment</a>' : '<span class="hinttxt">Ask your Engagement Consultant for the assessment link; it takes about ten minutes.</span>';
-  var MSG = {
-    reviewed:'<h4>Good. Keep the <em>email</em>.</h4><p>It is your starting point. Ninety days after you complete Manager Voyage you rate the same ten statements again; the aim is a higher rating, one behavior at a time.</p>',
-    retake:'<h4>Take the assessment <em>now</em>.</h4><p>Your results and feedback arrive by email. Keep them; you compare against them ninety days after you complete Manager Voyage.</p><div class="route-act" style="margin-top:12px">' + link + '</div>',
-    take:'<h4>Take it before you go <em>further</em>.</h4><p>Ten statements, rated from never to always, a few minutes. Your results and feedback arrive by email, and you compare against them ninety days after you complete Manager Voyage.</p><div class="route-act" style="margin-top:12px">' + link + '</div>'
-  };
-  function render(c){ $$('button[data-choice]', box).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-choice') === c ? 'true' : 'false'); }); out.innerHTML = MSG[c] || ''; }
+  function render(){
+    var rec = null; try{ rec = JSON.parse(get('assess-retake') || get('assess-answers') || 'null'); }catch(e){}
+    if(rec && rec.score !== undefined && window.MV_ASSESS){ out.innerHTML = MV_ASSESS.card(rec, rec.phase === 'retake' ? MV_ASSESS.baseline() : null); box.hidden = true; var h = $('#meaHead'); if(h) h.innerHTML = rec.phase === 'retake' ? 'Three months on: what <em>moved</em>.' : 'Your score, by <em>category</em>.'; var l = $('#meaLead'); if(l) l.textContent = rec.phase === 'retake' ? 'Your retake beside your starting point.' : 'Your starting point. You take the same ten again three months after you finish.'; return; }
+    var st = null; try{ st = JSON.parse(get('assess') || 'null'); }catch(e){}
+    box.hidden = false; $$('button[data-choice]', box).forEach(function(b){ b.setAttribute('aria-pressed', st && st.status === b.getAttribute('data-choice') ? 'true' : 'false'); });
+    out.innerHTML = st && st.status === 'reviewed' ? '<h4>Good. Keep the <em>email</em>.</h4><p>It is your starting point. Three months after you finish, you rate the same ten statements again.</p>' : '';
+  }
   box.addEventListener('click', function(e){
-    var b = e.target.closest('button[data-choice]'); if(!b) return;
-    var c = b.getAttribute('data-choice');
-    set('assess', JSON.stringify({ status:c, at:new Date().toISOString() })); if(c === 'reviewed') set('assess-gate', 'done');
-    render(c); progDone('survey');
+    var b = e.target.closest('button[data-choice]'); if(!b) return; var c = b.getAttribute('data-choice');
+    if(c === 'open'){ if(window.MV_ASSESS) MV_ASSESS.open('initial'); return; }
+    set('assess', JSON.stringify({ status:c, at:new Date().toISOString() })); set('assess-gate', 'done'); render(); progDone('survey');
   });
-  window.assessLoad = function(){ var raw = get('assess'); if(!raw) return; try{ var d = JSON.parse(raw); if(d && d.status) render(d.status); }catch(e){} };
-  window.assessLoad();
+  window.assessLoad = render;
+  document.addEventListener('mv-assessed', render);
+  render();
 })();
 
 /* ══════════ knowledge check: five questions, one at a time, feedback after each ══════════ */
@@ -1286,28 +1285,68 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && e.intersectionRatio > .3){ art.classList.add('play'); io.disconnect(); } }); }, { threshold:[.3] });
   io.observe(art);
 })();
-/* ══════════ before you start: the assessment. The Vanderbilt form itself, inside the branded dialog, so its responses and flows stay untouched. ══════════ */
+/* ══════════ the assessment: ten statements, scored in four categories, recorded with FLH, emailed, and retaken three months on ══════════ */
 (function(){
   var m = $('#assessModal'); if(!m) return;
-  var C = window.MV_CONFIG || {}, url = C.assessmentUrl || '';
+  var C = window.MV_CONFIG || {}, SCALE = C.assessmentScale || ['Never', 'Rarely', 'Sometimes', 'Often', 'Always'], ST = C.assessmentStatements || [], CATS4 = C.assessmentCategories || [], BANDS = C.assessmentBands || [], MOVES = C.assessmentMoves || [];
+  var mode = 'initial', ans = {}, loaded = false;
   function assessed(){ try{ var d = JSON.parse(get('assess') || 'null'); if(d && d.status === 'reviewed') return true; }catch(e){} return get('assess-gate') === 'done'; }
-  var snoozed = false; try{ snoozed = sessionStorage.getItem('mv-assess-snooze') === '1'; }catch(e){}
-  if(assessed() || snoozed) return;
+  function baseline(){ try{ return JSON.parse(get('assess-answers') || 'null'); }catch(e){ return null; } }
+  function score(a){ var cats = CATS4.map(function(c){ var vs = c[1].map(function(i){ return (a[i] || 0) + 1; }); var avg = vs.reduce(function(x, y){ return x + y; }, 0) / vs.length; return { k:c[0], avg:Math.round(avg * 10) / 10, pct:Math.round((avg - 1) / 4 * 100) }; }); var total = ST.reduce(function(t, st, i){ return t + (a[i] || 0) + 1; }, 0); return { score:total, max:ST.length * SCALE.length, categories:cats }; }
+  function band(avg){ for(var i = 0; i < BANDS.length; i++){ if(avg >= BANDS[i][0]) return BANDS[i]; } return BANDS[BANDS.length - 1] || [0, '', '']; }
+  function card(rec, base){
+    var cats = rec.categories || [], hi = cats.slice().sort(function(a, b){ return b.avg - a.avg; })[0], lo = cats.slice().sort(function(a, b){ return a.avg - b.avg; })[0], loIdx = cats.indexOf(lo);
+    var when = rec.at ? new Date(rec.at).toLocaleDateString(undefined, { month:'long', day:'numeric', year:'numeric' }) : '';
+    var delta = base ? rec.score - base.score : null;
+    return '<div class="ar"><div class="ar-top"><span class="ar-score">' + rec.score + '<small>of ' + rec.max + '</small></span><div><h4>' + (rec.phase === 'retake' ? 'Three months on' : 'Your starting point') + (when ? ' &middot; ' + esc(when) : '') + (delta !== null ? ' <span class="ar-delta' + (delta < 0 ? ' down' : '') + '">' + (delta >= 0 ? '+' : '') + delta + ' since you started</span>' : '') + '</h4><p>Strongest: ' + esc(hi ? hi.k.toLowerCase() : '') + '. Start with: ' + esc(lo ? lo.k.toLowerCase() : '') + '.</p></div></div>' +
+      '<ul class="ar-cats">' + cats.map(function(c, i){ var bd = band(c.avg), prev = base && base.categories && base.categories[i]; var d = prev ? Math.round((c.avg - prev.avg) * 10) / 10 : null; return '<li><span class="ar-l">' + esc(c.k) + '</span><span class="ar-v">' + c.avg.toFixed(1) + '<small>of 5</small>' + (d !== null ? '<span class="ar-delta' + (d < 0 ? ' down' : '') + '">' + (d >= 0 ? '+' : '') + d.toFixed(1) + '</span>' : '') + '</span><span class="ar-bar"><i style="width:' + c.pct + '%"></i>' + (prev ? '<em style="left:' + prev.pct + '%" title="Starting point"></em>' : '') + '</span><span class="ar-f"><b>' + esc(bd[1]) + '</b>' + esc(bd[2]) + '</span></li>'; }).join('') + '</ul>' +
+      (MOVES[loIdx] ? '<div class="ar-move"><b>Your first move</b>' + esc(MOVES[loIdx]) + '</div>' : '') + '</div>';
+  }
+  function show(){ m.hidden = false; if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); }); document.body.classList.add('oracle-open'); }
   function hide(){ m.classList.remove('open'); document.body.classList.remove('oracle-open'); window.setTimeout(function(){ m.hidden = true; }, reduce ? 0 : 260); }
-  function done(){ set('assess-gate', 'done'); set('assess', JSON.stringify({ status:'reviewed', at:new Date().toISOString() })); if(window.assessLoad) assessLoad(); progDone('survey'); hide(); }
-  var frame = $('#gateFrame', m), open = $('#gateOpen', m), loaded = false;
-  function view(k){ $('#gateIntro', m).hidden = k !== 'intro'; $('#gateForm', m).hidden = k !== 'form'; m.scrollTop = 0;
-    if(k === 'form' && frame && !loaded && url){ frame.src = url + (url.indexOf('?') > -1 ? '&' : '?') + 'embed=true'; loaded = true; }
-    var f = k === 'form' ? $('#assessDone2', m) : $('#assessStart', m); if(f) f.focus(); }
-  if(open) open.href = url || '#';
-  m.hidden = false; if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); }); document.body.classList.add('oracle-open');
-  var start = $('#assessStart', m); if(start) start.focus();
+  function view(k){ var map = { intro:'gateIntro', form:'gateForm', result:'gateResult' }; ['gateIntro', 'gateForm', 'gateResult'].forEach(function(id){ $('#' + id, m).hidden = id !== map[k]; }); m.scrollTop = 0; var el = $({ intro:'#assessStart', form:'#gateName', result:'#assessContinue' }[k], m); if(el) el.focus(); }
+  var q = $('#gateQ', m), send = $('#assessSend', m), nameEl = $('#gateName', m), mailEl = $('#gateEmail', m);
+  function build(){
+    if(loaded) return; loaded = true;
+    q.innerHTML = ST.map(function(st, i){ return '<li><b>' + (i + 1) + ' &middot; ' + esc(st[0]) + '</b><p>' + esc(st[1]) + '</p><div class="scale" role="group" aria-label="' + esc(st[0]) + '">' + SCALE.map(function(l, j){ return '<button type="button" data-q="' + i + '" data-v="' + j + '" aria-pressed="false">' + esc(l) + '</button>'; }).join('') + '</div></li>'; }).join('');
+    var who = {}; try{ who = JSON.parse(get('who') || '{}') || {}; }catch(e){}
+    nameEl.value = who.name || profile.name || (window.MVScorm && MVScorm.name) || ''; mailEl.value = who.email || '';
+    q.addEventListener('click', function(e){ var b = e.target.closest('button[data-q]'); if(!b) return; var i = b.getAttribute('data-q'); ans[i] = +b.getAttribute('data-v'); $$('button[data-q="' + i + '"]', q).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); ready(); });
+    nameEl.addEventListener('input', ready); mailEl.addEventListener('input', ready);
+  }
+  function ready(){ var n = Object.keys(ans).length, ok = n === ST.length && nameEl.value.trim() && /@/.test(mailEl.value); send.disabled = !ok; send.textContent = n < ST.length ? 'See my results (' + n + ' of ' + ST.length + ' answered)' : ok ? 'See my results' : 'Add your name and Vanderbilt email'; }
+  function open(k){
+    mode = k || 'initial'; ans = {}; build(); $$('button[data-q]', q).forEach(function(x){ x.setAttribute('aria-pressed', 'false'); }); ready();
+    if(mode === 'retake'){ $('#gateKicker', m).textContent = 'Three months on'; $('#assessTitle', m).innerHTML = 'Rate the same ten statements <em>again</em>.'; $('#gateIntroText', m).textContent = 'Answer for how you work now, not how you want to. You see your result beside your starting point, and a copy goes to you by email.'; $('#assessDone', m).hidden = true; $('#assessLater', m).textContent = 'Not now'; $('#gateFormKicker', m).textContent = 'Manager Effectiveness Assessment · three months on'; }
+    show(); view('intro');
+  }
+  function finish(){
+    var sc = score(ans), rec = { phase:mode, name:nameEl.value.trim(), email:mailEl.value.trim(), at:new Date().toISOString(), answers:ST.map(function(st, i){ return { n:i + 1, k:st[0], v:ans[i] + 1, label:SCALE[ans[i]] }; }), score:sc.score, max:sc.max, categories:sc.categories };
+    var base = mode === 'retake' ? baseline() : null;
+    set(mode === 'retake' ? 'assess-retake' : 'assess-answers', JSON.stringify(rec));
+    set('assess', JSON.stringify({ status:'reviewed', phase:mode, at:rec.at, score:rec.score, max:rec.max })); set('assess-gate', 'done');
+    var who = {}; try{ who = JSON.parse(get('who') || '{}') || {}; }catch(e){} who.name = rec.name; who.email = rec.email; set('who', JSON.stringify(who)); window.MV_LEARNER = { name:rec.name, email:rec.email };
+    var n = $('#whoName'), e2 = $('#whoEmail'); if(n && !n.value) n.value = rec.name; if(e2 && !e2.value) e2.value = rec.email;
+    var lo = rec.categories.slice().sort(function(a, b){ return a.avg - b.avg; })[0];
+    var sent = window.MVOracle && MVOracle.send({ event:'assessment', phase:mode, course:'Manager Foundations, Course 1: You Are a Manager Now', name:rec.name, email:rec.email, at:rec.at, score:rec.score, max:rec.max, categories:rec.categories, answers:rec.answers, prior:base ? { at:base.at, score:base.score, categories:base.categories } : null, feedback:rec.categories.map(function(c){ var bd = band(c.avg); return { k:c.k, label:bd[1], line:bd[2] }; }), move:MOVES[rec.categories.indexOf(lo)] || '', page:location.href.split('#')[0] });
+    $('#gateResultBody', m).innerHTML = card(rec, base);
+    $('#gateResultKicker', m).textContent = mode === 'retake' ? 'Your results, three months on' : 'Your results';
+    $('#gateResultFine', m).textContent = sent ? 'A copy is on its way to ' + rec.email + '. Your results also live on the Your assessment page in this course.' : 'Your results live on the Your assessment page in this course.';
+    try{ document.dispatchEvent(new CustomEvent('mv-assessed')); }catch(e){}
+    progDone('survey'); view('result');
+  }
   $('#assessStart', m).addEventListener('click', function(){ view('form'); });
   $('#assessBack', m).addEventListener('click', function(){ view('intro'); });
   $('#assessDone', m).addEventListener('click', function(){ set('assess-gate', 'done'); hide(); });
-  $('#assessDone2', m).addEventListener('click', done);
   $('#assessLater', m).addEventListener('click', function(){ try{ sessionStorage.setItem('mv-assess-snooze', '1'); }catch(e){} hide(); });
+  send.addEventListener('click', finish);
+  $('#assessContinue', m).addEventListener('click', hide);
   document.addEventListener('keydown', function(e){ if(!m.hidden && e.key === 'Escape'){ try{ sessionStorage.setItem('mv-assess-snooze', '1'); }catch(e2){} hide(); } });
+  window.MV_ASSESS = { open:open, card:card, baseline:baseline }; if(window.assessLoad) assessLoad();
+  var qs = null; try{ qs = new URLSearchParams(location.search); }catch(e){}
+  var snoozed = false; try{ snoozed = sessionStorage.getItem('mv-assess-snooze') === '1'; }catch(e){}
+  if(qs && qs.get('reassess')){ open('retake'); }
+  else if(!assessed() && !snoozed){ open('initial'); }
 })();
 /* ══════════ build check: if a newer build is published, say so instead of serving a stale page quietly ══════════ */
 (function(){

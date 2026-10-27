@@ -39,13 +39,29 @@ window.MV_CONFIG = {
   // the full vision and areas of focus, linked from the mission page
   missionUrl: 'https://www.vanderbilt.edu/',
   assessmentUrl: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OX9aur7js0q0UGf6gPrsrSj0YUFCM_9NtEckOrGZTO9UNUEzVllPWEkwVEtaUUlYRVVNSU9JRlgxVi4u',
-  /* The branded assessment in the Foundation course pre-fills the Microsoft
-     Form. Paste the question IDs from a "Get pre-filled link" URL here: the
-     part after "&r" and before "=" for each question, in order. The scale
-     labels must match the Form's choices exactly. Empty until supplied. */
-  assessmentPrefill: { name: '', email: '', questions: ['', '', '', '', '', '', '', '', '', ''] },
   /* The Form's own choices, lowest to highest. The labels must match the Form exactly. */
   assessmentScale: ['Never', 'Rarely', 'Sometimes', 'Often', 'Always'],
+  /* Which statements make up each of the four categories (indexes into assessmentStatements). */
+  assessmentCategories: [
+    ['Get the work done',         [0, 1, 2]],
+    ['Take care of your people',  [3, 4, 5]],
+    ['Make things better',        [6, 7]],
+    ['Connect your team',         [8, 9]]
+  ],
+  /* Feedback by category average, highest band first: [minimum average, label, line]. */
+  assessmentBands: [
+    [4.5, 'A strength',  'You do this consistently. Keep it, and notice who on your team could learn it from you.'],
+    [3.5, 'Solid',       'You do this most weeks. One more deliberate rep a week makes it a habit.'],
+    [2.5, 'Developing',  'You do this sometimes. Pick one specific moment this week and do it on purpose.'],
+    [0,   'Start here',  'This is the category to work on first. The course gives you one move for it; make that your action this week.']
+  ],
+  /* The first move for each category, matching the four actions on Next steps. */
+  assessmentMoves: [
+    'Confirm with one person, out loud, what they own and by when.',
+    'Thank one person for one specific thing, by name.',
+    'Hold one ten-minute look-back after a piece of work.',
+    'Have coffee with one person your team depends on.'
+  ],
   /* The ten statements, in the Form's order, word for word. */
   assessmentStatements: [
     ['Priorities',     'I write down my team\u2019s top three priorities for the coming period, with a named owner for each, before the work starts.'],
