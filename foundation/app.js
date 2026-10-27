@@ -391,7 +391,7 @@ var modalReturn = null, modalTimer = null;
 function allDone(){
   if(window.MVOracle){
     var qs = get('quiz-score'), qm = get('quiz-max');
-    MVOracle.reportCompletion('MRC-F', { score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: every activity done', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })() } });
+    MVOracle.reportCompletion('MRC-F', { course: 'Manager Foundations, Course 1: You Are a Manager Now', score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: every activity done', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })(), action: get('habit'), week: (function(){ try{ return JSON.parse(get('week') || 'null'); }catch(e){ return null; } })(), build: (document.querySelector('.build') || {}).textContent || '' } });
   } else if(window.MVScorm && MVScorm.connected) MVScorm.complete();
   if(doneSeen) return;
   doneSeen = true; set('done-seen', '1');
@@ -1053,6 +1053,16 @@ var IDEAS = [
   rose.addEventListener('click', function(e){ var b = e.target.closest('.pt[data-job]'); if(b) pick(b.getAttribute('data-job')); });
   if(back) back.addEventListener('click', function(){ map.hidden = true; if(vid) vid.hidden = false; $$('.pt', rose).forEach(function(b){ b.setAttribute('aria-selected', 'false'); }); $$('.star path.lit', rose).forEach(function(pth){ pth.classList.remove('lit'); }); if(narr.playing) narrStop(); });
   map.addEventListener('click', function(e){ var b = e.target.closest('.fw-open'); if(b){ e.stopPropagation(); if(window.showJob) showJob(b.getAttribute('data-open')); } });
+})();
+
+/* ══════════ who you are: name and Vanderbilt email, so the completion can be recorded ══════════ */
+(function(){
+  var n = $('#whoName'), e = $('#whoEmail'); 
+  var saved = {}; try{ saved = JSON.parse(get('who') || '{}') || {}; }catch(x){}
+  function pub(){ window.MV_LEARNER = { name:(n && n.value.trim()) || saved.name || profile.name || (window.MVScorm && MVScorm.name) || '', email:(e && e.value.trim()) || saved.email || '' }; }
+  if(n){ n.value = saved.name || profile.name || ''; n.addEventListener('input', function(){ saved.name = n.value.trim(); set('who', JSON.stringify(saved)); pub(); }); }
+  if(e){ e.value = saved.email || ''; e.addEventListener('input', function(){ saved.email = e.value.trim(); set('who', JSON.stringify(saved)); pub(); }); }
+  pub();
 })();
 
 /* ══════════ next steps: pick one thing to do this week; it lands in the message to your manager ══════════ */

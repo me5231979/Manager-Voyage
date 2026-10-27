@@ -65,8 +65,12 @@
     if (CFG.completionEndpoint) {
       rec.source = 'sso';
       try {
-        var body = JSON.stringify({ id: id, at: rec.at, score: rec.score, max: rec.max, passed: x.passed, extra: x.extra || null });
-        if (navigator.sendBeacon && !x.wait) {
+        var who = window.MV_LEARNER || {};
+        var payload = { event: 'course_complete', id: id, course: x.course || id, name: who.name || '', email: who.email || '', at: new Date().toISOString(), date: rec.at, score: rec.score, max: rec.max, passed: x.passed, source: (window.MVScorm && window.MVScorm.connected) ? 'oracle' : 'web', page: location.href.split('#')[0], extra: x.extra || null };
+        var body = JSON.stringify(payload);
+        if (CFG.completionMode === 'flow') {
+          fetch(CFG.completionEndpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: body, keepalive: true }).catch(function () {});
+        } else if (navigator.sendBeacon && !x.wait) {
           navigator.sendBeacon(CFG.completionEndpoint, new Blob([body], { type: 'application/json' }));
         } else {
           fetch(CFG.completionEndpoint, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true })

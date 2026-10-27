@@ -24,7 +24,8 @@ window.MV_CONFIG = {
      { id, at, score, max, passed, extra } to this URL with credentials.
      Inside Oracle Learning the SCORM API is used instead. Leave null to
      keep completions local and self-reported. */
-  completionEndpoint: null,           /* e.g. 'https://flh-proxy.vanderbilt.edu/voyage/completions' */
+  completionEndpoint: null,           /* a Power Automate "When an HTTP request is received" URL, or a proxy */
+  completionMode: 'flow',             /* 'flow': post as text/plain with no CORS preflight, which Power Automate accepts. 'proxy': JSON with credentials. */
 
   /* The Manager Effectiveness Assessment: taken before the Foundation course and
      again this many months after completing it. */

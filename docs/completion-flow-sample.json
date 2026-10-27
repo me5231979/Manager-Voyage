@@ -1,0 +1,15 @@
+{
+  "event": "course_complete",
+  "id": "MRC-F",
+  "course": "Manager Foundations, Course 1: You Are a Manager Now",
+  "name": "Taylor Example",
+  "email": "taylor.example@vanderbilt.edu",
+  "at": "2026-10-27T03:32:00.142Z",
+  "date": "2026-10-27",
+  "score": 5,
+  "max": 5,
+  "passed": true,
+  "source": "web",
+  "page": "https://me5231979.github.io/Manager-Voyage/foundation/",
+  "extra": { "assess": { "status": "reviewed", "at": "2026-10-27T01:00:00.000Z" }, "action": "1", "week": { "n": 5, "hourly": "some", "heavy": 1, "step": 3 }, "build": "Build 2026.10.27.v" }
+}
