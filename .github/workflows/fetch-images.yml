@@ -29,7 +29,7 @@ jobs:
           items = d if isinstance(d, list) else [d]
           for it in items:
               assert re.fullmatch(r'[A-Za-z0-9-]+', it['name']), it['name']
-              sub = it.get('dir', 'foundation'); assert re.fullmatch(r'[a-z0-9-]+', sub), sub
+              sub = it.get('dir', 'foundation'); assert re.fullmatch(r'[a-z0-9-]+(/[a-z0-9-]+)?', sub), sub
               os.makedirs('assets/img/' + sub, exist_ok=True)
               raw = '/tmp/%s.raw' % it['name']
               subprocess.run(['curl', '-fsSL', '-o', raw, it['url']], check=True)
