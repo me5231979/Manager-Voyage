@@ -13,7 +13,7 @@ Built on the same page pattern as the Talent Marketplace program page (me5231979
 Verified in Chromium at 1440px and 390px wide: no horizontal scroll, no console errors.
 
 Publishing: GitHub Pages serves the `gh-pages` branch. Every push to `main` runs `.github/workflows/pages.yml`, which mirrors main to gh-pages.
-The site will be at https://me5231979.github.io/Manager-Voyage/
+The site will be at https://manager-voyage.vercel.app/
 
 ## Manager dashboard (`dashboard/`)
 

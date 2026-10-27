@@ -10,6 +10,6 @@
   "max": 5,
   "passed": true,
   "source": "web",
-  "page": "https://me5231979.github.io/Manager-Voyage/foundation/",
+  "page": "https://manager-voyage.vercel.app/foundation/",
   "extra": { "assess": { "status": "reviewed", "at": "2026-10-27T01:00:00.000Z" }, "action": "1", "week": { "n": 5, "hourly": "some", "heavy": 1, "step": 3 }, "build": "Build 2026.10.27.v" }
 }

@@ -1,7 +1,7 @@
 Build the Manager Voyage assessment and completion automation in Power Automate and SharePoint, in my browser, and hand me back the trigger URL at the end.
 
 CONTEXT
-The Manager Foundations course at https://me5231979.github.io/Manager-Voyage/foundation/ posts JSON records to one HTTP URL. There are three kinds of record, told apart by the "event" and "phase" fields:
+The Manager Foundations course at https://manager-voyage.vercel.app/foundation/ posts JSON records to one HTTP URL. There are three kinds of record, told apart by the "event" and "phase" fields:
 - event "assessment", phase "initial": the learner's starting assessment (ten statements, score out of 50, four category averages).
 - event "course_complete": the learner finished the course.
 - event "assessment", phase "retake": the same ten statements three months later, with "prior" holding the starting scores.

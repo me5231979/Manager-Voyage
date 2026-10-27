@@ -13,6 +13,8 @@ second, scheduled flow.
 Every record is a JSON object posted to one URL. Samples are in
 `docs/completion-flow-sample.json` and `docs/assessment-flow-sample.json`.
 
+The live site is https://manager-voyage.vercel.app/ (Vercel, deployed from main). GitHub Pages at https://me5231979.github.io/Manager-Voyage/ mirrors it.
+
 ## Flow 1: Manager Voyage, record and email
 
 1. Power Automate, **Create**, **Instant cloud flow**, trigger **When an HTTP request is received**.
@@ -72,7 +74,7 @@ invisible marker `<!--PERSONAL_NOTE-->` just under the overall narrative. To add
    - **Send an email (V2)** to the item's Email. Subject: `Three months on: rate the same ten statements`.
      Body: the branded invitation in `docs/email-reassess-invite.html`, pasted in code view. It carries
      the learner's first name and starting score as expressions, and the retake link
-     `https://me5231979.github.io/Manager-Voyage/reassess/`. The learner's browser holds their
+     `https://manager-voyage.vercel.app/reassess/`. The learner's browser holds their
      starting point, and the retake record carries it as `prior` for the comparison email in Flow 1.
    - **Update item**: RetakeInvitedOn = today.
 

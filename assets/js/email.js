@@ -6,7 +6,7 @@
    only has to send it. Loads after config.js and foundation/resources.js.
    ===================================================================== */
 var MV_EMAIL = (function(){
-  var SITE = 'https://me5231979.github.io/Manager-Voyage/';
+  var SITE = 'https://manager-voyage.vercel.app/';
   var TOPICS = { 'Get the work done':['priorities', 'oneonones', 'communication', 'start'], 'Take care of your people':['trust', 'feedback', 'performance', 'oneonones'], 'Make things better':['change', 'trust', 'communication'], 'Connect your team':['external', 'start', 'communication'] };
   var OVERALL = [
     [45, 'Consistent', 'These habits are weekly for you. That is the finding, and it is not a small one: the behaviors this assessment measures are the first things squeezed out when a manager is busy, and yours are holding. The useful next move is depth rather than breadth: coach another manager through one of these, or take on the parts of the job this assessment does not measure.'],
