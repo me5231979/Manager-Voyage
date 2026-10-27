@@ -1,33 +1,52 @@
-name: Fetch course media
-# Downloads the Runway-generated narration and video clips listed in
-# .github/media-urls.json, builds the course media with ffmpeg, commits the
-# results to main, and mirrors main to gh-pages. The signed URLs expire within
-# a day of generation, so this runs as soon as the JSON changes.
-# Narration now comes from ElevenLabs (build-tts.yml). This workflow is kept
-# for the Runway video footage and runs only when started by hand.
+name: Fetch images
+# Downloads generated images into assets/img/<dir>, resizes them to web size
+# (webp, max 1600px wide), and publishes. Write [{"name","url","dir"?}, ...]
+# to .github/media-url.json and push to main, or run it by hand.
 on:
+  push:
+    branches: [main]
+    paths: ['.github/media-url.json']
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
-  group: fetch-media
+  group: media-build
   cancel-in-progress: false
 jobs:
-  build:
+  fetch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Install ffmpeg
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-      - name: Build media
-        run: python3 scripts/build-media.py
-      - name: Commit media
+        with: { ref: main }
+      - name: Download and resize
+        run: |
+          set -e
+          pip install -q pillow
+          python3 - <<'PY'
+          import json, os, re, subprocess
+          from PIL import Image
+          d = json.load(open('.github/media-url.json'))
+          items = d if isinstance(d, list) else [d]
+          for it in items:
+              assert re.fullmatch(r'[A-Za-z0-9-]+', it['name']), it['name']
+              sub = it.get('dir', 'foundation'); assert re.fullmatch(r'[a-z0-9-]+', sub), sub
+              os.makedirs('assets/img/' + sub, exist_ok=True)
+              raw = '/tmp/%s.raw' % it['name']
+              subprocess.run(['curl', '-fsSL', '-o', raw, it['url']], check=True)
+              im = Image.open(raw).convert('RGB')
+              w = int(it.get('width', 1600))
+              if im.width > w: im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
+              out = 'assets/img/%s/%s.webp' % (sub, it['name'])
+              im.save(out, 'WEBP', quality=int(it.get('quality', 84)), method=6)
+              print('fetched', out, im.size, os.path.getsize(out))
+          PY
+      - name: Commit
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/audio/foundation assets/video/foundation assets/img/foundation
-          if git diff --cached --quiet; then echo "No media changes"; else git commit -m "Add Foundation course narration and videos (built from media-urls.json)"; git pull --rebase -X theirs origin main; git push origin HEAD:main; fi
-      - name: Mirror main to gh-pages
-        run: git push -f origin HEAD:gh-pages
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/img
+          git commit -m "Add images from media-url.json" || exit 0
+          git pull --rebase -X theirs origin main
+          git push origin HEAD:main
+      - name: Publish to the live site
+        run: git push origin HEAD:gh-pages
