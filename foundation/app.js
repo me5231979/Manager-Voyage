@@ -486,7 +486,7 @@ var LIVE = {
     penalty:['took_report_themselves', 'You took the report on yourself. Doing the work is the old job.'],
     way:'The Vanderbilt way: rocks first. Three named priorities before email, said out loud, with owners. The sand fits around them.', pass:3 },
   idea2: { agent:'agent_8901m5ww6bh9evns857z11cg5g1t', who:'Priya', initial:'P', role:'Analyst on your team', mins:'About three minutes',
-    brief:'Priya has rewritten the summary twice on tighten it up. It is due tomorrow. Tell her exactly what good looks like, by when, and why. Do not rewrite it for her.',
+    brief:'Priya has rewritten the summary twice. Both times your only feedback was “tighten it up.” It is due tomorrow. Tell her exactly what good looks like, when you need it, and why it matters. Do not rewrite it for her.',
     checks:[['said_what_good_looks_like', 'You said specifically what the summary needs'], ['gave_a_deadline', 'You gave a time it is due'], ['gave_the_why', 'You explained why it matters'], ['stayed_kind', 'You were direct without blaming her']],
     penalty:['rewrote_it_themselves', 'You offered to rewrite it yourself. It ships, Priya learns nothing, and you own every summary from now on.'],
     way:'The Vanderbilt way: clear is kind. What, by when, what good looks like, and why. Said in the 1:1, written in the follow up.', pass:3 },
