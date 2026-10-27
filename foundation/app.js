@@ -143,6 +143,7 @@ var MEDIA_V = '20261027p';
 /* the course videos carry their own narration: nothing else should talk over them, and they should not talk over anything else */
 function pauseVideos(){ $$('video').forEach(function(v){ if(v.id !== 'heroVideo' && !v.paused){ try{ v.pause(); }catch(e){} } }); }
 function narrPlay(k){
+  if(narr.hold){ narr.pending = true; return; }
   k = k || narrKey(); var text = NARR[k];
   narrStop(); pauseVideos();
   if(!text){ toast('No narration on this page.'); return; }
@@ -1386,8 +1387,8 @@ window.MV_EMAIL = MV_EMAIL;
       '<ul class="ar-cats">' + cats.map(function(c, i){ var bd = band(c.avg), prev = base && base.categories && base.categories[i]; var d = prev ? Math.round((c.avg - prev.avg) * 10) / 10 : null; return '<li><span class="ar-l">' + esc(c.k) + '</span><span class="ar-v">' + c.avg.toFixed(1) + '<small>of 5</small>' + (d !== null ? '<span class="ar-delta' + (d < 0 ? ' down' : '') + '">' + (d >= 0 ? '+' : '') + d.toFixed(1) + '</span>' : '') + '</span><span class="ar-bar"><i style="width:' + c.pct + '%"></i>' + (prev ? '<em style="left:' + prev.pct + '%" title="Starting point"></em>' : '') + '</span><span class="ar-f"><b>' + esc(bd[1]) + '</b>' + esc(bd[2]) + '</span></li>'; }).join('') + '</ul>' +
       (MOVES[loIdx] ? '<div class="ar-move"><b>Your first move</b>' + esc(MOVES[loIdx]) + '</div>' : '') + '</div>';
   }
-  function show(){ m.hidden = false; if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); }); document.body.classList.add('oracle-open'); }
-  function hide(){ m.classList.remove('open'); document.body.classList.remove('oracle-open'); window.setTimeout(function(){ m.hidden = true; }, reduce ? 0 : 260); }
+  function show(){ narr.hold = true; narr.pending = false; if(narr.playing) narrStop(); m.hidden = false; if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); }); document.body.classList.add('oracle-open'); }
+  function hide(){ m.classList.remove('open'); document.body.classList.remove('oracle-open'); window.setTimeout(function(){ m.hidden = true; }, reduce ? 0 : 260); narr.hold = false; if(narr.pending || narr.auto){ narr.pending = false; window.setTimeout(function(){ narrPlay(); }, reduce ? 0 : 400); } }
   function view(k){ var map = { intro:'gateIntro', form:'gateForm', result:'gateResult' }; ['gateIntro', 'gateForm', 'gateResult'].forEach(function(id){ $('#' + id, m).hidden = id !== map[k]; }); m.scrollTop = 0; var el = $({ intro:'#assessStart', form:'#gateName', result:'#assessContinue' }[k], m); if(el) el.focus(); }
   var q = $('#gateQ', m), send = $('#assessSend', m), nameEl = $('#gateName', m), mailEl = $('#gateEmail', m);
   function build(){
