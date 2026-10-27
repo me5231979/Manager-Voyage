@@ -70,10 +70,10 @@ invisible marker `<!--PERSONAL_NOTE-->` just under the overall narrative. To add
    The date expression: `formatDateTime(addDays(utcNow(), -90), 'yyyy-MM-dd')`.
 3. **Apply to each** item:
    - **Send an email (V2)** to the item's Email. Subject: `Three months on: rate the same ten statements`.
-     Body: a short note and this link, which opens the course straight into the retake:
-     `https://me5231979.github.io/Manager-Voyage/foundation/?reassess=1`
-     (the learner's browser already holds their starting point, and the retake record carries it as `prior`
-     for the comparison email in Flow 1).
+     Body: the branded invitation in `docs/email-reassess-invite.html`, pasted in code view. It carries
+     the learner's first name and starting score as expressions, and the retake link
+     `https://me5231979.github.io/Manager-Voyage/foundation/?reassess=1`. The learner's browser holds their
+     starting point, and the retake record carries it as `prior` for the comparison email in Flow 1.
    - **Update item**: RetakeInvitedOn = today.
 
 ## Testing

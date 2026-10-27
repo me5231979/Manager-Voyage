@@ -82,12 +82,7 @@ Create a Scheduled cloud flow, daily at 8:00 AM Central Time.
 2. Apply to each item:
    a. "Send an email (V2)" to items('Apply_to_each')?['Email'], from the same mailbox as Flow 1.
       Subject: Three months on: rate the same ten statements
-      Body (HTML, code view):
-      <p>Hi items('Apply_to_each')?['Title'],</p>
-      <p>Three months ago you finished Manager Foundations and set your starting point on the Manager Effectiveness Assessment. Rate the same ten statements again and see what moved. It takes five minutes.</p>
-      <p><a href="https://me5231979.github.io/Manager-Voyage/foundation/?reassess=1">Rate the ten statements again</a></p>
-      <p>Answer for how you work now, not how you want to. Your results come straight back, beside your starting point.</p>
-      <p>People, Culture and Belonging, Vanderbilt University</p>
+      Body (HTML, code view): paste the entire contents of https://github.com/me5231979/Manager-Voyage/blob/main/docs/email-reassess-invite.html (Raw view). It is the same branded layout as the other two emails and already contains the dynamic expressions for the learner's first name and starting score.
    b. SharePoint "Update item" on the same item: RetakeInvitedOn = utcNow() formatted 'yyyy-MM-dd'.
 3. Save. Run a test by temporarily setting one row's CompletedOn to 91 days ago, running the flow, and checking the email and the RetakeInvitedOn date. Reset the row afterward.
 
