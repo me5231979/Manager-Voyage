@@ -1283,6 +1283,7 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   m.hidden = false; if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); }); document.body.classList.add('oracle-open');
   var first = $('#assessOpen', m); if(first) first.focus();
   $('#assessDone', m).addEventListener('click', function(){ set('assess-gate', 'done'); hide(); });
+  var opened = $('#assessOpened', m); if(first && opened) first.addEventListener('click', function(){ opened.hidden = false; var d = $('#assessDone', m); if(d){ d.classList.remove('btn-ghost'); d.classList.add('btn-gold'); } });
   $('#assessLater', m).addEventListener('click', function(){ try{ sessionStorage.setItem('mv-assess-snooze', '1'); }catch(e){} hide(); });
   document.addEventListener('keydown', function(e){ if(!m.hidden && e.key === 'Escape'){ try{ sessionStorage.setItem('mv-assess-snooze', '1'); }catch(e2){} hide(); } });
 })();

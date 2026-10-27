@@ -42,6 +42,13 @@
 <link rel="stylesheet" href="../assets/css/course.css?v=20260916b" />
 <link rel="stylesheet" href="../assets/css/vvo.css?v=1" />
 <style>
+.gate-steps{ list-style:none; margin:14px 0 0; padding:0; display:grid; gap:8px; }
+.gate-steps li{ display:flex; gap:10px; align-items:flex-start; font-size:.95rem; line-height:1.45; color:rgba(255,255,255,.82); }
+.gate-steps li b{ flex:none; width:22px; height:22px; border-radius:50%; border:1px solid var(--vu-gold); color:var(--vu-gold); font-family:var(--cond); font-size:.72rem; display:grid; place-items:center; margin-top:2px; }
+.gate-steps em{ font-style:normal; color:#fff; font-weight:600; }
+.gate-opened{ margin:12px 0 0; padding:10px 12px; border:1px solid rgba(207,174,112,.5); border-radius:var(--r); background:rgba(207,174,112,.12); font-size:.92rem; color:#fff; }
+.gate-opened b{ color:var(--vu-gold); font-weight:600; }
+.linkish{ background:none; border:0; padding:0; color:var(--vu-gold); font:inherit; text-decoration:underline; cursor:pointer; }
 /* every section in the top bar: compact at wide screens, the menu button below 1500px */
 .gnav .gnav__links a i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.06em; color:#CFAE70; margin-right:5px; vertical-align:1px; }
 @media (min-width:1501px){ .gnav .gnav__links{ gap:clamp(.3rem,.8vw,1rem); } .gnav .gnav__links a{ font-size:.84rem; white-space:nowrap; } .gnav .gnav__links a.gnav__btn{ font-size:.8rem; padding:6px 11px; } }
@@ -1587,7 +1594,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="fcenter">
       <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.p</span></p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.q</span></p>
       <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The four categories and their behaviors are Yukl&rsquo;s taxonomy (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. About the program</p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>
@@ -1615,12 +1622,16 @@ html.paged .idea .try .scn{ margin-top:0; }
     <span class="mono">Before you start</span>
     <h2 id="assessTitle">Take the Manager Effectiveness Assessment <em>first</em>.</h2>
     <p>Six statements, about ten minutes. Your results arrive by email and become your starting point. You take it again ninety days after you finish, to see what moved.</p>
+    <ol class="gate-steps">
+      <li><b>1</b><span>Open the assessment. It opens in a new tab; this page stays here.</span></li>
+      <li><b>2</b><span>Finish it, come back to this tab, and tap <em>I have completed it</em>. This message then never shows again.</span></li>
+    </ol>
     <div class="oracle-actions">
-      <a class="btn btn-gold" id="assessOpen" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OX9aur7js0q0UGf6gPrsrSj0YUFCM_9NtEckOrGZTO9UMTRCTlc4WTZHRzE1MENNV0pRS0ZPV1FWMC4u" target="_blank" rel="noopener">Open the assessment</a>
+      <a class="btn btn-gold" id="assessOpen" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OX9aur7js0q0UGf6gPrsrSj0YUFCM_9NtEckOrGZTO9UMTRCTlc4WTZHRzE1MENNV0pRS0ZPV1FWMC4u" target="_blank" rel="noopener">Open the assessment in a new tab</a>
       <button type="button" class="btn btn-ghost" id="assessDone">I have completed it</button>
-      <button type="button" class="btn btn-ghost btn-sm" id="assessLater">Remind me next time</button>
     </div>
-    <p class="oracle-fine">Once you tap “I have completed it,” this will not show again.</p>
+    <p class="gate-opened" id="assessOpened" hidden>The assessment is open in a new tab. When you have finished it, tap <b>I have completed it</b>.</p>
+    <p class="oracle-fine"><button type="button" class="linkish" id="assessLater">Skip for now</button> keeps the course open and asks again next time.</p>
   </div>
 </div>
 <div class="oracle-overlay" id="oracleModal" role="dialog" aria-modal="true" aria-labelledby="oracleTitle" hidden>
@@ -1644,6 +1655,6 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20261027p"></script>
+<script src="app.js?v=20261027q"></script>
 </body>
 </html>
