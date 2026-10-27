@@ -1188,9 +1188,9 @@ var CATS = { task:{ name:'Get the work done', short:'Task-oriented' }, relations
   var url = (window.MV_CONFIG && MV_CONFIG.assessmentUrl) || '';
   var link = url ? '<a class="btn btn-primary" href="' + esc(url) + '" target="_blank" rel="noopener">Open the assessment</a>' : '<span class="hinttxt">Ask your Engagement Consultant for the assessment link; it takes about ten minutes.</span>';
   var MSG = {
-    reviewed:'<h4>Good. Keep the <em>email</em>.</h4><p>It is your starting point. Ninety days after you complete Manager Voyage you rate the same six statements again; the aim is a higher rating, one behavior at a time.</p>',
+    reviewed:'<h4>Good. Keep the <em>email</em>.</h4><p>It is your starting point. Ninety days after you complete Manager Voyage you rate the same ten statements again; the aim is a higher rating, one behavior at a time.</p>',
     retake:'<h4>Take the assessment <em>now</em>.</h4><p>Your results and feedback arrive by email. Keep them; you compare against them ninety days after you complete Manager Voyage.</p><div class="route-act" style="margin-top:12px">' + link + '</div>',
-    take:'<h4>Take it before you go <em>further</em>.</h4><p>Six statements, rated from never to consistently, a few minutes. Your results and feedback arrive by email, and you compare against them ninety days after you complete Manager Voyage.</p><div class="route-act" style="margin-top:12px">' + link + '</div>'
+    take:'<h4>Take it before you go <em>further</em>.</h4><p>Ten statements, rated from never to always, a few minutes. Your results and feedback arrive by email, and you compare against them ninety days after you complete Manager Voyage.</p><div class="route-act" style="margin-top:12px">' + link + '</div>'
   };
   function render(c){ $$('button[data-choice]', box).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-choice') === c ? 'true' : 'false'); }); out.innerHTML = MSG[c] || ''; }
   box.addEventListener('click', function(e){
@@ -1273,18 +1273,44 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && e.intersectionRatio > .3){ art.classList.add('play'); io.disconnect(); } }); }, { threshold:[.3] });
   io.observe(art);
 })();
-/* ══════════ before you start: take the assessment. Shown until the manager says it is done. ══════════ */
+/* ══════════ before you start: the assessment, branded, in the course. It pre-fills the Vanderbilt form; the learner presses Submit there. ══════════ */
 (function(){
   var m = $('#assessModal'); if(!m) return;
+  var C = window.MV_CONFIG || {}, SCALE = C.assessmentScale || ['Never', 'Rarely', 'Sometimes', 'Often', 'Always'], ST = C.assessmentStatements || [];
   function assessed(){ try{ var d = JSON.parse(get('assess') || 'null'); if(d && d.status === 'reviewed') return true; }catch(e){} return get('assess-gate') === 'done'; }
   var snoozed = false; try{ snoozed = sessionStorage.getItem('mv-assess-snooze') === '1'; }catch(e){}
   if(assessed() || snoozed) return;
   function hide(){ m.classList.remove('open'); document.body.classList.remove('oracle-open'); window.setTimeout(function(){ m.hidden = true; }, reduce ? 0 : 260); }
+  function view(k){ $('#gateIntro', m).hidden = k !== 'intro'; $('#gateForm', m).hidden = k !== 'form'; var f = k === 'form' ? $('#gateName', m) : $('#assessStart', m); if(f) f.focus(); m.scrollTop = 0; }
   m.hidden = false; if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); }); document.body.classList.add('oracle-open');
-  var first = $('#assessOpen', m); if(first) first.focus();
+  var start = $('#assessStart', m); if(start) start.focus();
+  var ans = {}, q = $('#gateQ', m), send = $('#assessSend', m), nameEl = $('#gateName', m), mailEl = $('#gateEmail', m);
+  if(nameEl && profile.name) nameEl.value = profile.name;
+  q.innerHTML = ST.map(function(st, i){ return '<li><b>' + (i + 1) + ' &middot; ' + esc(st[0]) + '</b><p>' + esc(st[1]) + '</p><div class="scale" role="group" aria-label="' + esc(st[0]) + '">' + SCALE.map(function(l, j){ return '<button type="button" data-q="' + i + '" data-v="' + j + '" aria-pressed="false">' + esc(l) + '</button>'; }).join('') + '</div></li>'; }).join('');
+  function ready(){ var n = Object.keys(ans).length; send.disabled = !(n === ST.length && nameEl.value.trim()); send.textContent = n === ST.length ? 'Send my answers' : 'Send my answers (' + n + ' of ' + ST.length + ')'; }
+  q.addEventListener('click', function(e){ var b = e.target.closest('button[data-q]'); if(!b) return; var i = b.getAttribute('data-q'); ans[i] = +b.getAttribute('data-v'); $$('button[data-q="' + i + '"]', q).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); ready(); });
+  nameEl.addEventListener('input', ready);
+  function formUrl(){
+    var base = C.assessmentUrl || '', pf = C.assessmentPrefill || {}; if(!base) return '';
+    var parts = [];
+    if(pf.name && nameEl.value.trim()) parts.push('r' + pf.name + '=' + encodeURIComponent(nameEl.value.trim()));
+    if(pf.email && mailEl.value.trim()) parts.push('r' + pf.email + '=' + encodeURIComponent(mailEl.value.trim()));
+    (pf.questions || []).forEach(function(id, i){ if(id && ans[i] !== undefined) parts.push('r' + id + '=' + encodeURIComponent(SCALE[ans[i]])); });
+    return base + (parts.length ? (base.indexOf('?') > -1 ? '&' : '?') + parts.join('&') : '');
+  }
+  $('#assessStart', m).addEventListener('click', function(){ view('form'); });
+  $('#assessBack', m).addEventListener('click', function(){ view('intro'); });
   $('#assessDone', m).addEventListener('click', function(){ set('assess-gate', 'done'); hide(); });
-  var opened = $('#assessOpened', m); if(first && opened) first.addEventListener('click', function(){ opened.hidden = false; var d = $('#assessDone', m); if(d){ d.classList.remove('btn-ghost'); d.classList.add('btn-gold'); } });
   $('#assessLater', m).addEventListener('click', function(){ try{ sessionStorage.setItem('mv-assess-snooze', '1'); }catch(e){} hide(); });
+  send.addEventListener('click', function(){
+    var rec = { name:nameEl.value.trim(), email:mailEl.value.trim(), answers:ST.map(function(st, i){ return { k:st[0], v:ans[i], label:SCALE[ans[i]] }; }), score:ST.reduce(function(a, st, i){ return a + (ans[i] || 0) + 1; }, 0), max:ST.length * SCALE.length, at:new Date().toISOString() };
+    set('assess-answers', JSON.stringify(rec)); set('assess', JSON.stringify({ status:'reviewed', at:rec.at, score:rec.score, max:rec.max })); set('assess-gate', 'done');
+    if(window.assessLoad) assessLoad(); progDone('survey');
+    var url = formUrl(); if(url) window.open(url, '_blank', 'noopener');
+    var note = $('#assessOpened', m); if(note){ note.hidden = false; if(!url) note.innerHTML = 'Your answers are saved here. Ask your Engagement Consultant for the assessment link to record them with the Futures Learning Hub.'; }
+    send.textContent = 'Sent'; send.disabled = true; $('#assessBack', m).textContent = 'Continue to the course'; $('#assessBack', m).onclick = function(){ hide(); }; $('#assessBack', m).className = 'btn btn-gold';
+    var fine = $('#gateFine', m); if(fine) fine.textContent = 'Score ' + rec.score + ' of ' + rec.max + '. You rate the same ten again in ninety days.';
+  });
   document.addEventListener('keydown', function(e){ if(!m.hidden && e.key === 'Escape'){ try{ sessionStorage.setItem('mv-assess-snooze', '1'); }catch(e2){} hide(); } });
 })();
 /* ══════════ build check: if a newer build is published, say so instead of serving a stale page quietly ══════════ */

@@ -32,7 +32,7 @@
   Assessment: managers complete the Manager Effectiveness Assessment (six
   self-rated statements, 1 to 5, never to consistently, informed by Yukl's
   framework) before Manager Voyage; results arrive by email; they rate the
-  same six again 90 days after completing Manager Voyage, optionally at six
+  same ten again 90 days after completing Manager Voyage, optionally at six
   months (module 5, next step).
   Source: Yukl, G. (2012). Effective leadership behavior: what we know and
   what questions need more attention. Academy of Management Perspectives,
@@ -49,6 +49,21 @@
 .gate-opened{ margin:12px 0 0; padding:10px 12px; border:1px solid rgba(207,174,112,.5); border-radius:var(--r); background:rgba(207,174,112,.12); font-size:.92rem; color:#fff; }
 .gate-opened b{ color:var(--vu-gold); font-weight:600; }
 .linkish{ background:none; border:0; padding:0; color:var(--vu-gold); font:inherit; text-decoration:underline; cursor:pointer; }
+.oracle-modal.gate{ max-height:calc(100vh - 48px); overflow:auto; width:min(760px, calc(100vw - 32px)); }
+.gate-view[hidden]{ display:none !important; }
+.gate-who{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0 4px; }
+.gate-who label{ display:grid; gap:4px; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); }
+.gate-who input{ font:inherit; font-size:.95rem; color:#fff; background:rgba(255,255,255,.06); border:1px solid rgba(207,174,112,.4); border-radius:var(--r); padding:9px 11px; }
+.gate-who input:focus-visible{ outline:2px solid var(--vu-gold); outline-offset:1px; }
+.gate-q{ list-style:none; margin:12px 0 0; padding:0; display:grid; gap:10px; }
+.gate-q li{ border:1px solid rgba(255,255,255,.12); border-radius:var(--r); padding:10px 12px; display:grid; gap:8px; }
+.gate-q li b{ font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); }
+.gate-q li p{ margin:0; font-size:.98rem; line-height:1.4; color:#fff; }
+.gate-q .scale{ display:grid; grid-template-columns:repeat(5,1fr); gap:6px; }
+.gate-q .scale button{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.85); border-radius:999px; padding:7px 4px; font:inherit; font-size:.8rem; cursor:pointer; }
+.gate-q .scale button:hover, .gate-q .scale button:focus-visible{ border-color:var(--vu-gold); }
+.gate-q .scale button[aria-pressed="true"]{ background:var(--vu-gold); border-color:var(--vu-gold); color:#1C1C1C; font-weight:600; }
+@media (max-width:640px){ .gate-who{ grid-template-columns:1fr; } .gate-q .scale{ grid-template-columns:repeat(5,1fr); } .gate-q .scale button{ font-size:.68rem; padding:7px 2px; } }
 /* every section in the top bar: compact at wide screens, the menu button below 1500px */
 .gnav .gnav__links a i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.06em; color:#CFAE70; margin-right:5px; vertical-align:1px; }
 @media (min-width:1501px){ .gnav .gnav__links{ gap:clamp(.3rem,.8vw,1rem); } .gnav .gnav__links a{ font-size:.84rem; white-space:nowrap; } .gnav .gnav__links a.gnav__btn{ font-size:.8rem; padding:6px 11px; } }
@@ -1493,10 +1508,10 @@ html.paged .idea .try .scn{ margin-top:0; }
           <span class="sk">Taken before Manager Voyage &middot; again 90 days after completion</span>
           <div>
             <h4>The Manager Effectiveness Assessment</h4>
-            <p>Six statements, rated from never to consistently: create clarity, coach and develop, build trust, empower others, address issues, lead change. Your score came by email from the Futures Learning Hub. Search your inbox for it.</p>
+            <p>Ten statements about what you actually do, each rated from never to always. If you took it in this course, your score is saved here. Otherwise it came by email from the Futures Learning Hub.</p>
           </div>
         </div>
-        <div class="week" style="margin-top:12px"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. The aim is a higher rating on all six when you take it again in 90 days.</div>
+        <div class="week" style="margin-top:12px"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. The aim is a higher rating on all ten when you take it again in 90 days.</div>
             </div>
       <div class="v-act">
       <div class="route reveal" id="meaBox">
@@ -1594,7 +1609,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="fcenter">
       <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.q</span></p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.s</span></p>
       <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The four categories and their behaviors are Yukl&rsquo;s taxonomy (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. About the program</p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>
@@ -1618,20 +1633,32 @@ html.paged .idea .try .scn{ margin-top:0; }
 <p class="narr-toast" id="narrToast" role="status" aria-live="polite"></p>
 
 <div class="oracle-overlay" id="assessModal" role="dialog" aria-modal="true" aria-labelledby="assessTitle" hidden>
-  <div class="oracle-modal">
-    <span class="mono">Before you start</span>
-    <h2 id="assessTitle">Take the Manager Effectiveness Assessment <em>first</em>.</h2>
-    <p>Six statements, about ten minutes. Your results arrive by email and become your starting point. You take it again ninety days after you finish, to see what moved.</p>
-    <ol class="gate-steps">
-      <li><b>1</b><span>Open the assessment. It opens in a new tab; this page stays here.</span></li>
-      <li><b>2</b><span>Finish it, come back to this tab, and tap <em>I have completed it</em>. This message then never shows again.</span></li>
-    </ol>
-    <div class="oracle-actions">
-      <a class="btn btn-gold" id="assessOpen" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OX9aur7js0q0UGf6gPrsrSj0YUFCM_9NtEckOrGZTO9UMTRCTlc4WTZHRzE1MENNV0pRS0ZPV1FWMC4u" target="_blank" rel="noopener">Open the assessment in a new tab</a>
-      <button type="button" class="btn btn-ghost" id="assessDone">I have completed it</button>
+  <div class="oracle-modal gate">
+    <div class="gate-view" id="gateIntro">
+      <span class="mono">Before you start</span>
+      <h2 id="assessTitle">Take the Manager Effectiveness Assessment <em>first</em>.</h2>
+      <p>Ten statements, about five minutes, right here. Your answers become your starting point. You take it again ninety days after you finish, to see what moved.</p>
+      <div class="oracle-actions">
+        <button type="button" class="btn btn-gold" id="assessStart">Take it now</button>
+        <button type="button" class="btn btn-ghost" id="assessDone">I have already completed it</button>
+      </div>
+      <p class="oracle-fine"><button type="button" class="linkish" id="assessLater">Skip for now</button> keeps the course open and asks again next time.</p>
     </div>
-    <p class="gate-opened" id="assessOpened" hidden>The assessment is open in a new tab. When you have finished it, tap <b>I have completed it</b>.</p>
-    <p class="oracle-fine"><button type="button" class="linkish" id="assessLater">Skip for now</button> keeps the course open and asks again next time.</p>
+    <div class="gate-view" id="gateForm" hidden>
+      <span class="mono">Manager Effectiveness Assessment</span>
+      <h2>How often do you <em>actually</em> do each of these?</h2>
+      <div class="gate-who">
+        <label><span>Your name</span><input type="text" id="gateName" autocomplete="name" /></label>
+        <label><span>Vanderbilt email</span><input type="email" id="gateEmail" autocomplete="email" placeholder="first.last@vanderbilt.edu" /></label>
+      </div>
+      <ol class="gate-q" id="gateQ"></ol>
+      <div class="oracle-actions">
+        <button type="button" class="btn btn-gold" id="assessSend" disabled>Send my answers</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="assessBack">Back</button>
+      </div>
+      <p class="gate-opened" id="assessOpened" hidden>Your answers are filled in on the Vanderbilt form in a new tab. Press <b>Submit</b> there to record them. This page is ready when you are.</p>
+      <p class="oracle-fine" id="gateFine">Your answers are saved here and sent to the Futures Learning Hub form.</p>
+    </div>
   </div>
 </div>
 <div class="oracle-overlay" id="oracleModal" role="dialog" aria-modal="true" aria-labelledby="oracleTitle" hidden>
@@ -1651,10 +1678,10 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="../assets/js/program-data.js?v=20260916b"></script>
 <script src="../assets/js/scorm.js?v=20260912p"></script>
 <script src="../assets/js/oracle.js?v=20260912p"></script>
-<script src="narration-scripts.js?v=20261027n"></script>
+<script src="narration-scripts.js?v=20261027s"></script>
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20261027q"></script>
+<script src="app.js?v=20261027s"></script>
 </body>
 </html>

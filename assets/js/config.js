@@ -37,7 +37,28 @@ window.MV_CONFIG = {
   assessmentEmailSubject: '',
   // the full vision and areas of focus, linked from the mission page
   missionUrl: 'https://www.vanderbilt.edu/',
-  assessmentUrl: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OX9aur7js0q0UGf6gPrsrSj0YUFCM_9NtEckOrGZTO9UMTRCTlc4WTZHRzE1MENNV0pRS0ZPV1FWMC4u',
+  assessmentUrl: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OX9aur7js0q0UGf6gPrsrSj0YUFCM_9NtEckOrGZTO9UNUEzVllPWEkwVEtaUUlYRVVNSU9JRlgxVi4u',
+  /* The branded assessment in the Foundation course pre-fills the Microsoft
+     Form. Paste the question IDs from a "Get pre-filled link" URL here: the
+     part after "&r" and before "=" for each question, in order. The scale
+     labels must match the Form's choices exactly. Empty until supplied. */
+  assessmentPrefill: { name: '', email: '', questions: ['', '', '', '', '', '', '', '', '', ''] },
+  /* The Form's own choices, lowest to highest. The labels must match the Form exactly. */
+  assessmentScale: ['Never', 'Rarely', 'Sometimes', 'Often', 'Always'],
+  /* The ten statements, in the Form's order. 1 to 3 are confirmed from the Form;
+     4 to 10 are placeholders until FLH supplies the wording. */
+  assessmentStatements: [
+    ['Priorities',       'I write down my team\u2019s top three priorities for the coming period, with a named owner for each, before the work starts.'],
+    ['Expectations',     'I tell each person what they own, by when, and what a good result looks like, and I put it in writing.'],
+    ['Checking work',    'I look at work while it is still in progress, well before the due date, so there is time to help.'],
+    ['Fixing causes',    'When the same thing breaks twice, I find the cause rather than fixing the symptom faster.'],
+    ['Supporting',       'When someone on my team is under pressure, I notice, move what I can, and follow up.'],
+    ['Developing',       'I know where each person wants to go next, and I find work that stretches them toward it.'],
+    ['Recognizing',      'I thank people for specific work, by name, the same week.'],
+    ['Empowering',       'I hand over the decision, not just the task.'],
+    ['Leading change',   'I explain the why behind a change, in my own words, before the announcement lands.'],
+    ['Connecting',       'I know the people my team depends on in other offices by name, before I need them.']
+  ],
 
   /* Profile and completion feed. A small proxy in front of Oracle HCM that
      returns the signed-in manager's record as JSON. See docs/ORACLE-INTEGRATION.md
