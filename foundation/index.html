@@ -128,22 +128,6 @@
 .v-cities-head .v-why{ margin-top:0; max-width:44ch; flex:1 1 320px; }
 .v-cities-head .v-h{ flex:1 1 420px; max-width:14ch; }
 /* the big rocks jars: sand pours, rocks drop, grains trickle; transform and opacity only */
-.idea-art.anim{ position:relative; }
-.idea-art.anim .pour{ transform-box:fill-box; transform-origin:50% 100%; transform:scaleY(0); }
-.idea-art.anim .drop{ transform-box:fill-box; transform:translateY(-170px); opacity:0; }
-.idea-art.anim .trickle{ transform-box:fill-box; transform:translateY(-70px); opacity:0; }
-.idea-art.anim.play .pour{ animation:artPour 1.5s cubic-bezier(.16,1,.3,1) forwards; animation-delay:var(--d,0s); }
-.idea-art.anim.play .drop{ animation:artDrop .85s cubic-bezier(.34,1.45,.64,1) forwards; animation-delay:var(--d,0s); }
-.idea-art.anim.play .drop.over{ animation-name:artOver; animation-duration:1.1s; }
-.idea-art.anim.play .trickle{ animation:artTrickle .9s cubic-bezier(.16,1,.3,1) forwards; animation-delay:var(--d,0s); }
-.idea-art.anim.still .pour, .idea-art.anim.still .drop, .idea-art.anim.still .trickle{ animation:none; transform:none; opacity:1; }
-@keyframes artPour{ to{ transform:scaleY(1); } }
-@keyframes artDrop{ 0%{ transform:translateY(-170px); opacity:0; } 12%{ opacity:1; } 100%{ transform:none; opacity:1; } }
-@keyframes artOver{ 0%{ transform:translateY(-170px); opacity:0; } 10%{ opacity:1; } 55%{ transform:translateY(0); } 70%{ transform:translateY(-14px) rotate(-4deg); } 85%{ transform:translateY(0) rotate(2deg); } 100%{ transform:none; opacity:1; } }
-@keyframes artTrickle{ 0%{ transform:translateY(-70px); opacity:0; } 20%{ opacity:1; } 100%{ transform:none; opacity:1; } }
-.art-replay{ position:absolute; right:0; top:0; background:none; border:1px solid var(--bdg); color:var(--eyebrow); border-radius:999px; padding:5px 11px; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
-.art-replay:hover, .art-replay:focus-visible{ border-color:var(--eyebrow); }
-@media (prefers-reduced-motion:reduce){ .idea-art.anim .pour, .idea-art.anim .drop, .idea-art.anim .trickle{ animation:none !important; transform:none; opacity:1; } .art-replay{ display:none; } }
 /* five ideas: the core up top, the detail folded away, two columns on wide screens */
 .idea-core, .idea-more, .live{ grid-column:1 / -1; }
 .idea-core{ display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:16px 28px; align-items:start; margin-top:4px; }
@@ -1003,13 +987,17 @@ html.paged .idea .try .scn{ margin-top:0; }
 .wrapup .send-sign{ margin-top:22px; }
 /* the big rocks, drawn */
 .idea-art{ grid-column:1 / -1; margin:2px 0 6px; }
-.idea-art svg{ width:100%; max-width:720px; height:auto; display:block; }
-.idea-art text{ font-family:var(--sans); font-size:13px; fill:rgba(255,255,255,.85); }
-.idea-art text.lab{ font-family:var(--cond); font-weight:700; font-size:12px; letter-spacing:.06em; text-transform:uppercase; fill:var(--vu-gold); }
-.idea-art .jar{ fill:none; stroke:rgba(255,255,255,.55); stroke-width:2; }
-.idea-art .rock{ fill:var(--vu-gold); }
-.idea-art .sand{ fill:rgba(245,243,239,.28); }
-.idea-art .grain{ fill:rgba(245,243,239,.7); }
+.idea-art.photo{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:760px; }
+.jar-fig{ margin:0; position:relative; border:1px solid var(--bdg); border-radius:var(--r); overflow:hidden; background:#0b0b0b; }
+.jar-fig img{ display:block; width:100%; height:auto; aspect-ratio:4 / 3; object-fit:cover; object-position:center 48%; opacity:0; transform:scale(1.07); transition:opacity .9s ease, transform 1.8s cubic-bezier(.16,1,.3,1); }
+.idea-art.photo.play .jar-fig img{ opacity:1; transform:none; }
+.idea-art.photo.play .jar-fig.b img{ transition-delay:.55s; }
+.jar-fig figcaption{ position:absolute; left:0; right:0; bottom:0; padding:28px 14px 12px; background:linear-gradient(180deg, rgba(11,11,11,0), rgba(11,11,11,.92) 50%); color:var(--tx2); font-size:.86rem; line-height:1.4; }
+.jar-fig figcaption b{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); margin-bottom:3px; }
+.jar-fig.a figcaption b::after{ content:" \00b7 the rocks do not fit"; color:var(--tx3); }
+.jar-fig.b figcaption b::after{ content:" \00b7 everything fits"; color:var(--tx3); }
+@media (prefers-reduced-motion:reduce){ .jar-fig img{ opacity:1; transform:none; transition:none; } }
+@media (max-width:600px){ .idea-art.photo{ grid-template-columns:1fr; } }
 .evidence a.btn, .pol a.btn{ color:#1C1C1C; border-bottom:0; }
 @media (max-width:1000px){ .v-copy .survey{ grid-template-columns:1fr; gap:10px; padding:16px 18px; } .v-copy .survey .sk{ justify-self:start; white-space:normal; } }
 @media (min-width:1001px){ .v-copy .survey .sk{ align-self:start; } }
@@ -1507,7 +1495,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="fcenter">
       <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.c</span></p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.d</span></p>
       <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The four categories and their behaviors are Yukl&rsquo;s taxonomy (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. About the program</p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>
@@ -1551,6 +1539,6 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20261027c"></script>
+<script src="app.js?v=20261027d"></script>
 </body>
 </html>
