@@ -1388,7 +1388,7 @@ window.MV_EMAIL = MV_EMAIL;
       (MOVES[loIdx] ? '<div class="ar-move"><b>Your first move</b>' + esc(MOVES[loIdx]) + '</div>' : '') + '</div>';
   }
   function show(){ narr.hold = true; narr.pending = false; if(narr.playing) narrStop(); m.hidden = false; if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); }); document.body.classList.add('oracle-open'); }
-  function hide(){ m.classList.remove('open'); document.body.classList.remove('oracle-open'); window.setTimeout(function(){ m.hidden = true; }, reduce ? 0 : 260); narr.hold = false; if(narr.pending || narr.auto){ narr.pending = false; window.setTimeout(function(){ narrPlay(); }, reduce ? 0 : 400); } }
+  function hide(){ m.classList.remove('open'); document.body.classList.remove('oracle-open'); window.setTimeout(function(){ m.hidden = true; }, reduce ? 0 : 260); narr.hold = false; narr.pending = false; narr.on = true; window.setTimeout(function(){ narrPlay(); }, reduce ? 0 : 400); }
   function view(k){ var map = { intro:'gateIntro', form:'gateForm', result:'gateResult' }; ['gateIntro', 'gateForm', 'gateResult'].forEach(function(id){ $('#' + id, m).hidden = id !== map[k]; }); m.scrollTop = 0; var el = $({ intro:'#assessStart', form:'#gateName', result:'#assessContinue' }[k], m); if(el) el.focus(); }
   var q = $('#gateQ', m), send = $('#assessSend', m), nameEl = $('#gateName', m), mailEl = $('#gateEmail', m);
   function build(){
