@@ -391,7 +391,8 @@ var modalReturn = null, modalTimer = null;
 function allDone(){
   if(window.MVOracle){
     var qs = get('quiz-score'), qm = get('quiz-max');
-    MVOracle.reportCompletion('MRC-F', { course: 'Manager Foundations, Course 1: You Are a Manager Now', score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: every activity done', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })(), action: get('habit'), week: (function(){ try{ return JSON.parse(get('week') || 'null'); }catch(e){ return null; } })(), build: (document.querySelector('.build') || {}).textContent || '' } });
+    var ACTS2 = ['Confirm with one person, out loud, what they own and by when', 'Thank one person for one specific thing, by name', 'Hold one ten-minute look-back after a piece of work', 'Have coffee with one person your team depends on'], who2 = window.MV_LEARNER || {};
+    MVOracle.reportCompletion('MRC-F', { emailSubject:'You finished Manager Foundations', emailHtml:(window.MV_EMAIL ? MV_EMAIL.completion({ name:who2.name, score:qs === null ? undefined : +qs, max:qm === null ? undefined : +qm, action:ACTS2[+get('habit')] || '' }) : ''), course: 'Manager Foundations, Course 1: You Are a Manager Now', score: qs === null ? undefined : +qs, max: qm === null ? undefined : +qm, passed: true, note: 'Foundation course complete: every activity done', extra: { assess: (function(){ try{ return JSON.parse(get('assess') || 'null'); }catch(e){ return null; } })(), action: get('habit'), week: (function(){ try{ return JSON.parse(get('week') || 'null'); }catch(e){ return null; } })(), build: (document.querySelector('.build') || {}).textContent || '' } });
   } else if(window.MVScorm && MVScorm.connected) MVScorm.complete();
   if(doneSeen) return;
   doneSeen = true; set('done-seen', '1');
@@ -1285,6 +1286,57 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && e.intersectionRatio > .3){ art.classList.add('play'); io.disconnect(); } }); }, { threshold:[.3] });
   io.observe(art);
 })();
+/* ══════════ the results email and the completion email, built here so the flow only has to send them ══════════ */
+var MV_EMAIL = (function(){
+  var SITE = 'https://me5231979.github.io/Manager-Voyage/';
+  var TOPICS = { 'Get the work done':['priorities', 'oneonones', 'feedback', 'start'], 'Take care of your people':['trust', 'feedback', 'oneonones'], 'Make things better':['change', 'trust', 'communication'], 'Connect your team':['external', 'start', 'communication'] };
+  var OVERALL = [
+    [45, 'Consistent', 'These habits are weekly for you. That is the finding, and it is not a small one: the behaviors this assessment measures are the first things squeezed out when a manager is busy, and yours are holding. The useful next move is depth rather than breadth: coach another manager through one of these, or take on the parts of the job this assessment does not measure.'],
+    [35, 'Often', 'Most of these habits are in place most weeks. The gap between often and always is usually one category, and the scores below show which. Pick the lowest, make its first move this week, and keep the rest exactly as they are.'],
+    [25, 'Sometimes', 'You do these things, but not yet as a rhythm, and a rhythm is what makes them cheap. The course builds one. Start with the category marked Start here, do its move once this week on purpose, and let the others follow.'],
+    [0,  'Rarely', 'These habits are not yet part of your week, which is the normal starting point for a new manager and the reason the course exists. Nothing here is a verdict. Take the first move below, do it once this week, and rate yourself again in three months.']
+  ];
+  function esc2(x){ return String(x == null ? '' : x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function overall(score, max){ var pct = score / max * 50; for(var i = 0; i < OVERALL.length; i++){ if(pct >= OVERALL[i][0]) return OVERALL[i]; } return OVERALL[OVERALL.length - 1]; }
+  function picks(cat, type, n){ var L = window.MV_LEARN || [], ts = TOPICS[cat] || [], out = [], seen = {}; ts.forEach(function(t){ L.forEach(function(x){ if(out.length < n && !seen[x.id || x.title] && x.topic === t && (type === 'oracle' ? x.type === 'oracle' : x.type !== 'oracle') && x.url){ seen[x.id || x.title] = 1; out.push(x); } }); }); if(type !== 'oracle') L.forEach(function(x){ if(out.length < n && !seen[x.id || x.title] && x.type !== 'oracle' && x.url){ seen[x.id || x.title] = 1; out.push(x); } }); return out; }
+  function shell(inner){
+    return '<!DOCTYPE html><html><body style="margin:0;padding:0;background:#f4f1ea;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1ea;"><tr><td align="center" style="padding:16px 8px;">' +
+      '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;font-family:Helvetica,Arial,sans-serif;color:#1C1C1C;">' +
+      '<tr><td style="background:#1C1C1C;padding:22px 24px 18px;border-bottom:3px solid #CFAE70;"><img src="' + SITE + 'assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="150" style="display:block;width:150px;height:auto;border:0;"><div style="color:#CFAE70;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:10px;font-weight:bold;">People, Culture &amp; Belonging</div></td></tr>' +
+      '<tr><td style="padding:26px 24px 8px;">' + inner + '</td></tr>' +
+      '<tr><td style="background:#f4f1ea;padding:18px 24px 22px;font-size:13px;line-height:1.5;color:#555;border-top:3px solid #CFAE70;"><b style="color:#1C1C1C;">About this assessment.</b> The items are inspired by Yukl’s leadership-behavior framework, which groups managerial behavior into four families: task, relations, change, and external. This is a self-reflection tool, not a validated instrument, and it is not a performance evaluation.<br><br>Sent by People, Culture &amp; Belonging, Vanderbilt University.</td></tr></table></td></tr></table></body></html>';
+  }
+  function list(title, items){ if(!items.length) return ''; return '<div style="font-family:Georgia,serif;font-size:18px;margin:22px 0 4px;">' + esc2(title) + '</div><div style="border-top:1px solid #CFAE70;margin-bottom:10px;"></div><ul style="margin:0;padding-left:18px;">' + items.map(function(x){ return '<li style="margin:0 0 9px;font-size:15px;line-height:1.4;"><a href="' + esc2(x.url) + '" style="color:#1C1C1C;">' + esc2(x.title) + '</a>' + (x.type !== 'oracle' ? '<br><span style="font-size:13px;color:#666;">' + esc2(x.type === 'video' ? 'Video' : x.type === 'podcast' ? 'Podcast' : 'Guide') + (x.by ? ', ' + esc2(x.by) : '') + '</span>' : '') + '</li>'; }).join('') + '</ul>'; }
+  function assessment(rec, base){
+    var cats = rec.categories || [], lo = cats.slice().sort(function(a, b){ return a.avg - b.avg; })[0], ov = overall(rec.score, rec.max), retake = rec.phase === 'retake';
+    var bars = '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:14px 0 4px;">' + cats.map(function(c, i){ var prev = base && base.categories && base.categories[i]; var d = prev ? Math.round((c.avg - prev.avg) * 10) / 10 : null; var w = Math.max(2, c.pct);
+      return '<tr><td style="padding:8px 0 2px;font-size:15px;"><b>' + esc2(c.k) + '</b><span style="float:right;font-family:Georgia,serif;color:#8a6d2f;">' + c.avg.toFixed(1) + ' <span style="font-size:12px;color:#777;">of 5</span>' + (d !== null ? ' <span style="font-size:12px;color:' + (d < 0 ? '#b3261e' : '#2e7d32') + ';">' + (d >= 0 ? '+' : '') + d.toFixed(1) + '</span>' : '') + '</span></td></tr>' +
+        '<tr><td><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#e9e4d8;border-radius:4px;"><tr><td width="' + w + '%" style="background:#CFAE70;height:8px;line-height:8px;font-size:0;border-radius:4px;">&nbsp;</td><td style="font-size:0;line-height:8px;">&nbsp;</td></tr></table></td></tr>' +
+        '<tr><td style="padding:4px 0 6px;font-size:13px;line-height:1.45;color:#555;">' + (rec.feedback && rec.feedback[i] ? '<b style="color:#8a6d2f;text-transform:uppercase;font-size:11px;letter-spacing:1px;">' + esc2(rec.feedback[i].label) + '</b> ' + esc2(rec.feedback[i].line) : '') + '</td></tr>'; }).join('') + '</table>';
+    var inner = '<div style="color:#8a6d2f;font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;">Manager Effectiveness Assessment</div>' +
+      '<div style="font-family:Georgia,serif;font-size:22px;margin:4px 0 14px;">' + (retake ? 'Your results, three months on' : 'Your results') + (rec.name ? ' <span style="color:#777;font-size:16px;">for ' + esc2(rec.name) + '</span>' : '') + '</div>' +
+      '<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#f7f4ee;border-left:4px solid #CFAE70;"><tr><td style="padding:12px 16px;"><div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#555;">Your score</div><div style="font-family:Georgia,serif;font-size:30px;line-height:1.1;">' + rec.score + ' <span style="font-size:16px;color:#777;">/ ' + rec.max + '</span>' + (base ? ' <span style="font-size:14px;color:' + (rec.score - base.score < 0 ? '#b3261e' : '#2e7d32') + ';">' + (rec.score - base.score >= 0 ? '+' : '') + (rec.score - base.score) + ' since your starting point of ' + base.score + '</span>' : '') + '</div></td></tr></table>' +
+      '<div style="font-family:Georgia,serif;font-style:italic;font-size:17px;margin:14px 0 4px;">' + esc2(ov[1]) + '</div><p style="margin:0;font-size:15px;line-height:1.5;">' + esc2(ov[2]) + '</p>' + bars +
+      (rec.move ? '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:10px 0 4px;background:#fbf6ea;border:1px solid #CFAE70;"><tr><td style="padding:10px 14px;"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a6d2f;font-weight:bold;">Your first move</div><div style="font-size:15px;margin-top:2px;">' + esc2(rec.move) + '</div></td></tr></table>' : '') +
+      list('Courses in Oracle Learn', (lo ? picks(lo.k, 'oracle', 3) : []).concat([{ title:'Manager Foundations: You Are a Manager Now', url:SITE + 'foundation/', type:'oracle' }])) +
+      list('Beyond Vanderbilt', lo ? picks(lo.k, 'outside', 4) : []) +
+      '<p style="font-size:15px;line-height:1.5;margin:22px 0 10px;">Management is a set of habits, not a personality. Pick one behavior and make it routine.' + (retake ? '' : ' You rate the same ten statements again three months after you finish the course.') + '</p>';
+    return shell(inner);
+  }
+  function completion(x){
+    var inner = '<div style="color:#8a6d2f;font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;">Manager Foundations</div>' +
+      '<div style="font-family:Georgia,serif;font-size:22px;margin:4px 0 14px;">You finished the course' + (x.name ? ', ' + esc2(x.name.split(' ')[0]) + '.' : '.') + '</div>' +
+      '<p style="margin:0 0 12px;font-size:15px;line-height:1.5;">Every activity in <i>You Are a Manager Now</i> is complete' + (typeof x.score === 'number' ? ', with ' + x.score + ' of ' + x.max + ' on the quick check' : '') + '.</p>' +
+      (x.action ? '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:10px 0 14px;background:#fbf6ea;border:1px solid #CFAE70;"><tr><td style="padding:10px 14px;"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a6d2f;font-weight:bold;">The one thing you chose for this week</div><div style="font-size:15px;margin-top:2px;">' + esc2(x.action) + '</div></td></tr></table>' : '') +
+      '<p style="margin:0 0 12px;font-size:15px;line-height:1.5;">Do it once, on purpose, in a meeting you already have. Then keep the week you built in the course: the 1:1s, the check on work before it is due, and fifteen minutes on Friday for feedback and thanks.</p>' +
+      '<p style="margin:0 0 12px;font-size:15px;line-height:1.5;">In three months you will get a short email asking you to rate the same ten statements again, so you can see what moved.</p>' +
+      '<p style="margin:0;font-size:15px;line-height:1.5;"><a href="' + SITE + 'foundation/" style="color:#1C1C1C;">Open the course</a> any time to review your week, your results, or the conversations.</p>';
+    return shell(inner);
+  }
+  return { assessment:assessment, completion:completion, overall:overall };
+})();
+window.MV_EMAIL = MV_EMAIL;
+
 /* ══════════ the assessment: ten statements, scored in four categories, recorded with FLH, emailed, and retaken three months on ══════════ */
 (function(){
   var m = $('#assessModal'); if(!m) return;
@@ -1328,7 +1380,7 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     var who = {}; try{ who = JSON.parse(get('who') || '{}') || {}; }catch(e){} who.name = rec.name; who.email = rec.email; set('who', JSON.stringify(who)); window.MV_LEARNER = { name:rec.name, email:rec.email };
     var n = $('#whoName'), e2 = $('#whoEmail'); if(n && !n.value) n.value = rec.name; if(e2 && !e2.value) e2.value = rec.email;
     var lo = rec.categories.slice().sort(function(a, b){ return a.avg - b.avg; })[0];
-    var sent = window.MVOracle && MVOracle.send({ event:'assessment', phase:mode, course:'Manager Foundations, Course 1: You Are a Manager Now', name:rec.name, email:rec.email, at:rec.at, score:rec.score, max:rec.max, categories:rec.categories, answers:rec.answers, prior:base ? { at:base.at, score:base.score, categories:base.categories } : null, feedback:rec.categories.map(function(c){ var bd = band(c.avg); return { k:c.k, label:bd[1], line:bd[2] }; }), move:MOVES[rec.categories.indexOf(lo)] || '', page:location.href.split('#')[0] });
+    var sent = window.MVOracle && MVOracle.send({ event:'assessment', phase:mode, course:'Manager Foundations, Course 1: You Are a Manager Now', name:rec.name, email:rec.email, at:rec.at, score:rec.score, max:rec.max, categories:rec.categories, answers:rec.answers, prior:base ? { at:base.at, score:base.score, categories:base.categories } : null, feedback:rec.categories.map(function(c){ var bd = band(c.avg); return { k:c.k, label:bd[1], line:bd[2] }; }), move:MOVES[rec.categories.indexOf(lo)] || '', page:location.href.split('#')[0], emailSubject:(mode === 'retake' ? 'Your Manager Effectiveness Assessment, three months on' : 'Your Manager Effectiveness Assessment results'), emailHtml:MV_EMAIL.assessment({ phase:mode, name:rec.name, score:rec.score, max:rec.max, categories:rec.categories, feedback:rec.categories.map(function(c){ var bd = band(c.avg); return { k:c.k, label:bd[1], line:bd[2] }; }), move:MOVES[rec.categories.indexOf(lo)] || '' }, base) });
     $('#gateResultBody', m).innerHTML = card(rec, base);
     $('#gateResultKicker', m).textContent = mode === 'retake' ? 'Your results, three months on' : 'Your results';
     $('#gateResultFine', m).textContent = sent ? 'A copy is on its way to ' + rec.email + '. Your results also live on the Your assessment page in this course.' : 'Your results live on the Your assessment page in this course.';

@@ -31,26 +31,21 @@ Every record is a JSON object posted to one URL. Samples are in
   FirstMove (text), PriorScore (number, retake only), CompletedOn (date, filled by the completion case),
   RetakeInvitedOn (date, filled by Flow 2).
   Category values: `outputs('record')?['categories'][0]?['avg']` through `[3]`.
-- **Send an email (V2)** to `outputs('record')?['email']` from the Futures Learning Hub mailbox.
-  Subject: `Your Manager Effectiveness Assessment results`.
-  Body, using the record:
-  - Score: `outputs('record')?['score']` of `outputs('record')?['max']`
-  - For each of the four categories: name, average out of 5, and the feedback label and line from
-    `outputs('record')?['feedback']` (an array of `{k, label, line}` in the same order).
-  - Your first move: `outputs('record')?['move']`
-  - When phase is `retake`, add a line per category with the change: current average minus
-    `outputs('record')?['prior']?['categories'][i]?['avg']`.
+- **Send an email (V2)** to `outputs('record')?['email']` from the People, Culture and Belonging mailbox.
+  Subject: `outputs('record')?['emailSubject']`. Body: `outputs('record')?['emailHtml']`.
+  The course builds the finished branded email (score, the four categories with bars and feedback,
+  the first move, courses in Oracle Learn, resources beyond Vanderbilt, the about note). Nothing to
+  design in the flow. Switch the body editor to code view (the `</>` icon) before pasting the expression
+  so the HTML is not escaped.
 
 ### Case `course_complete`
 
 - **Get items** from the list, filter `Email eq '<email>' and Phase eq 'initial'`, take the first,
   then **Update item** with `CompletedOn` = today.
-- **Send an email (V2)** to the learner. Subject: `You finished Manager Foundations`.
-  Body: congratulations, quiz score `outputs('record')?['score']` of `outputs('record')?['max']`,
-  the one action they chose this week (`outputs('record')?['extra']?['action']` is the index 0 to 3 of
-  "Confirm with one person what they own and by when", "Thank one person for one specific thing, by name",
-  "Hold one ten-minute look-back", "Have coffee with one person your team depends on"), and a note that the
-  reassessment arrives in three months.
+- **Send an email (V2)** to the learner. Subject: `outputs('record')?['emailSubject']`.
+  Body: `outputs('record')?['emailHtml']` (code view). The course builds it: congratulations, the quick
+  check score, the one action they chose, the week they built, and a note that the reassessment arrives
+  in three months.
 - Optional: a second email to the FLH team with the same details.
 
 5. Save. Copy the **HTTP POST URL** from the trigger and send it to the course maintainer. It goes into
