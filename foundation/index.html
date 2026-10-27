@@ -114,7 +114,12 @@
 /* next steps: two steps side by side, then the timeline */
 .habit-box.v-side .habit-pick:not(.acts) button{ padding:6px 11px; font-size:.86rem; }
 .hp-lead{ margin:4px 0 10px; font-size:.88rem; color:var(--tx2); line-height:1.4; }
-.habit-pick.acts{ display:grid; gap:8px; }
+.habit-pick.acts{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.ns-one{ margin-top:14px; }
+.ns-steps.two{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+.ns-steps.two .evidence{ margin-top:0; }
+@media (max-width:1000px){ .habit-pick.acts{ grid-template-columns:1fr 1fr; } }
+@media (max-width:640px){ .habit-pick.acts, .ns-steps.two{ grid-template-columns:1fr; } }
 .habit-pick.acts button{ text-align:left; border:1px solid var(--bdg); border-radius:var(--r); background:var(--card2); color:var(--tx); padding:10px 12px; font:inherit; cursor:pointer; display:grid; gap:2px; }
 .habit-pick.acts button b{ font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
 .habit-pick.acts button strong{ font-size:.98rem; font-weight:600; line-height:1.3; }
@@ -1026,10 +1031,8 @@ html.paged .idea .try .scn{ margin-top:0; }
 .v-goals summary::after{ content:"Tap to open \00a0+"; transform:none; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:5px 10px; line-height:1; }
 .v-goals[open] summary::after{ content:"Close \00a0\2212"; transform:none; background:none; color:var(--eyebrow); border:1px solid var(--eyebrow); }
 /* ── in practice: the video's story as a decision ── */
-.story{ position:relative; border:1px solid var(--bdg); border-radius:var(--r); overflow:hidden; background:#141414; }
-.story-bg{ position:absolute; inset:0; background:var(--poster) center 30% / cover no-repeat; opacity:.42; filter:saturate(.9); }
-.story-bg::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,20,20,.15) 0%, rgba(20,20,20,.9) 60%, #141414 100%); }
-.story-in{ position:relative; padding:clamp(14px,1.8vw,22px); display:grid; gap:10px; min-height:280px; align-content:end; }
+.story{ position:relative; border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); overflow:hidden; background:var(--card); }
+.story-in{ position:relative; padding:clamp(14px,1.8vw,22px); display:grid; gap:10px; align-content:start; }
 .story-in > .mono{ color:var(--eyebrow); }
 .story-beats{ display:grid; gap:8px; }
 .beat{ font-family:var(--serif); font-size:clamp(1.05rem,1.3vw,1.25rem); line-height:1.35; margin:0; opacity:0; transform:translateY(6px); transition:opacity .5s ease, transform .5s ease; }
@@ -1063,62 +1066,40 @@ html.paged .idea .try .scn{ margin-top:0; }
 .story-video[open] summary::before{ content:"\25BC"; }
 .story-video .cv-wrap{ margin-top:8px; }
 
-/* ── your first year: build your rhythm ── */
-.planner{ border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); }
-.rh-steps{ display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--bd); }
-.rh-steps button{ min-width:0; background:none; border:0; border-right:1px solid var(--bd); padding:12px 14px; text-align:left; cursor:pointer; color:var(--tx2); font:inherit; display:grid; gap:2px; }
-.rh-steps button:last-child{ border-right:0; }
-.rh-steps button b{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); display:flex; align-items:center; gap:6px; }
-.rh-steps button span{ font-family:var(--serif); font-size:1.05rem; color:var(--tx); line-height:1.2; }
-.rh-steps button[aria-selected="true"]{ background:rgba(207,174,112,.12); box-shadow:inset 0 -3px 0 var(--eyebrow); }
-.rh-steps button.done b::after{ content:"\2713"; display:inline-grid; place-items:center; width:16px; height:16px; border-radius:50%; background:var(--eyebrow); color:var(--btn-tx); font-size:.62rem; }
-.pl-pane{ padding:14px clamp(14px,1.8vw,20px) 16px; }
-.pl-pane[hidden]{ display:none !important; }
-.pl-head{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
-.pl-head strong{ font-family:var(--serif); font-weight:400; font-size:1.3rem; }
-.pl-head .mono{ color:var(--eyebrow); }
-.pl-item{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:6px 18px; align-items:start; padding:11px 0; border-top:1px solid var(--bd); }
-.pl-head + .pl-item, .rh-group + .pl-item{ border-top:0; }
-.pl-item > strong{ font-size:1rem; font-weight:600; line-height:1.3; }
-.pl-item .pl-when{ grid-column:1; font-family:var(--serif); font-size:1.02rem; line-height:1.35; color:var(--tx); }
-.pl-item .pl-note{ grid-column:1; color:var(--tx2); font-size:.86rem; line-height:1.4; display:grid; gap:2px; }
-.pl-item .pl-note b{ font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-right:4px; }
-.pl-opts{ grid-column:2; grid-row:1 / span 3; display:flex; flex-wrap:wrap; gap:6px; align-content:start; justify-content:flex-end; }
-.pl-opts .pl-lab{ width:100%; text-align:right; font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tx3); }
-.pl-opts button{ background:var(--card2); border:1px solid var(--bdg); color:var(--tx); border-radius:999px; padding:6px 11px; font:inherit; font-size:.86rem; cursor:pointer; }
-.pl-opts button:hover, .pl-opts button:focus-visible{ border-color:var(--eyebrow); }
-.pl-opts button[aria-pressed="true"]{ background:var(--eyebrow); border-color:var(--eyebrow); color:var(--btn-tx); }
-.pl-foot{ display:flex; justify-content:flex-end; align-items:center; gap:10px; padding-top:12px; border-top:1px solid var(--bd); flex-wrap:wrap; }
-.pl-foot .rh-total{ margin-right:auto; font-family:var(--serif); font-size:1.05rem; }
-.pl-foot .rh-total b{ color:var(--eyebrow); font-weight:400; }
-.rh-group{ margin:14px 0 4px; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); border-bottom:1px solid var(--vu-gold); padding-bottom:6px; }
-.rh-ask{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.rh-ask > div{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card2); padding:12px 14px; display:grid; gap:8px; align-content:start; }
-.rh-ask b{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
-.rh-ask p{ margin:0; font-size:.86rem; color:var(--tx2); line-height:1.4; }
-.rh-num{ display:flex; align-items:center; gap:10px; }
-.rh-num button{ width:36px; height:36px; border-radius:50%; border:1px solid var(--bdg); background:none; color:var(--tx); font-size:1.2rem; cursor:pointer; }
-.rh-num output{ font-family:var(--serif); font-size:2rem; min-width:44px; text-align:center; }
-.rh-chips{ display:flex; flex-wrap:wrap; gap:6px; }
-.rh-chips button{ background:none; border:1px solid var(--bdg); color:var(--tx); border-radius:999px; padding:6px 11px; font:inherit; font-size:.86rem; cursor:pointer; }
-.rh-chips button[aria-pressed="true"]{ background:var(--eyebrow); border-color:var(--eyebrow); color:var(--btn-tx); }
-.rh-ref{ display:grid; grid-template-columns:1fr 1fr; gap:6px 18px; }
-.rh-ref div{ padding:8px 0; border-top:1px solid var(--bd); font-size:.88rem; color:var(--tx2); line-height:1.4; }
-.rh-ref div strong{ display:block; color:var(--tx); font-weight:600; font-size:.95rem; }
-.rh-ref div i{ font-style:normal; color:var(--eyebrow); }
-.plan-box{ margin-top:14px; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 16px 14px; }
-.plan-box > .mono{ color:var(--eyebrow); display:block; margin-bottom:6px; }
-.plan-box h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; margin:0 0 8px; }
-.plan-box .pl-g{ margin-top:8px; } .plan-box .pl-g b{ display:block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:3px; }
-.plan-box ul{ list-style:none; margin:0; padding:0; display:grid; gap:3px; }
-.plan-box li{ font-size:.88rem; display:flex; justify-content:space-between; gap:10px; color:var(--tx2); }
-.plan-box li i{ font-style:normal; color:var(--tx); text-align:right; }
-.plan-box .pl-empty{ color:var(--tx3); font-size:.88rem; }
-.plan-box .pl-ctl{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-.plan-box .pl-ctl .btn{ font-size:.82rem; }
-.plan-box .rh-hours{ font-family:var(--serif); font-size:1.05rem; margin:0 0 6px; } .plan-box .rh-hours b{ color:var(--eyebrow); font-weight:400; }
-@media (max-width:900px){ .rh-ask{ grid-template-columns:1fr; } }
-@media (max-width:700px){ .pl-item{ grid-template-columns:1fr; } .pl-opts{ grid-column:1; grid-row:auto; justify-content:flex-start; } .pl-opts .pl-lab{ text-align:left; } .rh-ref{ grid-template-columns:1fr; } }
+/* ── your first year: the list, and a three-tap wizard ── */
+.yr-ref{ margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; }
+.yr-ref > div b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); border-bottom:1px solid var(--vu-gold); padding-bottom:5px; margin-bottom:6px; }
+.yr-ref ul{ list-style:none; margin:0; padding:0; display:grid; gap:4px; }
+.yr-ref li{ font-size:.88rem; line-height:1.35; color:var(--tx2); padding-left:12px; position:relative; }
+.yr-ref li::before{ content:""; position:absolute; left:0; top:.55em; width:5px; height:5px; border-radius:50%; background:var(--vu-gold); }
+.yr-ref li i{ font-style:normal; color:var(--eyebrow); font-family:var(--cond); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; margin-left:6px; white-space:nowrap; }
+.wz{ border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:clamp(16px,2vw,24px); min-height:320px; display:grid; align-content:start; gap:14px; }
+.wz-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.wz-top .mono{ color:var(--eyebrow); }
+.wz-dots{ display:flex; gap:6px; } .wz-dots i{ width:22px; height:4px; border-radius:2px; background:var(--bd); } .wz-dots i.on{ background:var(--eyebrow); }
+.wz-q{ font-family:var(--serif); font-weight:400; font-size:clamp(1.4rem,2vw,1.9rem); line-height:1.15; margin:0; }
+.wz-q em{ font-family:var(--serif-i); font-style:italic; color:var(--eyebrow); }
+.wz-hint{ margin:-6px 0 0; color:var(--tx2); font-size:.92rem; line-height:1.45; }
+.wz-opts{ display:grid; grid-template-columns:repeat(auto-fill, minmax(96px,1fr)); gap:8px; }
+.wz-opts.wide{ grid-template-columns:repeat(auto-fill, minmax(170px,1fr)); }
+.wz-opts button{ background:var(--card2); border:1px solid var(--bdg); color:var(--tx); border-radius:var(--r); padding:14px 10px; font:inherit; cursor:pointer; text-align:center; display:grid; gap:3px; }
+.wz-opts button strong{ font-family:var(--serif); font-weight:400; font-size:1.5rem; line-height:1; }
+.wz-opts button small{ font-size:.78rem; color:var(--tx2); line-height:1.3; }
+.wz-opts button:hover, .wz-opts button:focus-visible{ border-color:var(--eyebrow); background:rgba(207,174,112,.12); }
+.wz-foot{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+.wz-back{ background:none; border:0; color:var(--eyebrow); font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; padding:0; }
+.wk{ display:grid; grid-template-columns:repeat(5,1fr); gap:6px; }
+.wk > div{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card2); padding:8px; min-height:150px; display:grid; align-content:start; gap:5px; }
+.wk > div.heavy{ opacity:.55; }
+.wk b{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); border-bottom:1px solid var(--bd); padding-bottom:4px; }
+.wk span{ display:block; font-size:.8rem; line-height:1.3; padding:5px 7px; border-radius:6px; background:rgba(207,174,112,.14); border-left:3px solid var(--vu-gold); }
+.wk span i{ display:block; font-style:normal; font-size:.7rem; color:var(--tx3); }
+.wk span.light{ background:none; border-left-color:var(--bdg); color:var(--tx2); }
+.wk-more{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.wk-more > div{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card2); padding:8px 10px; font-size:.86rem; line-height:1.4; color:var(--tx2); }
+.wk-more > div b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+.wk-total{ font-family:var(--serif); font-size:1.1rem; margin:0; } .wk-total b{ color:var(--eyebrow); font-weight:400; }
+@media (max-width:700px){ .yr-ref{ grid-template-columns:1fr; } .wk{ grid-template-columns:1fr; } .wk > div{ min-height:0; } .wk-more{ grid-template-columns:1fr; } }
 </style>
 <link rel="stylesheet" href="../assets/css/nav.css?v=1">
 </head>
@@ -1272,14 +1253,6 @@ html.paged .idea .try .scn{ margin-top:0; }
             </div>
       <div class="v-act">
         <div class="story" data-story="basics"></div>
-        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
-        <div class="cv-wrap" data-cv="basics">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/basics-poster.jpg?v=20260912p" src="../assets/video/foundation/basics.mp4?v=20260912p" aria-label="What a manager is, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/basics.vtt?v=20260912p" srclang="en" label="English" default /></video>
-          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>What a manager is, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
-        </div>
-        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. What changed, what is new, what a manager is not, who helps. About ninety seconds.</p>
-
-        </details>
       </div>
     </div>
     <div class="helpers" role="list" aria-label="Who helps you at Vanderbilt">
@@ -1310,12 +1283,17 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="v-stage wide-act">
       <div class="v-copy">
         <h2 class="v-h">What Vanderbilt will ask you to do, and <em>when</em>.</h2>
-        <p class="v-why">Nothing here should surprise you when it lands. Build the rhythm that fits your team, then put it in your calendar.</p>
-        <div class="plan-box v-side" id="yearPlanOut" aria-live="polite"></div>
+        <p class="v-why">Everything a manager owns, by how often it comes up. Then build your week in three taps.</p>
+        <div class="yr-ref v-side" aria-label="What you do, and when">
+          <div><b>Every week</b><ul><li>A short 1:1 with each person</li><li>Look at work before it is due</li><li>Approve timecards and time off</li><li>Give feedback, and thank people for specific work</li><li>Answer questions, or find who can</li></ul></div>
+          <div><b>Every month or quarter</b><ul><li>Approve expenses and purchases</li><li>Set and check goals</li><li>Step back: how is the work, and the team, going</li></ul></div>
+          <div><b>A few times a year</b><ul><li>Performance reviews</li><li>Hiring when a seat opens</li><li>Onboarding a new hire</li><li>Someone leaving</li></ul></div>
+          <div><b>When it happens &middot; the same day</b><ul><li>Leave, including FMLA <i>the leave office</i></li><li>Flexible work <i>yours to decide</i></li><li>An accommodation request <i>ask your HCM</i></li><li>Harassment or discrimination <i>report to EOA</i></li><li>A performance concern <i>ask your HCM</i></li></ul></div>
+        </div>
       </div>
       <div class="v-act">
-    <div class="planner" id="yearPlan"></div>
-    <p class="fw-status" id="yearStatus" role="status" aria-live="polite">Step 1 of 2.</p>
+    <div class="wz" id="yearWizard"></div>
+    <p class="fw-status" id="yearStatus" role="status" aria-live="polite">Three taps.</p>
       </div>
     </div>
   </div>
@@ -1366,15 +1344,7 @@ html.paged .idea .try .scn{ margin-top:0; }
       <div class="fw-panel" id="fwPanel">
         <div class="fw-video" id="fwVideo">
           <div class="story" data-story="framework"></div>
-          <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
-          <div class="cv-wrap" data-cv="framework">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/framework-poster.jpg?v=20260912p" src="../assets/video/foundation/framework.mp4?v=20260912p" aria-label="The four categories, in about ninety seconds. Training video, about 90 seconds, with captions."><track kind="captions" src="../assets/video/foundation/framework.vtt?v=20260912p" srclang="en" label="English" default /></video>
-          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>The four categories, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
-        </div>
-        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. The four categories and the habits inside each. About ninety seconds.</p>
-
-          </details>
-          <p class="fw-hint">Sort the four asks, then tap a point of the compass to see what each category asks of you.</p>
+          
         </div>
         <div class="fw" id="fwMap" hidden>
       <div class="fw-card" data-job="task" role="button" tabindex="0" aria-label="Hear the Task-oriented intro"><b>Task-oriented</b><strong>Get the work done, through your team.</strong><p>Is the team&rsquo;s work getting done, and done well? You check it and unblock it; you do not do it yourself.</p><ul><li>Planning <i>(plan it)</i><em>Create clarity</em></li><li>Clarifying <i>(say it)</i><em>Create clarity</em></li><li>Monitoring operations <i>(check it)</i><em>Coach and develop</em></li><li>Problem solving <i>(fix it)</i><em>Address issues</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="task">Open this category</button></span></div>
@@ -1398,14 +1368,6 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="story" data-story="task"></div>
-        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
-        <div class="cv-wrap" data-cv="task">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/task-poster.jpg?v=20260912p" src="../assets/video/foundation/task.mp4?v=20260912p" aria-label="Task-oriented behavior, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/task.vtt?v=20260912p" srclang="en" label="English" default /></video>
-          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Task-oriented behavior, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
-        </div>
-        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
-
-        </details>
         <p class="week"><b>Do this week</b>Pick one person and confirm, out loud, what they own and by when.</p>
       </div>
       <div class="flip-grid two">
@@ -1424,14 +1386,6 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="story" data-story="relations"></div>
-        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
-        <div class="cv-wrap" data-cv="relations">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/relations-poster.jpg?v=20260912p" src="../assets/video/foundation/relations.mp4?v=20260912p" aria-label="Relations-oriented behavior, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/relations.vtt?v=20260912p" srclang="en" label="English" default /></video>
-          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Relations-oriented behavior, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
-        </div>
-        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
-
-        </details>
         <p class="week"><b>Do this week</b>Thank one person for one specific thing.</p>
       </div>
       <div class="flip-grid two">
@@ -1450,14 +1404,6 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="story" data-story="change"></div>
-        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
-        <div class="cv-wrap" data-cv="change">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/change-poster.jpg?v=20260912p" src="../assets/video/foundation/change.mp4?v=20260912p" aria-label="Change-oriented behavior, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/change.vtt?v=20260912p" srclang="en" label="English" default /></video>
-          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Change-oriented behavior, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
-        </div>
-        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
-
-        </details>
         <p class="week"><b>Do this week</b>Hold one ten-minute look-back.</p>
       </div>
       <div class="flip-grid two">
@@ -1476,14 +1422,6 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="vc-grid">
       <div>
         <div class="story" data-story="external"></div>
-        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
-        <div class="cv-wrap" data-cv="external">
-          <video controls playsinline preload="metadata" poster="../assets/img/foundation/external-poster.jpg?v=20260912p" src="../assets/video/foundation/external.mp4?v=20260912p" aria-label="External behavior, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/external.vtt?v=20260912p" srclang="en" label="English" default /></video>
-          <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>External behavior, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
-        </div>
-        <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
-
-        </details>
         <p class="week"><b>Do this week</b>Have coffee with one person your team depends on.</p>
       </div>
       <div class="flip-grid two">
@@ -1566,16 +1504,13 @@ html.paged .idea .try .scn{ margin-top:0; }
 <section id="nextstep" class="th-dark v-sec" aria-label="Your next steps">
   <div class="wrap">
     <div class="v-rail" data-lesson="6"><span>Topic 6 of 6 &middot; Next steps</span></div>
-    <div class="v-stage">
-      <div class="v-copy">
-        <h2 class="v-h">One thing. <em>This week.</em></h2>
-        <p class="v-why">Three steps, ten minutes. Pick one thing to do this week, tell your manager, mark the course complete.</p>
-    <div class="habit-box v-side reveal"><span class="mono">Step 1 &middot; Pick the one thing you will do this week</span><p class="hp-lead">Four choices, one per category. Each is a single action you can finish in a meeting you already have.</p><div class="habit-pick acts" id="habitPick" role="group" aria-label="Pick one action"></div></div>
-      </div>
-      <div class="v-act ns-steps">
+    <h2 class="v-h sm">One thing. <em>This week.</em></h2>
+    <p class="v-why">Three steps, ten minutes. Pick one thing to do this week, tell your manager, mark the course complete.</p>
+    <div class="habit-box reveal ns-one"><span class="mono">Step 1 &middot; Pick the one thing you will do this week</span><p class="hp-lead">Four choices, one per category. Each is a single action you can finish in a meeting you already have.</p><div class="habit-pick acts" id="habitPick" role="group" aria-label="Pick one action"></div></div>
+    <div class="ns-steps two">
     <div class="evidence reveal" id="tell-leader">
       <span class="e-label">Step 2 &middot; Tell your manager</span>
-      <p id="ns2p">Pick your action on the left. It drops into this message.</p>
+      <p id="ns2p">Pick your action above. It drops into this message.</p>
       <p class="ns-msg"><em id="tellText">&ldquo;I just finished the Manager Foundations course. This week I will [action]. Ask me how it went on [date].&rdquo;</em></p>
       <div class="ns-ctl">
         <button type="button" class="btn btn-gold btn-sm" id="copyTell" data-copytext="I just finished the Manager Foundations course. This week I will [action]. Ask me how it went on [date].">Copy the message</button>
@@ -1589,7 +1524,6 @@ html.paged .idea .try .scn{ margin-top:0; }
         <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="nextstep" data-label="Mark complete" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Mark complete</span></button>
       </div>
     </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1598,14 +1532,16 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="v-rail" data-lesson="6"><span>Keep learning &middot; The last page</span></div>
     <h2 class="v-h sm">What to take <em>next</em>.</h2>
-    <p class="v-why">One item a month, on the habit you are working on. That is plenty.</p>
+    <p class="v-why">Your micro modules first: the manager responsibilities, one short course each, in Oracle Learning. Then one item a month, on the habit you are working on.</p>
     <a class="pdf-card reveal" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener"><span class="pdf-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>The printable guide (PDF)</b><span class="pdf-sub">Every detail of this course on paper: what changed, the five ideas, year one, who handles what, the four categories, your results, and this list. Branded, letter size, links live.</span></span><span class="pdf-go">Open the PDF</span></a>
     <div class="learn-tabs" role="tablist" aria-label="Keep learning">
-      <button type="button" role="tab" aria-selected="true" data-ltab="oracle">In Oracle Learning</button>
+      <button type="button" role="tab" aria-selected="true" data-ltab="comp">Your micro modules</button>
+      <button type="button" role="tab" aria-selected="false" data-ltab="oracle">More in Oracle Learning</button>
       <button type="button" role="tab" aria-selected="false" data-ltab="outside">Outside Vanderbilt</button>
       <button type="button" role="tab" aria-selected="false" data-ltab="watch">Watch</button>
     </div>
-    <div class="learn-pane cur" data-lpane="oracle"><div class="learn-top" id="learnTop"></div></div>
+    <div class="learn-pane cur" data-lpane="comp"><div class="learn-comp" id="learnComp"></div></div>
+    <div class="learn-pane" data-lpane="oracle"><div class="learn-top" id="learnTop"></div></div>
     <div class="learn-pane" data-lpane="outside"><div class="learn-grid" id="learnGrid"></div></div>
     <div class="learn-pane" data-lpane="watch">
     <div class="learn-media">
@@ -1632,7 +1568,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="fcenter">
       <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.m</span></p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.n</span></p>
       <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The four categories and their behaviors are Yukl&rsquo;s taxonomy (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. About the program</p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>
@@ -1672,10 +1608,10 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="../assets/js/program-data.js?v=20260916b"></script>
 <script src="../assets/js/scorm.js?v=20260912p"></script>
 <script src="../assets/js/oracle.js?v=20260912p"></script>
-<script src="narration-scripts.js?v=20261027m"></script>
+<script src="narration-scripts.js?v=20261027n"></script>
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20261027m"></script>
+<script src="app.js?v=20261027n"></script>
 </body>
 </html>
