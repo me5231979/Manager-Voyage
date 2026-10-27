@@ -34,7 +34,7 @@ if(vid){
 
 /* ── greeting from the dashboard profile, the URL, or Oracle Learning ── */
 function firstName(full){ if(!full) return ''; full = String(full).trim(); if(full.indexOf(',') > -1) return full.split(',')[1].trim().split(/\s+/)[0]; return full.split(/\s+/)[0]; }
-try{ var rq = new URLSearchParams(location.search); if(rq.get('reset')){ Object.keys(localStorage).forEach(function(k){ if(k.indexOf(KEY) === 0 || k.indexOf('mv-found-') === 0) localStorage.removeItem(k); }); sessionStorage.removeItem('mv-assess-snooze'); rq.delete('reset'); rq.set('v', String(Date.now())); location.replace(location.pathname + '?' + rq.toString() + '#p/home/1'); } }catch(e){}
+try{ var rq = new URLSearchParams(location.search); if(rq.get('reset')){ Object.keys(localStorage).forEach(function(k){ if(k.indexOf(KEY) === 0 || k.indexOf('mv-found-') === 0 || k === 'mv.manager.v1') localStorage.removeItem(k); }); sessionStorage.removeItem('mv-assess-snooze'); rq.delete('reset'); rq.set('v', String(Date.now())); location.replace(location.pathname + '?' + rq.toString() + '#p/home/1'); } }catch(e){}
 var profile = { name:'', state:'' };
 try{ var dp = JSON.parse(localStorage.getItem('mv.manager.v1') || '{}'); if(dp.name) profile.name = dp.name; if(dp.state) profile.state = dp.state; }catch(e){}
 try{ var q = new URLSearchParams(location.search); if(q.get('name')) profile.name = q.get('name'); if(q.get('state')) profile.state = String(q.get('state')).toUpperCase(); }catch(e){}
@@ -1062,8 +1062,8 @@ var IDEAS = [
 (function(){
   var n = $('#whoName'), e = $('#whoEmail'); 
   var saved = {}; try{ saved = JSON.parse(get('who') || '{}') || {}; }catch(x){}
-  function pub(){ window.MV_LEARNER = { name:(n && n.value.trim()) || saved.name || profile.name || (window.MVScorm && MVScorm.name) || '', email:(e && e.value.trim()) || saved.email || '' }; }
-  if(n){ n.value = saved.name || profile.name || ''; n.addEventListener('input', function(){ saved.name = n.value.trim(); set('who', JSON.stringify(saved)); pub(); }); }
+  function pub(){ window.MV_LEARNER = { name:(n && n.value.trim()) || saved.name || (window.MVScorm && MVScorm.connected && MVScorm.name) || '', email:(e && e.value.trim()) || saved.email || '' }; }
+  if(n){ n.value = saved.name || ''; n.addEventListener('input', function(){ saved.name = n.value.trim(); set('who', JSON.stringify(saved)); pub(); }); }
   if(e){ e.value = saved.email || ''; e.addEventListener('input', function(){ saved.email = e.value.trim(); set('who', JSON.stringify(saved)); pub(); }); }
   pub();
 })();
@@ -1395,7 +1395,7 @@ window.MV_EMAIL = MV_EMAIL;
     if(loaded) return; loaded = true;
     q.innerHTML = ST.map(function(st, i){ return '<li><b>' + (i + 1) + ' &middot; ' + esc(st[0]) + '</b><p>' + esc(st[1]) + '</p><div class="scale" role="group" aria-label="' + esc(st[0]) + '">' + SCALE.map(function(l, j){ return '<button type="button" data-q="' + i + '" data-v="' + j + '" aria-pressed="false">' + esc(l) + '</button>'; }).join('') + '</div></li>'; }).join('');
     var who = {}; try{ who = JSON.parse(get('who') || '{}') || {}; }catch(e){}
-    nameEl.value = who.name || profile.name || (window.MVScorm && MVScorm.name) || ''; mailEl.value = who.email || '';
+    nameEl.value = who.name || (window.MVScorm && MVScorm.connected && MVScorm.name) || ''; mailEl.value = who.email || '';
     q.addEventListener('click', function(e){ var b = e.target.closest('button[data-q]'); if(!b) return; var i = b.getAttribute('data-q'); ans[i] = +b.getAttribute('data-v'); $$('button[data-q="' + i + '"]', q).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); ready(); });
     nameEl.addEventListener('input', ready); mailEl.addEventListener('input', ready);
   }
