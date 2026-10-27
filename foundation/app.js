@@ -475,6 +475,83 @@ function flipSeen(btn){
     });
   });
 });
+/* ══════════ your first year: build the plan. Every responsibility gets a place in your rhythm, and a reason. ══════════ */
+var PLAN = [
+  { k:'week', t:'Every week', s:'Run the team.', slot:'Which day', opts:['Mon','Tue','Wed','Thu','Fri'], items:[
+    { n:'A short 1:1 with each person', why:'The one place people tell you the truth while it is still small.', gets:'Problems surface early, and everyone knows where they stand.' },
+    { n:'Look at work before it is due', why:'Checking work is the job. Doing it yourself is not.', gets:'Fewer late surprises, and work that ships right the first time.' },
+    { n:'Approve timecards and time off', why:'People are paid right only if you approve on time.', gets:'Correct pay, and a yes they can plan their life around.' },
+    { n:'Feedback, and thanks for specific work', why:'Late feedback is wasted feedback.', gets:'People know what good looks like, and that someone noticed.' },
+    { n:'Answer questions, or find who can', why:'An open question stalls work for a day.', gets:'Nobody waits on you to move.' } ] },
+  { k:'month', t:'Every month or quarter', s:'Keep it on track.', slot:'When in the month', opts:['First week','Mid month','Last week','Quarter end'], items:[
+    { n:'Approve expenses and purchases', why:'Late approvals cost the team money and vendor trust.', gets:'Spend that clears while it still helps.' },
+    { n:'Set and check goals', why:'A goal nobody checks is a wish.', gets:'The team knows what counts, and sees progress.' },
+    { n:'Step back: how the work and the team are going', why:'You cannot see drift from inside the week.', gets:'Course corrections in weeks, not at review time.' } ] },
+  { k:'cycle', t:'A few times a year', s:'The cycles.', slot:'My move', items:[
+    { n:'Performance reviews', why:'A review should never surprise anyone.', gets:'Fair ratings backed by a year of notes.', opts:['Notes after every 1:1, so the review writes itself','Two hours blocked a month before','Start the week it opens'] },
+    { n:'Hiring when a seat opens', why:'An open seat costs the team every week it stays open.', gets:'A faster, fairer hire.', opts:['Ask my HCM the day the seat opens','Draft the posting with the team','Wait for HR to reach out'] },
+    { n:'Onboarding a new hire', why:'The first month decides whether they stay.', gets:'A new hire who is useful by week four.', opts:['A 30-day plan ready before day one','First week scheduled, hour by hour','A buddy on the team from day one'] },
+    { n:'Someone leaving', why:'A good exit protects the team, and your reputation.', gets:'Knowledge kept, and a door left open.', opts:['Tell my HCM the same day','Capture what they know before they go','Thank them in front of the team'] } ] },
+  { k:'event', t:'When it happens', s:'Know the process. Act the same day.', slot:'My first call', opts:['Handle it','Ask my HCM first','The leave office, same day','EOA, same day'], items:[
+    { n:'A leave request, including FMLA', why:'Leave has legal protection and a clock.', gets:'Time off handled right, with no questions about the diagnosis.', right:2, x:'It sounds like leave, so it is leave until the leave office says otherwise. Adjust the work; never ask about the condition.' },
+    { n:'A flexible work request', why:'Equity across the team is yours to protect.', gets:'A fair yes or no, with the reason.', right:0, x:'Yours to handle: check the policy and the equity across the team, then decide and say why.' },
+    { n:'An accommodation request', why:'There is a formal process, and it starts the day they ask.', gets:'A person who can do their job, with the right support.', right:1, x:'Ask your HCM first. The process is formal, and your HCM gets it to the right office the same day.' },
+    { n:'A report of harassment or discrimination', why:'You report. You do not investigate.', gets:'A team that trusts that speaking up works.', right:3, x:'EOA, the same day. Listen, write down what was said, report it. Do not investigate or promise an outcome.' },
+    { n:'A performance concern that a talk did not fix', why:'A fair process protects them, and you.', gets:'A real chance to improve, documented properly.', right:1, x:'Ask your HCM first. A performance concern has a fair process; do not improvise it.' } ] }
+];
+(function(){
+  var box = $('#yearPlan'), out = $('#yearPlanOut'), status = $('#yearStatus'); if(!box) return;
+  var picks = {}; try{ picks = JSON.parse(get('plan') || '{}') || {}; }catch(e){ picks = {}; }
+  var total = PLAN.reduce(function(a, g){ return a + g.items.length; }, 0), cur = 0;
+  function optsOf(g, it){ return it.opts || g.opts; }
+  function picked(gi, ii){ var v = picks[PLAN[gi].k + ':' + ii]; return v === undefined ? -1 : v; }
+  function ok(gi, ii){ var it = PLAN[gi].items[ii], v = picked(gi, ii); return v >= 0 && (it.right === undefined || it.right === v); }
+  function groupDone(gi){ return PLAN[gi].items.every(function(_, ii){ return ok(gi, ii); }); }
+  function count(){ var n = 0; PLAN.forEach(function(g, gi){ g.items.forEach(function(_, ii){ if(ok(gi, ii)) n += 1; }); }); return n; }
+  function item(g, gi, it, ii){
+    var v = picked(gi, ii), hit = ok(gi, ii), miss = v >= 0 && !hit;
+    return '<div class="pl-item"><strong>' + esc(it.n) + '</strong><span class="pl-note"><span><b>Why</b>' + esc(it.why) + '</span><span><b>The team gets</b>' + esc(it.gets) + '</span></span>' +
+      '<div class="pl-opts" role="group" aria-label="' + esc(g.slot + ': ' + it.n) + '">' + optsOf(g, it).map(function(o, oi){ return '<button type="button" data-g="' + gi + '" data-i="' + ii + '" data-o="' + oi + '" aria-pressed="' + (v === oi ? 'true' : 'false') + '"' + (miss && v === oi ? ' class="miss"' : '') + '>' + esc(o) + '</button>'; }).join('') + '</div>' +
+      (it.x && v >= 0 ? '<p class="pl-x' + (miss ? ' miss' : '') + '">' + (miss ? 'Not quite. ' : '') + esc(it.x) + '</p>' : '') + '</div>';
+  }
+  function render(){
+    box.innerHTML = '<div class="pl-tabs" role="tablist" aria-label="Your rhythm">' + PLAN.map(function(g, gi){ return '<button type="button" role="tab" data-tab="' + gi + '" aria-selected="' + (gi === cur ? 'true' : 'false') + '"' + (groupDone(gi) ? ' class="done"' : '') + '><b>' + esc(g.t) + '</b><span>' + esc(g.s) + '</span></button>'; }).join('') + '</div>' +
+      PLAN.map(function(g, gi){ return '<div class="pl-pane" role="tabpanel" data-pane="' + gi + '"' + (gi === cur ? '' : ' hidden') + '><div class="pl-head"><strong>' + esc(g.s) + '</strong><span class="mono">' + esc(g.slot) + ' &middot; pick one for each</span></div>' + g.items.map(function(it, ii){ return item(g, gi, it, ii); }).join('') +
+        '<div class="pl-foot">' + (gi > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev>Back</button>' : '') + (gi < PLAN.length - 1 ? '<button type="button" class="btn btn-gold btn-sm" data-next>Next: ' + esc(PLAN[gi + 1].t) + '</button>' : '') + '</div></div>'; }).join('');
+    paintOut();
+  }
+  function planText(){
+    return PLAN.map(function(g, gi){ var lines = g.items.map(function(it, ii){ return ok(gi, ii) ? '  - ' + it.n + ': ' + optsOf(g, it)[picked(gi, ii)] : null; }).filter(Boolean); return lines.length ? g.t.toUpperCase() + '\n' + lines.join('\n') : null; }).filter(Boolean).join('\n\n');
+  }
+  function paintOut(){
+    if(!out) return;
+    var n = count();
+    out.innerHTML = '<span class="mono">My plan &middot; ' + n + ' of ' + total + '</span><h4>My first year, <em>planned</em>.</h4>' +
+      (n ? PLAN.map(function(g, gi){ var lis = g.items.map(function(it, ii){ return ok(gi, ii) ? '<li><span>' + esc(it.n) + '</span><i>' + esc(optsOf(g, it)[picked(gi, ii)]) + '</i></li>' : ''; }).join(''); return lis ? '<div class="pl-g"><b>' + esc(g.t) + '</b><ul>' + lis + '</ul></div>' : ''; }).join('') : '<p class="pl-empty">Pick a place for each responsibility on the right. It lands here.</p>') +
+      (n ? '<div class="pl-ctl"><button type="button" class="btn btn-ghost btn-sm" data-copyplan>Copy my plan</button><a class="btn btn-ghost btn-sm" href="mailto:?subject=' + encodeURIComponent('My first year as a manager: the plan') + '&body=' + encodeURIComponent(planText()) + '">Email it to myself</a></div>' : '');
+    if(status) status.textContent = n + ' of ' + total + ' planned.' + (n === total ? ' Activity complete. Copy the plan, or email it to yourself.' : '');
+    if(n === total) progDone('year');
+  }
+  function show(gi){ cur = gi; $$('.pl-tabs button', box).forEach(function(b){ b.setAttribute('aria-selected', parseInt(b.getAttribute('data-tab'), 10) === gi ? 'true' : 'false'); }); $$('.pl-pane', box).forEach(function(pn){ pn.hidden = parseInt(pn.getAttribute('data-pane'), 10) !== gi; }); if(NARR['year/g' + (gi + 1)]) narrSub('year/g' + (gi + 1)); }
+  box.addEventListener('click', function(e){
+    var o = e.target.closest('.pl-opts button'); if(o){
+      var gi = +o.getAttribute('data-g'), ii = +o.getAttribute('data-i'), oi = +o.getAttribute('data-o');
+      picks[PLAN[gi].k + ':' + ii] = oi; set('plan', JSON.stringify(picks));
+      var pane = o.closest('.pl-pane'); var row = o.closest('.pl-item'); var tmp = document.createElement('div'); tmp.innerHTML = item(PLAN[gi], gi, PLAN[gi].items[ii], ii); row.replaceWith(tmp.firstChild);
+      $$('.pl-tabs button', box).forEach(function(b){ b.classList.toggle('done', groupDone(+b.getAttribute('data-tab'))); });
+      paintOut(); return;
+    }
+    var t = e.target.closest('.pl-tabs button[data-tab]'); if(t){ show(+t.getAttribute('data-tab')); return; }
+    if(e.target.closest('button[data-next]')){ show(Math.min(cur + 1, PLAN.length - 1)); return; }
+    if(e.target.closest('button[data-prev]')){ show(Math.max(cur - 1, 0)); }
+  });
+  if(out) out.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-copyplan]'); if(!b) return;
+    var txt = planText(); var done = function(){ b.textContent = 'Copied'; setTimeout(function(){ b.textContent = 'Copy my plan'; }, 1800); };
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, done); else { var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(err){} ta.remove(); done(); }
+  });
+  render();
+})();
 /* ══════════ your call: one scenario, three responses, consequences ══════════ */
 /* ══════════ practice it live: a spoken conversation with the character, scored by what you did ══════════
    The character is an ElevenLabs conversational agent. The page starts the session, shows the
@@ -531,7 +608,7 @@ function liveHTML(k){
   var L = LIVE[k];
   return '<div class="live" data-live="' + k + '"><div class="live-scene"><div class="live-avatar"><i class="ring r1"></i><i class="ring r2"></i><span>' + L.initial + '</span></div>' +
     '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p>' + esc(L.brief) + '</p><p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Microphone</p></div></div>' +
-    '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-state" role="status" aria-live="polite"></span></div>' +
+    '<ol class="live-how" aria-label="How this works"><li><b>1</b>Tap Start and allow the microphone. ' + esc(L.who) + ' speaks first.</li><li><b>2</b>Talk the way you would at work. Speak naturally, in your own words. There is no script.</li><li><b>3</b>Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.</li></ol>' + '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-state" role="status" aria-live="polite"></span></div>' +
     '<div class="live-log" aria-live="polite"></div><div class="live-score" hidden></div></div>';
 }
 
@@ -834,7 +911,7 @@ var IDEAS = [
   box.innerHTML = '<div class="idea-tabs" role="tablist" aria-label="The five ideas, by topic">' + IDEAS.map(function(it, i){ return '<button type="button" role="tab" aria-selected="false" data-tab="' + i + '">' + (i + 1) + ' · ' + names[i] + (LIVE[IDEA_SCN[i]] ? ' <span class="live-badge">Live</span>' : '') + '</button>'; }).join('') + '</div>' +
     '<div class="idea idea-intro cur" role="region" aria-label="About the five ideas"><span class="who-is">Start here</span><h3>Five ideas that hold <em>up</em>.</h3>' +
       '<div class="intro-copy"><p>You do not need a theory of management. You need a few ideas that hold up, and each one turns into something you can do this week. These five come from people who spent years studying what good managers do.</p>' +
-      '<p><b>How this works.</b> Each idea: what it is, one thing to start this week, and a moment to apply it. Open the detail if you want the why.</p>' +
+      '<p><b>How this works.</b> Each idea: what it is, one thing to start this week, and a live conversation to practice it. Open the detail if you want the why.</p>' +
       '<p class="intro-cta"><button type="button" class="btn btn-primary btn-sm" data-tab="0">Start with idea 1<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></p></div>' +
       '<ol class="intro-list" aria-label="The five ideas">' + IDEAS.map(function(it, i){ return '<li><button type="button" data-tab="' + i + '"><span class="il-no">' + (i + 1) + '</span><span class="il-t"><b>' + names[i] + (LIVE[IDEA_SCN[i]] ? ' <span class="live-badge">Live conversation</span>' : '') + '</b><span>' + ONE[i] + '</span></span></button></li>'; }).join('') + '</ol></div>' +
     IDEAS.map(function(it, i){
@@ -842,7 +919,6 @@ var IDEAS = [
         '<div class="idea-core"><p class="blk"><b>What it is</b>' + esc(it.what) + '</p><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
         (LIVE[IDEA_SCN[i]] ? liveHTML(IDEA_SCN[i]) : '') +
         '<details class="idea-more"><summary>Why it works, what it looks like, and what it brings</summary><div class="idea-more-grid"><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p></div></details>' +
-        '<div class="try' + (LIVE[IDEA_SCN[i]] ? ' try-fold' : '') + '"><p class="cq-h"><span class="mono">Apply it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + '<span class="try-note">' + (LIVE[IDEA_SCN[i]] ? 'No microphone, or no time to talk? Tap the response you would give, then try the other two. It counts the same.' : 'Show you understood the idea. Tap the response you would give, then try the other two.') + '</span></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
         '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page for what Vanderbilt will ask of you.</span>') + '</div></div>';
     }).join('');
   function show(i){
@@ -854,7 +930,7 @@ var IDEAS = [
     if(window.chartPager && window.chartPager.current().key === 'ideas'){ var f = $$('.idea[data-i]', box)[i].querySelector('.idea-nav button'); if(f) f.focus({ preventScroll:true }); }
     narrSub('ideas/t' + (i + 1));
   }
-  function paint(){ var n = Object.keys(seen).length, f = Object.keys(found).length; if(status) status.textContent = n + ' of 5 ideas. ' + f + ' of 5 moments.' + (f === 5 ? ' Activity complete. Pick the idea you will try first.' : n === 5 && f < 5 ? ' Find the best response in each moment.' : ''); if(f === 5) progDone('safe'); }
+  function paint(){ var n = Object.keys(seen).length, f = Object.keys(found).length; if(status) status.textContent = n + ' of 5 ideas read. ' + f + ' of 5 conversations.' + (n === 5 ? ' Activity complete.' + (f < 5 ? ' The conversations are extra practice, any time.' : '') : ''); if(n === 5) progDone('safe'); }
   $$('.scn[data-scn]', box).forEach(buildScenario);
   window.markIdeaMoment = function(k){ found[k] = 1; paint(); };
   box.addEventListener('click', function(e){
@@ -967,8 +1043,8 @@ var IDEAS = [
 /* ══════════ "Your turn": a black callout above every activity, gold check when done ══════════ */
 var TURNS = [
   { sel:'#shiftDrill',  prog:'shift',    text:'Sort six things: yours, a team member’s, or another office' },
-  { sel:'#ideasBox',    prog:'safe',     text:'Read each idea, then try its moment' },
-  { sel:'#yearMap',     prog:'year',     text:'Tap each group to open it' },
+  { sel:'#ideasBox',    prog:'safe',     text:'Read each idea, then have its conversation' },
+  { sel:'#yearPlan',    prog:'year',     text:'Give every responsibility a place in your rhythm' },
   { sel:'#simBox',      prog:null,       text:'Pick a situation' },
   { sel:'#callsDrill',  prog:'calls',    text:'Decide five situations' },
   { sel:'#fwRose',  prog:'welcome', text:'Tap each point of the compass' },
