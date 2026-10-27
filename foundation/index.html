@@ -1007,6 +1007,44 @@ html.paged .idea .try .scn{ margin-top:0; }
 @media (min-width:1001px){ .v-copy .survey .sk{ align-self:start; } }
 .evidence a.btn-ghost, .pol a.btn-ghost{ color:var(--tx); }
 
+/* ── in practice: the video's story as a decision ── */
+.story{ position:relative; border:1px solid var(--bdg); border-radius:var(--r); overflow:hidden; background:#141414; }
+.story-bg{ position:absolute; inset:0; background:var(--poster) center 30% / cover no-repeat; opacity:.42; filter:saturate(.9); }
+.story-bg::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,20,20,.15) 0%, rgba(20,20,20,.9) 60%, #141414 100%); }
+.story-in{ position:relative; padding:clamp(14px,1.8vw,22px); display:grid; gap:10px; min-height:280px; align-content:end; }
+.story-in > .mono{ color:var(--eyebrow); }
+.story-beats{ display:grid; gap:8px; }
+.beat{ font-family:var(--serif); font-size:clamp(1.05rem,1.3vw,1.25rem); line-height:1.35; margin:0; opacity:0; transform:translateY(6px); transition:opacity .5s ease, transform .5s ease; }
+.beat.show{ opacity:1; transform:none; }
+.story-step{ font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tx3); }
+.story-q[hidden], .story-week[hidden], .story-ctl[hidden]{ display:none !important; }
+.story-q .story-ask{ font-family:var(--cond); font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:.74rem; color:var(--eyebrow); margin:2px 0 8px; }
+.story-opts{ display:grid; gap:6px; }
+.story-opts button{ text-align:left; background:rgba(28,28,28,.88); border:1px solid var(--bdg); color:var(--tx); border-radius:var(--r); padding:9px 12px; font:inherit; font-size:.92rem; line-height:1.35; cursor:pointer; display:flex; gap:10px; align-items:flex-start; }
+.story-opts button i{ font-style:normal; font-family:var(--cond); font-weight:700; color:var(--eyebrow); }
+.story-opts button:hover, .story-opts button:focus-visible{ border-color:var(--eyebrow); }
+.story-opts button[aria-pressed="true"]{ border-color:var(--eyebrow); }
+.story-opts button.best[aria-pressed="true"]{ background:rgba(207,174,112,.18); }
+.story-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+.story-tags button{ background:rgba(28,28,28,.88); border:1px solid var(--bdg); color:var(--tx); border-radius:999px; padding:6px 11px; font:inherit; font-size:.86rem; cursor:pointer; }
+.story-tags button:hover, .story-tags button:focus-visible{ border-color:var(--eyebrow); }
+.story-tags button[aria-pressed="true"]{ background:var(--eyebrow); border-color:var(--eyebrow); color:var(--btn-tx); }
+.story-tags button.miss[aria-pressed="true"]{ background:none; color:var(--tx); border-color:#F0B6B0; }
+.story-out{ border-left:3px solid var(--eyebrow); padding-left:10px; font-size:.92rem; color:var(--tx2); margin:0; }
+.story-out:empty{ display:none; }
+.story-out.miss{ border-left-color:#F0B6B0; }
+.story-out b{ display:block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+.story-out.miss b{ color:#F0B6B0; }
+.story-week{ margin:0; padding:10px 12px; border:1px solid rgba(207,174,112,.5); border-radius:var(--r); background:rgba(207,174,112,.1); font-size:.92rem; line-height:1.4; }
+.story-week b{ display:block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+.story-ctl{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.story-video{ margin-top:10px; }
+.story-video summary{ list-style:none; cursor:pointer; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); display:flex; align-items:center; gap:8px; padding:6px 0; }
+.story-video summary::-webkit-details-marker{ display:none; }
+.story-video summary::before{ content:"\25B6"; font-size:.6rem; }
+.story-video[open] summary::before{ content:"\25BC"; }
+.story-video .cv-wrap{ margin-top:8px; }
+
 /* ── your first year: the plan builder ── */
 .planner{ border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); }
 .pl-tabs{ display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--bd); }
@@ -1198,11 +1236,15 @@ html.paged .idea .try .scn{ margin-top:0; }
         </div>
             </div>
       <div class="v-act">
+        <div class="story" data-story="basics"></div>
+        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
         <div class="cv-wrap" data-cv="basics">
           <video controls playsinline preload="metadata" poster="../assets/img/foundation/basics-poster.jpg?v=20260912p" src="../assets/video/foundation/basics.mp4?v=20260912p" aria-label="What a manager is, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/basics.vtt?v=20260912p" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>What a manager is, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. What changed, what is new, what a manager is not, who helps. About ninety seconds.</p>
+
+        </details>
       </div>
     </div>
     <div class="helpers" role="list" aria-label="Who helps you at Vanderbilt">
@@ -1288,12 +1330,16 @@ html.paged .idea .try .scn{ margin-top:0; }
       <div class="v-rose" id="fwRose" aria-label="The four categories"></div>
       <div class="fw-panel" id="fwPanel">
         <div class="fw-video" id="fwVideo">
+          <div class="story" data-story="framework"></div>
+          <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
           <div class="cv-wrap" data-cv="framework">
           <video controls playsinline preload="metadata" poster="../assets/img/foundation/framework-poster.jpg?v=20260912p" src="../assets/video/foundation/framework.mp4?v=20260912p" aria-label="The four categories, in about ninety seconds. Training video, about 90 seconds, with captions."><track kind="captions" src="../assets/video/foundation/framework.vtt?v=20260912p" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>The four categories, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. The four categories and the habits inside each. About ninety seconds.</p>
-          <p class="fw-hint">Watch the overview, then tap a point of the compass to see what each category asks of you.</p>
+
+          </details>
+          <p class="fw-hint">Sort the four asks, then tap a point of the compass to see what each category asks of you.</p>
         </div>
         <div class="fw" id="fwMap" hidden>
       <div class="fw-card" data-job="task" role="button" tabindex="0" aria-label="Hear the Task-oriented intro"><b>Task-oriented</b><strong>Get the work done, through your team.</strong><p>Is the team&rsquo;s work getting done, and done well? You check it and unblock it; you do not do it yourself.</p><ul><li>Planning <i>(plan it)</i><em>Create clarity</em></li><li>Clarifying <i>(say it)</i><em>Create clarity</em></li><li>Monitoring operations <i>(check it)</i><em>Coach and develop</em></li><li>Problem solving <i>(fix it)</i><em>Address issues</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="task">Open this category</button></span></div>
@@ -1316,11 +1362,15 @@ html.paged .idea .try .scn{ margin-top:0; }
     <p class="v-why">When people are not sure what is expected, work comes in late or gets redone, and you find out on the due date.</p>
     <div class="vc-grid">
       <div>
+        <div class="story" data-story="task"></div>
+        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
         <div class="cv-wrap" data-cv="task">
           <video controls playsinline preload="metadata" poster="../assets/img/foundation/task-poster.jpg?v=20260912p" src="../assets/video/foundation/task.mp4?v=20260912p" aria-label="Task-oriented behavior, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/task.vtt?v=20260912p" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Task-oriented behavior, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
+
+        </details>
         <p class="week"><b>Do this week</b>Pick one person and confirm, out loud, what they own and by when.</p>
       </div>
       <div class="flip-grid two">
@@ -1338,11 +1388,15 @@ html.paged .idea .try .scn{ margin-top:0; }
     <p class="v-why">People stay, and do their best work, for a manager who notices them.</p>
     <div class="vc-grid">
       <div>
+        <div class="story" data-story="relations"></div>
+        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
         <div class="cv-wrap" data-cv="relations">
           <video controls playsinline preload="metadata" poster="../assets/img/foundation/relations-poster.jpg?v=20260912p" src="../assets/video/foundation/relations.mp4?v=20260912p" aria-label="Relations-oriented behavior, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/relations.vtt?v=20260912p" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Relations-oriented behavior, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
+
+        </details>
         <p class="week"><b>Do this week</b>Thank one person for one specific thing.</p>
       </div>
       <div class="flip-grid two">
@@ -1360,11 +1414,15 @@ html.paged .idea .try .scn{ margin-top:0; }
     <p class="v-why">Vanderbilt is asking every team to move faster and improve. That happens in your team, in small ways, every week.</p>
     <div class="vc-grid">
       <div>
+        <div class="story" data-story="change"></div>
+        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
         <div class="cv-wrap" data-cv="change">
           <video controls playsinline preload="metadata" poster="../assets/img/foundation/change-poster.jpg?v=20260912p" src="../assets/video/foundation/change.mp4?v=20260912p" aria-label="Change-oriented behavior, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/change.vtt?v=20260912p" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Change-oriented behavior, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
+
+        </details>
         <p class="week"><b>Do this week</b>Hold one ten-minute look-back.</p>
       </div>
       <div class="flip-grid two">
@@ -1382,11 +1440,15 @@ html.paged .idea .try .scn{ margin-top:0; }
     <p class="v-why">Your team needs approvals, information, and a fair hearing from outside. New managers do this job least.</p>
     <div class="vc-grid">
       <div>
+        <div class="story" data-story="external"></div>
+        <details class="story-video"><summary>Prefer to watch? The ninety-second video</summary>
         <div class="cv-wrap" data-cv="external">
           <video controls playsinline preload="metadata" poster="../assets/img/foundation/external-poster.jpg?v=20260912p" src="../assets/video/foundation/external.mp4?v=20260912p" aria-label="External behavior, in about ninety seconds. Training video, about 80 seconds, with captions."><track kind="captions" src="../assets/video/foundation/external.vtt?v=20260912p" srclang="en" label="English" default /></video>
           <div class="cv-wait"><span class="vic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>External behavior, in about ninety seconds</b><p>The video is being produced. The cards beside it teach the same thing.</p></div>
         </div>
         <p class="cv-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Narrated, captions on. Why it matters, each habit on a Tuesday, what to stop, one thing this week. About ninety seconds.</p>
+
+        </details>
         <p class="week"><b>Do this week</b>Have coffee with one person your team depends on.</p>
       </div>
       <div class="flip-grid two">
@@ -1535,7 +1597,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="fcenter">
       <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.f</span></p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.g</span></p>
       <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The four categories and their behaviors are Yukl&rsquo;s taxonomy (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. About the program</p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>
@@ -1579,6 +1641,6 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20261027f"></script>
+<script src="app.js?v=20261027g"></script>
 </body>
 </html>

@@ -475,6 +475,79 @@ function flipSeen(btn){
     });
   });
 });
+/* ══════════ in practice: each video's example story, as a decision the learner makes ══════════ */
+var STORIES = {
+  basics: { who:'The dining manager', poster:'basics', beats:['A new dining manager still plates faster than anyone on the line.', 'Her cooks are waiting on decisions only she can make. Lunch is in forty minutes, and the line is slowing.'], q:'What does she do?', opts:[
+    { t:'Keep plating. She is the fastest, and the line is moving.', out:'Lunch limps out. The cooks waited all shift on calls only she could make. Before, her job was her work. Now it is the team’s work.' },
+    { t:'Step back. Name the three things that matter today, and sign the timecards.', best:true, out:'Lunch runs better, and she did not plate a tray. Decide, approve, and look after the people: that is the whole change.' },
+    { t:'Tell the cooks to figure it out between them.', out:'They guess, and two of them guess differently. Somebody has to be responsible for the team’s work. That is her now.' } ],
+    week:'Before Monday ends, answer the three questions on the left for your own team.' },
+  framework: { who:'Monday, four asks', poster:'framework', intro:'A facilities supervisor starts Monday with four asks. Sort each one into the job it belongs to.', tags:['Get the work done', 'Take care of your people', 'Make things better', 'Connect your team'], moments:[
+    { s:'A backlog of work orders from last week.', a:0, x:'Getting the work done: plan it, say what good looks like, check it before it is due.' },
+    { s:'A new technician asks to learn the boiler.', a:1, x:'Taking care of your people: grow them. Find the stretch.' },
+    { s:'A new work-order system arrives next month.', a:2, x:'Making things better: explain the why before the announcement lands.' },
+    { s:'Events asks for his crew on Friday.', a:3, x:'Connecting your team: facts, options, and a negotiated date before you say yes.' } ],
+    done:'One list, four different jobs. Sorting it tells him where the week is heavy: this week, the work and the outside ask.', week:'Sort your own list for this week into the four jobs.' },
+  task: { who:'One report, five moments', poster:'task', intro:'The monthly report is due Friday. Tag each moment with the habit it shows.', tags:['Plan it', 'Say it', 'Check it', 'Fix it', 'Stop: doing the work'], moments:[
+    { s:'Monday: you write what matters this week, who owns each piece, and what can wait.', a:0, x:'Plan it. What matters, who owns it, what gives.' },
+    { s:'You tell Priya: the decision on page one, under three hundred words, by Thursday at three.', a:1, x:'Say it. What is expected, by when, and what good looks like.' },
+    { s:'Wednesday: fifteen minutes with Priya on where the report stands and what she needs.', a:2, x:'Check it. Look at the work before it is due, while there is time to help.' },
+    { s:'The same Finance extract is late for the third month. You call Finance about the process.', a:3, x:'Fix it. When the same thing breaks twice, find the cause, not the person.' },
+    { s:'Thursday night you open the spreadsheet to build it yourself, to be sure.', a:4, x:'Stop. Doing the work yourself because it is faster is the old job.' } ],
+    done:'Four habits and one to stop. The report ships Friday, and you did not build it.', week:'Pick one person and confirm, out loud, what they own and by when.' },
+  relations: { who:'The lab technician', poster:'relations', beats:['A lab technician stays after the huddle. Her mother is in and out of the hospital, and she might need some time.', 'She has two deadlines this week. She looks braced for your reaction.'], q:'What do you do?', opts:[
+    { t:'Ask what is wrong with her mother, so you can plan around it.', out:'Never ask for a diagnosis. You adjust the load; the leave office decides eligibility. The question costs trust and tells you nothing you need.' },
+    { t:'Move her two deadlines, send the request to the leave office the same day, and tell her you did.', best:true, out:'A week later she is back, and the team greets her at the door. Listen and help, then route it the same day.' },
+    { t:'Say you will see what you can do, and get back to work.', out:'She hears nothing. The request sits in your inbox. Same day means same day.' } ],
+    week:'Thank one person for one specific thing, by name, this week.' },
+  change: { who:'The checkout system', poster:'change', beats:['Central is replacing the library’s checkout system in six weeks.', 'The team has already said it in the hallway: here we go again.'], q:'What does the manager do?', opts:[
+    { t:'Forward the campus email when it lands. It is not her decision anyway.', out:'The hallway version wins. The team hears what changed and never why, so it lands as one more thing done to them.' },
+    { t:'Explain the why at her own staff meeting before the campus email, write down the hard questions, and let one staffer test the new cart routine for two weeks.', best:true, out:'The team still did not love the system. But they heard the why from her first, two of them volunteered to test it early, and a ten-minute look-back after move-in weekend fixed the rest.' },
+    { t:'Tell the team she does not love it either, but it is what it is.', out:'Honest, and it costs the team its manager. Nobody’s concerns go anywhere.' } ],
+    week:'Hold one ten-minute look-back after a piece of big work.' },
+  external: { who:'The week before Commencement', poster:'external', beats:['The week before Commencement, Events asks a Student Affairs manager for her whole team on Friday.', 'She knows the events coordinator by name. The schedule has been on her wall since March, and Friday is already full.'], q:'What does she do?', opts:[
+    { t:'Say yes. It is Commencement.', out:'Her team works the weekend, and the welcome tables are staffed by people who have not slept. Saying yes to everything is not connecting your team.' },
+    { t:'Over coffee, with the printed hours, name the conflict and offer two options.', best:true, out:'He picks one. Nobody works the weekend, and on Commencement morning the welcome tables are staffed and ready. Facts, options, a negotiated date.' },
+    { t:'Say no. The team is at capacity.', out:'The team is protected and the relationship is gone. Next time Events does not ask; it goes over her head.' } ],
+    week:'Have coffee with one person your team depends on, before you need them.' }
+};
+(function(){
+  $$('.story[data-story]').forEach(function(el){
+    var k = el.getAttribute('data-story'), S = STORIES[k]; if(!S) return;
+    var done = get('story:' + k) === '1';
+    var head = '<div class="story-bg" style="--poster:url(../assets/img/foundation/' + S.poster + '-poster.jpg)"></div><div class="story-in"><span class="mono">In practice &middot; ' + esc(S.who) + '</span>';
+    if(S.beats){
+      var at = 0;
+      el.innerHTML = head + '<div class="story-beats">' + S.beats.map(function(b, i){ return '<p class="beat' + (i === 0 ? ' show' : '') + '">' + esc(b) + '</p>'; }).join('') + '</div>' +
+        '<div class="story-ctl"><button type="button" class="btn btn-gold btn-sm" data-next>Continue</button><span class="story-step">1 of ' + S.beats.length + '</span></div>' +
+        '<div class="story-q" hidden><p class="story-ask">' + esc(S.q) + '</p><div class="story-opts">' + S.opts.map(function(o, i){ return '<button type="button" data-o="' + i + '" aria-pressed="false"' + (o.best ? ' class="best"' : '') + '><i>' + 'ABC'.charAt(i) + '</i><span>' + esc(o.t) + '</span></button>'; }).join('') + '</div><p class="story-out"></p></div>' +
+        '<p class="story-week" hidden><b>This week</b>' + esc(S.week) + '</p></div>';
+      var beats = $$('.beat', el), ctl = $('.story-ctl', el), q = $('.story-q', el), out = $('.story-out', el), week = $('.story-week', el), step = $('.story-step', el);
+      function reveal(){ at += 1; if(at < beats.length){ beats[at].classList.add('show'); step.textContent = (at + 1) + ' of ' + beats.length; } if(at >= beats.length - 1){ ctl.hidden = true; q.hidden = false; } }
+      function pick(i){ var o = S.opts[i]; $$('.story-opts button', el).forEach(function(b, j){ b.setAttribute('aria-pressed', j === i ? 'true' : 'false'); }); out.className = 'story-out' + (o.best ? '' : ' miss'); out.innerHTML = '<b>' + (o.best ? 'The manager’s move' : 'What happens') + '</b>' + esc(o.out); if(o.best){ week.hidden = false; set('story:' + k, '1'); } }
+      el.addEventListener('click', function(e){ if(e.target.closest('[data-next]')){ reveal(); return; } var b = e.target.closest('.story-opts button'); if(b) pick(parseInt(b.getAttribute('data-o'), 10)); });
+      if(done){ beats.forEach(function(b){ b.classList.add('show'); }); at = beats.length; ctl.hidden = true; q.hidden = false; pick(S.opts.map(function(o){ return !!o.best; }).indexOf(true)); }
+    } else {
+      var cur = 0, good = {};
+      el.innerHTML = head + '<p class="beat show story-intro">' + esc(S.intro) + '</p><div class="story-beats"></div><p class="story-out"></p><div class="story-ctl" hidden><button type="button" class="btn btn-gold btn-sm" data-next>Next</button></div><p class="story-week" hidden><b>This week</b>' + esc(S.week) + '</p></div>';
+      var beatsBox = $('.story-beats', el), out2 = $('.story-out', el), ctl2 = $('.story-ctl', el), week2 = $('.story-week', el), intro = $('.story-intro', el);
+      function paintMoment(){
+        var m = S.moments[cur]; if(!m){ beatsBox.innerHTML = '<p class="beat show">' + esc(S.done) + '</p>'; out2.innerHTML = ''; ctl2.hidden = true; week2.hidden = false; set('story:' + k, '1'); return; }
+        beatsBox.innerHTML = '<span class="story-step">' + (cur + 1) + ' of ' + S.moments.length + '</span><p class="beat show">' + esc(m.s) + '</p><div class="story-tags">' + S.tags.map(function(t, i){ return '<button type="button" data-t="' + i + '" aria-pressed="false">' + esc(t) + '</button>'; }).join('') + '</div>';
+        out2.innerHTML = ''; out2.className = 'story-out'; ctl2.hidden = true;
+      }
+      el.addEventListener('click', function(e){
+        if(e.target.closest('[data-next]')){ cur += 1; paintMoment(); return; }
+        var b = e.target.closest('.story-tags button'); if(!b) return; var i = parseInt(b.getAttribute('data-t'), 10), m = S.moments[cur], hit = i === m.a;
+        $$('.story-tags button', el).forEach(function(x, j){ x.setAttribute('aria-pressed', j === i ? 'true' : 'false'); x.classList.toggle('miss', j === i && !hit); });
+        out2.className = 'story-out' + (hit ? '' : ' miss'); out2.innerHTML = '<b>' + (hit ? 'Right' : 'Not that one') + '</b>' + (hit ? esc(m.x) : 'Try another. ' + esc(S.tags[m.a].split(':')[0]) + ' is the job this one belongs to.');
+        if(hit) ctl2.hidden = false;
+      });
+      if(done){ cur = S.moments.length; intro.hidden = true; }
+      paintMoment();
+    }
+  });
+})();
 /* ══════════ your first year: build the plan. Every responsibility gets a place in your rhythm, and a reason. ══════════ */
 var PLAN = [
   { k:'week', t:'Every week', s:'Run the team.', slot:'Which day', opts:['Mon','Tue','Wed','Thu','Fri'], items:[
