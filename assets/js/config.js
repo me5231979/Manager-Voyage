@@ -45,19 +45,18 @@ window.MV_CONFIG = {
   assessmentPrefill: { name: '', email: '', questions: ['', '', '', '', '', '', '', '', '', ''] },
   /* The Form's own choices, lowest to highest. The labels must match the Form exactly. */
   assessmentScale: ['Never', 'Rarely', 'Sometimes', 'Often', 'Always'],
-  /* The ten statements, in the Form's order. 1 to 3 are confirmed from the Form;
-     4 to 10 are placeholders until FLH supplies the wording. */
+  /* The ten statements, in the Form's order, word for word. */
   assessmentStatements: [
-    ['Priorities',       'I write down my team\u2019s top three priorities for the coming period, with a named owner for each, before the work starts.'],
-    ['Expectations',     'I tell each person what they own, by when, and what a good result looks like, and I put it in writing.'],
-    ['Checking work',    'I look at work while it is still in progress, well before the due date, so there is time to help.'],
-    ['Fixing causes',    'When the same thing breaks twice, I find the cause rather than fixing the symptom faster.'],
-    ['Supporting',       'When someone on my team is under pressure, I notice, move what I can, and follow up.'],
-    ['Developing',       'I know where each person wants to go next, and I find work that stretches them toward it.'],
-    ['Recognizing',      'I thank people for specific work, by name, the same week.'],
-    ['Empowering',       'I hand over the decision, not just the task.'],
-    ['Leading change',   'I explain the why behind a change, in my own words, before the announcement lands.'],
-    ['Connecting',       'I know the people my team depends on in other offices by name, before I need them.']
+    ['Priorities',     'I write down my team\u2019s top three priorities for the coming period, with a named owner for each, before the work starts.'],
+    ['Expectations',   'I tell each person what they own, by when, and what a good result looks like, and I put it in writing.'],
+    ['Checking work',  'I look at work while it is still in progress, well before the due date, so there is time to help.'],
+    ['Supporting',     'When I see someone under pressure, I move a deadline or a task that same week and check back with them.'],
+    ['Recognizing',    'I thank a person for a specific piece of work, by name, within the same week it happened.'],
+    ['Empowering',     'I make a decision that changes how my team works, I ask for their view and let it shape what I decide.'],
+    ['Leading change', 'When a change is coming, I explain the reason to my team in my own words before the official announcement reaches them.'],
+    ['Looking back',   'After a large piece of work, I hold a short look-back with the team: what worked, what did not, what we change.'],
+    ['Watching ahead', 'I watch what is coming from the rest of Vanderbilt, such as cycles, deadlines, and system changes, so my team hears it from me first.'],
+    ['Representing',   'When a request from another office would overload my team, I show the hours, name the conflict, and offer two options rather than a flat yes or no.']
   ],
 
   /* Profile and completion feed. A small proxy in front of Oracle HCM that

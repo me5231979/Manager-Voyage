@@ -34,6 +34,7 @@ if(vid){
 
 /* ── greeting from the dashboard profile, the URL, or Oracle Learning ── */
 function firstName(full){ if(!full) return ''; full = String(full).trim(); if(full.indexOf(',') > -1) return full.split(',')[1].trim().split(/\s+/)[0]; return full.split(/\s+/)[0]; }
+try{ var rq = new URLSearchParams(location.search); if(rq.get('reset')){ Object.keys(localStorage).forEach(function(k){ if(k.indexOf(KEY) === 0 || k.indexOf('mv-found-') === 0) localStorage.removeItem(k); }); sessionStorage.removeItem('mv-assess-snooze'); rq.delete('reset'); rq.set('v', String(Date.now())); location.replace(location.pathname + '?' + rq.toString() + '#p/home/1'); } }catch(e){}
 var profile = { name:'', state:'' };
 try{ var dp = JSON.parse(localStorage.getItem('mv.manager.v1') || '{}'); if(dp.name) profile.name = dp.name; if(dp.state) profile.state = dp.state; }catch(e){}
 try{ var q = new URLSearchParams(location.search); if(q.get('name')) profile.name = q.get('name'); if(q.get('state')) profile.state = String(q.get('state')).toUpperCase(); }catch(e){}
@@ -375,10 +376,12 @@ $$('.md-btn').forEach(function(b){ b.addEventListener('click', function(){ progT
 var progReset = $('#progReset');
 if(progReset) progReset.addEventListener('click', function(){
   SECTIONS.forEach(function(s){ progWrite(s.k, false); });
-  set('assess', null); set('done-seen', null); doneSeen = false;
+  ['assess', 'assess-gate', 'assess-answers', 'done-seen', 'week', 'habit', 'plan', 'rhythm'].forEach(function(k){ set(k, null); }); doneSeen = false;
+  try{ Object.keys(localStorage).forEach(function(k){ if(k.indexOf(KEY + 'story:') === 0 || k.indexOf('mv-found-live-') === 0) localStorage.removeItem(k); }); sessionStorage.removeItem('mv-assess-snooze'); }catch(e){}
   var mo = $('#meaOut'); if(mo) mo.innerHTML = '';
   progRender();
-  if(progStatus) progStatus.textContent = 'Progress reset. 0 of ' + SECTIONS.length + ' activities complete; your starting point is cleared.';
+  if(progStatus) progStatus.textContent = 'Progress reset. 0 of ' + SECTIONS.length + ' activities complete; your starting point is cleared. Reload to start over.';
+  window.setTimeout(function(){ var u = new URL(location.href); u.hash = '#p/home/1'; u.searchParams.set('v', String(Date.now())); location.replace(u.toString()); }, 900);
 });
 if(!store){ var pw = $('#progStorageNote'); if(pw) pw.hidden = false; }
 
