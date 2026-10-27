@@ -30,6 +30,11 @@ window.MV_CONFIG = {
   /* The Manager Effectiveness Assessment: taken before the Foundation course and
      again this many months after completing it. */
   surveyRetakeMonths: 6,
+  /* The standalone three-month reassessment, outside the course. The invite email links here. */
+  reassessUrl: 'https://me5231979.github.io/Manager-Voyage/reassess/',
+  /* Three-month route: a retake score below this (out of 50) sends the manager back through
+     Manager Foundations; at or above it, they get new learning for their lowest categories. */
+  reassessFoundationsBelow: 25,
   /* Link to the Manager Effectiveness Assessment (Qualtrics, REDCap, Oracle survey). Empty until PCB supplies it. */
   /* Contact links for Who to call (PCB directory pages). Empty until supplied. */
   contacts: { engagementConsultants: '', hcm: '', er: '', leave: '', eoa: '', titleIX: '', hotline: '', compliance: '' },
