@@ -138,7 +138,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20261027o';
+var MEDIA_V = '20261027p';
 /* the course videos carry their own narration: nothing else should talk over them, and they should not talk over anything else */
 function pauseVideos(){ $$('video').forEach(function(v){ if(v.id !== 'heroVideo' && !v.paused){ try{ v.pause(); }catch(e){} } }); }
 function narrPlay(k){
@@ -552,30 +552,30 @@ var STORIES = {
 (function(){
   var box = $('#yearWizard'), status = $('#yearStatus'); if(!box) return;
   var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'], DAYF = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], BY = ['MO', 'TU', 'WE', 'TH', 'FR'];
-  var W = { n:0, pay:'', heavy:-2, step:0 };
+  var W = { n:0, hourly:'', heavy:-2, step:0 };
   try{ var sv = JSON.parse(get('week') || 'null'); if(sv && sv.step === 3) W = sv; }catch(e){}
   function save(){ set('week', JSON.stringify(W)); }
-  var PAY = { weekly:['Every Monday', 'FREQ=WEEKLY;BYDAY=MO'], biweekly:['Every other Monday', 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO'], monthly:['First Monday of the month', 'FREQ=MONTHLY;BYDAY=1MO'], mixed:['Every Monday', 'FREQ=WEEKLY;BYDAY=MO'] };
   function ooDays(){ var pref = [1, 3, 2, 0, 4].filter(function(d){ return d !== W.heavy; }); return pref.slice(0, Math.min(W.n > 6 ? 3 : W.n > 2 ? 2 : 1, W.n)).sort(function(a, b){ return a - b; }); }
   function split(){ var days = ooDays(), per = {}, left = W.n; days.forEach(function(d, i){ var c = Math.ceil(left / (days.length - i)); per[d] = c; left -= c; }); return per; }
   function checkDay(){ return W.heavy === 2 ? 3 : 2; }
   function fbDay(){ return W.heavy === 4 ? 3 : 4; }
-  function hrs(){ var h = W.n * 0.5 + 0.75 + 0.25 + 0.25 + 0.8; var r = Math.round(h * 2) / 2; return String(r).replace('.0', ''); }
+  function hourly(){ return W.hourly !== 'none'; }
+  function hrs(){ var h = W.n * 0.5 + 0.75 + (hourly() ? 0.25 : 0) + 0.25 + 0.8; var r = Math.round(h * 2) / 2; return String(r).replace('.0', ''); }
   function dots(n){ return '<span class="wz-dots" aria-hidden="true">' + [0, 1, 2].map(function(i){ return '<i class="' + (i < n ? 'on' : '') + '"></i>'; }).join('') + '</span>'; }
   function screen(){
     if(W.step === 0) return '<div class="wz-top"><span class="mono">Build my week &middot; 1 of 3</span>' + dots(1) + '</div><h3 class="wz-q">How many people <em>report to you</em>?</h3><p class="wz-hint">Each one gets a 30-minute 1:1 every week. That is the biggest block in your week.</p><div class="wz-opts">' + [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function(n){ return '<button type="button" data-n="' + n + '"><strong>' + (n === 10 ? '10+' : n) + '</strong></button>'; }).join('') + '</div>';
-    if(W.step === 1) return '<div class="wz-top"><span class="mono">Build my week &middot; 2 of 3</span>' + dots(2) + '</div><h3 class="wz-q">How is your team <em>paid</em>?</h3><p class="wz-hint">It sets how often you approve timecards. Pay periods at Vanderbilt can be weekly, biweekly, or monthly, depending on the worker.</p><div class="wz-opts wide">' + [['weekly', 'Weekly', 'Timecards every Monday'], ['biweekly', 'Biweekly', 'Timecards every other Monday'], ['monthly', 'Monthly', 'Timecards the first Monday'], ['mixed', 'Mixed', 'A Monday pass catches every deadline']].map(function(x){ return '<button type="button" data-pay="' + x[0] + '"><strong>' + x[1] + '</strong><small>' + x[2] + '</small></button>'; }).join('') + '</div><div class="wz-foot"><button type="button" class="wz-back" data-step="0">Back</button></div>';
+    if(W.step === 1) return '<div class="wz-top"><span class="mono">Build my week &middot; 2 of 3</span>' + dots(2) + '</div><h3 class="wz-q">Is anyone on your team <em>hourly</em>?</h3><p class="wz-hint">Hourly staff clock in, so their timecards need your approval every pay period. Salaried staff do not have timecards. Everyone needs time off approved.</p><div class="wz-opts wide">' + [['none', 'No one', 'All salaried. Time off only.'], ['some', 'Some of them', 'A Monday pass covers every pay period'], ['all', 'Everyone', 'A Monday pass covers every pay period']].map(function(x){ return '<button type="button" data-hourly="' + x[0] + '"><strong>' + x[1] + '</strong><small>' + x[2] + '</small></button>'; }).join('') + '</div><div class="wz-foot"><button type="button" class="wz-back" data-step="0">Back</button></div>';
     if(W.step === 2) return '<div class="wz-top"><span class="mono">Build my week &middot; 3 of 3</span>' + dots(3) + '</div><h3 class="wz-q">Which day is already <em>full</em>?</h3><p class="wz-hint">Shifts, clinic, standing meetings. Your 1:1s and the work check stay off it.</p><div class="wz-opts wide">' + DAYS.map(function(d, i){ return '<button type="button" data-heavy="' + i + '"><strong>' + DAYF[i] + '</strong></button>'; }).join('') + '<button type="button" data-heavy="-1"><strong>None</strong><small>Every day is about the same</small></button></div><div class="wz-foot"><button type="button" class="wz-back" data-step="1">Back</button></div>';
     var per = split(), cols = DAYS.map(function(d, i){
       var items = [];
-      if(i === 0) items.push('<span>Approve timecards and time off<i>8:30 &middot; 15 min &middot; ' + PAY[W.pay][0].toLowerCase() + '</i></span>');
+      if(i === 0 && hourly()) items.push('<span>Approve timecards<i>8:30 &middot; 15 min &middot; every Monday</i></span>');
       if(per[i]) items.push('<span>' + per[i] + ' &times; 1:1<i>10:00 &middot; 30 min each</i></span>');
       if(i === checkDay()) items.push('<span>Look at work before it is due<i>2:00 &middot; 45 min</i></span>');
       if(i === fbDay()) items.push('<span>Feedback and thanks<i>3:30 &middot; 15 min &middot; by name</i></span>');
-      items.push('<span class="light">Clear what is waiting on you<i>4:30 &middot; 10 min</i></span>');
+      items.push('<span class="light">Clear what is waiting on you<i>4:30 &middot; 10 min &middot; questions, time off</i></span>');
       return '<div' + (i === W.heavy ? ' class="heavy"' : '') + '><b>' + d + (i === W.heavy ? ' &middot; full' : '') + '</b>' + items.join('') + '</div>';
     }).join('');
-    return '<div class="wz-top"><span class="mono">Your week</span><button type="button" class="wz-back" data-step="0">Start over</button></div><p class="wk-total">' + W.n + (W.n === 1 ? ' person' : ' people') + ', ' + (W.pay === 'mixed' ? 'mixed pay' : W.pay + ' pay') + '. About <b>' + hrs() + ' hours a week</b> on the team. The rest is the work.</p><div class="wk">' + cols + '</div>' +
+    return '<div class="wz-top"><span class="mono">Your week</span><button type="button" class="wz-back" data-step="0">Start over</button></div><p class="wk-total">' + W.n + (W.n === 1 ? ' person' : ' people') + (W.hourly === 'none' ? ', all salaried' : W.hourly === 'all' ? ', all hourly' : ', some hourly') + '. About <b>' + hrs() + ' hours a week</b> on the team. The rest is the work.</p><div class="wk">' + cols + '</div>' +
       '<div class="wk-more"><div><b>Every month</b>First Tuesday, 1 hour: approve expenses, check goals, ask how the work and the team are going.</div><div><b>Every quarter</b>First Wednesday of the quarter, 1 hour: set the next three months with the team.</div></div>' +
       '<div class="wz-foot"><span class="hinttxt">The cycles and the same-day calls are on the left. They happen when they happen.</span><button type="button" class="btn btn-gold btn-sm" data-ics>Add to my calendar</button></div>';
   }
@@ -588,9 +588,9 @@ var STORIES = {
     function ev(title, dow, h, m, mins, rule, desc){ var d = next(dow), e = new Date(d); e.setHours(h, m + mins); i += 1; L.push('BEGIN:VEVENT', 'UID:mv-week-' + i + '-' + Date.now() + '@vanderbilt.edu', 'DTSTAMP:' + st(now, now.getHours(), now.getMinutes()) + 'Z', 'DTSTART:' + st(d, h, m), 'DTEND:' + st(e, e.getHours(), e.getMinutes()), 'RRULE:' + rule, 'SUMMARY:' + title, 'DESCRIPTION:' + desc, 'END:VEVENT'); }
     var per = split(); Object.keys(per).forEach(function(d){ d = +d; ev('1:1s (' + per[d] + ' x 30 min)', d, 10, 0, 30 * per[d], 'FREQ=WEEKLY;BYDAY=' + BY[d], 'A short 1:1 with each person. The one place people tell you the truth while it is still small.'); });
     ev('Look at work before it is due', checkDay(), 14, 0, 45, 'FREQ=WEEKLY;BYDAY=' + BY[checkDay()], 'What is due this week, and where it stands. Checking work is the job.');
-    ev('Approve timecards and time off', 0, 8, 30, 15, PAY[W.pay][1], 'People are paid right only if you approve on time.');
+    if(hourly()) ev('Approve timecards', 0, 8, 30, 15, 'FREQ=WEEKLY;BYDAY=MO', 'Hourly staff are paid right only if you approve on time. A Monday pass covers every pay period.');
     ev('Feedback and thanks', fbDay(), 15, 30, 15, 'FREQ=WEEKLY;BYDAY=' + BY[fbDay()], 'One specific thank-you and one piece of feedback, by name.');
-    ev('Answer what is waiting on me', 0, 16, 30, 10, 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR', 'Questions, approvals, and requests. Nobody waits on you to move.');
+    ev('Clear what is waiting on me', 0, 16, 30, 10, 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR', 'Questions, time-off requests, and approvals. Nobody waits on you to move.');
     ev('Expenses, goals, and a step back', 1, 13, 0, 60, 'FREQ=MONTHLY;BYDAY=1TU', 'Approve expenses, check goals, ask how the work and the team are going.');
     ev('Quarterly goals with the team', 2, 13, 0, 60, 'FREQ=MONTHLY;INTERVAL=3;BYDAY=1WE', 'Set the next three months with the team.');
     L.push('END:VCALENDAR');
@@ -599,7 +599,7 @@ var STORIES = {
   box.addEventListener('click', function(e){
     var b;
     if((b = e.target.closest('button[data-n]'))){ W.n = +b.getAttribute('data-n'); W.step = 1; render(); return; }
-    if((b = e.target.closest('button[data-pay]'))){ W.pay = b.getAttribute('data-pay'); W.step = 2; render(); return; }
+    if((b = e.target.closest('button[data-hourly]'))){ W.hourly = b.getAttribute('data-hourly'); W.step = 2; render(); return; }
     if((b = e.target.closest('button[data-heavy]'))){ W.heavy = +b.getAttribute('data-heavy'); W.step = 3; save(); render(); progDone('year'); return; }
     if((b = e.target.closest('button[data-step]'))){ W.step = +b.getAttribute('data-step'); render(); return; }
     if(e.target.closest('button[data-ics]')) ics();
@@ -1196,7 +1196,7 @@ var CATS = { task:{ name:'Get the work done', short:'Task-oriented' }, relations
   box.addEventListener('click', function(e){
     var b = e.target.closest('button[data-choice]'); if(!b) return;
     var c = b.getAttribute('data-choice');
-    set('assess', JSON.stringify({ status:c, at:new Date().toISOString() }));
+    set('assess', JSON.stringify({ status:c, at:new Date().toISOString() })); if(c === 'reviewed') set('assess-gate', 'done');
     render(c); progDone('survey');
   });
   window.assessLoad = function(){ var raw = get('assess'); if(!raw) return; try{ var d = JSON.parse(raw); if(d && d.status) render(d.status); }catch(e){} };
@@ -1272,6 +1272,19 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   if(reduce || !('IntersectionObserver' in window)){ art.classList.add('play'); return; }
   var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && e.intersectionRatio > .3){ art.classList.add('play'); io.disconnect(); } }); }, { threshold:[.3] });
   io.observe(art);
+})();
+/* ══════════ before you start: take the assessment. Shown until the manager says it is done. ══════════ */
+(function(){
+  var m = $('#assessModal'); if(!m) return;
+  function assessed(){ try{ var d = JSON.parse(get('assess') || 'null'); if(d && d.status === 'reviewed') return true; }catch(e){} return get('assess-gate') === 'done'; }
+  var snoozed = false; try{ snoozed = sessionStorage.getItem('mv-assess-snooze') === '1'; }catch(e){}
+  if(assessed() || snoozed) return;
+  function hide(){ m.classList.remove('open'); document.body.classList.remove('oracle-open'); window.setTimeout(function(){ m.hidden = true; }, reduce ? 0 : 260); }
+  m.hidden = false; if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); }); document.body.classList.add('oracle-open');
+  var first = $('#assessOpen', m); if(first) first.focus();
+  $('#assessDone', m).addEventListener('click', function(){ set('assess-gate', 'done'); hide(); });
+  $('#assessLater', m).addEventListener('click', function(){ try{ sessionStorage.setItem('mv-assess-snooze', '1'); }catch(e){} hide(); });
+  document.addEventListener('keydown', function(e){ if(!m.hidden && e.key === 'Escape'){ try{ sessionStorage.setItem('mv-assess-snooze', '1'); }catch(e2){} hide(); } });
 })();
 /* ══════════ build check: if a newer build is published, say so instead of serving a stale page quietly ══════════ */
 (function(){
