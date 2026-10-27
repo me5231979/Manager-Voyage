@@ -306,7 +306,7 @@ window.MV_PROGRAM = {
      marks the routes that cannot wait. Routing language to be confirmed by PCB. */
   contacts: [
     { role: 'Your HCM', key: 'hcm',
-      desc: 'Embedded in most business units. Your first call for an immediate HR issue: pay, hiring, a performance concern, a policy question, a form you are not sure about.',
+      desc: 'Embedded in most business units. Positions, recruitment and hiring; payroll and timecards; assignments; the first step of leave management; costing; student and faculty hiring and assignments; document records and reporting.',
       when: 'The same day a question comes up, before you act on your own. When you are unsure, start here.',
       how: 'Email, a call, or a walk down the hall. Give the facts and what you need by when.' },
     { role: 'Your Engagement Consultant (EC)', key: 'engagementConsultants',
