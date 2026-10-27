@@ -337,7 +337,7 @@ function progRender(changedKey, nowDone){
     if(dot){ dot.classList.toggle('done', done); var base = dot.getAttribute('data-name') || s.name; dot.setAttribute('aria-label', base + ', activity ' + (done ? 'done' : 'not done')); dot.setAttribute('title', base + ' · ' + (done ? 'done' : 'not yet')); }
     $$('.md-btn[data-prog="' + s.k + '"]').forEach(function(b){
       b.setAttribute('aria-pressed', done ? 'true' : 'false');
-      var sp = b.querySelector('span'); if(sp) sp.textContent = done ? 'Completed' : 'Done with this section';
+      var sp = b.querySelector('span'); if(sp) sp.textContent = done ? 'Completed' : (b.getAttribute('data-label') || 'Done with this section');
     });
   });
   if(changedKey && progStatus){ var sec = SECTIONS.filter(function(s){ return s.k === changedKey; })[0]; if(sec) progStatus.textContent = (nowDone ? 'Activity complete: ' : 'Activity reopened: ') + sec.name + '. ' + doneN + ' of ' + total + ' complete.'; }
@@ -530,7 +530,7 @@ var LIVE = {
 function liveHTML(k){
   var L = LIVE[k];
   return '<div class="live" data-live="' + k + '"><div class="live-scene"><div class="live-avatar"><i class="ring r1"></i><i class="ring r2"></i><span>' + L.initial + '</span></div>' +
-    '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p>' + esc(L.brief) + '</p><p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Needs a microphone &middot; Optional</p></div></div>' +
+    '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p>' + esc(L.brief) + '</p><p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Microphone</p></div></div>' +
     '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-state" role="status" aria-live="polite"></span></div>' +
     '<div class="live-log" aria-live="polite"></div><div class="live-score" hidden></div></div>';
 }
@@ -610,13 +610,13 @@ $$('[data-scn]').forEach(buildScenario);
 /* a stepper of scenarios, one at a time; done when the best response is found in each */
 var CALL_SETS = { jobs:['task','relations','change','external'] };
 var CALL_HEADS = { task:'Task-oriented · Get the work done', relations:'Relations-oriented · Take care of your people', change:'Change-oriented · Make things better', external:'External · Connect your team' };
-var CALL_PROG = { jobs:{ prog:'yourcall', noun:'situations', status:'#jobsStatus', narr:'yourcall/s' } };
+var CALL_PROG = { jobs:{ prog:'yourcall', noun:'conversations', status:'#jobsStatus', narr:'yourcall/s' } };
 function buildCalls(el){
   var name = el.getAttribute('data-calls'), keys = CALL_SETS[name]; if(!keys) return;
   var cfg = CALL_PROG[name], status = $(cfg.status), found = {}, cur = 0;
   el.innerHTML = keys.map(function(k, i){
     var sc = SCENARIOS[k];
-    return '<div class="cq' + (i === 0 ? ' cur' : '') + '" data-k="' + k + '"><p class="cq-h">' + (i + 1) + ' of ' + keys.length + ' &middot; ' + esc(sc.h || CALL_HEADS[k] || '') + subBtn(cfg.narr + (i + 1)) + '</p><div class="scn" data-scn="' + k + '"></div>' + (LIVE[k] ? liveHTML(k) : '') + '<div class="cq-nav">' +
+    return '<div class="cq' + (i === 0 ? ' cur' : '') + '" data-k="' + k + '"><p class="cq-h">' + (i + 1) + ' of ' + keys.length + ' &middot; ' + esc(sc.h || CALL_HEADS[k] || '') + subBtn(cfg.narr + (i + 1)) + '</p>' + (LIVE[k] ? liveHTML(k) + '<details class="try-fold-cq"><summary>No microphone? Tap the response you would give instead</summary><div class="scn" data-scn="' + k + '"></div></details>' : '<div class="scn" data-scn="' + k + '"></div>') + '<div class="cq-nav">' +
       (i < keys.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1" hidden>Next situation<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '') +
       (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + '</div></div>';
   }).join('');
@@ -798,6 +798,7 @@ var IDEAS = [
     var L = LIVE[root.getAttribute('data-live')];
     el(root, '.live-log').innerHTML = '<p class="live-off">' + esc(why) + ' You can still practice on the ElevenLabs page, or use the tap version above. <a href="https://elevenlabs.io/app/talk-to?agent_id=' + L.agent + '" target="_blank" rel="noopener">Talk to ' + esc(L.who) + ' in a new tab</a>.</p>';
     el(root, '[data-live-start]').hidden = false; el(root, '[data-live-end]').hidden = true;
+    var fold = root.parentNode && (root.parentNode.querySelector('.try-fold, .try-fold-cq')); if(fold){ fold.classList.add('open'); if(fold.tagName === 'DETAILS') fold.open = true; }
   }
   function start(root){
     var k = root.getAttribute('data-live'), L = LIVE[k];
@@ -852,7 +853,7 @@ var IDEAS = [
         '<div class="idea-core"><p class="blk"><b>What it is</b>' + esc(it.what) + '</p><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
         (LIVE[IDEA_SCN[i]] ? liveHTML(IDEA_SCN[i]) : '') +
         '<details class="idea-more"><summary>Why it works, what it looks like, and what it brings</summary><div class="idea-more-grid"><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p></div></details>' +
-        '<div class="try"><p class="cq-h"><span class="mono">Apply it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + '<span class="try-note">Show you understood the idea. Tap the response you would give, then try the other two.</span></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
+        '<div class="try' + (LIVE[IDEA_SCN[i]] ? ' try-fold' : '') + '"><p class="cq-h"><span class="mono">Apply it</span><span class="try-t">' + esc(SCENARIOS[IDEA_SCN[i]].h) + '</span>' + subBtn('safe/m' + (i + 1)) + '<span class="try-note">' + (LIVE[IDEA_SCN[i]] ? 'No microphone, or no time to talk? Tap the response you would give, then try the other two. It counts the same.' : 'Show you understood the idea. Tap the response you would give, then try the other two.') + '</span></p><div class="scn" data-scn="' + IDEA_SCN[i] + '"></div></div>' +
         '<div class="idea-nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost btn-sm" data-prev="1">Back</button>' : '') + (i < IDEAS.length - 1 ? '<button type="button" class="btn btn-primary btn-sm" data-next="1">Next idea<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>' : '<span class="hinttxt">All five read. Turn the page for what Vanderbilt will ask of you.</span>') + '</div></div>';
     }).join('');
   function show(i){
@@ -868,6 +869,7 @@ var IDEAS = [
   $$('.scn[data-scn]', box).forEach(buildScenario);
   window.markIdeaMoment = function(k){ found[k] = 1; paint(); };
   box.addEventListener('click', function(e){
+    var fh = e.target.closest('.try.try-fold > .cq-h'); if(fh && !e.target.closest('button')){ fh.parentNode.classList.toggle('open'); return; }
     var b = e.target.closest('.scn button[data-o]'); if(b){ var k = b.closest('.scn').getAttribute('data-scn'); if(SCENARIOS[k].opts[parseInt(b.getAttribute('data-o'), 10)].best){ found[k] = 1; paint(); } return; }
     var t = e.target.closest('button[data-tab]'); if(t){ show(parseInt(t.getAttribute('data-tab'), 10)); return; }
     if(e.target.closest('button[data-next]')){ show(Math.min(Math.max(cur, 0) + 1, IDEAS.length - 1)); return; }
@@ -937,12 +939,12 @@ var IDEAS = [
   var HABITS = [['Task-oriented', ['Clarifying', 'Planning', 'Monitoring operations', 'Problem solving']], ['Relations-oriented', ['Supporting', 'Developing', 'Recognizing', 'Empowering']],
     ['Change-oriented', ['Advocating change', 'Envisioning change', 'Encouraging innovation', 'Facilitating collective learning']], ['External', ['Networking', 'External monitoring', 'Representing']]];
   box.innerHTML = HABITS.map(function(g){ return '<span class="hp-job">' + g[0] + '</span>' + g[1].map(function(h){ return '<button type="button" data-habit="' + esc(h) + '" aria-pressed="false">' + esc(h) + '</button>'; }).join(''); }).join('');
-  var BASE = 'I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].';
+  var BASE = 'I just finished the Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].';
   function paint(h){
     $$('button[data-habit]', box).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-habit') === h ? 'true' : 'false'); });
     if(!h) return;
     var msg = BASE.replace('[habit]', h.toLowerCase());
-    if(p) p.textContent = 'You picked: ' + h.toLowerCase() + '. Attach it to something you already do every week, such as your Monday 1:1s or your Friday wrap-up, and do it once, on purpose. Notice what happened.';
+    if(p) p.textContent = 'You picked ' + h.toLowerCase() + '. Do it once this week, on purpose, in a meeting you already have.';
     if(tell) tell.textContent = '\u201c' + msg + '\u201d';
     if(copy) copy.setAttribute('data-copytext', msg);
   }
@@ -985,7 +987,7 @@ var TURNS = [
   { sel:'#relations .flip-grid', prog:'relations', text:'Flip each card' },
   { sel:'#change .flip-grid',    prog:'change',    text:'Flip each card' },
   { sel:'#external .flip-grid',  prog:'external',  text:'Flip each card' },
-  { sel:'#jobsCalls',   prog:'yourcall', text:'Try all three responses in each' },
+  { sel:'#jobsCalls',   prog:'yourcall', text:'Have all four conversations' },
   { sel:'#meaChoice',   prog:'survey',   text:'Tap what is true for you' },
   { sel:'#quizBox',     prog:'quiz',     text:'Four of five finishes the course' },
   { sel:'#tell-leader', prog:'nextstep', text:'Copy the message, send it, then mark this done' }

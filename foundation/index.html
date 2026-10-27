@@ -43,7 +43,11 @@
 <link rel="stylesheet" href="../assets/css/vvo.css?v=1" />
 <style>
 /* ── the Voyage pattern on this course ── */
-.v-hero .hero-media{ z-index:0; } .v-hero .hero-media::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(28,28,28,.25) 0%, rgba(28,28,28,.5) 45%, #1C1C1C 100%); }
+.v-hero .hero-media{ z-index:0; overflow:hidden; } .v-hero .hero-media::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(28,28,28,.08) 0%, rgba(28,28,28,.3) 50%, #1C1C1C 100%); }
+.v-hero .hero-still{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 40%; opacity:.82; filter:saturate(1.05) brightness(1.04); transform-origin:62% 45%; animation:heroBurns 34s ease-in-out infinite alternate; will-change:transform; }
+.v-hero .hero-scrim{ background:rgba(28,28,28,.18); }
+@keyframes heroBurns{ from{ transform:scale(1.02) translate3d(0,0,0); } to{ transform:scale(1.14) translate3d(-2.5%,-2%,0); } }
+@media (prefers-reduced-motion:reduce){ .v-hero .hero-still{ animation:none; transform:scale(1.04); } }
 /* each topic: the heading and the why beside the activity, supporting detail full width below */
 @media (min-width:1001px){
   .v-stage{ align-items:start; row-gap:clamp(16px,2.6vh,28px); grid-template-rows:auto auto minmax(0,1fr); }
@@ -154,11 +158,11 @@
 @media (max-width:800px){ .idea-more-grid{ grid-template-columns:1fr; } }
 /* practice it live: the scene, the state ring, the transcript, the score */
 .calls .live{ margin-top:12px; }
-.live{ margin-top:18px; border:1px solid var(--bdg); border-radius:var(--r); background:linear-gradient(180deg, rgba(207,174,112,.08), rgba(28,28,28,0) 60%), var(--card2); padding:clamp(16px,2vw,24px); }
-.live-scene{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:18px; align-items:center; }
+.live{ margin-top:14px; border:1px solid var(--bdg); border-radius:var(--r); background:linear-gradient(180deg, rgba(207,174,112,.08), rgba(28,28,28,0) 60%), var(--card2); padding:clamp(14px,1.6vw,20px); }
+.live-scene{ display:grid; grid-template-columns:84px minmax(0,1fr); gap:16px; align-items:center; }
 @media (max-width:600px){ .live-scene{ grid-template-columns:72px 1fr; } }
-.live-avatar{ position:relative; width:96px; height:96px; display:grid; place-items:center; }
-.live-avatar span{ position:relative; z-index:2; width:72px; height:72px; border-radius:50%; background:var(--vu-black); border:2px solid var(--vu-gold); color:var(--vu-gold); font-family:var(--serif); font-size:2rem; display:grid; place-items:center; }
+.live-avatar{ position:relative; width:84px; height:84px; display:grid; place-items:center; }
+.live-avatar span{ position:relative; z-index:2; width:64px; height:64px; border-radius:50%; background:var(--vu-black); border:2px solid var(--vu-gold); color:var(--vu-gold); font-family:var(--serif); font-size:2rem; display:grid; place-items:center; }
 .live-avatar .ring{ position:absolute; inset:0; border-radius:50%; border:2px solid var(--vu-gold); opacity:0; transform:scale(.75); }
 .live[data-mode="speaking"] .ring{ animation:liveRing 1.6s ease-out infinite; }
 .live[data-mode="speaking"] .ring.r2{ animation-delay:.8s; }
@@ -167,9 +171,9 @@
 @keyframes liveRing{ 0%{ opacity:.7; transform:scale(.78); } 100%{ opacity:0; transform:scale(1.25); } }
 @keyframes liveBreath{ 0%,100%{ transform:scale(.88); opacity:.45; } 50%{ transform:scale(.96); opacity:.75; } }
 @keyframes liveSpin{ to{ transform:rotate(360deg) scale(.9); } }
-.live-who h4{ font-family:var(--serif); font-weight:400; font-size:clamp(1.3rem,1.6vw,1.7rem); line-height:1.15; margin:4px 0 6px; }
+.live-who h4{ font-family:var(--serif); font-weight:400; font-size:clamp(1.2rem,1.4vw,1.5rem); line-height:1.15; margin:2px 0 4px; }
 .live-who h4 em{ font-family:var(--serif-i); font-style:italic; color:var(--eyebrow); }
-.live-who p{ color:var(--tx2); font-size:.95rem; max-width:62ch; }
+.live-who p{ color:var(--tx2); font-size:.93rem; line-height:1.45; max-width:62ch; }
 .live-who .live-meta{ margin-top:6px; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
 .live-ctl{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; }
 .live-state{ font-size:.9rem; color:var(--tx2); }
@@ -194,6 +198,20 @@
 .live-badge{ display:inline-block; margin-left:6px; padding:2px 7px; border-radius:999px; background:var(--eyebrow); color:var(--btn-tx); font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; vertical-align:middle; }
 .idea-tabs button[aria-selected="true"] .live-badge{ background:var(--vu-black); color:var(--eyebrow); }
 .build-bar{ position:fixed; left:50%; bottom:92px; transform:translateX(-50%); z-index:60; display:flex; align-items:center; gap:14px; background:var(--vu-black); border:1px solid var(--eyebrow); border-radius:999px; padding:8px 10px 8px 18px; color:var(--tx); font-size:.9rem; box-shadow:0 12px 40px rgba(0,0,0,.5); max-width:min(92vw, 640px); }
+/* when a live conversation exists, the tap version folds away under it */
+.try.try-fold{ margin-top:12px; border-top:1px solid var(--bd); }
+.try.try-fold > .cq-h{ cursor:pointer; padding:10px 0; }
+.try.try-fold > .cq-h::after{ content:"+"; margin-left:auto; color:var(--eyebrow); font-family:var(--cond); font-size:1.2rem; line-height:1; }
+.try.try-fold.open > .cq-h::after{ content:"\2212"; }
+.try.try-fold > .scn{ display:none; }
+.try.try-fold.open > .scn{ display:block; }
+.try.try-fold > .cq-h .try-t{ font-size:1rem; }
+.try.try-fold > .cq-h .try-note{ font-weight:400; color:var(--tx3); }
+.try-fold-cq{ margin-top:12px; border-top:1px solid var(--bd); }
+.try-fold-cq summary{ list-style:none; cursor:pointer; padding:10px 0; display:flex; align-items:center; font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.try-fold-cq summary::-webkit-details-marker{ display:none; }
+.try-fold-cq summary::after{ content:"+"; margin-left:auto; font-size:1.2rem; line-height:1; }
+.try-fold-cq[open] summary::after{ content:"\2212"; }
 /* five cities: the dotted campus network map */
 .us-map .pin .badge{ fill:var(--vu-black); stroke:var(--vu-gold); stroke-width:1.6; }
 .us-map .pin .ic{ fill:none; stroke:var(--vu-gold); stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
@@ -478,7 +496,7 @@ html.paged .qz{ padding:10px 14px; margin-bottom:8px; }
 html.paged .qz legend{ font-size:.95rem; margin-bottom:8px; }
 html.paged .qz .opts{ gap:6px; }
 html.paged .qz .opts label{ min-height:36px; padding:6px 12px; font-size:.9rem; }
-html.paged #nextstep .hw-list{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:0 28px; border-top:0; margin-top:10px; }
+html.paged .ns-steps{ display:grid; gap:14px; align-content:start; } html.paged .ns-steps .evidence{ margin-top:0; } .ns-msg{ font-family:var(--serif-i); font-size:1.12rem; line-height:1.4; margin-top:8px; } .ns-ctl{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:12px; } .ns-ctl .hinttxt{ margin:0; }
 html.paged #nextstep .hw-step{ padding:10px 0; grid-template-columns:56px 1fr auto; gap:8px 14px; }
 html.paged #nextstep .hw-step .hw-no{ font-size:1.7rem; }
 html.paged #nextstep .hw-step h3{ font-size:1.05rem; }
@@ -1038,7 +1056,7 @@ html.paged .idea .try .scn{ margin-top:0; }
 <!-- ═══ 1 HERO ═══ -->
 <section class="hero v-hero th-dark" aria-label="Welcome">
   <div class="hero-media" aria-hidden="true">
-    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="../assets/img/hero-poster.jpg" aria-hidden="true"><source src="../assets/video/hero-montage.mp4" type="video/mp4" /></video>
+    <img class="hero-still" src="../assets/img/campus/kirkland-skyline.jpg" alt="" width="1800" height="942" decoding="async" fetchpriority="high" />
     <div class="hero-scrim"></div>
   </div>
   <div class="wrap v-hero-in">
@@ -1284,7 +1302,6 @@ html.paged .idea .try .scn{ margin-top:0; }
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Problem solving</h4><span class="def">Fix it. When it breaks twice, find the cause.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 4 · Problem solving · Fix it · Address issues</span><p class="hb no"><b>Stop</b>The report rebuilt yourself because it is faster.</p><p class="hb yes"><b>Do</b>Cause found, handoff changed, team told.</p></span></button></div>
       </div>
     </div>
-    <p class="hinttxt" style="margin-top:12px">Micro modules for this job: Performance Management Foundations for Managers, UKG for managers, Oracle Cloud exempt time off.</p>
   </div>
 </section>
 <section id="relations" class="job-pane" data-job="relations" role="tabpanel" aria-label="Relations-oriented: take care of your people" hidden>
@@ -1307,7 +1324,6 @@ html.paged .idea .try .scn{ margin-top:0; }
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Empowering</h4><span class="def">Trust them. Hand over the decision, not just the task.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 8 · Empowering · Trust them · Empower others</span><p class="hb no"><b>Stop</b>A new process set without asking the team.</p><p class="hb yes"><b>Do</b>Ask the team first; let their answer change the decision.</p></span></button></div>
       </div>
     </div>
-    <p class="hinttxt" style="margin-top:12px">Micro modules for this job: FMLA, Giving feedback, Flexible work arrangements.</p>
   </div>
 </section>
 <section id="change" class="job-pane" data-job="change" role="tabpanel" aria-label="Change-oriented: make things better" hidden>
@@ -1330,7 +1346,6 @@ html.paged .idea .try .scn{ margin-top:0; }
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Facilitating collective learning</h4><span class="def">Look back. Ten minutes after big work.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 12 · Facilitating collective learning · Look back · Lead change</span><p class="hb no"><b>Stop</b>On to the next thing.</p><p class="hb yes"><b>Do</b>What worked, what did not, what changes. Written where the next person finds it.</p></span></button></div>
       </div>
     </div>
-    <p class="hinttxt" style="margin-top:12px">Micro modules for this job: The mission and the vision, Areas of focus.</p>
   </div>
 </section>
 <section id="external" class="job-pane" data-job="external" role="tabpanel" aria-label="External: connect your team" hidden>
@@ -1353,7 +1368,6 @@ html.paged .idea .try .scn{ margin-top:0; }
         <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Know the campus network</h4><span class="def">Five cities, four states. Rules can differ by location.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Know the campus network</span><p class="hb no"><b>Stop</b>Assuming what works in Nashville works everywhere.</p><p class="hb yes"><b>Do</b>Know where each person sits. On leave, pay, or hours, tell your HCM the location first.</p></span></button></div>
       </div>
     </div>
-    <p class="hinttxt" style="margin-top:12px">Micro modules for this job: How we work together, Oracle Recruiting and Onboarding, Compensation cycle and merit basics.</p>
   </div>
 </section>
   </div>
@@ -1368,12 +1382,12 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="v-rail" data-lesson="4"><span>Topic 4 of 6 &middot; Your call</span></div>
     <div class="v-stage wide-act">
       <div class="v-copy">
-        <h2 class="v-h">Four situations, one per <em>category</em>.</h2>
-        <p class="v-why">Try all three responses in each. The consequences teach more than the right answer.</p>
+        <h2 class="v-h">Four conversations, one per <em>category</em>.</h2>
+        <p class="v-why">Have each one out loud. You are scored on what you actually say, not on what you would have picked.</p>
       </div>
       <div class="v-act">
         <div class="calls" id="jobsCalls" data-calls="jobs"></div>
-        <p class="drill-status" id="jobsStatus" role="status" aria-live="polite">0 of 4 situations.</p>
+        <p class="drill-status" id="jobsStatus" role="status" aria-live="polite">0 of 4 conversations.</p>
       </div>
     </div>
   </div>
@@ -1393,7 +1407,7 @@ html.paged .idea .try .scn{ margin-top:0; }
             <p>Six statements, rated from never to consistently: create clarity, coach and develop, build trust, empower others, address issues, lead change. Your score came by email from the Futures Learning Hub. Search your inbox for it.</p>
           </div>
         </div>
-        <div class="week" style="margin-top:12px"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. Over this course and the micro modules that follow, the aim is a higher rating on all six at 90 days, and again at the optional six-month pulse.</div>
+        <div class="week" style="margin-top:12px"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. The aim is a higher rating on all six when you take it again in 90 days.</div>
             </div>
       <div class="v-act">
       <div class="route reveal" id="meaBox">
@@ -1429,28 +1443,28 @@ html.paged .idea .try .scn{ margin-top:0; }
     <div class="v-rail" data-lesson="6"><span>Topic 6 of 6 &middot; Next steps</span></div>
     <div class="v-stage">
       <div class="v-copy">
-        <h2 class="v-h">What to do, and <em>when</em>.</h2>
-        <p class="v-why">Nobody builds every habit at once. Pick one, attach it to something you already do every week, and let the rest come with the micro modules.</p>
-    <div class="habit-box v-side reveal"><span class="mono">Step 1 &middot; Pick the one habit you will practice this week</span><div class="habit-pick" id="habitPick" role="group" aria-label="Pick one habit"></div></div>
+        <h2 class="v-h">One habit. <em>This week.</em></h2>
+        <p class="v-why">Three steps, ten minutes. Pick a habit, tell your manager, mark the course complete.</p>
+    <div class="habit-box v-side reveal"><span class="mono">Step 1 &middot; Pick one habit</span><div class="habit-pick" id="habitPick" role="group" aria-label="Pick one habit"></div></div>
       </div>
-      <div class="v-act">
+      <div class="v-act ns-steps">
     <div class="evidence reveal" id="tell-leader">
       <span class="e-label">Step 2 &middot; Tell your manager</span>
-      <p>Pick your habit on the left, then copy this, fill in the date, and send it today. <em id="tellText">&ldquo;I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].&rdquo;</em></p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:center">
-        <button type="button" class="btn btn-ghost btn-sm" id="copyTell" data-copytext="I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].">Copy the message</button>
-        <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="nextstep" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Done with this section</span></button>
+      <p id="ns2p">Pick a habit on the left. It drops into this message.</p>
+      <p class="ns-msg"><em id="tellText">&ldquo;I just finished the Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].&rdquo;</em></p>
+      <div class="ns-ctl">
+        <button type="button" class="btn btn-gold btn-sm" id="copyTell" data-copytext="I just finished the Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].">Copy the message</button>
+        <span class="hinttxt">Fill in the date, send it today.</span>
       </div>
     </div>
-    <p class="hinttxt" id="oracleStripText" style="margin-top:12px">When you open this course from Oracle Learning, your completion is recorded automatically once every activity is done. Outside Oracle, progress stays in this browser.</p>
+    <div class="evidence reveal">
+      <span class="e-label">Step 3 &middot; Mark the course complete</span>
+      <p>That is the whole course. Come back in 90 days and take the self-assessment again to see what moved.</p>
+      <div class="ns-ctl">
+        <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="nextstep" data-label="Mark complete" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Mark complete</span></button>
       </div>
     </div>
-    <div class="hw-list reveal" style="margin-top:12px">
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span><div><h3>Mark this course complete</h3><p>Then open the first micro module listed under Up next.</p></div><span class="chip">Today</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span><div><h3>Practice one habit this week</h3><p id="ns2p">Attach it to something you already do every week, and do it once, on purpose.</p></div><span class="chip">This week</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span><div><h3>The Systems and Vanderbilt &amp; Nashville modules</h3><p>UKG and Oracle, and the mission. The first micro modules in Oracle Learning.</p></div><span class="chip">By Day 30</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">04</span><div><h3>Compliance courses, then the People and Processes modules</h3><p>Compliance by its deadlines, then the people and process modules.</p></div><span class="chip">By Day 60</span></div>
-      <div class="hw-step"><span class="hw-no" aria-hidden="true">05</span><div><h3>Take the assessment again</h3><p>The same six statements, 90 days on. Compare with where you started.</p></div><span class="chip">90 days after</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1459,16 +1473,14 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="v-rail" data-lesson="6"><span>Keep learning &middot; The last page</span></div>
     <h2 class="v-h sm">What to take <em>next</em>.</h2>
-    <p class="v-why">Micro modules first: Systems and Vanderbilt &amp; Nashville by Day 30, People and Processes by Day 60. Then one item from the other tabs a month, on the habit you are working on.</p>
+    <p class="v-why">One item a month, on the habit you are working on. That is plenty.</p>
     <a class="pdf-card reveal" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener"><span class="pdf-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>The printable guide (PDF)</b><span class="pdf-sub">Every detail of this course on paper: what changed, the five ideas, year one, who handles what, the four categories, your results, and this list. Branded, letter size, links live.</span></span><span class="pdf-go">Open the PDF</span></a>
     <div class="learn-tabs" role="tablist" aria-label="Keep learning">
-      <button type="button" role="tab" aria-selected="true" data-ltab="comp">Micro Modules</button>
-      <button type="button" role="tab" aria-selected="false" data-ltab="oracle">More in Oracle Learning</button>
+      <button type="button" role="tab" aria-selected="true" data-ltab="oracle">In Oracle Learning</button>
       <button type="button" role="tab" aria-selected="false" data-ltab="outside">Outside Vanderbilt</button>
       <button type="button" role="tab" aria-selected="false" data-ltab="watch">Watch</button>
     </div>
-    <div class="learn-pane cur" data-lpane="comp"><div class="learn-comp" id="learnComp"></div></div>
-    <div class="learn-pane" data-lpane="oracle"><div class="learn-top" id="learnTop"></div></div>
+    <div class="learn-pane cur" data-lpane="oracle"><div class="learn-top" id="learnTop"></div></div>
     <div class="learn-pane" data-lpane="outside"><div class="learn-grid" id="learnGrid"></div></div>
     <div class="learn-pane" data-lpane="watch">
     <div class="learn-media">
@@ -1481,7 +1493,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     <p class="hinttxt" style="margin-top:12px">Oracle Learning links open in a new tab. Podcasts and videos are public and free.</p>
     <div class="wrapup reveal">
       <h2 class="metal">Now manage it the <em>same</em> way.</h2>
-      <p>Four categories, six behaviors, one habit this week, and your micro modules next. Take the first one today.</p>
+      <p>Four categories, six behaviors, one habit this week. Start it today.</p>
       <a class="btn btn-gold" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener">Download the printable guide</a>
       <p class="send-sign">The quality of Vanderbilt&rsquo;s future depends on the quality of its managers today.</p>
     </div>
@@ -1495,7 +1507,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="fcenter">
       <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.a</span></p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.27.c</span></p>
       <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The four categories and their behaviors are Yukl&rsquo;s taxonomy (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. About the program</p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>
@@ -1522,7 +1534,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="oracle-modal">
     <span class="mono">Foundation complete</span>
     <h2 id="oracleTitle">You have completed the foundation.</h2>
-    <p id="oracleBody">Every activity is done. Mark the course complete on My voyage; your micro modules are next. The assessment comes back around 90 days after you complete Manager Voyage.</p>
+    <p id="oracleBody">Every activity is done. Practice your habit this week, and take the self-assessment again in 90 days.</p>
     <div class="oracle-actions">
       <button type="button" class="btn btn-gold" id="oracleGo">Done</button>
       <button type="button" class="btn btn-ghost btn-sm" id="oracleLater">Stay here</button>
@@ -1539,6 +1551,6 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20261027a"></script>
+<script src="app.js?v=20261027c"></script>
 </body>
 </html>
