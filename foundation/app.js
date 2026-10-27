@@ -138,7 +138,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20260912p';
+var MEDIA_V = '20261027o';
 /* the course videos carry their own narration: nothing else should talk over them, and they should not talk over anything else */
 function pauseVideos(){ $$('video').forEach(function(v){ if(v.id !== 'heroVideo' && !v.paused){ try{ v.pause(); }catch(e){} } }); }
 function narrPlay(k){
