@@ -56,6 +56,8 @@ b. Office 365 Outlook "Send an email (V2)":
    Body = outputs('record')?['emailHtml']   (switch the body editor to code view with the </> icon before inserting, so the HTML is not escaped)
    From (send as) = the People, Culture and Belonging shared mailbox, if I have send-as rights on it; otherwise leave it as me and tell me.
 
+Optional, only if AI Builder is available in this environment: before the email, add "Create text with GPT using a prompt" with Prompt = outputs('record')?['aiPrompt'], and set the email Body to replace(outputs('record')?['emailHtml'], '<!--PERSONAL_NOTE-->', concat('<p style="margin:12px 0 0;font-size:15px;line-height:1.5;border-left:3px solid #CFAE70;padding-left:12px;">', <the GPT step's text output>, '</p>')). If AI Builder is not available, skip this and tell me.
+
 Case "course_complete":
 a. SharePoint "Get items" from the list with Filter Query:
    Email eq 'outputs('record')?['email']' and Phase eq 'initial'

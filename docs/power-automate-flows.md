@@ -38,7 +38,18 @@ Every record is a JSON object posted to one URL. Samples are in
   design in the flow. Switch the body editor to code view (the `</>` icon) before pasting the expression
   so the HTML is not escaped.
 
-### Case `course_complete`
+#### Optional: a note written for each learner
+
+The record carries `aiPrompt`, a ready prompt built from the learner's answers, and the email HTML holds an
+invisible marker `<!--PERSONAL_NOTE-->` just under the overall narrative. To add a written-for-them paragraph:
+
+1. Before "Send an email", add the AI Builder action **Create text with GPT using a prompt** (needs AI Builder
+   credits on the environment). Prompt: `outputs('record')?['aiPrompt']`.
+2. In "Send an email", set Body to:
+   `replace(outputs('record')?['emailHtml'], '<!--PERSONAL_NOTE-->', concat('<p style="margin:12px 0 0;font-size:15px;line-height:1.5;border-left:3px solid #CFAE70;padding-left:12px;">', outputs('Create_text_with_GPT_using_a_prompt')?['body']?['responsev2']?['predictionOutput']?['text'], '</p>'))`
+   If the step is skipped, the marker is an HTML comment and nothing shows.
+
+## Case `course_complete`
 
 - **Get items** from the list, filter `Email eq '<email>' and Phase eq 'initial'`, take the first,
   then **Update item** with `CompletedOn` = today.
