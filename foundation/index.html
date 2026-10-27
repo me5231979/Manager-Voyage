@@ -1097,8 +1097,8 @@ html.paged .idea .try .scn{ margin-top:0; }
 @media (min-width:1001px){ .v-copy .survey .sk{ align-self:start; } }
 .evidence a.btn-ghost, .pol a.btn-ghost{ color:var(--tx); }
 
-.v-goals summary::after{ content:"Tap to open \00a0+"; transform:none; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:5px 10px; line-height:1; }
-.v-goals[open] summary::after{ content:"Close \00a0\2212"; transform:none; background:none; color:var(--eyebrow); border:1px solid var(--eyebrow); }
+.v-goals summary{ pointer-events:none; } .v-goals summary::after{ content:""; transform:none; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:5px 10px; line-height:1; }
+.v-goals[open] summary::after{ content:""; display:none; }
 /* ── in practice: the video's story as a decision ── */
 .story{ position:relative; border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); overflow:hidden; background:var(--card); }
 .story-in{ position:relative; padding:clamp(14px,1.8vw,22px); display:grid; gap:10px; align-content:start; }
@@ -1226,7 +1226,7 @@ html.paged .idea .try .scn{ margin-top:0; }
       <a class="btn btn-gold" href="#p/mission/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <ul class="v-meta" aria-label="Course at a glance"><li>6 topics</li><li>About 35 minutes</li><li>Narrated</li><li>Recorded in Oracle Learning</li></ul>
     </div>
-    <details class="v-goals">
+    <details class="v-goals" open>
       <summary>What you will be able to do</summary>
       <ol>
         <li><b>Describe</b> the one change that makes you a manager, and the three things that are new.</li>
@@ -1642,7 +1642,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="fcenter">
       <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.28.g</span></p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.10.28.h</span></p>
       <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The four categories and their behaviors are Yukl&rsquo;s taxonomy (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. About the program</p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>
@@ -1722,6 +1722,6 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="app.js?v=20261028g"></script>
+<script src="app.js?v=20261028h"></script>
 </body>
 </html>
