@@ -139,7 +139,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20261027p';
+var MEDIA_V = '20261031a';
 /* the course videos carry their own narration: nothing else should talk over them, and they should not talk over anything else */
 function pauseVideos(){ $$('video').forEach(function(v){ if(v.id !== 'heroVideo' && !v.paused){ try{ v.pause(); }catch(e){} } }); }
 function narrPlay(k){
@@ -298,7 +298,7 @@ var SECTIONS = [
   { k:'safe',      no:'02', name:'Five ideas at work',      how:'Find the best response in each idea’s moment' },
   { k:'year',      no:'03', name:'Your first year',         how:'Open all four groups' },
   { k:'calls',     no:'04', name:'Who handles what',        how:'Decide five situations' },
-  { k:'welcome',   no:'05', name:'The four categories',     how:'Open all four' },
+  { k:'welcome',   no:'05', name:'The Manager Standard',    how:'Open all four expectations' },
   { k:'task',      no:'06', name:'Get the work done',       how:'Flip all four cards' },
   { k:'relations', no:'07', name:'Take care of your people', how:'Flip all four cards' },
   { k:'change',    no:'08', name:'Make things better',      how:'Flip all four cards' },
@@ -873,31 +873,31 @@ var IDEAS = [
     why:'Your calendar fills itself. Requests arrive faster than you can finish them, and the urgent ones are rarely the important ones. Without three named priorities, the loudest request decides for you.',
     looks:'Monday, before email: three lines on a notepad. Said aloud at the huddle, on the calendar by nine. A request lands Wednesday; you ask which rock it moves.',
     value:'A team that knows this week’s three things wastes less, argues less, and finishes more.',
-    week:'Write your three big rocks before you open your inbox. Tell your team.' },
+    week:'Write your three big rocks before you open your inbox. Tell your team.', std:'Standard 01 · Get the work done' },
   { who:'Clear expectations and feedback · clear is kind', h:'Clear is kind. Unclear is <em>unkind</em>.',
     what:'Say what you expect, by when, and what good looks like. Give feedback close to the moment, in private, on the specific thing.',
     why:'Hinting feels kind and costs weeks. People guess, redo the work, and hear about the problem late, when it is bigger and harder to fix.',
     looks:'“The summary needs the decision on page one, under three hundred words, by Thursday at three. Here is why.” Said in the 1:1, written in the follow-up.',
     value:'Fewer surprises at the deadline, fewer redo cycles, and a team that always knows where it stands.',
-    week:'Say one thing you have been hinting at. Privately, plainly, kindly.' },
+    week:'Say one thing you have been hinting at. Privately, plainly, kindly.', std:'Standard 01 · Get the work done' },
   { who:'Psychological safety', h:'People only speak up when it is <em>safe</em> to.',
     what:'A team’s shared belief that nobody is punished or embarrassed for a question, a mistake, or a disagreement. Not about being nice: about making the truth cheap to tell.',
     why:'Late news is the most expensive kind. A team that fears the reaction hides mistakes until they are big, and stops asking questions before they become errors.',
     looks:'Bad news lands: “Thank you for telling me today. What do we know, and what do you need from me?” A basic question in the meeting gets a straight answer. You say “I got that wrong” out loud.',
     value:'You hear about problems while they are small. The best teams report more mistakes, not fewer, because they catch them early.',
-    week:'When someone reports a problem, thank them first. Then solve it.' },
+    week:'When someone reports a problem, thank them first. Then solve it.', std:'Standard 02 · Take care of your people' },
   { who:'Purpose · start with why, team first', h:'Explain the why. Take care of the people, and they take care of the <em>work</em>.',
     what:'People do their best work when they know why it matters, not just what to do. A team that feels looked after protects the work and each other.',
     why:'People who know the why make good decisions when you are not in the room. People who only know the what wait for you, or push back in the hallway.',
     looks:'Before you hand out the new form: “Here is why. The old one loses a third of requests at the handoff.” Credit passed down in the team meeting. Blame taken first with your manager.',
     value:'A team that trusts you tells you the truth, stays, and works through the hard weeks with you instead of around you.',
-    week:'Explain the why behind one thing you have been asking for.' },
+    week:'Explain the why behind one thing you have been asking for.', std:'Standard 03 · Make things better' },
   { who:'The people work · a manager’s core responsibilities', h:'The people work is the manager’s <em>work</em>.',
     what:'Hiring, onboarding, expectations, feedback, performance, time and leave, and hard conversations are the manager’s job, not PCB’s. PCB shows you how.',
     why:'Nothing should wait for someone else to act. Your team gets answers from the person who knows them, and PCB spends its time on the hard cases, not the routine ones.',
     looks:'You hold the 1:1. You give the feedback the week it happened. You send the leave request the same day. You call your HCM when you are unsure, not instead of acting.',
     value:'Problems get handled while they are small, by the person closest to them, and your team knows who its manager is.',
-    week:'Find out your HCM’s and your Engagement Consultant’s names, and how to reach them.' }
+    week:'Find out your HCM’s and your Engagement Consultant’s names, and how to reach them.', std:'Standard 02 and 04 · Your people, your network' }
 ];
 (function(){
   var SDK = 'https://cdn.jsdelivr.net/npm/@elevenlabs/client/+esm';
@@ -975,7 +975,7 @@ var IDEAS = [
       '<p class="intro-cta"><button type="button" class="btn btn-primary btn-sm" data-tab="0">Start with idea 1<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></p></div>' +
       '<ol class="intro-list" aria-label="The five ideas">' + IDEAS.map(function(it, i){ return '<li><button type="button" data-tab="' + i + '"><span class="il-no">' + (i + 1) + '</span><span class="il-t"><b>' + names[i] + (LIVE[IDEA_SCN[i]] ? ' <span class="live-badge">Live conversation</span>' : '') + '</b><span>' + ONE[i] + '</span></span></button></li>'; }).join('') + '</ol></div>' +
     IDEAS.map(function(it, i){
-      return '<div class="idea" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span><h3>' + it.h + '</h3>' + (i === 0 ? ROCKS_ART : '') +
+      return '<div class="idea" role="tabpanel" data-i="' + i + '"><span class="who-is">' + esc(it.who) + subBtn('ideas/t' + (i + 1)) + '</span>' + (it.std ? '<span class="std-tag">' + esc(it.std) + '</span>' : '') + '<h3>' + it.h + '</h3>' + (i === 0 ? ROCKS_ART : '') +
         '<div class="idea-core"><p class="blk"><b>What it is</b>' + esc(it.what) + '</p><div class="week"><b>Start this week</b>' + esc(it.week) + '</div></div>' +
         (LIVE[IDEA_SCN[i]] ? liveHTML(IDEA_SCN[i]) : '') +
         '<details class="idea-more"><summary>Why it works, what it looks like, and what it brings</summary><div class="idea-more-grid"><p class="blk"><b>Why adopt it</b>' + esc(it.why) + '</p><p class="blk"><b>What it looks like in practice</b>' + esc(it.looks) + '</p><p class="blk"><b>The value it brings</b>' + esc(it.value) + '</p></div></details>' +
@@ -1011,7 +1011,7 @@ var IDEAS = [
   function mark(k){
     if(JOBS.indexOf(k) < 0 || jseen[k]) return;
     jseen[k] = 1; var n = Object.keys(jseen).length;
-    if(jstatus) jstatus.textContent = n + ' of 4 categories opened.' + (n === JOBS.length ? ' Activity complete.' : '');
+    if(jstatus) jstatus.textContent = n + ' of 4 expectations opened.' + (n === JOBS.length ? ' Activity complete.' : '');
     if(n === JOBS.length) progDone('welcome');
   }
   function show(k){
@@ -1032,7 +1032,7 @@ var IDEAS = [
    that category's intro and see what it asks of you; open it from there. */
 (function(){
   var rose = $('#fwRose'), panel = $('#fwPanel'), map = $('#fwMap'), vid = $('#fwVideo'), back = $('#fwBack'); if(!rose || !map) return;
-  var PTS = [['task', 'n', 'Task-oriented'], ['relations', 'e', 'Relations-oriented'], ['change', 's', 'Change-oriented'], ['external', 'w', 'External']];
+  var PTS = [['task', 'n', '01 · Get the work done'], ['relations', 'e', '02 · Take care of your people'], ['change', 's', '03 · Make things better'], ['external', 'w', '04 · Connect your team']];
   function roseSVG(){
     var t = '', i;
     for(i = 0; i < 72; i++){ var a = i * 5 * Math.PI / 180, r1 = i % 18 === 0 ? 150 : i % 3 === 0 ? 156 : 160; t += '<line class="tick" x1="' + (200 + Math.sin(a) * r1).toFixed(1) + '" y1="' + (200 - Math.cos(a) * r1).toFixed(1) + '" x2="' + (200 + Math.sin(a) * 165).toFixed(1) + '" y2="' + (200 - Math.cos(a) * 165).toFixed(1) + '"/>'; }
@@ -1040,7 +1040,7 @@ var IDEAS = [
       var tip = [200 + sn * len, 200 - c * len], l = [200 + sn * 22 + px * w, 200 - c * 22 + py * w], r = [200 + sn * 22 - px * w, 200 - c * 22 - py * w];
       return '<path class="' + cls + '"' + (key ? ' data-pt="' + key + '"' : '') + ' d="M200 200L' + l.map(function(v){ return v.toFixed(1); }).join(' ') + 'L' + tip.map(function(v){ return v.toFixed(1); }).join(' ') + 'L' + r.map(function(v){ return v.toFixed(1); }).join(' ') + 'Z"/>'; }
     var star = pt(45, 92, 12, 'minor') + pt(135, 92, 12, 'minor') + pt(225, 92, 12, 'minor') + pt(315, 92, 12, 'minor') + pt(0, 140, 22, '', 'n') + pt(90, 140, 22, '', 'e') + pt(180, 140, 22, '', 's') + pt(270, 140, 22, '', 'w');
-    return '<svg viewBox="0 0 400 400" aria-hidden="true"><circle class="ring2" cx="200" cy="200" r="178"/><circle class="ring" cx="200" cy="200" r="165"/>' + t + '<g class="star">' + star + '</g><circle class="hub" cx="200" cy="200" r="9"/><text class="hub-text" x="200" y="236">The whole job</text></svg>';
+    return '<svg viewBox="0 0 400 400" aria-hidden="true"><circle class="ring2" cx="200" cy="200" r="178"/><circle class="ring" cx="200" cy="200" r="165"/>' + t + '<g class="star">' + star + '</g><circle class="hub" cx="200" cy="200" r="9"/><text class="hub-text" x="200" y="236">The standard</text></svg>';
   }
   rose.innerHTML = roseSVG() + '<div role="tablist" aria-label="The four categories">' + PTS.map(function(p, i){ return '<button type="button" role="tab" class="pt ' + p[1] + '" aria-selected="false" data-job="' + p[0] + '" data-nk="welcome/j' + (i + 1) + '">' + p[2] + '</button>'; }).join('') + '</div>';
   var cards = $$('.fw-card[data-job]', map);
@@ -1072,10 +1072,10 @@ var IDEAS = [
 (function(){
   var box = $('#habitPick'), p = $('#ns2p'), tell = $('#tellText'), copy = $('#copyTell'); if(!box) return;
   var ACTS = [
-    { c:'Get the work done', a:'Confirm with one person, out loud, what they own and by when', why:'When people are not sure what is expected, work comes in late and you find out on the due date.', say:'confirm with one person what they own and by when' },
-    { c:'Take care of your people', a:'Thank one person for one specific thing, by name', why:'People stay, and do their best work, for a manager who notices them. “Great job everyone” thanks nobody.', say:'thank one person for one specific thing, by name' },
-    { c:'Make things better', a:'Hold one ten-minute look-back after a piece of work', why:'Ten minutes on what worked and what did not is how a team stops repeating the same mistake.', say:'hold a ten-minute look-back with the team after a piece of work' },
-    { c:'Connect your team', a:'Have coffee with one person your team depends on', why:'Know the people your team needs by name before you need them. New managers do this least.', say:'have coffee with one person my team depends on' }
+    { c:'01 · Get the work done', a:'Confirm with one person, out loud, what they own and by when', why:'When people are not sure what is expected, work comes in late and you find out on the due date.', say:'confirm with one person what they own and by when' },
+    { c:'02 · Take care of your people', a:'Thank one person for one specific thing, by name', why:'People stay, and do their best work, for a manager who notices them. “Great job everyone” thanks nobody.', say:'thank one person for one specific thing, by name' },
+    { c:'03 · Make things better', a:'Hold one ten-minute look-back after a piece of work', why:'Ten minutes on what worked and what did not is how a team stops repeating the same mistake.', say:'hold a ten-minute look-back with the team after a piece of work' },
+    { c:'04 · Connect your team', a:'Have coffee with one person your team depends on', why:'Know the people your team needs by name before you need them. New managers do this least.', say:'have coffee with one person my team depends on' }
   ];
   box.innerHTML = ACTS.map(function(x, i){ return '<button type="button" data-act="' + i + '" aria-pressed="false"><b>' + esc(x.c) + '</b><strong>' + esc(x.a) + '</strong><small>' + esc(x.why) + '</small></button>'; }).join('');
   var BASE = 'I just finished the Manager Foundations course. This week I will [action]. Ask me how it went on [date].';
@@ -1225,7 +1225,7 @@ var QUIZ = [
   { seg:'Five ideas', q:'The rule for expectations and feedback is:', opts:['Praise in public, correct in private','Clear is kind, unclear is unkind','Never give bad news on a Friday','Hint first, so it lands softly'], a:1, x:'Clear is kind. Say the expectation, the deadline, and the feedback plainly and early. Hinting feels polite and leaves people guessing.' },
   { seg:'Five ideas', q:'A team member brings you bad news early. Which response keeps the bad news coming early?', opts:['“Why am I only hearing about this now?”','“Thank you for telling me today. What do you need from me?”','“Let me handle it from here.”','“Bring it to the team meeting.”'], a:1, x:'Thank first, solve second, learn the cause later. Your reaction the first time decides whether you hear the next one early.' },
   { seg:'Who handles what', q:'A team member says their doctor wants them out for three weeks after surgery. What do you do first?', opts:['Approve the time off yourself','Ask what the surgery is for, so you can plan','Send it to the leave office the same day','Tell them to talk to PCB when they are back'], a:2, x:'The leave office, the same day. Anything that sounds like leave goes there; you adjust the work and never ask for a diagnosis.' },
-  { seg:'The four categories', q:'Yukl sorts what effective managers do into four categories of behavior. In plain words, which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Task-oriented, relations-oriented, change-oriented, and external: get the work done, take care of your people, make things better, connect your team. Every manager does all four, every week.' }
+  { seg:'The Manager Standard', q:'The Vanderbilt Manager Standard has four expectations of every manager. Which list is right?', opts:['Hire, fire, approve, report','Get the work done; take care of your people; make things better; connect your team','Plan, budget, schedule, present','Whatever your own manager did'], a:1, x:'Get the work done through your team, take care of your people, make things better, connect your team to Vanderbilt. Fifteen behaviors sit inside the four, the assessment measures them, and every manager meets all four, every week.' }
 ];/* the right answer sits at a different position on each question */
 (function(){ var POS = [0, 2, 3, 1, 2]; QUIZ.forEach(function(q, i){ var t = POS[i]; if(t === undefined || t === q.a || t >= q.opts.length) return; var o = q.opts.splice(q.a, 1)[0]; q.opts.splice(t, 0, o); q.a = t; }); })();
 
@@ -1304,7 +1304,7 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     var cats = rec.categories || [], hi = cats.slice().sort(function(a, b){ return b.avg - a.avg; })[0], lo = cats.slice().sort(function(a, b){ return a.avg - b.avg; })[0], loIdx = cats.indexOf(lo);
     var when = rec.at ? new Date(rec.at).toLocaleDateString(undefined, { month:'long', day:'numeric', year:'numeric' }) : '';
     var delta = base ? rec.score - base.score : null;
-    return '<div class="ar"><div class="ar-top"><span class="ar-score">' + rec.score + '<small>of ' + rec.max + '</small></span><div><h4>' + (rec.phase === 'retake' ? 'Three months on' : 'Your starting point') + (when ? ' &middot; ' + esc(when) : '') + (delta !== null ? ' <span class="ar-delta' + (delta < 0 ? ' down' : '') + '">' + (delta >= 0 ? '+' : '') + delta + ' since you started</span>' : '') + '</h4><p>' + (hi && lo && hi.avg === lo.avg ? 'All four categories at the same level. Start with: ' + esc(lo.k.toLowerCase()) + '.' : 'Strongest: ' + esc(hi ? hi.k.toLowerCase() : '') + '. Start with: ' + esc(lo ? lo.k.toLowerCase() : '') + '.') + '</p></div></div>' +
+    return '<div class="ar"><div class="ar-top"><span class="ar-score">' + rec.score + '<small>of ' + rec.max + '</small></span><div><h4>' + (rec.phase === 'retake' ? 'Three months on, against the Vanderbilt Manager Standard' : 'Your starting point against the Vanderbilt Manager Standard') + (when ? ' &middot; ' + esc(when) : '') + (delta !== null ? ' <span class="ar-delta' + (delta < 0 ? ' down' : '') + '">' + (delta >= 0 ? '+' : '') + delta + ' since you started</span>' : '') + '</h4><p>' + (hi && lo && hi.avg === lo.avg ? 'All four categories at the same level. Start with: ' + esc(lo.k.toLowerCase()) + '.' : 'Strongest: ' + esc(hi ? hi.k.toLowerCase() : '') + '. Start with: ' + esc(lo ? lo.k.toLowerCase() : '') + '.') + '</p></div></div>' +
       '<ul class="ar-cats">' + cats.map(function(c, i){ var bd = band(c.avg), prev = base && base.categories && base.categories[i]; var d = prev ? Math.round((c.avg - prev.avg) * 10) / 10 : null; return '<li><span class="ar-l">' + esc(c.k) + '</span><span class="ar-v">' + c.avg.toFixed(1) + '<small>of 5</small>' + (d !== null ? '<span class="ar-delta' + (d < 0 ? ' down' : '') + '">' + (d >= 0 ? '+' : '') + d.toFixed(1) + '</span>' : '') + '</span><span class="ar-bar"><i style="width:' + c.pct + '%"></i>' + (prev ? '<em style="left:' + prev.pct + '%" title="Starting point"></em>' : '') + '</span><span class="ar-f"><b>' + esc(bd[1]) + '</b>' + esc(bd[2]) + '</span></li>'; }).join('') + '</ul>' +
       (MOVES[loIdx] ? '<div class="ar-move"><b>Your first move</b>' + esc(MOVES[loIdx]) + '</div>' : '') + '</div>';
   }

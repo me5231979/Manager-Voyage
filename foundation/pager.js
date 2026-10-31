@@ -17,7 +17,7 @@ try{
     { sel:'#ideas',           key:'ideas',     label:'Five ideas',                   mode:'whole' },
     { sel:'#year',            key:'year',      label:'Your first year',              mode:'whole' },
     { sel:'#calls',           key:'calls',     label:'Who handles what',             mode:'whole' },
-    { sel:'#welcome',         key:'welcome',   label:'The four categories',                mode:'whole' },
+    { sel:'#welcome',         key:'welcome',   label:'The Vanderbilt Manager Standard',    mode:'whole' },
     { sel:'#yourcall',        key:'yourcall',  label:'Your call: four situations',   mode:'whole' },
     { sel:'#survey',          key:'survey',    label:'Your assessment',                   mode:'whole' },
     { sel:'#quiz',            key:'quiz',      label:'Quick check',                  mode:'whole' },
@@ -26,8 +26,8 @@ try{
   ];
   var TRACKED = [
     ['shift','01','What changed'], ['safe','02','Five ideas at work'], ['year','03','Your first year'], ['calls','04','Who handles what'],
-    ['welcome','05','The four categories'], ['task','06','Task-oriented: get the work done'], ['relations','07','Relations-oriented: take care of your people'],
-    ['change','08','Change-oriented: make things better'], ['external','09','External: connect your team'], ['yourcall','10','Your call'],
+    ['welcome','05','The Manager Standard'], ['task','06','Expectation 01: get the work done'], ['relations','07','Expectation 02: take care of your people'],
+    ['change','08','Expectation 03: make things better'], ['external','09','Expectation 04: connect your team'], ['yourcall','10','Your call'],
     ['survey','11','Your assessment'], ['quiz','12','Quick check'], ['nextstep','13','Next steps']
   ];
   var pages = [], secFirst = {};

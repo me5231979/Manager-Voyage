@@ -96,7 +96,7 @@ td{ vertical-align:top; padding:5pt 8pt 5pt 0; border-bottom:1px solid var(--bd)
   <img src="../assets/img/vu-lockup-black.png" alt="Vanderbilt University">
   <div><span class="eyebrow">Manager Voyage · Manager Foundations · Course 1</span>
   <h1 style="margin-top:8pt">You are a manager <em>now</em>.</h1></div>
-  <p class="lead">Everything in the course, on paper: what changed, what a manager is, five ideas that hold up, what Vanderbilt will ask of you this year, who helps, Yukl&rsquo;s four categories, how to read your assessment results, and what to learn next.</p>
+  <p class="lead">Everything in the course, on paper: what changed, what a manager is, five ideas that hold up, what Vanderbilt will ask of you this year, who helps, the Vanderbilt Manager Standard, how to read your assessment results, and what to learn next.</p>
   <div class="meta"><span>About 35 minutes online</span><span>One idea per page</span><span>Before: manager compliance courses</span><span>After: the supporting micro modules in Oracle Learning</span><span>Recorded in Oracle Learning</span></div>
 </header>`);
 // at a glance
@@ -104,7 +104,7 @@ H.push(`<section><span class="eyebrow">The course at a glance</span><h2>Five top
 <div class="topic"><span class="n">01</span><div><b>What changed, and what a manager is</b><span class="tx2">The one change, three things that are new, what a manager is not, who helps you here.</span></div></div>
 <div class="topic"><span class="n">02</span><div><b>Five ideas every good manager relies on</b><span class="tx2">Priorities, clear expectations, psychological safety, purpose, the people work. Each with a moment to apply it.</span></div></div>
 <div class="topic"><span class="n">03</span><div><b>What Vanderbilt will ask you to do</b><span class="tx2">The tasks of year one, when they show up, and who handles what: handle it, ask, route, or report.</span></div></div>
-<div class="topic"><span class="n">04</span><div><b>Yukl&rsquo;s four categories of manager behavior</b><span class="tx2">Get the work done, take care of your people, make things better, connect your team. One tab each, then your call.</span></div></div>
+<div class="topic"><span class="n">04</span><div><b>The Vanderbilt Manager Standard</b><span class="tx2">Four expectations: get the work done, take care of your people, make things better, connect your team. Fifteen behaviors inside them. One tab each, then your call.</span></div></div>
 <div class="topic"><span class="n">05</span><div><b>Your assessment</b><span class="tx2">What your results email tells you, and where the score should go.</span></div></div>
 <p class="tx2" style="margin-top:6pt">Then a five-question check (4 of 5 finishes the course), your next seven days, a keep-learning list, and the wrap-up. Progress tracks each activity; completion is recorded in Oracle Learning.</p></section>`);
 // mission
@@ -157,19 +157,19 @@ H.push(`<section><span class="eyebrow">Quick reference · Something just landed 
 SIM.forEach(s => H.push(`<div class="sim"><b class="t">${esc(s.label)}</b><div class="grid2"><div><b>First move.</b> ${esc(s.first)}</div><div><b class="nv">Never.</b> ${esc(s.never)}${s.mod ? ' <span class="tx2">Micro module: ' + esc(s.mod) + '.</span>' : ''}</div></div></div>`));
 H.push(`</section>`);
 // topic 4
-H.push(`<section><span class="eyebrow">Topic 4 · The four categories</span><h2>One picture that holds the whole <em>job</em>.</h2><p class="tx2">Nothing new to memorize: the same work, sorted. Each behavior is marked with the Vanderbilt behavior it serves, and those six are what the survey asks you to rate.</p><div class="grid2">`);
+H.push(`<section><span class="eyebrow">Topic 4 · The Vanderbilt Manager Standard</span><h2>Four expectations, fifteen <em>behaviors</em>.</h2><p class="tx2">The standard the assessment measures and the course teaches. Nothing new to memorize: the same work, sorted into four expectations every manager meets every week.</p><div class="grid2">`);
 JOBS.forEach(c => H.push(`<div class="box"><b class="k">${esc(c.b)}</b><strong>${esc(c.h)}</strong><span class="tx2">${esc(c.p)}</span><ul>${c.li.map(l => '<li>' + l + '</li>').join('')}</ul></div>`));
 H.push(`</div><div class="grid2" style="margin-top:8pt">
 <div class="box cream"><b class="k">The habit to stop</b>Doing the work yourself. When you are tempted to just do it, that is the moment to manage instead.</div>
 <div class="box cream"><b class="k">The one thing to route</b>Anything that sounds like leave goes to the leave office the same day. You adjust the load; they decide eligibility.</div></div></section>`);
 // topic 5
 H.push(`<section><span class="eyebrow">Topic 5 · Your assessment</span><h2>Your score, and where it should <em>go</em>.</h2>
-<p class="tx2">Before Manager Voyage you took the Manager Effectiveness Assessment: six statements, from creating clarity to leading change, each rated from never to consistently. They are informed by Yukl&rsquo;s framework, the one this course teaches. Your results and feedback came by email. Review them. If you did not get them, or have not taken it yet, take the assessment.</p>
-<div class="week"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. Over this course and the micro modules that follow, the aim is a higher rating on all six when you rate the same statements again, 90 days after you complete Manager Voyage.</div>
+<p class="tx2">Before Manager Voyage you took the Manager Effectiveness Assessment: ten statements, each one a behavior from the Vanderbilt Manager Standard, rated from never to always and scored by expectation. Your results and feedback came by email. Review them. If you did not get them, or have not taken it yet, take the assessment.</p>
+<div class="week"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. Over this course and the micro modules that follow, the aim is a higher rating on all ten when you rate the same statements again, 90 days after you complete Manager Voyage.</div>
 <h3>Your next seven days</h3><div class="grid3">
 <div class="box"><b class="k">Today</b><strong>Take your first micro module</strong>Start with the habit you know needs you most.</div>
 <div class="box"><b class="k">This week</b><strong>Practice one habit</strong>Pick one from this course. Do it once, on purpose, and notice what happened.</div>
-<div class="box"><b class="k">90 days after</b><strong>Rate the same six again</strong>Compare with where you started, once you have completed Manager Voyage.</div></div>
+<div class="box"><b class="k">90 days after</b><strong>Rate the same ten again</strong>Compare with where you started, once you have completed Manager Voyage.</div></div>
 <div class="week" style="margin-top:8pt"><b>Tell your manager</b>“I just finished the first Manager Foundations course. The habit I am practicing this week is [habit]. Ask me about it on [date].”</div></section>`);
 // learning
 H.push(`<section class="learn"><span class="eyebrow">Keep learning</span><h2>What to take <em>next</em>.</h2><p class="tx2">Your micro modules in Oracle Learning, in the four tracks you take them in, then a short chosen list: ten more courses, podcasts, videos, and a guide. Micro modules first: Systems and Vanderbilt &amp; Nashville by Day 30, People and Processes by Day 60. Then one item a month, on the habit you are working on. Links are live in the PDF; in Oracle Learning you can also search by title.</p>`);
