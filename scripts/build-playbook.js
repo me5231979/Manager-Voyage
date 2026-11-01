@@ -8,6 +8,9 @@ if (!fs.existsSync(OUT)) fs.mkdirSync(OUT);
 const w = { MV_CONFIG: {} }; vm.createContext(w);
 vm.runInContext(fs.readFileSync(path.join(R, 'assets/js/program-data.js'), 'utf8').replace('window.MV_PROGRAM', 'MV_PROGRAM'), w);
 const C = w.MV_PROGRAM.cohort;
+vm.runInContext(fs.readFileSync(path.join(R, 'cohort/program.js'), 'utf8').replace('window.MV_COHORT', 'MV_COHORT'), w);
+const K = w.MV_COHORT;
+const fmtMins = m => m >= 60 ? (m / 60).toFixed(m % 60 ? 1 : 0).replace('.0', '') + ' hours' : m + ' minutes';
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const lines = (n, h) => `<div class="lines" style="--n:${n}${h ? ';height:' + h : ''}"></div>`;
 const field = (label, hint, n) => `<div class="field"><span class="fl">${esc(label)}</span>${hint ? `<span class="fh">${esc(hint)}</span>` : ''}${lines(n || 3)}</div>`;
@@ -89,63 +92,59 @@ H.push(`<section class="page cover">
 <div><img class="lockup" src="../assets/img/vu-lockup-black.png" alt="Vanderbilt University">
 <span class="eyebrow" style="margin-top:.5in">Manager Voyage · The four-week cohort</span>
 <h1>The Manager <em>Playbook</em>.</h1>
-<p class="lead">Your written personal operating system: how you manage, in your own words, one section a week. Drafted through the four weeks, presented at the capstone, and yours to keep.</p>
-<div class="ident"><div><span>Name</span></div><div><span>Team and business unit</span></div><div><span>Cohort</span></div><div><span>Kickoff date</span></div></div></div>
+<p class="lead">Your written personal operating system: how you manage, in your own words, one section a week. Started in the classroom, drafted through two remote weeks, presented at the capstone to peers and your business unit leader, and yours to keep.</p>
+<div class="ident"><div><span>Name</span></div><div><span>Team and business unit</span></div><div><span>Hourly, salaried, or mixed · how many people</span></div><div><span>Week one date</span></div></div></div>
 <p class="foot">Vanderbilt University · People, Culture and Belonging · Futures Learning Hub</p>
 </section>`);
 
 /* how it works */
 H.push(`<section class="page">
-${weekHead('', 'How this Playbook works', 'Read first', 'Every week of the cohort ends with a Playbook section. The Friday discussion is grounded in what you wrote, and the capstone is where you present the whole thing.')}
-<h3>The weekly rhythm</h3>
-<div class="rhythm">${C.rhythm.map(r => `<div><span class="when">${esc(r.when)}</span><b>${esc(r.beat)}${r.tool ? ' <span style="font-family:Inter;font-size:8pt;color:#5B554B">in ' + esc(r.tool) + '</span>' : ''}</b>${esc(r.desc)}<br><span style="color:#1C1C1C;font-weight:600">${esc(r.mins)}</span></div>`).join('')}</div>
+${weekHead('', 'How this Playbook works', 'Read first', 'The cohort is the 201 and 301 to Manager Foundations. It does not reteach the Vanderbilt Manager Standard; it practices it with your own team, and this Playbook is where the practice gets written down. One section a week, presented whole in week four.')}
+<h3>The four weeks</h3>
+<div class="rhythm">${K.weeks.map(w => `<div><span class="when">Week ${w.n} · ${esc(w.mode)} · ${esc(fmtMins(w.mins))}</span><b>${esc(w.title)}</b>Expectation ${K.standard[w.expectation - 1].n}, ${esc(K.standard[w.expectation - 1].name.toLowerCase())}.<br><span style="color:#1C1C1C;font-weight:600">Section ${w.playbook.n} · ${esc(w.playbook.title)}</span></div>`).join('')}</div>
 <h3>What you write, week by week</h3>
 <table class="grid" style="font-size:9pt"><thead><tr><th style="width:1.1in">When</th><th>Section</th><th>Due</th></tr></thead><tbody>
-<tr style="height:auto"><td style="height:auto">Prework</td><td style="height:auto"><b>The first sentence</b> of your Philosophy, the confidence pulse, and the calendar holds.</td><td style="height:auto">Bring it to the kickoff</td></tr>
-<tr><td style="height:auto">Week 1</td><td style="height:auto"><b>Section 1 · Manager Philosophy.</b> What your team can expect from you, what you say when bad news lands, your 90-day intent.</td><td style="height:auto">Sunday</td></tr>
-<tr><td style="height:auto">Week 2</td><td style="height:auto"><b>Section 2 · 1:1 framework and conversation plan.</b> Your cadence and agenda, three goals per person, the conversation you rehearsed.</td><td style="height:auto">Sunday</td></tr>
-<tr><td style="height:auto">Week 3</td><td style="height:auto"><b>Section 3 · Delegation and growth plan.</b> Where each person wants to be, one stretch assignment, the rung they are on, your coaching cadence.</td><td style="height:auto">Sunday</td></tr>
-<tr><td style="height:auto">Week 4</td><td style="height:auto"><b>Section 4 · Performance practice,</b> then the <b>Integrated Management Model</b> and the <b>Team Development Plan</b>.</td><td style="height:auto">Before the capstone</td></tr>
+<tr><td style="height:auto">Before week 1</td><td style="height:auto"><b>Set your team</b> on the cohort site, finish Manager Foundations, and take the four-question pulse. The cohort site is at ${esc(K.site.replace('https://', ''))}.</td><td style="height:auto">Bring the printed Playbook to week 1</td></tr>
+${K.weeks.map(w => `<tr><td style="height:auto">Week ${w.n}</td><td style="height:auto"><b>Section ${w.playbook.n} · ${esc(w.playbook.title)}.</b> ${esc(w.playbook.desc)}</td><td style="height:auto">${esc(w.playbook.due)}</td></tr>`).join('')}
 </tbody></table>
-<h3>Three rules for writing it</h3>
-<div class="box"><b>Write in your own voice.</b> This is not a form for PCB; it is the document you will reread in month six. <b>Use real names and real dates.</b> A plan without a name and a date is a wish. <b>Short beats complete.</b> One true sentence per prompt is enough; the discussion adds the rest.</div>
-<h3>Where it ends up</h3>
-<p class="intro">At the capstone you present the Integrated Management Model and the Team Development Plan to peers and your business unit leader, in the room or online. The deliverables are recorded in Oracle Learning against your job profile. The Playbook stays with you.</p>
+<div style="break-inside:avoid"><h3>Three rules for writing it</h3>
+<div class="box"><b>Write in your own voice.</b> This is not a form for PCB; it is the document you will reread in month six. <b>Use real names and real dates.</b> A plan without a name and a date is a wish. <b>Short beats complete.</b> One true sentence per prompt is enough; the room adds the rest. <b>Weeks two and three are capped at ninety minutes,</b> and five of those are for this Playbook; the rest of the week is for doing it with your team.</div></div>
 </section>`);
 
-/* prework */
+/* before week one */
 H.push(`<section class="page">
-${weekHead('W0', 'Prework', 'The week before the kickoff · about 90 minutes on your own time', 'Watch New Manager Foundations in Oracle Learning, then write one sentence. Bring it to the kickoff; you will read it aloud.')}
+${weekHead('W0', 'Before week one', 'On your own, about twenty minutes', 'Set your team on the cohort site so every scenario is written for the people you manage. Then the pulse, and one sentence.')}
+<h3>Your team</h3>
+<div class="two">${field('The area your team is in', 'Dining, IT, facilities, a research lab, the library, student affairs, administration, advancement.', 1)}${field('Hourly, salaried, or mixed, and how many', '', 1)}</div>
 ${field('The first sentence of your Philosophy', 'What can your team expect from you? One sentence. It will be sharpened in week 1.', 3)}
 <h3>The pulse, before</h3>
-<p class="intro">How confident are you in each conversation today? Circle one. You answer the same four questions again at the capstone.</p>
+<p class="intro">How confident are you in each conversation today? Circle one. You answer the same four questions again in week four.</p>
 <div class="scale">
 <span class="h">Conversation</span><span class="h">Not yet</span><span class="h">Confident</span>
-<span>Telling a team member what I expect, by when, and what good looks like</span><span class="b"><i>1</i><i>2</i><i>3</i></span><span class="b"><i>4</i><i>5</i></span>
-<span>Holding a difficult conversation about missed work without hinting</span><span class="b"><i>1</i><i>2</i><i>3</i></span><span class="b"><i>4</i><i>5</i></span>
-<span>Handing over a real decision, with the boundary stated, and not taking it back</span><span class="b"><i>1</i><i>2</i><i>3</i></span><span class="b"><i>4</i><i>5</i></span>
-<span>Having a performance conversation that is honest about the answer and specific about what changes it</span><span class="b"><i>1</i><i>2</i><i>3</i></span><span class="b"><i>4</i><i>5</i></span>
+${K.pulse.map(q => `<span>${esc(q)}</span><span class="b"><i>1</i><i>2</i><i>3</i></span><span class="b"><i>4</i><i>5</i></span>`).join('')}
 </div>
-<h3>Before the kickoff</h3>
-${check(['New Manager Foundations watched in Oracle Learning', 'The calendar holds accepted: the Learning Lab slot, the Scenario Studio, and the Friday discussion, all four weeks', 'The kickoff date, time, and room or link confirmed', 'The first sentence above written and ready to read aloud'])}
-<div class="box" style="margin-top:12pt"><b>Which of Yukl&rsquo;s four categories have you been avoiding?</b> Task-oriented, get the work done through your team · Relations-oriented, take care of your people · Change-oriented, make things better · External, connect your team. Name it here; it becomes your thread through the four weeks.</div>
+<h3>Before week one</h3>
+${check(['Manager Foundations finished, and the assessment taken', 'Your team set on the cohort site (profile: area, hourly or salaried, size, where they sit)', 'This Playbook printed, or open on a tablet', 'The first sentence above written and ready to read aloud'])}
+<div class="box" style="margin-top:12pt"><b>Which of the four expectations did your assessment say to start with?</b> 01 Get the work done, through your team (Yukl: task) · 02 Take care of your people (relations) · 03 Make things better (change) · 04 Connect your team to the rest of Vanderbilt (external). Name it here; it becomes your thread through the four weeks.</div>
 ${lines(2)}
 </section>`);
 
 /* section 1 */
 H.push(`<section class="page">
-${weekHead('01', 'Manager Philosophy', 'Week 1 · What it means to manage · due Sunday', 'One page on how you will manage. Start from the sentence you read aloud at the kickoff and the reaction you named in the Learning Lab.')}
-${field('What my team can expect from me', 'Three commitments, in plain words. The ones you could be held to on a bad day.', 5)}
-${field('What I say when bad news lands', 'Your first sentence, word for word. Thank first, solve second, learn the cause later.', 3)}
-${field('The one reaction on my team I will change', 'From the Learning Lab: the moment that decides whether you hear the next problem early.', 3)}
-${field('My intent for the next 90 days', 'What will be true about this team by Day 90 that is not true today?', 4)}
-<div class="box"><b>Friday discussion prompt.</b> Read your commitments to a peer. They answer: what would your team notice by Friday if that were true? Write their answer here.</div>
+${weekHead('01', 'Manager Philosophy', 'Week 1 · In the classroom · What it means to manage · due Sunday', 'One page on how you will manage. It starts with the mission, runs through your voyage on a timeline, and ends with the sentence you read aloud to your four.')}
+${field('The mission needs my team to…', 'From the first fifteen minutes. What your team makes possible for the people this university exists for.', 2)}
+<h3>My voyage, in seven lines</h3>
+<table class="grid" style="font-size:9pt"><thead><tr><th style="width:1.6in">Stop</th><th>One line</th></tr></thead><tbody>${K.timeline.map(t => `<tr><td style="height:22pt"><b>${esc(t.label)}</b><br><small>${esc(t.title)}</small></td><td style="height:22pt"></td></tr>`).join('')}</tbody></table>
+${field('What my team can expect from me', 'One sentence, then the three commitments behind it. The ones you could be held to on a bad day.', 4)}
+<div class="two">${field('What I say when bad news lands', 'Your first sentence, word for word.', 3)}${field('The expectation my team needs most this month, and the habit I will keep', 'From the How to lead activity.', 3)}</div>
+${field('My intent for the next 90 days, and the assessment statement I want to move', 'What will be true about this team by Day 90 that is not true today? Which of the ten statements will say so?', 3)}
+<div class="box"><b>Read it to your four.</b> They make it shorter and more specific, something your team could check. Write the sharpened sentence here.</div>
 ${lines(2)}
 </section>`);
 
 /* section 2 */
 H.push(`<section class="page">
-${weekHead('02', '1:1 framework and conversation plan', 'Week 2 · Goal setting, 1:1s, and difficult conversations · due Sunday', 'The operating discipline of the role: a cadence on the calendar, goals per person, and the hard conversation you rehearsed in the Scenario Studio and then held for real.')}
+${weekHead('02', '1:1 framework and conversation plan', 'Week 2 · Remote, under ninety minutes · Goals, 1:1s, and difficult conversations · due Sunday', 'Expectation 01, get the work done through your team: a cadence on the calendar, goals per person, and the hard conversation you rehearsed with Dev on your phone and then held for real.')}
 <h3>My 1:1 framework</h3>
 <div class="two">${field('Cadence and length', 'Weekly or biweekly, how long, which day. It goes on the calendar before Monday.', 2)}${field('Where the agenda lives', 'Theirs first. Where it is written so both of you can see it.', 2)}</div>
 <div class="two">${field('What I check every time', 'Work before it is due, what they are stuck on, what is coming that they should hear from me first.', 3)}${field('What I never let a 1:1 become', 'A status report, a one-way download, a skipped meeting.', 3)}</div>
@@ -154,25 +153,25 @@ ${people(['Name', 'Goal 1', 'Goal 2', 'Goal 3', 'By when'], 5)}
 <h3>The conversation plan</h3>
 <div class="two">${field('Who, and what I noticed', 'The specific observation, with dates. Not a feeling about them.', 3)}${field('What I expect, by when', 'Clear is kind. The expectation and the date, said out loud.', 3)}</div>
 <div class="two">${field('My opening sentence, word for word', '', 2)}${field('What they might need from me', 'The question you will ask, and the help you can actually give.', 2)}</div>
-${field('What happened when I held it', 'Fill in after. One minute, for Friday: what you said, what they said, what you would say differently.', 3)}
+${field('What happened when I held it', 'Fill in after. What you said, what they said, what you would say differently. You will read it back in week four.', 3)}
 </section>`);
 
 /* section 3 */
 H.push(`<section class="page">
-${weekHead('03', 'Delegation and growth plan', 'Week 3 · Coaching and mentoring · due Sunday', 'From directing to developing: where each person wants to go, one stretch assignment toward it, the rung of the ladder they are on, and the decision you handed over this week.')}
+${weekHead('03', 'Delegation and growth plan', 'Week 3 · Remote, under ninety minutes · Coaching and mentoring · due Sunday', 'Expectation 02, take care of your people. From directing to developing: where each person wants to go, one stretch assignment toward it, the rung of the ladder they are on, and the decision you handed over this week.')}
 <h3>The delegation ladder</h3>
 <div class="ladder"><div><b>1 · Do as I say</b>I decide, they do.</div><div><b>2 · Check with me</b>They propose, I approve.</div><div><b>3 · Tell me, then act</b>They decide and inform me first.</div><div><b>4 · Act, then tell me</b>They decide and inform me after.</div><div><b>5 · Their call</b>They decide; I hear about it if it matters.</div></div>
 <h3>Growth plan, one line per person</h3>
 ${people(['Name', 'Where they want to be in two years', 'One stretch assignment toward it', 'Rung today', 'Next rung', 'By when'], 5)}
 <h3>The decision I handed over this week</h3>
 <div class="two">${field('The decision, and to whom', 'The decision, not just the task.', 2)}${field('The one boundary I stated', 'The thing the decision has to respect, said once, up front.', 2)}</div>
-${field('What happened when I did not take it back', 'For Friday. Include the moment you wanted to.', 3)}
-<div class="two">${field('My coaching cadence', 'When you ask instead of tell: which meeting, how often, with the GROW questions to hand.', 3)}${field('Coach or correct: the case I decided', 'The pattern, which one it needed, and why.', 3)}</div>
+${field('What happened when I did not take it back', 'Include the moment you wanted to.', 3)}
+<div class="two">${field('My coaching cadence', 'When you ask instead of tell: which meeting, how often, with the questions to hand.', 3)}${field('One thank-you, by name, this week', 'Who, for what specific thing, and where you said it.', 3)}</div>
 </section>`);
 
 /* section 4 */
 H.push(`<section class="page">
-${weekHead('04', 'Performance practice', 'Week 4 · Performance management and developing talent · due before the capstone', 'How you run the cycle, how you give feedback, and how you handle a concern from the first conversation to the written step, with the people you call along the way.')}
+${weekHead('04', 'Performance practice', 'Week 4 · In the classroom · Performance, talent, and your Playbook · due before the capstone', 'Expectation 04, connect your team to the rest of Vanderbilt. How you run the cycle, how you give feedback, and how you handle a concern from the first conversation to the written step, with the people you call along the way.')}
 <h3>How I run the performance cycle</h3>
 <div class="two">${field('Goals set and written', 'When in the cycle, and where the team can see them.', 2)}${field('Check-ins', 'How often the goals come up before the review, so nothing at the review is a surprise.', 2)}</div>
 <h3>My feedback approach</h3>
@@ -184,7 +183,7 @@ ${weekHead('04', 'Performance practice', 'Week 4 · Performance management and d
 <tr><td>The written step</td><td></td><td>Employee Relations Consultant, through my HCM</td></tr>
 <tr><td>A leave, health, or fairness mention along the way</td><td></td><td>Leave, EOA, or Title IX the same day</td></tr>
 </tbody></table>
-${field('The performance conversation I rehearsed, then held', 'Honest about the cycle, specific about what would change the answer, a growth move that starts now.', 3)}
+${field('The performance conversation I rehearsed with Marcus, then held', 'Honest about the cycle, specific about what would change the answer, a growth move that starts now.', 3)}
 </section>`);
 
 /* integrated management model */
@@ -201,17 +200,17 @@ ${weekHead('', 'Integrated Management Model', 'Capstone deliverable · one page'
 
 /* team development plan */
 H.push(`<section class="page">
-${weekHead('', 'Team Development Plan', 'Capstone deliverable · 90 days', 'A plan for your actual team: names, goals, growth moves, and dates. Challenged by peers in the week 4 Learning Lab; presented at the capstone to peers and your business unit leader.')}
+${weekHead('', 'Team Development Plan', 'Capstone deliverable · 90 days', 'A plan for your actual team: names, goals, growth moves, and dates. Challenged by your four in week 4, one goal, one move, one date; presented in the same hour to peers and your business unit leader.')}
 ${field('The team goal for the next 90 days', 'One outcome the whole team owns, and how you will know.', 2)}
 ${people(['Name', 'Their goal', 'Growth move', 'By Day 30', 'By Day 60', 'By Day 90'], 6)}
 <div class="two">${field('What I need from my business unit leader', 'The ask, with the reason. Bring it to the capstone.', 3)}${field('What could get in the way', 'The risk you already see, and your first move on it.', 3)}</div>
 <h3>The five-minute presentation</h3>
-${check(['One minute: the sentence at the center of my Integrated Management Model', 'Two minutes: the team goal and one person\'s plan, by name', 'One minute: the habit I have kept since week 1, and what changed', 'One minute: what I need from my business unit leader'])}
+${check(['One minute: the sentence at the center, my Philosophy from week 1', 'Two minutes: the team goal, how it serves the mission line, and one person\'s plan by name', 'One minute: the habit I kept, which expectation it serves, and what the team noticed', 'One minute: what I need from my business unit leader', 'Then three minutes of challenge: one goal, one move, one date'])}
 </section>`);
 
 /* capstone */
 H.push(`<section class="page">
-${weekHead('', 'The capstone, and after', 'Week 4 · hybrid · two hours', 'Before you present, take the pulse again and compare it with your prework answers. Then the six-month checkpoint.')}
+${weekHead('', 'The capstone, and after', 'Week 4 · in the classroom · two hours', 'Before you present, take the pulse again and compare it with your answers from before week one. Then the 90-day reassessment date.')}
 <h3>The pulse, after</h3>
 <div class="scale">
 <span class="h">Conversation</span><span class="h">Not yet</span><span class="h">Confident</span>
@@ -221,11 +220,11 @@ ${weekHead('', 'The capstone, and after', 'Week 4 · hybrid · two hours', 'Befo
 <span>Having a performance conversation that is honest about the answer and specific about what changes it</span><span class="b"><i>1</i><i>2</i><i>3</i></span><span class="b"><i>4</i><i>5</i></span>
 </div>
 <h3>Capstone checklist</h3>
-${check(['Sections 1 to 4 finished', 'Integrated Management Model on one page', 'Team Development Plan with names and dates', 'Business unit leader invited, in the room or online', 'Five-minute presentation rehearsed in the Friday discussion'])}
+${check(['Sections 1 to 4 finished', 'Integrated Management Model on one page', 'Team Development Plan with names and dates', 'Business unit leader invited to the room for the presentations', 'Five-minute presentation rehearsed out loud once'])}
 <h3>After the cohort</h3>
-${check(['Reread this Playbook at Day 30 and Day 90 of the plan', 'Take the Manager Effectiveness Assessment again at six months and compare the score', 'Keep the Manager Portal open: templates, policy links, and who to call'])}
+${check(['Reread this Playbook at Day 30 and Day 90 of the plan', 'Rate the ten statements again at the 90-day reassessment and compare, expectation by expectation', 'Keep the Manager Portal open: templates, policy links, and who to call'])}
 <div class="sig"><div>Manager</div><div>Business unit leader</div><div>Date</div></div>
-<p class="small" style="margin-top:.6in">Vanderbilt University · People, Culture and Belonging · Futures Learning Hub. The Manager Playbook is the manager's own document. Deliverables are recorded in Oracle Learning; the Playbook itself is not collected.</p>
+<p class="small" style="margin-top:.6in">Vanderbilt University · People, Culture and Belonging · Futures Learning Hub. The Manager Playbook is the manager's own document. The Playbook itself is not collected; what you present in week four is the record.</p>
 </section>`);
 
 H.push('</body></html>');

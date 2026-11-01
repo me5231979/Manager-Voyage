@@ -171,56 +171,53 @@ window.MV_PROGRAM = {
   },
 
   /* -------- Component 03: cohort --------
-     The four-week program as mapped in September 2026: prework, then four
-     weeks in one rhythm (Core module, Learning Lab in SparkWise, Scenario
-     Studio in Yoodli, a virtual Manager Voyage discussion) grounded in the
-     Manager Playbook, with a hybrid kickoff and capstone. Core modules with
-     a url are LinkedIn Learning courses already in Oracle; the rest are
-     titles to add. Learning Lab titles are framed by topic until SparkWise
-     confirms them. Tool links come from MV_CONFIG.cohortLinks. */
+     The four-week program as built in November 2026 at /cohort/: week one
+     is a half day in the classroom, weeks two and three are remote and
+     capped at ninety minutes, week four is a two-hour capstone in the
+     classroom. Each remote week has a Core module in Oracle Learning, a
+     SparkWise Learning Lab, a simulation lab tailored to the manager's own
+     team, and five minutes on the Manager Playbook. The site itself
+     (cohort/program.js) is the source for timings and scenarios; this
+     block is the program-level summary. */
   cohort: {
-    id: 'COHORT', oracleCode: 'COHORT', oracleUrl: null, requestUrl: null,
+    id: 'COHORT', oracleCode: 'COHORT', oracleUrl: null, requestUrl: null, siteUrl: 'cohort/',
     title: 'Four-Week Cohort',
-    summary: 'Where skill development happens. One hundred managers a quarter, in the same weekly rhythm: a Core module opens the topic, a Learning Lab works it with peers, a Scenario Studio rehearses the conversation, and a virtual Manager Voyage discussion closes the week around your Manager Playbook. A hybrid kickoff opens the four weeks and a hybrid capstone closes them.',
-    prerequisite: 'You arrive having finished the Foundation course. The cohort builds on its four categories, its habits, and its people rather than reteaching them.',
+    summary: 'Where skill development happens. One hundred managers a quarter practice the Vanderbilt Manager Standard with their own teams: a half day in the classroom, two remote weeks of under ninety minutes each, and a two-hour capstone where every manager presents a Manager Playbook and how they will lead. Every scenario is tailored to the team the manager runs, hourly or salaried, dining or IT.',
+    prerequisite: 'You arrive having finished Manager Foundations. The cohort is the 201 and 301: it practices the four expectations with your team rather than reteaching them.',
     eligibility: 'Open to any manager who has completed the compliance courses and Manager Foundations. Oracle sends the invitation on completion.',
     rhythm: [
-      { beat: 'Core module', when: 'By Monday', mins: '45 to 60 min', desc: 'A LinkedIn Learning course in Oracle Learning sets the topic and the vocabulary. Released at the close of the previous Friday, so it is prework for the week it serves.' },
-      { beat: 'Learning Lab', tool: 'SparkWise', when: 'Tuesday or Wednesday', mins: '45 min, live', desc: 'A facilitated small-group peer lab on the same topic, working a live case from someone\'s real team.' },
-      { beat: 'Scenario Studio', tool: 'Yoodli', when: 'Thursday', mins: '15 min', desc: 'The week\'s conversation, rehearsed with an AI counterpart grounded in Vanderbilt policy. From week 2.' },
-      { beat: 'Manager Voyage discussion', when: 'Friday', mins: '30 min, virtual; 60 in weeks 1 and 4', desc: 'FLH-facilitated. What happened when you tried it, what your Playbook section says now, what you commit to next week.' }
+      { beat: 'Core module', when: 'Released Friday', mins: '30 to 35 min', desc: 'A short course in Oracle Learning sets the vocabulary for the week. Difficult conversations, coaching skills, performance management.' },
+      { beat: 'Learning Lab', tool: 'SparkWise', when: 'Your own time', mins: '40 to 45 min', desc: 'A guided small-group lab with other managers in the cohort: conversation prep in week two, delegation and coach-or-correct in week three.' },
+      { beat: 'Simulation lab', when: 'On your phone', mins: '10 min', desc: 'A live voice conversation with Sam, Dev, Priya, or Marcus, written for the manager\'s own team and scored on what was said and not said. A tap version for rooms without microphones.' },
+      { beat: 'Playbook', when: 'Due Sunday', mins: '5 min', desc: 'One section a week, saved on the site and finished in the printed Playbook. Presented whole at the capstone.' }
     ],
-    playbookNote: 'The Manager Playbook is the through-line: one section drafted each week and due by Sunday, then the whole thing presented at the capstone.',
+    playbookNote: 'The Manager Playbook is the through-line: started in the classroom, one section drafted each week, and the whole thing presented in week four.',
     weeks: [
-      { n: 0, title: 'Prework', when: 'The week before the kickoff', outcome: 'Everyone arrives from the same place. About ninety minutes on your own time, so the kickoff hour is spent on identity and norms, not on a course.',
-        core: { title: 'New Manager Foundations', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300002857233710', note: 'The identity shift, the first conversations with a team, and the habits that separate managers who settle in from those who stay stuck.' },
-        playbook: { title: 'The first sentence of your Philosophy', desc: 'One sentence: what your team can expect from you. Written before the kickoff and read aloud there.' },
-        extra: { title: 'The pulse, and the calendar', desc: 'Three questions on how confident you feel in the four conversations the cohort rehearses, asked again at the capstone. Then accept the calendar holds for all four weeks.' } },
-      { n: 1, title: 'What it means to manage', outcome: 'Establishes the why before the how. By Friday you can say, in one sentence, what your team can expect from you.',
-        live: { title: 'Kickoff, one hour, hybrid', when: 'Monday, in the room or online, location TBD', desc: 'The cohort meets. Management identity in one story from a Vanderbilt manager a year in, cohort norms, the Playbook introduced, and your Philosophy sentence read aloud and sharpened.' },
-        lab: { title: 'Psychological safety: make the truth cheap to tell', desc: 'Live case: a team member brought bad news late, and the manager\'s first reaction decided whether it would happen again. Name the one reaction on your own team you would change.' },
-        studio: null,
-        discussion: { mins: 60, items: ['Debrief the kickoff and the Learning Lab: what surprised you.', 'Read your Philosophy sentence; a peer answers what your team would notice by Friday if it were true.', 'Commit: one thing you will say to your team on Monday.'] },
-        playbook: { title: 'Section 1: Manager Philosophy', desc: 'One page: the three things your team can expect from you, what you say when bad news lands, and your intent for the next 90 days.' } },
-      { n: 2, title: 'Goal setting, 1:1s, and difficult conversations', outcome: 'Builds daily operating discipline. By Friday you have a 1:1 cadence on the calendar, three goals per person drafted, and one hard conversation held.',
-        core: { title: 'How to Manage Difficult Conversations', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001635326767', note: 'Saying what you noticed, what you expect, and by when, without hinting. The 1:1 and goal-setting pieces are in Go deeper.' },
-        lab: { title: 'Conversation prep: the hard conversation you are holding', desc: 'Bring one real conversation you have been putting off. Peers help frame it in three lines: what you noticed, what you expect, what you need by when. Then three goals for one person, tested for clear-is-kind.' },
-        studio: { title: 'The 1:1 that turns into a difficult conversation', desc: 'Dev has missed two deadlines and opens the 1:1 as if nothing is wrong. Say the observation, the expectation, and the date, and ask what he needs. Scored on specificity, hedging, and whether the date is said out loud.' },
-        discussion: { mins: 30, items: ['The conversation you held this week, in one minute, and what you would say differently.', 'Three 1:1 frameworks on screen; steal one thing from a peer\'s.', 'Commit: the 1:1 cadence goes on the calendar before Monday.'] },
-        playbook: { title: 'Section 2: 1:1 framework and conversation plan', desc: 'Your 1:1 cadence and agenda, what you check in the meeting, three goals per person for this quarter, and the opening sentence of the conversation you rehearsed.' } },
-      { n: 3, title: 'Coaching and mentoring', outcome: 'Shifts you from directing to developing. By Friday you have handed over one real decision and held one coaching conversation that was mostly questions.',
-        core: { title: 'Coaching Skills for Leaders and Managers', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002857610240&learningItemType=ORA_COURSE', note: 'Asking instead of telling, the coaching conversation, and when to coach versus correct.' },
-        lab: { title: 'Delegation lab and coach-or-correct lab', desc: 'Two cases in one session: what you will hand off this month, to whom, at which rung of the ladder, with what boundary; then a real performance pattern and whether it needs coaching or correcting.' },
-        studio: { title: 'A coaching conversation, then a handoff', desc: 'Priya wants to grow into a lead role and expects you to tell her how. Practice GROW, then hand her the decision about the intake process with one boundary and a check-in date.' },
-        discussion: { mins: 30, items: ['The decision you delegated this week and what happened when you did not take it back.', 'One coach-or-correct case from the lab, decided together.', 'Commit: the stretch assignment you will offer one person next week.'] },
-        playbook: { title: 'Section 3: Delegation and growth plan', desc: 'For each person: where they want to be in two years, one stretch assignment toward it, their rung on the delegation ladder and the next one, and your coaching cadence.' } },
-      { n: 4, title: 'Performance management and developing talent', outcome: 'Closes the loop from learning to leading. At the capstone you present a finished Playbook, a one-page Integrated Management Model, and a 90-day Team Development Plan.',
-        core: { title: 'Performance Management Foundations for Managers', by: 'Vanderbilt, in Oracle Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329264&learningItemType=ORA_CLASS', note: 'The Vanderbilt process: performance management, leading with goals, and effective one-on-ones. Skip if you completed it in your first 60 days; the Scenario Studio is the week\'s work.' },
-        lab: { title: 'Team development accountability lab', desc: 'Present your draft 90-day Team Development Plan to four peers in five minutes; they challenge one goal, one growth move, and one date. The plan that survives is the one you present at the capstone.' },
-        studio: { title: 'Two performance conversations', desc: 'Marcus, a strong performer, expects a promotion you cannot give this cycle: honest about the cycle, specific about what would change the answer, a growth move he can start now. Then redirecting feedback on a pattern a talk did not fix.' },
-        discussion: { mins: 60, items: ['Rehearse the five-minute capstone presentation: the Integrated Management Model, then the Team Development Plan.', 'One piece of feedback each, using situation, behavior, impact.', 'The Playbook is declared finished, or the one section that is not gets a date.'] },
-        live: { title: 'Capstone, two hours, hybrid', when: 'In the room or online', desc: 'Present the Integrated Management Model and the Team Development Plan to peers and your business unit leader. Deliverables are recorded in Oracle Learning against your job profile.' },
-        playbook: { title: 'Section 4: Performance practice, and the whole Playbook finished', desc: 'How you run the performance cycle, your feedback approach, and how you handle a concern from first conversation to written step. Plus the two capstone deliverables.' } }
+      { n: 0, title: 'Before week one', when: 'About twenty minutes, on your own', outcome: 'Everyone arrives from the same place.',
+        core: null, lab: null, sim: null,
+        playbook: { title: 'Set your team, and the first sentence', desc: 'The team profile on the cohort site (area, hourly or salaried, size), the four-question confidence pulse, and one sentence: what your team can expect from you.' } },
+      { n: 1, title: 'What it means to manage', when: 'In the classroom, half a day', expectation: '03 · Make things better',
+        live: { title: 'In the classroom, three hours', desc: 'The mission, your voyage on a timeline, the standard sorted from your own week, how to lead in your area, and the hard conversation out loud: in pairs, then live with Sam.' },
+        core: null,
+        lab: { title: 'In the room: timeline, sort, and lead activities', desc: 'Interactive on each manager\'s phone: a timeline from the work you were hired for to year one; a week of your own work sorted into the four expectations; which expectation your team needs most, and the habit that serves it.' },
+        sim: { title: 'The hard conversation, with Sam', desc: 'Sam missed the work twice this month and nobody said so. Three lines, said in private, then the question that fixes it. Pairs first, then live.' },
+        playbook: { title: 'Section 1: Manager Philosophy', desc: 'The mission line, seven timeline lines, what your team can expect from you, what you say when bad news lands, and your 90-day intent.' } },
+      { n: 2, title: 'Goals, 1:1s, and difficult conversations', when: 'Remote, under ninety minutes', expectation: '01 · Get the work done, through your team',
+        core: { title: 'How to Manage Difficult Conversations', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001635326767', mins: 30 },
+        lab: { title: 'Conversation prep, with peers', desc: 'Bring the one you have been putting off; leave with it framed in three lines.' },
+        sim: { title: 'The 1:1 that turns difficult, with Dev', desc: 'Dev has missed two dates and opens as if nothing is wrong. Keep the 1:1 theirs, then say it.' },
+        playbook: { title: 'Section 2: 1:1 framework and conversation plan', desc: 'Cadence and agenda, three goals per person this quarter, the opening sentence of the conversation you are holding.' } },
+      { n: 3, title: 'Coaching and mentoring', when: 'Remote, under ninety minutes', expectation: '02 · Take care of your people',
+        core: { title: 'Coaching Skills for Leaders and Managers', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002857610240&learningItemType=ORA_COURSE', mins: 35 },
+        lab: { title: 'Delegation lab, and coach or correct', desc: 'What you will hand off this month, to whom, at which rung of the ladder, with what boundary.' },
+        sim: { title: 'Coach, then hand it over, with Priya', desc: 'Priya wants to grow and expects you to tell her how. Ask first. Then hand her a real decision with one boundary and a date.' },
+        playbook: { title: 'Section 3: Delegation and growth plan', desc: 'One line per person: where they want to be, one stretch assignment, their rung and the next one.' } },
+      { n: 4, title: 'Performance, talent, and your Playbook', when: 'In the classroom, two hours', expectation: '04 · Connect your team to the rest of Vanderbilt',
+        live: { title: 'The capstone, in the classroom, two hours', desc: 'The standard read back against three weeks, the performance conversation with Marcus, and five minutes each to present the Playbook and how you will manage, challenged by peers and heard by your business unit leader.' },
+        core: { title: 'Performance Management Foundations for Managers', by: 'Vanderbilt, in Oracle Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329264&learningItemType=ORA_CLASS', mins: 30 },
+        lab: { title: 'In the room: recap and presentations', desc: 'Peers challenge one goal, one move, one date. The pulse is taken a second time beside the week-one answers.' },
+        sim: { title: 'The performance conversation, with Marcus', desc: 'Marcus expects a promotion you cannot give this cycle. Honest about the answer, specific about what would change it, a growth move that starts now.' },
+        playbook: { title: 'Section 4: Performance practice, and the whole Playbook', desc: 'How you run the cycle, your feedback approach, the Integrated Management Model, and the 90-day Team Development Plan.' } }
     ],
     /* Go deeper: after the program, for the manager who wants more on a week's topic.
        Inside Vanderbilt is Oracle Learning (LinkedIn Learning titles; url null means to add). */
@@ -248,11 +245,11 @@ window.MV_PROGRAM = {
     deliverables: [
       { title: 'Manager Playbook', desc: 'Your written personal operating system: philosophy, 1:1 framework, delegation and growth plan, performance practice. One section a week.' },
       { title: 'Integrated Management Model', desc: 'A one-page model of how the four weeks connect for you. Synthesis, not attendance.' },
-      { title: 'Team Development Plan', desc: 'A 90-day plan for your actual team: names, goals, growth moves. Challenged by peers in week 4, presented at the capstone.' }
+      { title: 'Team Development Plan', desc: 'A 90-day plan for your actual team: names, goals, growth moves. Challenged by peers in week 4 and presented in the same hour to the business unit leader.' }
     ],
     tools: [
-      { name: 'Learning Lab, in SparkWise', key: 'sparkwise', desc: 'Facilitated small-group peer labs on a live case, 45 minutes, on the week\'s topic.' },
-      { name: 'Scenario Studio, in Yoodli', key: 'yoodli', desc: 'AI conversation rehearsal with a simulated team member, with feedback on clarity, pace, and the rubric.' },
+      { name: 'Learning Lab, in SparkWise', key: 'sparkwise', desc: 'Guided small-group peer labs in the two remote weeks, 40 to 45 minutes, on the week\'s topic.' },
+      { name: 'Simulation labs', key: 'sim', desc: 'Live voice conversations with Sam, Dev, Priya, and Marcus, tailored to the manager\'s own team and scored on what was said. A tap version for rooms without microphones.' },
       { name: 'The Manager Playbook', key: 'playbook', desc: 'The template you build one section a week and present at the capstone.' },
       { name: 'AI Chat Agents', key: 'agents', desc: 'FLH-built agents, any hour, grounded in Vanderbilt policy and the Manager Standard.' }
     ]

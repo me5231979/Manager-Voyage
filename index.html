@@ -584,27 +584,27 @@
 
   <section class="comp" id="c-cohort">
     <div class="wrap">
-      <div class="comp__head"><div><p class="eyebrow rv">Component 03</p><h2>The four-week <em>cohort</em>.</h2><p class="lead">The cohort is where managers practice the skills from Foundations with their own teams. It runs for four weeks, follows the same weekly rhythm, and serves one hundred managers each quarter.</p></div><div class="status"><span class="chip chip--opt">Optional but recommended</span><b>Quarterly · 100 seats</b></div></div>
+      <div class="comp__head"><div><p class="eyebrow rv">Component 03</p><h2>The four-week <em>cohort</em>.</h2><p class="lead">The cohort is where managers practice the Vanderbilt Manager Standard with their own teams. A half day in the classroom, two remote weeks of under ninety minutes, and a two-hour capstone where every manager presents a Playbook, for one hundred managers each quarter. Every scenario is tailored to the team the manager runs.</p><p style="margin-top:1rem"><a class="btn" href="cohort/">Open the cohort site</a></p></div><div class="status"><span class="chip chip--opt">Optional but recommended</span><b>Quarterly · 100 seats</b></div></div>
       <details class="acc" open><summary>Who can join, and when</summary><div class="acc__body">
         <p>The cohort is open to any manager who has completed the compliance courses and Manager Foundations. Oracle sends the invitation when the Day 60 requirements are complete.</p>
         <p>Units outside the central budget are billed per seat.</p>
       </div></details>
-      <details class="acc"><summary>The weekly rhythm <small>The same four activities every week</small></summary><div class="acc__body">
+      <details class="acc"><summary>The remote weeks <small>Four parts, under ninety minutes</small></summary><div class="acc__body">
         <div class="cards cards--4" id="rhythm" style="margin-top:.5rem"></div>
-        <p class="note">The Manager Playbook connects the four weeks. Managers draft one section each week and present the finished Playbook at the capstone.</p>
+        <p class="note">The Manager Playbook connects the four weeks. Managers start it in the classroom, draft one section each week, and present the finished Playbook in week four. <a href="cohort/Manager-Playbook.pdf" target="_blank" rel="noopener">Manager Playbook (PDF)</a></p>
       </div></details>
       <details class="acc"><summary>Week by week</summary><div class="acc__body">
-        <div class="tblwrap"><table class="tbl" id="weekTable"><thead><tr><th>Week</th><th>Topic</th><th>Core module</th><th>Learning Lab</th><th>Scenario Studio</th><th>Discussion</th><th>Playbook</th></tr></thead><tbody></tbody></table></div>
+        <div class="tblwrap"><table class="tbl" id="weekTable"><thead><tr><th>Week</th><th>Topic</th><th>Core module</th><th>Learning Lab</th><th>Simulation lab</th><th>Playbook</th></tr></thead><tbody></tbody></table></div>
       </div></details>
       <details class="acc"><summary>What every participant produces</summary><div class="acc__body">
         <div class="cards" id="deliverables" style="margin-top:.5rem"></div>
       </div></details>
       <details class="acc"><summary>Logistics</summary><div class="acc__body">
         <ul>
-          <li><b>Kickoff.</b> A one-hour hybrid session on the Monday of week 1, in the room or online. The location is confirmed each quarter.</li>
-          <li><b>Capstone.</b> A two-hour hybrid session in week 4, where managers present their work to peers and their business unit leader.</li>
-          <li><b>Discussions.</b> Virtual sessions on Fridays, facilitated by the Futures Learning Hub: 60 minutes in weeks 1 and 4, 30 minutes in weeks 2 and 3.</li>
-          <li><b>Time.</b> About 90 minutes of prework, then two and a half to three hours a week, and about five hours in week 4 including the capstone.</li>
+          <li><b>Week one.</b> A half day in the classroom, facilitated by the Futures Learning Hub. The room runs from the cohort site on a screen, with a QR code for every page.</li>
+          <li><b>Weeks two and three.</b> Remote, on the manager's own time, capped at ninety minutes each.</li>
+          <li><b>Week four.</b> A two-hour capstone in the classroom, where managers present their Playbook and how they will manage to peers and their business unit leader.</li>
+          <li><b>Time.</b> About twenty minutes before week one, three hours in week one, under ninety minutes in each of weeks two and three, and two hours in week four.</li>
           <li><b>Tools.</b> <span id="toolsLine"></span></li>
         </ul>
       </div></details>
@@ -650,6 +650,7 @@
       <a href="foundation/">Foundation course</a>
       <a href="dashboard/#who">Who to call</a>
       <a href="#overview">About the program</a>
+      <a href="cohort/">The cohort</a>
       <a href="overview/">Overview deck and PDF</a>
     </nav>
     <span>© <span id="yr">2026</span> Vanderbilt University · Manager Voyage · People, Culture and Belonging</span>
@@ -689,10 +690,9 @@
   $('#rhythm').innerHTML = C.rhythm.map(function(r){ return '<div class="card"><span class="tag tag--ghost">' + esc(r.when) + '</span><h3>' + esc(r.beat) + (r.tool ? ' <small>in ' + esc(r.tool) + '</small>' : '') + '</h3><p>' + esc(r.desc) + '</p><small>' + esc(r.mins) + '</small></div>'; }).join('');
   $('#weekTable tbody').innerHTML = C.weeks.map(function(w){
     var dim = function(t){ return '<span style="opacity:.55">' + t + '</span>'; };
-    var cell = function(x, alt){ return x ? '<b>' + esc(x.title) + '</b>' + (x.by ? '<br><small>' + esc(x.by) + '</small>' : '') : dim(alt || 'none'); };
-    return '<tr><td><b>' + (w.n === 0 ? 'Prework' : 'Week ' + w.n) + '</b>' + (w.when ? '<br><small>' + esc(w.when) + '</small>' : '') + (w.live ? '<br><small>' + esc(w.live.title) + '</small>' : '') + '</td>' +
-      '<td><b>' + esc(w.title) + '</b></td><td>' + cell(w.core, w.n === 1 ? 'Covered by the prework' : 'none') + '</td><td>' + (w.n === 0 ? dim('none') : cell(w.lab)) + '</td><td>' + cell(w.studio, w.n === 1 ? 'Starts in week 2' : w.n === 0 ? 'none' : 'none') + '</td>' +
-      '<td>' + (w.discussion ? w.discussion.mins + ' min, virtual' : '<span style="opacity:.5">none</span>') + '</td><td>' + cell(w.playbook) + '</td></tr>';
+    var cell = function(x, alt){ return x ? '<b>' + esc(x.title) + '</b>' + (x.by ? '<br><small>' + esc(x.by) + '</small>' : x.desc ? '<br><small>' + esc(x.desc) + '</small>' : '') : dim(alt || 'none'); };
+    return '<tr><td><b>' + (w.n === 0 ? 'Before' : 'Week ' + w.n) + '</b>' + (w.when ? '<br><small>' + esc(w.when) + '</small>' : '') + (w.expectation ? '<br><small>Expectation ' + esc(w.expectation) + '</small>' : '') + '</td>' +
+      '<td><b>' + esc(w.title) + '</b></td><td>' + cell(w.core, w.n === 1 ? 'Covered by Foundations' : 'none') + '</td><td>' + cell(w.lab) + '</td><td>' + cell(w.sim) + '</td><td>' + cell(w.playbook) + '</td></tr>';
   }).join('');
   $('#deliverables').innerHTML = C.deliverables.map(function(d){ return '<div class="card"><h3>' + esc(d.title) + '</h3><p>' + esc(d.desc) + '</p></div>'; }).join('');
   $('#toolsLine').textContent = C.tools.map(function(t){ return t.name; }).join('; ') + '.';
