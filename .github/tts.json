@@ -1,13 +1,11 @@
 {
-  "_note": "ElevenLabs narration. The build workflow reads this file, generates every clip in foundation/narration-scripts.js with this voice, keeps the raw files in assets/audio/foundation/source, and rebuilds the course audio and videos. Change voice_id or voice_settings and push to re-record; only clips whose text or settings changed are regenerated. Pushing any change to this file re-runs the build. Voice: Sarah (warm, conversational, confident). Lower stability and a little style give natural pacing and inflection without sounding theatrical.",
-  "voice_id": "EXAVITQu4vr4xnSDxMaL",
-  "model_id": "eleven_multilingual_v2",
+  "_note": "ElevenLabs narration. The build workflow reads this file, generates every clip in foundation/narration-scripts.js with this voice, keeps the raw files in assets/audio/foundation/source, and rebuilds the course audio and videos. Change voice_id, model_id or voice_settings and push to re-record; only clips whose text or settings changed are regenerated. Pushing any change to this file re-runs the build. Model eleven_v3 for natural pacing and emphasis; v3 accepts stability 0.0 (creative), 0.5 (natural) or 1.0 (robust) only.",
+  "voice_id": "uju3wxzG5OhpWcoi3SMy",
+  "model_id": "eleven_v3",
   "output_format": "mp3_44100_128",
   "voice_settings": {
-    "stability": 0.42,
-    "similarity_boost": 0.75,
-    "style": 0.22,
-    "use_speaker_boost": true
+    "stability": 0.5,
+    "similarity_boost": 0.75
   },
   "audio_filter": "highpass=f=70"
 }
