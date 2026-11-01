@@ -67,6 +67,17 @@ window.MV_CONFIG = {
     'Hold one ten-minute look-back after a piece of work.',
     'Have coffee with one person your team depends on.'
   ],
+  /* The Vanderbilt Manager Standard, and how the ten statements map onto it: expectation, Yukl's category,
+     the behaviors inside it, and which statements measure it. Statement indexes point into assessmentStatements. */
+  standard: [
+    { n:'01', name:'Get the work done, through your team', yukl:'Task-oriented behavior', behaviors:['Planning (plan it)', 'Clarifying (say it)', 'Monitoring (check it)', 'Problem solving (fix it)'], statements:[0, 1, 2] },
+    { n:'02', name:'Take care of your people', yukl:'Relations-oriented behavior', behaviors:['Supporting (listen and help)', 'Developing (grow them)', 'Recognizing (thank them)', 'Empowering (trust them)'], statements:[3, 4, 5] },
+    { n:'03', name:'Make things better', yukl:'Change-oriented behavior', behaviors:['Advocating change (explain the why)', 'Envisioning change (describe where you are going)', 'Encouraging innovation (let people try)', 'Facilitating collective learning (look back)'], statements:[6, 7] },
+    { n:'04', name:'Connect your team to the rest of Vanderbilt', yukl:'External behavior', behaviors:['Networking (know the people)', 'External monitoring (watch for what is coming)', 'Representing (speak up for your team)'], statements:[8, 9] }
+  ],
+  /* The Yukl behavior each statement measures, in statement order. */
+  statementBehaviors: ['Planning', 'Clarifying', 'Monitoring', 'Supporting', 'Recognizing', 'Empowering', 'Advocating change', 'Facilitating collective learning', 'External monitoring', 'Representing'],
+  standardSource: 'Adapted from Gary Yukl, Effective Leadership Behavior: What We Know and What Questions Need More Attention, Academy of Management Perspectives 26(4), 2012. The four expectations are Yukl\u2019s four categories and the fifteen behaviors are his fifteen. Each assessment statement is one behavior written as something a manager does in a normal week. Five behaviors have no statement of their own (problem solving, developing, envisioning change, encouraging innovation, networking), so the ten statements sample the standard; the course teaches all fifteen. A self-reflection tool, not a validated instrument, and not a performance evaluation.',
   /* The ten statements, in the Form's order, word for word. */
   assessmentStatements: [
     ['Priorities',     'I write down my team\u2019s top three priorities for the coming period, with a named owner for each, before the work starts.'],

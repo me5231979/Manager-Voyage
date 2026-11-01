@@ -51,7 +51,7 @@
 .linkish{ background:none; border:0; padding:0; color:var(--vu-gold); font:inherit; text-decoration:underline; cursor:pointer; }
 .oracle-modal.gate{ max-height:calc(100vh - 48px); overflow:auto; width:min(980px, calc(100vw - 32px)); max-width:none; }
 .oracle-modal.gate .gate-q .scale{ grid-template-columns:repeat(5,1fr); }
-@media (min-width:900px){ .oracle-modal.gate .gate-q li{ grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); align-items:center; } .oracle-modal.gate .gate-q li b{ grid-column:1; } .oracle-modal.gate .gate-q li p{ grid-column:1; } .oracle-modal.gate .gate-q li .scale{ grid-column:2; grid-row:1 / span 2; } }
+@media (min-width:900px){ .oracle-modal.gate .gate-q li{ grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); align-items:center; } .oracle-modal.gate .gate-q li.gate-grp{ grid-template-columns:1fr; } .oracle-modal.gate .gate-q li b{ grid-column:1; } .oracle-modal.gate .gate-q li p{ grid-column:1; } .oracle-modal.gate .gate-q li .scale{ grid-column:2; grid-row:1 / span 2; } }
 .gate-view[hidden]{ display:none !important; }
 .gate-who{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0 4px; }
 .gate-who label{ display:grid; gap:4px; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); }
@@ -1069,6 +1069,28 @@ html.paged .idea .try .scn{ margin-top:0; }
 .job-h .mono{ font-size:.72rem; }
 .v-std{ margin:14px 0 0; max-width:62ch; font-size:.95rem; line-height:1.5; color:rgba(255,255,255,.82); border-left:3px solid var(--vu-gold); padding-left:12px; }
 .v-std b{ color:var(--vu-gold); font-weight:600; }
+.std-src{ margin-top:18px; }
+.std-src-in{ padding:4px 0 16px; }
+.std-lead{ margin:0 0 12px; font-size:.98rem; line-height:1.5; color:rgba(255,255,255,.85); max-width:80ch; }
+.std-tblwrap{ overflow-x:auto; }
+.std-table{ width:100%; border-collapse:collapse; font-size:.9rem; line-height:1.45; }
+.std-table th{ text-align:left; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); padding:8px 12px 8px 0; border-bottom:1px solid rgba(207,174,112,.5); vertical-align:bottom; }
+.std-table td{ padding:10px 12px 10px 0; border-bottom:1px solid rgba(255,255,255,.12); vertical-align:top; color:rgba(255,255,255,.82); }
+.std-table td b{ color:#fff; font-weight:600; }
+.std-table td i{ font-style:normal; color:var(--vu-gold); }
+.std-note{ margin:12px 0 0; font-size:.85rem; line-height:1.5; color:rgba(255,255,255,.62); max-width:90ch; }
+.std-map{ margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; }
+.std-map .sm-grp{ border-top:2px solid var(--vu-gold); padding-top:8px; }
+.std-map .sm-grp > b{ display:block; font-family:var(--cond); font-weight:700; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); }
+.std-map .sm-y{ display:block; font-size:.8rem; color:rgba(255,255,255,.55); margin:2px 0 6px; }
+.std-map ol{ margin:0; padding-left:22px; display:grid; gap:6px; }
+.std-map li{ font-size:.88rem; line-height:1.4; color:rgba(255,255,255,.85); }
+.std-map li i{ display:block; font-style:normal; font-family:var(--cond); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); margin-top:2px; }
+.ar-cats .ar-st{ grid-column:1 / -1; display:block; font-size:.78rem; line-height:1.35; color:rgba(255,255,255,.6); margin-top:-2px; }
+.gate-q li.gate-grp{ border:0; padding:10px 0 0; gap:2px; }
+.gate-q li.gate-grp b{ font-size:.78rem; color:#fff; }
+.gate-q li.gate-grp span{ font-size:.8rem; color:rgba(255,255,255,.6); }
+@media (max-width:760px){ .std-map{ grid-template-columns:1fr; } }
 .std-tag{ display:inline-block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); border:1px solid rgba(207,174,112,.5); border-radius:999px; padding:3px 9px; margin:0 0 8px; }
 /* pick one habit */
 .habit-box{ margin-top:14px; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 16px 14px; }
@@ -1437,6 +1459,7 @@ html.paged .idea .try .scn{ margin-top:0; }
       </div>
     </div>
     <p class="fw-status" id="fwStatus" role="status" aria-live="polite">0 of 4 expectations opened.</p>
+    <details class="idea-more std-src" id="stdSrc"><summary>Where the standard comes from, and how the assessment measures it</summary><div class="std-src-in" id="stdSrcBody"></div></details>
     </div>
 <section id="task" class="job-pane" data-job="task" role="tabpanel" aria-label="Expectation 01: get the work done" hidden>
   <div class="jwrap">
@@ -1544,7 +1567,8 @@ html.paged .idea .try .scn{ margin-top:0; }
           <span class="sk">Taken before Manager Voyage &middot; again 90 days after completion</span>
           <div>
             <h4>The Manager Effectiveness Assessment</h4>
-            <p>Ten statements about what you actually do, each rated from never to always. Each statement is one behavior from the standard, and the ten are scored by expectation: three for getting the work done, three for taking care of your people, two for making things better, two for connecting your team.</p>
+            <p>Ten statements about what you actually do, each rated from never to always. Each statement is one behavior from the Vanderbilt Manager Standard, scored by expectation. Here is the whole map: the four expectations, the ten statements under them, and the behavior each one measures.</p>
+            <div class="std-map" id="stdMap"></div>
           </div>
         </div>
         <div class="week" style="margin-top:12px"><b>Where you need to be</b>The score is a direction, not a grade. Every point up is a behavior you do more often. The aim is a higher rating on all ten when you take it again in 90 days.</div>
@@ -1646,7 +1670,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   <div class="wrap">
     <div class="fcenter">
       <img src="../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.11.01.a</span></p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.11.01.b</span></p>
       <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The Vanderbilt Manager Standard&rsquo;s four expectations and fifteen behaviors are adapted from Yukl&rsquo;s taxonomy (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. About the program</p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>
@@ -1718,7 +1742,7 @@ html.paged .idea .try .scn{ margin-top:0; }
   </div>
 </div>
 
-<script src="../assets/js/config.js?v=20261031a"></script>
+<script src="../assets/js/config.js?v=20261101b"></script>
 <script src="../assets/js/program-data.js?v=20260916b"></script>
 <script src="../assets/js/scorm.js?v=20260912p"></script>
 <script src="../assets/js/oracle.js?v=20261027x"></script>
@@ -1726,7 +1750,7 @@ html.paged .idea .try .scn{ margin-top:0; }
 <script src="resources.js?v=20260912p"></script>
 <script src="../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20260916a"></script>
-<script src="../assets/js/email.js?v=20261031a"></script>
-<script src="app.js?v=20261101a"></script>
+<script src="../assets/js/email.js?v=20261101b"></script>
+<script src="app.js?v=20261101b"></script>
 </body>
 </html>

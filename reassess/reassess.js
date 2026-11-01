@@ -50,7 +50,8 @@
 
   /* the ten statements */
   var qsEl = $('qs');
-  qsEl.innerHTML = ST.map(function(st, i){ return '<li data-li="' + i + '"><b>' + (i + 1) + ' · ' + esc(st[0]) + '</b><p>' + esc(st[1]) + '</p><div class="scale" role="group" aria-label="' + esc(st[0]) + '">' + SCALE.map(function(l, j){ return '<button type="button" data-q="' + i + '" data-v="' + j + '" aria-pressed="false">' + esc(l) + '</button>'; }).join('') + '</div></li>'; }).join('');
+  var STD = C.standard || [], BEH = C.statementBehaviors || [];
+  qsEl.innerHTML = ST.map(function(st, i){ var g = STD.filter(function(s){ return s.statements[0] === i; })[0]; return (g ? '<li class="grp"><b>Expectation ' + esc(g.n) + ' · ' + esc(g.name) + '</b><span>' + esc(g.yukl) + ' · ' + g.statements.length + ' statements</span></li>' : '') + '<li data-li="' + i + '"><b>' + (i + 1) + ' · ' + esc(st[0]) + (BEH[i] ? ' · measures ' + esc(BEH[i].toLowerCase()) : '') + '</b><p>' + esc(st[1]) + '</p><div class="scale" role="group" aria-label="' + esc(st[0]) + '">' + SCALE.map(function(l, j){ return '<button type="button" data-q="' + i + '" data-v="' + j + '" aria-pressed="false">' + esc(l) + '</button>'; }).join('') + '</div></li>'; }).join('');
   qsEl.addEventListener('click', function(e){
     var b = e.target.closest('button[data-q]'); if(!b) return;
     var i = +b.getAttribute('data-q'); ans[i] = +b.getAttribute('data-v');

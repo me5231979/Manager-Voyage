@@ -139,7 +139,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20261101a';
+var MEDIA_V = '20261101b';
 /* the course videos carry their own narration: nothing else should talk over them, and they should not talk over anything else */
 function pauseVideos(){ $$('video').forEach(function(v){ if(v.id !== 'heroVideo' && !v.paused){ try{ v.pause(); }catch(e){} } }); }
 function narrPlay(k){
@@ -1003,6 +1003,21 @@ var IDEAS = [
 })();
 
 
+/* ══════════ the standard, articulated: where it comes from and how the ten statements measure it ══════════ */
+(function(){
+  var C = window.MV_CONFIG || {}, STD = C.standard || [], ST = C.assessmentStatements || [], BEH = C.statementBehaviors || [];
+  var src = $('#stdSrcBody'), map = $('#stdMap');
+  if(src && STD.length){
+    src.innerHTML = '<p class="std-lead">The Vanderbilt Manager Standard is adapted from Gary Yukl’s research on what effective managers actually do. Yukl sorted leadership behavior into four categories with fifteen behaviors inside them. The four expectations are those four categories. The fifteen flip cards are his fifteen behaviors. And each of the ten assessment statements is one of those behaviors, written as something you do in a normal week. When you see your score by expectation, you are seeing yourself against this page.</p>' +
+      '<div class="std-tblwrap"><table class="std-table"><thead><tr><th>Expectation</th><th>Yukl’s category</th><th>The behaviors inside it</th><th>The assessment statements that measure it</th></tr></thead><tbody>' +
+      STD.map(function(s){ return '<tr><td><b>' + s.n + ' · ' + esc(s.name) + '</b></td><td>' + esc(s.yukl) + '</td><td>' + s.behaviors.map(esc).join('<br>') + '</td><td>' + s.statements.map(function(i){ return ST[i] ? '<b>' + (i + 1) + ' · ' + esc(ST[i][0]) + '</b> <i>measures ' + esc((BEH[i] || '').toLowerCase()) + '</i>' : ''; }).join('<br>') + '</td></tr>'; }).join('') +
+      '</tbody></table></div><p class="std-note">' + esc(C.standardSource || '') + '</p>';
+  }
+  if(map && STD.length){
+    map.innerHTML = STD.map(function(s){ return '<div class="sm-grp"><b>' + s.n + ' · ' + esc(s.name) + '</b><span class="sm-y">' + esc(s.yukl) + ' · ' + s.statements.length + ' statements</span><ol>' + s.statements.map(function(i){ return ST[i] ? '<li value="' + (i + 1) + '"><span>' + esc(ST[i][1]) + '</span><i>Measures ' + esc(BEH[i] || ST[i][0]) + '</i></li>' : ''; }).join('') + '</ol></div>'; }).join('');
+  }
+})();
+
 /* ══════════ the four categories: one page, five tabs, each category with its own clip ══════════ */
 (function(){
   var box = $('#welcome'); if(!box) return;
@@ -1305,7 +1320,7 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     var when = rec.at ? new Date(rec.at).toLocaleDateString(undefined, { month:'long', day:'numeric', year:'numeric' }) : '';
     var delta = base ? rec.score - base.score : null;
     return '<div class="ar"><div class="ar-top"><span class="ar-score">' + rec.score + '<small>of ' + rec.max + '</small></span><div><h4>' + (rec.phase === 'retake' ? 'Three months on, against the Vanderbilt Manager Standard' : 'Your starting point against the Vanderbilt Manager Standard') + (when ? ' &middot; ' + esc(when) : '') + (delta !== null ? ' <span class="ar-delta' + (delta < 0 ? ' down' : '') + '">' + (delta >= 0 ? '+' : '') + delta + ' since you started</span>' : '') + '</h4><p>' + (hi && lo && hi.avg === lo.avg ? 'All four categories at the same level. Start with: ' + esc(lo.k.toLowerCase()) + '.' : 'Strongest: ' + esc(hi ? hi.k.toLowerCase() : '') + '. Start with: ' + esc(lo ? lo.k.toLowerCase() : '') + '.') + '</p></div></div>' +
-      '<ul class="ar-cats">' + cats.map(function(c, i){ var bd = band(c.avg), prev = base && base.categories && base.categories[i]; var d = prev ? Math.round((c.avg - prev.avg) * 10) / 10 : null; return '<li><span class="ar-l">' + esc(c.k) + '</span><span class="ar-v">' + c.avg.toFixed(1) + '<small>of 5</small>' + (d !== null ? '<span class="ar-delta' + (d < 0 ? ' down' : '') + '">' + (d >= 0 ? '+' : '') + d.toFixed(1) + '</span>' : '') + '</span><span class="ar-bar"><i style="width:' + c.pct + '%"></i>' + (prev ? '<em style="left:' + prev.pct + '%" title="Starting point"></em>' : '') + '</span><span class="ar-f"><b>' + esc(bd[1]) + '</b>' + esc(bd[2]) + '</span></li>'; }).join('') + '</ul>' +
+      '<ul class="ar-cats">' + cats.map(function(c, i){ var bd = band(c.avg), prev = base && base.categories && base.categories[i]; var d = prev ? Math.round((c.avg - prev.avg) * 10) / 10 : null; var sg = (C.standard || [])[i]; return '<li><span class="ar-l">' + (sg ? esc(sg.n) + ' · ' : '') + esc(c.k) + '</span><span class="ar-v">' + c.avg.toFixed(1) + '<small>of 5</small>' + (d !== null ? '<span class="ar-delta' + (d < 0 ? ' down' : '') + '">' + (d >= 0 ? '+' : '') + d.toFixed(1) + '</span>' : '') + '</span><span class="ar-bar"><i style="width:' + c.pct + '%"></i>' + (prev ? '<em style="left:' + prev.pct + '%" title="Starting point"></em>' : '') + '</span><span class="ar-f"><b>' + esc(bd[1]) + '</b>' + esc(bd[2]) + '</span>' + (sg ? '<small class="ar-st">Statements ' + sg.statements.map(function(k){ return k + 1; }).join(', ') + ': ' + sg.statements.map(function(k){ return (ST[k] || [''])[0].toLowerCase(); }).join(', ') + '. ' + esc(sg.yukl) + '.</small>' : '') + '</li>'; }).join('') + '</ul>' +
       (MOVES[loIdx] ? '<div class="ar-move"><b>Your first move</b>' + esc(MOVES[loIdx]) + '</div>' : '') + '</div>';
   }
   function show(){ narr.hold = true; narr.pending = false; if(narr.playing) narrStop(); m.hidden = false; if(reduce) m.classList.add('open'); else window.requestAnimationFrame(function(){ m.classList.add('open'); }); document.body.classList.add('oracle-open'); }
@@ -1314,7 +1329,8 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   var q = $('#gateQ', m), send = $('#assessSend', m), nameEl = $('#gateName', m), mailEl = $('#gateEmail', m);
   function build(){
     if(loaded) return; loaded = true;
-    q.innerHTML = ST.map(function(st, i){ return '<li><b>' + (i + 1) + ' &middot; ' + esc(st[0]) + '</b><p>' + esc(st[1]) + '</p><div class="scale" role="group" aria-label="' + esc(st[0]) + '">' + SCALE.map(function(l, j){ return '<button type="button" data-q="' + i + '" data-v="' + j + '" aria-pressed="false">' + esc(l) + '</button>'; }).join('') + '</div></li>'; }).join('');
+    var STD = C.standard || [], BEH = C.statementBehaviors || [];
+    q.innerHTML = ST.map(function(st, i){ var g = STD.filter(function(s){ return s.statements[0] === i; })[0]; return (g ? '<li class="gate-grp"><b>Expectation ' + esc(g.n) + ' &middot; ' + esc(g.name) + '</b><span>' + esc(g.yukl) + ' &middot; ' + g.statements.length + ' statements</span></li>' : '') + '<li><b>' + (i + 1) + ' &middot; ' + esc(st[0]) + (BEH[i] ? ' &middot; measures ' + esc(BEH[i].toLowerCase()) : '') + '</b><p>' + esc(st[1]) + '</p><div class="scale" role="group" aria-label="' + esc(st[0]) + '">' + SCALE.map(function(l, j){ return '<button type="button" data-q="' + i + '" data-v="' + j + '" aria-pressed="false">' + esc(l) + '</button>'; }).join('') + '</div></li>'; }).join('');
     var who = {}; try{ who = JSON.parse(get('who') || '{}') || {}; }catch(e){}
     nameEl.value = who.name || (window.MVScorm && MVScorm.connected && MVScorm.name) || ''; mailEl.value = who.email || '';
     q.addEventListener('click', function(e){ var b = e.target.closest('button[data-q]'); if(!b) return; var i = b.getAttribute('data-q'); ans[i] = +b.getAttribute('data-v'); $$('button[data-q="' + i + '"]', q).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); ready(); });
