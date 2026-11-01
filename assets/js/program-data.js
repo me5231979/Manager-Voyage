@@ -172,7 +172,7 @@ window.MV_PROGRAM = {
 
   /* -------- Component 03: cohort --------
      The four-week program as built in November 2026 at /cohort/: week one
-     is a half day in the classroom, weeks two and three are remote and
+     is a half day in the classroom, weeks two and three are virtual and
      capped at ninety minutes, week four is a two-hour capstone in the
      classroom. Each remote week has a Core module in Oracle Learning, a
      SparkWise Learning Lab, a simulation lab tailored to the manager's own
@@ -182,8 +182,8 @@ window.MV_PROGRAM = {
   cohort: {
     id: 'COHORT', oracleCode: 'COHORT', oracleUrl: null, requestUrl: null, siteUrl: 'cohort/',
     title: 'Four-Week Cohort',
-    summary: 'Where skill development happens. One hundred managers a quarter practice the Vanderbilt Manager Standard with their own teams: a half day in the classroom, two remote weeks of under ninety minutes each, and a two-hour capstone where every manager presents a Manager Playbook and how they will lead. Every scenario is tailored to the team the manager runs, hourly or salaried, dining or IT.',
-    prerequisite: 'You arrive having finished Manager Foundations. The cohort is the 201 and 301: it practices the four expectations with your team rather than reteaching them.',
+    summary: 'Where skill development happens. One hundred managers a quarter practice the Vanderbilt Manager Standard with their own teams: a half day in the classroom, two virtual weeks of under ninety minutes each, and a two-hour capstone where every manager presents a Manager Playbook and how they will lead. Every scenario is tailored to the team the manager runs, hourly or salaried, dining or IT.',
+    prerequisite: 'You arrive having finished Manager Foundations. The cohort practices the four expectations with your team rather than reteaching them.',
     eligibility: 'Open to any manager who has completed the compliance courses and Manager Foundations. Oracle sends the invitation on completion.',
     rhythm: [
       { beat: 'Core module', when: 'Released Friday', mins: '30 to 35 min', desc: 'A short course in Oracle Learning sets the vocabulary for the week. Difficult conversations, coaching skills, performance management.' },
@@ -197,17 +197,17 @@ window.MV_PROGRAM = {
         core: null, lab: null, sim: null,
         playbook: { title: 'Set your team, and the first sentence', desc: 'The team profile on the cohort site (area, hourly or salaried, size), the four-question confidence pulse, and one sentence: what your team can expect from you.' } },
       { n: 1, title: 'What it means to manage', when: 'In the classroom, half a day', expectation: '03 · Make things better',
-        live: { title: 'In the classroom, three hours', desc: 'The mission, your voyage on a timeline, the standard sorted from your own week, how to lead in your area, and the hard conversation out loud: in pairs, then live with Sam.' },
+        live: { title: 'In the classroom, three hours', desc: 'The mission, your Manager Voyage on a timeline, the standard sorted from your own week, how to lead in your area, and the hard conversation out loud: in pairs, then live with Sam.' },
         core: null,
         lab: { title: 'In the room: timeline, sort, and lead activities', desc: 'Interactive on each manager\'s phone: a timeline from the work you were hired for to year one; a week of your own work sorted into the four expectations; which expectation your team needs most, and the habit that serves it.' },
         sim: { title: 'The hard conversation, with Sam', desc: 'Sam missed the work twice this month and nobody said so. Three lines, said in private, then the question that fixes it. Pairs first, then live.' },
         playbook: { title: 'Section 1: Manager Philosophy', desc: 'The mission line, seven timeline lines, what your team can expect from you, what you say when bad news lands, and your 90-day intent.' } },
-      { n: 2, title: 'Goals, 1:1s, and difficult conversations', when: 'Remote, under ninety minutes', expectation: '01 · Get the work done, through your team',
+      { n: 2, title: 'Goals, 1:1s, and difficult conversations', when: 'Virtual, under ninety minutes', expectation: '01 · Get the work done, through your team',
         core: { title: 'How to Manage Difficult Conversations', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001635326767', mins: 30 },
         lab: { title: 'Conversation prep, with peers', desc: 'Bring the one you have been putting off; leave with it framed in three lines.' },
         sim: { title: 'The 1:1 that turns difficult, with Dev', desc: 'Dev has missed two dates and opens as if nothing is wrong. Keep the 1:1 theirs, then say it.' },
         playbook: { title: 'Section 2: 1:1 framework and conversation plan', desc: 'Cadence and agenda, three goals per person this quarter, the opening sentence of the conversation you are holding.' } },
-      { n: 3, title: 'Coaching and mentoring', when: 'Remote, under ninety minutes', expectation: '02 · Take care of your people',
+      { n: 3, title: 'Coaching and mentoring', when: 'Virtual, under ninety minutes', expectation: '02 · Take care of your people',
         core: { title: 'Coaching Skills for Leaders and Managers', by: 'LinkedIn Learning, Sara Canaday', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002857610240&learningItemType=ORA_COURSE', mins: 35 },
         lab: { title: 'Delegation lab, and coach or correct', desc: 'What you will hand off this month, to whom, at which rung of the ladder, with what boundary.' },
         sim: { title: 'Coach, then hand it over, with Priya', desc: 'Priya wants to grow and expects you to tell her how. Ask first. Then hand her a real decision with one boundary and a date.' },

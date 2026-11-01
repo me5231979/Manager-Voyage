@@ -86,7 +86,7 @@
 
   /* ---------- header, footer, progress ---------- */
   function header(){
-    var links = [['index.html', 'Home', 'index'], ['week-1.html', 'Week 1', 'week-1'], ['week-2.html', 'Week 2', 'week-2'], ['week-3.html', 'Week 3', 'week-3'], ['week-4.html', 'Week 4', 'week-4']];
+    var links = [['index.html', 'Home', 'index'], ['week-1.html', 'Week 1', 'week-1'], ['week-2.html', 'Week 2', 'week-2'], ['week-3.html', 'Week 3', 'week-3'], ['week-4.html', 'Week 4', 'week-4'], ['manage.html', 'The other things', 'manage']];
     var h = el('header', 'cnav gnav');
     h.innerHTML = '<a href="index.html" aria-label="Manager Voyage cohort home"><img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="150" height="40"></a>' +
       '<span class="tag">Manager Voyage · The Cohort</span>' +
@@ -434,7 +434,7 @@
       root.addEventListener('click', function(e){ var b = e.target.closest('button[data-n]'); if(!b) return; var i = b.getAttribute('data-i'); mine[i] = parseInt(b.getAttribute('data-n'), 10); all[which] = mine; set('pulse', all); $$('button[data-i="' + i + '"]', root).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); });
     });
   }
-  function present(){
+  function presentTools(){
     var ck = get('present', {});
     $$('.checks input[type=checkbox][data-ck]').forEach(function(i){ var k = i.getAttribute('data-ck'); i.checked = !!ck[k]; i.addEventListener('change', function(){ ck[k] = i.checked; set('present', ck); }); });
     $$('.bigtimer[data-mins]').forEach(function(b){ b.innerHTML = '<span class="tm">0:00</span><div class="ctl"><button type="button" data-t="start">Start</button><button type="button" data-t="plus">+1 min</button><button type="button" data-t="reset">Reset</button></div><p class="note" style="margin-top:8px;text-align:center">' + esc(b.getAttribute('data-label') || '') + '</p>'; makeTimer(b, parseFloat(b.getAttribute('data-mins')), true); });
@@ -460,6 +460,91 @@
       n.className = 'tool-card'; n.innerHTML = '<div><span class="lg">Core module · Oracle Learning · ' + c.mins + ' minutes</span><h4>' + esc(c.title) + '</h4><p>' + esc(c.by) + '. Released the Friday before the week opens. Watch it first; the lab assumes its vocabulary.</p></div><a class="btn" href="' + esc(c.url) + '" target="_blank" rel="noopener">Open in Oracle Learning</a>'; });
   }
 
+  /* ---------- frameworks, go deeper, the other things you manage ---------- */
+  function fwCards(list){ return list.map(function(f, i){ return '<article class="fwc" style="--i:' + i + '"><span class="mono">' + esc(f.who) + '</span><h3>' + esc(f.what) + '</h3><p>' + esc(f.how) + '</p></article>'; }).join(''); }
+  function frameworks(){ $$('[data-frameworks]').forEach(function(n){ var L = C.frameworks[n.getAttribute('data-frameworks')] || []; n.className = 'fw'; n.innerHTML = fwCards(L); }); }
+  function deepItem(d){
+    var inner = (d.kind ? '<span class="pill">' + esc(d.kind) + '</span>' : '<span class="pill">Oracle Learning</span>') + '<b>' + esc(d.title) + '</b><span class="by">' + esc(d.by) + (d.mins ? ' · about ' + d.mins + ' minutes' : '') + '</span><span class="nt">' + esc(d.note) + '</span>';
+    return d.url ? '<a class="dp" href="' + esc(d.url) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="dp off">' + inner + '</div>';
+  }
+  function deeper(){ $$('[data-deeper]').forEach(function(n){ var D = C.deeper[n.getAttribute('data-deeper')]; if(!D) return; n.className = 'deep';
+    n.innerHTML = '<div><h3 class="h3">In Oracle Learning</h3><p class="note">LinkedIn Learning and Vanderbilt courses, recorded against your profile. Where there is no link, search the title in Oracle Learning.</p>' + D.inside.map(deepItem).join('') + '</div>' +
+      '<div><h3 class="h3">Podcasts, videos, reading</h3><p class="note">For the drive home. Each one names its source; all are free.</p>' + D.outside.map(deepItem).join('') + '</div>'; }); }
+  function manage(){
+    var root = $('[data-manage]'); if(!root) return; var M = C.manage;
+    root.innerHTML = M.cadence.map(function(g){ return '<section class="cad"><h3 class="h3">' + esc(g.when) + '</h3><div class="duties">' + g.items.map(function(d){ var std = C.standard[d.std - 1];
+      return '<article class="duty"><span class="stdtag"><i>' + std.n + '</i>' + esc(std.name) + '</span><h4>' + esc(d.what) + '</h4><p>' + esc(d.note) + '</p><ul class="kv"><li><b>System</b><span>' + esc(d.sys) + '</span></li><li><b>Who to call</b><span>' + esc(d.who) + '</span></li>' + (d.url ? '<li><b>Learn it</b><span><a href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.link) + '</a></span></li>' : '') + '</ul></article>'; }).join('') + '</div></section>'; }).join('');
+    var t = $('[data-manage-time]'); if(t){ t.className = 'fw'; t.innerHTML = fwCards(M.time); }
+    var w = $('[data-manage-week]'); if(w){ w.className = 'wk7'; w.innerHTML = M.week.map(function(d){ return '<div class="wkd"><b>' + esc(d.day) + '</b><ul>' + d.items.map(function(i){ return '<li>' + esc(i) + '</li>'; }).join('') + '</ul></div>'; }).join(''); }
+  }
+
+  /* ---------- present mode: the page as a deck for the room ----------
+     Each segment becomes a slide (an <hr class="cut"> inside a segment starts a new slide). Nodes are moved, not
+     copied, so every activity keeps its state and its listeners; leaving the deck moves them back. */
+  var deck = { on: false, rec: [], slides: [], cur: 0, el: null, bar: null };
+  function deckBuild(){
+    var d = el('div', 'pdeck'); d.setAttribute('role', 'region'); d.setAttribute('aria-label', 'Slides');
+    var hero = $('.hero .wrap');
+    if(hero){ var t = el('section', 'slide title'); var inner = el('div', 'in'); inner.innerHTML = hero.innerHTML; $$('.rv', inner).forEach(function(n){ n.classList.add('on'); }); $$('.btns', inner).forEach(function(n){ n.remove(); }); t.appendChild(inner); d.appendChild(t); deck.slides.push(t); }
+    $$('.slide-src, .seg-block[data-seg]').forEach(function(b){
+      var id = b.getAttribute('data-seg') || b.getAttribute('data-title') || '', chunks = [[]];
+      Array.prototype.slice.call(b.children).forEach(function(c){ if(c.classList.contains('cut')) chunks.push([]); else chunks[chunks.length - 1].push(c); });
+      var title = ($('.seg-head h2', b) || $('h2', b) || {}).textContent || id;
+      chunks.forEach(function(nodes, ci){ if(!nodes.length) return; var sl = el('section', 'slide'); sl.setAttribute('data-seg', id); var inner = el('div', 'in');
+        if(ci > 0) inner.appendChild(el('p', 'eyebrow cont', esc(title) + ' · continued'));
+        nodes.forEach(function(n){ deck.rec.push({ n: n, p: n.parentNode, next: n.nextSibling }); inner.appendChild(n); });
+        sl.appendChild(inner); d.appendChild(sl); deck.slides.push(sl); });
+    });
+    var bar = el('div', 'deckbar');
+    bar.innerHTML = '<div class="dl"><span class="mono">' + (WEEK ? 'Week ' + WEEK.n + ' · ' + esc(WEEK.title) : '') + '</span><span class="cnt" aria-live="polite"></span></div>' +
+      '<div class="dots" role="tablist" aria-label="Slides">' + deck.slides.map(function(sl, i){ return '<button type="button" role="tab" data-go="' + i + '" aria-label="Slide ' + (i + 1) + '"></button>'; }).join('') + '</div>' +
+      '<div class="dr"><button type="button" class="btn sm ghost" data-deck="prev" aria-label="Previous slide">&larr;</button><button type="button" class="btn sm" data-deck="next" aria-label="Next slide">Next &rarr;</button>' +
+      '<button type="button" class="btn sm ghost" data-deck="notes" aria-pressed="false" title="N">Notes</button><button type="button" class="btn sm ghost" data-deck="full" title="F">Full screen</button><button type="button" class="btn sm ghost" data-deck="exit" title="Esc">Exit</button></div>';
+    deck.el = d; deck.bar = bar;
+  }
+  function deckGo(i, instant){ i = Math.max(0, Math.min(deck.slides.length - 1, i)); var jump = Math.abs(i - deck.cur) > 1; deck.cur = i; deck.el.scrollTo({ left: i * deck.el.clientWidth, behavior: instant || jump || reduce ? 'auto' : 'smooth' }); deckPaint(); }
+  function deckPaint(){ $$('.dots button', deck.bar).forEach(function(b, j){ b.setAttribute('aria-selected', j === deck.cur ? 'true' : 'false'); }); $('.cnt', deck.bar).textContent = (deck.cur + 1) + ' / ' + deck.slides.length; $('[data-deck="prev"]', deck.bar).disabled = deck.cur === 0; $('[data-deck="next"]', deck.bar).disabled = deck.cur === deck.slides.length - 1; }
+  function deckOn(){
+    if(deck.on) return; deckBuild(); deck.on = true; document.body.classList.add('deck'); document.body.appendChild(deck.el); document.body.appendChild(deck.bar);
+    var start = 0, h = location.hash.replace('#seg-', ''); deck.slides.forEach(function(sl, i){ if(!start && h && sl.getAttribute('data-seg') === h) start = i; });
+    deckGo(start, true);
+    var st; deck.el.addEventListener('scroll', function(){ clearTimeout(st); st = setTimeout(function(){ var i = Math.round(deck.el.scrollLeft / deck.el.clientWidth); if(i !== deck.cur){ deck.cur = i; deckPaint(); } }, 80); }, { passive: true });
+    window.addEventListener('resize', deckResize);
+    $$('[data-present]').forEach(function(b){ b.setAttribute('aria-pressed', 'true'); });
+  }
+  function deckResize(){ if(deck.on) deckGo(deck.cur, true); }
+  function deckOff(){
+    if(!deck.on) return;
+    if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    var seg = deck.slides[deck.cur] && deck.slides[deck.cur].getAttribute('data-seg');
+    deck.rec.slice().reverse().forEach(function(r){ r.p.insertBefore(r.n, r.next && r.next.parentNode === r.p ? r.next : null); });
+    deck.el.remove(); deck.bar.remove(); deck.rec = []; deck.slides = []; deck.on = false; document.body.classList.remove('deck', 'notes'); window.removeEventListener('resize', deckResize);
+    $$('[data-present]').forEach(function(b){ b.setAttribute('aria-pressed', 'false'); });
+    if(seg){ var t = $('#seg-' + seg); if(t) t.scrollIntoView(); }
+  }
+  function fullToggle(){ try{ if(document.fullscreenElement) document.exitFullscreen(); else (document.documentElement.requestFullscreen || function(){}).call(document.documentElement); }catch(e){} }
+  function present(){
+    if(!WEEK) return;
+    var rail = $('.rail'); if(rail){ var b = el('button', 'btn sm present-btn', 'Present as slides'); b.type = 'button'; b.setAttribute('data-present', ''); b.setAttribute('aria-pressed', 'false'); b.title = 'P'; rail.insertBefore(b, rail.firstChild); }
+    document.addEventListener('click', function(e){
+      if(e.target.closest('[data-present]')){ deck.on ? deckOff() : deckOn(); return; }
+      var g = e.target.closest('.deckbar [data-go]'); if(g){ deckGo(+g.getAttribute('data-go')); return; }
+      var k = e.target.closest('.deckbar [data-deck]'); if(!k) return; k = k.getAttribute('data-deck');
+      if(k === 'prev') deckGo(deck.cur - 1); else if(k === 'next') deckGo(deck.cur + 1); else if(k === 'exit') deckOff(); else if(k === 'full') fullToggle();
+      else if(k === 'notes'){ var on = document.body.classList.toggle('notes'); e.target.closest('[data-deck]').setAttribute('aria-pressed', on ? 'true' : 'false'); }
+    });
+    document.addEventListener('keydown', function(e){
+      var tag = (e.target.tagName || '').toLowerCase(); if(tag === 'input' || tag === 'textarea' || e.metaKey || e.ctrlKey || e.altKey) return;
+      if(!deck.on){ if(e.key === 'p' || e.key === 'P'){ deckOn(); } return; }
+      if(e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ' || e.key === 'Enter' && e.target === document.body){ e.preventDefault(); deckGo(deck.cur + 1); }
+      else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); deckGo(deck.cur - 1); }
+      else if(e.key === 'Home'){ deckGo(0); } else if(e.key === 'End'){ deckGo(deck.slides.length - 1); }
+      else if(e.key === 'f' || e.key === 'F'){ fullToggle(); } else if(e.key === 'n' || e.key === 'N'){ document.body.classList.toggle('notes'); }
+      else if(e.key === 'Escape' && !document.fullscreenElement){ deckOff(); }
+    });
+    document.addEventListener('fullscreenchange', function(){ var b = deck.bar && $('[data-deck="full"]', deck.bar); if(b) b.textContent = document.fullscreenElement ? 'Exit full screen' : 'Full screen'; });
+  }
+
   /* ---------- boot ---------- */
   function boot(){
     header(); footer();
@@ -473,7 +558,8 @@
     var tl = $('#timeline'); if(tl) timeline(tl);
     var so = $('#sort'); if(so){ sort(so); document.addEventListener('mv-profile', function(){ sort(so); }); }
     var ld = $('#lead'); if(ld) lead(ld);
-    labs(); playbook(); pulse(); present();
+    frameworks(); deeper(); manage();
+    labs(); playbook(); pulse(); presentTools(); present();
     words(); reveals(); hero(); stack(); qrSide();
     facil(get('facil', false));
     if(location.hash){ var t = $(location.hash); if(t) setTimeout(function(){ t.scrollIntoView(); }, 60); }

@@ -99,7 +99,7 @@ H.push(`<section class="page cover">
 
 /* how it works */
 H.push(`<section class="page">
-${weekHead('', 'How this Playbook works', 'Read first', 'The cohort is the 201 and 301 to Manager Foundations. It does not reteach the Vanderbilt Manager Standard; it practices it with your own team, and this Playbook is where the practice gets written down. One section a week, presented whole in week four.')}
+${weekHead('', 'How this Playbook works', 'Read first', 'The cohort builds on Manager Foundations. It does not reteach the Vanderbilt Manager Standard; it practices it with your own team, and this Playbook is where the practice gets written down. One section a week, presented whole in week four.')}
 <h3>The four weeks</h3>
 <div class="rhythm">${K.weeks.map(w => `<div><span class="when">Week ${w.n} · ${esc(w.mode)} · ${esc(fmtMins(w.mins))}</span><b>${esc(w.title)}</b>Expectation ${K.standard[w.expectation - 1].n}, ${esc(K.standard[w.expectation - 1].name.toLowerCase())}.<br><span style="color:#1C1C1C;font-weight:600">Section ${w.playbook.n} · ${esc(w.playbook.title)}</span></div>`).join('')}</div>
 <h3>What you write, week by week</h3>
@@ -129,9 +129,22 @@ ${check(['Manager Foundations finished, and the assessment taken', 'Your team se
 ${lines(2)}
 </section>`);
 
+/* the other things you manage */
+H.push(`<section class="page">
+${weekHead('', 'The other things you manage', 'Reference · the cohort site has the full version', 'Timecards, leave, expenses, hiring, the performance cycle, the inbox. By cadence, with the system and who to call. Then your week.')}
+${K.manage.cadence.map(g => `<h3>${esc(g.when)}</h3><table class="grid" style="font-size:8.5pt"><thead><tr><th style="width:2.1in">What</th><th style="width:1.7in">System</th><th>Who to call</th></tr></thead><tbody>${g.items.map(d => `<tr><td style="height:auto">${esc(d.what)}</td><td style="height:auto">${esc(d.sys)}</td><td style="height:auto">${esc(d.who)}</td></tr>`).join('')}</tbody></table>`).join('')}
+</section>`);
+H.push(`<section class="page">
+${weekHead('', 'A week that works', 'Reference · Covey, Drucker, Grove', 'The duties fit in the gaps if the managing goes into the calendar first. Fill in your own version.')}
+<div class="rhythm">${K.manage.week.map(d => `<div><span class="when">${esc(d.day)}</span>${d.items.map(i => `<b style="font-size:9pt;font-family:Inter,Arial,sans-serif;font-weight:400;margin:2pt 0">${esc(i)}</b>`).join('')}</div>`).join('')}</div>
+<h3>Five time rules</h3>
+${K.manage.time.map(t => `<div class="box"><b>${esc(t.who)}: ${esc(t.what)}.</b> ${esc(t.how)}</div>`).join('')}
+${field('My week, in my own words', 'Which day the approvals happen, when the 1:1s sit, where the protected half day goes.', 4)}
+</section>`);
+
 /* section 1 */
 H.push(`<section class="page">
-${weekHead('01', 'Manager Philosophy', 'Week 1 · In the classroom · What it means to manage · due Sunday', 'One page on how you will manage. It starts with the mission, runs through your voyage on a timeline, and ends with the sentence you read aloud to your four.')}
+${weekHead('01', 'Manager Philosophy', 'Week 1 · In the classroom · What it means to manage · due Sunday', 'One page on how you will manage. It starts with the mission, runs through your Manager Voyage on a timeline, and ends with the sentence you read aloud to your four.')}
 ${field('The mission needs my team to…', 'From the first fifteen minutes. What your team makes possible for the people this university exists for.', 2)}
 <h3>My voyage, in seven lines</h3>
 <table class="grid" style="font-size:9pt"><thead><tr><th style="width:1.6in">Stop</th><th>One line</th></tr></thead><tbody>${K.timeline.map(t => `<tr><td style="height:22pt"><b>${esc(t.label)}</b><br><small>${esc(t.title)}</small></td><td style="height:22pt"></td></tr>`).join('')}</tbody></table>

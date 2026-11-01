@@ -393,9 +393,69 @@ footer a{ color:rgba(255,255,255,.8); }
 }
 @media (prefers-reduced-motion: reduce){ .rv{ opacity:1; transform:none; transition:none; } .hero .bg img{ animation:none; } .tl .orb::after{ animation:none; } }
 
+/* frameworks */
+.fw{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:20px; }
+.fwc{ background:var(--card); border:1px solid var(--bd); border-left:3px solid var(--eyebrow); border-radius:var(--r); padding:16px 18px; }
+.fwc .mono{ display:block; margin-bottom:6px; }
+.fwc h3{ font-family:var(--serif); font-weight:400; font-size:1.15rem; line-height:1.2; margin-bottom:8px; }
+.fwc p{ font-size:.9rem; color:var(--tx2); line-height:1.45; }
+.fwrap{ padding-bottom:clamp(28px,4vw,48px); }
+/* go deeper */
+.deep{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(18px,3vw,40px); margin-top:20px; }
+.dp{ display:grid; gap:3px; padding:14px 0; border-top:1px solid var(--bd); color:inherit; text-decoration:none; }
+.dp:first-of-type{ border-top:0; }
+.dp .pill{ justify-self:start; margin-bottom:4px; }
+.dp b{ font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; }
+.dp:hover b{ color:var(--eyebrow); }
+.dp .by{ font-size:.82rem; color:var(--tx3); }
+.dp .nt{ font-size:.9rem; color:var(--tx2); line-height:1.45; }
+.dp.off b::after{ content:' · search the title in Oracle Learning'; font-family:var(--sans); font-size:.78rem; color:var(--tx3); }
+/* the other things you manage */
+.cad{ margin-top:28px; }
+.cad .h3{ padding-bottom:8px; border-bottom:2px solid var(--eyebrow); margin-bottom:14px; }
+.duties{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.duty{ background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:16px 18px; }
+.duty h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; line-height:1.2; margin:4px 0 6px; }
+.duty p{ font-size:.92rem; color:var(--tx2); line-height:1.45; }
+.duty .kv{ margin-top:10px; }
+.duty .kv li{ grid-template-columns:96px 1fr; font-size:.86rem; padding:6px 0; }
+.wk7{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:20px; }
+.wkd{ background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); padding:14px 16px; }
+.wkd b{ display:block; font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:8px; }
+.wkd ul{ padding-left:16px; font-size:.9rem; color:var(--tx2); line-height:1.45; }
+.wkd li{ margin:4px 0; }
+/* present mode: the page as a deck */
+.cut{ display:none; }
+.present-btn{ width:100%; justify-content:center; margin-bottom:14px; }
+body.deck{ overflow:hidden; }
+body.deck .cnav, body.deck .progress{ display:none; }
+.pdeck{ position:fixed; inset:0; z-index:310; display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; background:var(--black); color:#fff; --bg:#1C1C1C; --tx:#fff; --tx2:rgba(255,255,255,.8); --tx3:rgba(255,255,255,.6); --bd:rgba(255,255,255,.14); --bdg:rgba(207,174,112,.45); --card:#262624; --card2:#2E2D2A; --eyebrow:#CFAE70; --btn:#CFAE70; --btn-tx:#1C1C1C; scrollbar-width:none; }
+.pdeck::-webkit-scrollbar{ display:none; }
+.pdeck .slide{ flex:0 0 100vw; width:100vw; height:100vh; scroll-snap-align:start; scroll-snap-stop:always; overflow-y:auto; padding:clamp(28px,6vh,64px) clamp(24px,6vw,96px) 110px; font-size:1.08rem; }
+.pdeck .slide .in{ max-width:1320px; margin:0 auto; }
+.pdeck .slide.title{ display:grid; place-items:center; text-align:left; }
+.pdeck .slide.title .in{ max-width:1100px; }
+.pdeck .slide .h2{ font-size:clamp(2rem,4.2vw,3.4rem); }
+.pdeck .slide .lead{ font-size:clamp(1.05rem,1.5vw,1.35rem); max-width:70ch; }
+.pdeck .eyebrow.cont{ margin-bottom:18px; }
+.pdeck .rv{ opacity:1; transform:none; }
+.pdeck .seg-block{ border:0; padding:0; }
+body.deck:not(.notes) .pdeck .talk{ display:none; }
+body.deck.notes .pdeck .talk{ display:block; }
+.deckbar{ position:fixed; left:0; right:0; bottom:0; z-index:320; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px; padding:12px clamp(16px,3vw,32px); background:linear-gradient(180deg, rgba(28,28,28,0), rgba(28,28,28,.92) 40%); color:#fff; --btn:#CFAE70; --btn-tx:#1C1C1C; --tx:#fff; --bdg:rgba(207,174,112,.45); --eyebrow:#CFAE70; }
+.deckbar .dl{ display:flex; flex-direction:column; gap:2px; }
+.deckbar .cnt{ font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.1em; color:rgba(255,255,255,.6); }
+.deckbar .dots{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; max-width:40vw; }
+.deckbar .dots button{ width:10px; height:10px; border-radius:50%; border:1px solid var(--gold); background:transparent; cursor:pointer; padding:0; }
+.deckbar .dots button[aria-selected="true"]{ background:var(--gold); box-shadow:0 0 10px rgba(207,174,112,.8); }
+.deckbar .dr{ display:flex; gap:8px; justify-content:flex-end; flex-wrap:wrap; }
+.deckbar .btn[disabled]{ opacity:.35; }
+@media (max-width:900px){ .deckbar{ grid-template-columns:1fr; } .deckbar .dl{ display:none; } .deckbar .dots{ max-width:none; } .deckbar .dr{ justify-content:center; } .pdeck .slide{ padding-bottom:150px; } }
+
 /* responsive */
 @media (max-width:1000px){
-  .std, .g4, .qrgrid, .lead-pick, .habits{ grid-template-columns:1fr 1fr; }
+  .std, .g4, .qrgrid, .lead-pick, .habits, .wk7{ grid-template-columns:1fr 1fr; }
+  .fw{ grid-template-columns:1fr 1fr; }
   .g3, .frame3{ grid-template-columns:1fr 1fr; }
   .session{ grid-template-columns:1fr; }
   .rail{ position:static; }
@@ -406,7 +466,7 @@ footer a{ color:rgba(255,255,255,.8); }
 }
 @media (max-width:640px){
   :root{ --nav-h:60px; }
-  .std, .g2, .g3, .g4, .qrgrid, .lead-pick, .habits, .frame3, .agenda, .sort .bins, .pbf .two, .lab .how{ grid-template-columns:1fr; }
+  .std, .g2, .g3, .g4, .qrgrid, .lead-pick, .habits, .frame3, .agenda, .sort .bins, .pbf .two, .lab .how, .fw, .deep, .duties, .wk7{ grid-template-columns:1fr; }
   .lab .scene{ grid-template-columns:1fr; }
   .lab .av{ width:96px; height:96px; }
   .kv li{ grid-template-columns:1fr; gap:2px; }
