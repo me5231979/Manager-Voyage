@@ -213,7 +213,7 @@
       var id = b.getAttribute('data-seg'), seg = WEEK.segments.filter(function(s){ return s.id === id; })[0]; if(!seg) return;
       b.id = 'seg-' + id;
       var std = seg.std ? C.standard[seg.std - 1] : null;
-      var head = el('div', 'seg-head');
+      var head = el('div', 'seg-head'); head.setAttribute('data-seg-head', id);
       head.innerHTML = '<div>' + (std ? '<span class="stdtag"><i>' + std.n + '</i>' + esc(std.name) + '</span>' : '') +
         '<p class="eyebrow">Segment ' + (i + 1) + ' of ' + blocks.length + ' · ' + esc(kindName(seg.kind)) + '</p><h2 class="h2">' + esc(seg.title) + '</h2>' + (seg.desc ? '<p class="lead">' + esc(seg.desc) + '</p>' : '') +
         '<div class="timer" data-mins="' + seg.mins + '"><span class="tm">0:00</span><button type="button" data-t="start">Start</button><button type="button" data-t="plus">+1 min</button><button type="button" data-t="reset">Reset</button></div></div>' +
