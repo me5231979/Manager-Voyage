@@ -550,7 +550,7 @@
   function deckBuild(){
     var d = el('div', 'pdeck'); d.setAttribute('role', 'region'); d.setAttribute('aria-label', 'Slides');
     var hero = $('.hero .wrap');
-    if(hero){ var t = el('section', 'slide title'); var inner = el('div', 'in'); inner.innerHTML = hero.innerHTML; $$('.rv', inner).forEach(function(n){ n.classList.add('on'); }); $$('.btns', inner).forEach(function(n){ n.remove(); }); t.appendChild(inner); d.appendChild(t); deck.slides.push(t); }
+    if(hero){ var t = el('section', 'slide title'); var inner = el('div', 'in on'); inner.innerHTML = hero.innerHTML; $$('.rv', inner).forEach(function(n){ n.classList.add('on'); }); $$('.btns', inner).forEach(function(n){ n.remove(); }); t.appendChild(inner); d.appendChild(t); deck.slides.push(t); }
     $$('.slide-src, .seg-block[data-seg]').forEach(function(b){
       var id = b.getAttribute('data-seg') || b.getAttribute('data-title') || '', chunks = [[]];
       Array.prototype.slice.call(b.children).forEach(function(c){ if(c.classList.contains('cut')) chunks.push([]); else chunks[chunks.length - 1].push(c); });
@@ -560,6 +560,9 @@
         nodes.forEach(function(n){ deck.rec.push({ n: n, p: n.parentNode, next: n.nextSibling }); inner.appendChild(n); });
         sl.appendChild(inner); d.appendChild(sl); deck.slides.push(sl); });
     });
+    var pa = el('button', 'deck-arrow prev', '&larr;'); pa.type = 'button'; pa.setAttribute('aria-label', 'Previous slide'); pa.setAttribute('data-deck', 'prev');
+    var na = el('button', 'deck-arrow next', '&rarr;'); na.type = 'button'; na.setAttribute('aria-label', 'Next slide'); na.setAttribute('data-deck', 'next');
+    d.appendChild(pa); d.appendChild(na);
     var bar = el('div', 'deckbar');
     bar.innerHTML = '<div class="dl"><span class="mono">' + (WEEK ? 'Week ' + WEEK.n + ' · ' + esc(WEEK.title) : '') + '</span><span class="cnt" aria-live="polite"></span></div>' +
       '<div class="dots" role="tablist" aria-label="Slides">' + deck.slides.map(function(sl, i){ return '<button type="button" role="tab" data-go="' + i + '" aria-label="Slide ' + (i + 1) + '"></button>'; }).join('') + '</div>' +
@@ -568,14 +571,19 @@
     deck.el = d; deck.bar = bar;
   }
   function deckGo(i, instant){ i = Math.max(0, Math.min(deck.slides.length - 1, i)); var jump = Math.abs(i - deck.cur) > 1; deck.cur = i; deck.el.scrollTo({ left: i * deck.el.clientWidth, behavior: instant || jump || reduce ? 'auto' : 'smooth' }); deckPaint(); }
-  function deckPaint(){ $$('.dots button', deck.bar).forEach(function(b, j){ b.setAttribute('aria-selected', j === deck.cur ? 'true' : 'false'); }); $('.cnt', deck.bar).textContent = (deck.cur + 1) + ' / ' + deck.slides.length; $('[data-deck="prev"]', deck.bar).disabled = deck.cur === 0; $('[data-deck="next"]', deck.bar).disabled = deck.cur === deck.slides.length - 1; }
+  function deckPaint(){ $$('.dots button', deck.bar).forEach(function(b, j){ b.setAttribute('aria-selected', j === deck.cur ? 'true' : 'false'); }); $('.cnt', deck.bar).textContent = (deck.cur + 1) + ' / ' + deck.slides.length; $('[data-deck="prev"]', deck.bar).disabled = deck.cur === 0; $('[data-deck="next"]', deck.bar).disabled = deck.cur === deck.slides.length - 1; $$('.deck-arrow', deck.el).forEach(function(a){ a.disabled = a.classList.contains('prev') ? deck.cur === 0 : deck.cur === deck.slides.length - 1; }); }
   function deckOn(){
     if(deck.on) return; deckBuild(); deck.on = true; document.body.classList.add('deck'); document.body.appendChild(deck.el); document.body.appendChild(deck.bar);
     var start = 0, h = location.hash.replace('#seg-', ''); deck.slides.forEach(function(sl, i){ if(!start && h && sl.getAttribute('data-seg') === h) start = i; });
     deckGo(start, true);
     var st; deck.el.addEventListener('scroll', function(){ clearTimeout(st); st = setTimeout(function(){ var i = Math.round(deck.el.scrollLeft / deck.el.clientWidth); if(i !== deck.cur){ deck.cur = i; deckPaint(); } }, 80); }, { passive: true });
     window.addEventListener('resize', deckResize);
-    $$('[data-present]').forEach(function(b){ b.setAttribute('aria-pressed', 'true'); });
+    $$('[data-present]').forEach(function(b){ b.setAttribute('aria-pressed', 'true'); b.textContent = 'Scroll view'; });
+    /* click anywhere that is not a control: right two thirds forward, left third back */
+    deck.el.addEventListener('click', function(e){
+      if(e.target.closest('button, a, input, textarea, select, label, summary, details, [role="slider"], .lab, .sort, .tl, .lead-pick, .habits, .pulse, .pbf, .say, .checks, .bigtimer, .timer, .opts, .deck-arrow')) return;
+      var x = e.clientX / window.innerWidth; if(x < 0.33) deckGo(deck.cur - 1); else deckGo(deck.cur + 1);
+    });
   }
   function deckResize(){ if(deck.on) deckGo(deck.cur, true); }
   function deckOff(){
@@ -584,18 +592,18 @@
     var seg = deck.slides[deck.cur] && deck.slides[deck.cur].getAttribute('data-seg');
     deck.rec.slice().reverse().forEach(function(r){ r.p.insertBefore(r.n, r.next && r.next.parentNode === r.p ? r.next : null); });
     deck.el.remove(); deck.bar.remove(); deck.rec = []; deck.slides = []; deck.on = false; document.body.classList.remove('deck', 'notes'); window.removeEventListener('resize', deckResize);
-    $$('[data-present]').forEach(function(b){ b.setAttribute('aria-pressed', 'false'); });
+    $$('[data-present]').forEach(function(b){ b.setAttribute('aria-pressed', 'false'); b.textContent = 'Present as slides'; });
     if(seg){ var t = $('#seg-' + seg); if(t) t.scrollIntoView(); }
   }
   function fullToggle(){ try{ if(document.fullscreenElement) document.exitFullscreen(); else (document.documentElement.requestFullscreen || function(){}).call(document.documentElement); }catch(e){} }
   function present(){
     if(!WEEK) return;
-    var rail = $('.rail'); if(rail){ var b = el('button', 'btn sm present-btn', 'Present as slides'); b.type = 'button'; b.setAttribute('data-present', ''); b.setAttribute('aria-pressed', 'false'); b.title = 'P'; rail.insertBefore(b, rail.firstChild); }
+    var rail = $('.rail'); if(rail){ var b = el('button', 'btn sm present-btn', 'Present as slides'); b.type = 'button'; b.setAttribute('data-present', ''); b.setAttribute('aria-pressed', 'false'); b.title = 'P'; rail.insertBefore(b, rail.firstChild); var hint = el('p', 'note present-hint', 'The room runs as slides: click anywhere to advance, arrow keys, F for full screen. This scrolling page is the phone and print view.'); rail.insertBefore(hint, b.nextSibling); }
     document.addEventListener('click', function(e){
-      if(e.target.closest('[data-present]')){ deck.on ? deckOff() : deckOn(); return; }
+      if(e.target.closest('[data-present]')){ if(deck.on){ set('view', 'scroll'); deckOff(); } else { set('view', 'slides'); deckOn(); } return; }
       var g = e.target.closest('.deckbar [data-go]'); if(g){ deckGo(+g.getAttribute('data-go')); return; }
-      var k = e.target.closest('.deckbar [data-deck]'); if(!k) return; k = k.getAttribute('data-deck');
-      if(k === 'prev') deckGo(deck.cur - 1); else if(k === 'next') deckGo(deck.cur + 1); else if(k === 'exit') deckOff(); else if(k === 'full') fullToggle();
+      var k = e.target.closest('.deckbar [data-deck], .deck-arrow'); if(!k) return; k = k.getAttribute('data-deck');
+      if(k === 'prev') deckGo(deck.cur - 1); else if(k === 'next') deckGo(deck.cur + 1); else if(k === 'exit'){ set('view', 'scroll'); deckOff(); } else if(k === 'full') fullToggle();
       else if(k === 'notes'){ var on = document.body.classList.toggle('notes'); e.target.closest('[data-deck]').setAttribute('aria-pressed', on ? 'true' : 'false'); }
     });
     document.addEventListener('keydown', function(e){
@@ -605,7 +613,7 @@
       else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); deckGo(deck.cur - 1); }
       else if(e.key === 'Home'){ deckGo(0); } else if(e.key === 'End'){ deckGo(deck.slides.length - 1); }
       else if(e.key === 'f' || e.key === 'F'){ fullToggle(); } else if(e.key === 'n' || e.key === 'N'){ document.body.classList.toggle('notes'); }
-      else if(e.key === 'Escape' && !document.fullscreenElement){ deckOff(); }
+      else if(e.key === 'Escape' && !document.fullscreenElement){ set('view', 'scroll'); deckOff(); }
     });
     document.addEventListener('fullscreenchange', function(){ var b = deck.bar && $('[data-deck="full"]', deck.bar); if(b) b.textContent = document.fullscreenElement ? 'Exit full screen' : 'Full screen'; });
   }
@@ -627,7 +635,9 @@
     labs(); playbook(); pulse(); presentTools(); present();
     words(); reveals(); hero(); stack(); qrSide();
     facil(get('facil', false));
-    if(location.hash){ var t = $(location.hash); if(t) setTimeout(function(){ t.scrollIntoView(); }, 60); }
+    var qv = (location.search.match(/[?&]view=(slides|scroll)/) || [])[1]; if(qv) set('view', qv);
+    if(WEEK && window.innerWidth >= 900 && get('view', 'slides') === 'slides' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){ deckOn(); }
+    else if(location.hash){ var t = $(location.hash); if(t) setTimeout(function(){ t.scrollIntoView(); }, 60); }
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
   window.MV_COHORT_APP = { fill: fill, vocab: vocab, profile: profile };
