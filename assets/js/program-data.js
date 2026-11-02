@@ -182,7 +182,7 @@ window.MV_PROGRAM = {
   cohort: {
     id: 'COHORT', oracleCode: 'COHORT', oracleUrl: null, requestUrl: null, siteUrl: 'cohort/',
     title: 'Four-Week Cohort',
-    summary: 'Where skill development happens. One hundred managers a quarter practice the Vanderbilt Manager Standard with their own teams: a half day in the classroom, two virtual weeks of under ninety minutes each, and a two-hour capstone where every manager presents a Manager Playbook and how they will lead. Every scenario is tailored to the team the manager runs, hourly or salaried, dining or IT.',
+    summary: 'Where skill development happens. Fifty managers a quarter practice the Vanderbilt Manager Standard with their own teams: a half day in the classroom, two virtual weeks of under ninety minutes each, and a two-hour capstone where every manager presents a Manager Playbook and how they will lead. Every scenario is tailored to the team the manager runs, hourly or salaried, dining or IT.',
     prerequisite: 'You arrive having finished Manager Foundations. The cohort practices the four expectations with your team rather than reteaching them.',
     eligibility: 'Open to any manager who has completed the compliance courses and Manager Foundations. Oracle sends the invitation on completion.',
     rhythm: [
