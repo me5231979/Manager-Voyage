@@ -10,7 +10,7 @@
    Manager Standard, it does not reteach it.
    ===================================================================== */
 window.MV_COHORT = {
-  version: '2026.11.01.b',
+  version: '2026.11.01.c',
   site: 'https://manager-voyage.vercel.app/cohort/',
   links: {
     foundations: '../foundation/',
@@ -19,6 +19,8 @@ window.MV_COHORT = {
     portal: 'https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/',
     /* SparkWise Learning Labs: paste the links here when they exist. Empty means a placeholder card. */
     sparkwise: { w1: '', w2: '', w3: '', w4: '' },
+    /* The team's view of the ten statements (a Microsoft Form, anonymous), the completion record (a form or an inbox), and the leader brief. Empty means the page shows the copy-and-paste version. */
+    teamForm: '', completionForm: '', completionEmail: '', leaderEmailCc: '',
     /* Core modules in Oracle Learning, released the Friday before each week. */
     core: {
       w2: { title: 'How to Manage Difficult Conversations', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001630000000', mins: 30 },
@@ -53,28 +55,28 @@ window.MV_COHORT = {
   areas: [
     { id: 'dining', name: 'Dining and food service', team: 'your dining team', role: 'line cook', role2: 'catering lead', place: 'the kitchen', asker: 'the Events office',
       work: 'the catering order for Friday’s donor lunch', work2: 'the new allergen labeling process', system: 'the new point-of-sale system', busy: 'move-in weekend',
-      slip: 'the prep list was not done when service started, twice this month', win: 'the way you ran the line during the Chancellor’s dinner', hourlyDefault: 'hourly' },
+      slip: 'the prep list was not done when service started, twice this month', win: 'the way you ran the line during the Chancellor’s dinner', es: { role: 'cocinero de línea', team: 'tu equipo de comedor', work: 'el pedido de catering para el almuerzo de donantes del viernes', busy: 'el fin de semana de mudanza', slip: 'la lista de preparación no estaba lista cuando empezó el servicio, dos veces este mes' }, hourlyDefault: 'hourly' },
     { id: 'it', name: 'IT and technology', team: 'your IT team', role: 'desktop support analyst', role2: 'systems administrator', place: 'the service desk', asker: 'the department chair',
       work: 'the patch window for the lab workstations', work2: 'the ticket triage rotation', system: 'the new ticketing system', busy: 'the start of term',
-      slip: 'two change windows were missed this month and nobody said so until the tickets came in', win: 'the way you handled the outage on the first day of class', hourlyDefault: 'salaried' },
+      slip: 'two change windows were missed this month and nobody said so until the tickets came in', win: 'the way you handled the outage on the first day of class', es: { role: 'analista de soporte técnico', team: 'tu equipo de TI', work: 'la ventana de parches para las estaciones del laboratorio', busy: 'el inicio del semestre', slip: 'se perdieron dos ventanas de cambio este mes y nadie lo dijo hasta que llegaron los tickets' }, hourlyDefault: 'salaried' },
     { id: 'facilities', name: 'Facilities and grounds', team: 'your facilities crew', role: 'maintenance technician', role2: 'crew lead', place: 'the shop', asker: 'Housing',
       work: 'the work-order backlog from last week', work2: 'the preventive maintenance schedule', system: 'the new work-order system', busy: 'Commencement week',
-      slip: 'two priority work orders sat open past their dates, twice this month', win: 'the boiler repair you finished before the cold snap', hourlyDefault: 'hourly' },
+      slip: 'two priority work orders sat open past their dates, twice this month', win: 'the boiler repair you finished before the cold snap', es: { role: 'técnico de mantenimiento', team: 'tu cuadrilla de mantenimiento', work: 'las órdenes de trabajo atrasadas de la semana pasada', busy: 'la semana de graduación', slip: 'dos órdenes de trabajo prioritarias quedaron abiertas después de su fecha, dos veces este mes' }, hourlyDefault: 'hourly' },
     { id: 'lab', name: 'Research lab', team: 'your lab', role: 'research assistant', role2: 'lab manager', place: 'the lab', asker: 'the principal investigator',
       work: 'the sample prep for Thursday’s run', work2: 'the inventory and ordering process', system: 'the new electronic lab notebook', busy: 'the grant deadline',
-      slip: 'two runs were delayed because prep was not ready, and the PI heard it from someone else', win: 'the way you kept the freezer failure from costing a month of samples', hourlyDefault: 'salaried' },
+      slip: 'two runs were delayed because prep was not ready, and the PI heard it from someone else', win: 'the way you kept the freezer failure from costing a month of samples', es: { role: 'asistente de investigación', team: 'tu laboratorio', work: 'la preparación de muestras para la corrida del jueves', busy: 'la fecha límite de la subvención', slip: 'dos corridas se retrasaron porque la preparación no estaba lista, y el investigador principal se enteró por otra persona' }, hourlyDefault: 'salaried' },
     { id: 'library', name: 'Library and academic support', team: 'your library team', role: 'circulation specialist', role2: 'instruction librarian', place: 'the service desk', asker: 'the dean’s office',
       work: 'the course reserves for the new term', work2: 'the desk coverage schedule', system: 'the new checkout system', busy: 'finals week',
-      slip: 'two reserve lists went live late this month and faculty emailed you about it', win: 'the extended-hours plan you ran during finals', hourlyDefault: 'mixed' },
+      slip: 'two reserve lists went live late this month and faculty emailed you about it', win: 'the extended-hours plan you ran during finals', es: { role: 'especialista de circulación', team: 'tu equipo de biblioteca', work: 'las reservas de curso para el nuevo semestre', busy: 'la semana de exámenes finales', slip: 'dos listas de reserva se publicaron tarde este mes y el profesorado te escribió por eso' }, hourlyDefault: 'mixed' },
     { id: 'students', name: 'Student affairs and events', team: 'your student affairs team', role: 'program coordinator', role2: 'events coordinator', place: 'the student center', asker: 'the Dean of Students office',
       work: 'the orientation schedule', work2: 'the event request process', system: 'the new room-booking system', busy: 'orientation week',
-      slip: 'two event confirmations went out late this month and a student group complained', win: 'the way you staffed the welcome tables on move-in day', hourlyDefault: 'salaried' },
+      slip: 'two event confirmations went out late this month and a student group complained', win: 'the way you staffed the welcome tables on move-in day', es: { role: 'coordinador de programas', team: 'tu equipo de asuntos estudiantiles', work: 'el calendario de orientación', busy: 'la semana de orientación', slip: 'dos confirmaciones de eventos salieron tarde este mes y un grupo estudiantil se quejó' }, hourlyDefault: 'salaried' },
     { id: 'admin', name: 'Finance, HR, and administration', team: 'your administrative team', role: 'financial analyst', role2: 'business operations lead', place: 'the office', asker: 'the Provost’s office',
       work: 'the month-end close', work2: 'the expense approval routing', system: 'the new travel system', busy: 'fiscal year end',
-      slip: 'two reconciliations came in late this month and Finance noticed before you did', win: 'the clean audit you delivered last quarter', hourlyDefault: 'salaried' },
+      slip: 'two reconciliations came in late this month and Finance noticed before you did', win: 'the clean audit you delivered last quarter', es: { role: 'analista financiero', team: 'tu equipo administrativo', work: 'el cierre de mes', busy: 'el cierre del año fiscal', slip: 'dos conciliaciones llegaron tarde este mes y Finanzas lo notó antes que tú' }, hourlyDefault: 'salaried' },
     { id: 'advancement', name: 'Advancement and communications', team: 'your communications team', role: 'communications specialist', role2: 'gift officer', place: 'the office', asker: 'the campaign director',
       work: 'the donor mailing', work2: 'the content calendar', system: 'the new CRM', busy: 'the campaign launch',
-      slip: 'two pieces went out past their dates this month and a donor noticed a wrong name', win: 'the campaign launch piece that got picked up by the news', hourlyDefault: 'salaried' }
+      slip: 'two pieces went out past their dates this month and a donor noticed a wrong name', win: 'the campaign launch piece that got picked up by the news', es: { role: 'especialista en comunicaciones', team: 'tu equipo de comunicaciones', work: 'el envío postal a donantes', busy: 'el lanzamiento de la campaña', slip: 'dos piezas salieron después de su fecha este mes y un donante notó un nombre equivocado' }, hourlyDefault: 'salaried' }
   ],
 
   /* The cast. Portraits live in assets/img/foundation/cast. */
@@ -124,7 +126,7 @@ window.MV_COHORT = {
       playbook: { n: 4, title: 'Performance practice, and the whole Playbook', due: 'Before the capstone', desc: 'How you run the cycle, your feedback approach, the Integrated Management Model, and the Team Development Plan.' },
       segments: [
         { id: 'recap', mins: 20, title: 'Recap: four expectations, three weeks', kind: 'activity', std: 4, desc: 'What you tried, what held, what did not. The standard, read back against your own weeks.' },
-        { id: 'practice', mins: 40, title: 'Practice round: the performance conversation', kind: 'lab', std: 2, desc: 'Marcus expects a promotion you cannot give this cycle. In pairs, then live.' },
+        { id: 'practice', mins: 40, title: 'Practice round: two conversations', kind: 'lab', std: 2, desc: 'Marcus expects a promotion you cannot give this cycle. Then Jordan, from another office, wants your whole team on Friday. In pairs, then live.' },
         { id: 'present', mins: 50, title: 'Present your Playbook', kind: 'activity', std: 4, desc: 'Five minutes each, in fours: the sentence at the center, the team goal, one person’s plan by name, the habit you kept. Peers challenge one goal, one move, one date.' },
         { id: 'close', mins: 10, title: 'Close: the pulse, and what comes next', kind: 'write', std: 4, desc: 'The four confidence questions again, beside your prework answers. The 90-day reassessment date.' }
       ] }
@@ -223,6 +225,20 @@ window.MV_COHORT = {
         { t: '“I am pushing for it. Give me a little time.”', b: 'Vague, and a promise you cannot keep', best: false, out: 'Marcus hears a yes. When the cycle closes without it, he takes the other offer and tells people why.' },
         { t: '“Not this cycle, and here is exactly why. Here is what would change the answer, and here is the piece of {work2} I want you to own starting Monday.”', b: 'Honest and specific', best: true, out: 'Marcus is disappointed and stays. He has a plan with dates, and a reason to believe you.' },
         { t: '“That is really a question for PCB and the compensation team.”', b: 'Handing it off', best: false, out: 'True in part, and he came to you. He learns you will not fight for him, and starts answering recruiters.' }
+      ] },
+    w4x: { key: 'w4x', who: 'jordan', agent: 'agent_9401m6cps8jbf2bstbf27rqgaz2n', std: 4, mins: 'About four minutes',
+      title: 'The ask you have to refuse', frame: 'Hear the need. Say no to the whole ask, plainly. Show the hours. Offer two options.',
+      role: 'from {asker}',
+      brief: 'Jordan, from {asker}, calls and asks for your whole team on Friday, all day, and has already told their director you would be fine with it. Friday is also the deadline for {work}, and {busy} is close. Hear what Jordan needs, say plainly that the whole team is not available, show the hours, and offer two options you can actually deliver.',
+      truth: 'Jordan really needs six hands for four hours in the afternoon. Their own planning slipped and they asked late. If you offer two real options, either works. If you only say no, they escalate. If you say yes to everything, they take it and move on.',
+      first: 'Hi, thanks for picking up. Quick one. I need your whole team on Friday, all day. It is a big one for us and I told my director you would be fine with it.',
+      checks: [['acknowledged_the_need', 'You heard what Jordan needs and said so before answering'], ['said_no_plainly', 'You said plainly, early, that the whole team is not available Friday'], ['showed_the_hours', 'You showed the hours or the conflict as facts, not feelings'], ['offered_two_options', 'You offered two real options instead of a flat no'], ['agreed_next_step', 'You agreed a next step with a time']],
+      penalty: ['caved', 'You said yes to the whole ask. Your team pays for it Friday, and Jordan learns that you always will.'], pass: 4,
+      way: 'The Vanderbilt way, and statement 10 on your assessment: show the hours, name the conflict, offer two options. A flat no breaks the partnership; a flat yes breaks the team.',
+      options: [
+        { t: '“Sure, we will make it work. Send me the details.”', b: 'Caving', best: false, out: 'Jordan says great and hangs up. Friday, {work} slips, and your team learns that other offices come first.' },
+        { t: '“I hear you need hands Friday. The whole team is not available: {work} is due that day. I can do half the team from one to five, or two people all day with a handoff. Which works?”', b: 'Show the hours, two options', best: true, out: 'Jordan takes the afternoon option and thanks you. Your team keeps its deadline and you keep the partner.' },
+        { t: '“No. We are slammed. Ask someone else.”', b: 'The flat no', best: false, out: 'Jordan escalates to their director, who calls yours. Now it is a conversation about whether your team is a team player.' }
       ] }
   },
 
@@ -277,7 +293,8 @@ window.MV_COHORT = {
       inside: [
         { title: 'Performance Management: Conducting Performance Reviews', by: 'LinkedIn Learning, Todd Dewett, in Oracle', url: null, mins: 35, note: 'Preparing, the conversation itself, and the follow-through. Search the title in Oracle Learning.' },
         { title: 'Managing Employee Performance Problems', by: 'LinkedIn Learning, Todd Dewett, in Oracle', url: null, mins: 35, note: 'When a talk did not fix it. Search the title in Oracle Learning.' },
-        { title: 'Performance Management Foundations for Managers', by: 'Vanderbilt, in Oracle', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329200&learningItemType=ORA_COURSE', mins: 30, note: 'The Vanderbilt cycle. The core module, for reference all year.' }
+        { title: 'Performance Management Foundations for Managers', by: 'Vanderbilt, in Oracle', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300002987329200&learningItemType=ORA_COURSE', mins: 30, note: 'The Vanderbilt cycle. The core module, for reference all year.' },
+        { title: 'Oracle Recruiting and Onboarding for Hiring Managers', by: 'Vanderbilt, in Oracle', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemId=300001769180473&learningItemType=ORA_CLASS', mins: 45, note: 'The requisition, the interviews, the offer, and the first week, in the system you will use.' }
       ],
       outside: [
         { kind: 'Read', title: 'Reinventing performance management', by: 'Marcus Buckingham and Ashley Goodall, Harvard Business Review, on Deloitte’s redesign', url: 'https://hbr.org/2015/04/reinventing-performance-management', mins: 20, note: 'Frequent check-ins and four future-focused questions replaced the annual ratings. The model behind how you run the cycle.' },
@@ -285,6 +302,7 @@ window.MV_COHORT = {
         { kind: 'Podcast', title: 'The McKinsey Podcast', by: 'McKinsey', url: 'https://www.mckinsey.com/featured-insights/mckinsey-podcast', mins: 30, note: 'Talent, performance and leading change, from the research side.' },
         { kind: 'Podcast', title: 'HBR IdeaCast', by: 'Harvard Business Review', url: 'https://hbr.org/podcasts/ideacast', mins: 30, note: 'A weekly interview with a leading thinker on management and work.' },
         { kind: 'Read', title: 'Human Capital Trends', by: 'Deloitte Insights', url: 'https://www2.deloitte.com/us/en/insights/focus/human-capital-trends.html', mins: 20, note: 'Where talent and work are going, for the Team Development Plan’s year-one line.' },
+        { kind: 'Read', title: 'Hiring: use structured interviewing', by: 'Google re:Work', url: 'https://rework.withgoogle.com/intl/en/subjects/hiring', mins: 15, note: 'Why unstructured interviews predict almost nothing, and the four-part structure that does.' },
         { kind: 'Book', title: 'The First 90 Days', by: 'Michael D. Watkins, Harvard Business Review Press', url: null, mins: null, note: 'The transition playbook, for you and for the person you just promoted.' }
       ]
     }
@@ -320,7 +338,8 @@ window.MV_COHORT = {
       { who: 'Peter Drucker', what: 'What makes an effective executive', how: 'Ask what needs to be done. Write an action plan. Take responsibility for decisions and for communication. Your five-minute presentation is that plan, out loud.' },
       { who: 'Marcus Buckingham', what: 'Play to strengths', how: 'The growth move for Marcus is a real piece of work with his name on it, in the thing he is best at. Not a course.' },
       { who: 'Patrick Lencioni', what: 'The five dysfunctions of a team', how: 'Trust, then conflict, then commitment, then accountability, then results. The peer challenge in the presentations is the conflict step done on purpose.' },
-      { who: 'McKinsey', what: 'Talent to value', how: 'Put your strongest people on the work that matters most, and say so. The Team Development Plan names who owns the team goal.' }
+      { who: 'McKinsey', what: 'Talent to value', how: 'Put your strongest people on the work that matters most, and say so. The Team Development Plan names who owns the team goal.' },
+      { who: 'Google re:Work, Schmidt and Hunter', what: 'Structured interviews', how: 'The highest-cost decision a manager makes is a hire. Write what good looks like at ninety days before you post. Same questions for every candidate, scored against the same rubric, by two interviewers, plus a work sample. Decide against the rubric, not the room.' }
     ]
   },
 
@@ -367,5 +386,75 @@ window.MV_COHORT = {
       { day: 'Friday', items: ['The look back, fifteen minutes: what worked, what broke twice', 'One thank-you by name', 'Next week’s rocks, before you leave'] },
       { day: 'Any day, same day', items: ['Leave, injury, accommodation, or a report: route it and tell your HCM', 'A date at risk: say it the day it is at risk, not the day it is missed'] }
     ]
-  }
+  },
+
+  /* ── Week one role cards, in Spanish. The scenario words come from each area's es block. ── */
+  es: {
+    w1: {
+      manager: { h: 'Si eres el gerente', brief: 'Sam es {role} en {team}. {Slip}. Todavía no has dicho nada. Tienes diez minutos con Sam, y {busy} está cerca. Di lo que notaste, lo que esperas de aquí en adelante y lo que necesitas y para cuándo. Luego pregunta qué se interpone.', frame: 'Marco: lo que noté, lo que espero, lo que necesito y para cuándo.', tips: ['No leas la tarjeta. Dilo como lo dirías tú.', 'Termina con la pregunta que lo arregla, y luego un siguiente paso con fecha.'] },
+      sam: { h: 'Si eres Sam', open: 'Empieza con: «Hola. ¿Querías verme? Si es por {work}, ya lo sé. He estado cubriendo a dos personas.» Luego juega limpio: no lo hagas fácil ni imposible.', truth: 'Lo que es cierto para ti: Sam ha estado cubriendo a un compañero ausente y dio por hecho que lo sabías. Nadie le dijo a Sam qué fechas importaban. A Sam le preocupa que esto vaya a Recursos Humanos antes de que alguien pregunte.', tips: ['Si el gerente insinúa, di «bien» y espera.', 'Si el gerente dice lo que notó, lo que espera y pregunta qué se interpone, dile la verdad.'] }
+    }
+  },
+
+  /* ── Cohort norms, read in the room before anything else. ── */
+  norms: [
+    { b: 'What is said in the room stays in the room.', t: 'Philosophy sentences, timeline lines, and scores are the person’s own.' },
+    { b: 'No live cases by name.', t: 'Describe the situation, not the person. If it is a real case on your team, change the details.' },
+    { b: 'Phones out for the activities, away for each other.', t: 'The site runs on your phone. The conversations run on your face.' },
+    { b: 'Say the hard thing plainly.', t: 'That is the skill we are practicing. Hinting in here is practice for hinting out there.' },
+    { b: 'Some things are never practice cases.', t: 'Leave, injury, accommodation, discrimination, harassment, Title IX: those go to the right office the same day, every time. We route them; we do not rehearse them.' }
+  ],
+
+  /* ── Two nudges a week, one question each. Added to the calendar as events from the week page. ── */
+  nudges: {
+    w1: [ { day: 'Tuesday', q: 'Your Philosophy sentence from the room: have you said it to your team yet? Say it in this week’s meeting.' }, { day: 'Thursday', q: 'The habit you picked in How to lead: where did you use it this week, in one line?' } ],
+    w2: [ { day: 'Tuesday', q: 'Which of your 1:1s this week is on the calendar as a recurring hold, and which is still a hope?' }, { day: 'Thursday', q: 'The conversation you framed in three lines: has line one been said out loud yet? If not, what is the sentence?' } ],
+    w3: [ { day: 'Tuesday', q: 'Name the decision you are handing over this week and the one boundary. Have you said it to the person yet?' }, { day: 'Thursday', q: 'In your last coaching conversation, how many questions did you ask before your first piece of advice?' } ],
+    w4: [ { day: 'Tuesday', q: 'Your Playbook is due at the capstone. Which section is still blank, and what is the one sentence that would fill it?' }, { day: 'Thursday', q: 'Who on your team has been thanked by name this week? If nobody, do it before you leave today.' } ]
+  },
+
+  /* ── The leader brief: fifteen minutes with the manager's own leader before week one, and one question a week. ── */
+  leader: {
+    intro: 'Your manager is joining the Manager Voyage cohort: four weeks of practicing the Vanderbilt Manager Standard with their own team. The research on whether training changes behavior is unambiguous: the single biggest factor is whether the person’s own leader asks about it. This page asks fifteen minutes of you before week one, one question a week, and two hours in week four.',
+    before: [
+      'Read the four expectations below. They are what your manager is being measured on, and what your manager’s team will be asked about.',
+      'Ask your manager which expectation their assessment told them to start with, and which habit they intend to keep for the four weeks.',
+      'Tell them the one thing you would most like to see different on their team in ninety days. Keep it to a sentence; they will write it into their Playbook.',
+      'Block the week-four capstone in your calendar now. Managers present their Playbook to peers and to you.'
+    ],
+    weekly: [
+      { week: 1, ask: 'What is the sentence your team can expect from you? Say it to me.', why: 'The Philosophy sentence. Hearing it said out loud to you is the first transfer.' },
+      { week: 2, ask: 'Which 1:1s are on the calendar now, and which difficult conversation did you hold?', why: 'Expectation 01. If the 1:1s are not recurring holds by Friday, ask again Monday.' },
+      { week: 3, ask: 'What decision did you hand over, to whom, with what boundary? Did you take it back?', why: 'Expectation 02. The honest answer to the last question is the one that matters.' },
+      { week: 4, ask: 'What will your team be able to do in ninety days that it cannot do today, and who owns it?', why: 'Expectation 04 and the Team Development Plan. You will hear the answer again at the capstone; challenge one date.' }
+    ],
+    after: 'After the cohort, keep the one question a week for ninety days, until the reassessment. Then ask what moved.'
+  },
+
+  /* ── The team's view: the ten statements as a team member would answer them. Anonymous, three or more responses, at Day 0 and Day 90. ── */
+  teamCheck: {
+    intro: 'The assessment asks managers to rate themselves. The team sees the same ten behaviors from the other side. Ask your team to answer these anonymously before week one and again at the ninety-day reassessment. Three or more responses, or do not read them.',
+    scale: ['Rarely', 'Sometimes', 'About half the time', 'Usually', 'Almost always'],
+    statements: [
+      'My manager writes down our top priorities for the period, with a named owner for each, before the work starts.',
+      'My manager tells me what I own, by when, and what a good result looks like, and puts it in writing.',
+      'My manager looks at my work while it is in progress, well before it is due, so there is time to help.',
+      'When I am under pressure, my manager moves a deadline or a task that same week and checks back with me.',
+      'My manager thanks me for specific work, by name, within the week it happened.',
+      'Before my manager changes how we work, they ask for my view and it shapes the decision.',
+      'When a change is coming, my manager explains the reason in their own words before the official announcement reaches us.',
+      'After a large piece of work, my manager holds a short look-back with us: what worked, what did not, what we change.',
+      'My manager watches what is coming from the rest of Vanderbilt so we hear it from them first.',
+      'When another office asks too much of us, my manager shows the hours, names the conflict, and offers options instead of just saying yes.'
+    ],
+    indicators: [
+      { k: 'oneonones', t: 'My 1:1s are on the calendar as recurring holds for everyone on the team' },
+      { k: 'timecards', t: 'Timecards and time off were approved before the deadline every week this month' },
+      { k: 'conversation', t: 'I held the difficult conversation I framed in week two' },
+      { k: 'handoff', t: 'I handed over a real decision in week three and did not take it back' }
+    ]
+  },
+
+  /* ── Scenario scripts: who has reviewed them. Shown to facilitators until both say yes. ── */
+  review: { sme: false, employeeRelations: false, note: 'The lab scripts and the voice agents are drafts until a subject-matter expert and Employee Relations have read them. Until then, facilitators say so in the room.' }
 };

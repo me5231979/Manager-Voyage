@@ -92,6 +92,15 @@ window.MV_CONFIG = {
     ['Representing',   'When a request from another office would overload my team, I show the hours, name the conflict, and offer two options rather than a flat yes or no.']
   ],
 
+  /* Four optional items at the reassessment, for the behaviors in the standard the ten statements do not measure
+     (developing, problem solving, envisioning change and encouraging innovation, networking). Not scored. */
+  assessmentExtra: [
+    ['Developing',        'I give each person one assignment this quarter that stretches them, and I check in on it.'],
+    ['Problem solving',   'When the same problem shows up twice, I change the process rather than fixing it again myself.'],
+    ['Envisioning change', 'I can say, in one sentence my team repeats, what this team will be able to do next year that it cannot do today.'],
+    ['Networking',        'I know by name the people in Finance, HR, and IT my team depends on, and I have talked with each of them this quarter.']
+  ],
+
   /* Profile and completion feed. A small proxy in front of Oracle HCM that
      returns the signed-in manager's record as JSON. See docs/ORACLE-INTEGRATION.md
      for the contract. Leave null to run without it. */

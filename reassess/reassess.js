@@ -3,7 +3,7 @@
   'use strict';
   var C = window.MV_CONFIG || {}, E = window.MV_EMAIL;
   var SCALE = C.assessmentScale || ['Never', 'Rarely', 'Sometimes', 'Often', 'Always'];
-  var ST = C.assessmentStatements || [], CATS4 = C.assessmentCategories || [], BANDS = C.assessmentBands || [], MOVES = C.assessmentMoves || [];
+  var ST = C.assessmentStatements || [], CATS4 = C.assessmentCategories || [], BANDS = C.assessmentBands || [], MOVES = C.assessmentMoves || [], EXTRA = C.assessmentExtra || [], xans = {};
   var FOUNDATIONS = (C.reassessUrl || '').replace(/reassess\/?$/, '') + 'foundation/';
   if(FOUNDATIONS === 'foundation/') FOUNDATIONS = '../foundation/';
   var ans = {};
@@ -59,6 +59,12 @@
     qsEl.querySelector('[data-li="' + i + '"]').classList.add('done');
     formReady();
   });
+  /* four optional items for the behaviors the ten statements do not measure; not scored */
+  if(EXTRA.length){ var xo = document.createElement('ol'); xo.className = 'qs qs-extra'; xo.setAttribute('aria-label', 'Optional: four more behaviors');
+    xo.innerHTML = '<li class="grp"><b>Optional · Four behaviors the ten statements do not measure</b><span>Developing, problem solving, envisioning change, networking · not scored, kept with your results</span></li>' + EXTRA.map(function(st, i){ return '<li data-xli="' + i + '"><b>' + (i + 1) + ' · ' + esc(st[0]) + '</b><p>' + esc(st[1]) + '</p><div class="scale" role="group" aria-label="' + esc(st[0]) + '">' + SCALE.map(function(l, j){ return '<button type="button" data-x="' + i + '" data-v="' + j + '" aria-pressed="false">' + esc(l) + '</button>'; }).join('') + '</div></li>'; }).join('');
+    qsEl.parentNode.insertBefore(xo, qsEl.nextSibling);
+    xo.addEventListener('click', function(e){ var b = e.target.closest('button[data-x]'); if(!b) return; var i = +b.getAttribute('data-x'); xans[i] = +b.getAttribute('data-v'); Array.prototype.forEach.call(xo.querySelectorAll('button[data-x="' + i + '"]'), function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); xo.querySelector('[data-xli="' + i + '"]').classList.add('done'); });
+  }
   function formReady(){ var n = Object.keys(ans).length, all = n === ST.length; $('progFill').style.width = (n / ST.length * 100) + '%'; $('progText').textContent = n + ' of ' + ST.length; $('send').disabled = !all; $('send').textContent = all ? 'See my results' : 'See my results (' + n + ' of ' + ST.length + ' answered)'; }
   formReady();
 
@@ -70,7 +76,8 @@
     var feedback = sc.categories.map(function(c){ var bd = band(c.avg); return { k:c.k, label:bd[1], line:bd[2] }; });
     var move = MOVES[loIdx] || '', route = E.route(sc.score, sc.max), ov = E.overall(sc.score, sc.max);
     var rec = { phase:'retake', name:name, email:email, at:new Date().toISOString(), score:sc.score, max:sc.max, categories:sc.categories, feedback:feedback, move:move, route:route,
-      answers:ST.map(function(st, i){ return { n:i + 1, k:st[0], v:ans[i] + 1, label:SCALE[ans[i]] }; }) };
+      answers:ST.map(function(st, i){ return { n:i + 1, k:st[0], v:ans[i] + 1, label:SCALE[ans[i]] }; }),
+      extra:EXTRA.map(function(st, i){ return xans[i] === undefined ? null : { k:st[0], v:xans[i] + 1, label:SCALE[xans[i]] }; }).filter(Boolean) };
 
     var first = name.split(' ')[0], d = base ? sc.score - base.score : null;
     $('resTitle').innerHTML = route === 'foundations' ? 'Time to go back to the <em>foundations</em>' + (first ? ', ' + esc(first) : '') + '.' : (d !== null && d > 0 ? 'You moved' : 'Here is where you are') + (first ? ', ' + esc(first) : '') + '.';
@@ -78,7 +85,7 @@
     $('cats').innerHTML = sc.categories.map(function(c, i){ var bd = band(c.avg), prev = base && base.categories[i], dd = prev ? Math.round((c.avg - prev.avg) * 10) / 10 : null;
       return '<li><span class="l">' + esc(c.k) + '</span><span class="v">' + c.avg.toFixed(1) + '<small>of 5</small>' + delta(dd, true) + '</span><span class="b"><i data-w="' + Math.max(2, c.pct) + '"></i>' + (prev ? '<em style="left:' + prev.pct + '%" title="Starting point"></em>' : '') + '</span><span class="f"><b>' + esc(bd[1]) + '</b>' + esc(bd[2]) + '</span></li>'; }).join('');
     $('legend').hidden = !base;
-    $('moveBox').innerHTML = move ? '<div class="move"><b>Your first move this week</b>' + esc(move) + '</div>' : '';
+    $('moveBox').innerHTML = (move ? '<div class="move"><b>Your first move this week</b>' + esc(move) + '</div>' : '') + (rec.extra.length ? '<p class="note" style="margin-top:12px">Optional behaviors: ' + rec.extra.map(function(x){ return esc(x.k) + ' ' + esc(x.label.toLowerCase()); }).join(' · ') + '.</p>' : '');
 
     if(route === 'foundations'){
       $('nextBox').innerHTML = '<p class="kick">Your next step</p><h2>Retake Manager Foundations.</h2><p>These habits have not yet become part of your week' + (lo ? ', and ' + esc(lo.k.toLowerCase()) + ' is furthest from it' : '') + '. That is common three months in, when the work crowds them out. The course is about thirty-five minutes. Take it again with this week in mind, build a fresh week, and rate yourself again in three months.</p><div class="actions"><a class="btn" href="' + esc(FOUNDATIONS) + '">Retake Manager Foundations</a></div>';
@@ -92,7 +99,7 @@
     }
 
     var sent = window.MVOracle && MVOracle.send({ event:'assessment', phase:'retake', course:'Manager Foundations, Course 1: You Are a Manager Now', name:name, email:email, at:rec.at,
-      score:rec.score, max:rec.max, categories:rec.categories, answers:rec.answers, prior:base ? { at:base.at, score:base.score, categories:base.categories } : null,
+      score:rec.score, max:rec.max, categories:rec.categories, answers:rec.answers, extra:rec.extra, prior:base ? { at:base.at, score:base.score, categories:base.categories } : null,
       feedback:feedback, move:move, route:route, source:'reassess', page:location.href.split('?')[0],
       emailSubject:route === 'foundations' ? 'Your results, three months on: back to the foundations' : 'Your results, three months on, and what to learn next',
       emailHtml:E.assessment(rec, base) });

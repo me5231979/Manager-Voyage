@@ -142,6 +142,18 @@ ${K.manage.time.map(t => `<div class="box"><b>${esc(t.who)}: ${esc(t.what)}.</b>
 ${field('My week, in my own words', 'Which day the approvals happen, when the 1:1s sit, where the protected half day goes.', 4)}
 </section>`);
 
+/* the leader, and the team's view */
+H.push(`<section class="page">
+${weekHead('', 'Your leader, and your team’s view', 'Before week one · the other half of the cohort', 'Two things make the practice stick: your own leader asking one question a week, and your team’s anonymous view of the same ten behaviors you rated yourself on.')}
+<h3>Your leader: fifteen minutes before week one</h3>
+${check(K.leader.before)}
+<h3>One question a week, from your leader</h3>
+<table class="grid" style="font-size:9pt"><thead><tr><th style="width:.7in">Week</th><th>The question</th><th style="width:2.4in">Why</th></tr></thead><tbody>${K.leader.weekly.map(w => `<tr><td style="height:auto">${w.week}</td><td style="height:auto"><b>${esc(w.ask)}</b></td><td style="height:auto">${esc(w.why)}</td></tr>`).join('')}</tbody></table>
+<h3>Your team’s view: the ten statements, from their side</h3>
+<p class="intro">Anonymous, three or more responses, before week one and again at ninety days. Answered on a five-point scale: ${esc(K.teamCheck.scale.join(', '))}.</p>
+<ol style="margin:6pt 0 0;padding-left:16pt;font-size:9pt;line-height:1.45">${K.teamCheck.statements.map(q => `<li style="margin:0 0 3pt">${esc(q)}</li>`).join('')}</ol>
+</section>`);
+
 /* section 1 */
 H.push(`<section class="page">
 ${weekHead('01', 'Manager Philosophy', 'Week 1 · In the classroom · What it means to manage · due Sunday', 'One page on how you will manage. It starts with the mission, runs through your Manager Voyage on a timeline, and ends with the sentence you read aloud to your four.')}

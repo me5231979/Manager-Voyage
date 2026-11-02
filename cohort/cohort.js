@@ -86,7 +86,7 @@
 
   /* ---------- header, footer, progress ---------- */
   function header(){
-    var links = [['index.html', 'Home', 'index'], ['week-1.html', 'Week 1', 'week-1'], ['week-2.html', 'Week 2', 'week-2'], ['week-3.html', 'Week 3', 'week-3'], ['week-4.html', 'Week 4', 'week-4'], ['manage.html', 'The other things', 'manage']];
+    var links = [['index.html', 'Home', 'index'], ['week-1.html', 'Week 1', 'week-1'], ['week-2.html', 'Week 2', 'week-2'], ['week-3.html', 'Week 3', 'week-3'], ['week-4.html', 'Week 4', 'week-4'], ['manage.html', 'The other things', 'manage'], ['facilitator.html', 'Facilitators', 'facilitator']];
     var h = el('header', 'cnav gnav');
     h.innerHTML = '<a href="index.html" aria-label="Manager Voyage cohort home"><img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="150" height="40"></a>' +
       '<span class="tag">Manager Voyage · The Cohort</span>' +
@@ -137,6 +137,7 @@
   }
   function hero(){
     var h = $('.hero'); if(!h) return;
+    if(WEEK){ var st = C.standard[WEEK.expectation - 1], m = $('.hero .meta', h); if(m && st){ var li = el('li', '', 'Yukl: ' + esc(st.yukl.toLowerCase()) + ' · ' + STMTS[WEEK.expectation]); m.insertBefore(li, m.children[1] || null); } }
     if(!$('.glow', h)){ var g = el('div', 'glow'); g.setAttribute('aria-hidden', 'true'); h.insertBefore(g, h.firstChild.nextSibling); }
     requestAnimationFrame(function(){ h.classList.add('on'); });
     if(reduce || !window.matchMedia('(pointer:fine)').matches) return;
@@ -179,7 +180,7 @@
   }
   function pageUrl(slug){ return C.site + (slug === 'index' ? '' : slug + '.html'); }
   function qrGrid(root){
-    var pages = [['index', 'Cohort home', 'Profile, map, Playbook'], ['week-1', 'Week 1', 'In the classroom'], ['week-2', 'Week 2', 'Remote, 90 minutes'], ['week-3', 'Week 3', 'Remote, 90 minutes'], ['week-4', 'Week 4', 'Capstone, in person']];
+    var pages = [['index', 'Cohort home', 'Profile, map, Playbook'], ['week-1', 'Week 1', 'In the classroom'], ['week-2', 'Week 2', 'Virtual, 90 minutes'], ['week-3', 'Week 3', 'Virtual, 90 minutes'], ['week-4', 'Week 4', 'Capstone, in person'], ['leader', 'For your leader', 'Fifteen minutes, one question a week'], ['team-check', 'Your team’s view', 'Ten statements, anonymous'], ['manage', 'The other things', 'Duties by cadence'], ['facilitator', 'Facilitators', 'Run of show, checklists']];
     root.innerHTML = pages.map(function(p, i){ var u = pageUrl(p[0]); return '<div class="qrc" style="--i:' + i + '"><div class="qr" data-url="' + esc(u) + '" data-size="200"></div><b>' + esc(p[1]) + '</b><span>' + esc(p[2]) + '</span><span>' + esc(u.replace('https://', '')) + '</span></div>'; }).join('');
     qrs();
   }
@@ -336,17 +337,27 @@
 
   /* ---------- the simulation labs ---------- */
   var SDK = 'https://cdn.jsdelivr.net/npm/@elevenlabs/client/+esm', sessions = {};
+  var ROUTE = 'Always the same day, never yours alone: leave, injury, accommodation, discrimination, harassment, Title IX. You route those; this conversation stays yours.';
   function labs(){
     $$('[data-lab]').forEach(function(root){ renderLab(root, C.labs[root.getAttribute('data-lab')]); });
     $$('[data-pairs]').forEach(function(root){ renderPairs(root, C.labs[root.getAttribute('data-pairs')]); });
     document.addEventListener('mv-profile', labs);
   }
+  function fillEs(str, a){ var e = a.es || {}; return String(str).replace(/\{(\w+)\}/g, function(m, k){ var low = k.charAt(0).toLowerCase() + k.slice(1), val = e[low]; if(val == null) return m; return k.charAt(0) === k.charAt(0).toUpperCase() ? cap(val) : val; }); }
   function renderPairs(root, L){
-    var v = vocab(), who = C.cast[L.who];
+    var v = vocab(), who = C.cast[L.who], ES = C.es && C.es[L.key], lang = get('lang', 'en');
     root.className = 'pairs';
+    if(ES && lang === 'es' && v.a.es){
+      root.innerHTML = '<div class="rolecard"><b>' + esc(ES.manager.h) + '</b>' + esc(fillEs(ES.manager.brief, v.a)) + '<ul><li>' + esc(ES.manager.frame) + '</li>' + ES.manager.tips.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>' +
+        '<div class="rolecard"><b>' + esc(ES.sam.h) + '</b>' + esc(fillEs(ES.sam.open, v.a)) + '<ul><li>' + esc(ES.sam.truth) + '</li>' + ES.sam.tips.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>' +
+        '<p class="lang"><button type="button" class="btn sm ghost" data-lang="en">Read the cards in English</button></p>';
+      return;
+    }
     root.innerHTML = '<div class="rolecard"><b>If you are the manager</b>' + esc(fill(L.brief, v)) + '<ul><li>Frame: ' + esc(L.frame) + '</li><li>Do not read from the card. Say it the way you would say it.</li><li>Finish with the question that fixes it, then a next step with a date.</li></ul></div>' +
-      '<div class="rolecard"><b>If you are ' + esc(who.name) + '</b>Open with: “' + esc(fill(L.first, v)) + '” Then play it straight; do not make it easy and do not make it impossible.<ul><li>What is true for you: ' + esc(fill(L.truth, v)) + '</li><li>If the manager hints, say “fine” and wait.</li><li>If the manager says what they noticed, what they expect, and asks what is in the way, tell them the truth.</li></ul></div>';
+      '<div class="rolecard"><b>If you are ' + esc(who.name) + '</b>Open with: “' + esc(fill(L.first, v)) + '” Then play it straight; do not make it easy and do not make it impossible.<ul><li>What is true for you: ' + esc(fill(L.truth, v)) + '</li><li>If the manager hints, say “fine” and wait.</li><li>If the manager says what they noticed, what they expect, and asks what is in the way, tell them the truth.</li></ul></div>' +
+      (ES && v.a.es ? '<p class="lang"><button type="button" class="btn sm ghost" data-lang="es">Leer las tarjetas en español</button></p>' : '');
   }
+  document.addEventListener('click', function(e){ var b = e.target.closest('[data-lang]'); if(!b) return; set('lang', b.getAttribute('data-lang')); $$('[data-pairs]').forEach(function(root){ renderPairs(root, C.labs[root.getAttribute('data-pairs')]); }); });
   function renderLab(root, L){
     if(!L) return;
     var v = vocab(), who = C.cast[L.who], std = C.standard[L.std - 1];
@@ -354,7 +365,7 @@
     root.className = 'lab'; root.setAttribute('data-mode', 'off'); root.setAttribute('data-live', L.key);
     root.innerHTML =
       '<div class="scene"><div class="av"><img src="../assets/img/foundation/cast/' + esc(who.img) + '.webp" alt="" width="128" height="128"><i aria-hidden="true"></i><i class="r2" aria-hidden="true"></i></div>' +
-        '<div class="who"><span class="stdtag"><i>' + std.n + '</i>' + esc(std.name) + '</span><h4>' + esc(who.name) + ', ' + esc(fill(L.role, v).replace(/^./, function(c){ return c.toLowerCase(); })) + '</h4><p>' + esc(brief) + '</p><p class="meta">' + esc(L.mins) + ' · ' + (v.a.id ? 'Written for ' + esc(v.a.team) + ', ' + esc(v.type === 'mixed' ? 'hourly and salaried' : v.type) : 'Generic team. <a href="index.html#profile">Set your profile</a> to tailor it') + '</p></div></div>' +
+        '<div class="who"><span class="stdtag"><i>' + std.n + '</i>' + esc(std.name) + '</span><h4>' + esc(who.name) + ', ' + esc(fill(L.role, v).replace(/^./, function(c){ return c.toLowerCase(); })) + '</h4><p>' + esc(brief) + '</p><p class="meta">' + esc(L.mins) + ' · ' + (v.a.id ? 'Written for ' + esc(v.a.team) + ', ' + esc(v.type === 'mixed' ? 'hourly and salaried' : v.type) : 'Generic team. <a href="index.html#profile">Set your profile</a> to tailor it') + ' · Second rep: Again, harder</p>' + (C.review && !(C.review.sme && C.review.employeeRelations) ? '<p class="meta talk-only">Script under review by a subject-matter expert and Employee Relations. Say so in the room.</p>' : '') + '</div></div>' +
       '<ol class="how"><li><b>1</b>Say your three lines out loud. The frame: ' + esc(L.frame) + '</li><li><b>2</b>' + esc(who.name) + ' answers like a real person: pushback, half-truths, a reason you did not know.</li><li><b>3</b>Agree a next step with a date. ' + esc(who.name) + ' records what you did and did not do.</li></ol>' +
       '<div class="ctl"><button type="button" class="btn" data-live-start>Talk to ' + esc(who.name) + ' live</button><button type="button" class="btn ghost" data-live-end hidden>End the conversation</button><span class="state live-state" aria-live="polite">Uses your microphone. Nothing is stored by Vanderbilt.</span></div>' +
       '<div class="log live-log" aria-live="polite"></div><div class="score live-score" hidden></div>' +
@@ -374,7 +385,7 @@
     var pen = L.penalty && p[L.penalty[0]], passed = n >= L.pass && !pen, box = $('.live-score', root);
     box.innerHTML = '<span class="mono">' + (passed ? 'You held the conversation' : 'Not yet') + ' · ' + n + ' of ' + L.checks.length + '</span>' + (p.summary ? '<p class="sum">' + esc(p.summary) + '</p>' : '') + '<ul>' + rows + '</ul>' +
       (pen ? '<p class="pen">' + esc(L.penalty[1]) + '</p>' : '') + (p.tone === 'harsh' ? '<p class="pen">' + esc(C.cast[L.who].name) + ' went quiet. Harsh gets compliance, not the truth.</p>' : '') +
-      '<p class="way">' + esc(L.way) + '</p><p style="margin-top:12px"><button type="button" class="btn ghost sm" data-live-again>Try it again</button></p>';
+      '<p class="way">' + esc(L.way) + '</p><p class="route">' + esc(ROUTE) + '</p><p style="margin-top:12px"><button type="button" class="btn ghost sm" data-live-again>Try it again</button> <button type="button" class="btn sm" data-live-harder>Again, harder</button></p>';
     box.hidden = false; lstate(root, 'done', passed ? 'Scored.' : 'Scored. Try it again when you are ready.');
     markLab(L.key, { live: true, n: n, pen: !!pen, passed: passed });
   }
@@ -386,14 +397,14 @@
   function lstart(root){
     var L = C.labs[root.getAttribute('data-live')], v = vocab(), name = C.cast[L.who].name;
     $('.live-log', root).innerHTML = ''; $('.live-score', root).hidden = true; $('[data-live-start]', root).hidden = true; $('[data-live-end]', root).hidden = false;
-    lstate(root, 'connecting', 'Asking for the microphone…');
+    lstate(root, 'connecting', (root.getAttribute('data-hard') ? 'Harder rep. ' : '') + 'Asking for the microphone…');
     var mic = navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? navigator.mediaDevices.getUserMedia({ audio: true }) : Promise.reject(new Error('nomic'));
     mic.then(function(stream){ try{ stream.getTracks().forEach(function(t){ t.stop(); }); }catch(e){} lstate(root, 'connecting', 'Connecting to ' + name + '…'); return import(SDK); })
     .then(function(mod){
       var Conversation = mod.Conversation || (mod.default && mod.default.Conversation); if(!Conversation) throw new Error('nosdk');
       return Conversation.startSession({
         agentId: L.agent, connectionType: 'webrtc',
-        dynamicVariables: { counterpart_role: L.key === 'w3' || L.key === 'w4' ? v.a.role2 : v.a.role, team: v.a.team, work: v.a.work, work2: v.a.work2, slip_sentence: cap(v.a.slip) + '.', busy: v.a.busy, team_type: v.type === 'mixed' ? 'hourly and salaried' : v.type, asker: v.a.asker },
+        dynamicVariables: { counterpart_role: L.key === 'w3' || L.key === 'w4' ? v.a.role2 : L.key === 'w4x' ? v.a.asker : v.a.role, team: v.a.team, work: v.a.work, work2: v.a.work2, slip_sentence: cap(v.a.slip) + '.', busy: v.a.busy, team_type: v.type === 'mixed' ? 'hourly and salaried' : v.type, asker: v.a.asker, difficulty: root.getAttribute('data-hard') ? 'harder' : 'standard' },
         clientTools: { record_outcome: function(p){ lscore(root, L, p || {}); return 'recorded'; } },
         onConnect: function(){ lstate(root, 'listening', name + ' is on. Speak when you are ready.'); },
         onDisconnect: function(){ $('[data-live-end]', root).hidden = true; $('[data-live-start]', root).hidden = false; if(root.getAttribute('data-mode') !== 'done') lstate(root, 'off', 'Conversation ended.' + ($('.live-score', root).hidden ? ' No score was recorded. Start again and finish with a next step.' : '')); sessions[L.key] = null; },
@@ -409,7 +420,8 @@
   function lend(root){ var k = root.getAttribute('data-live'), c = sessions[k]; if(c && c.endSession) c.endSession(); sessions[k] = null; $('[data-live-end]', root).hidden = true; $('[data-live-start]', root).hidden = false; if(root.getAttribute('data-mode') !== 'done') lstate(root, 'off', 'Ended.'); }
   document.addEventListener('click', function(e){
     var root = e.target.closest('.lab'); if(!root) return;
-    if(e.target.closest('[data-live-start]') || e.target.closest('[data-live-again]')) lstart(root);
+    if(e.target.closest('[data-live-harder]')){ root.setAttribute('data-hard', '1'); lstart(root); return; }
+    if(e.target.closest('[data-live-start]') || e.target.closest('[data-live-again]')){ root.removeAttribute('data-hard'); lstart(root); }
     else if(e.target.closest('[data-live-end]')) lend(root);
   });
 
@@ -462,7 +474,9 @@
 
   /* ---------- frameworks, go deeper, the other things you manage ---------- */
   function fwCards(list){ return list.map(function(f, i){ return '<article class="fwc" style="--i:' + i + '"><span class="mono">' + esc(f.who) + '</span><h3>' + esc(f.what) + '</h3><p>' + esc(f.how) + '</p></article>'; }).join(''); }
-  function frameworks(){ $$('[data-frameworks]').forEach(function(n){ var L = C.frameworks[n.getAttribute('data-frameworks')] || []; n.className = 'fw'; n.innerHTML = fwCards(L); }); }
+  var STMTS = { 1: 'statements 1, 2 and 3', 2: 'statements 4, 5 and 6', 3: 'statements 7 and 8', 4: 'statements 9 and 10' };
+  function stdCard(n){ var st = C.standard[n - 1]; return '<article class="fwc std-card" style="--i:0"><span class="mono">The Vanderbilt Manager Standard · Gary Yukl</span><h3>Expectation ' + st.n + ': ' + esc(st.name) + '</h3><p>Yukl’s ' + esc(st.yukl.toLowerCase()) + ' category of effective leadership behavior, in Vanderbilt’s words. Your assessment measured it with ' + STMTS[n] + '. Habits: ' + esc(st.habits.join(', ').toLowerCase()) + '. Everything below serves this expectation this week.</p></article>'; }
+  function frameworks(){ $$('[data-frameworks]').forEach(function(n){ var k = n.getAttribute('data-frameworks'), L = C.frameworks[k] || [], w = C.weeks[parseInt(k.slice(1), 10) - 1]; n.className = 'fw'; n.innerHTML = (w ? stdCard(w.expectation) : '') + fwCards(L); }); }
   function deepItem(d){
     var inner = (d.kind ? '<span class="pill">' + esc(d.kind) + '</span>' : '<span class="pill">Oracle Learning</span>') + '<b>' + esc(d.title) + '</b><span class="by">' + esc(d.by) + (d.mins ? ' · about ' + d.mins + ' minutes' : '') + '</span><span class="nt">' + esc(d.note) + '</span>';
     return d.url ? '<a class="dp" href="' + esc(d.url) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="dp off">' + inner + '</div>';
@@ -477,6 +491,57 @@
     var t = $('[data-manage-time]'); if(t){ t.className = 'fw'; t.innerHTML = fwCards(M.time); }
     var w = $('[data-manage-week]'); if(w){ w.className = 'wk7'; w.innerHTML = M.week.map(function(d){ return '<div class="wkd"><b>' + esc(d.day) + '</b><ul>' + d.items.map(function(i){ return '<li>' + esc(i) + '</li>'; }).join('') + '</ul></div>'; }).join(''); }
   }
+
+  function norms(){ var n = $('[data-norms]'); if(!n) return; n.className = 'norms'; n.innerHTML = C.norms.map(function(x, i){ return '<li style="--i:' + i + '"><b>' + esc(x.b) + '</b><span>' + esc(x.t) + '</span></li>'; }).join(''); }
+  function icsFor(k){
+    var N = C.nudges[k] || [], now = new Date(), lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Vanderbilt FLH//Manager Voyage//EN'];
+    N.forEach(function(x, i){ var d = new Date(now); var want = x.day === 'Tuesday' ? 2 : 4; d.setDate(d.getDate() + ((want - d.getDay() + 7) % 7 || 7)); d.setHours(9, 0, 0, 0); var end = new Date(d.getTime() + 15 * 60000);
+      function f(t){ return t.getFullYear() + ('0' + (t.getMonth() + 1)).slice(-2) + ('0' + t.getDate()).slice(-2) + 'T' + ('0' + t.getHours()).slice(-2) + ('0' + t.getMinutes()).slice(-2) + '00'; }
+      lines.push('BEGIN:VEVENT', 'UID:mv-' + k + '-' + i + '-' + Date.now() + '@manager-voyage', 'DTSTAMP:' + f(now) + 'Z', 'DTSTART:' + f(d), 'DTEND:' + f(end), 'SUMMARY:Manager Voyage nudge: ' + x.q.replace(/[,;]/g, ' ').slice(0, 60), 'DESCRIPTION:' + x.q.replace(/,/g, '\\,') + ' (' + C.site + k.replace('w', 'week-') + '.html)', 'END:VEVENT'); });
+    lines.push('END:VCALENDAR'); return lines.join('\r\n');
+  }
+  function nudges(){ $$('[data-nudges]').forEach(function(n){ var k = n.getAttribute('data-nudges'), N = C.nudges[k]; if(!N) return; n.className = 'nudges';
+    n.innerHTML = N.map(function(x){ return '<div class="nudge"><span class="mono">' + esc(x.day) + ' · one question</span><p>' + esc(x.q) + '</p></div>'; }).join('') + '<div class="nudge-ctl"><button type="button" class="btn sm" data-ics="' + k + '">Add both to my calendar</button><a class="btn sm ghost" href="mailto:?subject=' + encodeURIComponent('Manager Voyage: two questions this week') + '&body=' + encodeURIComponent(N.map(function(x){ return x.day + ': ' + x.q; }).join('\n\n') + '\n\n' + C.site + k.replace('w', 'week-') + '.html') + '">Email them to me</a></div>';
+    n.addEventListener('click', function(e){ var b = e.target.closest('[data-ics]'); if(!b) return; var blob = new Blob([icsFor(b.getAttribute('data-ics'))], { type: 'text/calendar' }), a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'manager-voyage-' + b.getAttribute('data-ics') + '-nudges.ics'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500); }); }); }
+  function leaderPage(){
+    var L = C.leader, r = $('[data-leader]'); if(!r) return;
+    r.innerHTML = '<p class="lead rv">' + esc(L.intro) + '</p><h3 class="h3 rv" style="margin-top:28px">Fifteen minutes before week one</h3><ol class="steps rv">' + L.before.map(function(b){ return '<li>' + esc(b) + '</li>'; }).join('') + '</ol>' +
+      '<h3 class="h3 rv" style="margin-top:28px">One question a week</h3><div class="grid g2 rv" style="margin-top:14px">' + L.weekly.map(function(w){ var st = C.standard[C.weeks[w.week - 1].expectation - 1]; return '<div class="card"><span class="no">W' + w.week + '</span><span class="stdtag"><i>' + st.n + '</i>' + esc(st.name) + '</span><h3>“' + esc(w.ask) + '”</h3><p>' + esc(w.why) + '</p></div>'; }).join('') + '</div><p class="note rv">' + esc(L.after) + '</p>';
+  }
+  function leaderSend(){
+    $$('[data-leader-send]').forEach(function(b){ b.addEventListener('click', function(){ var pb = get('pb', {}), ld = get('lead', {});
+      var body = 'Hello,\n\nI am in the Manager Voyage cohort this month. Week one asked me to write what my team can expect from me, and to send it to you.\n\nWhat my team can expect from me:\n' + (pb['w1.philosophy'] || '(not written yet)') + '\n\nMy intent for the next 90 days:\n' + (pb['w1.intent_90'] || '(not written yet)') + '\n\nThe expectation I am starting with, and the habit I will keep:\n' + (ld.n ? 'Expectation 0' + ld.n + ', ' + C.standard[ld.n - 1].name + (ld.h ? ', habit: ' + ld.h : '') : '(not chosen yet)') + '\n\nOne question a week would help more than anything. The leader brief is here: ' + C.site + 'leader.html\n\nThank you.';
+      location.href = 'mailto:' + (C.links.leaderEmailCc || '') + '?subject=' + encodeURIComponent('Manager Voyage: what my team can expect from me') + '&body=' + encodeURIComponent(body); }); });
+  }
+  function teamCheck(){
+    var r = $('[data-team-check]'); if(!r) return; var T = C.teamCheck;
+    var txt = 'Your manager is in the Manager Voyage cohort and has asked for your honest view. Answer each statement with one of: ' + T.scale.join(', ') + '. Your answers are anonymous and are only read when three or more people respond.\n\n' + T.statements.map(function(q, i){ return (i + 1) + '. ' + q; }).join('\n');
+    r.innerHTML = '<p class="lead rv">' + esc(T.intro) + '</p>' + (C.links.teamForm ? '<p class="rv"><a class="btn" href="' + esc(C.links.teamForm) + '" target="_blank" rel="noopener">Open the team form</a></p>' : '<div class="tool-card rv"><div><span class="lg">Microsoft Form · anonymous</span><h4>The form link is not set yet</h4><p>When PCB publishes the anonymous form, its link goes in cohort/program.js under links.teamForm and this button opens it. Until then, send the ten statements by email or paste them into your own form.</p></div><button type="button" class="btn" data-copy-team>Copy the ten statements</button></div>') +
+      '<ol class="tc rv">' + T.statements.map(function(q, i){ var st = C.standard[i < 3 ? 0 : i < 6 ? 1 : i < 8 ? 2 : 3]; return '<li><span class="stdtag"><i>' + st.n + '</i>' + esc(st.name) + ' · Yukl: ' + esc(st.yukl.toLowerCase()) + '</span><p>' + esc(q) + '</p></li>'; }).join('') + '</ol>' +
+      '<p class="rv"><a class="btn ghost sm" href="mailto:?subject=' + encodeURIComponent('Three minutes: how am I doing as your manager?') + '&body=' + encodeURIComponent(txt) + '">Email the ten statements to my team</a></p>';
+    r.addEventListener('click', function(e){ if(!e.target.closest('[data-copy-team]')) return; try{ navigator.clipboard.writeText(txt); e.target.textContent = 'Copied'; }catch(x){} });
+  }
+  function completion(){
+    var r = $('[data-completion]'); if(!r) return; var T = C.teamCheck, ind = get('ind', {});
+    r.innerHTML = '<ul class="checks" aria-label="Behavioral indicators">' + T.indicators.map(function(i){ return '<li><label><input type="checkbox" data-ind="' + i.k + '"' + (ind[i.k] ? ' checked' : '') + '><span>' + esc(i.t) + '</span></label></li>'; }).join('') + '</ul>' +
+      '<div class="btns"><button type="button" class="btn" data-complete>Record my completion</button>' + (C.links.completionForm ? '<a class="btn ghost" href="' + esc(C.links.completionForm) + '" target="_blank" rel="noopener">Open the completion form</a>' : '') + '</div><p class="note" data-complete-note></p><textarea class="rec" data-complete-text hidden rows="10" readonly></textarea>';
+    r.addEventListener('change', function(e){ var c = e.target.closest('[data-ind]'); if(!c) return; ind[c.getAttribute('data-ind')] = c.checked; set('ind', ind); });
+    r.addEventListener('click', function(e){ if(!e.target.closest('[data-complete]')) return;
+      var done = get('done', {}), labs = get('labs', {}), pulse = get('pulse', {}), pb = get('pb', {}), v = vocab();
+      var segs = []; C.weeks.forEach(function(w){ w.segments.forEach(function(s){ if(s.kind !== 'break') segs.push({ k: 'w' + w.n + ':' + s.id, t: 'Week ' + w.n + ': ' + s.title }); }); });
+      var nd = segs.filter(function(s){ return done[s.k]; }).length;
+      var lines = ['Manager Voyage cohort, completion record', 'Date: ' + new Date().toLocaleDateString(), 'Team: ' + (v.a.name || 'not set') + ', ' + (v.type || '') + ', ' + (v.size || '?') + ' people', '',
+        'Segments marked done: ' + nd + ' of ' + segs.length, 'Simulation labs: ' + Object.keys(C.labs).map(function(k){ var L = labs[k]; return C.labs[k].title + ' (' + (L ? (L.live ? (L.passed ? 'held, live' : 'attempted, live') : 'tap version') : 'not done') + ')'; }).join('; '),
+        'Pulse, week one: ' + [0, 1, 2, 3].map(function(i){ return (pulse.pre || {})[i] || '-'; }).join(' ') + ' · week four: ' + [0, 1, 2, 3].map(function(i){ return (pulse.post || {})[i] || '-'; }).join(' '),
+        'Indicators: ' + T.indicators.map(function(i){ return (ind[i.k] ? 'yes' : 'no') + ' ' + i.t; }).join('; '), '',
+        'Philosophy: ' + (pb['w1.philosophy'] || ''), 'Team goal: ' + (pb['w4.team_goal'] || ''), 'First move: ' + (pb['w4.first_move'] || ''), 'Reassessment date: ' + (pb['w4.reassess_date'] || '')];
+      var txt = lines.join('\n'), ta = $('[data-complete-text]', r); ta.value = txt; ta.hidden = false;
+      set('completed', { at: Date.now(), nd: nd, of: segs.length });
+      $('[data-complete-note]', r).textContent = C.links.completionEmail ? 'Your email app opens with this record addressed to the Futures Learning Hub. Send it as is.' : 'The record is below. Until PCB sets the completion inbox or form, copy it into the completion form or email it to your facilitator.';
+      if(C.links.completionEmail) location.href = 'mailto:' + C.links.completionEmail + '?subject=' + encodeURIComponent('Manager Voyage cohort: completion record') + '&body=' + encodeURIComponent(txt);
+    });
+  }
+  function runOfShow(){ var r = $('[data-run-of-show]'); if(!r) return; r.innerHTML = C.weeks.map(function(w){ var t = 0; return '<div class="card"><span class="no">' + w.n + '</span><h3>Week ' + w.n + ' · ' + esc(w.title) + '</h3><p class="mono" style="margin:4px 0 8px">' + esc(w.mode) + ' · ' + fmtMins(w.mins) + '</p><ul class="kv">' + w.segments.map(function(s){ var at = t; t += s.mins; var hh = Math.floor(at / 60), mm = at % 60; return '<li><b>' + (hh ? hh + ':' + (mm < 10 ? '0' : '') + mm : ':' + (mm < 10 ? '0' : '') + mm) + '</b><span>' + esc(s.title) + ' <small style="color:var(--tx3)">' + s.mins + ' min</small></span></li>'; }).join('') + '</ul></div>'; }).join(''); }
 
   /* ---------- present mode: the page as a deck for the room ----------
      Each segment becomes a slide (an <hr class="cut"> inside a segment starts a new slide). Nodes are moved, not
@@ -558,7 +623,7 @@
     var tl = $('#timeline'); if(tl) timeline(tl);
     var so = $('#sort'); if(so){ sort(so); document.addEventListener('mv-profile', function(){ sort(so); }); }
     var ld = $('#lead'); if(ld) lead(ld);
-    frameworks(); deeper(); manage();
+    frameworks(); deeper(); manage(); norms(); nudges(); leaderPage(); leaderSend(); teamCheck(); completion(); runOfShow();
     labs(); playbook(); pulse(); presentTools(); present();
     words(); reveals(); hero(); stack(); qrSide();
     facil(get('facil', false));

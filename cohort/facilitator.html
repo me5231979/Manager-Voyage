@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For facilitators · The Cohort · Manager Voyage</title>
+<meta name="description" content="Run of show for all four weeks, the room and producer checklists, the norms, the rehearsal, and the review status of the scenario scripts.">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../assets/img/favicon-96.png">
+<link rel="stylesheet" href="cohort.css?v=20261101c">
+<script src="program.js?v=20261101c"></script>
+<script src="cohort.js?v=20261101c" defer></script>
+</head>
+<body data-page="facilitator">
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+
+  <section class="hero sub" aria-labelledby="h1">
+    <div class="bg" aria-hidden="true"><img src="../assets/img/campus/kirkland-skyline.jpg" alt="" width="1600" height="900"></div>
+    <div class="wrap">
+      <p class="eyebrow on">Futures Learning Hub · Facilitators and producers</p>
+      <h1 class="h1" id="h1" data-words>Run the room. <em>Run the week.</em></h1>
+      <p class="lead rv">Everything a facilitator needs in one place: the run of show to the minute, the room checklist for weeks one and four, the producer checklist for the virtual weeks, the norms, the rehearsal, and where the scenario scripts stand with review.</p>
+    </div>
+  </section>
+
+  <section class="band th-dark" aria-labelledby="h-ros">
+    <div class="wrap">
+      <p class="eyebrow">Run of show</p>
+      <h2 class="h2 rv" id="h-ros">Four weeks, <em>to the minute.</em></h2>
+      <p class="lead rv">Times are from the start of the session. On a week page, Present as slides puts each segment on the screen with its timer; facilitator mode adds the talk notes.</p>
+      <div class="grid g2 ros rv" data-run-of-show></div>
+    </div>
+  </section>
+  <section class="band th-light" aria-labelledby="h-chk">
+    <div class="wrap">
+      <p class="eyebrow">Before the room</p>
+      <h2 class="h2 rv" id="h-chk">The rehearsal, <em>and two checklists.</em></h2>
+      <div class="grid g3 rv">
+        <div class="card"><span class="no">01</span><h3>Rehearse week one against the clock</h3><ul class="checks"><li><label><input type="checkbox" data-ck="r1"><span>Run the whole deck once in Present mode with the timers on, out loud, in the actual room</span></label></li><li><label><input type="checkbox" data-ck="r2"><span>Do the Sam lab yourself, standard and harder, so you know what the room will hear</span></label></li><li><label><input type="checkbox" data-ck="r3"><span>Practice the demonstration with your volunteer, including the deliberate mistake</span></label></li><li><label><input type="checkbox" data-ck="r4"><span>Decide the fours in advance, by area where you can</span></label></li></ul></div>
+        <div class="card"><span class="no">02</span><h3>The room, weeks one and four</h3><ul class="checks"><li><label><input type="checkbox" data-ck="m1"><span>Screen, clicker, the week page open in Present mode, facilitator mode on</span></label></li><li><label><input type="checkbox" data-ck="m2"><span>Wi-Fi password on the screen; the QR grid printed</span></label></li><li><label><input type="checkbox" data-ck="m3"><span>Movable chairs, room for pairs to talk out loud, earbuds for the live round</span></label></li><li><label><input type="checkbox" data-ck="m4"><span>Printed Playbooks, one per manager, plus five spares</span></label></li><li><label><input type="checkbox" data-ck="m5"><span>Business unit leaders confirmed for the week-four presentations, seated with a four not their own</span></label></li><li><label><input type="checkbox" data-ck="m6"><span>Spanish role cards shown to the room: the toggle is on the pairs block</span></label></li></ul></div>
+        <div class="card"><span class="no">03</span><h3>The producer, weeks two and three</h3><ul class="checks"><li><label><input type="checkbox" data-ck="p1"><span>Core module released in Oracle Learning the Friday before</span></label></li><li><label><input type="checkbox" data-ck="p2"><span>SparkWise link live and pasted into cohort/program.js under links.sparkwise</span></label></li><li><label><input type="checkbox" data-ck="p3"><span>Monday email: the week page link, the ninety-minute cap, the Sunday Playbook due date</span></label></li><li><label><input type="checkbox" data-ck="p4"><span>Tuesday and Thursday nudges sent to the cohort list, or managers reminded to add them</span></label></li><li><label><input type="checkbox" data-ck="p5"><span>Friday: completion nudge to anyone whose week page shows no segments done</span></label></li></ul></div>
+      </div>
+      <h3 class="h3 rv" style="margin-top:32px">The norms, read first</h3>
+      <ul data-norms aria-label="Cohort norms"></ul>
+    </div>
+  </section>
+  <section class="band th-dark" aria-labelledby="h-rev">
+    <div class="wrap">
+      <p class="eyebrow">Review status</p>
+      <h2 class="h2 rv" id="h-rev">The scenario scripts <em>are drafts until reviewed.</em></h2>
+      <p class="lead rv">The lab briefs, the role cards, and the five voice agents were written for this build. Before a room sees them, a subject-matter expert and Employee Relations read them. Until both have, say so in the room: these are practice characters, not policy.</p>
+      <div class="grid g2 rv">
+        <div class="card"><span class="no">SME</span><h3>Subject-matter expert</h3><p>Reads the eight area vocabularies for plausibility: dining, IT, facilities, lab, library, student affairs, administration, advancement. Flags anything a real supervisor in that area would not say.</p><p class="note">Status: pending. Set review.sme to true in cohort/program.js when done.</p></div>
+        <div class="card"><span class="no">ER</span><h3>Employee Relations</h3><p>Reads the five labs for the line between a performance conversation the manager owns and a matter that must route the same day. Confirms the wording of the routing line on every score panel.</p><p class="note">Status: pending. Set review.employeeRelations to true in cohort/program.js when done.</p></div>
+      </div>
+      <div class="btns rv"><a class="btn" href="week-1.html">Week 1</a><a class="btn ghost" href="week-4.html">Week 4</a><a class="btn ghost" href="leader.html">The leader brief</a><a class="btn ghost" href="index.html#profile">The QR grid</a></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
