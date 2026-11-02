@@ -635,7 +635,7 @@
   function deckBuild(){
     var d = el('div', 'pdeck'); d.setAttribute('role', 'region'); d.setAttribute('aria-label', 'Slides');
     var hero = $('.hero .wrap');
-    if(hero){ var t = el('section', 'slide title'); var inner = el('div', 'in on'); inner.innerHTML = hero.innerHTML; $$('.rv', inner).forEach(function(n){ n.classList.add('on'); }); $$('.btns', inner).forEach(function(n){ n.remove(); }); t.appendChild(inner); d.appendChild(t); deck.slides.push(t); }
+    if(hero){ var t = el('section', 'slide title'); t.setAttribute('data-wm', WEEK ? '0' + WEEK.n : ''); var inner = el('div', 'in on'); inner.innerHTML = hero.innerHTML; $$('.rv', inner).forEach(function(n){ n.classList.add('on'); }); $$('.btns', inner).forEach(function(n){ n.remove(); }); t.appendChild(inner); d.appendChild(t); deck.slides.push(t); }
     $$('.slide-src, .seg-block[data-seg]').forEach(function(b){
       var id = b.getAttribute('data-seg') || b.getAttribute('data-title') || '', chunks = [[]];
       Array.prototype.slice.call(b.children).forEach(function(c){ if(c.classList.contains('cut')) chunks.push([]); else chunks[chunks.length - 1].push(c); });
@@ -656,7 +656,8 @@
     deck.el = d; deck.bar = bar;
   }
   function deckGo(i, instant){ i = Math.max(0, Math.min(deck.slides.length - 1, i)); var jump = Math.abs(i - deck.cur) > 1; deck.cur = i; deck.el.scrollTo({ left: i * deck.el.clientWidth, behavior: instant || jump || reduce ? 'auto' : 'smooth' }); deckPaint(); }
-  function deckPaint(){ $$('.dots button', deck.bar).forEach(function(b, j){ b.setAttribute('aria-selected', j === deck.cur ? 'true' : 'false'); }); $('.cnt', deck.bar).textContent = (deck.cur + 1) + ' / ' + deck.slides.length; $('[data-deck="prev"]', deck.bar).disabled = deck.cur === 0; $('[data-deck="next"]', deck.bar).disabled = deck.cur === deck.slides.length - 1; $$('.deck-arrow', deck.el).forEach(function(a){ a.disabled = a.classList.contains('prev') ? deck.cur === 0 : deck.cur === deck.slides.length - 1; }); }
+  function deckEvent(on){ try { document.dispatchEvent(new CustomEvent('mv-deck', { detail: { on: on, cur: deck.cur } })); } catch(e){} }
+  function deckPaint(){ deckEvent(true); $$('.dots button', deck.bar).forEach(function(b, j){ b.setAttribute('aria-selected', j === deck.cur ? 'true' : 'false'); }); $('.cnt', deck.bar).textContent = (deck.cur + 1) + ' / ' + deck.slides.length; $('[data-deck="prev"]', deck.bar).disabled = deck.cur === 0; $('[data-deck="next"]', deck.bar).disabled = deck.cur === deck.slides.length - 1; $$('.deck-arrow', deck.el).forEach(function(a){ a.disabled = a.classList.contains('prev') ? deck.cur === 0 : deck.cur === deck.slides.length - 1; }); }
   function deckOn(){
     if(deck.on) return; deckBuild(); deck.on = true; document.body.classList.add('deck'); document.body.appendChild(deck.el); document.body.appendChild(deck.bar);
     var start = 0, h = location.hash.replace('#seg-', ''); deck.slides.forEach(function(sl, i){ if(!start && h && sl.getAttribute('data-seg') === h) start = i; });
@@ -676,7 +677,7 @@
     if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
     var seg = deck.slides[deck.cur] && deck.slides[deck.cur].getAttribute('data-seg');
     deck.rec.slice().reverse().forEach(function(r){ r.p.insertBefore(r.n, r.next && r.next.parentNode === r.p ? r.next : null); });
-    deck.el.remove(); deck.bar.remove(); deck.rec = []; deck.slides = []; deck.on = false; document.body.classList.remove('deck', 'notes'); window.removeEventListener('resize', deckResize);
+    deckEvent(false); deck.el.remove(); deck.bar.remove(); deck.rec = []; deck.slides = []; deck.on = false; document.body.classList.remove('deck', 'notes'); window.removeEventListener('resize', deckResize);
     $$('[data-present]').forEach(function(b){ b.setAttribute('aria-pressed', 'false'); b.textContent = 'Present as slides'; });
     if(seg){ var t = $('#seg-' + seg); if(t) t.scrollIntoView(); }
   }

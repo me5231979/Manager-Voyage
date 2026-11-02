@@ -95,7 +95,7 @@ window.MV_COHORT = {
 
   /* The four weeks. Minutes are the plan; the page shows them as a timed agenda. */
   weeks: [
-    { n: 1, slug: 'week-1', title: 'What it means to manage', mode: 'In the classroom', where: 'In person, half a day', mins: 180, expectation: 3,
+    { n: 1, slug: 'week-1', title: 'What it means to manage', mode: 'In the classroom', where: 'In person, three hours', mins: 180, expectation: 3,
       promise: 'By the end of the day you can say, in one sentence, what your team can expect from you, and you have held one hard conversation out loud.',
       playbook: { n: 1, title: 'Manager Philosophy', due: 'Sunday', desc: 'The best manager you ever had, your journey in six moments, what your team can expect from you, what you say when bad news lands, and your intent for the next 90 days.' },
       segments: [
