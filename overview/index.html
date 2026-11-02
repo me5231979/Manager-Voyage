@@ -803,7 +803,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     var wrap = slide.querySelector('.wrap'); if(!wrap || wrap.classList.contains('split')) return;
     var cs = getComputedStyle(slide), avail = P - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 24;
     var items = [];
-    function groupOf(el){ if(el.matches('.heard')) return { cls:'heard', tag:'ol', cols:1 }; if(el.matches('.wk')) return { cls:'wk', tag:'div', cols:2 }; return null; }
+    function groupOf(el){ if(el.matches('.heard')) return { cls:'heard', tag:'ol', cols:1 }; if(el.matches('.wk')) return { cls:'wk', tag:'div', cols:2 }; if(el.matches('.bp')) return { cls:'bp', tag:'div', cols:1 }; return null; }
     function outer(node){ var r = node.getBoundingClientRect(), m = getComputedStyle(node); return r.height + (parseFloat(m.marginTop) || 0) + (parseFloat(m.marginBottom) || 0); }
     function push(node, extra){ var it = { nodes:[node], h: outer(node) }; for(var k in extra) it[k] = extra[k]; items.push(it); }
     function pushRows(container, g, extra){ var kids = [].slice.call(container.children), gap = parseFloat(getComputedStyle(container).rowGap) || 12; for(var i = 0; i < kids.length; i += g.cols){ var row = kids.slice(i, i + g.cols), it = { nodes:row, group:g, h: Math.max.apply(null, row.map(outer)) + gap }; for(var k in extra) it[k] = extra[k]; items.push(it); } }
