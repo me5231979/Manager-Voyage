@@ -142,22 +142,28 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 .path b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; margin:4px 0 4px; }
 .path p{ font-size:.88rem; color:var(--tx2); line-height:1.4; }
 
-/* ── the journey: twelve stops on one line ── */
-.jr{ margin-top:34px; position:relative; }
-.jr-phases{ display:grid; grid-template-columns:3fr 4fr 3fr 2fr; gap:6px; }
-.jr-phases span{ font-family:var(--cond); font-weight:700; font-size:.84rem; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); background:rgba(207,174,112,.14); border-radius:999px; padding:7px 14px; text-align:center; }
-.jr-line{ height:3px; margin:34px 3% 0; background:linear-gradient(90deg, var(--oak, #946E24), var(--eyebrow) 55%, var(--bdg)); border-radius:2px; }
-.jr-stops{ list-style:none; display:grid; grid-template-columns:repeat(12,1fr); gap:4px; margin-top:-35px; }
-.jr-stops li{ display:grid; justify-items:center; text-align:center; }
-.jr-stops i{ width:68px; height:68px; border-radius:50%; background:var(--card); border:2px solid var(--eyebrow); display:grid; place-items:center; color:var(--eyebrow); box-shadow:0 0 0 6px var(--bg); }
-.jr-stops i svg{ width:30px; height:30px; }
-.jr-stops li.key i{ background:var(--eyebrow); color:#fff; }
-.th-light .jr-stops li.key i{ color:#1C1C1C; }
-.jr-stops b{ font-family:var(--serif); font-weight:400; font-size:1.12rem; line-height:1.15; margin-top:14px; }
-.jr-stops span{ font-size:.78rem; color:var(--tx3); line-height:1.3; margin-top:4px; }
-.jr-always{ margin:34px auto 0; display:flex; align-items:center; justify-content:center; gap:10px; font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); border-top:1px dashed var(--bdg); padding-top:14px; }
-.jr-always i{ display:inline-grid; }
-.jr-always svg{ width:20px; height:20px; }
+/* ── the journey: three stages on one line, the portal beneath ── */
+.jy{ list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:30px; position:relative; counter-reset:jy; }
+.jy::before{ content:''; position:absolute; left:8%; right:8%; top:76px; height:3px; background:var(--eyebrow); }
+.jy > li{ position:relative; padding:0 clamp(10px,2vw,28px); text-align:center; display:grid; justify-items:center; align-content:start; }
+.jy > li + li::before{ content:'\2192'; position:absolute; left:-12px; top:58px; font-size:1.6rem; color:var(--eyebrow); background:var(--bg); padding:0 4px; }
+.jy .when{ font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:14px; }
+.jy .ico{ width:88px; height:88px; border-radius:50%; background:var(--card); border:3px solid var(--eyebrow); display:grid; place-items:center; color:var(--eyebrow); box-shadow:0 0 0 10px var(--bg); position:relative; z-index:1; }
+.jy .ico svg{ width:40px; height:40px; }
+.jy h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.25rem,1.7vw,1.6rem); line-height:1.15; margin:18px 0 12px; max-width:22ch; }
+.jy .bits{ list-style:none; display:grid; gap:7px; justify-items:start; text-align:left; }
+.jy .bits li{ display:flex; align-items:center; gap:9px; font-size:.95rem; color:var(--tx2); }
+.jy .bits svg{ width:18px; height:18px; color:var(--eyebrow); flex:none; }
+.jy .bits.wk{ grid-template-columns:1fr 1fr; gap:8px 18px; }
+.jy .bits.wk b{ font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.08em; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:3px 8px; }
+.jy .pills{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px; max-width:300px; }
+.jy .pills span{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); border:1px solid var(--bdg); border-radius:999px; padding:5px 11px; }
+.jy-portal{ margin-top:34px; display:flex; align-items:center; justify-content:center; gap:14px; background:var(--eyebrow); color:var(--btn-tx); border-radius:var(--r); padding:14px 20px; }
+.jy-portal i{ display:inline-grid; }
+.jy-portal svg{ width:26px; height:26px; }
+.jy-portal b{ font-family:var(--serif); font-weight:400; font-size:1.35rem; }
+.jy-portal span{ font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; opacity:.85; }
+@media (max-width:1000px){ .jy{ grid-template-columns:1fr; gap:26px; } .jy::before, .jy > li + li::before{ display:none; } }
 /* ── the blueprint: tiles, two hubs, pills ── */
 .bp{ margin-top:22px; display:grid; gap:10px; }
 .bp-h, .bp-r{ display:grid; grid-template-columns:104px repeat(5,1fr); gap:10px; align-items:stretch; }
@@ -345,8 +351,8 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   .slide{ display:block; width:11in; height:auto; min-height:8.5in; overflow:visible; page-break-after:always; break-after:page; padding:0.55in 0.7in 0.6in; opacity:1; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .slide:last-child{ page-break-after:auto; break-after:auto; }
   .slide{ box-decoration-break:clone; -webkit-box-decoration-break:clone; }
-  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr, .jr, .bp-r{ break-inside:avoid; page-break-inside:avoid; }
-  .bp{ display:block; } .bp-h, .bp-r{ margin-bottom:10px; } .jr-stops b{ font-size:.86rem; } .jr-stops span{ font-size:.66rem; } .jr-stops i{ width:52px; height:52px; } .jr-phases span{ font-size:.66rem; padding:5px 6px; }
+  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr, .jy > li, .jy-portal, .bp-r{ break-inside:avoid; page-break-inside:avoid; }
+  .bp{ display:block; } .bp-h, .bp-r{ margin-bottom:10px; } .jy .ico{ width:68px; height:68px; } .jy::before{ top:66px; } .jy > li + li::before{ top:48px; }
   .slide.cont .h{ font-size:1.5rem; }
   .wk{ gap:12px; } .wk > div{ padding:10px 12px; } .wk dl{ font-size:.8rem; grid-template-columns:84px 1fr; gap:3px 10px; } .wk h4{ font-size:1.05rem; }
   .more-in h4{ break-after:avoid; }
@@ -416,7 +422,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   <div class="wrap">
     <p class="eyebrow rv">02 Program overview</p>
     <h2 class="h rv">What Manager Voyage <em>is</em>.</h2>
-    <p class="lead rv">A manager&rsquo;s first 60 days shape how they will lead for years, and until now Vanderbilt had no common standard for that period. Manager Voyage provides one. Courses are assigned automatically in Oracle Learning from the HR record, and the dashboard shows each manager what to do now, what comes next, and who to call.</p>
+    <p class="lead rv">A manager&rsquo;s first 60 days shape how they will lead for years, and until now Vanderbilt had no common standard for that period. Manager Voyage provides one. Courses are assigned automatically in Oracle Learning from the HR record, and the Manager Portal holds every template and contact from the first day.</p>
     <div class="stats rv">
       <div class="stat"><b>4,600+</b><span>Staff led by Vanderbilt managers</span></div>
       <div class="stat"><b>500+</b><span>Vanderbilt managers</span></div>
@@ -436,32 +442,34 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 <section class="slide th-light print-long" id="s3b" aria-roledescription="slide" data-title="The manager&rsquo;s journey">
   <div class="wrap">
     <p class="eyebrow rv">The journey</p>
-    <h2 class="h rv">One manager, start to <em>finish</em>.</h2>
-    <div class="jr rv" role="list" aria-label="The journey, twelve stops in four phases">
-      <div class="jr-phases" aria-hidden="true"><span style="--n:3">Day 1 &middot; Assigned</span><span style="--n:4">Days 1 to 60 &middot; Foundations</span><span style="--n:3">Quarterly &middot; The cohort</span><span style="--n:2">90 days &middot; Measured</span></div>
-      <div class="jr-line" aria-hidden="true"></div>
-      <ol class="jr-stops">
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.2"/><path d="M5.5 17c.8-2 2.2-3 3.5-3s2.7 1 3.5 3M14 10h4M14 14h4"/></svg></i><b>Role changes</b><span>HR record</span></li>
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v10H4z"/><path d="M8 20h8M12 14v6"/><path d="M9 9l3 3 3-3"/></svg></i><b>Path assigned</b><span>Oracle Learning</span></li>
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 13h3M8 16h6"/></svg></i><b>My voyage</b><span>and the Portal</span></li>
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M6.5 8l.7.7 1.3-1.4" stroke-width="1.2"/></svg></i><b>Assessment</b><span>10 statements</span></li>
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z"/></svg></i><b>The course</b><span>35 min &middot; by Day 7</span></li>
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".5"/></svg></i><b>Modules</b><span>compliance, 4 tracks</span></li>
-        <li role="listitem" class="key"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg></i><b>Day 60</b><span>complete, invited</span></li>
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8"/><rect x="8" y="15" width="8" height="3" rx="1"/></svg></i><b>Enroll</b><span>survey, team profile</span></li>
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></i><b>Four weeks</b><span>room &middot; virtual &middot; virtual &middot; room</span></li>
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10l2 2 4-4"/></svg></i><b>Survey</b><span>after each session</span></li>
-        <li role="listitem" class="key"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5l2 2"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M4 20v-5h5"/></svg></i><b>Reassess</b><span>same 10, at 90 days</span></li>
-        <li role="listitem"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="9" r="2.5"/><path d="M2 20c1-4 3.5-6 6-6s5 2 6 6"/><path d="M14 19c.5-3 2-4.5 4-4.5s3.5 1.5 4 4.5"/></svg></i><b>Team&rsquo;s view</b><span>3+ reports</span></li>
-      </ol>
-      <p class="jr-always"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"/><path d="M20 5h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z"/></svg></i>The Manager Portal, open from Day 1 and never taken away</p>
-    </div>
-    <details class="more"><summary>Each stop, in a sentence</summary><div class="more-in">
+    <h2 class="h rv">Three stages, one <em>line</em>.</h2>
+    <ol class="jy rv" aria-label="The journey in three stages">
+      <li>
+        <span class="when">Day 1 &middot; Enrolled</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v10H4z"/><path d="M8 20h8M12 14v6"/><path d="M9 9l3 3 3-3"/></svg></div>
+        <h3>Compliance and the Foundations course</h3>
+        <ul class="bits"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Compliance, by state</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z"/></svg><i>You Are a Manager Now</i>, 35 min</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5l2 2"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M4 20v-5h5"/></svg>Assessment before, again at 90 days</li></ul>
+      </li>
+      <li>
+        <span class="when">The next few weeks &middot; Responsibilities</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".5"/></svg></div>
+        <h3>The responsibility micro courses</h3>
+        <div class="pills"><span>FMLA</span><span>PTO</span><span>Timecards</span><span>Hiring</span><span>Expenses</span><span>Performance</span><span>Accommodations</span><span>EOA</span></div>
+      </li>
+      <li>
+        <span class="when">Quarterly &middot; Four weeks</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></div>
+        <h3>The four-week cohort</h3>
+        <ul class="bits wk"><li><b>W1</b>Room, 3 hr</li><li><b>W2</b>Virtual</li><li><b>W3</b>Virtual</li><li><b>W4</b>Room, 2 hr</li></ul>
+      </li>
+    </ol>
+    <div class="jy-portal rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"/><path d="M20 5h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z"/></svg></i><b>The Manager Portal</b><span>always live, from day one</span></div>
+    <details class="more"><summary>Each stage, in a sentence</summary><div class="more-in">
       <div class="cols">
-        <div><h4>Assigned, Day 1</h4><ul><li><b>Role changes.</b> Oracle HCM shows a management role. Nothing to request.</li><li><b>Path assigned.</b> Compliance and Manager Foundations land in the learner record with due dates.</li><li><b>My voyage.</b> The dashboard: what to do now, what comes next, who to call. The Portal from the same day.</li></ul>
-        <h4>Foundations, Days 1 to 60</h4><ul><li><b>Assessment.</b> Ten statements before the course. Results by expectation, on screen and by email.</li><li><b>The course.</b> <i>You Are a Manager Now</i>, thirty-five minutes online: six topics, live conversations, scored.</li><li><b>Modules.</b> Legal courses by Day 30, policy by Day 60. Four tracks of short modules in Oracle Learning.</li><li><b>Day 60.</b> Recorded against the job profile. The cohort invitation goes out.</li></ul></div>
-        <div><h4>The cohort, quarterly</h4><ul><li><b>Enroll.</b> The enrollment survey: a seat request and the team profile, four taps that tailor every scenario.</li><li><b>Four weeks.</b> Week 1 in the classroom, three hours. Weeks 2 and 3 virtual, under ninety minutes. Week 4 the capstone, two hours.</li><li><b>Survey.</b> Ten questions after every session, most one tap. They shape the next cohort.</li><li><b>Completion.</b> Four indicators, the Playbook presented, the record sent to the Futures Learning Hub.</li></ul>
-        <h4>Measured, 90 days and after</h4><ul><li><b>Reassess.</b> The same ten statements, invited by email at 90 days. The before and after, by expectation.</li><li><b>Team&rsquo;s view.</b> Three or more direct reports answer the same ten about their manager, anonymously.</li><li><b>Always on.</b> The Portal, the HCM and Engagement Consultant by name, an optional six-month pulse.</li></ul></div>
+        <div><h4>Day 1, enrolled</h4><ul><li><b>Enrolled on the first day.</b> Oracle Learning assigns compliance and Manager Foundations from the HR record. Nothing to request.</li><li><b>Compliance.</b> The legal and policy courses for the state the team works in, supervisor versions included.</li><li><b>The Foundations course.</b> <i>You Are a Manager Now</i>, thirty-five minutes online: the assessment first, then six topics with live conversations, scored.</li></ul>
+        <h4>The next few weeks, responsibilities</h4><ul><li><b>Micro courses, one task each.</b> FMLA and leave, PTO and timecards, hiring, expenses, the performance cycle, accommodations, reporting to EOA. Short, in Oracle Learning, taken as the responsibility arrives.</li></ul></div>
+        <div><h4>Quarterly, the cohort</h4><ul><li><b>Enroll.</b> The enrollment survey: a seat request and the team profile, four taps that tailor every scenario.</li><li><b>Four weeks.</b> Week 1 in the classroom, three hours. Weeks 2 and 3 virtual, under ninety minutes. Week 4 the capstone, two hours.</li><li><b>A survey after every session, then completion.</b> Ten questions, most one tap; four indicators; the Playbook presented.</li></ul>
+        <h4>Always live</h4><ul><li><b>The Manager Portal.</b> Every template, policy link and contact, open from the first day and never taken away.</li><li><b>Measured.</b> The same ten statements at 90 days, and the team&rsquo;s view from three or more direct reports.</li></ul></div>
       </div>
     </div></details>
   </div>
@@ -479,7 +487,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     </div>
     <ul class="kv rv" style="margin-top:18px">
       <li><b>Assignment</b><span>Automatic in Oracle Learning when the HR record shows a management role. No enrollment step.</span></li>
-      <li><b>Deadlines</b><span>Courses required by law are due within 30 days; policy courses within 60. My voyage shows the dates and flags anything at risk.</span></li>
+      <li><b>Deadlines</b><span>Courses required by law are due within 30 days; policy courses within 60. Oracle Learning shows the dates.</span></li>
       <li><b>Renewal</b><span>Most courses renew every year, some every two years where the state allows. Oracle Learning holds the official record.</span></li>
     </ul>
     <details class="more"><summary>Every course, by location</summary><div class="more-in">
@@ -632,7 +640,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     <div class="bp rv" role="table" aria-label="Service blueprint">
       <div class="bp-h" role="row"><span></span><span>Assign</span><span>Learn</span><span>Assess</span><span>Practice</span><span>Measure</span></div>
       <div class="bp-r sees" role="row"><span class="rl">Manager sees</span>
-        <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 13h3M8 16h6"/></svg></i><b>My voyage</b></span>
+        <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v10H4z"/><path d="M8 20h8M12 14v6"/><path d="M9 9l3 3 3-3"/></svg></i><b>Enrolled</b></span>
         <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z"/></svg></i><b>The course</b></span>
         <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M6.5 8l.7.7 1.3-1.4" stroke-width="1.2"/></svg></i><b>10 statements</b></span>
         <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></i><b>Cohort site</b></span>
@@ -643,17 +651,17 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
         <span class="hub b"><span class="hi"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 12h4l5-6M11.5 12l5 6"/></svg></i><b>Power Automate</b><em>one flow per record</em></span><span class="arr" aria-hidden="true">&rarr;</span><span class="hi"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></i><b>SharePoint</b><em>one list per record</em></span><span class="arr" aria-hidden="true">&rarr;</span><span class="hi"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></i><b>Email</b><em>from PCB, to the manager</em></span></span>
       </div>
       <div class="bp-r sys" role="row"><span class="rl">Runs on</span>
-        <span class="c"><i>Oracle HCM</i><i>SCORM 1.2</i></span>
-        <span class="c"><i>Oracle Learning</i><i>LinkedIn &middot; OpenSesame</i></span>
+        <span class="c"><i>Oracle HCM</i><i>Oracle Learning</i></span>
+        <span class="c"><i>SCORM package</i><i>LinkedIn &middot; OpenSesame</i></span>
         <span class="c"><i>Course site</i><i>Power Automate</i></span>
         <span class="c"><i>ElevenLabs</i><i>SparkWise</i></span>
         <span class="c"><i>Scheduled flow</i><i>SharePoint</i></span>
       </div>
     </div>
-    <p class="bp-foot rv"><span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".5"/></svg></i>One static site: GitHub &rarr; Vercel, zipped as the SCORM package</span><span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></i>Three lists: assessments, surveys, completions</span><span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></i>Five voices, scored on the phone, nothing stored</span></p>
+    <p class="bp-foot rv"><span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".5"/></svg></i>One static site: GitHub &rarr; Vercel, the course zipped as the SCORM package</span><span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></i>Three lists: assessments, surveys, completions</span><span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></i>Five voices, scored on the phone, nothing stored</span></p>
     <details class="more"><summary>How each record moves, and what is in it</summary><div class="more-in">
       <div class="cols">
-        <div><h4>Assign and learn</h4><ul><li><b>Job profile to assignment.</b> An Oracle HCM role change assigns the learning path. The SCORM 1.2 launch passes the learner to My voyage, which reads name, state and start date from the record.</li><li><b>Completions write back.</b> SCORM reports the course complete to Oracle Learning. The dashboard keeps progress in suspend data so it follows the manager across devices.</li></ul></div>
+        <div><h4>Assign and learn</h4><ul><li><b>Job profile to assignment.</b> An Oracle HCM role change assigns the learning path. The Foundation course launches from Oracle Learning as a SCORM package.</li><li><b>Completions write back.</b> SCORM reports the course complete to Oracle Learning, against the job profile.</li></ul></div>
         <div><h4>Assess, practice, measure</h4><ul><li><b>One record, one flow.</b> The course posts a JSON record to a Power Automate flow: a SharePoint list row and the branded email, in one run.</li><li><b>Survey and completion.</b> Each cohort survey and each completion posts to the same kind of flow and lands in SharePoint. Lab scores stay on the phone.</li><li><b>Scheduled invitation.</b> A second flow reads the list, invites at 90 days, and stores the retake beside the first score.</li></ul></div>
       </div>
       <table class="t"><thead><tr><th>Record</th><th>Sent when</th><th>Holds</th><th>Lands in</th></tr></thead><tbody>
@@ -706,14 +714,13 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 </section>
 
 <!-- 11 · CLOSE -->
-<section class="slide th-dark" id="s11" aria-roledescription="slide" data-title="Start with My voyage">
+<section class="slide th-dark" id="s11" aria-roledescription="slide" data-title="Start with the Foundation course">
   <div class="wrap">
     <p class="eyebrow rv">Where to start</p>
-    <h2 class="h1 rv" style="font-size:clamp(2.2rem,4.4vw,4rem)">Start with My <em>voyage</em>.</h2>
-    <p class="lead rv">My voyage is the dashboard where a manager sees what to do now, what comes next, and who to call. The Foundation course and the Manager Portal are open to every manager today.</p>
+    <h2 class="h1 rv" style="font-size:clamp(2.2rem,4.4vw,4rem)">Start with the <em>course</em>.</h2>
+    <p class="lead rv">The Foundation course and the Manager Portal are open to every manager today. Compliance and Foundations are assigned on the first day; the cohort opens each quarter.</p>
     <div class="btns rv">
-      <a class="btn" href="../dashboard/">My voyage</a>
-      <a class="btn ghost" href="../foundation/">The Foundation course</a>
+      <a class="btn" href="../foundation/">The Foundation course</a>
       <a class="btn ghost" href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/">The Manager Portal</a>
       <a class="btn ghost" href="Manager-Voyage-Program-Overview.pdf" download>Download this overview as a PDF</a>
     </div>
