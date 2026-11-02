@@ -284,21 +284,25 @@
   function sort(root){
     var v = vocab(), items = C.sortItems.filter(function(it){ return fitsType(it, v); }).map(function(it, i){ return { i: i, t: fill(it.t, v), std: it.std }; });
     var seed = 7; items.sort(function(a, b){ seed = (seed * 9301 + 49297) % 233280; return (seed / 233280) - 0.5; });
-    var sel = null, placed = 0, right = 0;
+    var sel = null, placed = 0, tries = 0;
     root.innerHTML = '<div class="deck" role="list">' + items.map(function(it, j){ return '<button type="button" class="item" role="listitem" data-i="' + it.i + '" aria-pressed="false"><span class="k">' + (j + 1 < 10 ? '0' : '') + (j + 1) + '</span><span>' + esc(it.t) + '</span></button>'; }).join('') + '</div>' +
       '<div class="bins">' + C.standard.map(function(s){ return '<button type="button" class="bin" data-std="' + s.n + '" aria-label="Place in ' + esc(s.name) + '"><span class="n">' + s.n + ' · ' + esc(s.yukl) + '</span><b>' + esc(s.name) + '</b><ul></ul></button>'; }).join('') + '</div>' +
-      '<p class="out" aria-live="polite">Tap an item, then the expectation it belongs to. Most items could sit in two; pick the one a manager would act on first.</p>';
+      '<p class="out" aria-live="polite">Tap an item, then the expectation it belongs to. A wrong pick bounces back; the list clears only when every item sits where the standard puts it.</p>';
     var out = $('.out', root);
     root.addEventListener('click', function(e){
       var it = e.target.closest('.item'), bin = e.target.closest('.bin');
       if(it && !it.classList.contains('placed')){ $$('.item', root).forEach(function(x){ x.setAttribute('aria-pressed', x === it ? 'true' : 'false'); }); sel = it; out.innerHTML = 'Now tap the expectation.'; return; }
       if(bin && sel){
         var want = C.sortItems[parseInt(sel.getAttribute('data-i'), 10)].std, got = parseInt(bin.getAttribute('data-std'), 10), std = C.standard[want - 1];
-        var li = el('li', got === want ? '' : 'wrong', esc($('span:last-child', sel).textContent)); $('ul', bin).appendChild(li);
-        placed++; if(got === want) right++;
-        sel.classList.add('placed'); sel.classList.toggle('ok', got === want); sel.setAttribute('aria-pressed', 'false');
-        out.innerHTML = (got === want ? '<b>Yes.</b> ' : '<b>Closer to ' + std.n + ', ' + esc(std.name) + '.</b> ') + why(want) + (placed === items.length ? ' <b>All ' + items.length + ' placed, ' + right + ' where the standard puts them.</b> Notice which expectation you reached for least. That is usually the one your team needs next.' : '');
-        sel = null;
+        if(got !== want){
+          tries++; sel.classList.remove('miss'); void sel.offsetWidth; sel.classList.add('miss'); bin.classList.remove('shake'); void bin.offsetWidth; bin.classList.add('shake');
+          var hint = tries >= 2 ? ' Think about who acts on it first and what they would actually do: ' + why(want).charAt(0).toLowerCase() + why(want).slice(1) : ' Most items could sit in two; pick the one a manager would act on first.';
+          out.innerHTML = '<b>Not that one.</b> It stays in the list until it lands where the standard puts it.' + hint; return;
+        }
+        var li = el('li', '', esc($('span:last-child', sel).textContent)); $('ul', bin).appendChild(li);
+        placed++; sel.classList.add('placed', 'ok'); sel.classList.remove('miss'); sel.setAttribute('aria-pressed', 'false');
+        out.innerHTML = '<b>Yes.</b> ' + why(want) + (placed === items.length ? ' <b>All ' + items.length + ' placed where the standard puts them' + (tries ? ', after ' + tries + ' ' + (tries === 1 ? 'miss' : 'misses') : ', first time') + '.</b> Notice which expectation you reached for least. That is usually the one your team needs next.' : ' <span class="st">' + (items.length - placed) + ' to go.</span>');
+        sel = null; tries = 0;
       }
     });
     function why(n){ return ['', 'A task-oriented move: plan it, say it, check it, or fix the process. Statements 1 to 3 on your assessment.', 'A relations move: listen, grow, thank, or trust. Statements 4 to 6.', 'A change move: explain the why, say where we are going, let people try, look back. Statements 7 and 8.', 'An external move: know the people, watch what is coming, speak up for your team. Statements 9 and 10.'][n]; }
@@ -477,6 +481,13 @@
   function fwCards(list){ return list.map(function(f, i){ return '<article class="fwc" style="--i:' + i + '"><span class="mono">' + esc(f.who) + '</span><h3>' + esc(f.what) + '</h3><p>' + esc(f.how) + '</p></article>'; }).join(''); }
   var STMTS = { 1: 'statements 1, 2 and 3', 2: 'statements 4, 5 and 6', 3: 'statements 7 and 8', 4: 'statements 9 and 10' };
   function stdCard(n){ var st = C.standard[n - 1]; return '<article class="fwc std-card" style="--i:0"><span class="mono">The Vanderbilt Manager Standard · Gary Yukl</span><h3>Expectation ' + st.n + ': ' + esc(st.name) + '</h3><p>Yukl’s ' + esc(st.yukl.toLowerCase()) + ' category of effective leadership behavior, in Vanderbilt’s words. Your assessment measured it with ' + STMTS[n] + '. Habits: ' + esc(lc(st.habits.join(', '))) + '. Everything below serves this expectation this week.</p></article>'; }
+  function objectives(){
+    $$('[data-objectives]').forEach(function(n){ var w = C.weeks[parseInt(n.getAttribute('data-objectives').slice(1), 10) - 1]; if(!w) return; var st = C.standard[w.expectation - 1], F = C.frameworks[n.getAttribute('data-objectives')] || [];
+      var who = []; F.forEach(function(f){ var x = f.who.split(/,| and | via /)[0].trim(); if(who.indexOf(x) < 0) who.push(x); });
+      n.className = 'obj';
+      n.innerHTML = '<p class="lead">' + esc(w.promise) + '</p><div class="grid g2"><div class="card"><span class="mono">By the end of the week you can</span><ol class="olist">' + (w.objectives || []).map(function(o, i){ return '<li style="--i:' + i + '"><i></i><span>' + esc(o) + '</span></li>'; }).join('') + '</ol></div><div class="card"><span class="mono">You leave with</span><ul class="olist out">' + (w.outcomes || []).map(function(o, i){ return '<li style="--i:' + (i + 4) + '"><i></i><span>' + esc(o) + '</span></li>'; }).join('') + '</ul></div></div>' +
+        '<p class="note thread"><span class="stdtag"><i>' + st.n + '</i>' + esc(st.name) + '</span><span>The thread this week. ' + (who.length ? 'The thinking behind it comes from ' + esc(who.slice(0, -1).join(', ') + (who.length > 1 ? ' and ' : '') + who[who.length - 1]) + '; the sources sit at the end of the page.' : '') + '</span></p>'; });
+  }
   function frameworks(){ $$('[data-frameworks]').forEach(function(n){ var k = n.getAttribute('data-frameworks'), L = C.frameworks[k] || [], w = C.weeks[parseInt(k.slice(1), 10) - 1]; n.className = 'fw'; n.innerHTML = (w ? stdCard(w.expectation) : '') + fwCards(L); }); }
   function deepItem(d){
     var inner = (d.kind ? '<span class="pill">' + esc(d.kind) + '</span>' : '<span class="pill">Oracle Learning</span>') + '<b>' + esc(d.title) + '</b><span class="by">' + esc(d.by) + (d.mins ? ' · about ' + d.mins + ' minutes' : '') + '</span><span class="nt">' + esc(d.note) + '</span>';
@@ -551,17 +562,78 @@
   function areas(){ var r = $('[data-areas]'); if(!r) return; r.className = 'grid g3 aof'; r.innerHTML = C.areasOfFocus.map(function(a, i){ return '<div class="card" style="--i:' + i + '"><h3>' + esc(a.n) + '</h3><p>' + esc(a.t) + '</p><p class="team">' + esc(a.team) + '</p></div>'; }).join(''); }
   function journey(){
     var r = $('[data-journey]'); if(!r) return; var J = get('journey', {});
+    /* older saves were one line per kind; carry them over as undated moments */
+    if(!J.items){ var old = J; J = { items: [], fwd: {} }; C.lenses.forEach(function(l){ if(old[l.k] && String(old[l.k]).trim()) J.items.push({ y: '', k: l.k, t: String(old[l.k]).trim() }); }); set('journey', J); }
+    if(!J.fwd){ J.fwd = {}; if(J.forward) J.fwd.year = J.forward; }
+    var FWD = C.timeline.filter(function(t){ return t.k === 'day90' || t.k === 'year'; });
+    var SHAPES = { success: 'circle', setback: 'triangle', turning: 'diamond', mentor: 'square', risk: 'star', transition: 'hex' };
+    var kind = C.lenses[0].k;
+    function lens(k){ return C.lenses.filter(function(l){ return l.k === k; })[0] || C.lenses[0]; }
+    function shape(k, x, y, s, cls){ var sh = SHAPES[k] || 'circle', c = 'class="mk ' + (cls || '') + '"';
+      if(sh === 'circle') return '<circle cx="' + x + '" cy="' + y + '" r="' + s + '" ' + c + '/>';
+      if(sh === 'square') return '<rect x="' + (x - s) + '" y="' + (y - s) + '" width="' + (s * 2) + '" height="' + (s * 2) + '" rx="1.5" ' + c + '/>';
+      if(sh === 'triangle') return '<path d="M' + x + ' ' + (y - s * 1.15) + ' L' + (x + s * 1.1) + ' ' + (y + s * 0.85) + ' L' + (x - s * 1.1) + ' ' + (y + s * 0.85) + ' Z" ' + c + '/>';
+      if(sh === 'diamond') return '<path d="M' + x + ' ' + (y - s * 1.2) + ' L' + (x + s * 1.2) + ' ' + y + ' L' + x + ' ' + (y + s * 1.2) + ' L' + (x - s * 1.2) + ' ' + y + ' Z" ' + c + '/>';
+      if(sh === 'hex'){ var pts = []; for(var i = 0; i < 6; i++){ var an = Math.PI / 3 * i - Math.PI / 6; pts.push((x + Math.cos(an) * s * 1.15).toFixed(1) + ',' + (y + Math.sin(an) * s * 1.15).toFixed(1)); } return '<polygon points="' + pts.join(' ') + '" ' + c + '/>'; }
+      var st = []; for(var j = 0; j < 10; j++){ var a2 = Math.PI / 5 * j - Math.PI / 2, rr = j % 2 ? s * 0.55 : s * 1.3; st.push((x + Math.cos(a2) * rr).toFixed(1) + ',' + (y + Math.sin(a2) * rr).toFixed(1)); } return '<polygon points="' + st.join(' ') + '" ' + c + '/>'; }
+    function sorted(){ return J.items.slice().sort(function(a, b){ var ya = parseInt(a.y, 10), yb = parseInt(b.y, 10); if(isNaN(ya) && isNaN(yb)) return 0; if(isNaN(ya)) return -1; if(isNaN(yb)) return 1; return ya - yb; }); }
+    function tl(){
+      var it = sorted(), n = it.length, W = 1000, H = 230, x0 = 120, x1 = 690, mid = 118, fx = [810, 940];
+      var s = '<line x1="' + x0 + '" y1="' + mid + '" x2="' + x1 + '" y2="' + mid + '" class="axis"/><line x1="' + x1 + '" y1="' + mid + '" x2="' + fx[1] + '" y2="' + mid + '" class="axis ahead"/>' +
+        '<circle cx="' + x1 + '" cy="' + mid + '" r="6" class="today"/><text x="' + x1 + '" y="' + (mid + 26) + '" class="jt c yr">Today</text>';
+      FWD.forEach(function(f, i){ var has = J.fwd[f.k] && J.fwd[f.k].trim(), x = fx[i], up = i === 0, lbl = has ? (J.fwd[f.k].length > 24 ? J.fwd[f.k].slice(0, 23) + '…' : J.fwd[f.k]) : f.title;
+        s += '<line x1="' + x + '" y1="' + mid + '" x2="' + x + '" y2="' + (up ? mid - 24 : mid + 24) + '" class="stem"/><circle cx="' + x + '" cy="' + mid + '" r="6" class="stop' + (has ? ' has' : '') + '"/><text x="' + x + '" y="' + (up ? mid - 46 : mid + 50) + '" class="jt c yr">' + esc(f.label) + '</text><text x="' + x + '" y="' + (up ? mid - 30 : mid + 66) + '" class="jt c' + (has ? '' : ' dim') + '">' + esc(lbl) + '</text>'; });
+      if(!n) s += '<text x="' + ((x0 + x1) / 2) + '" y="' + (mid - 22) + '" class="jt c dim">Your moments appear here, in the order they happened</text>';
+      it.forEach(function(m, i){ var x = n === 1 ? (x0 + x1) / 2 : x0 + (x1 - x0 - 50) * i / (n - 1); var up = i % 2 === 0, ty = up ? mid - 46 : mid + 46, lbl = m.t.length > 26 ? m.t.slice(0, 25) + '…' : m.t;
+        s += '<line x1="' + x + '" y1="' + mid + '" x2="' + x + '" y2="' + (up ? mid - 24 : mid + 24) + '" class="stem"/>' + shape(m.k, x, mid, 7, 'k-' + m.k) +
+          '<text x="' + x + '" y="' + (up ? ty - 14 : ty + 2) + '" class="jt c yr">' + esc(m.y || '') + (m.y ? ' · ' : '') + esc(lens(m.k).name) + '</text><text x="' + x + '" y="' + (up ? ty + 2 : ty + 18) + '" class="jt c">' + esc(lbl) + '</text>'; });
+      return '<svg class="jtl" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Your Manager Voyage, in order, then ahead">' + s + '</svg>';
+    }
+    function paint(){
+      var it = sorted();
+      r.innerHTML = '<div class="jlegend">' + C.lenses.map(function(l){ return '<button type="button" class="jk" data-k="' + l.k + '" aria-pressed="' + (l.k === kind) + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + shape(l.k, 12, 12, 7, 'k-' + l.k) + '</svg><b>' + esc(l.name) + '</b><span>' + esc(l.prompt) + '</span></button>'; }).join('') + '</div>' +
+        '<form class="jform" novalidate><label><span class="mono">Year</span><input type="number" min="1950" max="2030" inputmode="numeric" placeholder="2014" data-jy></label><label class="grow"><span class="mono">' + esc(lens(kind).name) + ' · one line</span><input type="text" maxlength="90" placeholder="What happened, in a few words" data-jt></label><button type="submit" class="btn">Add to my timeline</button></form>' +
+        '<div class="jwrap">' + tl() + '</div>' +
+        (it.length ? '<ul class="jlist" aria-label="Your moments">' + it.map(function(m){ var idx = J.items.indexOf(m); return '<li><svg viewBox="0 0 24 24" aria-hidden="true">' + shape(m.k, 12, 12, 6, 'k-' + m.k) + '</svg><b>' + esc(m.y || 'undated') + '</b><span>' + esc(lens(m.k).name) + ': ' + esc(m.t) + '</span><button type="button" data-jdel="' + idx + '" aria-label="Remove">&times;</button></li>'; }).join('') + '</ul>' : '') +
+        '<div class="jfwd"><span class="mono">Then look forward: two stops past today</span><div class="two">' + FWD.map(function(f){ return '<label><b>' + esc(f.label) + ' · ' + esc(f.title) + '</b><span class="q">' + esc(f.prompt) + '</span><input type="text" maxlength="160" data-jf="' + f.k + '" placeholder="One line." value="' + esc(J.fwd[f.k] || '') + '"></label>'; }).join('') + '</div></div>' +
+        '<div class="btns"><button type="button" class="btn" data-journey-go>Write my journey</button><span class="note" style="margin:0" data-journey-n>' + (it.length ? it.length + ' moment' + (it.length === 1 ? '' : 's') + ' on the line. Any kind can appear more than once.' : 'Add the moments as they happened. Any kind can appear more than once; three is a start, eight is a career.') + '</span></div>' +
+        '<div class="jout" data-journey-out hidden><span class="mono">My journey, so far, and where it is going</span><p></p><p class="note">Read it once to the person next to you. Then it goes in your Playbook, section one.</p></div>';
+    }
     r.className = 'journey';
-    r.innerHTML = '<div class="lenses">' + C.lenses.map(function(l){ return '<label class="lens' + (J[l.k] ? ' has' : '') + '"><span class="mono">' + esc(l.name) + '</span><span class="q">' + esc(l.prompt) + '</span><textarea rows="2" data-lens="' + l.k + '" placeholder="One line.">' + esc(J[l.k] || '') + '</textarea></label>'; }).join('') + '</div>' +
-      '<div class="btns"><button type="button" class="btn" data-journey-go>Generate my leadership journey</button><span class="note" style="margin:0" data-journey-n></span></div><div class="jout" data-journey-out hidden><span class="mono">My leadership journey, so far</span><p></p><p class="note">Read it once to the person next to you. Then it goes in your Playbook, section one.</p></div>';
-    function n(){ var k = Object.keys(J).filter(function(x){ return J[x] && J[x].trim(); }).length; $('[data-journey-n]', r).textContent = k ? k + ' of 6 moments written' : 'Write any three; six is better.'; }
-    r.addEventListener('input', function(e){ var t = e.target.closest('[data-lens]'); if(!t) return; J[t.getAttribute('data-lens')] = t.value; set('journey', J); t.closest('.lens').classList.toggle('has', !!t.value.trim()); n(); });
-    r.addEventListener('click', function(e){ if(!e.target.closest('[data-journey-go]')) return;
-      var parts = C.lenses.filter(function(l){ return J[l.k] && J[l.k].trim(); }).map(function(l){ var x = J[l.k].trim().replace(/\.$/, ''); var low = x.charAt(0).toLowerCase() + x.slice(1); return l.frame.replace('{x}', low); });
-      var out = $('[data-journey-out]', r); if(!parts.length){ out.hidden = false; $('p', out).textContent = 'Write at least one moment first.'; return; }
-      var v = vocab(), text = parts.join('. ') + '. ' + (v.a.id ? 'Today I lead ' + v.a.team + ', and ' : 'Today I lead a team, and ') + 'the leader I want to be is drawn from all of it.';
-      $('p', out).textContent = text; out.hidden = false; var pb = get('pb', {}); pb['w1.journey'] = text; set('pb', pb); });
-    n();
+    r.addEventListener('click', function(e){
+      var kb = e.target.closest('.jk'); if(kb){ kind = kb.getAttribute('data-k'); $$('.jk', r).forEach(function(x){ x.setAttribute('aria-pressed', x === kb ? 'true' : 'false'); }); $('.jform .grow .mono', r).textContent = lens(kind).name + ' · one line'; $('[data-jt]', r).focus(); return; }
+      var del = e.target.closest('[data-jdel]'); if(del){ J.items.splice(+del.getAttribute('data-jdel'), 1); set('journey', J); paint(); return; }
+      if(e.target.closest('[data-journey-go]')){
+        var it = sorted(), out = $('[data-journey-out]', r); if(!it.length){ out.hidden = false; $('p', out).textContent = 'Add at least one moment first.'; return; }
+        var v = vocab(), parts = it.map(function(m){ var x = m.t.trim().replace(/\.$/, ''); var low = x.charAt(0).toLowerCase() + x.slice(1); var f = lens(m.k).frame.replace('{x}', low); return (m.y ? 'In ' + m.y + ', ' + f.charAt(0).toLowerCase() + f.slice(1) : f); });
+        var d90 = (J.fwd.day90 || '').trim().replace(/\.$/, ''), yr = (J.fwd.year || '').trim().replace(/\.$/, '');
+        var text = parts.join('. ') + '. ' + (v.a.id ? 'Today I lead ' + v.a.team + '. ' : 'Today I lead a team. ') + (d90 ? 'By day 90, the statement I want to have moved is ' + d90.charAt(0).toLowerCase() + d90.slice(1) + '. ' : '') + (yr ? 'A year from now, this team will ' + yr.replace(/^(this team will|we will|will)\s+/i, '') + '.' : 'The leader I want to be is drawn from all of it.');
+        $('p', out).textContent = text; out.hidden = false; var pb = get('pb', {}); pb['w1.journey'] = text; set('pb', pb);
+      }
+    });
+    r.addEventListener('submit', function(e){ e.preventDefault(); var y = $('[data-jy]', r).value.trim(), t = $('[data-jt]', r).value.trim(); if(!t){ $('[data-jt]', r).focus(); return; } J.items.push({ y: y, k: kind, t: t }); set('journey', J); paint(); $('[data-jy]', r).focus(); });
+    var jfT; r.addEventListener('input', function(e){ if(e.target.matches('[data-jf]')){ J.fwd[e.target.getAttribute('data-jf')] = e.target.value; set('journey', J); clearTimeout(jfT); jfT = setTimeout(function(){ var w = $('.jwrap', r); if(w) w.innerHTML = tl(); }, 400); } });
+    paint();
+  }
+  function missionLine(){
+    var r = $('[data-missionline]'); if(!r) return; var pb = get('pb', {}), M = get('mline', {}); r.className = 'mline';
+    var A = C.areasOfFocus;
+    function fillv(){ var v = vocab(); return { team: v.a.id ? v.a.team : 'your team', who: v.a.id ? v.a.vocab.role : 'a team member' }; }
+    function paint(){ var f = fillv();
+      r.innerHTML = '<ol class="chain">' +
+        '<li class="on"><i>1</i><div><span class="mono">The mission</span><p class="q">Define the great university of the twenty-first century, and be it.</p></div></li>' +
+        '<li class="' + (M.area != null ? 'on' : '') + '"><i>2</i><div><span class="mono">The area of focus ' + esc(f.team) + ' fuels</span><div class="opts">' + A.map(function(a, i){ return '<button type="button" data-area="' + i + '" aria-pressed="' + (M.area === i) + '">' + esc(a.n) + '</button>'; }).join('') + '</div>' + (M.area != null ? '<p class="note">' + esc(A[M.area].team) + '</p>' : '') + '</div></li>' +
+        '<li class="' + ((pb['w1.mission'] || '').trim() ? 'on' : '') + '"><i>3</i><div><span class="mono">What ' + esc(f.team) + ' makes possible</span><p class="q">For the people this university exists for: students, patients, faculty, the public. Concrete, no slogans. “The mission needs us to…”</p><textarea rows="2" data-ml="team" placeholder="The mission needs us to…" aria-label="What your team makes possible">' + esc(pb['w1.mission'] || '') + '</textarea></div></li>' +
+        '<li class="' + ((M.who || '').trim() && (M.part || '').trim() ? 'on' : '') + '"><i>4</i><div><span class="mono">One person’s part, this week</span><p class="q">A name or a role, and the piece of work they will do this week that the line above depends on.</p><div class="two"><input type="text" data-ml="who" placeholder="' + esc(f.who.charAt(0).toUpperCase() + f.who.slice(1)) + ', by name" value="' + esc(M.who || '') + '" aria-label="Who"><input type="text" data-ml="part" placeholder="…does what, this week" value="' + esc(M.part || '') + '" aria-label="Their part"></div></div></li></ol>' +
+        '<div class="mread card"><span class="mono">Read the line, bottom to top</span><p class="out">' + line(f) + '</p><p class="note">' + (complete() ? 'That is one person’s line to the mission. Every person on ' + esc(f.team) + ' has one. Your job is to be able to say each of them.' : 'The sentence fills in as the chain does.') + '</p></div>';
+    }
+    function complete(){ return M.area != null && (pb['w1.mission'] || '').trim() && (M.who || '').trim() && (M.part || '').trim(); }
+    function tidy(x){ return String(x || '').trim().replace(/\.$/, ''); }
+    function line(f){ var who = tidy(M.who), part = tidy(M.part), team = tidy(pb['w1.mission']).replace(/^the mission needs us to\s*/i, ''), area = M.area != null ? A[M.area].n : '';
+      return '<b>' + (who ? esc(who) : '<span class="gap">someone</span>') + '</b> ' + (part ? esc(part) : '<span class="gap">does their part</span>') + ', so that ' + esc(f.team) + ' can ' + (team ? esc(team.charAt(0).toLowerCase() + team.slice(1)) : '<span class="gap">make something possible</span>') + ', which fuels ' + (area ? '<b>' + esc(area) + '</b>' : '<span class="gap">an area of focus</span>') + ', so that Vanderbilt can define the great university of the twenty-first century, and be it.'; }
+    r.addEventListener('click', function(e){ var b = e.target.closest('[data-area]'); if(!b) return; M.area = +b.getAttribute('data-area'); set('mline', M); paint(); });
+    r.addEventListener('input', function(e){ var t = e.target.closest('[data-ml]'); if(!t) return; var k = t.getAttribute('data-ml'); if(k === 'team'){ pb['w1.mission'] = t.value; set('pb', pb); } else { M[k] = t.value; set('mline', M); } $('.mread .out', r).innerHTML = line(fillv()); t.closest('li').classList.toggle('on', k === 'team' ? !!t.value.trim() : !!((M.who || '').trim() && (M.part || '').trim())); if(complete()) pb['w1.mission_line'] = $('.mread .out', r).textContent; set('pb', pb); });
+    document.addEventListener('mv-profile', paint); paint();
   }
   function icm(){
     var r = $('[data-icm]'); if(!r) return; var I = C.icm, st = get('icm', { lines: '' });
@@ -717,7 +789,7 @@
     var tl = $('#timeline'); if(tl) timeline(tl);
     var so = $('#sort'); if(so){ sort(so); document.addEventListener('mv-profile', function(){ sort(so); }); }
     var ld = $('#lead'); if(ld) lead(ld);
-    frameworks(); deeper(); manage(); norms(); nudges(); leaderPage(); leaderSend(); teamCheck(); completion(); runOfShow(); areas(); journey(); icm(); strengths(); overview(); survey(); phil();
+    objectives(); frameworks(); deeper(); manage(); norms(); nudges(); leaderPage(); leaderSend(); teamCheck(); completion(); runOfShow(); areas(); missionLine(); journey(); icm(); strengths(); overview(); survey(); phil();
     labs(); playbook(); pulse(); presentTools(); present();
     words(); reveals(); hero(); stack(); qrSide();
     facil(get('facil', false));

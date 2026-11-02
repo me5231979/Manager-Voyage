@@ -97,11 +97,13 @@ window.MV_COHORT = {
   weeks: [
     { n: 1, slug: 'week-1', title: 'What it means to manage', mode: 'In the classroom', where: 'In person, three hours', mins: 180, expectation: 3,
       promise: 'By the end of the day you can say, in one sentence, what your team can expect from you, and you have held one hard conversation out loud.',
-      playbook: { n: 1, title: 'Manager Philosophy', due: 'Sunday', desc: 'The best manager you ever had, your journey in six moments, what your team can expect from you, what you say when bad news lands, and your intent for the next 90 days.' },
+      objectives: ['Say, in one sentence, what your team can expect from you.', 'Trace the line from one person’s work to the mission, and say it aloud.', 'Name the four expectations, and where you are strong and where you are growing.', 'Hold a hard conversation in three lines: what you noticed, what you expect, what you need by when.'],
+      outcomes: ['Playbook section 1, your Manager Philosophy, drafted.', 'Your career on one line, with two stops ahead.', 'One hard conversation practiced out loud, and scored.', 'The one habit you will keep for the next four weeks.'],
+      playbook: { n: 1, title: 'Manager Philosophy', due: 'Sunday', desc: 'The best manager you ever had, your career on a line, what your team can expect from you, what you say when bad news lands, and your intent for the next 90 days.' },
       segments: [
-        { id: 'welcome', mins: 25, title: 'Welcome, and the best manager you ever had', kind: 'room', std: 2, desc: 'The norms, who is in the room, and one question that starts everything: what did the best manager you ever had actually do?' },
-        { id: 'mission', mins: 15, title: 'Start with the mission', kind: 'room', std: 3, desc: 'Define the great university of the twenty-first century, and be it. The three areas of focus, and what they ask of a team, and of you.' },
-        { id: 'timeline', mins: 25, title: 'Your Manager Voyage, on a timeline', kind: 'activity', std: 3, desc: 'From the work you were hired to do to year one, and the six moments that shaped how you lead. You place yourself on it.' },
+        { id: 'welcome', mins: 25, title: 'Welcome', kind: 'room', std: 2, desc: 'Five norms, then who is in the room.' },
+        { id: 'mission', mins: 15, title: 'Start with the mission', kind: 'room', std: 3, desc: 'Vanderbilt’s mission in one line, the line from one person on your team to it, and the three areas of focus.' },
+        { id: 'timeline', mins: 25, title: 'Your Manager Voyage, on a timeline', kind: 'activity', std: 3, desc: 'Your career on one line, in the order it happened: the successes, setbacks, turning points, mentors, risks and transitions that shaped how you lead. Then past today, to Day 90 and Year one.' },
         { id: 'role', mins: 30, title: 'From contributor to manager, and the standard', kind: 'activity', std: 1, desc: 'In groups: what changes when you move from doing the work to leading it. Then the four expectations you are already measured on, sorted from your own week.' },
         { id: 'break', mins: 10, title: 'Break', kind: 'break' },
         { id: 'lead', mins: 15, title: 'How to lead, in your area', kind: 'activity', std: 2, desc: 'Where you are strong, where you are growing, which expectation your team needs most this month, and the habit that serves it.' },
@@ -110,6 +112,8 @@ window.MV_COHORT = {
       ] },
     { n: 2, slug: 'week-2', title: 'Goals, 1:1s, and difficult conversations', mode: 'Virtual', where: 'On your own time, under ninety minutes', mins: 90, expectation: 1,
       promise: 'By Friday you have a 1:1 cadence on the calendar, three goals per person drafted, and one difficult conversation held with your own team.',
+      objectives: ['Set a 1:1 cadence and agenda that belongs to the team member.', 'Write three goals per person that can be checked by a date.', 'Frame a difficult conversation in three lines and hold it this week.', 'Separate the fact from the story you are telling yourself about it.'],
+      outcomes: ['1:1s on the calendar as recurring holds.', 'Three goals per person, drafted.', 'One difficult conversation held with your own team, and the follow-up written the same day.', 'Playbook section 2, your 1:1 framework and conversation plan.'],
       playbook: { n: 2, title: '1:1 framework and conversation plan', due: 'Sunday', desc: 'Your cadence and agenda, three goals per person this quarter, and the opening sentence of the conversation you are holding.' },
       segments: [
         { id: 'core', mins: 30, title: 'Core module', kind: 'core', std: 1, desc: 'How to Manage Difficult Conversations, in Oracle Learning. Sets the vocabulary for the week.' },
@@ -119,6 +123,8 @@ window.MV_COHORT = {
       ] },
     { n: 3, slug: 'week-3', title: 'Coaching and mentoring', mode: 'Virtual', where: 'On your own time, under ninety minutes', mins: 90, expectation: 2,
       promise: 'By Friday you have handed over one real decision, with the boundary stated, and held one coaching conversation that was mostly questions.',
+      objectives: ['Run a coaching conversation that is mostly questions.', 'Place each person on the delegation ladder and name the next rung.', 'Hand over a real decision with one boundary and one check-in date, and not take it back.', 'Thank one person by name for a specific thing.'],
+      outcomes: ['One decision handed over, out loud, with the boundary stated.', 'One coaching conversation held.', 'A growth plan, one line per person.', 'Playbook section 3, your delegation and growth plan.'],
       playbook: { n: 3, title: 'Delegation and growth plan', due: 'Sunday', desc: 'For each person: where they want to be, one stretch assignment, their rung on the delegation ladder and the next one.' },
       segments: [
         { id: 'core', mins: 35, title: 'Core module', kind: 'core', std: 2, desc: 'Coaching Skills for Leaders and Managers, in Oracle Learning.' },
@@ -128,6 +134,8 @@ window.MV_COHORT = {
       ] },
     { n: 4, slug: 'week-4', title: 'Performance, talent, and your Playbook', mode: 'In the classroom', where: 'In person, two hours', mins: 120, expectation: 4,
       promise: 'You present your Playbook and how you will manage, to peers and your business unit leader, and leave with a 90-day Team Development Plan that survived a challenge.',
+      objectives: ['Give an honest performance answer in the first minute, and say what would change it.', 'Say no to a whole ask while keeping the relationship, with two options you can keep.', 'Present your Playbook in five minutes and defend one goal, one move and one date.', 'Set a team goal for the quarter that is measurable by the date.'],
+      outcomes: ['A 90-day Team Development Plan that survived a challenge.', 'Your Playbook, all four sections, presented to peers and your leader.', 'The reassessment date in the calendar.', 'Your completion recorded with the Futures Learning Hub.'],
       playbook: { n: 4, title: 'Performance practice, and the whole Playbook', due: 'Before the capstone', desc: 'How you run the cycle, your feedback approach, the Integrated Management Model, and the Team Development Plan.' },
       segments: [
         { id: 'recap', mins: 20, title: 'Recap: four expectations, three weeks', kind: 'activity', std: 4, desc: 'What you tried, what held, what did not. The standard, read back against your own weeks.' },
@@ -475,12 +483,12 @@ window.MV_COHORT = {
 
   /* ── The Leadership Journey Generator: six moments that shape how a person leads. Layered on the timeline. ── */
   lenses: [
-    { k: 'success', name: 'Formative success', prompt: 'A win early on that taught you what you were good at.', frame: 'I learned I was good at {x}' },
-    { k: 'setback', name: 'Meaningful setback', prompt: 'The failure or loss you still think about, and what it changed.', frame: 'A setback taught me {x}' },
-    { k: 'turning', name: 'Turning point', prompt: 'The moment the direction changed, by choice or not.', frame: 'Everything turned when {x}' },
-    { k: 'mentor', name: 'Influential mentor', prompt: 'The person whose way of working you still copy.', frame: 'From {x} I took' },
-    { k: 'risk', name: 'Pivotal risk', prompt: 'The thing you did that could have gone badly, and did not, or did.', frame: 'I took a risk on {x}' },
-    { k: 'transition', name: 'Key transition', prompt: 'The move into managing, or the move that made it possible.', frame: 'The transition that made me a manager was {x}' }
+    { k: 'success', name: 'Success', prompt: 'A win that taught you what you were good at.', frame: 'I learned I was good at {x}' },
+    { k: 'setback', name: 'Setback', prompt: 'A failure or loss you still think about, and what it changed.', frame: 'A setback taught me {x}' },
+    { k: 'turning', name: 'Turning point', prompt: 'A moment the direction changed, by choice or not.', frame: 'Everything turned when {x}' },
+    { k: 'mentor', name: 'Mentor', prompt: 'A person whose way of working you still copy.', frame: 'From {x} I took something I still use' },
+    { k: 'risk', name: 'Risk', prompt: 'Something you did that could have gone badly, and did not, or did.', frame: 'I took a risk on {x}' },
+    { k: 'transition', name: 'Transition', prompt: 'A move: a new job, a new team, the move into managing.', frame: 'The transition was {x}' }
   ],
 
   /* ── From contributor to manager: the group activity. Groups enter phrases; the page sorts them into the shifts

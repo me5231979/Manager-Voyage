@@ -271,7 +271,7 @@
 
   /* ---------- boot ---------- */
   function boot(){
-    cards(); segHeads(); agendaIcons(); kvIcons(); deeperIcons(); frames(); journeyRadar(); icmBars(); strengthsCompass(); overviewRoute(); pulseChart(); timerRings(); seal(); labBars(); ladder(); ratio(); weekGrid(); goalTree(); pairsScene(); room(); briefSlides();
+    cards(); segHeads(); agendaIcons(); kvIcons(); deeperIcons(); frames(); icmBars(); strengthsCompass(); overviewRoute(); pulseChart(); timerRings(); seal(); labBars(); ladder(); ratio(); weekGrid(); goalTree(); pairsScene(); room(); briefSlides();
     arm();
     /* cards re-render after a profile change or a sort reset */
     document.addEventListener('mv-profile', function(){ setTimeout(function(){ cards(); kvIcons(); pairsScene(); arm(); }, 0); });

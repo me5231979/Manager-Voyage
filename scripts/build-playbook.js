@@ -162,8 +162,8 @@ ${field('The best manager I ever had did…', 'What they did that stuck with you
 ${field('The mission needs my team to…', 'From the first fifteen minutes. What your team makes possible for the people this university exists for.', 2)}
 <h3>My voyage, in seven lines</h3>
 <table class="grid" style="font-size:9pt"><thead><tr><th style="width:1.6in">Stop</th><th>One line</th></tr></thead><tbody>${K.timeline.map(t => `<tr><td style="height:22pt"><b>${esc(t.label)}</b><br><small>${esc(t.title)}</small></td><td style="height:22pt"></td></tr>`).join('')}</tbody></table>
-<h3>Six moments that made me</h3>
-<table class="grid" style="font-size:9pt"><thead><tr><th style="width:1.6in">Moment</th><th>One line</th></tr></thead><tbody>${K.lenses.map(l => `<tr><td style="height:20pt"><b>${esc(l.name)}</b></td><td style="height:20pt"></td></tr>`).join('')}</tbody></table>
+<h3>My career on a line, then two stops ahead</h3>
+<table class="grid" style="font-size:9pt"><thead><tr><th style="width:.7in">Year</th><th style="width:1.2in">Kind</th><th>One line</th></tr></thead><tbody>${[1,2,3,4,5,6,7,8].map(() => `<tr><td style="height:18pt"></td><td></td><td></td></tr>`).join('')}</tbody></table>
 ${field('What my team can expect from me', 'One sentence, then the three commitments behind it. The ones you could be held to on a bad day.', 4)}
 <div class="two">${field('What I say when bad news lands', 'Your first sentence, word for word.', 3)}${field('The expectation my team needs most this month, and the habit I will keep', 'From the How to lead activity.', 3)}</div>
 ${field('My intent for the next 90 days, and the assessment statement I want to move', 'What will be true about this team by Day 90 that is not true today? Which of the ten statements will say so?', 3)}
