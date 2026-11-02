@@ -26,7 +26,7 @@
   --nav-h:72px; --bar-h:64px; --r:4px; --ease:cubic-bezier(.33,1,.68,1);
 }
 .th-dark{ --bg:#1C1C1C; --tx:#FFFFFF; --tx2:rgba(255,255,255,.8); --tx3:rgba(255,255,255,.62); --bd:rgba(255,255,255,.16); --bdg:rgba(207,174,112,.45); --card:#262624; --card2:#2E2D2A; --eyebrow:#CFAE70; --accent:#CFAE70; --focus:#ECB748; --btn:#CFAE70; --btn-tx:#1C1C1C; }
-.th-light{ --bg:#F5F3EF; --tx:#1C1C1C; --tx2:#4A4A4A; --tx3:#5E5E5E; --bd:#DDD6C8; --bdg:rgba(148,110,36,.45); --card:#FFFFFF; --card2:#FBF9F5; --eyebrow:#7A5C1E; --accent:#946E24; --focus:#7A5C1E; --btn:#1C1C1C; --btn-tx:#FFFFFF; }
+.th-light{ --bg:#F5F3EF; --tx:#1C1C1C; --tx2:#4A4A4A; --tx3:#5E5E5E; --bd:#DDD6C8; --bdg:rgba(207,174,112,.6); --card:#FFFFFF; --card2:#FBF9F5; --eyebrow:#CFAE70; --accent:#CFAE70; --focus:#946E24; --btn:#1C1C1C; --btn-tx:#FFFFFF; }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
 html, body{ height:100%; }
@@ -142,28 +142,27 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 .path b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; margin:4px 0 4px; }
 .path p{ font-size:.88rem; color:var(--tx2); line-height:1.4; }
 
-/* ── the journey: three stages on one line, the portal beneath ── */
-.jy{ list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:30px; position:relative; counter-reset:jy; }
-.jy::before{ content:''; position:absolute; left:8%; right:8%; top:76px; height:3px; background:var(--eyebrow); }
-.jy > li{ position:relative; padding:0 clamp(10px,2vw,28px); text-align:center; display:grid; justify-items:center; align-content:start; }
-.jy > li + li::before{ content:'\2192'; position:absolute; left:-12px; top:58px; font-size:1.6rem; color:var(--eyebrow); background:var(--bg); padding:0 4px; }
-.jy .when{ font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:14px; }
-.jy .ico{ width:88px; height:88px; border-radius:50%; background:var(--card); border:3px solid var(--eyebrow); display:grid; place-items:center; color:var(--eyebrow); box-shadow:0 0 0 10px var(--bg); position:relative; z-index:1; }
-.jy .ico svg{ width:40px; height:40px; }
-.jy h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.25rem,1.7vw,1.6rem); line-height:1.15; margin:18px 0 12px; max-width:22ch; }
-.jy .bits{ list-style:none; display:grid; gap:7px; justify-items:start; text-align:left; }
-.jy .bits li{ display:flex; align-items:center; gap:9px; font-size:.95rem; color:var(--tx2); }
-.jy .bits svg{ width:18px; height:18px; color:var(--eyebrow); flex:none; }
-.jy .bits.wk{ grid-template-columns:1fr 1fr; gap:8px 18px; }
-.jy .bits.wk b{ font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.08em; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:3px 8px; }
-.jy .pills{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px; max-width:300px; }
-.jy .pills span{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); border:1px solid var(--bdg); border-radius:999px; padding:5px 11px; }
-.jy-portal{ margin-top:34px; display:flex; align-items:center; justify-content:center; gap:14px; background:var(--eyebrow); color:var(--btn-tx); border-radius:var(--r); padding:14px 20px; }
-.jy-portal i{ display:inline-grid; }
-.jy-portal svg{ width:26px; height:26px; }
-.jy-portal b{ font-family:var(--serif); font-weight:400; font-size:1.35rem; }
-.jy-portal span{ font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; opacity:.85; }
-@media (max-width:1000px){ .jy{ grid-template-columns:1fr; gap:26px; } .jy::before, .jy > li + li::before{ display:none; } }
+/* ── the journey: one drawn route ── */
+.jart{ margin-top:14px; }
+.jart svg{ display:block; width:100%; height:auto; overflow:visible; }
+.jart .terr{ fill:url(#jterr); }
+.jart .route{ fill:none; stroke:url(#jroute); stroke-width:5; stroke-linecap:round; }
+.jart .chev{ fill:none; stroke:var(--eyebrow); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.jart .st{ fill:var(--eyebrow); stroke:var(--bg); stroke-width:8; }
+.jart .num{ font-family:var(--cond); font-weight:700; font-size:34px; fill:#1C1C1C; text-anchor:middle; }
+.jart .tag{ font-family:var(--cond); font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; fill:var(--eyebrow); }
+.jart .ttl{ font-family:var(--serif); font-size:26px; fill:var(--tx); }
+.jart .sub{ font-family:var(--sans); font-size:15px; fill:var(--tx2); }
+.jart .pill rect{ fill:var(--card); stroke:var(--bdg); }
+.jart .pt{ font-family:var(--cond); font-weight:700; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; fill:var(--eyebrow); text-anchor:middle; }
+.jart .wk rect{ fill:var(--card); stroke:var(--eyebrow); stroke-width:1.5; }
+.jart .wn{ font-family:var(--cond); font-weight:700; font-size:18px; fill:var(--eyebrow); text-anchor:middle; }
+.jart .wm{ font-family:var(--sans); font-size:10px; fill:var(--tx3); text-anchor:middle; }
+.jart .ground{ fill:var(--eyebrow); }
+.jart .gi{ fill:none; stroke:#1C1C1C; stroke-width:1.8; stroke-linejoin:round; }
+.jart .gt{ font-family:var(--serif); font-size:20px; fill:#1C1C1C; }
+.jart .gs{ font-family:var(--cond); font-weight:700; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; fill:#1C1C1C; opacity:.8; }
+.th-dark .jart .num, .th-dark .jart .gt, .th-dark .jart .gs, .th-dark .jart .gi{ fill:#1C1C1C; }
 /* ── the blueprint: tiles, two hubs, pills ── */
 .bp{ margin-top:22px; display:grid; gap:10px; }
 .bp-h, .bp-r{ display:grid; grid-template-columns:104px repeat(5,1fr); gap:10px; align-items:stretch; }
@@ -351,8 +350,8 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   .slide{ display:block; width:11in; height:auto; min-height:8.5in; overflow:visible; page-break-after:always; break-after:page; padding:0.55in 0.7in 0.6in; opacity:1; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .slide:last-child{ page-break-after:auto; break-after:auto; }
   .slide{ box-decoration-break:clone; -webkit-box-decoration-break:clone; }
-  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr, .jy > li, .jy-portal, .bp-r{ break-inside:avoid; page-break-inside:avoid; }
-  .bp{ display:block; } .bp-h, .bp-r{ margin-bottom:10px; } .jy .ico{ width:68px; height:68px; } .jy::before{ top:66px; } .jy > li + li::before{ top:48px; }
+  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr, .jart, .bp-r{ break-inside:avoid; page-break-inside:avoid; }
+  .bp{ display:block; } .bp-h, .bp-r{ margin-bottom:10px; }
   .slide.cont .h{ font-size:1.5rem; }
   .wk{ gap:12px; } .wk > div{ padding:10px 12px; } .wk dl{ font-size:.8rem; grid-template-columns:84px 1fr; gap:3px 10px; } .wk h4{ font-size:1.05rem; }
   .more-in h4{ break-after:avoid; }
@@ -442,28 +441,42 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 <section class="slide th-light print-long" id="s3b" aria-roledescription="slide" data-title="The manager&rsquo;s journey">
   <div class="wrap">
     <p class="eyebrow rv">The journey</p>
-    <h2 class="h rv">Three stages, one <em>line</em>.</h2>
-    <ol class="jy rv" aria-label="The journey in three stages">
-      <li>
-        <span class="when">Day 1 &middot; Enrolled</span>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v10H4z"/><path d="M8 20h8M12 14v6"/><path d="M9 9l3 3 3-3"/></svg></div>
-        <h3>Compliance and the Foundations course</h3>
-        <ul class="bits"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Compliance, by state</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z"/></svg><i>You Are a Manager Now</i>, 35 min</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5l2 2"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M4 20v-5h5"/></svg>Assessment before, again at 90 days</li></ul>
-      </li>
-      <li>
-        <span class="when">The next few weeks &middot; Responsibilities</span>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".5"/></svg></div>
-        <h3>The responsibility micro courses</h3>
-        <div class="pills"><span>FMLA</span><span>PTO</span><span>Timecards</span><span>Hiring</span><span>Expenses</span><span>Performance</span><span>Accommodations</span><span>EOA</span></div>
-      </li>
-      <li>
-        <span class="when">Quarterly &middot; Four weeks</span>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></div>
-        <h3>The four-week cohort</h3>
-        <ul class="bits wk"><li><b>W1</b>Room, 3 hr</li><li><b>W2</b>Virtual</li><li><b>W3</b>Virtual</li><li><b>W4</b>Room, 2 hr</li></ul>
-      </li>
-    </ol>
-    <div class="jy-portal rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"/><path d="M20 5h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z"/></svg></i><b>The Manager Portal</b><span>always live, from day one</span></div>
+    <h2 class="h rv">The <em>voyage</em>.</h2>
+    <div class="jart rv">
+      <svg viewBox="0 0 1180 436" role="img" aria-label="The journey: enrolled on day one, the responsibility micro courses over the next few weeks, the four-week cohort each quarter, the Manager Portal always live">
+        <defs>
+          <linearGradient id="jterr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFAE70" stop-opacity=".28"/><stop offset="1" stop-color="#CFAE70" stop-opacity=".04"/></linearGradient>
+          <linearGradient id="jroute" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#CFAE70"/><stop offset="1" stop-color="#ECB748"/></linearGradient>
+        </defs>
+        <path class="terr" d="M40 368 C 150 368, 200 355, 250 340 S 480 310, 590 265 S 880 160, 980 120 S 1120 92, 1180 90 L1180 396 L40 396 Z"/>
+        <path class="route" d="M40 368 C 150 368, 200 355, 250 340 S 480 310, 590 265 S 880 160, 980 120 S 1120 92, 1180 90"/>
+        <path class="chev" transform="translate(420 304) rotate(-12)" d="M-5 -7 L5 0 L-5 7"/>
+        <path class="chev" transform="translate(785 194) rotate(-20)" d="M-5 -7 L5 0 L-5 7"/>
+
+        <text x="120" y="176" class="tag">Day 1 &middot; Enrolled</text>
+        <text x="120" y="210" class="ttl">Compliance and the</text><text x="120" y="238" class="ttl">Foundations course</text>
+        <text x="120" y="266" class="sub">Compliance by state</text>
+        <text x="120" y="286" class="sub">The 35-minute course, assessment first</text>
+        <circle cx="250" cy="340" r="40" class="st"/><text x="250" y="352" class="num">1</text>
+
+        <text x="470" y="100" class="tag">The next few weeks &middot; Responsibilities</text>
+        <text x="470" y="134" class="ttl">The responsibility</text><text x="470" y="162" class="ttl">micro courses</text>
+        <text x="470" y="190" class="sub">One task each, taken as the duty arrives</text>
+        <circle cx="590" cy="265" r="40" class="st"/><text x="590" y="277" class="num">2</text>
+        <g class="pill"><rect x="435" y="322" width="62" height="26" rx="13"/><text x="466.0" y="339" class="pt">FMLA</text></g><g class="pill"><rect x="505" y="322" width="52" height="26" rx="13"/><text x="531.0" y="339" class="pt">PTO</text></g><g class="pill"><rect x="565" y="322" width="98" height="26" rx="13"/><text x="614.0" y="339" class="pt">TIMECARDS</text></g><g class="pill"><rect x="671" y="322" width="74" height="26" rx="13"/><text x="708.0" y="339" class="pt">HIRING</text></g>
+        <g class="pill"><rect x="419" y="354" width="88" height="26" rx="13"/><text x="463.0" y="371" class="pt">EXPENSES</text></g><g class="pill"><rect x="515" y="354" width="110" height="26" rx="13"/><text x="570.0" y="371" class="pt">PERFORMANCE</text></g><g class="pill"><rect x="633" y="354" width="128" height="26" rx="13"/><text x="697.0" y="371" class="pt">ACCOMMODATIONS</text></g>
+
+        <text x="880" y="202" class="tag">Each quarter &middot; Four weeks</text>
+        <text x="880" y="236" class="ttl">The four-week cohort</text>
+        <text x="880" y="262" class="sub">Your own team, your own scenarios</text>
+        <circle cx="980" cy="120" r="40" class="st"/><text x="980" y="132" class="num">3</text>
+        <g class="wk"><rect x="880" y="282" width="62" height="62" rx="8"/><text x="911" y="309" class="wn">W1</text><text x="911" y="330" class="wm">Room · 3 hr</text></g><g class="wk"><rect x="952" y="282" width="62" height="62" rx="8"/><text x="983" y="309" class="wn">W2</text><text x="983" y="330" class="wm">Virtual</text></g><g class="wk"><rect x="1024" y="282" width="62" height="62" rx="8"/><text x="1055" y="309" class="wn">W3</text><text x="1055" y="330" class="wm">Virtual</text></g><g class="wk"><rect x="1096" y="282" width="62" height="62" rx="8"/><text x="1127" y="309" class="wn">W4</text><text x="1127" y="330" class="wm">Room · 2 hr</text></g>
+
+        <rect x="40" y="396" width="1140" height="40" rx="6" class="ground"/>
+        <path transform="translate(458 407)" d="M0 1h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H0z M20 1h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z" class="gi"/>
+        <text x="492" y="423" class="gt">The Manager Portal</text><text x="700" y="422" class="gs">always live, from day one</text>
+      </svg>
+    </div>
     <details class="more"><summary>Each stage, in a sentence</summary><div class="more-in">
       <div class="cols">
         <div><h4>Day 1, enrolled</h4><ul><li><b>Enrolled on the first day.</b> Oracle Learning assigns compliance and Manager Foundations from the HR record. Nothing to request.</li><li><b>Compliance.</b> The legal and policy courses for the state the team works in, supervisor versions included.</li><li><b>The Foundations course.</b> <i>You Are a Manager Now</i>, thirty-five minutes online: the assessment first, then six topics with live conversations, scored.</li></ul>
@@ -792,9 +805,18 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     wrap.style.transform = ''; wrap.style.zoom = ''; wrap.style.maxWidth = ''; slide.classList.remove('fitted');
     var cs = getComputedStyle(slide), avail = slide.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
     var need = wrap.getBoundingClientRect().height; if(need <= avail + 1) return;
-    var z = Math.max(0.68, avail / need);
-    /* zoom shrinks the width too, so the wrap is widened by the same factor and still fills the screen */
-    if(CSS.supports && CSS.supports('zoom', '0.9')){ wrap.style.zoom = z.toFixed(3); wrap.style.maxWidth = Math.round(1180 / z) + 'px'; } else { wrap.style.transform = 'scale(' + z.toFixed(3) + ')'; }
+    var z = 1, canZoom = CSS.supports && CSS.supports('zoom', '0.9');
+    /* zoom shrinks the width too, so the wrap is widened by the same factor and still fills the screen; content whose
+       height follows its width (a drawing) gives some of that back, so measure again and tighten, a few times */
+    var need0 = need, widen = true;
+    for(var k = 0; k < 4 && need > avail + 1; k++){
+      z = Math.max(0.68, z * avail / need);
+      if(canZoom){ wrap.style.zoom = z.toFixed(3); wrap.style.maxWidth = widen ? Math.round(1180 / z) + 'px' : ''; } else { wrap.style.transform = 'scale(' + z.toFixed(3) + ')'; }
+      need = wrap.getBoundingClientRect().height * (canZoom ? 1 : z);
+      /* widening gave the height straight back: the content follows its width, so stop widening */
+      if(k === 0 && widen && need > need0 * 0.97){ widen = false; wrap.style.maxWidth = ''; need = wrap.getBoundingClientRect().height * (canZoom ? 1 : z); }
+      if(z <= 0.68) break;
+    }
     if(wrap.getBoundingClientRect().height <= avail + 2) slide.classList.add('fitted');
   }
   function fitAll(){ slides.forEach(fit); overflowCheck(); }
