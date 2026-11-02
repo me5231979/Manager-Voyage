@@ -183,6 +183,8 @@ body.facil .qrside{ display:block; }
 .seg-block{ padding:clamp(28px,4vw,48px) 0; border-top:1px solid var(--bd); scroll-margin-top:calc(var(--nav-h) + 16px); }
 .seg-block:first-child{ border-top:0; padding-top:0; }
 .seg-head{ display:flex; gap:14px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+.seg-head > div:first-child{ flex:1 1 0; min-width:min(100%, 520px); }
+.seg-head .mins{ flex:none; }
 .seg-head .mins{ font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--tx3); border:1px solid var(--bdg); border-radius:999px; padding:6px 10px; white-space:nowrap; }
 .timer{ display:none; align-items:center; gap:8px; margin-top:12px; }
 body.facil .timer{ display:inline-flex; }
