@@ -385,6 +385,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 
 /* ── print: every slide on its own page, everything expanded ── */
 @media print{
+  .tl .bar, .tl .axis .rule{ transform:none !important; transition:none !important; } .tl .chip{ opacity:1 !important; } .tl .ship{ display:none; }
   @page{ size:letter landscape; margin:0; }
   html, body{ height:auto; overflow:visible; background:#fff; }
   .nav, .bar, .hint, .skip, .btns, .more summary::after{ display:none !important; }
