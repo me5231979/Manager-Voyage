@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Program Overview | Manager Voyage</title>
-<meta name="description" content="Manager Voyage in eleven slides: the Vanderbilt manager standard, the four components, compliance, Manager Foundations, the four-week cohort, the Manager Portal, how impact is measured, and what managers asked for." />
+<meta name="description" content="Manager Voyage in thirteen slides: the manager’s journey, the Vanderbilt manager standard, the four components, compliance, Manager Foundations, the four-week cohort, the Manager Portal, how impact is measured, and what managers asked for." />
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
 <link rel="preload" href="../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
@@ -141,6 +141,35 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 .path .lab{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); }
 .path b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; margin:4px 0 4px; }
 .path p{ font-size:.88rem; color:var(--tx2); line-height:1.4; }
+
+/* ── the journey ── */
+.jmap{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:22px; position:relative; }
+.jmap::before{ content:''; position:absolute; left:2%; right:2%; top:11px; height:2px; background:linear-gradient(90deg, var(--eyebrow), var(--bdg)); }
+.jmap .ph{ position:relative; padding-top:28px; }
+.jmap .ph::before{ content:''; position:absolute; left:0; top:4px; width:16px; height:16px; border-radius:50%; background:var(--bg); border:3px solid var(--eyebrow); }
+.jmap .lab{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); }
+.jmap h3{ font-family:var(--serif); font-weight:400; font-size:1.5rem; line-height:1.1; margin:4px 0 10px; }
+.jmap ol{ list-style:none; position:relative; display:grid; gap:8px; padding-left:22px; }
+.jmap ol::before{ content:''; position:absolute; left:6px; top:10px; bottom:10px; width:1px; background:var(--bdg); }
+.jmap li{ position:relative; background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:10px 12px; font-size:.86rem; line-height:1.4; }
+.jmap li::before{ content:''; position:absolute; left:-20px; top:14px; width:9px; height:9px; border-radius:50%; background:var(--eyebrow); }
+.jmap li b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.02rem; margin-bottom:2px; color:var(--tx); }
+.jmap li span{ color:var(--tx2); }
+/* ── the blueprint ── */
+.bp{ margin-top:20px; display:grid; gap:6px; }
+.bp-h, .bp-r{ display:grid; grid-template-columns:110px repeat(5,1fr); gap:6px; }
+.bp-h span{ font-family:var(--cond); font-weight:700; font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); padding:0 10px 6px; border-bottom:2px solid var(--eyebrow); position:relative; }
+.bp-h span:first-child{ border-bottom:0; }
+.bp-h span:not(:first-child):not(:last-child)::after{ content:'\2192'; position:absolute; right:-9px; top:-2px; color:var(--eyebrow); background:var(--bg); padding:0 1px; }
+.bp .rl{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tx3); padding:12px 8px 0 0; line-height:1.3; }
+.bp .c{ background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:10px 12px; font-size:.82rem; line-height:1.4; color:var(--tx2); }
+.bp .c b{ display:block; font-family:var(--serif); font-weight:400; font-size:1rem; color:var(--tx); margin-bottom:2px; }
+.bp-r:nth-of-type(2) .c{ border-top:3px solid var(--eyebrow); }
+.bp-r:nth-of-type(3) .c{ background:var(--card2); border-style:dashed; }
+.bp .sys .c{ display:flex; flex-wrap:wrap; gap:4px; align-items:flex-start; align-content:flex-start; background:transparent; border:0; padding:4px 0 0; }
+.bp .sys .c i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); border:1px solid var(--bdg); border-radius:999px; padding:3px 8px; }
+@media (max-width:1000px){ .jmap{ grid-template-columns:1fr 1fr; } .jmap::before{ display:none; } .bp-h{ display:none; } .bp-r{ grid-template-columns:1fr; } .bp .rl{ padding:8px 0 0; } }
+@media (max-width:640px){ .jmap{ grid-template-columns:1fr; } }
 
 /* ── bottom bar ── */
 .bar{ position:fixed; inset:auto 0 0 0; height:var(--bar-h); z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 clamp(16px,2.4vw,36px); background:rgba(20,20,20,.96); border-top:1px solid rgba(207,174,112,.35); color:#fff; }
@@ -282,7 +311,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   .slide{ display:block; width:11in; height:auto; min-height:8.5in; overflow:visible; page-break-after:always; break-after:page; padding:0.55in 0.7in 0.6in; opacity:1; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .slide:last-child{ page-break-after:auto; break-after:auto; }
   .slide{ box-decoration-break:clone; -webkit-box-decoration-break:clone; }
-  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr{ break-inside:avoid; page-break-inside:avoid; }
+  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr, .jmap .ph, .bp-r{ break-inside:avoid; page-break-inside:avoid; }
   .slide.cont .h{ font-size:1.5rem; }
   .wk{ gap:12px; } .wk > div{ padding:10px 12px; } .wk dl{ font-size:.8rem; grid-template-columns:84px 1fr; gap:3px 10px; } .wk h4{ font-size:1.05rem; }
   .more-in h4{ break-after:avoid; }
@@ -365,6 +394,52 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
       <div class="card"><span class="chip">03 &middot; Optional but recommended</span><h3>Four-week cohort</h3><span class="when">After Day 60 &middot; quarterly</span><p>Four weeks of guided practice with the manager&rsquo;s own team, for one hundred managers each quarter.</p></div>
       <div class="card"><span class="chip">04 &middot; Always available</span><h3>Manager Portal</h3><span class="when">From Day 1</span><p>Templates, policy links, and contacts in one place, available from the first day onward.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- 3b · THE MANAGER'S JOURNEY -->
+<section class="slide th-light print-long" id="s3b" aria-roledescription="slide" data-title="The manager&rsquo;s journey">
+  <div class="wrap">
+    <p class="eyebrow rv">The journey &middot; From the HR record to the 90-day measure</p>
+    <h2 class="h rv">One manager&rsquo;s <em>journey</em>, start to finish.</h2>
+    <p class="lead rv">What a new manager actually experiences, in order: what arrives on its own, what they do, and what they get back. Four phases, one line.</p>
+    <div class="jmap rv" role="list" aria-label="The journey in four phases">
+      <div class="ph" role="listitem">
+        <span class="lab">Phase 1 &middot; Day 1</span><h3>Assigned</h3>
+        <ol>
+          <li><b>The HR record changes.</b><span>Oracle HCM shows a management role. Nothing to request.</span></li>
+          <li><b>Oracle Learning assigns the path.</b><span>Compliance and Manager Foundations land in the learner record with due dates.</span></li>
+          <li><b>My voyage opens.</b><span>The dashboard: what to do now, what comes next, who to call. The Manager Portal from the same day.</span></li>
+        </ol>
+      </div>
+      <div class="ph" role="listitem">
+        <span class="lab">Phase 2 &middot; Days 1 to 60</span><h3>Foundations</h3>
+        <ol>
+          <li><b>The assessment.</b><span>Ten statements before the course. Results by expectation, on screen and by email.</span></li>
+          <li><b>The course, by Day 7.</b><span><i>You Are a Manager Now</i>, thirty-five minutes online: six topics, live conversations, scored.</span></li>
+          <li><b>Compliance and the micro modules.</b><span>Legal courses by Day 30, policy by Day 60. Four tracks of short modules in Oracle Learning.</span></li>
+          <li><b>Day 60, complete.</b><span>Recorded against the job profile. The cohort invitation goes out.</span></li>
+        </ol>
+      </div>
+      <div class="ph" role="listitem">
+        <span class="lab">Phase 3 &middot; Quarterly</span><h3>The cohort</h3>
+        <ol>
+          <li><b>Enroll.</b><span>The enrollment survey: a seat request and the team profile, four taps that tailor every scenario.</span></li>
+          <li><b>Four weeks.</b><span>Week 1 in the classroom, three hours. Weeks 2 and 3 virtual, under ninety minutes. Week 4 the capstone, two hours.</span></li>
+          <li><b>A survey after every session.</b><span>Ten questions, most one tap. They shape the next cohort.</span></li>
+          <li><b>Completion.</b><span>Four indicators that are true or not, the Playbook presented, the record sent to the Futures Learning Hub.</span></li>
+        </ol>
+      </div>
+      <div class="ph" role="listitem">
+        <span class="lab">Phase 4 &middot; 90 days and after</span><h3>Measured</h3>
+        <ol>
+          <li><b>The reassessment.</b><span>The same ten statements, invited by email at 90 days. The before and after, by expectation.</span></li>
+          <li><b>The team&rsquo;s view.</b><span>Three or more direct reports answer the same ten about their manager, anonymously.</span></li>
+          <li><b>Always on.</b><span>The Manager Portal, the HCM and Engagement Consultant by name, and an optional six-month pulse.</span></li>
+        </ol>
+      </div>
+    </div>
+    <p class="note rv">Everything in phase one and two arrives without an enrollment step. The cohort is the one thing a manager chooses, and the measure at 90 days is the same whether they chose it or not.</p>
   </div>
 </section>
 
@@ -525,6 +600,54 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   </div>
 </section>
 
+<!-- 9b · BEHIND THE SCENES -->
+<section class="slide th-light print-long" id="s9b" aria-roledescription="slide" data-title="Behind the scenes · The flow and the stack">
+  <div class="wrap">
+    <p class="eyebrow rv">Behind the scenes &middot; How the data moves and what it runs on</p>
+    <h2 class="h rv">The flow, front stage and <em>back stage</em>.</h2>
+    <p class="lead rv">What the manager sees on top. Underneath, what moves each record and where it lands. No new system was bought: Oracle, Microsoft 365 and the web, with three services for the parts they cannot do.</p>
+    <div class="bp rv" role="table" aria-label="Service blueprint">
+      <div class="bp-h" role="row"><span></span><span>Assign</span><span>Learn</span><span>Assess</span><span>Practice</span><span>Measure</span></div>
+      <div class="bp-r" role="row"><span class="rl">The manager sees</span>
+        <span class="c"><b>My voyage</b>Launched from Oracle Learning. Name, state and start date read from the learner record.</span>
+        <span class="c"><b>The Foundation course</b>Thirty-five minutes in the browser, inside Oracle Learning. Compliance and micro modules in Oracle Learn.</span>
+        <span class="c"><b>Ten statements</b>On the course site. A branded email with the result by expectation and the first move.</span>
+        <span class="c"><b>The cohort site</b>Scenarios tailored to the team. Five voice characters on the phone. SparkWise labs. The Playbook.</span>
+        <span class="c"><b>The reassessment</b>An email invitation at 90 days, the same ten statements, the before and after.</span>
+      </div>
+      <div class="bp-r" role="row"><span class="rl">What moves</span>
+        <span class="c"><b>Job profile to assignment</b>Oracle HCM role change assigns the learning path. SCORM 1.2 launch passes the learner to the dashboard.</span>
+        <span class="c"><b>Completions write back</b>SCORM reports the course complete to Oracle Learning. The dashboard keeps progress in suspend data across devices.</span>
+        <span class="c"><b>One record, one flow</b>The course posts a JSON record to a Power Automate flow: a SharePoint list row and the email, in one run.</span>
+        <span class="c"><b>Survey and completion</b>Each survey and each completion posts to the same kind of flow and lands in SharePoint. Lab scores stay on the phone.</span>
+        <span class="c"><b>Scheduled invitation</b>A second flow reads the list, invites at 90 days, and stores the retake beside the first score.</span>
+      </div>
+      <div class="bp-r sys" role="row"><span class="rl">Runs on</span>
+        <span class="c"><i>Oracle HCM</i><i>Oracle Learning</i></span>
+        <span class="c"><i>Oracle Learning</i><i>SCORM package</i><i>LinkedIn, OpenSesame</i></span>
+        <span class="c"><i>Power Automate</i><i>SharePoint</i><i>Outlook, PCB mailbox</i></span>
+        <span class="c"><i>Cohort site</i><i>ElevenLabs agents</i><i>SparkWise</i><i>Power Automate</i></span>
+        <span class="c"><i>Power Automate</i><i>SharePoint</i><i>Reassessment page</i></span>
+      </div>
+    </div>
+    <ul class="kv rv" style="margin-top:16px">
+      <li><b>The web</b><span>Every page of Manager Voyage is one static site: source on GitHub, served by Vercel with a GitHub Pages mirror, no framework and no build step. The same files are zipped as the SCORM package Oracle Learning launches.</span></li>
+      <li><b>The record</b><span>One SharePoint list per kind of record: assessments with the retake beside the first score, cohort surveys, completions. Power Automate is the only thing that writes to them.</span></li>
+      <li><b>The voices</b><span>Sam, Dev, Priya, Marcus and Jordan are ElevenLabs conversational agents with a script per team type. The conversation is scored on the phone and nothing is stored by Vanderbilt.</span></li>
+    </ul>
+    <details class="more"><summary>Every record the program keeps, and what is in it</summary><div class="more-in">
+      <table class="t"><thead><tr><th>Record</th><th>Sent when</th><th>Holds</th><th>Lands in</th></tr></thead><tbody>
+        <tr><td>Assessment, initial</td><td>The ten statements are finished before the course</td><td>Name, email, date, ten answers, total, the four expectation averages, the suggested first move</td><td>SharePoint list, email to the manager</td></tr>
+        <tr><td>Course complete</td><td>Every activity in the Foundation course is done</td><td>Quiz score, the action chosen for the week, the week built</td><td>The same list row, email to the manager, SCORM status to Oracle Learning</td></tr>
+        <tr><td>Cohort survey</td><td>After each of the four sessions</td><td>Week, ten answers, team area and type, optional name</td><td>SharePoint list</td></tr>
+        <tr><td>Cohort completion</td><td>The four indicators are ticked and the record sent</td><td>Segments done, labs held, both pulse readings, the four indicators, the Playbook lines</td><td>SharePoint list</td></tr>
+        <tr><td>Assessment, retake</td><td>The 90-day invitation is answered</td><td>The same as initial, plus the prior score and averages</td><td>The same list row</td></tr>
+      </tbody></table>
+      <p class="note">Team profiles, Playbook drafts, timeline moments and lab outcomes stay in the manager&rsquo;s own browser unless they choose to send them. Nothing in the cohort is read by a leader without the manager pressing send.</p>
+    </div></details>
+  </div>
+</section>
+
 <!-- 10 · YOU STATED, WE LISTENED -->
 <section class="slide th-light print-long" id="s10" aria-roledescription="slide" data-title="You stated. We listened.">
   <div class="wrap">
@@ -600,7 +723,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   <span class="bar-title" id="barTitle">Manager Voyage</span>
   <div class="dots" id="dots" aria-label="Go to slide"></div>
   <div class="bar-r">
-    <span class="count" id="count">1 / 11</span>
+    <span class="count" id="count">1 / 13</span>
     <button type="button" class="tool" id="expandAll" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 15v5h-5M20 4l-6 6M4 20l6-6"/></svg><span>Expand all</span></button>
     <a class="tool" id="pdf" href="Manager-Voyage-Program-Overview.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M6 11l6 6 6-6M4 21h16"/></svg><span>Download PDF</span></a>
     <button type="button" class="tool" id="printBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg><span>Print</span></button>
