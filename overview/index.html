@@ -204,34 +204,26 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 .tl .lane{ min-height:50px; }
 .tl .track{ height:40px; } .tl .seg{ top:5px; }
 @media (max-width:1000px){ .tl{ --ln:0px; } .tl .ln{ display:none; } .tl .lane{ grid-template-columns:1fr; } .tl .phases span, .tl .axis span{ font-size:.62rem; } .tl .chips .chip{ font-size:.56rem; padding:3px 5px; } }
-/* ── the blueprint: tiles, two hubs, pills ── */
-.bp{ margin-top:22px; display:grid; gap:10px; }
-.bp-h, .bp-r{ display:grid; grid-template-columns:104px repeat(5,1fr); gap:10px; align-items:stretch; }
-.bp-h span{ font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); padding:0 10px 6px; border-bottom:2px solid var(--eyebrow); position:relative; }
-.bp-h span:first-child{ border-bottom:0; }
-.bp-h span:not(:first-child):not(:last-child)::after{ content:'\2192'; position:absolute; right:-10px; top:-3px; color:var(--eyebrow); background:var(--bg); padding:0 2px; }
-.bp .rl{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tx3); padding-top:12px; line-height:1.3; }
-.bp .t{ background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); padding:14px 10px 12px; display:grid; justify-items:center; gap:8px; text-align:center; position:relative; }
-.bp .t i{ width:44px; height:44px; border-radius:50%; background:rgba(207,174,112,.14); color:var(--eyebrow); display:grid; place-items:center; }
-.bp .t i svg{ width:22px; height:22px; }
-.bp .t b{ font-family:var(--serif); font-weight:400; font-size:1.05rem; }
-.bp .t::after{ content:''; position:absolute; left:50%; bottom:-13px; width:2px; height:12px; background:var(--eyebrow); }
-.bp .lands{ grid-template-columns:104px 2fr 3fr; }
-.bp .hub{ display:flex; align-items:center; justify-content:center; gap:10px; background:var(--card2); border:1px dashed var(--bdg); border-radius:var(--r); padding:14px 16px; text-align:center; }
-.bp .hi{ display:grid; justify-items:center; gap:4px; flex:1 1 0; }
-.bp .arr{ color:var(--eyebrow); font-size:1.4rem; flex:none; }
-.bp .hub i{ width:38px; height:38px; border-radius:50%; background:var(--eyebrow); color:#1C1C1C; display:grid; place-items:center; }
-.bp .hub i svg{ width:20px; height:20px; }
-.bp .hub b{ font-family:var(--serif); font-weight:400; font-size:1.1rem; }
-.bp .hub em{ font-style:normal; font-size:.74rem; color:var(--tx3); line-height:1.3; }
-.bp .sys .c{ display:flex; flex-wrap:wrap; justify-content:center; gap:4px; align-items:flex-start; align-content:flex-start; padding:4px 0 0; }
-.bp .sys .c i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); border:1px solid var(--bdg); border-radius:999px; padding:4px 9px; }
-.bp-foot{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:18px; font-size:.86rem; color:var(--tx2); }
-.bp-foot span{ display:flex; gap:10px; align-items:center; border-top:1px solid var(--bd); padding-top:10px; }
-.bp-foot i{ display:inline-grid; color:var(--eyebrow); flex:none; }
-.bp-foot svg{ width:20px; height:20px; }
-@media (max-width:1000px){ .jr-phases{ display:none; } .jr-line{ display:none; } .jr-stops{ grid-template-columns:repeat(4,1fr); margin-top:0; gap:14px 6px; } .bp-h{ display:none; } .bp-r, .bp .lands{ grid-template-columns:1fr; } .bp .t::after{ display:none; } .bp-foot{ grid-template-columns:1fr; } }
-@media (max-width:640px){ .jr-stops{ grid-template-columns:repeat(3,1fr); } }
+/* ── the system map ── */
+.sysmap{ margin-top:18px; }
+.sysmap svg{ display:block; width:100%; height:auto; overflow:visible; }
+.sysmap .ch{ font-family:var(--cond); font-weight:700; font-size:13px; letter-spacing:.14em; fill:var(--eyebrow); }
+.sysmap .hl{ stroke:var(--eyebrow); stroke-width:2; }
+.sysmap .sys{ fill:var(--card); stroke:var(--bd); }
+.sysmap .hub{ fill:rgba(207,174,112,.07); stroke:var(--eyebrow); stroke-dasharray:5 4; }
+.sysmap .ht{ font-family:var(--serif); font-size:22px; fill:var(--tx); }
+.sysmap .card{ fill:var(--card); stroke:var(--bd); }
+.sysmap .card.hi{ stroke:var(--eyebrow); stroke-width:1.5; }
+.sysmap .ct{ font-family:var(--serif); font-size:18px; fill:var(--tx); }
+.sysmap .cs{ font-family:var(--sans); font-size:12px; fill:var(--tx2); }
+.sysmap .cb{ font-family:var(--cond); font-weight:700; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; fill:var(--eyebrow); }
+.sysmap .ar{ fill:none; stroke:var(--eyebrow); stroke-width:2; }
+.sysmap .ar.dim{ stroke-dasharray:3 4; opacity:.6; }
+.sysmap .ahp{ fill:var(--eyebrow); }
+.sysmap .al{ font-family:var(--cond); font-weight:700; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; fill:var(--tx3); }
+.sysmap .portal{ fill:var(--eyebrow); }
+.sysmap .pt{ font-family:var(--serif); font-size:20px; fill:#1C1C1C; text-anchor:middle; }
+.sysmap .ps{ font-family:var(--sans); font-size:12.5px; fill:#1C1C1C; text-anchor:middle; opacity:.85; }
 /* ── five themes, five columns ── */
 .heard{ grid-template-columns:repeat(5,1fr); gap:10px; }
 .heard li{ grid-template-columns:1fr; grid-template-rows:auto 1fr; }
@@ -250,7 +242,6 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 :fullscreen .nav{ display:none; }
 :fullscreen .slide{ padding-top:28px; }
 :fullscreen .bar{ background:rgba(20,20,20,.85); }
-
 /* ── presentation pieces: four, big3, states ── */
 .four{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:28px; }
 .four li{ background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); padding:22px 20px 20px; min-height:200px; display:grid; align-content:start; gap:8px; }
@@ -270,6 +261,16 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 
 /* content sits in the middle of the frame when it fits */
 @media screen and (min-width:1001px){ .slide:not(.cover) > .wrap{ margin:auto; } }
+
+/* ── next steps ── */
+.next{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:28px; counter-reset:nx; }
+.next li{ position:relative; border-top:3px solid var(--eyebrow); padding:16px 4px 0; }
+.next li::before{ counter-increment:nx; content:counter(nx, decimal-leading-zero); font-family:var(--cond); font-weight:700; font-size:2.2rem; color:var(--eyebrow); line-height:1; display:block; margin-bottom:8px; }
+.next .lab{ display:block; font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--tx3); }
+.next h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.2rem,1.6vw,1.5rem); line-height:1.15; margin:6px 0 8px; }
+.next p{ font-size:.92rem; color:var(--tx2); line-height:1.45; }
+.btn.sm{ padding:9px 14px; font-size:.86rem; }
+@media (max-width:1000px){ .next{ grid-template-columns:1fr 1fr; } }
 
 /* ── bottom bar ── */
 .bar{ position:fixed; inset:auto 0 0 0; height:var(--bar-h); z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 clamp(16px,2.4vw,36px); background:rgba(20,20,20,.96); border-top:1px solid rgba(207,174,112,.35); color:#fff; }
@@ -413,7 +414,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   .slide{ display:block; width:11in; height:auto; min-height:8.5in; overflow:visible; page-break-after:always; break-after:page; padding:0.55in 0.7in 0.6in; opacity:1; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .slide:last-child{ page-break-after:auto; break-after:auto; }
   .slide{ box-decoration-break:clone; -webkit-box-decoration-break:clone; }
-  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr, .tl, .bp-r{ break-inside:avoid; page-break-inside:avoid; }
+  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr, .tl, .sysmap{ break-inside:avoid; page-break-inside:avoid; }
   .bp{ display:block; } .bp-h, .bp-r{ margin-bottom:10px; }
   .slide.cont .h{ font-size:1.5rem; }
   .wk{ gap:12px; } .wk > div{ padding:10px 12px; } .wk dl{ font-size:.8rem; grid-template-columns:84px 1fr; gap:3px 10px; } .wk h4{ font-size:1.05rem; }
@@ -695,45 +696,19 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 </section>
 
 <!-- 9b · BEHIND THE SCENES -->
-<section class="slide th-light print-long" id="s9b" aria-roledescription="slide" data-title="Behind the scenes · The flow and the stack">
+<section class="slide th-light print-long" id="s9b" aria-roledescription="slide" data-title="Behind the scenes · How it was built and how it connects">
   <div class="wrap">
     <p class="eyebrow rv">Behind the scenes</p>
-    <h2 class="h rv">Front stage, <em>back stage</em>.</h2>
-    <div class="bp rv" role="table" aria-label="Service blueprint">
-      <div class="bp-h" role="row"><span></span><span>Assign</span><span>Learn</span><span>Assess</span><span>Practice</span><span>Measure</span></div>
-      <div class="bp-r sees" role="row"><span class="rl">Manager sees</span>
-        <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v10H4z"/><path d="M8 20h8M12 14v6"/><path d="M9 9l3 3 3-3"/></svg></i><b>Enrolled</b></span>
-        <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z"/></svg></i><b>The course</b></span>
-        <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M6.5 8l.7.7 1.3-1.4" stroke-width="1.2"/></svg></i><b>10 statements</b></span>
-        <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></i><b>Cohort site</b></span>
-        <span class="t"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5l2 2"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M4 20v-5h5"/></svg></i><b>Reassess</b></span>
-      </div>
-      <div class="bp-r lands" role="row"><span class="rl">Lands in</span>
-        <span class="hub a"><span class="hi"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v10H4z"/><path d="M8 20h8M12 14v6"/><path d="M9 9l3 3 3-3"/></svg></i><b>Oracle Learning</b><em>assigns &middot; launches &middot; records complete</em></span></span>
-        <span class="hub b"><span class="hi"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 12h4l5-6M11.5 12l5 6"/></svg></i><b>Power Automate</b><em>one flow per record</em></span><span class="arr" aria-hidden="true">&rarr;</span><span class="hi"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></i><b>SharePoint</b><em>one list per record</em></span><span class="arr" aria-hidden="true">&rarr;</span><span class="hi"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></i><b>Email</b><em>from PCB, to the manager</em></span></span>
-      </div>
-      <div class="bp-r sys" role="row"><span class="rl">Runs on</span>
-        <span class="c"><i>Oracle HCM</i><i>Oracle Learning</i></span>
-        <span class="c"><i>SCORM package</i><i>LinkedIn &middot; OpenSesame</i></span>
-        <span class="c"><i>Course site</i><i>Power Automate</i></span>
-        <span class="c"><i>ElevenLabs</i><i>SparkWise</i></span>
-        <span class="c"><i>Scheduled flow</i><i>SharePoint</i></span>
-      </div>
-    </div>
-    <p class="bp-foot rv"><span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".5"/></svg></i>One static site: GitHub &rarr; Vercel, the course zipped as the SCORM package</span><span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></i>Three lists: assessments, surveys, completions</span><span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></i>Five voices, scored on the phone, nothing stored</span></p>
+    <h2 class="h rv">Three places, one <em>program</em>.</h2>
+    <div class="sysmap rv"><svg viewBox="0 0 1180 450" role="img" aria-label="System map: Oracle HCM assigns the path in Oracle Learning, which holds the compliance courses and the micro courses and launches the Foundation course; the Futures Learning Hub built the Foundation course and the cohort site; records flow through Power Automate to SharePoint and email; the Manager Portal is linked from everything">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ahp"/></marker></defs>
+<text x="0" y="14" class="ch">LIVES IN ORACLE</text><text x="390" y="14" class="ch">BUILT BY THE FUTURES LEARNING HUB</text><text x="800" y="14" class="ch">THE RECORDS</text><line x1="0" y1="22" x2="320" y2="22" class="hl"/><line x1="390" y1="22" x2="740" y2="22" class="hl"/><line x1="800" y1="22" x2="1180" y2="22" class="hl"/><rect x="0" y="36" width="320" height="38" rx="6" class="sys"/><text x="14" y="61" class="ct">Oracle HCM</text><text x="180" y="61" class="cs">the HR record</text><path d="M60 74 L60 94" class="ar" marker-end="url(#ah)"/><text x="70" y="90" class="al">ROLE CHANGES · PATH ASSIGNED</text><rect x="0" y="98" width="320" height="276" rx="6" class="hub"/><text x="14" y="122" class="ht">Oracle Learning</text><text x="14" y="140" class="cs">assigns · launches · records complete</text><rect x="12" y="150" width="296" height="68" rx="6" class="card"/><text x="26" y="174" class="ct">Compliance courses</text><text x="26" y="192" class="cs">by state, supervisor versions</text><text x="26" y="210" class="cb">OpenSesame</text><rect x="12" y="226" width="296" height="68" rx="6" class="card"/><text x="26" y="250" class="ct">Responsibility micro courses</text><text x="26" y="268" class="cs">FMLA, PTO, timecards, hiring, expenses</text><text x="26" y="286" class="cb">LinkedIn Learning and vendor courses</text><rect x="12" y="302" width="296" height="70" rx="6" class="card hi"/><text x="26" y="326" class="ct">Foundation course, launched here</text><text x="26" y="344" class="cs">as a SCORM package · completion written back</text><text x="26" y="364" class="cb">You Are a Manager Now</text><rect x="390" y="36" width="350" height="140" rx="6" class="card hi"/><text x="404" y="62" class="ct">The Foundation course</text><text x="404" y="81" class="cs">35 min · six topics · live conversations, scored</text><text x="404" y="166" class="cb">Custom web course · the assessment inside</text><rect x="390" y="192" width="350" height="140" rx="6" class="card hi"/><text x="404" y="218" class="ct">The cohort site</text><text x="404" y="237" class="cs">four weeks · invited at Day 60 · tailored to the team</text><text x="404" y="322" class="cb">Custom web · ElevenLabs voices · SparkWise · Playbook</text><path d="M308 326 C 350 326, 350 100, 388 100" class="ar" marker-end="url(#ah)"/><path d="M390 130 C 352 130, 352 352, 310 352" class="ar" marker-end="url(#ah)"/><path d="M320 250 C 356 250, 356 262, 388 262" class="ar" marker-end="url(#ah)"/><text x="316" y="382" class="al">LAUNCHED · COMPLETE</text><text x="322" y="247" class="al">DAY 60</text><rect x="800" y="36" width="380" height="76" rx="6" class="card"/><text x="814" y="62" class="ct">Power Automate</text><text x="814" y="81" class="cs">one flow per record</text><text x="814" y="102" class="cb">Assessment · course complete · survey · completion</text><rect x="800" y="124" width="380" height="76" rx="6" class="card"/><text x="814" y="150" class="ct">SharePoint</text><text x="814" y="169" class="cs">one list per record, the retake beside the first score</text><text x="814" y="190" class="cb">Lists: assessments, cohort surveys, completions</text><rect x="800" y="212" width="380" height="76" rx="6" class="card"/><text x="814" y="238" class="ct">Email, from PCB</text><text x="814" y="257" class="cs">the result, the first move, the 90-day invitation</text><text x="814" y="278" class="cb">A scheduled flow invites the reassessment</text><path d="M990 112 L990 122" class="ar" marker-end="url(#ah)"/><path d="M990 200 L990 210" class="ar" marker-end="url(#ah)"/><path d="M740 74 L798 74" class="ar" marker-end="url(#ah)"/><path d="M740 230 C 770 230, 770 90, 798 90" class="ar" marker-end="url(#ah)"/><path d="M800 262 C 772 262, 772 150, 740 150" class="ar" marker-end="url(#ah)"/><text x="744" y="66" class="al">ASSESS</text><text x="744" y="142" class="al">REASSESS</text><rect x="0" y="392" width="1180" height="56" rx="6" class="portal"/><text x="590" y="416" class="pt">The Manager Portal</text><text x="590" y="436" class="ps">A PCB web page, always live from day one, linked from the course, the cohort and every email</text><path d="M160 374 L160 390" class="ar dim" marker-end="url(#ah)"/><path d="M565 332 L565 390" class="ar dim" marker-end="url(#ah)"/><path d="M990 288 L990 390" class="ar dim" marker-end="url(#ah)"/></svg></div>
     <details class="more"><summary>How each record moves, and what is in it</summary><div class="more-in">
       <div class="cols">
-        <div><h4>Assign and learn</h4><ul><li><b>Job profile to assignment.</b> An Oracle HCM role change assigns the learning path. The Foundation course launches from Oracle Learning as a SCORM package.</li><li><b>Completions write back.</b> SCORM reports the course complete to Oracle Learning, against the job profile.</li></ul></div>
-        <div><h4>Assess, practice, measure</h4><ul><li><b>One record, one flow.</b> The course posts a JSON record to a Power Automate flow: a SharePoint list row and the branded email, in one run.</li><li><b>Survey and completion.</b> Each cohort survey and each completion posts to the same kind of flow and lands in SharePoint. Lab scores stay on the phone.</li><li><b>Scheduled invitation.</b> A second flow reads the list, invites at 90 days, and stores the retake beside the first score.</li></ul></div>
+        <div><h4>In Oracle</h4><ul><li><b>Oracle HCM to Oracle Learning.</b> A role change on the HR record assigns compliance, the Foundation course and the micro courses, with due dates. Nothing to request.</li><li><b>Compliance and micro courses.</b> Vendor courses (OpenSesame, LinkedIn Learning) inside Oracle Learning, assigned by state and by duty.</li><li><b>The Foundation course launches from Oracle Learning</b> as a SCORM package, and SCORM writes completion back against the job profile.</li></ul></div>
+        <div><h4>Built by the Futures Learning Hub</h4><ul><li><b>The Foundation course</b> is a custom web course: six topics, live conversations that answer back and are scored, the ten-statement assessment inside it.</li><li><b>The cohort site</b> is a custom web site: scenarios tailored to the team, five ElevenLabs voice characters scored on the phone, SparkWise learning labs, and the Playbook PDF. Both are one static site on GitHub, served by Vercel.</li></ul>
+        <h4>The records</h4><ul><li><b>One flow per record.</b> The assessment, course completion, each cohort survey and the cohort completion post to a Power Automate flow, which writes a SharePoint list row and sends the branded email from the PCB mailbox. A second, scheduled flow invites the reassessment at 90 days and stores the retake beside the first score.</li><li><b>Stays on the phone.</b> Team profiles, Playbook drafts, timeline moments and lab outcomes, unless the manager presses send.</li></ul></div>
       </div>
-      <table class="t"><thead><tr><th>Record</th><th>Sent when</th><th>Holds</th><th>Lands in</th></tr></thead><tbody>
-        <tr><td>Assessment, initial</td><td>The ten statements are finished before the course</td><td>Name, email, date, ten answers, total, the four expectation averages, the suggested first move</td><td>SharePoint list, email to the manager</td></tr>
-        <tr><td>Course complete</td><td>Every activity in the Foundation course is done</td><td>Quiz score, the action chosen for the week, the week built</td><td>The same list row, email to the manager, SCORM status to Oracle Learning</td></tr>
-        <tr><td>Cohort survey</td><td>After each of the four sessions</td><td>Week, ten answers, team area and type, optional name</td><td>SharePoint list</td></tr>
-        <tr><td>Cohort completion</td><td>The four indicators are ticked and the record sent</td><td>Segments done, labs held, both pulse readings, the four indicators, the Playbook lines</td><td>SharePoint list</td></tr>
-        <tr><td>Assessment, retake</td><td>The 90-day invitation is answered</td><td>The same as initial, plus the prior score and averages</td><td>The same list row</td></tr>
-      </tbody></table>
-      <p class="note">Team profiles, Playbook drafts, timeline moments and lab outcomes stay in the manager&rsquo;s own browser unless they choose to send them. Nothing in the cohort is read by a leader without the manager pressing send.</p>
     </div></details>
   </div>
 </section>
@@ -776,15 +751,21 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 </section>
 
 <!-- 11 · CLOSE -->
-<section class="slide th-dark" id="s11" aria-roledescription="slide" data-title="Start with the Foundation course">
+<section class="slide th-dark" id="s11" aria-roledescription="slide" data-title="Next steps">
   <div class="wrap">
-    <p class="eyebrow rv">Where to start</p>
-    <h2 class="h1 rv" style="font-size:clamp(2.2rem,4.4vw,4rem)">Start with the <em>course</em>.</h2>
-    <p class="lead rv">Open to every manager today.</p>
+    <p class="eyebrow rv">Next steps</p>
+    <h2 class="h rv">Live now. Measured by <em>spring</em>.</h2>
+    <ol class="next rv">
+      <li><span class="lab">Now</span><h3>Open to every manager</h3><p>Compliance and the Foundation course assigned from the HR record. The Portal live.</p></li>
+      <li><span class="lab">This quarter</span><h3>First cohort of one hundred</h3><p>Seats by invitation at Day 60. Surveys to SharePoint after every session.</p></li>
+      <li><span class="lab">At 90 days</span><h3>The first reassessment</h3><p>The same ten statements, by expectation. The team&rsquo;s view from three or more reports.</p></li>
+      <li><span class="lab">Each quarter after</span><h3>The next cohort, shaped by the last</h3><p>Survey and reassessment results change the design, the same way the pilot did.</p></li>
+    </ol>
     <div class="btns rv">
-      <a class="btn" href="../foundation/">The Foundation course</a>
-      <a class="btn ghost" href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/">The Manager Portal</a>
-      <a class="btn ghost" href="Manager-Voyage-Program-Overview.pdf" download>Download this overview as a PDF</a>
+      <a class="btn sm ghost" href="../foundation/">Foundation course</a>
+      <a class="btn sm ghost" href="../cohort/">Four-week program</a>
+      <a class="btn sm ghost" href="https://www.vanderbilt.edu/pcb/futures-learning-hub/manager-resources/">Manager Portal</a>
+      <a class="btn sm ghost" href="Manager-Voyage-Program-Overview.pdf" download>This overview as a PDF</a>
     </div>
     <p class="note rv">Manager Voyage &middot; Futures Learning Hub &middot; People, Culture and Belonging &middot; Vanderbilt University</p>
   </div>
@@ -915,7 +896,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     var wrap = slide.querySelector('.wrap'); if(!wrap || wrap.classList.contains('split')) return;
     var cs = getComputedStyle(slide), avail = P - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 24;
     var items = [];
-    function groupOf(el){ if(el.matches('.heard')) return { cls:'heard', tag:'ol', cols:1 }; if(el.matches('.wk')) return { cls:'wk', tag:'div', cols:2 }; if(el.matches('.bp')) return { cls:'bp', tag:'div', cols:1 }; if(el.matches('.heardfull')) return { cls:'heardfull', tag:'div', cols:2 }; return null; }
+    function groupOf(el){ if(el.matches('.heard')) return { cls:'heard', tag:'ol', cols:1 }; if(el.matches('.wk')) return { cls:'wk', tag:'div', cols:2 }; if(el.matches('.heardfull')) return { cls:'heardfull', tag:'div', cols:2 }; return null; }
     function outer(node){ var r = node.getBoundingClientRect(), m = getComputedStyle(node); return r.height + (parseFloat(m.marginTop) || 0) + (parseFloat(m.marginBottom) || 0); }
     function push(node, extra){ var it = { nodes:[node], h: outer(node) }; for(var k in extra) it[k] = extra[k]; items.push(it); }
     function pushRows(container, g, extra){ var kids = [].slice.call(container.children), gap = parseFloat(getComputedStyle(container).rowGap) || 12; for(var i = 0; i < kids.length; i += g.cols){ var row = kids.slice(i, i + g.cols), it = { nodes:row, group:g, h: Math.max.apply(null, row.map(outer)) + gap }; for(var k in extra) it[k] = extra[k]; items.push(it); } }
