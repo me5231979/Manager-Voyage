@@ -166,6 +166,12 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 .tl .seg.live em{ color:#1C1C1C; font-family:var(--cond); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; }
 .tl .ms{ position:absolute; left:var(--x); top:-6px; transform:translateX(-50%); font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:#ECB748; }
 .tl .ms::before{ content:''; display:block; width:10px; height:10px; margin:0 auto 2px; background:#ECB748; transform:rotate(45deg); box-shadow:0 0 10px rgba(236,183,72,.9); }
+.tl .ms small{ display:block; font-family:var(--sans); font-weight:400; font-size:.64rem; letter-spacing:0; text-transform:none; color:var(--tx3); margin-top:1px; white-space:nowrap; }
+.tl .lane.asm .track{ background:none; }
+.tl .lane.asm .track::before{ content:''; position:absolute; left:1%; right:1%; top:11px; border-top:1px dashed rgba(236,183,72,.55); }
+.tl .lane.asm .ms{ top:6px; }
+.tl .lane.asm .ms:first-child{ transform:none; text-align:left; } .tl .lane.asm .ms:first-child::before{ margin:0 auto 2px 0; }
+.tl .lane.asm .ms:last-child{ transform:translateX(-100%); text-align:right; } .tl .lane.asm .ms:last-child::before{ margin:0 0 2px auto; }
 .tl .chips .chip{ position:absolute; left:var(--x); top:50%; transform:translate(-50%,-50%); font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); border:1px solid rgba(207,174,112,.6); background:#1C1C1C; border-radius:999px; padding:5px 9px; white-space:nowrap; }
 .tl .chips::before{ content:''; position:absolute; left:20%; right:62%; top:50%; height:2px; background:linear-gradient(90deg, rgba(207,174,112,.2), rgba(207,174,112,.8)); }
 .tl .axis{ position:relative; margin-left:var(--ln); height:74px; margin-top:12px; }
@@ -474,7 +480,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
       <li><span class="n">03</span><b>Make things better</b><span>explain the why, let people try, look back</span></li>
       <li><span class="n">04</span><b>Connect your team</b><span>to the rest of Vanderbilt</span></li>
     </ol>
-    <p class="note rv">Adapted from Gary Yukl&rsquo;s four categories of leadership behavior. Ten assessment statements, before the program and at 90 days.</p>
+    <p class="note rv">Adapted from Gary Yukl&rsquo;s four categories of leadership behavior. Ten assessment statements, before the course, at the capstone, and three months on.</p>
     <p class="links rv" aria-label="Sources">
       <a href="https://doi.org/10.5465/amp.2012.0088" target="_blank" rel="noopener">Yukl, 2012 &middot; Academy of Management Perspectives</a>
       <a href="https://doi.org/10.1177/107179190200900102" target="_blank" rel="noopener">Yukl, Gordon and Taber, 2002 &middot; the taxonomy</a>
@@ -520,7 +526,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   <div class="wrap">
     <p class="eyebrow rv">The journey</p>
     <h2 class="h rv">Day one to <em>ninety</em>, on one line.</h2>
-    <div class="tl rv" role="img" aria-label="Timeline: enrolled on day one into compliance and the Foundations course; the responsibility micro courses from day seven to day sixty; the four-week cohort the next quarter; the reassessment at ninety days; the Manager Portal always live">
+    <div class="tl rv" role="img" aria-label="Timeline: enrolled on day one into compliance and the Foundations course; the responsibility micro courses from day seven to day sixty; the four-week cohort the next quarter; the assessment before the course, again at the capstone, and three months on; the Manager Portal always live">
       <div class="phases" aria-hidden="true">
         <span style="--x:0%;--w:48%"><b>01</b>Enrolled, day one</span>
         <span style="--x:50%;--w:36%"><b>02</b>The cohort, next quarter</span>
@@ -528,7 +534,8 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
       </div>
       <div class="lanes">
         <div class="lane"><span class="ln">Compliance</span><div class="track"><i class="seg" style="--x:0%;--w:48%;--d:0"><em>Legal by day 30 &middot; policy by day 60</em></i></div></div>
-        <div class="lane"><span class="ln">Foundations course</span><div class="track"><i class="seg hi" style="--x:0%;--w:8%;--d:1"><em>35 min</em></i><b class="ms" style="--x:9.5%" title="Assessment first">Assessment first</b></div></div>
+        <div class="lane"><span class="ln">Foundations course</span><div class="track"><i class="seg hi" style="--x:0%;--w:8%;--d:1"><em>35 min</em></i></div></div>
+        <div class="lane asm"><span class="ln">Assessment</span><div class="track"><b class="ms" style="--x:1%">Pre<small>Day 1, before the course</small></b><b class="ms" style="--x:86%">Post<small>Capstone</small></b><b class="ms" style="--x:99.5%">Re-up<small>+3 months</small></b></div></div>
         <div class="lane"><span class="ln">Responsibility micro courses</span><div class="track chips"><span class="chip dn" style="--x:11.0%;--i:0">FMLA</span><span class="chip up" style="--x:16.3%;--i:1">PTO</span><span class="chip dn" style="--x:21.6%;--i:2">Timecards</span><span class="chip up" style="--x:26.9%;--i:3">Hiring</span><span class="chip dn" style="--x:32.2%;--i:4">Expenses</span><span class="chip up" style="--x:37.5%;--i:5">Performance</span><span class="chip dn" style="--x:42.8%;--i:6">Accommodation</span><span class="chip up" style="--x:48.1%;--i:7">EOA</span></div></div>
         <div class="lane"><span class="ln">Four-week cohort</span><div class="track"><i class="seg wk" style="--x:50%;--w:9%;--d:2">W1<em>Room</em></i><i class="seg wk v" style="--x:59.5%;--w:8.5%;--d:3">W2<em>Virtual</em></i><i class="seg wk v" style="--x:68.5%;--w:8.5%;--d:4">W3<em>Virtual</em></i><i class="seg wk" style="--x:77.5%;--w:8.5%;--d:5">W4<em>Room</em></i></div></div>
         <div class="lane portal"><span class="ln">Manager Portal</span><div class="track"><i class="seg live" style="--x:0%;--w:100%;--d:6"><em>Always live, from day one</em></i></div></div>
@@ -541,7 +548,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
         <span class="key" style="--x:48%"><b>Day 60</b>Complete, invited</span>
         <span class="lo" style="--x:50%"><b>Next quarter</b>Cohort opens</span>
         <span class="lo" style="--x:86%"><b>Capstone</b>Playbook presented</span>
-        <span class="key" style="--x:94%"><b>90 days</b>Reassess</span>
+        <span class="key" style="--x:94%"><b>90 days</b>The re-up</span>
       </div>
     </div>
     <details class="more"><summary>Each stage, in a sentence</summary><div class="more-in">
@@ -549,7 +556,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
         <div><h4>Day 1, enrolled</h4><ul><li><b>Enrolled on the first day.</b> Oracle Learning assigns compliance and Manager Foundations from the HR record. Nothing to request.</li><li><b>Compliance.</b> The legal and policy courses for the state the team works in, supervisor versions included. Legal by day 30, policy by day 60.</li><li><b>The Foundations course.</b> <i>You Are a Manager Now</i>, thirty-five minutes online by day seven: the assessment first, then six topics with live conversations, scored.</li></ul>
         <h4>Days 7 to 60, responsibilities</h4><ul><li><b>Micro courses, one task each.</b> FMLA and leave, PTO and timecards, hiring, expenses, the performance cycle, accommodations, reporting to EOA. Short, in Oracle Learning, taken as the responsibility arrives.</li><li><b>Day 60.</b> Recorded against the job profile. The cohort invitation goes out.</li></ul></div>
         <div><h4>Next quarter, the cohort</h4><ul><li><b>Enroll.</b> The enrollment survey: a seat request and the team profile, four taps that tailor every scenario.</li><li><b>Four weeks.</b> Week 1 in the classroom, three hours. Weeks 2 and 3 virtual, under ninety minutes. Week 4 the capstone, two hours, the Playbook presented.</li><li><b>A survey after every session, then completion.</b></li></ul>
-        <h4>Measured, and always live</h4><ul><li><b>Reassess.</b> The same ten statements at 90 days, and the team&rsquo;s view from three or more direct reports.</li><li><b>The Manager Portal.</b> Every template, policy link and contact, open from the first day and never taken away.</li></ul></div>
+        <h4>Measured, and always live</h4><ul><li><b>Measured three times.</b> Before the course, again at the capstone, and the re-up three months on: the same statements, scored beside the first result, and the team&rsquo;s view from three or more direct reports.</li><li><b>The Manager Portal.</b> Every template, policy link and contact, open from the first day and never taken away.</li></ul></div>
       </div>
     </div></details>
   </div>
@@ -584,10 +591,10 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 <section class="slide th-dark" id="s5" aria-roledescription="slide" data-title="Component 02 · Manager Foundations">
   <div class="wrap">
     <p class="eyebrow rv">Component 02 &middot; Strongly recommended &middot; Days 1 to 60</p>
-    <h2 class="h rv">What Vanderbilt expects, in <em>three parts</em>.</h2>
+    <h2 class="h rv">The assessment, the course, and the <em>micro modules</em>.</h2>
     <p class="lead rv">In order. Assigned to every current manager too.</p>
     <div class="grid g3 rv">
-      <div class="card"><span class="no">01</span><h3>The assessment</h3><span class="when">Before the course &middot; again at 90 days</span><p>Ten statements, scored by expectation.</p></div>
+      <div class="card"><span class="no">01</span><h3>The assessment</h3><span class="when">Pre, post, and the re-up at three months</span><p>Ten statements, scored by expectation.</p></div>
       <div class="card"><span class="no">02</span><h3>The Foundation course</h3><span class="when">35 minutes &middot; complete by Day 7</span><p><i>You Are a Manager Now.</i> Six topics, live conversations.</p></div>
       <div class="card"><span class="no">03</span><h3>The micro modules</h3><span class="when">Days 1 to 60 &middot; Oracle Learning</span><p>One task each, four tracks.</p></div>
     </div>
@@ -776,7 +783,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
           <li>Schedule the next session to review and refine the prototype.</li></ul></div>
         <div><h4>How the program keeps listening</h4><ul>
           <li>The pulse survey before week one and again at the capstone, and the week-four recap, where managers say what happened when they tried it.</li>
-          <li>The ten-statement assessment before the program and at 90 days, which shows where the program is working and where it is not.</li>
+          <li>The ten-statement assessment before the course, at the capstone, and three months on, which shows where the program is working and where it is not.</li>
           <li>Feedback from each cohort shapes the next quarter&rsquo;s design, the same way the pilot shaped this one.</li></ul></div>
       </div>
       <h4>From the jam session to launch</h4>

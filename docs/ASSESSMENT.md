@@ -3,7 +3,7 @@
 Ten behavior statements, one five-point frequency scale, four sub-scales that
 map to the four jobs of a manager in the Foundation course (after Gary Yukl's
 taxonomy of task, relations, change, and external leadership behaviors).
-Taken before the Foundation course and again six months later. Results go to
+Taken before the Foundation course and at the capstone, and again three months on. Results go to
 the manager by email, generated from the score.
 
 ## Scale
@@ -53,7 +53,7 @@ twelve.
 - **Priority job**: the sub-scale with the lowest mean. Tie-break: the job that
   contains the single lowest item; if still tied, the earlier job in the list
   (Job 1 before Job 2, and so on), because the course teaches them in that order.
-- **Change at six months**: retake total minus baseline total, and the same per
+- **Change at the re-up, three months on**: retake total minus baseline total, and the same per
   sub-scale.
 
 ### Bands
@@ -161,7 +161,7 @@ a fall of 5 or more, and "about the same" otherwise.
 >
 > Keep this email. The Foundation course asks you to review it on the
 > assessment page, and it orders your micro modules from this job first.
-> You will take the assessment again in six months, and the aim is a higher
+> You will take the assessment again at the capstone, and three months after that, and the aim is a higher
 > number then. This is a self-assessment, so it is a direction, not a grade.
 >
 > Manager Voyage · Futures Learning Hub · People, Culture and Belonging
@@ -170,7 +170,7 @@ a fall of 5 or more, and "about the same" otherwise.
 
 Same as baseline with the first paragraph replaced:
 
-> Six months ago your score was {{BaselineTotal}}. Today it is
+> At the start your score was {{BaselineTotal}}. Today it is
 > **{{Total}} out of 50**, {{ChangeSentence}} You are in the **{{Band}}**
 > band.
 
