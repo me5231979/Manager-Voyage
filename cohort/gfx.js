@@ -251,9 +251,27 @@
       show(); });
   }
 
+  /* ---------- 17. round the room: a ring of seats and thirty seconds each ---------- */
+  function room(){
+    var r = $('[data-room]'); if(!r) return; r.className = 'room card'; var N = 16, cur = -1, left = 30, id = null;
+    function seats(){ var s = Ci(60, 44, 30, 'dim dash'); for(var i = 0; i < N; i++){ var a = -Math.PI / 2 + i * 2 * Math.PI / N, x = 60 + Math.cos(a) * 30, y = 44 + Math.sin(a) * 30; s += '<g class="seat' + (i === cur ? ' on' : i < cur ? ' done' : '') + '" data-seat="' + i + '"><circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="4.2" class="' + (i === cur ? 'hi f' : i < cur ? 'f' : '') + '"/></g>'; } s += '<text x="60" y="47" class="t c big">' + (cur < 0 ? 'Go' : (cur + 1)) + '</text>'; return s; }
+    function paint(){ r.innerHTML = '<div class="rr">' + svg(seats(), '0 0 120 88', 'go', 'The room') + '</div><div class="rt"><span class="mono">Thirty seconds each</span><div class="ring big"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="45" class="trk"/><circle cx="50" cy="50" r="45" class="prg" pathLength="100"/></svg><span class="tm">0:' + (left < 10 ? '0' : '') + left + '</span></div><div class="ctl"><button type="button" data-rm="next">' + (cur < 0 ? 'First person' : 'Next person') + '</button><button type="button" data-rm="reset">Reset</button></div><p class="note">' + (cur < 0 ? 'Tap when the first person starts. Each tap lights the next seat and restarts the clock.' : (cur + 1) + ' of ' + N + ' seats lit. Say the one line, then pass it on.') + '</p></div>'; upd(); }
+    function upd(){ var tm = $('.tm', r), prg = $('.prg', r), ring = $('.ring', r); if(!tm) return; tm.textContent = '0:' + (left < 10 ? '0' : '') + left; prg.style.strokeDashoffset = (100 - left / 30 * 100).toFixed(1); ring.classList.toggle('low', left <= 5); }
+    function stop(){ clearInterval(id); id = null; }
+    function next(){ stop(); cur = (cur + 1) % N; left = 30; paint(); id = setInterval(function(){ if(left > 0){ left--; upd(); } if(left === 0) stop(); }, 1000); }
+    r.addEventListener('click', function(e){ var b = e.target.closest('[data-rm]'); if(!b) return; if(b.getAttribute('data-rm') === 'next') next(); else { stop(); cur = -1; left = 30; paint(); } });
+    paint();
+  }
+
+  /* ---------- 18. short slides read as statements ---------- */
+  function briefSlides(){
+    function mark(){ $$('.pdeck .slide:not(.title)').forEach(function(sl){ var inn = $('.in', sl); if(!inn) return; var kids = Array.prototype.slice.call(inn.children).filter(function(c){ return !c.classList.contains('talk') && !c.classList.contains('done-row'); }); var brief = kids.length <= 3 && !kids.some(function(c){ return c.matches('.card, .grid, .lab, .pairs, .frame3, .pbf, .mission, .tl, .sort, ul, ol, form, .journey, .icm, .strengths, .ovw, .phil, .ratio, .ladder, .wgrid, .gtree, .room, .tool-card, .present, .fw, .lead-pick, #lead, [data-core], [data-sparkwise]') || c.querySelector('.card, .grid, .lab, .pairs, .frame3, .pbf, .mission, .tl, .sort, ul, ol, form, .ratio, .ladder, .wgrid, .gtree, .room, .tool-card, .fw, .lead-pick'); }); sl.classList.toggle('brief', brief); }); }
+    document.addEventListener('mv-deck', function(){ setTimeout(mark, 0); }); if(document.body.classList.contains('deck')) mark();
+  }
+
   /* ---------- boot ---------- */
   function boot(){
-    cards(); segHeads(); agendaIcons(); kvIcons(); deeperIcons(); frames(); journeyRadar(); icmBars(); strengthsCompass(); overviewRoute(); pulseChart(); timerRings(); seal(); labBars(); ladder(); ratio(); weekGrid(); goalTree(); pairsScene();
+    cards(); segHeads(); agendaIcons(); kvIcons(); deeperIcons(); frames(); journeyRadar(); icmBars(); strengthsCompass(); overviewRoute(); pulseChart(); timerRings(); seal(); labBars(); ladder(); ratio(); weekGrid(); goalTree(); pairsScene(); room(); briefSlides();
     arm();
     /* cards re-render after a profile change or a sort reset */
     document.addEventListener('mv-profile', function(){ setTimeout(function(){ cards(); kvIcons(); pairsScene(); arm(); }, 0); });
