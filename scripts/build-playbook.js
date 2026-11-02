@@ -67,6 +67,7 @@ table.grid td{border-bottom:1px solid var(--line);height:34pt;padding:3pt 5pt;ve
 .checks li{display:flex;gap:7pt;align-items:flex-start;font-size:9.5pt}
 .cb{flex:0 0 auto;width:11pt;height:11pt;border:1.2px solid var(--ink);border-radius:2px;margin-top:2pt}
 .rhythm{display:grid;grid-template-columns:repeat(4,1fr);gap:8pt;margin-top:8pt}
+@media screen and (max-width:640px){.rhythm{grid-template-columns:1fr 1fr}}
 .rhythm div{border:1px solid var(--line);border-top:3px solid var(--gold);padding:7pt 8pt;font-size:8.5pt;color:var(--soft)}
 .rhythm b{display:block;font-family:'Libre Caslon Display',serif;font-weight:400;font-size:11.5pt;color:var(--ink);margin:2pt 0 3pt}
 .rhythm .when{font-family:Antonio,Impact,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.07em;font-size:7pt;color:var(--oak)}
@@ -101,7 +102,7 @@ H.push(`<section class="page cover">
 H.push(`<section class="page">
 ${weekHead('', 'How this Playbook works', 'Read first', 'The cohort builds on Manager Foundations. It does not reteach the Vanderbilt Manager Standard; it practices it with your own team, and this Playbook is where the practice gets written down. One section a week, presented whole in week four.')}
 <h3>The four weeks</h3>
-<div class="rhythm">${K.weeks.map(w => `<div><span class="when">Week ${w.n} · ${esc(w.mode)} · ${esc(fmtMins(w.mins))}</span><b>${esc(w.title)}</b>Expectation ${K.standard[w.expectation - 1].n}, ${esc(K.standard[w.expectation - 1].name.toLowerCase())}.<br><span style="color:#1C1C1C;font-weight:600">Section ${w.playbook.n} · ${esc(w.playbook.title)}</span></div>`).join('')}</div>
+<div class="rhythm">${K.weeks.map(w => `<div><span class="when">Week ${w.n} · ${esc(w.mode)} · ${esc(fmtMins(w.mins))}</span><b>${esc(w.title)}</b>Expectation ${K.standard[w.expectation - 1].n}, ${esc(K.standard[w.expectation - 1].name.toLowerCase().replace(/vanderbilt/g, "Vanderbilt"))}.<br><span style="color:#1C1C1C;font-weight:600">Section ${w.playbook.n} · ${esc(w.playbook.title)}</span></div>`).join('')}</div>
 <h3>What you write, week by week</h3>
 <table class="grid" style="font-size:9pt"><thead><tr><th style="width:1.1in">When</th><th>Section</th><th>Due</th></tr></thead><tbody>
 <tr><td style="height:auto">Before week 1</td><td style="height:auto"><b>Set your team</b> on the cohort site, finish Manager Foundations, and take the four-question pulse. The cohort site is at ${esc(K.site.replace('https://', ''))}.</td><td style="height:auto">Bring the printed Playbook to week 1</td></tr>
@@ -157,9 +158,12 @@ ${check(K.leader.before)}
 /* section 1 */
 H.push(`<section class="page">
 ${weekHead('01', 'Manager Philosophy', 'Week 1 · In the classroom · What it means to manage · due Sunday', 'One page on how you will manage. It starts with the mission, runs through your Manager Voyage on a timeline, and ends with the sentence you read aloud to your four.')}
+${field('The best manager I ever had did…', 'What they did that stuck with you, and how it shows up in the way you will lead.', 2)}
 ${field('The mission needs my team to…', 'From the first fifteen minutes. What your team makes possible for the people this university exists for.', 2)}
 <h3>My voyage, in seven lines</h3>
 <table class="grid" style="font-size:9pt"><thead><tr><th style="width:1.6in">Stop</th><th>One line</th></tr></thead><tbody>${K.timeline.map(t => `<tr><td style="height:22pt"><b>${esc(t.label)}</b><br><small>${esc(t.title)}</small></td><td style="height:22pt"></td></tr>`).join('')}</tbody></table>
+<h3>Six moments that made me</h3>
+<table class="grid" style="font-size:9pt"><thead><tr><th style="width:1.6in">Moment</th><th>One line</th></tr></thead><tbody>${K.lenses.map(l => `<tr><td style="height:20pt"><b>${esc(l.name)}</b></td><td style="height:20pt"></td></tr>`).join('')}</tbody></table>
 ${field('What my team can expect from me', 'One sentence, then the three commitments behind it. The ones you could be held to on a bad day.', 4)}
 <div class="two">${field('What I say when bad news lands', 'Your first sentence, word for word.', 3)}${field('The expectation my team needs most this month, and the habit I will keep', 'From the How to lead activity.', 3)}</div>
 ${field('My intent for the next 90 days, and the assessment statement I want to move', 'What will be true about this team by Day 90 that is not true today? Which of the ten statements will say so?', 3)}

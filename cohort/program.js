@@ -21,6 +21,10 @@ window.MV_COHORT = {
     sparkwise: { w1: '', w2: '', w3: '', w4: '' },
     /* The team's view of the ten statements (a Microsoft Form, anonymous), the completion record (a form or an inbox), and the leader brief. Empty means the page shows the copy-and-paste version. */
     teamForm: '', completionForm: '', completionEmail: '', leaderEmailCc: '',
+    /* Power Automate. An HTTP-request flow that writes to SharePoint. The site posts JSON as text/plain with no
+       CORS preflight, the same way the Foundations course posts to its flow. Empty means the survey keeps a local
+       copy and offers email. Payloads: { event:'survey' | 'completion', at, ...fields }. */
+    surveyFlowUrl: '',
     /* Core modules in Oracle Learning, released the Friday before each week. */
     core: {
       w2: { title: 'How to Manage Difficult Conversations', by: 'LinkedIn Learning', url: 'https://ecsr.fa.us2.oraclecloud.com/fscmUI/redwood/learner/learn/redirect?learningItemType=ORA_COURSE&learningItemId=300001630000000', mins: 30 },
@@ -93,15 +97,16 @@ window.MV_COHORT = {
   weeks: [
     { n: 1, slug: 'week-1', title: 'What it means to manage', mode: 'In the classroom', where: 'In person, half a day', mins: 180, expectation: 3,
       promise: 'By the end of the day you can say, in one sentence, what your team can expect from you, and you have held one hard conversation out loud.',
-      playbook: { n: 1, title: 'Manager Philosophy', due: 'Sunday', desc: 'What your team can expect from you, what you say when bad news lands, and your intent for the next 90 days.' },
+      playbook: { n: 1, title: 'Manager Philosophy', due: 'Sunday', desc: 'The best manager you ever had, your journey in six moments, what your team can expect from you, what you say when bad news lands, and your intent for the next 90 days.' },
       segments: [
-        { id: 'mission', mins: 15, title: 'Start with the mission', kind: 'room', std: 3, desc: 'Define the great university of the twenty-first century, and be it. What that asks of a team, and of you.' },
-        { id: 'timeline', mins: 25, title: 'Your Manager Voyage, on a timeline', kind: 'activity', std: 3, desc: 'From the work you were hired to do, to Day 1 as a manager, to Day 90 after this cohort. You place yourself on it.' },
-        { id: 'role', mins: 25, title: 'The new role, and the standard', kind: 'activity', std: 1, desc: 'What changed, and the four expectations you are already measured on. You sort a week of your own work into them.' },
-        { id: 'lead', mins: 30, title: 'How to lead, in your area', kind: 'activity', std: 2, desc: 'Which expectation your team needs most this month, and the habit that serves it.' },
+        { id: 'welcome', mins: 25, title: 'Welcome, and the best manager you ever had', kind: 'room', std: 2, desc: 'The norms, who is in the room, and one question that starts everything: what did the best manager you ever had actually do?' },
+        { id: 'mission', mins: 15, title: 'Start with the mission', kind: 'room', std: 3, desc: 'Define the great university of the twenty-first century, and be it. The three areas of focus, and what they ask of a team, and of you.' },
+        { id: 'timeline', mins: 25, title: 'Your Manager Voyage, on a timeline', kind: 'activity', std: 3, desc: 'From the work you were hired to do to year one, and the six moments that shaped how you lead. You place yourself on it.' },
+        { id: 'role', mins: 30, title: 'From contributor to manager, and the standard', kind: 'activity', std: 1, desc: 'In groups: what changes when you move from doing the work to leading it. Then the four expectations you are already measured on, sorted from your own week.' },
         { id: 'break', mins: 10, title: 'Break', kind: 'break' },
-        { id: 'hard', mins: 50, title: 'The hard conversation, out loud', kind: 'lab', std: 1, desc: 'The three-line frame. A demonstration, then pairs, then a live round with Sam on your phone.' },
-        { id: 'playbook', mins: 25, title: 'Playbook section one, and the week ahead', kind: 'write', std: 3, desc: 'Your Philosophy sentence, written and read aloud. Then what week two asks of you.' }
+        { id: 'lead', mins: 15, title: 'How to lead, in your area', kind: 'activity', std: 2, desc: 'Where you are strong, where you are growing, which expectation your team needs most this month, and the habit that serves it.' },
+        { id: 'hard', mins: 40, title: 'The hard conversation, out loud', kind: 'lab', std: 1, desc: 'The three-line frame. A demonstration, then pairs, then a live round with Sam on your phone.' },
+        { id: 'playbook', mins: 20, title: 'Your Philosophy, the program, and the week ahead', kind: 'write', std: 3, desc: 'You have already done the work; now put it together. Then the four weeks, the survey, and what week two asks of you.' }
       ] },
     { n: 2, slug: 'week-2', title: 'Goals, 1:1s, and difficult conversations', mode: 'Virtual', where: 'On your own time, under ninety minutes', mins: 90, expectation: 1,
       promise: 'By Friday you have a 1:1 cadence on the calendar, three goals per person drafted, and one difficult conversation held with your own team.',
@@ -456,5 +461,66 @@ window.MV_COHORT = {
   },
 
   /* ── Scenario scripts: who has reviewed them. Shown to facilitators until both say yes. ── */
-  review: { sme: false, employeeRelations: false, note: 'The lab scripts and the voice agents are drafts until a subject-matter expert and Employee Relations have read them. Until then, facilitators say so in the room.' }
+  review: { sme: false, employeeRelations: false, note: 'The lab scripts and the voice agents are drafts until a subject-matter expert and Employee Relations have read them. Until then, facilitators say so in the room.' },
+
+  /* ── The best manager you ever had: the opener. ── */
+  bestManager: { prompt: 'Think about the best manager you ever had. What made them great? Maybe they listened without judgment, gave feedback that actually helped, or believed in you before you believed in yourself.', ask: 'What did they do that stuck with you, and how does it show up in the way you will lead?' },
+
+  /* ── Vanderbilt’s three areas of focus, from the Chancellor’s strategy. ── */
+  areasOfFocus: [
+    { n: 'Exceptional Core Operations', t: 'With speed, agility and scale, Vanderbilt will distinguish itself with innovative and impactful capabilities to ensure that we have the talent, resources and reputation necessary to deliver on our vision.', team: 'For a team: the work done well, on time, the first time. Expectation 01.' },
+    { n: 'Bold Strategic Initiatives', t: 'With exceptional core operations as our fuel, Vanderbilt will pursue increasingly bold initiatives that enable and enhance the reach and impact of our education and research mission.', team: 'For a team: room to try something, and a manager who explains the why. Expectation 03.' },
+    { n: 'Industry Leadership', t: 'Through strategic advocacy efforts and modeling the role of an essential research university, Vanderbilt will stimulate industry change and combat existential threats to our education and research mission.', team: 'For a team: knowing how its work connects to the rest of the university, and saying so. Expectation 04.' }
+  ],
+
+  /* ── The Leadership Journey Generator: six moments that shape how a person leads. Layered on the timeline. ── */
+  lenses: [
+    { k: 'success', name: 'Formative success', prompt: 'A win early on that taught you what you were good at.', frame: 'I learned I was good at {x}' },
+    { k: 'setback', name: 'Meaningful setback', prompt: 'The failure or loss you still think about, and what it changed.', frame: 'A setback taught me {x}' },
+    { k: 'turning', name: 'Turning point', prompt: 'The moment the direction changed, by choice or not.', frame: 'Everything turned when {x}' },
+    { k: 'mentor', name: 'Influential mentor', prompt: 'The person whose way of working you still copy.', frame: 'From {x} I took' },
+    { k: 'risk', name: 'Pivotal risk', prompt: 'The thing you did that could have gone badly, and did not, or did.', frame: 'I took a risk on {x}' },
+    { k: 'transition', name: 'Key transition', prompt: 'The move into managing, or the move that made it possible.', frame: 'The transition that made me a manager was {x}' }
+  ],
+
+  /* ── From contributor to manager: the group activity. Groups enter phrases; the page sorts them into the shifts
+     and names what the group missed. Keywords are matched loosely and in lower case. ── */
+  icm: {
+    prompt: 'In small groups: what are the differences between an individual contributor and a manager? Enter every word or phrase your group says, one per line. Then submit for analysis.',
+    themes: [
+      { k: 'output', name: 'Your success is no longer your own', kw: ['team', 'others', 'through', 'their work', 'results', 'output', 'credit', 'win', 'success', 'deliver', 'accountab', 'responsib'], line: 'As a contributor you win by delivering great work. As a manager you win when your team delivers great work.' },
+      { k: 'enable', name: 'From doing to enabling', kw: ['enable', 'support', 'remove', 'obstacle', 'unblock', 'help', 'resource', 'coach', 'develop', 'grow', 'mentor', 'teach', 'empower', 'delegat'], line: 'Less heads-down execution, more removing obstacles, setting direction, and developing people.' },
+      { k: 'time', name: 'How you spend your time', kw: ['meeting', 'time', 'conversation', 'decision', 'calendar', 'priorit', 'plan', 'schedule', 'interrupt', 'email', 'approv', 'admin', 'budget'], line: 'Meetings, conversations, and decisions replace tasks and deliverables.' },
+      { k: 'letgo', name: 'Letting go', kw: ['let go', 'trust', 'control', 'hands', 'micromanag', 'perfection', 'my way', 'step back', 'patience', 'not doing', 'stop doing'], line: 'The hardest part: letting go, and trusting others to do the work you used to do yourself.' },
+      { k: 'people', name: 'The people are the work', kw: ['people', 'feedback', 'hard conversation', 'difficult', 'performance', 'hire', 'hiring', 'fire', 'conflict', 'morale', 'motivat', 'recogni', 'listen', 'emotion', 'care'], line: 'Feedback, expectations, performance, and the hard conversation are now your job, not an interruption to it.' },
+      { k: 'direction', name: 'Setting direction', kw: ['direction', 'vision', 'strategy', 'goal', 'why', 'big picture', 'communicat', 'translate', 'represent', 'advocate', 'upward', 'leadership', 'politics', 'stakeholder'], line: 'You explain the why, connect the team to the rest of the university, and speak up for it.' }
+    ],
+    synthesis: 'Your group identified the shifts that happen when you move from individual contributor to manager. Your success is no longer your own: as a contributor you win by delivering great work, as a manager you win when your team delivers great work. Your focus moves from doing to enabling: less heads-down execution, more removing obstacles, setting direction, and developing people. How you spend your time looks completely different: meetings, conversations, and decisions replace tasks and deliverables. The hardest part is letting go, and trusting others to do the work you used to do yourself.'
+  },
+
+  /* ── The Philosophy, framed. ── */
+  philosophy: {
+    h: 'You have already done the work. Now put it together.',
+    t: 'Over the past few hours you thought about the best manager in your life, mapped your own journey, worked out what changes when you become a manager, got honest about where you are strong and where you are growing, and saw the tools that support you. That was all intentional. A philosophy is not invented from scratch; it is drawn from everything you have already lived and learned.',
+    what: 'It is not a slogan. It is how you show up: the values that drive your decisions and what your team can count on from you every day. Without it, you react. With it, you lead.'
+  },
+
+  /* ── The course survey. Posted to the Power Automate flow when links.surveyFlowUrl is set; otherwise kept locally
+     and offered by email. One form for all four weeks; the week is the first question. ── */
+  survey: {
+    intro: 'A few minutes before you leave. Your answers shape how this cohort runs for every manager who comes after you. They go to the Futures Learning Hub, not to your leader.',
+    questions: [
+      { k: 'week', t: 'Which session are you rating?', type: 'choice', opts: ['Week 1, in the classroom', 'Week 2, virtual', 'Week 3, virtual', 'Week 4, the capstone'] },
+      { k: 'overall', t: 'Overall, how valuable was this session for the way you will manage?', type: 'scale', lo: 'Not valuable', hi: 'Very valuable' },
+      { k: 'useful', t: 'Which part was most useful?', type: 'choice', opts: ['The best manager you ever had', 'The mission and areas of focus', 'The timeline and journey', 'Contributor to manager, and the standard', 'How to lead in my area', 'The hard conversation lab', 'The Philosophy and Playbook', 'The core module', 'The SparkWise lab', 'The simulation lab', 'Presenting the Playbook'] },
+      { k: 'least', t: 'Which part could go, or needs to change?', type: 'text' },
+      { k: 'practice', t: 'How ready do you feel to use what you practiced with your own team this week?', type: 'scale', lo: 'Not ready', hi: 'Ready' },
+      { k: 'pace', t: 'The pace was', type: 'choice', opts: ['Too slow', 'About right', 'Too fast'] },
+      { k: 'facilitation', t: 'The facilitation', type: 'scale', lo: 'Got in the way', hi: 'Made it work' },
+      { k: 'monday', t: 'The one thing you will do with your team on Monday', type: 'text' },
+      { k: 'recommend', t: 'Would you tell another manager to join the cohort?', type: 'scale', lo: 'No', hi: 'Yes, today' },
+      { k: 'comments', t: 'Anything else', type: 'text' }
+    ],
+    who: 'Name and email are optional. Leave them blank and the answers are anonymous.'
+  }
 };

@@ -489,10 +489,66 @@ body.deck.notes .pdeck .talk{ display:block; }
 body.facil .lab .talk-only{ display:block; }
 .ros .card .kv li{ grid-template-columns:52px 1fr; font-size:.86rem; padding:5px 0; }
 
+/* week one, from the first pilot */
+.aof .card .team{ margin-top:10px; color:var(--eyebrow); font-size:.88rem; }
+.journey{ margin-top:18px; }
+.lenses{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.lens{ display:grid; gap:6px; background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--bd); border-radius:var(--r); padding:14px 16px; }
+.lens.has{ border-top-color:var(--eyebrow); }
+.lens .q{ font-size:.9rem; color:var(--tx2); line-height:1.4; }
+.lens textarea{ width:100%; font:inherit; font-size:.95rem; color:var(--tx); background:rgba(127,127,127,.08); border:1px solid var(--bdg); border-radius:var(--r); padding:8px 10px; resize:vertical; }
+.jout{ margin-top:16px; background:var(--card); border:1px solid var(--bdg); border-left:3px solid var(--eyebrow); border-radius:var(--r); padding:16px 18px; }
+.jout p:first-of-type{ font-family:var(--serif); font-size:1.25rem; line-height:1.35; margin-top:6px; }
+.icm{ margin-top:18px; }
+.icm-in textarea{ width:100%; font:inherit; font-size:1rem; color:var(--tx); background:rgba(127,127,127,.08); border:1px solid var(--bdg); border-radius:var(--r); padding:12px 14px; resize:vertical; }
+.icm-out{ margin-top:18px; }
+.themes{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px; }
+.theme{ background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); padding:14px 16px; position:relative; }
+.theme.empty{ border-top-color:var(--bd); opacity:.75; }
+.theme b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; padding-right:36px; }
+.theme .cnt{ position:absolute; top:12px; right:14px; font-family:var(--cond); font-weight:700; font-size:1.3rem; color:var(--eyebrow); }
+.theme ul{ list-style:none; margin-top:8px; display:grid; gap:3px; }
+.theme li{ font-size:.86rem; color:var(--tx2); padding-left:12px; position:relative; }
+.theme li::before{ content:''; position:absolute; left:0; top:.55em; width:5px; height:5px; border-radius:50%; background:var(--eyebrow); }
+.theme p{ font-size:.86rem; color:var(--tx3); margin-top:8px; }
+.theme .ln{ color:var(--tx2); border-top:1px solid var(--bd); padding-top:8px; }
+.miss{ margin-top:14px; font-size:.95rem; }
+.synth{ margin-top:16px; background:var(--card); border:1px solid var(--bdg); border-left:3px solid var(--eyebrow); border-radius:var(--r); padding:16px 18px; }
+.synth p{ font-size:1rem; line-height:1.55; margin-top:6px; }
+.strengths{ margin-top:16px; }
+.srows{ display:grid; gap:8px; }
+.srow{ display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr) auto; gap:12px; align-items:center; padding:10px 0; border-top:1px solid var(--bd); }
+.srow .stdtag{ margin:0; }
+.srow .y{ font-family:var(--cond); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--tx3); }
+.sout{ margin-top:14px; background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:14px 16px; font-size:.95rem; line-height:1.5; }
+.ovw{ display:grid; gap:10px; margin-top:16px; }
+.ow{ display:grid; grid-template-columns:56px 1fr; gap:14px; padding:14px 16px; background:var(--card); border:1px solid var(--bd); border-radius:var(--r); }
+.ow.now{ border-color:var(--eyebrow); }
+.ow > b{ font-family:var(--cond); font-weight:700; font-size:2.4rem; line-height:1; color:var(--eyebrow); }
+.ow h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; margin:4px 0 4px; }
+.ow p{ font-size:.9rem; color:var(--tx2); line-height:1.45; }
+.ow .pbk{ color:var(--tx3); margin-top:4px; }
+.phil{ margin-top:8px; background:var(--card); border:1px solid var(--bdg); border-left:3px solid var(--eyebrow); border-radius:var(--r); padding:20px 22px; }
+.phil h3{ font-family:var(--serif); font-weight:400; font-size:1.5rem; line-height:1.2; }
+.phil p{ margin-top:10px; font-size:1rem; line-height:1.55; color:var(--tx2); }
+.phil p b{ color:var(--tx); }
+/* survey */
+.svy .sq{ border:0; padding:18px 0; border-top:1px solid var(--bd); margin:0; }
+.svy legend{ font-family:var(--serif); font-size:1.2rem; line-height:1.25; padding:0; margin-bottom:10px; display:flex; gap:12px; align-items:baseline; }
+.svy legend .n{ font-family:var(--cond); font-weight:700; font-size:.9rem; color:var(--eyebrow); }
+.svy textarea{ width:100%; font:inherit; font-size:1rem; color:var(--tx); background:rgba(127,127,127,.08); border:1px solid var(--bdg); border-radius:var(--r); padding:10px 12px; resize:vertical; }
+.sc5{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.sc5 > span{ font-size:.82rem; color:var(--tx3); }
+.sc5 button{ width:42px; height:42px; border-radius:50%; border:1px solid var(--bdg); background:transparent; color:var(--tx); cursor:pointer; font-family:var(--cond); font-weight:700; font-size:1rem; }
+.sc5 button[aria-pressed="true"]{ background:var(--eyebrow); color:var(--btn-tx); }
+.thanks{ padding:24px 0; }
+.thanks p{ margin-top:8px; color:var(--tx2); }
+
 /* responsive */
 @media (max-width:1000px){
   .std, .g4, .qrgrid, .lead-pick, .habits, .wk7{ grid-template-columns:1fr 1fr; }
   .norms{ grid-template-columns:repeat(3,1fr); }
+  .lenses, .themes{ grid-template-columns:1fr 1fr; }
   .fw{ grid-template-columns:1fr 1fr; }
   .g3, .frame3{ grid-template-columns:1fr 1fr; }
   .session{ grid-template-columns:1fr; }
@@ -504,7 +560,8 @@ body.facil .lab .talk-only{ display:block; }
 }
 @media (max-width:640px){
   :root{ --nav-h:60px; }
-  .std, .g2, .g3, .g4, .qrgrid, .lead-pick, .habits, .frame3, .agenda, .sort .bins, .pbf .two, .lab .how, .fw, .deep, .duties, .wk7, .norms, .nudges{ grid-template-columns:1fr; }
+  .std, .g2, .g3, .g4, .qrgrid, .lead-pick, .habits, .frame3, .agenda, .sort .bins, .pbf .two, .lab .how, .fw, .deep, .duties, .wk7, .norms, .nudges, .lenses, .themes{ grid-template-columns:1fr; }
+  .srow{ grid-template-columns:1fr; gap:6px; }
   .lab .scene{ grid-template-columns:1fr; }
   .lab .av{ width:96px; height:96px; }
   .kv li{ grid-template-columns:1fr; gap:2px; }

@@ -7,9 +7,9 @@
 <meta name="description" content="Run of show for all four weeks, the room and producer checklists, the norms, the rehearsal, and the review status of the scenario scripts.">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="../assets/img/favicon-96.png">
-<link rel="stylesheet" href="cohort.css?v=20261101e">
-<script src="program.js?v=20261101c"></script>
-<script src="cohort.js?v=20261101e" defer></script>
+<link rel="stylesheet" href="cohort.css?v=20261101f">
+<script src="program.js?v=20261101f"></script>
+<script src="cohort.js?v=20261101f" defer></script>
 </head>
 <body data-page="facilitator">
 <a class="skip" href="#main">Skip to content</a>
@@ -38,11 +38,24 @@
       <h2 class="h2 rv" id="h-chk">The rehearsal, <em>and two checklists.</em></h2>
       <div class="grid g3 rv">
         <div class="card"><span class="no">01</span><h3>Rehearse week one against the clock</h3><ul class="checks"><li><label><input type="checkbox" data-ck="r1"><span>Run the whole deck once in Present mode with the timers on, out loud, in the actual room</span></label></li><li><label><input type="checkbox" data-ck="r2"><span>Do the Sam lab yourself, standard and harder, so you know what the room will hear</span></label></li><li><label><input type="checkbox" data-ck="r3"><span>Practice the demonstration with your volunteer, including the deliberate mistake</span></label></li><li><label><input type="checkbox" data-ck="r4"><span>Decide the fours in advance, by area where you can</span></label></li></ul></div>
-        <div class="card"><span class="no">02</span><h3>The room, weeks one and four</h3><ul class="checks"><li><label><input type="checkbox" data-ck="m1"><span>Screen, clicker, the week page open in Present mode, facilitator mode on</span></label></li><li><label><input type="checkbox" data-ck="m2"><span>Wi-Fi password on the screen; the QR grid printed</span></label></li><li><label><input type="checkbox" data-ck="m3"><span>Movable chairs, room for pairs to talk out loud, earbuds for the live round</span></label></li><li><label><input type="checkbox" data-ck="m4"><span>Printed Playbooks, one per manager, plus five spares</span></label></li><li><label><input type="checkbox" data-ck="m5"><span>Business unit leaders confirmed for the week-four presentations, seated with a four not their own</span></label></li><li><label><input type="checkbox" data-ck="m6"><span>Spanish role cards shown to the room: the toggle is on the pairs block</span></label></li></ul></div>
+        <div class="card"><span class="no">02</span><h3>The room, weeks one and four</h3><ul class="checks"><li><label><input type="checkbox" data-ck="m1"><span>Screen, clicker, the week page open in Present mode, facilitator mode on</span></label></li><li><label><input type="checkbox" data-ck="m2"><span>Wi-Fi password on the screen; the QR grid printed</span></label></li><li><label><input type="checkbox" data-ck="m3"><span>Movable chairs, room for pairs to talk out loud, earbuds for the live round</span></label></li><li><label><input type="checkbox" data-ck="m4"><span>Printed Playbooks, one per manager, plus five spares</span></label></li><li><label><input type="checkbox" data-ck="m5"><span>Business unit leaders confirmed for the week-four presentations, seated with a four not their own</span></label></li><li><label><input type="checkbox" data-ck="m6"><span>Spanish role cards shown to the room: the toggle is on the pairs block</span></label></li><li><label><input type="checkbox" data-ck="m7"><span>The survey QR on the screen before the close; nobody leaves before it</span></label></li></ul></div>
         <div class="card"><span class="no">03</span><h3>The producer, weeks two and three</h3><ul class="checks"><li><label><input type="checkbox" data-ck="p1"><span>Core module released in Oracle Learning the Friday before</span></label></li><li><label><input type="checkbox" data-ck="p2"><span>SparkWise link live and pasted into cohort/program.js under links.sparkwise</span></label></li><li><label><input type="checkbox" data-ck="p3"><span>Monday email: the week page link, the ninety-minute cap, the Sunday Playbook due date</span></label></li><li><label><input type="checkbox" data-ck="p4"><span>Tuesday and Thursday nudges sent to the cohort list, or managers reminded to add them</span></label></li><li><label><input type="checkbox" data-ck="p5"><span>Friday: completion nudge to anyone whose week page shows no segments done</span></label></li></ul></div>
       </div>
       <h3 class="h3 rv" style="margin-top:32px">The norms, read first</h3>
       <ul data-norms aria-label="Cohort norms"></ul>
+    </div>
+  </section>
+  <section class="band th-dark" aria-labelledby="h-flow">
+    <div class="wrap">
+      <p class="eyebrow">The survey and the completion record</p>
+      <h2 class="h2 rv" id="h-flow">One Power Automate flow, <em>two payloads, one SharePoint list.</em></h2>
+      <p class="lead rv">The survey page and the week-four completion button both post JSON to one flow URL, the same way the Foundations course posts its assessment. Until the URL is set, the site keeps a local copy and offers email.</p>
+      <div class="grid g3 rv">
+        <div class="card"><span class="no">1</span><h3>Create the flow</h3><p>Power Automate, new instant cloud flow, trigger “When an HTTP request is received”, anyone can trigger. Leave the schema empty. Copy the HTTP POST URL into <code>cohort/program.js</code> under <code>links.surveyFlowUrl</code>.</p></div>
+        <div class="card"><span class="no">2</span><h3>Read the body</h3><p>The site posts as text/plain so no browser preflight is needed. In the flow, add a Compose step with the expression <code>json(base64ToString(triggerBody()?['$content']))</code>. Every field is then available: <code>event</code> (survey or completion), <code>at</code>, <code>week</code>, the ten answers by key, <code>area</code>, <code>name</code>, <code>email</code>.</p></div>
+        <div class="card"><span class="no">3</span><h3>Write to SharePoint</h3><p>Condition on <code>event</code>. For survey: Create item in a Cohort Survey list with one column per question key. For completion: Create item in a Cohort Completions list with name, email, area, segments done, labs, pulse, indicators, and the Playbook lines. Optional: send the manager a copy by email.</p></div>
+      </div>
+      <p class="note rv">Survey keys: week, overall, useful, least, practice, pace, facilitation, monday, recommend, comments, name, email, area, team_type. Completion keys: segments_done, segments_total, labs, pulse, indicators, philosophy, team_goal, first_move, reassess_date, who.</p>
     </div>
   </section>
   <section class="band th-dark" aria-labelledby="h-rev">

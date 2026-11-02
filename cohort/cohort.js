@@ -13,6 +13,7 @@
   var KEY = 'mv-cohort-';
   function $(s, r){ return (r || document).querySelector(s); }
   function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function lc(s){ return String(s).toLowerCase().replace(/vanderbilt/g, 'Vanderbilt'); }
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); }
   function get(k, d){ try{ var v = localStorage.getItem(KEY + k); return v == null ? d : JSON.parse(v); }catch(e){ return d; } }
   function set(k, v){ try{ localStorage.setItem(KEY + k, JSON.stringify(v)); }catch(e){} }
@@ -86,7 +87,7 @@
 
   /* ---------- header, footer, progress ---------- */
   function header(){
-    var links = [['index.html', 'Home', 'index'], ['week-1.html', 'Week 1', 'week-1'], ['week-2.html', 'Week 2', 'week-2'], ['week-3.html', 'Week 3', 'week-3'], ['week-4.html', 'Week 4', 'week-4'], ['manage.html', 'The other things', 'manage'], ['facilitator.html', 'Facilitators', 'facilitator']];
+    var links = [['index.html', 'Home', 'index'], ['week-1.html', 'Week 1', 'week-1'], ['week-2.html', 'Week 2', 'week-2'], ['week-3.html', 'Week 3', 'week-3'], ['week-4.html', 'Week 4', 'week-4'], ['manage.html', 'The other things', 'manage'], ['facilitator.html', 'Facilitators', 'facilitator'], ['survey.html', 'Survey', 'survey']];
     var h = el('header', 'cnav gnav');
     h.innerHTML = '<a href="index.html" aria-label="Manager Voyage cohort home"><img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="150" height="40"></a>' +
       '<span class="tag">Manager Voyage · The Cohort</span>' +
@@ -180,7 +181,7 @@
   }
   function pageUrl(slug){ return C.site + (slug === 'index' ? '' : slug + '.html'); }
   function qrGrid(root){
-    var pages = [['index', 'Cohort home', 'Profile, map, Playbook'], ['week-1', 'Week 1', 'In the classroom'], ['week-2', 'Week 2', 'Virtual, 90 minutes'], ['week-3', 'Week 3', 'Virtual, 90 minutes'], ['week-4', 'Week 4', 'Capstone, in person'], ['leader', 'For your leader', 'Fifteen minutes, one question a week'], ['team-check', 'Your team’s view', 'Ten statements, anonymous'], ['manage', 'The other things', 'Duties by cadence'], ['facilitator', 'Facilitators', 'Run of show, checklists']];
+    var pages = [['index', 'Cohort home', 'Profile, map, Playbook'], ['week-1', 'Week 1', 'In the classroom'], ['week-2', 'Week 2', 'Virtual, 90 minutes'], ['week-3', 'Week 3', 'Virtual, 90 minutes'], ['week-4', 'Week 4', 'Capstone, in person'], ['leader', 'For your leader', 'Fifteen minutes, one question a week'], ['team-check', 'Your team’s view', 'Ten statements, anonymous'], ['manage', 'The other things', 'Duties by cadence'], ['facilitator', 'Facilitators', 'Run of show, checklists'], ['survey', 'Course survey', 'A few minutes before you leave']];
     root.innerHTML = pages.map(function(p, i){ var u = pageUrl(p[0]); return '<div class="qrc" style="--i:' + i + '"><div class="qr" data-url="' + esc(u) + '" data-size="200"></div><b>' + esc(p[1]) + '</b><span>' + esc(p[2]) + '</span><span>' + esc(u.replace('https://', '')) + '</span></div>'; }).join('');
     qrs();
   }
@@ -475,7 +476,7 @@
   /* ---------- frameworks, go deeper, the other things you manage ---------- */
   function fwCards(list){ return list.map(function(f, i){ return '<article class="fwc" style="--i:' + i + '"><span class="mono">' + esc(f.who) + '</span><h3>' + esc(f.what) + '</h3><p>' + esc(f.how) + '</p></article>'; }).join(''); }
   var STMTS = { 1: 'statements 1, 2 and 3', 2: 'statements 4, 5 and 6', 3: 'statements 7 and 8', 4: 'statements 9 and 10' };
-  function stdCard(n){ var st = C.standard[n - 1]; return '<article class="fwc std-card" style="--i:0"><span class="mono">The Vanderbilt Manager Standard · Gary Yukl</span><h3>Expectation ' + st.n + ': ' + esc(st.name) + '</h3><p>Yukl’s ' + esc(st.yukl.toLowerCase()) + ' category of effective leadership behavior, in Vanderbilt’s words. Your assessment measured it with ' + STMTS[n] + '. Habits: ' + esc(st.habits.join(', ').toLowerCase()) + '. Everything below serves this expectation this week.</p></article>'; }
+  function stdCard(n){ var st = C.standard[n - 1]; return '<article class="fwc std-card" style="--i:0"><span class="mono">The Vanderbilt Manager Standard · Gary Yukl</span><h3>Expectation ' + st.n + ': ' + esc(st.name) + '</h3><p>Yukl’s ' + esc(st.yukl.toLowerCase()) + ' category of effective leadership behavior, in Vanderbilt’s words. Your assessment measured it with ' + STMTS[n] + '. Habits: ' + esc(lc(st.habits.join(', '))) + '. Everything below serves this expectation this week.</p></article>'; }
   function frameworks(){ $$('[data-frameworks]').forEach(function(n){ var k = n.getAttribute('data-frameworks'), L = C.frameworks[k] || [], w = C.weeks[parseInt(k.slice(1), 10) - 1]; n.className = 'fw'; n.innerHTML = (w ? stdCard(w.expectation) : '') + fwCards(L); }); }
   function deepItem(d){
     var inner = (d.kind ? '<span class="pill">' + esc(d.kind) + '</span>' : '<span class="pill">Oracle Learning</span>') + '<b>' + esc(d.title) + '</b><span class="by">' + esc(d.by) + (d.mins ? ' · about ' + d.mins + ' minutes' : '') + '</span><span class="nt">' + esc(d.note) + '</span>';
@@ -537,10 +538,94 @@
         'Philosophy: ' + (pb['w1.philosophy'] || ''), 'Team goal: ' + (pb['w4.team_goal'] || ''), 'First move: ' + (pb['w4.first_move'] || ''), 'Reassessment date: ' + (pb['w4.reassess_date'] || '')];
       var txt = lines.join('\n'), ta = $('[data-complete-text]', r); ta.value = txt; ta.hidden = false;
       set('completed', { at: Date.now(), nd: nd, of: segs.length });
-      $('[data-complete-note]', r).textContent = C.links.completionEmail ? 'Your email app opens with this record addressed to the Futures Learning Hub. Send it as is.' : 'The record is below. Until PCB sets the completion inbox or form, copy it into the completion form or email it to your facilitator.';
+      var posted = flowPost({ event: 'completion', program: 'Manager Voyage cohort', at: new Date().toISOString(), area: v.a.name || '', team_type: v.type || '', size: v.size || '', segments_done: nd, segments_total: segs.length, labs: labs, pulse: pulse, indicators: ind, philosophy: pb['w1.philosophy'] || '', team_goal: pb['w4.team_goal'] || '', first_move: pb['w4.first_move'] || '', reassess_date: pb['w4.reassess_date'] || '', who: get('who', {}) });
+      $('[data-complete-note]', r).textContent = posted ? 'Recorded. Your completion is on its way to the Futures Learning Hub; the copy below is yours.' : C.links.completionEmail ? 'Your email app opens with this record addressed to the Futures Learning Hub. Send it as is.' : 'The record is below. Until PCB connects the flow, copy it into the completion form or email it to your facilitator.';
       if(C.links.completionEmail) location.href = 'mailto:' + C.links.completionEmail + '?subject=' + encodeURIComponent('Manager Voyage cohort: completion record') + '&body=' + encodeURIComponent(txt);
     });
   }
+  /* ---------- week one, recreated from the first pilot: areas of focus, the journey generator, contributor to manager, strengths, the overview, the survey ---------- */
+  function flowPost(payload){
+    var url = C.links.surveyFlowUrl; if(!url) return false;
+    try{ fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload), keepalive: true }).catch(function(){}); return true; }catch(e){ return false; }
+  }
+  function areas(){ var r = $('[data-areas]'); if(!r) return; r.className = 'grid g3 aof'; r.innerHTML = C.areasOfFocus.map(function(a, i){ return '<div class="card" style="--i:' + i + '"><h3>' + esc(a.n) + '</h3><p>' + esc(a.t) + '</p><p class="team">' + esc(a.team) + '</p></div>'; }).join(''); }
+  function journey(){
+    var r = $('[data-journey]'); if(!r) return; var J = get('journey', {});
+    r.className = 'journey';
+    r.innerHTML = '<div class="lenses">' + C.lenses.map(function(l){ return '<label class="lens' + (J[l.k] ? ' has' : '') + '"><span class="mono">' + esc(l.name) + '</span><span class="q">' + esc(l.prompt) + '</span><textarea rows="2" data-lens="' + l.k + '" placeholder="One line.">' + esc(J[l.k] || '') + '</textarea></label>'; }).join('') + '</div>' +
+      '<div class="btns"><button type="button" class="btn" data-journey-go>Generate my leadership journey</button><span class="note" style="margin:0" data-journey-n></span></div><div class="jout" data-journey-out hidden><span class="mono">My leadership journey, so far</span><p></p><p class="note">Read it once to the person next to you. Then it goes in your Playbook, section one.</p></div>';
+    function n(){ var k = Object.keys(J).filter(function(x){ return J[x] && J[x].trim(); }).length; $('[data-journey-n]', r).textContent = k ? k + ' of 6 moments written' : 'Write any three; six is better.'; }
+    r.addEventListener('input', function(e){ var t = e.target.closest('[data-lens]'); if(!t) return; J[t.getAttribute('data-lens')] = t.value; set('journey', J); t.closest('.lens').classList.toggle('has', !!t.value.trim()); n(); });
+    r.addEventListener('click', function(e){ if(!e.target.closest('[data-journey-go]')) return;
+      var parts = C.lenses.filter(function(l){ return J[l.k] && J[l.k].trim(); }).map(function(l){ var x = J[l.k].trim().replace(/\.$/, ''); var low = x.charAt(0).toLowerCase() + x.slice(1); return l.frame.replace('{x}', low); });
+      var out = $('[data-journey-out]', r); if(!parts.length){ out.hidden = false; $('p', out).textContent = 'Write at least one moment first.'; return; }
+      var v = vocab(), text = parts.join('. ') + '. ' + (v.a.id ? 'Today I lead ' + v.a.team + ', and ' : 'Today I lead a team, and ') + 'the leader I want to be is drawn from all of it.';
+      $('p', out).textContent = text; out.hidden = false; var pb = get('pb', {}); pb['w1.journey'] = text; set('pb', pb); });
+    n();
+  }
+  function icm(){
+    var r = $('[data-icm]'); if(!r) return; var I = C.icm, st = get('icm', { lines: '' });
+    r.className = 'icm';
+    r.innerHTML = '<p class="note">' + esc(I.prompt) + '</p><div class="icm-in"><textarea rows="7" data-icm-text placeholder="less doing, more enabling&#10;my success is the team’s success&#10;more meetings&#10;letting go of control">' + esc(st.lines) + '</textarea><div class="btns"><button type="button" class="btn" data-icm-go>Submit for analysis</button><button type="button" class="btn ghost sm" data-icm-clear>Clear</button></div></div><div class="icm-out" data-icm-out hidden></div>';
+    var ta = $('[data-icm-text]', r);
+    ta.addEventListener('input', function(){ st.lines = ta.value; set('icm', st); });
+    r.addEventListener('click', function(e){
+      if(e.target.closest('[data-icm-clear]')){ ta.value = ''; st.lines = ''; set('icm', st); $('[data-icm-out]', r).hidden = true; return; }
+      if(!e.target.closest('[data-icm-go]')) return;
+      var lines = ta.value.split(/\n|;|,/).map(function(x){ return x.trim(); }).filter(Boolean); if(!lines.length){ ta.focus(); return; }
+      var hits = {}, other = []; I.themes.forEach(function(t){ hits[t.k] = []; });
+      lines.forEach(function(l){ var low = l.toLowerCase(), found = null; I.themes.forEach(function(t){ if(!found && t.kw.some(function(k){ return low.indexOf(k) > -1; })) found = t.k; }); if(found) hits[found].push(l); else other.push(l); });
+      var ranked = I.themes.slice().sort(function(a, b){ return hits[b.k].length - hits[a.k].length; }), missed = I.themes.filter(function(t){ return !hits[t.k].length; });
+      var out = $('[data-icm-out]', r);
+      out.innerHTML = '<span class="mono">Your ' + lines.length + ' phrases, in ' + ranked.filter(function(t){ return hits[t.k].length; }).length + ' of the six shifts</span>' +
+        '<div class="themes">' + ranked.map(function(t){ var n = hits[t.k].length; return '<div class="theme' + (n ? '' : ' empty') + '"><b>' + esc(t.name) + '</b><span class="cnt">' + n + '</span>' + (n ? '<ul>' + hits[t.k].map(function(l){ return '<li>' + esc(l) + '</li>'; }).join('') + '</ul>' : '<p>Nobody said this one yet.</p>') + '<p class="ln">' + esc(t.line) + '</p></div>'; }).join('') + '</div>' +
+        (other.length ? '<p class="note">Not sorted: ' + esc(other.join(' · ')) + '. Say them to the room; they may be a seventh shift.</p>' : '') +
+        (missed.length ? '<p class="miss"><b>What your group missed:</b> ' + esc(missed.map(function(t){ return lc(t.name); }).join(', ')) + '. Most groups do. It is usually the one that costs new managers the most.</p>' : '<p class="miss"><b>All six.</b> Rare. Now notice which one has the fewest phrases; that is the one to watch.</p>') +
+        '<div class="synth"><span class="mono">Identifying the differences helps you understand how to manage</span><p>' + esc(I.synthesis) + '</p></div>';
+      out.hidden = false; set('icm', { lines: ta.value, at: Date.now(), n: lines.length, themes: ranked.map(function(t){ return [t.k, hits[t.k].length]; }) });
+      out.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+    });
+  }
+  function strengths(){
+    var r = $('[data-strengths]'); if(!r) return; var S = get('strength', {}), LV = ['Growing', 'Solid', 'A strength'];
+    r.className = 'strengths';
+    function paint(){
+      r.innerHTML = '<div class="srows">' + C.standard.map(function(st, i){ return '<div class="srow"><span class="stdtag"><i>' + st.n + '</i>' + esc(st.name) + '</span><span class="y">Yukl: ' + esc(st.yukl.toLowerCase()) + '</span><div class="opts">' + LV.map(function(l, j){ return '<button type="button" data-s="' + i + '" data-v="' + j + '" aria-pressed="' + (S[i] === j) + '">' + l + '</button>'; }).join('') + '</div></div>'; }).join('') + '</div>' + read();
+    }
+    function read(){
+      var k = Object.keys(S).length; if(k < 4) return '<p class="note">Honest, not modest. ' + (4 - k) + ' to go.</p>';
+      var strong = C.standard.filter(function(_, i){ return S[i] === 2; }), grow = C.standard.filter(function(_, i){ return S[i] === 0; });
+      return '<div class="sout"><p><b>Your strengths:</b> ' + (strong.length ? esc(strong.map(function(x){ return lc(x.name); }).join('; ')) : 'none marked yet, and that is usually modesty') + '.</p><p><b>Where you are growing:</b> ' + (grow.length ? esc(grow.map(function(x){ return lc(x.name); }).join('; ')) : 'nothing marked growing, so pick the lowest of the four and treat it as growing') + '.</p><p class="note">Your Foundations assessment said something about this too. If the two disagree, the assessment is usually closer. Carry the growing one into the next activity.</p></div>';
+    }
+    r.addEventListener('click', function(e){ var b = e.target.closest('button[data-s]'); if(!b) return; S[b.getAttribute('data-s')] = +b.getAttribute('data-v'); set('strength', S); paint(); });
+    paint();
+  }
+  function phil(){ var h = $('[data-fill-phil-h]'); if(!h) return; h.textContent = C.philosophy.h; $('[data-fill-phil-t]').textContent = C.philosophy.t; $('[data-fill-phil-w]').innerHTML = '<b>So what is it?</b> ' + esc(C.philosophy.what); }
+  function overview(){ var r = $('[data-overview]'); if(!r) return; r.className = 'ovw'; r.innerHTML = C.weeks.map(function(w){ var st = C.standard[w.expectation - 1]; return '<div class="ow' + (w.n === weekN ? ' now' : '') + '"><b>' + w.n + '</b><div><span class="mono">' + esc(w.mode) + ' · ' + fmtMins(w.mins) + ' · Expectation ' + st.n + '</span><h4>' + esc(w.title) + '</h4><p>' + esc(w.promise) + '</p><p class="pbk">Playbook section ' + w.playbook.n + ': ' + esc(w.playbook.title) + ', due ' + esc(w.playbook.due) + '.</p></div></div>'; }).join(''); }
+  function survey(){
+    var r = $('[data-survey]'); if(!r) return; var Q = C.survey.questions, ans = {}, who = get('who', {});
+    var pre = (location.search.match(/[?&]week=(\d)/) || [])[1];
+    r.innerHTML = '<p class="lead rv">' + esc(C.survey.intro) + '</p><form class="svy" novalidate>' + Q.map(function(q, i){
+      var h = '<fieldset class="sq"><legend><span class="n">' + (i + 1) + '</span>' + esc(q.t) + '</legend>';
+      if(q.type === 'choice') h += '<div class="opts">' + q.opts.map(function(o){ return '<button type="button" data-q="' + q.k + '" data-v="' + esc(o) + '" aria-pressed="false">' + esc(o) + '</button>'; }).join('') + '</div>';
+      else if(q.type === 'scale') h += '<div class="sc5"><span>' + esc(q.lo) + '</span>' + [1, 2, 3, 4, 5].map(function(n){ return '<button type="button" data-q="' + q.k + '" data-v="' + n + '" aria-pressed="false">' + n + '</button>'; }).join('') + '<span>' + esc(q.hi) + '</span></div>';
+      else h += '<textarea rows="2" data-qt="' + q.k + '"></textarea>';
+      return h + '</fieldset>'; }).join('') +
+      '<fieldset class="sq"><legend><span class="n">' + (Q.length + 1) + '</span>Optional: who you are</legend><p class="note">' + esc(C.survey.who) + '</p><div class="pbf"><div class="two"><label><b>Name</b><input type="text" data-who="name" value="' + esc(who.name || '') + '"></label><label><b>Vanderbilt email</b><input type="email" data-who="email" value="' + esc(who.email || '') + '"></label></div></div></fieldset>' +
+      '<div class="btns"><button type="submit" class="btn">Send my answers</button><span class="note" style="margin:0" data-svy-n></span></div></form><div class="thanks" data-svy-done hidden><h3 class="h3">Thank you.</h3><p></p></div>';
+    if(pre){ var b = $('button[data-q="week"][data-v^="Week ' + pre + '"]', r); if(b){ ans.week = b.getAttribute('data-v'); b.setAttribute('aria-pressed', 'true'); } }
+    r.addEventListener('click', function(e){ var b = e.target.closest('button[data-q]'); if(!b) return; var q = b.getAttribute('data-q'); ans[q] = isNaN(+b.getAttribute('data-v')) ? b.getAttribute('data-v') : +b.getAttribute('data-v'); $$('button[data-q="' + q + '"]', r).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); });
+    $('form', r).addEventListener('submit', function(e){ e.preventDefault();
+      $$('[data-qt]', r).forEach(function(t){ ans[t.getAttribute('data-qt')] = t.value.trim(); });
+      var need = Q.filter(function(q){ return q.type !== 'text' && ans[q.k] === undefined; });
+      if(need.length){ $('[data-svy-n]', r).textContent = 'Answer the rated questions first: ' + need.map(function(q){ return Q.indexOf(q) + 1; }).join(', ') + '.'; return; }
+      var v = vocab(), nm = $('[data-who="name"]', r).value.trim(), em = $('[data-who="email"]', r).value.trim();
+      var payload = Object.assign({ event: 'survey', program: 'Manager Voyage cohort', at: new Date().toISOString(), page: location.href.split('?')[0], area: v.a.name || '', team_type: v.type || '', name: nm, email: em }, ans);
+      var sent = flowPost(payload); var log = get('surveys', []); log.push(payload); set('surveys', log); if(nm || em) set('who', { name: nm, email: em });
+      var d = $('[data-svy-done]', r); $('p', d).innerHTML = sent ? 'Your answers are on their way to the Futures Learning Hub.' : 'The survey inbox is not connected yet, so your answers are saved on this device. <a href="mailto:?subject=' + encodeURIComponent('Manager Voyage cohort survey') + '&body=' + encodeURIComponent(JSON.stringify(payload, null, 2)) + '">Email them instead</a>, or ask your facilitator.';
+      $('form', r).hidden = true; d.hidden = false; d.scrollIntoView({ block: 'start' }); });
+  }
+
   function runOfShow(){ var r = $('[data-run-of-show]'); if(!r) return; r.innerHTML = C.weeks.map(function(w){ var t = 0; return '<div class="card"><span class="no">' + w.n + '</span><h3>Week ' + w.n + ' · ' + esc(w.title) + '</h3><p class="mono" style="margin:4px 0 8px">' + esc(w.mode) + ' · ' + fmtMins(w.mins) + '</p><ul class="kv">' + w.segments.map(function(s){ var at = t; t += s.mins; var hh = Math.floor(at / 60), mm = at % 60; return '<li><b>' + (hh ? hh + ':' + (mm < 10 ? '0' : '') + mm : ':' + (mm < 10 ? '0' : '') + mm) + '</b><span>' + esc(s.title) + ' <small style="color:var(--tx3)">' + s.mins + ' min</small></span></li>'; }).join('') + '</ul></div>'; }).join(''); }
 
   /* ---------- present mode: the page as a deck for the room ----------
@@ -631,7 +716,7 @@
     var tl = $('#timeline'); if(tl) timeline(tl);
     var so = $('#sort'); if(so){ sort(so); document.addEventListener('mv-profile', function(){ sort(so); }); }
     var ld = $('#lead'); if(ld) lead(ld);
-    frameworks(); deeper(); manage(); norms(); nudges(); leaderPage(); leaderSend(); teamCheck(); completion(); runOfShow();
+    frameworks(); deeper(); manage(); norms(); nudges(); leaderPage(); leaderSend(); teamCheck(); completion(); runOfShow(); areas(); journey(); icm(); strengths(); overview(); survey(); phil();
     labs(); playbook(); pulse(); presentTools(); present();
     words(); reveals(); hero(); stack(); qrSide();
     facil(get('facil', false));
