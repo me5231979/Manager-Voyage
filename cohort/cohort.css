@@ -622,7 +622,7 @@ section.band.th-light{ background-image:linear-gradient(180deg, #F5F3EF, #F1EDE5
 /* cards: gold gradient border, tilt, sheen */
 .card, .fwc, .stk, .lens, .theme, .nudge, .duty, .wkd, .std li, .ow, .rolecard, .tool-card, .lab, .phil, .jout, .synth, .sout, .prof{ background-image:linear-gradient(160deg, rgba(255,255,255,.035), rgba(255,255,255,0) 40%); box-shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 20px 50px -40px rgba(0,0,0,.9); }
 .th-light .card, .th-light .fwc, .th-light .lens, .th-light .theme, .th-light .nudge, .th-light .duty, .th-light .wkd, .th-light .std li, .th-light .ow, .th-light .rolecard, .th-light .tool-card, .th-light .prof{ background-image:linear-gradient(160deg, rgba(255,255,255,.9), rgba(255,255,255,.5)); box-shadow:0 20px 40px -34px rgba(28,28,28,.45); }
-.tilt{ transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-2px); transition:transform .12s linear, box-shadow .4s var(--ease); box-shadow:0 30px 60px -30px rgba(0,0,0,.75); will-change:transform; }
+.tilt{ transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); transition:transform .18s ease-out, box-shadow .4s var(--ease); box-shadow:0 30px 60px -30px rgba(0,0,0,.75); }
 .card, .fwc, .lens, .theme, .nudge, .duty, .wkd, .std li, .ow, .rolecard, .qrc{ position:relative; overflow:hidden; transition:transform .5s var(--ease), box-shadow .5s var(--ease), border-color .4s; }
 .card::after, .fwc::after, .lens::after, .theme::after, .nudge::after, .duty::after, .wkd::after, .std li::after, .ow::after, .rolecard::after{ content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .4s; background:radial-gradient(420px circle at var(--px,50%) var(--py,50%), rgba(207,174,112,.16), transparent 55%); }
 .tilt::after{ opacity:1; }
@@ -635,12 +635,17 @@ section.band.th-light{ background-image:linear-gradient(180deg, #F5F3EF, #F1EDE5
 .stk .wkn{ background:linear-gradient(180deg, var(--gold-hi), var(--oak)); -webkit-background-clip:text; background-clip:text; color:transparent; font-size:clamp(4rem,9vw,7.5rem); }
 .stk .wkn small{ -webkit-text-fill-color:var(--tx3); }
 
-/* buttons: shimmer and a magnetic lean */
-.btn{ position:relative; overflow:hidden; transform:translate(var(--bx,0), var(--by,0)); transition:transform .25s var(--ease), box-shadow .3s var(--ease), background .3s; }
-.btn:hover{ transform:translate(var(--bx,0), calc(var(--by,0) - 2px)); }
-.btn::after{ content:''; position:absolute; top:-40%; bottom:-40%; left:-30%; width:30%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transform:translateX(-120%) skewX(-18deg); transition:transform .9s var(--ease); pointer-events:none; }
-.btn:hover::after{ transform:translateX(480%) skewX(-18deg); }
-.btn.ghost::after{ background:linear-gradient(100deg, transparent, rgba(207,174,112,.3), transparent); }
+/* buttons: a plain two-pixel lift on hover, a shimmer only on devices that hover */
+.btn{ position:relative; overflow:hidden; transform:none; transition:transform .2s var(--ease), box-shadow .3s var(--ease), background .3s; }
+.btn:hover{ transform:translateY(-2px); }
+.btn:active{ transform:translateY(0); transition-duration:.05s; }
+.btn[disabled], .btn[disabled]:hover{ transform:none; box-shadow:none; }
+@media (hover:hover) and (pointer:fine){
+  .btn::after{ content:''; position:absolute; top:-40%; bottom:-40%; left:-30%; width:30%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.3), transparent); transform:translateX(-120%) skewX(-18deg); transition:transform .9s var(--ease); pointer-events:none; }
+  .btn:hover::after{ transform:translateX(480%) skewX(-18deg); }
+  .btn.ghost::after{ background:linear-gradient(100deg, transparent, rgba(207,174,112,.28), transparent); }
+  .btn[disabled]::after{ display:none; }
+}
 .btn:not(.ghost){ background-image:linear-gradient(180deg, #D9BC82, #CFAE70 55%, #C19F5E); }
 .th-light .btn:not(.ghost){ background-image:linear-gradient(180deg, #2A2A2A, #1C1C1C); }
 

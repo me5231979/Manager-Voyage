@@ -1,7 +1,7 @@
 /* =====================================================================
    MANAGER VOYAGE · THE COHORT · visual layer
    Routes drawn on scroll, cards that tilt, a spotlight on dark bands,
-   magnetic buttons, slides that stagger in. Everything here is
+   slides that stagger in. Everything here is
    decoration: the page works without it, and all of it stands down
    when the viewer prefers reduced motion.
    ===================================================================== */
@@ -44,11 +44,13 @@ function timelineRoute(){
 /* ---------- cards that tilt toward the pointer, with a sheen ---------- */
 function tilt(){
   if(!fine || reduce) return;
-  const sel = '.card, .fwc, .stk, .lens, .theme, .nudge, .duty, .wkd, .std li, .ow, .rolecard, .qrc, .aof .card';
+  /* only cards with nothing to type or click inside: a surface that moves under a control is a glitch */
+  const sel = '.fwc, .std li, .duty, .wkd, .ow, .rolecard, .qrc, .nudge, .theme, .aof .card';
+  const ok = c => !c.querySelector('input, textarea, select, button, a.btn, [contenteditable]');
   document.addEventListener('pointermove', e => {
-    const c = e.target.closest(sel); if(!c) return;
+    const c = e.target.closest(sel); if(!c || !ok(c)) return;
     const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-    c.classList.add('tilt'); c.style.setProperty('--rx', ((0.5 - y) * 6).toFixed(2) + 'deg'); c.style.setProperty('--ry', ((x - 0.5) * 8).toFixed(2) + 'deg'); c.style.setProperty('--px', (x * 100).toFixed(1) + '%'); c.style.setProperty('--py', (y * 100).toFixed(1) + '%');
+    c.classList.add('tilt'); c.style.setProperty('--rx', ((0.5 - y) * 3).toFixed(2) + 'deg'); c.style.setProperty('--ry', ((x - 0.5) * 4).toFixed(2) + 'deg'); c.style.setProperty('--px', (x * 100).toFixed(1) + '%'); c.style.setProperty('--py', (y * 100).toFixed(1) + '%');
   }, { passive: true });
   document.addEventListener('pointerout', e => { const c = e.target.closest(sel); if(c && !c.contains(e.relatedTarget)){ c.classList.remove('tilt'); c.style.removeProperty('--rx'); c.style.removeProperty('--ry'); } }, { passive: true });
 }
@@ -57,13 +59,6 @@ function tilt(){
 function spotlight(){
   if(!fine || reduce) return;
   $$('section.band.th-dark').forEach(b => { b.classList.add('spot'); b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); b.style.setProperty('--sx', (e.clientX - r.left) + 'px'); b.style.setProperty('--sy', (e.clientY - r.top) + 'px'); b.classList.add('lit'); }, { passive: true }); b.addEventListener('pointerleave', () => b.classList.remove('lit')); });
-}
-
-/* ---------- magnetic buttons ---------- */
-function magnets(){
-  if(!fine || reduce) return;
-  document.addEventListener('pointermove', e => { const b = e.target.closest('.btn:not(.sm)'); if(!b) return; const r = b.getBoundingClientRect(); b.style.setProperty('--bx', ((e.clientX - r.left - r.width / 2) * 0.18).toFixed(1) + 'px'); b.style.setProperty('--by', ((e.clientY - r.top - r.height / 2) * 0.3).toFixed(1) + 'px'); }, { passive: true });
-  document.addEventListener('pointerout', e => { const b = e.target.closest('.btn'); if(b){ b.style.removeProperty('--bx'); b.style.removeProperty('--by'); } }, { passive: true });
 }
 
 /* ---------- the deck: slides stagger in, the field rides on the title slide ---------- */
@@ -83,6 +78,6 @@ function railLine(){
 /* ---------- boot ---------- */
 function boot(){
   document.documentElement.classList.add('fx');
-  indexRoute(); timelineRoute(); tilt(); spotlight(); magnets(); railLine(); deckHooks();
+  indexRoute(); timelineRoute(); tilt(); spotlight(); railLine(); deckHooks();
 }
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
