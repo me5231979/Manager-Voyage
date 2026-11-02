@@ -795,9 +795,10 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   slides.forEach(function(s){ s.addEventListener('toggle', function(){ setTimeout(function(){ fit(s); overflowCheck(); }, 60); }, true); });
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll); else setTimeout(fitAll, 300);
   window.addEventListener('load', fitAll);
-  function unfit(){ slides.forEach(function(sl){ var w = sl.querySelector('.wrap'); if(w){ w.style.transform = ''; w.style.zoom = ''; w.style.maxWidth = ''; } sl.classList.remove('fitted'); }); }
-  window.addEventListener('beforeprint', unfit); window.addEventListener('afterprint', function(){ setTimeout(fitAll, 100); });
-  window.MV_UNFIT = unfit;
+  /* unzoom, not unfit: the print code below has its own unfit that puts moved blocks back */
+  function unzoom(){ slides.forEach(function(sl){ var w = sl.querySelector('.wrap'); if(w){ w.style.transform = ''; w.style.zoom = ''; w.style.maxWidth = ''; } sl.classList.remove('fitted'); }); }
+  window.addEventListener('beforeprint', unzoom); window.addEventListener('afterprint', function(){ setTimeout(fitAll, 150); });
+  window.MV_UNFIT = unzoom;
   /* full screen */
   var fullBtn = document.getElementById('fullBtn');
   function fullToggle(){ if(document.fullscreenElement){ if(document.exitFullscreen) document.exitFullscreen(); } else if(document.documentElement.requestFullscreen){ document.documentElement.requestFullscreen().catch(function(){}); } }

@@ -8,7 +8,7 @@ const ROOT = path.join(__dirname, '..');
   const { chromium } = require('playwright');
   const srv = http.createServer((req, res) => { const f = path.join(ROOT, decodeURIComponent(req.url.split('?')[0])); fs.readFile(f, (e, d) => { if (e) { res.statusCode = 404; return res.end(); } const ext = path.extname(f); res.setHeader('Content-Type', { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml' }[ext] || 'application/octet-stream'); res.end(d); }); });
   await new Promise(r => srv.listen(0, '127.0.0.1', r)); const port = srv.address().port;
-  const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+  const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1056, height: 816 } }); /* the print page, 11 by 8.5 inches, so the paginator measures at print width */
   await p.goto(`http://127.0.0.1:${port}/overview/index.html`, { waitUntil: 'load' });
   await p.evaluate(() => { document.querySelectorAll('details').forEach(d => d.open = true); document.querySelectorAll('.slide').forEach(s => { s.classList.add('on'); s.removeAttribute('inert'); s.removeAttribute('aria-hidden'); }); });
   await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(600);
