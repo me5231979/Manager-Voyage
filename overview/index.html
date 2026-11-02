@@ -142,27 +142,68 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 .path b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; margin:4px 0 4px; }
 .path p{ font-size:.88rem; color:var(--tx2); line-height:1.4; }
 
-/* ── the journey: one drawn route ── */
-.jart{ margin-top:14px; }
-.jart svg{ display:block; width:100%; height:auto; overflow:visible; }
-.jart .terr{ fill:url(#jterr); }
-.jart .route{ fill:none; stroke:url(#jroute); stroke-width:5; stroke-linecap:round; }
-.jart .chev{ fill:none; stroke:var(--eyebrow); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
-.jart .st{ fill:var(--eyebrow); stroke:var(--bg); stroke-width:8; }
-.jart .num{ font-family:var(--cond); font-weight:700; font-size:34px; fill:#1C1C1C; text-anchor:middle; }
-.jart .tag{ font-family:var(--cond); font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; fill:var(--eyebrow); }
-.jart .ttl{ font-family:var(--serif); font-size:26px; fill:var(--tx); }
-.jart .sub{ font-family:var(--sans); font-size:15px; fill:var(--tx2); }
-.jart .pill rect{ fill:var(--card); stroke:var(--bdg); }
-.jart .pt{ font-family:var(--cond); font-weight:700; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; fill:var(--eyebrow); text-anchor:middle; }
-.jart .wk rect{ fill:var(--card); stroke:var(--eyebrow); stroke-width:1.5; }
-.jart .wn{ font-family:var(--cond); font-weight:700; font-size:18px; fill:var(--eyebrow); text-anchor:middle; }
-.jart .wm{ font-family:var(--sans); font-size:10px; fill:var(--tx3); text-anchor:middle; }
-.jart .ground{ fill:var(--eyebrow); }
-.jart .gi{ fill:none; stroke:#1C1C1C; stroke-width:1.8; stroke-linejoin:round; }
-.jart .gt{ font-family:var(--serif); font-size:20px; fill:#1C1C1C; }
-.jart .gs{ font-family:var(--cond); font-weight:700; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; fill:#1C1C1C; opacity:.8; }
-.th-dark .jart .num, .th-dark .jart .gt, .th-dark .jart .gs, .th-dark .jart .gi{ fill:#1C1C1C; }
+/* ── the journey: a roadmap with a time axis ── */
+.tl{ margin-top:24px; --ln:168px; position:relative; }
+.tl .phases{ position:relative; height:34px; margin-left:var(--ln); margin-bottom:10px; }
+.tl .phases span{ position:absolute; left:var(--x); width:var(--w); top:0; height:30px; display:flex; align-items:center; gap:10px; padding:0 12px; font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--eyebrow); border-top:2px solid var(--eyebrow); white-space:nowrap; }
+.tl .phases span::before, .tl .phases span::after{ content:''; position:absolute; top:-2px; width:2px; height:10px; background:var(--eyebrow); }
+.tl .phases span::before{ left:0; } .tl .phases span::after{ right:0; }
+.tl .phases b{ font-family:var(--serif); font-weight:400; font-size:1.3rem; color:#fff; letter-spacing:0; }
+.tl .lanes{ display:grid; gap:6px; }
+.tl .lane{ display:grid; grid-template-columns:var(--ln) 1fr; align-items:center; min-height:54px; border-top:1px solid rgba(255,255,255,.08); }
+.tl .lane.portal{ border-top:1px solid rgba(207,174,112,.35); margin-top:4px; }
+.tl .ln{ font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--tx3); padding-right:14px; }
+.tl .track{ position:relative; height:44px; background:repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 10%); }
+.tl .bar{ position:absolute; left:var(--x); width:var(--w); top:7px; height:30px; border-radius:4px; background:rgba(207,174,112,.22); border:1px solid rgba(207,174,112,.55); display:flex; align-items:center; gap:8px; padding:0 10px; font-family:var(--cond); font-weight:700; font-size:.82rem; letter-spacing:.06em; color:#fff; white-space:nowrap; overflow:hidden; transform-origin:left center; }
+.tl .bar em{ font-style:normal; font-family:var(--sans); font-weight:400; font-size:.76rem; color:var(--tx2); letter-spacing:0; }
+.tl .bar.hi{ background:var(--eyebrow); border-color:var(--gold-hi, #ECB748); color:#1C1C1C; box-shadow:0 0 18px rgba(236,183,72,.45); }
+.tl .bar.hi em{ color:#1C1C1C; }
+.tl .bar.wk{ justify-content:center; flex-direction:column; gap:0; line-height:1.05; background:var(--eyebrow); color:#1C1C1C; border-color:#ECB748; }
+.tl .bar.wk em{ color:#1C1C1C; opacity:.75; font-size:.66rem; }
+.tl .bar.wk.v{ background:rgba(207,174,112,.18); color:#fff; border-style:dashed; }
+.tl .bar.wk.v em{ color:var(--tx2); }
+.tl .bar.live{ background:linear-gradient(90deg, rgba(207,174,112,.9), rgba(207,174,112,.35) 60%, rgba(207,174,112,.9)); border-color:#ECB748; color:#1C1C1C; justify-content:center; box-shadow:0 0 24px rgba(207,174,112,.35); }
+.tl .bar.live em{ color:#1C1C1C; font-family:var(--cond); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; }
+.tl .ms{ position:absolute; left:var(--x); top:-6px; transform:translateX(-50%); font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:#ECB748; }
+.tl .ms::before{ content:''; display:block; width:10px; height:10px; margin:0 auto 2px; background:#ECB748; transform:rotate(45deg); box-shadow:0 0 10px rgba(236,183,72,.9); }
+.tl .chips .chip{ position:absolute; left:var(--x); top:50%; transform:translate(-50%,-50%); font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); border:1px solid rgba(207,174,112,.6); background:#1C1C1C; border-radius:999px; padding:5px 9px; white-space:nowrap; }
+.tl .chips::before{ content:''; position:absolute; left:20%; right:62%; top:50%; height:2px; background:linear-gradient(90deg, rgba(207,174,112,.2), rgba(207,174,112,.8)); }
+.tl .axis{ position:relative; margin-left:var(--ln); height:74px; margin-top:12px; }
+.tl .axis .rule{ position:absolute; left:0; right:0; top:10px; height:3px; border-radius:2px; background:linear-gradient(90deg, #946E24, #CFAE70 50%, #ECB748); box-shadow:0 0 14px rgba(207,174,112,.45); }
+.tl .axis span{ position:absolute; left:var(--x); top:0; transform:translateX(-50%); text-align:center; font-size:.72rem; color:var(--tx3); white-space:nowrap; padding-top:24px; }
+.tl .axis span::before{ content:''; position:absolute; left:50%; top:4px; width:14px; height:14px; margin-left:-7px; border-radius:50%; background:#1C1C1C; border:2.5px solid var(--eyebrow); }
+.tl .axis span.key::before{ background:#ECB748; border-color:#ECB748; box-shadow:0 0 0 5px rgba(236,183,72,.2), 0 0 16px rgba(236,183,72,.9); }
+.tl .axis span b{ display:block; font-family:var(--cond); font-weight:700; font-size:.86rem; letter-spacing:.1em; text-transform:uppercase; color:#fff; }
+.tl .axis span:first-child{ transform:none; text-align:left; } .tl .axis span:first-child::before{ left:7px; }
+.tl .axis span:last-child{ transform:translateX(-100%); text-align:right; } .tl .axis span:last-child::before{ left:auto; right:0; margin:0; }
+.tl .ship{ position:absolute; top:4px; left:0; width:14px; height:14px; margin-left:-7px; border-radius:50%; background:#fff; box-shadow:0 0 0 4px rgba(255,255,255,.25), 0 0 22px #ECB748; opacity:0; }
+@media screen and (prefers-reduced-motion:no-preference){
+  .slide .tl .bar{ transform:scaleX(0); transition:transform .9s var(--ease); transition-delay:calc(.25s + var(--d,0) * .12s); }
+  .slide.on .tl .bar{ transform:scaleX(1); }
+  .slide .tl .chip{ opacity:0; transition:opacity .4s ease; transition-delay:calc(.8s + var(--i,0) * .08s); }
+  .slide.on .tl .chip{ opacity:1; }
+  .slide .tl .axis .rule{ transform:scaleX(0); transform-origin:left; transition:transform 1.2s var(--ease) .1s; }
+  .slide.on .tl .axis .rule{ transform:scaleX(1); }
+  .slide.on .tl .ship{ animation:sail 9s linear 1.4s infinite; }
+  .slide.on .tl .axis span.key::before{ animation:keypulse 2.4s ease-in-out infinite; }
+}
+@keyframes sail{ 0%{ left:0; opacity:0; } 4%{ opacity:1; } 96%{ opacity:1; } 100%{ left:100%; opacity:0; } }
+@keyframes keypulse{ 0%,100%{ box-shadow:0 0 0 5px rgba(236,183,72,.2), 0 0 16px rgba(236,183,72,.9); } 50%{ box-shadow:0 0 0 10px rgba(236,183,72,.06), 0 0 26px rgba(236,183,72,1); } }
+
+.tl .chips .chip.up{ transform:translate(-50%,-112%); } .tl .chips .chip.dn{ transform:translate(-50%,12%); }
+.tl .chips .chip{ font-size:.6rem; padding:4px 8px; }
+.tl .chips .chip::after{ content:''; position:absolute; left:50%; width:1px; height:6px; background:rgba(207,174,112,.6); }
+.tl .chips .chip.up::after{ top:100%; } .tl .chips .chip.dn::after{ bottom:100%; }
+.tl .chips::before{ left:11%; right:52%; }
+.tl .ms{ transform:none; }
+.tl .ms::before{ margin:0 0 2px; }
+.tl .axis{ height:96px; }
+.tl .axis span.lo{ padding-top:0; top:auto; bottom:0; }
+.tl .axis span.lo::before{ top:auto; bottom:72px; }
+.tl .axis span.lo b{ margin-top:2px; }
+.tl .lane{ min-height:50px; }
+.tl .track{ height:40px; } .tl .bar{ top:5px; }
+@media (max-width:1000px){ .tl{ --ln:0px; } .tl .ln{ display:none; } .tl .lane{ grid-template-columns:1fr; } .tl .phases span, .tl .axis span{ font-size:.62rem; } .tl .chips .chip{ font-size:.56rem; padding:3px 5px; } }
 /* ── the blueprint: tiles, two hubs, pills ── */
 .bp{ margin-top:22px; display:grid; gap:10px; }
 .bp-h, .bp-r{ display:grid; grid-template-columns:104px repeat(5,1fr); gap:10px; align-items:stretch; }
@@ -280,6 +321,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   .sweep{ position:absolute; top:0; bottom:0; left:0; width:30%; z-index:2; pointer-events:none; opacity:0; background:linear-gradient(90deg, rgba(207,174,112,0), rgba(207,174,112,.13) 50%, rgba(207,174,112,0)); }
   .th-light .sweep{ background:linear-gradient(90deg, rgba(148,110,36,0), rgba(148,110,36,.10) 50%, rgba(148,110,36,0)); }
   .slide.on .sweep{ animation:sweep 1.3s cubic-bezier(.2,.7,.3,1) .08s 1; }
+  .ambient-clip{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
   .ambient{ position:absolute; inset:-25%; z-index:0; pointer-events:none; animation:drift 28s ease-in-out infinite; background:radial-gradient(55% 45% at 18% 22%, rgba(207,174,112,.13), transparent 62%), radial-gradient(45% 40% at 86% 82%, rgba(236,183,72,.08), transparent 60%); }
   .th-light .ambient{ background:radial-gradient(55% 45% at 18% 22%, rgba(148,110,36,.09), transparent 62%), radial-gradient(45% 40% at 86% 82%, rgba(207,174,112,.12), transparent 60%); }
   .cover .ambient{ display:none; }
@@ -350,7 +392,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   .slide{ display:block; width:11in; height:auto; min-height:8.5in; overflow:visible; page-break-after:always; break-after:page; padding:0.55in 0.7in 0.6in; opacity:1; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .slide:last-child{ page-break-after:auto; break-after:auto; }
   .slide{ box-decoration-break:clone; -webkit-box-decoration-break:clone; }
-  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr, .jart, .bp-r{ break-inside:avoid; page-break-inside:avoid; }
+  .card, .rows li, .kv li, .weeks li, .wk > div, .heard li, .path li, .more-in li, .stat, .more summary, .more-in h4, table.t tr, .tl, .bp-r{ break-inside:avoid; page-break-inside:avoid; }
   .bp{ display:block; } .bp-h, .bp-r{ margin-bottom:10px; }
   .slide.cont .h{ font-size:1.5rem; }
   .wk{ gap:12px; } .wk > div{ padding:10px 12px; } .wk dl{ font-size:.8rem; grid-template-columns:84px 1fr; gap:3px 10px; } .wk h4{ font-size:1.05rem; }
@@ -438,51 +480,40 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 </section>
 
 <!-- 3b · THE MANAGER'S JOURNEY -->
-<section class="slide th-light print-long" id="s3b" aria-roledescription="slide" data-title="The manager&rsquo;s journey">
+<section class="slide th-dark print-long" id="s3b" aria-roledescription="slide" data-title="The manager&rsquo;s journey">
   <div class="wrap">
     <p class="eyebrow rv">The journey</p>
-    <h2 class="h rv">The <em>voyage</em>.</h2>
-    <div class="jart rv">
-      <svg viewBox="0 0 1180 436" role="img" aria-label="The journey: enrolled on day one, the responsibility micro courses over the next few weeks, the four-week cohort each quarter, the Manager Portal always live">
-        <defs>
-          <linearGradient id="jterr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFAE70" stop-opacity=".28"/><stop offset="1" stop-color="#CFAE70" stop-opacity=".04"/></linearGradient>
-          <linearGradient id="jroute" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#CFAE70"/><stop offset="1" stop-color="#ECB748"/></linearGradient>
-        </defs>
-        <path class="terr" d="M40 368 C 150 368, 200 355, 250 340 S 480 310, 590 265 S 880 160, 980 120 S 1120 92, 1180 90 L1180 396 L40 396 Z"/>
-        <path class="route" d="M40 368 C 150 368, 200 355, 250 340 S 480 310, 590 265 S 880 160, 980 120 S 1120 92, 1180 90"/>
-        <path class="chev" transform="translate(420 304) rotate(-12)" d="M-5 -7 L5 0 L-5 7"/>
-        <path class="chev" transform="translate(785 194) rotate(-20)" d="M-5 -7 L5 0 L-5 7"/>
-
-        <text x="120" y="176" class="tag">Day 1 &middot; Enrolled</text>
-        <text x="120" y="210" class="ttl">Compliance and the</text><text x="120" y="238" class="ttl">Foundations course</text>
-        <text x="120" y="266" class="sub">Compliance by state</text>
-        <text x="120" y="286" class="sub">The 35-minute course, assessment first</text>
-        <circle cx="250" cy="340" r="40" class="st"/><text x="250" y="352" class="num">1</text>
-
-        <text x="470" y="100" class="tag">The next few weeks &middot; Responsibilities</text>
-        <text x="470" y="134" class="ttl">The responsibility</text><text x="470" y="162" class="ttl">micro courses</text>
-        <text x="470" y="190" class="sub">One task each, taken as the duty arrives</text>
-        <circle cx="590" cy="265" r="40" class="st"/><text x="590" y="277" class="num">2</text>
-        <g class="pill"><rect x="435" y="322" width="62" height="26" rx="13"/><text x="466.0" y="339" class="pt">FMLA</text></g><g class="pill"><rect x="505" y="322" width="52" height="26" rx="13"/><text x="531.0" y="339" class="pt">PTO</text></g><g class="pill"><rect x="565" y="322" width="98" height="26" rx="13"/><text x="614.0" y="339" class="pt">TIMECARDS</text></g><g class="pill"><rect x="671" y="322" width="74" height="26" rx="13"/><text x="708.0" y="339" class="pt">HIRING</text></g>
-        <g class="pill"><rect x="419" y="354" width="88" height="26" rx="13"/><text x="463.0" y="371" class="pt">EXPENSES</text></g><g class="pill"><rect x="515" y="354" width="110" height="26" rx="13"/><text x="570.0" y="371" class="pt">PERFORMANCE</text></g><g class="pill"><rect x="633" y="354" width="128" height="26" rx="13"/><text x="697.0" y="371" class="pt">ACCOMMODATIONS</text></g>
-
-        <text x="880" y="202" class="tag">Each quarter &middot; Four weeks</text>
-        <text x="880" y="236" class="ttl">The four-week cohort</text>
-        <text x="880" y="262" class="sub">Your own team, your own scenarios</text>
-        <circle cx="980" cy="120" r="40" class="st"/><text x="980" y="132" class="num">3</text>
-        <g class="wk"><rect x="880" y="282" width="62" height="62" rx="8"/><text x="911" y="309" class="wn">W1</text><text x="911" y="330" class="wm">Room · 3 hr</text></g><g class="wk"><rect x="952" y="282" width="62" height="62" rx="8"/><text x="983" y="309" class="wn">W2</text><text x="983" y="330" class="wm">Virtual</text></g><g class="wk"><rect x="1024" y="282" width="62" height="62" rx="8"/><text x="1055" y="309" class="wn">W3</text><text x="1055" y="330" class="wm">Virtual</text></g><g class="wk"><rect x="1096" y="282" width="62" height="62" rx="8"/><text x="1127" y="309" class="wn">W4</text><text x="1127" y="330" class="wm">Room · 2 hr</text></g>
-
-        <rect x="40" y="396" width="1140" height="40" rx="6" class="ground"/>
-        <path transform="translate(458 407)" d="M0 1h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H0z M20 1h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z" class="gi"/>
-        <text x="492" y="423" class="gt">The Manager Portal</text><text x="700" y="422" class="gs">always live, from day one</text>
-      </svg>
+    <h2 class="h rv">Day one to <em>ninety</em>, on one line.</h2>
+    <div class="tl rv" role="img" aria-label="Timeline: enrolled on day one into compliance and the Foundations course; the responsibility micro courses from day seven to day sixty; the four-week cohort the next quarter; the reassessment at ninety days; the Manager Portal always live">
+      <div class="phases" aria-hidden="true">
+        <span style="--x:0%;--w:48%"><b>01</b>Enrolled, day one</span>
+        <span style="--x:50%;--w:36%"><b>02</b>The cohort, next quarter</span>
+        <span style="--x:88%;--w:12%"><b>03</b>Measured</span>
+      </div>
+      <div class="lanes">
+        <div class="lane"><span class="ln">Compliance</span><div class="track"><i class="bar" style="--x:0%;--w:48%;--d:0"><em>Legal by day 30 &middot; policy by day 60</em></i></div></div>
+        <div class="lane"><span class="ln">Foundations course</span><div class="track"><i class="bar hi" style="--x:0%;--w:8%;--d:1"><em>35 min</em></i><b class="ms" style="--x:9.5%" title="Assessment first">Assessment first</b></div></div>
+        <div class="lane"><span class="ln">Responsibility micro courses</span><div class="track chips"><span class="chip dn" style="--x:11.0%;--i:0">FMLA</span><span class="chip up" style="--x:16.3%;--i:1">PTO</span><span class="chip dn" style="--x:21.6%;--i:2">Timecards</span><span class="chip up" style="--x:26.9%;--i:3">Hiring</span><span class="chip dn" style="--x:32.2%;--i:4">Expenses</span><span class="chip up" style="--x:37.5%;--i:5">Performance</span><span class="chip dn" style="--x:42.8%;--i:6">Accommodation</span><span class="chip up" style="--x:48.1%;--i:7">EOA</span></div></div>
+        <div class="lane"><span class="ln">Four-week cohort</span><div class="track"><i class="bar wk" style="--x:50%;--w:9%;--d:2">W1<em>Room</em></i><i class="bar wk v" style="--x:59.5%;--w:8.5%;--d:3">W2<em>Virtual</em></i><i class="bar wk v" style="--x:68.5%;--w:8.5%;--d:4">W3<em>Virtual</em></i><i class="bar wk" style="--x:77.5%;--w:8.5%;--d:5">W4<em>Room</em></i></div></div>
+        <div class="lane portal"><span class="ln">Manager Portal</span><div class="track"><i class="bar live" style="--x:0%;--w:100%;--d:6"><em>Always live, from day one</em></i></div></div>
+      </div>
+      <div class="axis" aria-hidden="true">
+        <i class="rule"></i><i class="ship"></i>
+        <span style="--x:0%"><b>Day 1</b>Role changes</span>
+        <span class="lo" style="--x:8%"><b>Day 7</b>Course done</span>
+        <span style="--x:28%"><b>Day 30</b>Legal courses due</span>
+        <span class="key" style="--x:48%"><b>Day 60</b>Complete, invited</span>
+        <span class="lo" style="--x:50%"><b>Next quarter</b>Cohort opens</span>
+        <span class="lo" style="--x:86%"><b>Capstone</b>Playbook presented</span>
+        <span class="key" style="--x:94%"><b>90 days</b>Reassess</span>
+      </div>
     </div>
     <details class="more"><summary>Each stage, in a sentence</summary><div class="more-in">
       <div class="cols">
-        <div><h4>Day 1, enrolled</h4><ul><li><b>Enrolled on the first day.</b> Oracle Learning assigns compliance and Manager Foundations from the HR record. Nothing to request.</li><li><b>Compliance.</b> The legal and policy courses for the state the team works in, supervisor versions included.</li><li><b>The Foundations course.</b> <i>You Are a Manager Now</i>, thirty-five minutes online: the assessment first, then six topics with live conversations, scored.</li></ul>
-        <h4>The next few weeks, responsibilities</h4><ul><li><b>Micro courses, one task each.</b> FMLA and leave, PTO and timecards, hiring, expenses, the performance cycle, accommodations, reporting to EOA. Short, in Oracle Learning, taken as the responsibility arrives.</li></ul></div>
-        <div><h4>Quarterly, the cohort</h4><ul><li><b>Enroll.</b> The enrollment survey: a seat request and the team profile, four taps that tailor every scenario.</li><li><b>Four weeks.</b> Week 1 in the classroom, three hours. Weeks 2 and 3 virtual, under ninety minutes. Week 4 the capstone, two hours.</li><li><b>A survey after every session, then completion.</b> Ten questions, most one tap; four indicators; the Playbook presented.</li></ul>
-        <h4>Always live</h4><ul><li><b>The Manager Portal.</b> Every template, policy link and contact, open from the first day and never taken away.</li><li><b>Measured.</b> The same ten statements at 90 days, and the team&rsquo;s view from three or more direct reports.</li></ul></div>
+        <div><h4>Day 1, enrolled</h4><ul><li><b>Enrolled on the first day.</b> Oracle Learning assigns compliance and Manager Foundations from the HR record. Nothing to request.</li><li><b>Compliance.</b> The legal and policy courses for the state the team works in, supervisor versions included. Legal by day 30, policy by day 60.</li><li><b>The Foundations course.</b> <i>You Are a Manager Now</i>, thirty-five minutes online by day seven: the assessment first, then six topics with live conversations, scored.</li></ul>
+        <h4>Days 7 to 60, responsibilities</h4><ul><li><b>Micro courses, one task each.</b> FMLA and leave, PTO and timecards, hiring, expenses, the performance cycle, accommodations, reporting to EOA. Short, in Oracle Learning, taken as the responsibility arrives.</li><li><b>Day 60.</b> Recorded against the job profile. The cohort invitation goes out.</li></ul></div>
+        <div><h4>Next quarter, the cohort</h4><ul><li><b>Enroll.</b> The enrollment survey: a seat request and the team profile, four taps that tailor every scenario.</li><li><b>Four weeks.</b> Week 1 in the classroom, three hours. Weeks 2 and 3 virtual, under ninety minutes. Week 4 the capstone, two hours, the Playbook presented.</li><li><b>A survey after every session, then completion.</b></li></ul>
+        <h4>Measured, and always live</h4><ul><li><b>Reassess.</b> The same ten statements at 90 days, and the team&rsquo;s view from three or more direct reports.</li><li><b>The Manager Portal.</b> Every template, policy link and contact, open from the first day and never taken away.</li></ul></div>
       </div>
     </div></details>
   </div>
@@ -944,7 +975,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   /* ── motion ── */
   var motionOK = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
   /* sweep of light and the ambient glow on every slide */
-  slides.forEach(function(s){ var a = document.createElement('div'); a.className = 'ambient'; a.setAttribute('aria-hidden', 'true'); s.insertBefore(a, s.firstChild); var w = document.createElement('div'); w.className = 'sweep'; w.setAttribute('aria-hidden', 'true'); s.appendChild(w); });
+  slides.forEach(function(s){ var a = document.createElement('div'); a.className = 'ambient'; var ac = document.createElement('div'); ac.className = 'ambient-clip'; ac.setAttribute('aria-hidden', 'true'); ac.appendChild(a); s.insertBefore(ac, s.firstChild); var w = document.createElement('div'); w.className = 'sweep'; w.setAttribute('aria-hidden', 'true'); s.appendChild(w); });
   /* headings, word by word */
   if(motionOK){
     [].slice.call(deck.querySelectorAll('.slide .h, .slide .h1')).forEach(function(h){
