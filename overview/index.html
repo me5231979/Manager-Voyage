@@ -186,6 +186,25 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 .bp-foot svg{ width:20px; height:20px; }
 @media (max-width:1000px){ .jr-phases{ display:none; } .jr-line{ display:none; } .jr-stops{ grid-template-columns:repeat(4,1fr); margin-top:0; gap:14px 6px; } .bp-h{ display:none; } .bp-r, .bp .lands{ grid-template-columns:1fr; } .bp .t::after{ display:none; } .bp-foot{ grid-template-columns:1fr; } }
 @media (max-width:640px){ .jr-stops{ grid-template-columns:repeat(3,1fr); } }
+/* ── five themes, five columns ── */
+.heard{ grid-template-columns:repeat(5,1fr); gap:10px; }
+.heard li{ grid-template-columns:1fr; grid-template-rows:auto 1fr; }
+.heard .said{ border-left:0; border-top:3px solid var(--eyebrow); padding:12px 14px 10px; }
+.heard .did{ border-left:0; border-top:1px solid var(--bd); padding:12px 14px; }
+.heard h3{ font-size:1.15rem; }
+.heard .did p{ font-size:.86rem; }
+.heardfull{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px 28px; }
+.heardfull h4{ margin:0 0 4px; }
+.heardfull .q{ font-family:var(--serif-i); font-style:italic; color:var(--tx2); font-size:.95rem; margin-bottom:6px; }
+.heardfull p{ font-size:.9rem; color:var(--tx2); line-height:1.45; margin-bottom:6px; }
+/* ── fit: a slide that would scroll shrinks to the screen instead ── */
+.slide .wrap{ transform-origin:top center; }
+.slide.fitted{ overflow-y:hidden; }
+/* ── full screen: the header goes, the slide takes the room ── */
+:fullscreen .nav{ display:none; }
+:fullscreen .slide{ padding-top:28px; }
+:fullscreen .bar{ background:rgba(20,20,20,.85); }
+
 /* ── bottom bar ── */
 .bar{ position:fixed; inset:auto 0 0 0; height:var(--bar-h); z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 clamp(16px,2.4vw,36px); background:rgba(20,20,20,.96); border-top:1px solid rgba(207,174,112,.35); color:#fff; }
 .bar-title{ font-family:var(--cond); font-weight:700; font-size:.9rem; letter-spacing:.09em; text-transform:uppercase; color:#CFAE70; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -331,7 +350,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   .slide.cont .h{ font-size:1.5rem; }
   .wk{ gap:12px; } .wk > div{ padding:10px 12px; } .wk dl{ font-size:.8rem; grid-template-columns:84px 1fr; gap:3px 10px; } .wk h4{ font-size:1.05rem; }
   .more-in h4{ break-after:avoid; }
-  .heard li{ grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr); }
+  
   .heard .said, .heard .did{ padding:10px 14px; }
   .heard .did p, .more-in ul{ font-size:.86rem; }
   .slide.cover{ display:flex; height:8.5in; }
@@ -656,27 +675,13 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     <h2 class="h rv">You stated. We <em>listened</em>.</h2>
     <p class="lead rv">Before Manager Voyage was designed, managers and leaders from across Vanderbilt came together in a Manager Development Jam Session and told us what the program had to do. Five themes came out of that room. Each one shaped a specific part of the program.</p>
     <ol class="heard rv">
-      <li>
-        <div class="said"><span class="lab">You stated</span><h3>Make it practical.</h3><p>&ldquo;Give managers simple tools for 1:1s, people decisions, difficult situations, and the everyday work of managing.&rdquo;</p></div>
-        <div class="did"><span class="lab">We listened</span><p>Every activity in the Foundation course is a conversation a manager will actually have, and the course ends with a three-tap week the manager adds to their calendar: 1:1s, the team meeting, the monthly and quarterly work, and what to do as needed.</p><p>The Manager Portal holds the 1:1 agenda, the three-line conversation frame, the delegation ladder, and every policy route with the office it goes to, from Day 1 onward.</p></div>
-      </li>
-      <li>
-        <div class="said"><span class="lab">You stated</span><h3>Learn across Vanderbilt.</h3><p>&ldquo;Use cross-functional cohorts to build relationships, empathy, and a better understanding of how the university works.&rdquo;</p></div>
-        <div class="did"><span class="lab">We listened</span><p>The four-week cohort seats one hundred managers a quarter from across the 39 business units, in small SparkWise Learning Labs that work a live case from someone else&rsquo;s team, with a classroom week one and a capstone where managers present to peers from other units.</p><p>The Vanderbilt &amp; Nashville track covers the mission, the areas of focus, our campuses, and how we work together, and Who to call names the people a manager&rsquo;s team depends on.</p></div>
-      </li>
-      <li>
-        <div class="said"><span class="lab">You stated</span><h3>Learn by doing.</h3><p>&ldquo;Blend in-person experiences, real scenarios, SMEs, and practice in the flow of work.&rdquo;</p></div>
-        <div class="did"><span class="lab">We listened</span><p>The course teaches through live conversations with a team member who answers back, scored on what the manager says. The cohort rehearses each week&rsquo;s conversation in a simulation lab tailored to the manager&rsquo;s own team, then has it for real: one 1:1 cadence set, one hard conversation held, one decision handed over, with the manager&rsquo;s own team.</p><p>Subject-matter experts from seven divisions wrote the routing rules and the Day 30 and Day 60 expectations, and fifteen managers from eight units tested the whole program first.</p></div>
-      </li>
-      <li>
-        <div class="said"><span class="lab">You stated</span><h3>Build the talent bench.</h3><p>&ldquo;Help managers spot potential, create enrichment opportunities, enable lateral and diagonal mobility, and develop their successors.&rdquo;</p></div>
-        <div class="did"><span class="lab">We listened</span><p>Growing people and handing over decisions, not just tasks, are written into the standard itself. Week 3 of the cohort is coaching and mentoring: for each person on the team, where they want to be, one stretch assignment, and their rung on the delegation ladder.</p><p>The Team Development Plan sets 90-day growth moves by name, is challenged by peers in week 4, and is presented to the business unit leader at the capstone.</p></div>
-      </li>
-      <li>
-        <div class="said"><span class="lab">You stated</span><h3>Reinforce how we lead.</h3><p>&ldquo;Build shared expectations around collaboration, accountability, sound people practices, and care for frontline staff.&rdquo;</p></div>
-        <div class="did"><span class="lab">We listened</span><p>The Vanderbilt Manager Standard: four expectations of every manager, adapted from Yukl&rsquo;s research, the same in every business unit, taught in the course, measured by the ten-statement assessment before the program and again at 90 days, and practiced in the cohort.</p><p>Compliance and the People track put sound people practice on every manager&rsquo;s path, and taking care of the people on the team is one of the four categories, not an elective.</p></div>
-      </li>
+      <li><div class="said"><span class="lab">You stated</span><h3>Make it practical.</h3></div><div class="did"><span class="lab">We listened</span><p>Every activity is a conversation you will actually have, a three-tap week on your calendar, and the templates in the Portal.</p></div></li>
+      <li><div class="said"><span class="lab">You stated</span><h3>Learn across Vanderbilt.</h3></div><div class="did"><span class="lab">We listened</span><p>One hundred managers a quarter from 39 units, small labs on someone else&rsquo;s case, and the Vanderbilt &amp; Nashville track.</p></div></li>
+      <li><div class="said"><span class="lab">You stated</span><h3>Learn by doing.</h3></div><div class="did"><span class="lab">We listened</span><p>Live conversations that answer back and are scored; each week rehearsed in a lab, then done for real with your team.</p></div></li>
+      <li><div class="said"><span class="lab">You stated</span><h3>Build the talent bench.</h3></div><div class="did"><span class="lab">We listened</span><p>Growing people is written into the standard; week three is coaching and delegation; a 90-day plan names each person&rsquo;s move.</p></div></li>
+      <li><div class="said"><span class="lab">You stated</span><h3>Reinforce how we lead.</h3></div><div class="did"><span class="lab">We listened</span><p>One standard, four expectations, taught, practiced, and measured before and at 90 days; compliance and the People track underneath.</p></div></li>
     </ol>
+    <details class="more"><summary>What each theme changed, in full</summary><div class="more-in"><div class="heardfull"><div><h4>Make it practical.</h4><p class="q">&ldquo;Give managers simple tools for 1:1s, people decisions, difficult situations, and the everyday work of managing.&rdquo;</p><p>Every activity in the Foundation course is a conversation a manager will actually have, and the course ends with a three-tap week the manager adds to their calendar: 1:1s, the team meeting, the monthly and quarterly work, and what to do as needed.</p><p>The Manager Portal holds the 1:1 agenda, the three-line conversation frame, the delegation ladder, and every policy route with the office it goes to, from Day 1 onward.</p></div><div><h4>Learn across Vanderbilt.</h4><p class="q">&ldquo;Use cross-functional cohorts to build relationships, empathy, and a better understanding of how the university works.&rdquo;</p><p>The four-week cohort seats one hundred managers a quarter from across the 39 business units, in small SparkWise Learning Labs that work a live case from someone else&rsquo;s team, with a classroom week one and a capstone where managers present to peers from other units.</p><p>The Vanderbilt &amp; Nashville track covers the mission, the areas of focus, our campuses, and how we work together, and Who to call names the people a manager&rsquo;s team depends on.</p></div><div><h4>Learn by doing.</h4><p class="q">&ldquo;Blend in-person experiences, real scenarios, SMEs, and practice in the flow of work.&rdquo;</p><p>The course teaches through live conversations with a team member who answers back, scored on what the manager says. The cohort rehearses each week&rsquo;s conversation in a simulation lab tailored to the manager&rsquo;s own team, then has it for real: one 1:1 cadence set, one hard conversation held, one decision handed over, with the manager&rsquo;s own team.</p><p>Subject-matter experts from seven divisions wrote the routing rules and the Day 30 and Day 60 expectations, and fifteen managers from eight units tested the whole program first.</p></div><div><h4>Build the talent bench.</h4><p class="q">&ldquo;Help managers spot potential, create enrichment opportunities, enable lateral and diagonal mobility, and develop their successors.&rdquo;</p><p>Growing people and handing over decisions, not just tasks, are written into the standard itself. Week 3 of the cohort is coaching and mentoring: for each person on the team, where they want to be, one stretch assignment, and their rung on the delegation ladder.</p><p>The Team Development Plan sets 90-day growth moves by name, is challenged by peers in week 4, and is presented to the business unit leader at the capstone.</p></div><div><h4>Reinforce how we lead.</h4><p class="q">&ldquo;Build shared expectations around collaboration, accountability, sound people practices, and care for frontline staff.&rdquo;</p><p>The Vanderbilt Manager Standard: four expectations of every manager, adapted from Yukl&rsquo;s research, the same in every business unit, taught in the course, measured by the ten-statement assessment before the program and again at 90 days, and practiced in the cohort.</p><p>Compliance and the People track put sound people practice on every manager&rsquo;s path, and taking care of the people on the team is one of the four categories, not an elective.</p></div></div></div></details>
     <details class="more"><summary>The commitments we made in the room, and where they led</summary><div class="more-in">
       <div class="cols">
         <div><h4>Next steps named at the jam session</h4><ul>
@@ -727,6 +732,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     <span class="count" id="count">1 / 13</span>
     <button type="button" class="tool" id="expandAll" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 15v5h-5M20 4l-6 6M4 20l6-6"/></svg><span>Expand all</span></button>
     <a class="tool" id="pdf" href="Manager-Voyage-Program-Overview.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M6 11l6 6 6-6M4 21h16"/></svg><span>Download PDF</span></a>
+    <button type="button" class="tool" id="fullBtn" aria-pressed="false" title="F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 15v5h-5M20 9V4h-5M4 15v5h5"/></svg><span>Full screen</span></button>
     <button type="button" class="tool" id="printBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg><span>Print</span></button>
     <button type="button" class="arrow" id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
     <button type="button" class="arrow" id="next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
@@ -772,12 +778,39 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   slides.forEach(function(s){ s.addEventListener('scroll', overflowCheck, { passive:true }); s.addEventListener('toggle', function(){ setTimeout(overflowCheck, 50); }, true); });
   window.addEventListener('resize', function(){ deck.scrollLeft = cur * deck.clientWidth; overflowCheck(); });
 
+
+  /* fit: if the active slide's content is taller than the screen, scale it down (to a floor) instead of scrolling */
+  function fit(slide){
+    var wrap = slide.querySelector('.wrap'); if(!wrap || window.innerWidth < 1001 || window.matchMedia('print').matches) return;
+    wrap.style.transform = ''; wrap.style.zoom = ''; wrap.style.maxWidth = ''; slide.classList.remove('fitted');
+    var cs = getComputedStyle(slide), avail = slide.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    var need = wrap.getBoundingClientRect().height; if(need <= avail + 1) return;
+    var z = Math.max(0.68, avail / need);
+    /* zoom shrinks the width too, so the wrap is widened by the same factor and still fills the screen */
+    if(CSS.supports && CSS.supports('zoom', '0.9')){ wrap.style.zoom = z.toFixed(3); wrap.style.maxWidth = Math.round(1180 / z) + 'px'; } else { wrap.style.transform = 'scale(' + z.toFixed(3) + ')'; }
+    if(wrap.getBoundingClientRect().height <= avail + 2) slide.classList.add('fitted');
+  }
+  function fitAll(){ slides.forEach(fit); overflowCheck(); }
+  window.addEventListener('resize', fitAll);
+  slides.forEach(function(s){ s.addEventListener('toggle', function(){ setTimeout(function(){ fit(s); overflowCheck(); }, 60); }, true); });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll); else setTimeout(fitAll, 300);
+  window.addEventListener('load', fitAll);
+  function unfit(){ slides.forEach(function(sl){ var w = sl.querySelector('.wrap'); if(w){ w.style.transform = ''; w.style.zoom = ''; w.style.maxWidth = ''; } sl.classList.remove('fitted'); }); }
+  window.addEventListener('beforeprint', unfit); window.addEventListener('afterprint', function(){ setTimeout(fitAll, 100); });
+  window.MV_UNFIT = unfit;
+  /* full screen */
+  var fullBtn = document.getElementById('fullBtn');
+  function fullToggle(){ if(document.fullscreenElement){ if(document.exitFullscreen) document.exitFullscreen(); } else if(document.documentElement.requestFullscreen){ document.documentElement.requestFullscreen().catch(function(){}); } }
+  fullBtn.addEventListener('click', fullToggle);
+  document.addEventListener('fullscreenchange', function(){ var on = !!document.fullscreenElement; fullBtn.setAttribute('aria-pressed', on ? 'true' : 'false'); fullBtn.querySelector('span').textContent = on ? 'Exit full screen' : 'Full screen'; setTimeout(function(){ deck.scrollLeft = cur * deck.clientWidth; fitAll(); }, 120); });
+  if(!document.documentElement.requestFullscreen) fullBtn.hidden = true;
   document.addEventListener('keydown', function(e){
     if(e.target.closest && e.target.closest('input, textarea, select')) return;
     if(e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); go(cur + 1, true); }
     else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); go(cur - 1, true); }
     else if(e.key === 'Home'){ e.preventDefault(); go(0, true); }
     else if(e.key === 'End'){ e.preventDefault(); go(N - 1, true); }
+    else if(e.key === 'f' || e.key === 'F'){ if(!e.metaKey && !e.ctrlKey){ e.preventDefault(); fullToggle(); } }
   });
   deck.addEventListener('wheel', function(e){
     if(Math.abs(e.deltaX) > Math.abs(e.deltaY) || Math.abs(e.deltaY) < 24 || wheelLock) return;
@@ -803,7 +836,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     var wrap = slide.querySelector('.wrap'); if(!wrap || wrap.classList.contains('split')) return;
     var cs = getComputedStyle(slide), avail = P - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 24;
     var items = [];
-    function groupOf(el){ if(el.matches('.heard')) return { cls:'heard', tag:'ol', cols:1 }; if(el.matches('.wk')) return { cls:'wk', tag:'div', cols:2 }; if(el.matches('.bp')) return { cls:'bp', tag:'div', cols:1 }; return null; }
+    function groupOf(el){ if(el.matches('.heard')) return { cls:'heard', tag:'ol', cols:1 }; if(el.matches('.wk')) return { cls:'wk', tag:'div', cols:2 }; if(el.matches('.bp')) return { cls:'bp', tag:'div', cols:1 }; if(el.matches('.heardfull')) return { cls:'heardfull', tag:'div', cols:2 }; return null; }
     function outer(node){ var r = node.getBoundingClientRect(), m = getComputedStyle(node); return r.height + (parseFloat(m.marginTop) || 0) + (parseFloat(m.marginBottom) || 0); }
     function push(node, extra){ var it = { nodes:[node], h: outer(node) }; for(var k in extra) it[k] = extra[k]; items.push(it); }
     function pushRows(container, g, extra){ var kids = [].slice.call(container.children), gap = parseFloat(getComputedStyle(container).rowGap) || 12; for(var i = 0; i < kids.length; i += g.cols){ var row = kids.slice(i, i + g.cols), it = { nodes:row, group:g, h: Math.max.apply(null, row.map(outer)) + gap }; for(var k in extra) it[k] = extra[k]; items.push(it); } }

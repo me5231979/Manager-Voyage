@@ -12,6 +12,7 @@ const ROOT = path.join(__dirname, '..');
   await p.goto(`http://127.0.0.1:${port}/overview/index.html`, { waitUntil: 'load' });
   await p.evaluate(() => { document.querySelectorAll('details').forEach(d => d.open = true); document.querySelectorAll('.slide').forEach(s => { s.classList.add('on'); s.removeAttribute('inert'); s.removeAttribute('aria-hidden'); }); });
   await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(600);
+  await p.evaluate(() => { if (window.MV_UNFIT) window.MV_UNFIT(); });
   await p.emulateMedia({ media: 'print' });
   await p.pdf({ path: path.join(ROOT, 'overview', 'Manager-Voyage-Program-Overview.pdf'), format: 'Letter', landscape: true, printBackground: true, preferCSSPageSize: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
   await b.close(); srv.close();
