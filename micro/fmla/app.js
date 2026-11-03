@@ -101,10 +101,10 @@ narrUI();
 
 /* ══════════ PROGRESS ══════════ */
 var SECTIONS = [
-  { k:'basics',    no:'01', name:'The basics',    how:'Read it, then mark it done' },
-  { k:'recognize', no:'02', name:'Recognize it',  how:'Sort four lines: route it or handle it' },
-  { k:'steps',     no:'03', name:'Where it goes', how:'Put the four steps in order' },
-  { k:'origami',   no:'04', name:'Origami',       how:'Read it, then mark it done' },
+  { k:'basics',    no:'01', name:'What FMLA is', how:'Read it, then mark it done' },
+  { k:'recognize', no:'02', name:'How to spot a leave request', how:'Sort four lines: route it or handle it' },
+  { k:'steps',     no:'03', name:'Where a leave request goes', how:'Put the four steps in order' },
+  { k:'origami',   no:'04', name:'Origami, the leave system', how:'Read it, then mark it done' },
   { k:'quiz',      no:'05', name:'Quick check',   how:'Score 2 of 3' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }

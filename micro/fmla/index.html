@@ -34,66 +34,51 @@
 <link rel="stylesheet" href="../../assets/css/vvo.css?v=1" />
 <link rel="stylesheet" href="../../assets/css/nav.css?v=1" />
 <style>
-/* six topics on the rail, plus the end */
+/* five topics on the rail */
 .v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 20%), rgba(255,255,255,.14) 0); }
 .v-rail[data-lesson="5"]{ --l:5; }
-/* what, why, how: three lines, then a picture */
-.wwh{ list-style:none; display:grid; gap:8px; margin-top:14px; }
-.wwh li{ display:grid; grid-template-columns:58px 1fr; gap:10px; align-items:baseline; font-size:.98rem; line-height:1.4; color:var(--tx); }
-.wwh b{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--eyebrow); }
-.v-act .dia{ margin-top:0; }
-.dia{ margin-top:16px; width:100%; height:auto; display:block; color:#fff; }
-.dia text{ font-family:var(--sans); font-size:13px; fill:currentColor; }
-.dia text.k{ font-family:var(--cond); font-weight:700; font-size:11px; letter-spacing:.1em; text-transform:uppercase; fill:#CFAE70; }
-.dia text.big{ font-family:var(--serif); font-size:26px; fill:#CFAE70; }
-.dia text.dim{ fill:rgba(255,255,255,.65); font-size:12px; }
-.dia .g{ fill:#CFAE70; } .dia .gl{ fill:rgba(207,174,112,.25); } .dia .w{ fill:rgba(255,255,255,.12); }
-.dia .ln{ fill:none; stroke:#CFAE70; stroke-width:2; } .dia .ld{ fill:none; stroke:rgba(207,174,112,.6); stroke-width:1.5; stroke-dasharray:4 4; }
-.dia .box{ fill:rgba(255,255,255,.05); stroke:rgba(207,174,112,.6); stroke-width:1.5; }
-.dia .box.hi{ fill:rgba(207,174,112,.18); stroke:#CFAE70; }
-.dia .box.no{ stroke:rgba(255,255,255,.35); }
-.fm-src{ margin-top:10px; font-size:.78rem; color:var(--tx3); line-height:1.5; }
-.fm-src a{ color:var(--tx3); }
-/* the basics, as four facts */
-.fm-facts{ list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; margin-top:16px; }
-.fm-facts li{ border-top:2px solid var(--eyebrow); padding-top:8px; font-size:.92rem; color:var(--tx2); line-height:1.4; }
-.fm-facts b{ display:block; color:var(--tx); font-weight:600; margin-bottom:2px; }
-.fm-facts em{ font-family:var(--serif); font-style:normal; font-size:1.5rem; color:var(--eyebrow); display:block; line-height:1; margin-bottom:4px; }
-.fm-src{ margin-top:12px; font-size:.8rem; color:var(--tx3); line-height:1.5; }
-.fm-src a{ color:var(--tx3); }
-@media (max-width:480px){ .fm-facts{ grid-template-columns:1fr; } }
-/* the words that are a request */
-.fm-quotes{ list-style:none; display:grid; gap:8px; margin-top:16px; }
-.fm-quotes li{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:10px 14px; font-family:var(--serif); font-size:1.02rem; line-height:1.35; color:var(--tx); }
-.fm-quotes li span{ display:block; font-family:var(--sans); font-size:.82rem; color:var(--tx2); margin-top:3px; }
-/* the guide: three steps, then four doors */
-.fm-steps{ list-style:none; counter-reset:s; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px; }
-.fm-steps li{ counter-increment:s; border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:12px 14px; }
-.fm-steps li::before{ content:counter(s); display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--eyebrow); color:var(--vu-black); font-family:var(--cond); font-weight:700; font-size:1rem; margin-bottom:8px; }
-.fm-steps b{ display:block; font-weight:600; color:var(--tx); font-size:.98rem; margin-bottom:3px; }
-.fm-steps span{ display:block; color:var(--tx2); font-size:.88rem; line-height:1.4; }
-.fm-doors{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:18px; }
-.fm-doors li{ border-radius:var(--r); border:1px solid var(--bd); background:var(--card); padding:0 0 8px; overflow:hidden; font-size:.82rem; color:var(--tx2); line-height:1.38; }
-.fm-doors li b{ display:block; font-family:var(--cond); font-weight:700; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; padding:9px 12px; color:var(--vu-black); background:var(--eyebrow); margin-bottom:8px; }
-.fm-doors li.alt b{ background:rgba(207,174,112,.22); color:var(--tx); }
-.fm-doors li p{ padding:0 12px; margin:0 0 6px; }
-.fm-doors li p strong{ color:var(--tx); font-weight:600; }
-@media (max-width:760px){ .fm-steps, .fm-doors{ grid-template-columns:1fr; } }
-/* origami: what you do, what you never do */
-.fm-may{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
-.fm-may ul{ list-style:none; display:grid; gap:6px; }
-.fm-may li{ font-size:.92rem; color:var(--tx); padding-left:22px; position:relative; line-height:1.4; }
-.fm-may li::before{ position:absolute; left:0; top:0; font-family:var(--cond); font-weight:700; }
-.fm-may .no li::before{ content:'\2715'; color:var(--vu-err); }
-.fm-may .yes li::before{ content:'\2713'; color:var(--eyebrow); }
-.fm-may .v-label{ margin-bottom:8px; }
-.fm-note{ margin-top:14px; font-size:.92rem; color:var(--tx2); line-height:1.45; border-top:1px solid var(--bd); padding-top:10px; }
-.fm-note b{ color:var(--tx); }
-@media (max-width:560px){ .fm-may{ grid-template-columns:1fr; } }
-/* the deck cards need room for a long sentence */
-.v-deck .dq-s{ font-size:clamp(1.05rem,.8vw + .85rem,1.4rem) !important; }
-.v-survey b{ font-size:1.25rem; }
-.v-visit + .v-visit{ margin-top:6px; }
+/* the hero: Kirkland Hall with a slow Ken Burns move */
+.v-hero-bg img{ object-position:center 35%; transform-origin:55% 40%; animation:fmKen 36s ease-in-out infinite alternate; }
+@keyframes fmKen{ from{ transform:scale(1) translate(0,0); } to{ transform:scale(1.16) translate(-2.5%,1.5%); } }
+@media (prefers-reduced-motion:reduce){ .v-hero-bg img{ animation:none; } }
+/* the poster look: numbered steps with icons, then colored cards with cream bodies */
+.pst{ margin-top:18px; }
+.pst-steps{ list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.pst-steps li{ display:grid; grid-template-columns:34px 36px 1fr; gap:8px; align-items:center; }
+.pst-steps .n{ width:34px; height:34px; border-radius:50%; background:var(--eyebrow); color:var(--vu-black); font-family:var(--cond); font-weight:700; font-size:1.1rem; display:grid; place-items:center; }
+.pst-steps .ic{ width:36px; height:36px; border-radius:50%; border:1.5px solid var(--eyebrow); display:grid; place-items:center; color:var(--eyebrow); }
+.pst-steps .ic svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.pst-steps b{ display:block; font-family:var(--serif); font-weight:400; font-size:1rem; line-height:1.15; color:var(--tx); }
+.pst-steps span{ display:block; font-size:.8rem; color:var(--tx2); line-height:1.3; margin-top:2px; }
+.pst-cards{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:14px; }
+.pst-cards.two{ grid-template-columns:1fr 1fr; }
+.pst-cards li{ border-radius:8px; overflow:hidden; background:#F5F3EF; color:#1C1C1C; display:flex; flex-direction:column; }
+.pst-cards .hd{ display:flex; align-items:center; gap:10px; padding:10px 12px; color:#fff; font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; line-height:1.2; }
+.pst-cards .hd svg{ width:22px; height:22px; flex:none; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.pst-cards .c1 .hd{ background:#1C1C1C; border-bottom:3px solid var(--eyebrow); }
+.pst-cards .c2 .hd{ background:#946E24; }
+.pst-cards .c3 .hd{ background:#5f6f5b; }
+.pst-cards .c4 .hd{ background:#5a7384; }
+.pst-cards .bd{ padding:10px 12px 12px; font-size:.84rem; line-height:1.38; color:#4a4640; }
+.pst-cards .bd b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.02rem; color:#1C1C1C; line-height:1.2; margin-bottom:4px; }
+.pst-cards .bd strong{ color:#1C1C1C; font-weight:600; }
+.pst-cards .bd p{ margin:0 0 4px; }
+.pst-cards.yesno .bd{ font-size:.92rem; }
+.pst-facts{ list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
+.pst-facts li{ background:#F5F3EF; color:#1C1C1C; border-radius:8px; padding:12px 14px; border-top:4px solid var(--eyebrow); }
+.pst-facts em{ display:block; font-family:var(--serif); font-style:normal; font-size:2rem; line-height:1; color:#946E24; margin-bottom:4px; }
+.pst-facts b{ display:block; font-weight:600; font-size:.95rem; }
+.pst-facts span{ display:block; font-size:.82rem; color:#4a4640; line-height:1.35; margin-top:2px; }
+.pst-never{ list-style:none; display:grid; gap:8px; margin-top:14px; }
+.pst-never li{ display:grid; grid-template-columns:30px 1fr; gap:10px; align-items:center; background:#F5F3EF; color:#1C1C1C; border-radius:8px; padding:10px 12px; font-size:.95rem; }
+.pst-never li i{ width:30px; height:30px; border-radius:50%; background:#1C1C1C; color:#fff; display:grid; place-items:center; font-style:normal; font-family:var(--cond); font-weight:700; }
+.pst-note{ margin-top:12px; font-size:.9rem; color:var(--tx2); line-height:1.4; }
+.pst-note b{ color:var(--tx); }
+.v-copy .pst-steps{ grid-template-columns:1fr; gap:8px; }
+.v-copy .pst-steps li{ grid-template-columns:34px 36px 1fr; }
+.v-copy .pst-steps b{ display:inline; }
+.v-copy .pst-steps span.sub{ display:inline; margin-left:6px; }
+@media (max-width:860px){ .pst-steps, .pst-cards, .pst-facts{ grid-template-columns:1fr; } }
 /* ordering activity */
 .order{ border:1px solid var(--bdg); border-radius:var(--r); background:var(--card2); padding:16px 18px 18px; }
 .order .o-h{ font-size:.92rem; color:var(--tx2); margin-bottom:10px; }
@@ -105,6 +90,7 @@
 .order-list button.placed{ border-color:var(--eyebrow); background:var(--card); cursor:default; }
 .order-list button.placed .n{ background:var(--eyebrow); color:var(--vu-black); }
 .order-list button.shake{ border-color:var(--vu-err); }
+.v-deck .dq-s{ font-size:clamp(1.05rem,.8vw + .85rem,1.4rem) !important; }
 </style>
 </head>
 <body>
@@ -143,11 +129,11 @@
 
 <!-- ═══ WELCOME ═══ -->
 <section class="hero v-hero th-dark" aria-label="Welcome">
-  <div class="v-hero-bg" aria-hidden="true"><img src="../../assets/img/hero-poster.jpg" alt="" width="1680" height="945" /></div>
+  <div class="v-hero-bg" aria-hidden="true"><img src="../../assets/img/campus/kirkland-skyline.jpg" alt="" width="1800" height="942" /></div>
   <div class="wrap v-hero-in">
     <span class="v-kicker">Vanderbilt University &middot; Manager Foundations &middot; Micro course</span>
     <h1 class="v-display">FMLA for <em>managers</em>.</h1>
-    <p class="v-hello">Hear it. Route it. Never ask for a diagnosis.</p>
+    <p class="v-hello">What it is, how to spot a request, and where it goes.</p>
     <div class="v-hero-cta">
       <a class="btn btn-gold" href="#p/basics/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <ul class="v-meta" aria-label="Module at a glance"><li>5 topics</li><li>About 6 minutes</li><li>Narrated</li></ul>
@@ -155,59 +141,61 @@
     <details class="v-goals">
       <summary>What you will be able to do</summary>
       <ol>
-        <li><b>Recognize</b> a leave request in the words people actually use.</li>
-        <li><b>Route</b> it the same day to the right door.</li>
-        <li><b>Keep</b> the diagnosis, the eligibility call and the paperwork with the Leave team.</li>
+        <li><b>Say</b> what FMLA protects.</li>
+        <li><b>Spot</b> a leave request in everyday words.</li>
+        <li><b>Send</b> it to the right place the same day.</li>
       </ol>
     </details>
   </div>
 </section>
 
-<!-- ═══ TOPIC 1 · THE BASICS ═══ -->
-<section id="basics" class="th-dark v-sec" aria-label="Topic 1: The basics">
+<!-- ═══ TOPIC 1 · WHAT FMLA IS ═══ -->
+<section id="basics" class="th-dark v-sec" aria-label="Topic 1: What FMLA is">
   <div class="wrap">
-    <div class="v-rail" data-lesson="1"><span>Topic 1 of 5 &middot; The basics</span></div>
-    <div class="v-stage">
+    <div class="v-rail" data-lesson="1"><span>Topic 1 of 5 &middot; What FMLA is</span></div>
+    <div class="v-stage wide-act">
       <div class="v-copy">
-        <h2 class="v-h">Twelve weeks, job <em>protected</em>.</h2>
-        <p class="v-why">Federal law. Unpaid, job and health coverage kept. The Leave team checks eligibility; you never do.</p>
+        <h2 class="v-h">What FMLA <em>is</em>.</h2>
+        <p class="v-why">A federal law that lets an eligible employee take time off for health or family and keep their job.</p>
       </div>
       <div class="v-act">
-        <p class="v-task" data-task="basics">FMLA in one picture</p>
-        <svg class="dia" viewBox="0 0 560 170" role="img" aria-label="A twelve month year with twelve protected weeks, and the four reasons FMLA covers: your own serious health, a spouse, child or parent, a new child, military family">
-          <text x="0" y="14" class="k">12 months</text>
-          <rect x="0" y="24" width="560" height="30" rx="5" class="w"/>
-          <rect x="0" y="24" width="129" height="30" rx="5" class="gl"/><rect x="0" y="24" width="129" height="30" rx="5" class="ln"/>
-          <text x="12" y="44" class="k" style="fill:#fff">12 weeks</text>
-          <text x="0" y="90" class="k">Four reasons</text>
-          <rect x="0" y="100" width="133" height="60" rx="6" class="box"/><text x="66" y="126" text-anchor="middle">Your own</text><text x="66" y="144" text-anchor="middle">serious health</text>
-          <rect x="142" y="100" width="133" height="60" rx="6" class="box"/><text x="208" y="126" text-anchor="middle">Spouse, child</text><text x="208" y="144" text-anchor="middle">or parent</text>
-          <rect x="284" y="100" width="133" height="60" rx="6" class="box"/><text x="350" y="126" text-anchor="middle">A new</text><text x="350" y="144" text-anchor="middle">child</text>
-          <rect x="426" y="100" width="134" height="60" rx="6" class="box"/><text x="493" y="126" text-anchor="middle">Military</text><text x="493" y="144" text-anchor="middle">family</text>
-        </svg>
+        <p class="v-task" data-task="basics">The facts</p>
+        <ul class="pst-facts">
+          <li><em>12</em><b>weeks of leave</b><span>In a 12-month period. Unpaid, job protected, health coverage kept.</span></li>
+          <li><em>4</em><b>covered reasons</b><span>Your own health. A spouse, child or parent. A new child. Military family.</span></li>
+          <li><em>1</em><b>team decides</b><span>Leave and Workers&rsquo; Compensation checks eligibility and approves it. Not you.</span></li>
+        </ul>
+        <ul class="pst-cards" aria-label="The four covered reasons">
+          <li class="c1"><div class="hd"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>Your own health</div><div class="bd">A serious health condition. Surgery, a chronic illness, a hospital stay.</div></li>
+          <li class="c2"><div class="hd"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0M14 20a4.5 4.5 0 0 1 8 0"/></svg>A family member</div><div class="bd">Caring for a spouse, child or parent with a serious health condition.</div></li>
+          <li class="c3"><div class="hd"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 21a6 6 0 0 1 12 0M10 8h.01M14 8h.01M10.5 10.5a2 2 0 0 0 3 0"/></svg>A new child</div><div class="bd">Birth, adoption or foster placement, for either parent.</div></li>
+          <li class="c4"><div class="hd"><svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>Military family</div><div class="bd">A family member&rsquo;s deployment, or caring for an injured service member.</div></li>
+        </ul>
         <p class="drill-status" role="status">Read it, then tap Mark done below.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ TOPIC 2 · RECOGNIZE IT ═══ -->
-<section id="recognize" class="th-dark v-sec" aria-label="Topic 2: Recognize it">
+<!-- ═══ TOPIC 2 · HOW TO SPOT A LEAVE REQUEST ═══ -->
+<section id="recognize" class="th-dark v-sec" aria-label="Topic 2: How to spot a leave request">
   <div class="wrap">
-    <div class="v-rail" data-lesson="2"><span>Topic 2 of 5 &middot; Recognize it</span></div>
+    <div class="v-rail" data-lesson="2"><span>Topic 2 of 5 &middot; How to spot a leave request</span></div>
     <div class="v-stage">
       <div class="v-copy">
-        <h2 class="v-h">Nobody says the word <em>FMLA</em>.</h2>
-        <p class="v-why">Health, family health, a new child, military family. Hear one of those, and it is a leave request.</p>
-        <svg class="dia" viewBox="0 0 560 200" role="img" aria-label="Decision flow: they say something. Is it one of the four? Yes: route it to Origami the same day. No: handle it yourself.">
-          <rect x="170" y="4" width="220" height="40" rx="6" class="box"/><text x="280" y="29" text-anchor="middle">&ldquo;I might need some time.&rdquo;</text>
-          <path d="M280 44v16" class="ln"/><path d="M275 54l5 7 5-7" class="ln"/>
-          <rect x="130" y="68" width="300" height="40" rx="6" class="box hi"/><text x="280" y="93" text-anchor="middle" class="k">One of the four?</text>
-          <path d="M190 108v16H120v18" class="ln"/><path d="M115 136l5 7 5-7" class="ln"/><text x="150" y="122" class="k">Yes</text>
-          <path d="M370 108v16h70v18" class="ln"/><path d="M435 136l5 7 5-7" class="ln"/><text x="412" y="122" class="k">No</text>
-          <rect x="10" y="150" width="230" height="46" rx="6" class="box hi"/><text x="125" y="178" text-anchor="middle" class="k">Route it. Origami, today.</text>
-          <rect x="320" y="150" width="230" height="46" rx="6" class="box no"/><text x="435" y="178" text-anchor="middle" class="k" style="fill:#fff">Handle it. Time off.</text>
-        </svg>
+        <h2 class="v-h">How to spot a leave <em>request</em>.</h2>
+        <p class="v-why">Nobody says &ldquo;FMLA.&rdquo; They mention health, a family member&rsquo;s health, a new child, or military family. That is the request.</p>
+        <div class="pst">
+          <ol class="pst-steps">
+            <li><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 3-2 4-2 7a3 3 0 0 1-6 0"/><path d="M9 10a3 3 0 0 1 6 0"/></svg></span><div><b>They say it.</b><span class="sub">In their own words.</span></div></li>
+            <li><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span><div><b>You ask one question.</b><span class="sub">Is it one of the four?</span></div></li>
+            <li><span class="n">3</span><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div><b>You act today.</b><span class="sub">Route it, or handle it.</span></div></li>
+          </ol>
+          <ul class="pst-cards two yesno">
+            <li class="c2"><div class="hd"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Yes, one of the four</div><div class="bd"><b>Send it to Origami today.</b>&ldquo;My mom had a stroke.&rdquo; &ldquo;The doctor wants me out three weeks.&rdquo;</div></li>
+            <li class="c4"><div class="hd"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15l3 3 5-6"/></svg>No, plain time off</div><div class="bd"><b>Approve it yourself.</b>&ldquo;Friday off for a wedding.&rdquo; &ldquo;Can I start at 7?&rdquo;</div></li>
+          </ul>
+        </div>
       </div>
       <div class="v-act">
         <p class="v-task" data-task="recognize">Route it or handle it? Four lines</p>
@@ -218,27 +206,14 @@
   </div>
 </section>
 
-<!-- ═══ TOPIC 3 · WHERE IT GOES ═══ -->
-<section id="steps" class="th-dark v-sec" aria-label="Topic 3: Where it goes">
+<!-- ═══ TOPIC 3 · WHERE A LEAVE REQUEST GOES ═══ -->
+<section id="steps" class="th-dark v-sec" aria-label="Topic 3: Where a leave request goes">
   <div class="wrap">
-    <div class="v-rail" data-lesson="3"><span>Topic 3 of 5 &middot; Where it goes</span></div>
-    <div class="v-stage">
+    <div class="v-rail" data-lesson="3"><span>Topic 3 of 5 &middot; Where a leave request goes</span></div>
+    <div class="v-stage wide-act">
       <div class="v-copy">
-        <h2 class="v-h">Four <em>doors</em>.</h2>
-        <p class="v-why">Pick the door the same day. The team behind it does the rest.</p>
-        <svg class="dia" viewBox="0 0 560 190" role="img" aria-label="Four doors: health or family goes to Origami and the Leave team; hurt at work goes to the injury report and Occupational Health; a change needed at work goes to Equal Opportunity and Access; plain time off you approve in UKG or Oracle.">
-          <rect x="0" y="0" width="560" height="34" rx="6" class="box hi"/><text x="280" y="22" text-anchor="middle" class="k">They tell you. You listen. No diagnosis.</text>
-          <path d="M67 34v16M209 34v16M351 34v16M493 34v16" class="ln"/>
-          <rect x="0" y="50" width="134" height="56" rx="6" class="box"/><text x="67" y="72" text-anchor="middle" class="k">Health or family</text><text x="67" y="94" text-anchor="middle">Origami</text>
-          <rect x="142" y="50" width="134" height="56" rx="6" class="box"/><text x="209" y="72" text-anchor="middle" class="k">Hurt at work</text><text x="209" y="94" text-anchor="middle">Injury report first</text>
-          <rect x="284" y="50" width="134" height="56" rx="6" class="box"/><text x="351" y="72" text-anchor="middle" class="k">Change at work</text><text x="351" y="94" text-anchor="middle">EOA</text>
-          <rect x="426" y="50" width="134" height="56" rx="6" class="box no"/><text x="493" y="72" text-anchor="middle" class="k" style="fill:#fff">Plain time off</text><text x="493" y="94" text-anchor="middle">You approve it</text>
-          <path d="M67 106v16M209 106v16M351 106v16M493 106v16" class="ld"/>
-          <text x="67" y="142" text-anchor="middle" class="dim">Leave team</text><text x="67" y="160" text-anchor="middle" class="dim">615-343-4125</text>
-          <text x="209" y="142" text-anchor="middle" class="dim">Occupational Health</text><text x="209" y="160" text-anchor="middle" class="dim">615-936-0955</text>
-          <text x="351" y="142" text-anchor="middle" class="dim">Interactive process</text><text x="351" y="160" text-anchor="middle" class="dim">they keep working</text>
-          <text x="493" y="142" text-anchor="middle" class="dim">UKG or Oracle</text><text x="493" y="160" text-anchor="middle" class="dim">check coverage</text>
-        </svg>
+        <h2 class="v-h">Where a leave request <em>goes</em>.</h2>
+        <p class="v-why">Send it the same day. The team behind each door does the rest.</p>
       </div>
       <div class="v-act">
         <p class="v-task" data-task="steps">Tap the four steps in order</p>
@@ -246,30 +221,47 @@
         <p class="drill-status" id="stepsStatus" role="status" aria-live="polite">A wrong tap tells you why. 0 of 4 placed.</p>
       </div>
     </div>
+    <div class="pst">
+      <ol class="pst-steps">
+        <li><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 3-2 4-2 7a3 3 0 0 1-6 0"/><path d="M9 10a3 3 0 0 1 6 0"/></svg></span><div><b>They tell you</b><span>You listen. No diagnosis.</span></div></li>
+        <li><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg></span><div><b>You send it to the right place</b><span>The same day. Tell your HCM.</span></div></li>
+        <li><span class="n">3</span><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0M14 20a4.5 4.5 0 0 1 8 0"/></svg></span><div><b>That team runs it</b><span>You plan coverage from the dates they approve.</span></div></li>
+      </ol>
+      <ul class="pst-cards" aria-label="Where each kind of request goes">
+        <li class="c1"><div class="hd"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>Health or family</div><div class="bd"><b>Origami</b><p>Leave and Workers&rsquo; Compensation</p><p><strong>615-343-4125</strong><br>fmlaprocessing@vanderbilt.edu</p></div></li>
+        <li class="c2"><div class="hd"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3M12 11v5M9.5 13.5h5"/></svg>Hurt at work</div><div class="bd"><b>Injury report, then Origami</b><p>Nashville campus: Occupational Health Clinic, Medical Arts Building, Suite 640</p><p><strong>615-936-0955</strong><br>After hours: VUMC Emergency Department</p></div></li>
+        <li class="c3"><div class="hd"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M10 21v-3h4v3"/></svg>Needs a change at work</div><div class="bd"><b>Equal Opportunity and Access</b><p>An accommodation request. They keep working while it is worked out.</p></div></li>
+        <li class="c4"><div class="hd"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15l3 3 5-6"/></svg>Plain time off</div><div class="bd"><b>You approve it</b><p>UKG for hourly staff. Oracle Cloud for exempt staff.</p></div></li>
+      </ul>
+    </div>
   </div>
 </section>
 
 <!-- ═══ TOPIC 4 · ORIGAMI ═══ -->
-<section id="origami" class="th-dark v-sec" aria-label="Topic 4: Origami">
+<section id="origami" class="th-dark v-sec" aria-label="Topic 4: Origami, the leave system">
   <div class="wrap">
-    <div class="v-rail" data-lesson="4"><span>Topic 4 of 5 &middot; Origami</span></div>
+    <div class="v-rail" data-lesson="4"><span>Topic 4 of 5 &middot; Origami, the leave system</span></div>
     <div class="v-stage">
       <div class="v-copy">
-        <h2 class="v-h">Origami holds the <em>leave</em>.</h2>
-        <p class="v-why">The request, the paperwork and the dates live there, with the Leave team. You plan the work around what they approve.</p>
-        <svg class="dia" viewBox="0 0 560 120" role="img" aria-label="Four points: you route it to Origami, the Leave team approves the dates, you plan coverage, they return">
-          <path d="M20 60H540" class="ln"/>
-          <g class="g"><circle cx="70" cy="60" r="8"/><circle cx="220" cy="60" r="8"/><circle cx="370" cy="60" r="8"/><circle cx="510" cy="60" r="8"/></g>
-          <text x="70" y="34" text-anchor="middle" class="k">You</text><text x="70" y="92" text-anchor="middle">Route it, today</text>
-          <text x="220" y="34" text-anchor="middle" class="k">Leave team</text><text x="220" y="92" text-anchor="middle">Approves the dates</text>
-          <text x="370" y="34" text-anchor="middle" class="k">You</text><text x="370" y="92" text-anchor="middle">Plan coverage</text>
-          <text x="510" y="34" text-anchor="middle" class="k">Them</text><text x="510" y="92" text-anchor="middle">They return</text>
-        </svg>
+        <h2 class="v-h">Origami, the leave <em>system</em>.</h2>
+        <p class="v-why">Every leave request lives in Origami, with the Leave team. Your part is small.</p>
+        <div class="pst">
+          <ol class="pst-steps">
+            <li><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div><b>You send it.</b><span class="sub">The day you hear it.</span></div></li>
+            <li><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span><div><b>The Leave team approves.</b><span class="sub">Type and dates.</span></div></li>
+            <li><span class="n">3</span><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15l3 3 5-6"/></svg></span><div><b>You plan coverage.</b><span class="sub">From those dates.</span></div></li>
+          </ol>
+        </div>
+        <p class="pst-note"><b>Medical paperwork in your inbox?</b> Forward it unread to fmlaprocessing@vanderbilt.edu and delete it.</p>
       </div>
       <div class="v-act">
         <p class="v-task" data-task="origami">Four things you never do</p>
-        <div class="fm-may"><div class="no"><ul><li>Ask for a diagnosis</li><li>Decide eligibility</li><li>Wait for a better time</li><li>Count leave as attendance</li></ul></div></div>
-        <p class="fm-note"><b>Paperwork in your inbox?</b> Forward it unread to fmlaprocessing@vanderbilt.edu and delete it.</p>
+        <ul class="pst-never">
+          <li><i>&#x2715;</i>Ask what is medically wrong</li>
+          <li><i>&#x2715;</i>Decide whether it qualifies</li>
+          <li><i>&#x2715;</i>Wait for a better time</li>
+          <li><i>&#x2715;</i>Count approved leave as an absence</li>
+        </ul>
         <p class="drill-status" role="status">Read it, then tap Mark done below.</p>
       </div>
     </div>
@@ -280,8 +272,8 @@
 <section id="quiz" class="th-dark v-sec" aria-label="Topic 5: Quick check">
   <div class="wrap narrow">
     <div class="v-rail" data-lesson="5"><span>Topic 5 of 5 &middot; Quick check</span></div>
-    <h2 class="v-h center">Three <em>questions</em>.</h2>
-    <p class="v-task center" data-task="quiz">Two of three to pass</p>
+    <h2 class="v-h center">Quick <em>check</em>.</h2>
+    <p class="v-task center" data-task="quiz">Three questions, two to pass</p>
     <div id="quizBox"></div>
     <p class="drill-status" id="quizStatus" role="status" aria-live="polite">0 of 3 answered.</p>
     <div class="kq-done" id="quizDone" role="status" aria-live="polite"></div>
@@ -290,10 +282,10 @@
 
 <!-- ═══ THE END ═══ -->
 <section id="end" class="th-dark v-sec v-end" aria-label="The end of the module">
-  <div class="v-end-bg" aria-hidden="true"><img src="../../assets/img/hero-poster.jpg" alt="" width="1680" height="945" loading="lazy" /></div>
+  <div class="v-end-bg" aria-hidden="true"><img src="../../assets/img/campus/kirkland-skyline.jpg" alt="" width="1800" height="942" loading="lazy" /></div>
   <div class="wrap">
-    <h2 class="v-display sm">Hear it. Route it. <em>Protect</em> it.</h2>
-    <p class="v-hello">The same day. No diagnosis. The Leave team runs it.</p>
+    <h2 class="v-display sm">You are <em>done</em>.</h2>
+    <p class="v-hello">Hear it, send it the same day, never ask what is wrong. The Leave team runs it.</p>
     <div class="v-hero-cta center">
       <a class="btn btn-gold" href="FMLA-Takeaway.pdf" target="_blank" rel="noopener">Download the one-page guide</a>
       <button type="button" class="btn btn-ghost" id="exitBtn">Exit the module</button>

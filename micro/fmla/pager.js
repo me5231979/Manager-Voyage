@@ -11,15 +11,15 @@ try{
   if(!main) throw new Error('no main');
   var PLAN = [
     { sel:'section.hero',     key:'home',      label:'Welcome',        mode:'whole' },
-    { sel:'#basics',          key:'basics',    label:'The basics',     mode:'whole' },
-    { sel:'#recognize',       key:'recognize', label:'Recognize it',   mode:'whole' },
-    { sel:'#steps',           key:'steps',     label:'Where it goes',  mode:'whole' },
-    { sel:'#origami',         key:'origami',   label:'Origami',        mode:'whole' },
+    { sel:'#basics',          key:'basics',    label:'What FMLA is',     mode:'whole' },
+    { sel:'#recognize',       key:'recognize', label:'How to spot a leave request',   mode:'whole' },
+    { sel:'#steps',           key:'steps',     label:'Where a leave request goes',  mode:'whole' },
+    { sel:'#origami',         key:'origami',   label:'Origami, the leave system',        mode:'whole' },
     { sel:'#quiz',            key:'quiz',      label:'Quick check',    mode:'whole' },
     { sel:'#end',             key:'end',       label:'The end',        mode:'whole', extras:['footer'] }
   ];
   var TRACKED = [
-    ['basics','01','The basics'], ['recognize','02','Recognize it'], ['steps','03','Where it goes'], ['origami','04','Origami'], ['quiz','05','Quick check']
+    ['basics','01','What FMLA is'], ['recognize','02','How to spot a leave request'], ['steps','03','Where a leave request goes'], ['origami','04','Origami, the leave system'], ['quiz','05','Quick check']
   ];
   var pages = [], secFirst = {};
   var topSpan = document.getElementById('top');
