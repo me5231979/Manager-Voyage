@@ -35,12 +35,13 @@
 <link rel="stylesheet" href="../../assets/css/nav.css?v=1" />
 <style>
 /* six topics on the rail, plus the end */
-.v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 16.66%), rgba(255,255,255,.14) 0); }
-.v-rail[data-lesson="6"]{ --l:6; } .v-rail[data-lesson="7"]{ --l:6; }
+.v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 20%), rgba(255,255,255,.14) 0); }
+.v-rail[data-lesson="5"]{ --l:5; }
 /* what, why, how: three lines, then a picture */
 .wwh{ list-style:none; display:grid; gap:8px; margin-top:14px; }
 .wwh li{ display:grid; grid-template-columns:58px 1fr; gap:10px; align-items:baseline; font-size:.98rem; line-height:1.4; color:var(--tx); }
 .wwh b{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--eyebrow); }
+.v-act .dia{ margin-top:0; }
 .dia{ margin-top:16px; width:100%; height:auto; display:block; color:#fff; }
 .dia text{ font-family:var(--sans); font-size:13px; fill:currentColor; }
 .dia text.k{ font-family:var(--cond); font-weight:700; font-size:11px; letter-spacing:.1em; text-transform:uppercase; fill:#CFAE70; }
@@ -118,11 +119,11 @@
       <a href="./" aria-current="page">FMLA for managers</a>
       <a href="#p/steps/1">Where it goes</a>
       <a href="#p/origami/1">Origami</a>
-      <a href="#p/next/1">Next steps</a>
+      <a href="FMLA-Takeaway.pdf" target="_blank" rel="noopener">The guide</a>
       <a class="gnav__btn" href="mailto:fmlaprocessing@vanderbilt.edu">Contact the Leave team</a>
     </nav>
     <div class="gnav__extra">
-      <button type="button" class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel"><span class="pw">Progress</span> <b id="progCount">0/7</b></button>
+      <button type="button" class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel"><span class="pw">Progress</span> <b id="progCount">0/5</b></button>
     </div>
     <button type="button" class="gnav__burger" aria-label="Menu" aria-expanded="false" aria-controls="gnavLinks"><span></span><span></span><span></span></button>
   </div>
@@ -146,19 +147,17 @@
   <div class="wrap v-hero-in">
     <span class="v-kicker">Vanderbilt University &middot; Manager Foundations &middot; Micro course</span>
     <h1 class="v-display">FMLA for <em>managers</em>.</h1>
-    <p class="v-hello">Hear it. Route it the same day. Plan the work. Never ask for a diagnosis.</p>
+    <p class="v-hello">Hear it. Route it. Never ask for a diagnosis.</p>
     <div class="v-hero-cta">
       <a class="btn btn-gold" href="#p/basics/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <ul class="v-meta" aria-label="Module at a glance"><li>6 topics</li><li>Under 10 minutes</li><li>Narrated</li></ul>
+      <ul class="v-meta" aria-label="Module at a glance"><li>5 topics</li><li>About 6 minutes</li><li>Narrated</li></ul>
     </div>
     <details class="v-goals">
       <summary>What you will be able to do</summary>
       <ol>
-        <li><b>State</b> what FMLA protects, who is eligible, and for how long.</li>
-        <li><b>Recognize</b> a leave request in the words a team member actually uses.</li>
-        <li><b>Route</b> it the same day: to Origami for leave, the injury report for a workplace injury, EOA for an accommodation.</li>
-        <li><b>Do</b> your part in Origami and in timekeeping, and leave eligibility and medical questions to the Leave team.</li>
-        <li><b>Keep</b> the job, the schedule, and the attendance record protected while someone is out and when they come back.</li>
+        <li><b>Recognize</b> a leave request in the words people actually use.</li>
+        <li><b>Route</b> it the same day to the right door.</li>
+        <li><b>Keep</b> the diagnosis, the eligibility call and the paperwork with the Leave team.</li>
       </ol>
     </details>
   </div>
@@ -167,44 +166,26 @@
 <!-- ═══ TOPIC 1 · THE BASICS ═══ -->
 <section id="basics" class="th-dark v-sec" aria-label="Topic 1: The basics">
   <div class="wrap">
-    <div class="v-rail" data-lesson="1"><span>Topic 1 of 6 &middot; The basics</span></div>
+    <div class="v-rail" data-lesson="1"><span>Topic 1 of 5 &middot; The basics</span></div>
     <div class="v-stage">
       <div class="v-copy">
         <h2 class="v-h">Twelve weeks, job <em>protected</em>.</h2>
-        <ul class="wwh">
-          <li><b>What</b><span>A federal law. Up to 12 weeks off in 12 months for health or family, unpaid, job and health coverage kept.</span></li>
-          <li><b>Why</b><span>Nobody should have to choose between a sick parent and a paycheck. The law makes the job wait.</span></li>
-          <li><b>How</b><span>The Leave team checks eligibility and runs it. You hear it, route it, and plan the work.</span></li>
-        </ul>
-        <svg class="dia" viewBox="0 0 560 230" role="img" aria-label="FMLA in one picture: a twelve month year with twelve protected weeks, four covered reasons, three shapes of leave, and the eligibility gate">
-          <text x="0" y="14" class="k">A 12-month period</text>
-          <rect x="0" y="22" width="560" height="22" rx="4" class="w"/>
-          <rect x="0" y="22" width="129" height="22" rx="4" class="gl"/>
-          <rect x="0" y="22" width="129" height="22" rx="4" class="ln"/>
-          <text x="8" y="38" class="k" style="fill:#fff">12 weeks protected</text>
-          <text x="140" y="38" class="dim">Up to 26 weeks to care for an injured service member</text>
-          <text x="0" y="74" class="k">Four reasons it covers</text>
-          <g>
-            <rect x="0" y="82" width="133" height="34" rx="4" class="box"/><text x="10" y="104">Own serious health</text>
-            <rect x="142" y="82" width="133" height="34" rx="4" class="box"/><text x="150" y="104" style="font-size:11.5px">Spouse, child or parent</text>
-            <rect x="284" y="82" width="133" height="34" rx="4" class="box"/><text x="294" y="104">A new child</text>
-            <rect x="426" y="82" width="134" height="34" rx="4" class="box"/><text x="436" y="104">Military family</text>
-          </g>
-          <text x="0" y="146" class="k">Three shapes</text>
-          <text x="0" y="170">Continuous</text><rect x="132" y="160" width="140" height="12" rx="3" class="g"/>
-          <text x="0" y="196">Intermittent</text><g class="g"><rect x="132" y="186" width="12" height="12" rx="2"/><rect x="168" y="186" width="12" height="12" rx="2"/><rect x="192" y="186" width="12" height="12" rx="2"/><rect x="236" y="186" width="12" height="12" rx="2"/><rect x="260" y="186" width="12" height="12" rx="2"/></g>
-          <text x="0" y="222">Reduced hours</text><g><rect x="132" y="212" width="140" height="12" rx="3" class="w"/><rect x="132" y="212" width="70" height="12" rx="3" class="g"/></g>
-          <rect x="300" y="152" width="260" height="74" rx="6" class="box hi"/>
-          <text x="314" y="174" class="k">The gate, checked by the Leave team</text>
-          <text x="314" y="196">12 months at Vanderbilt</text>
-          <text x="314" y="216">1,250 hours worked in the past 12</text>
-        </svg>
-        <p class="fm-src">U.S. Department of Labor, <a href="https://www.dol.gov/agencies/whd/fmla" target="_blank" rel="noopener">The Family and Medical Leave Act</a> &middot; 29 CFR Part 825</p>
+        <p class="v-why">Federal law. Unpaid, job and health coverage kept. The Leave team checks eligibility; you never do.</p>
       </div>
       <div class="v-act">
-        <p class="v-task" data-task="basics">Myth or fact? Three statements</p>
-        <div class="drill v-deck" data-drill="basics" aria-label="Myth or fact"></div>
-        <p class="drill-status" id="basicsStatus" role="status" aria-live="polite">0 of 3 decided.</p>
+        <p class="v-task" data-task="basics">FMLA in one picture</p>
+        <svg class="dia" viewBox="0 0 560 170" role="img" aria-label="A twelve month year with twelve protected weeks, and the four reasons FMLA covers: your own serious health, a spouse, child or parent, a new child, military family">
+          <text x="0" y="14" class="k">12 months</text>
+          <rect x="0" y="24" width="560" height="30" rx="5" class="w"/>
+          <rect x="0" y="24" width="129" height="30" rx="5" class="gl"/><rect x="0" y="24" width="129" height="30" rx="5" class="ln"/>
+          <text x="12" y="44" class="k" style="fill:#fff">12 weeks</text>
+          <text x="0" y="90" class="k">Four reasons</text>
+          <rect x="0" y="100" width="133" height="60" rx="6" class="box"/><text x="66" y="126" text-anchor="middle">Your own</text><text x="66" y="144" text-anchor="middle">serious health</text>
+          <rect x="142" y="100" width="133" height="60" rx="6" class="box"/><text x="208" y="126" text-anchor="middle">Spouse, child</text><text x="208" y="144" text-anchor="middle">or parent</text>
+          <rect x="284" y="100" width="133" height="60" rx="6" class="box"/><text x="350" y="126" text-anchor="middle">A new</text><text x="350" y="144" text-anchor="middle">child</text>
+          <rect x="426" y="100" width="134" height="60" rx="6" class="box"/><text x="493" y="126" text-anchor="middle">Military</text><text x="493" y="144" text-anchor="middle">family</text>
+        </svg>
+        <p class="drill-status" role="status">Read it, then tap Mark done below.</p>
       </div>
     </div>
   </div>
@@ -213,36 +194,25 @@
 <!-- ═══ TOPIC 2 · RECOGNIZE IT ═══ -->
 <section id="recognize" class="th-dark v-sec" aria-label="Topic 2: Recognize it">
   <div class="wrap">
-    <div class="v-rail" data-lesson="2"><span>Topic 2 of 6 &middot; Recognize it</span></div>
+    <div class="v-rail" data-lesson="2"><span>Topic 2 of 5 &middot; Recognize it</span></div>
     <div class="v-stage">
       <div class="v-copy">
         <h2 class="v-h">Nobody says the word <em>FMLA</em>.</h2>
-        <ul class="wwh">
-          <li><b>What</b><span>A leave request is any mention of health, family health, a new child, or military family. No acronym, no form.</span></li>
-          <li><b>Why</b><span>The moment you hear it, Vanderbilt&rsquo;s clock starts. Missing it is the most common FMLA failure.</span></li>
-          <li><b>How</b><span>One question in your head: is it one of the four? Yes, route it. No, handle it. You never judge whether it qualifies.</span></li>
-        </ul>
-        <svg class="dia" viewBox="0 0 560 250" role="img" aria-label="Decision flow: a team member says something. Is it about their health, a family member's health, a new child, or military family? Yes: it is a leave request, route it to Origami the same day. No: time off or a schedule question, handle it yourself.">
-          <rect x="170" y="6" width="220" height="40" rx="6" class="box"/><text x="280" y="31" text-anchor="middle">&ldquo;I might need some time.&rdquo;</text>
-          <path d="M280 46v18" class="ln"/><path d="M275 58l5 7 5-7" class="ln"/>
-          <rect x="80" y="72" width="400" height="56" rx="6" class="box hi"/>
-          <text x="280" y="94" text-anchor="middle" class="k">Is it one of the four?</text>
-          <text x="280" y="116" text-anchor="middle">Their health &middot; a family member&rsquo;s health &middot; a new child &middot; military family</text>
-          <path d="M160 128v30H120v18" class="ln"/><path d="M115 170l5 7 5-7" class="ln"/>
-          <path d="M400 128v30h40v18" class="ln"/><path d="M435 170l5 7 5-7" class="ln"/>
-          <text x="150" y="152" class="k">Yes</text><text x="412" y="152" class="k">No</text>
-          <rect x="10" y="182" width="230" height="58" rx="6" class="box hi"/>
-          <text x="125" y="205" text-anchor="middle" class="k">A leave request. Route it.</text>
-          <text x="125" y="226" text-anchor="middle">Origami, the same day. Tell your HCM.</text>
-          <rect x="320" y="182" width="230" height="58" rx="6" class="box no"/>
-          <text x="435" y="205" text-anchor="middle" class="k" style="fill:#fff">Time off. Handle it.</text>
-          <text x="435" y="226" text-anchor="middle">Coverage, then approve it.</text>
+        <p class="v-why">Health, family health, a new child, military family. Hear one of those, and it is a leave request.</p>
+        <svg class="dia" viewBox="0 0 560 200" role="img" aria-label="Decision flow: they say something. Is it one of the four? Yes: route it to Origami the same day. No: handle it yourself.">
+          <rect x="170" y="4" width="220" height="40" rx="6" class="box"/><text x="280" y="29" text-anchor="middle">&ldquo;I might need some time.&rdquo;</text>
+          <path d="M280 44v16" class="ln"/><path d="M275 54l5 7 5-7" class="ln"/>
+          <rect x="130" y="68" width="300" height="40" rx="6" class="box hi"/><text x="280" y="93" text-anchor="middle" class="k">One of the four?</text>
+          <path d="M190 108v16H120v18" class="ln"/><path d="M115 136l5 7 5-7" class="ln"/><text x="150" y="122" class="k">Yes</text>
+          <path d="M370 108v16h70v18" class="ln"/><path d="M435 136l5 7 5-7" class="ln"/><text x="412" y="122" class="k">No</text>
+          <rect x="10" y="150" width="230" height="46" rx="6" class="box hi"/><text x="125" y="178" text-anchor="middle" class="k">Route it. Origami, today.</text>
+          <rect x="320" y="150" width="230" height="46" rx="6" class="box no"/><text x="435" y="178" text-anchor="middle" class="k" style="fill:#fff">Handle it. Time off.</text>
         </svg>
       </div>
       <div class="v-act">
-        <p class="v-task" data-task="recognize">Route it or handle it? Six lines</p>
+        <p class="v-task" data-task="recognize">Route it or handle it? Four lines</p>
         <div class="drill v-deck" data-drill="recognize" aria-label="Route it or handle it"></div>
-        <p class="drill-status" id="recognizeStatus" role="status" aria-live="polite">0 of 6 sorted.</p>
+        <p class="drill-status" id="recognizeStatus" role="status" aria-live="polite">0 of 4 sorted.</p>
       </div>
     </div>
   </div>
@@ -251,141 +221,70 @@
 <!-- ═══ TOPIC 3 · WHERE IT GOES ═══ -->
 <section id="steps" class="th-dark v-sec" aria-label="Topic 3: Where it goes">
   <div class="wrap">
-    <div class="v-rail" data-lesson="3"><span>Topic 3 of 6 &middot; Where it goes</span></div>
-    <div class="v-stage wide-act">
+    <div class="v-rail" data-lesson="3"><span>Topic 3 of 5 &middot; Where it goes</span></div>
+    <div class="v-stage">
       <div class="v-copy">
-        <h2 class="v-h">Where should it <em>go</em>?</h2>
-        <ul class="wwh">
-          <li><b>What</b><span>Four doors. The right one depends on what happened, not on how sure you are.</span></li>
-          <li><b>Why</b><span>Each door has a team behind it that decides, documents and protects. You do not have to be the expert.</span></li>
-          <li><b>How</b><span>Hear it, pick the door, the same day. Tell your HCM. Then plan the work.</span></li>
-        </ul>
-        <svg class="dia" viewBox="0 0 560 300" role="img" aria-label="Process: they tell you, you route it the same day through one of four doors, the team behind the door runs it, and you plan coverage. Health or family goes to Origami and the Leave team. Hurt at work goes to the injury report, then Occupational Health and the Leave team. A change needed at work goes to Equal Opportunity and Access. Plain time off is approved by you.">
-          <rect x="0" y="0" width="560" height="34" rx="6" class="box hi"/><text x="280" y="22" text-anchor="middle" class="k">1 &middot; They tell you, in any words. You listen. No diagnosis.</text>
-          <path d="M70 34v16M210 34v16M350 34v16M490 34v16" class="ln"/>
-          <g>
-            <rect x="0" y="50" width="134" height="58" rx="6" class="box"/><text x="67" y="72" text-anchor="middle" class="k">Health or family</text><text x="67" y="94" text-anchor="middle">Origami</text>
-            <rect x="142" y="50" width="134" height="58" rx="6" class="box"/><text x="209" y="72" text-anchor="middle" class="k">Hurt at work</text><text x="209" y="94" text-anchor="middle">Injury report first</text>
-            <rect x="284" y="50" width="134" height="58" rx="6" class="box"/><text x="351" y="72" text-anchor="middle" class="k">Change at work</text><text x="351" y="94" text-anchor="middle">EOA</text>
-            <rect x="426" y="50" width="134" height="58" rx="6" class="box no"/><text x="493" y="72" text-anchor="middle" class="k" style="fill:#fff">Plain time off</text><text x="493" y="94" text-anchor="middle">You approve it</text>
-          </g>
-          <rect x="0" y="116" width="330" height="18" fill="#1C1C1C"/><text x="0" y="129" class="k">2 &middot; You route it, the same day. Tell your HCM.</text>
-          <path d="M70 108v26M210 108v26M350 108v26M490 108v26" class="ld"/>
-          <g>
-            <rect x="0" y="140" width="134" height="70" rx="6" class="box"/><text x="67" y="160" text-anchor="middle">Leave team</text><text x="67" y="178" text-anchor="middle" class="dim">eligibility, certification,</text><text x="67" y="194" text-anchor="middle" class="dim">dates, pay</text>
-            <rect x="142" y="140" width="134" height="70" rx="6" class="box"/><text x="209" y="160" text-anchor="middle">Occupational Health</text><text x="209" y="178" text-anchor="middle" class="dim">treatment by work</text><text x="209" y="194" text-anchor="middle" class="dim">location, then the claim</text>
-            <rect x="284" y="140" width="134" height="70" rx="6" class="box"/><text x="351" y="160" text-anchor="middle">Interactive process</text><text x="351" y="178" text-anchor="middle" class="dim">they keep working</text><text x="351" y="194" text-anchor="middle" class="dim">while it is worked out</text>
-            <rect x="426" y="140" width="134" height="70" rx="6" class="box no"/><text x="493" y="160" text-anchor="middle">UKG or Oracle</text><text x="493" y="178" text-anchor="middle" class="dim">check coverage,</text><text x="493" y="194" text-anchor="middle" class="dim">say yes out loud</text>
-          </g>
-          <rect x="0" y="218" width="270" height="18" fill="#1C1C1C"/><text x="0" y="231" class="k">3 &middot; The team behind the door runs it</text>
-          <path d="M70 210v30M210 210v30M350 210v30M490 210v30" class="ld"/>
-          <rect x="0" y="244" width="560" height="50" rx="6" class="box hi"/>
-          <text x="280" y="264" text-anchor="middle" class="k">4 &middot; You plan coverage from the approved dates</text>
-          <text x="280" y="283" text-anchor="middle">Record time with the codes you are given. The attendance record stays clean.</text>
+        <h2 class="v-h">Four <em>doors</em>.</h2>
+        <p class="v-why">Pick the door the same day. The team behind it does the rest.</p>
+        <svg class="dia" viewBox="0 0 560 190" role="img" aria-label="Four doors: health or family goes to Origami and the Leave team; hurt at work goes to the injury report and Occupational Health; a change needed at work goes to Equal Opportunity and Access; plain time off you approve in UKG or Oracle.">
+          <rect x="0" y="0" width="560" height="34" rx="6" class="box hi"/><text x="280" y="22" text-anchor="middle" class="k">They tell you. You listen. No diagnosis.</text>
+          <path d="M67 34v16M209 34v16M351 34v16M493 34v16" class="ln"/>
+          <rect x="0" y="50" width="134" height="56" rx="6" class="box"/><text x="67" y="72" text-anchor="middle" class="k">Health or family</text><text x="67" y="94" text-anchor="middle">Origami</text>
+          <rect x="142" y="50" width="134" height="56" rx="6" class="box"/><text x="209" y="72" text-anchor="middle" class="k">Hurt at work</text><text x="209" y="94" text-anchor="middle">Injury report first</text>
+          <rect x="284" y="50" width="134" height="56" rx="6" class="box"/><text x="351" y="72" text-anchor="middle" class="k">Change at work</text><text x="351" y="94" text-anchor="middle">EOA</text>
+          <rect x="426" y="50" width="134" height="56" rx="6" class="box no"/><text x="493" y="72" text-anchor="middle" class="k" style="fill:#fff">Plain time off</text><text x="493" y="94" text-anchor="middle">You approve it</text>
+          <path d="M67 106v16M209 106v16M351 106v16M493 106v16" class="ld"/>
+          <text x="67" y="142" text-anchor="middle" class="dim">Leave team</text><text x="67" y="160" text-anchor="middle" class="dim">615-343-4125</text>
+          <text x="209" y="142" text-anchor="middle" class="dim">Occupational Health</text><text x="209" y="160" text-anchor="middle" class="dim">615-936-0955</text>
+          <text x="351" y="142" text-anchor="middle" class="dim">Interactive process</text><text x="351" y="160" text-anchor="middle" class="dim">they keep working</text>
+          <text x="493" y="142" text-anchor="middle" class="dim">UKG or Oracle</text><text x="493" y="160" text-anchor="middle" class="dim">check coverage</text>
         </svg>
       </div>
       <div class="v-act">
-        <p class="v-task" data-task="steps">Tap the six steps in order</p>
+        <p class="v-task" data-task="steps">Tap the four steps in order</p>
         <div class="order" id="orderBox" aria-label="Put the steps in order"></div>
-        <p class="drill-status" id="stepsStatus" role="status" aria-live="polite">A wrong tap tells you why. 0 of 6 placed.</p>
+        <p class="drill-status" id="stepsStatus" role="status" aria-live="polite">A wrong tap tells you why. 0 of 4 placed.</p>
       </div>
     </div>
-    <ul class="fm-doors">
-      <li><b>Health or family</b><p><strong>Origami.</strong> Leave and Workers&rsquo; Compensation, 615-343-4125, fmlaprocessing@vanderbilt.edu</p></li>
-      <li class="alt"><b>Hurt at work</b><p><strong>Injury report first.</strong> Nashville: Occupational Health Clinic, Medical Arts Building Suite 640, 615-936-0955. After hours, the VUMC Emergency Department.</p></li>
-      <li class="alt"><b>Change at work</b><p><strong>Equal Opportunity and Access.</strong> An accommodation request, kept working while it is worked out.</p></li>
-      <li><b>Plain time off</b><p><strong>You.</strong> UKG for hourly staff, Oracle Cloud for exempt staff.</p></li>
-    </ul>
   </div>
 </section>
 
 <!-- ═══ TOPIC 4 · ORIGAMI ═══ -->
 <section id="origami" class="th-dark v-sec" aria-label="Topic 4: Origami">
   <div class="wrap">
-    <div class="v-rail" data-lesson="4"><span>Topic 4 of 6 &middot; Origami</span></div>
+    <div class="v-rail" data-lesson="4"><span>Topic 4 of 5 &middot; Origami</span></div>
     <div class="v-stage">
       <div class="v-copy">
-        <h2 class="v-h">Origami is where the leave <em>lives</em>.</h2>
-        <ul class="wwh">
-          <li><b>What</b><span>Vanderbilt&rsquo;s leave and claims system. Request, certification, approved dates and return, all in one place.</span></li>
-          <li><b>Why</b><span>One record, owned by the Leave team, means the medical detail never has to pass through you.</span></li>
-          <li><b>How</b><span>Send them to Origami the day you hear it. Watch for the approved dates. Record time with the codes you are given.</span></li>
-        </ul>
-        <svg class="dia" viewBox="0 0 600 250" role="img" aria-label="The life of a leave in Origami: day zero they tell you and it is filed; within five business days the Leave team sends the eligibility notice; the provider returns the certification within fifteen days; the Leave team records the approved type and dates; the person is out and you plan coverage; they return and the record stays clean. Above the line is what you do; below the line is what the Leave team does.">
-          <text x="0" y="14" class="k">You</text><text x="0" y="236" class="k">The Leave team, in Origami</text>
-          <path d="M0 125H600" class="ln"/>
-          <g class="g"><circle cx="60" cy="125" r="7"/><circle cx="190" cy="125" r="7"/><circle cx="310" cy="125" r="7"/><circle cx="430" cy="125" r="7"/><circle cx="545" cy="125" r="7"/></g>
-          <text x="60" y="46" text-anchor="middle" class="k">Day 0</text><text x="60" y="66" text-anchor="middle">They tell you.</text><text x="60" y="84" text-anchor="middle">Route it to Origami.</text><text x="60" y="102" text-anchor="middle" class="dim">Tell your HCM.</text>
-          <text x="310" y="66" text-anchor="middle">Plan coverage from</text><text x="310" y="84" text-anchor="middle">the approved dates.</text>
-          <text x="430" y="66" text-anchor="middle">Record leave time</text><text x="430" y="84" text-anchor="middle">with their codes.</text>
-          <text x="598" y="66" text-anchor="end">They return.</text><text x="598" y="84" text-anchor="end">Talk about the work,</text><text x="598" y="102" text-anchor="end" class="dim">not the condition.</text>
-          <text x="190" y="152" text-anchor="middle" class="k">Within 5 business days</text><text x="190" y="172" text-anchor="middle">Eligibility notice.</text><text x="190" y="190" text-anchor="middle" class="dim">Certification from the provider,</text><text x="190" y="206" text-anchor="middle" class="dim">about 15 days.</text>
-          <text x="310" y="152" text-anchor="middle" class="k">Approved</text><text x="310" y="172" text-anchor="middle">Type and dates</text><text x="310" y="190" text-anchor="middle">recorded.</text>
-          <text x="430" y="152" text-anchor="middle" class="k">While they are out</text><text x="430" y="172" text-anchor="middle">Dates, pay, and</text><text x="430" y="190" text-anchor="middle">any changes.</text>
-          <text x="598" y="152" text-anchor="end" class="k">The return</text><text x="598" y="172" text-anchor="end">Any fitness for duty</text><text x="598" y="190" text-anchor="end">step, through them.</text>
+        <h2 class="v-h">Origami holds the <em>leave</em>.</h2>
+        <p class="v-why">The request, the paperwork and the dates live there, with the Leave team. You plan the work around what they approve.</p>
+        <svg class="dia" viewBox="0 0 560 120" role="img" aria-label="Four points: you route it to Origami, the Leave team approves the dates, you plan coverage, they return">
+          <path d="M20 60H540" class="ln"/>
+          <g class="g"><circle cx="70" cy="60" r="8"/><circle cx="220" cy="60" r="8"/><circle cx="370" cy="60" r="8"/><circle cx="510" cy="60" r="8"/></g>
+          <text x="70" y="34" text-anchor="middle" class="k">You</text><text x="70" y="92" text-anchor="middle">Route it, today</text>
+          <text x="220" y="34" text-anchor="middle" class="k">Leave team</text><text x="220" y="92" text-anchor="middle">Approves the dates</text>
+          <text x="370" y="34" text-anchor="middle" class="k">You</text><text x="370" y="92" text-anchor="middle">Plan coverage</text>
+          <text x="510" y="34" text-anchor="middle" class="k">Them</text><text x="510" y="92" text-anchor="middle">They return</text>
         </svg>
-        <div class="fm-may">
-          <div class="no"><span class="v-label">Never</span><ul><li>Ask for a diagnosis or the paperwork</li><li>Decide eligibility</li><li>Wait for a better time</li><li>Count approved leave as attendance</li></ul></div>
-          <div class="yes"><span class="v-label">If a certification reaches you</span><ul><li>Forward it unread to fmlaprocessing@vanderbilt.edu</li><li>Delete your copy</li></ul></div>
-        </div>
       </div>
       <div class="v-act">
-        <p class="v-task" data-task="origami">Which first move holds?</p>
-        <div class="scn" data-scn="origami" aria-label="Make the call"></div>
-        <p class="drill-status" id="origamiStatus" role="status" aria-live="polite">Try all three. The activity completes when you find the one that holds.</p>
+        <p class="v-task" data-task="origami">Four things you never do</p>
+        <div class="fm-may"><div class="no"><ul><li>Ask for a diagnosis</li><li>Decide eligibility</li><li>Wait for a better time</li><li>Count leave as attendance</li></ul></div></div>
+        <p class="fm-note"><b>Paperwork in your inbox?</b> Forward it unread to fmlaprocessing@vanderbilt.edu and delete it.</p>
+        <p class="drill-status" role="status">Read it, then tap Mark done below.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ TOPIC 5 · YOUR CALL ═══ -->
-<section id="yourcall" class="th-dark v-sec" aria-label="Topic 5: Your call">
-  <div class="wrap">
-    <div class="v-rail" data-lesson="5"><span>Topic 5 of 6 &middot; Your call</span></div>
-    <div class="v-stage wide-act">
-      <div class="v-copy">
-        <h2 class="v-h">Three situations, three <em>calls</em>.</h2>
-        <p class="v-why">A parent in the hospital, an attendance write-up that is really intermittent leave, and a return to work with a curious team. The consequences teach more than the right answer.</p>
-      </div>
-      <div class="v-act">
-        <p class="v-task" data-task="yourcall">Three moments. What would you do?</p>
-        <div class="calls" id="callsBox" data-calls="ny"></div>
-        <p class="drill-status" id="nyStatus" role="status" aria-live="polite">0 of 3 situations.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TOPIC 6 · QUICK CHECK ═══ -->
-<section id="quiz" class="th-dark v-sec" aria-label="Topic 6: Quick check">
+<!-- ═══ TOPIC 5 · QUICK CHECK ═══ -->
+<section id="quiz" class="th-dark v-sec" aria-label="Topic 5: Quick check">
   <div class="wrap narrow">
-    <div class="v-rail" data-lesson="6"><span>Topic 6 of 6 &middot; Quick check</span></div>
-    <h2 class="v-h center">Five <em>questions</em>.</h2>
-    <p class="v-task center" data-task="quiz">Four of five to pass</p>
+    <div class="v-rail" data-lesson="5"><span>Topic 5 of 5 &middot; Quick check</span></div>
+    <h2 class="v-h center">Three <em>questions</em>.</h2>
+    <p class="v-task center" data-task="quiz">Two of three to pass</p>
     <div id="quizBox"></div>
-    <p class="drill-status" id="quizStatus" role="status" aria-live="polite">0 of 5 answered.</p>
+    <p class="drill-status" id="quizStatus" role="status" aria-live="polite">0 of 3 answered.</p>
     <div class="kq-done" id="quizDone" role="status" aria-live="polite"></div>
-  </div>
-</section>
-
-<!-- ═══ NEXT STEPS ═══ -->
-<section id="next" class="th-dark v-sec" aria-label="Next steps">
-  <div class="wrap">
-    <div class="v-rail" data-lesson="7"><span>Next steps &middot; Four practices</span></div>
-    <div class="v-stage">
-      <div class="v-copy">
-        <h2 class="v-h">Your four <em>practices</em>.</h2>
-        <p class="v-task" data-task="next">Tap each one to commit</p>
-        <div class="v-commits" id="commitList" role="group" aria-label="Your four practices"></div>
-        <p class="drill-status" id="commitStatus" role="status" aria-live="polite"></p>
-      </div>
-      <div class="v-act">
-        <a class="v-survey" href="FMLA-Takeaway.pdf" target="_blank" rel="noopener"><span class="v-label">One page &middot; PDF</span><b>Download the printable guide</b><i aria-hidden="true">&darr;</i></a>
-        <p class="v-visit"><b>Leave and Workers&rsquo; Compensation</b> runs every leave: 615-343-4125, <a href="mailto:fmlaprocessing@vanderbilt.edu">fmlaprocessing@vanderbilt.edu</a>.</p>
-        <p class="v-visit"><b>Your HCM</b> hears about every leave the day you do, and helps with coverage and timekeeping.</p>
-        <p class="v-visit"><b>PCB HelpDesk</b> for anything they cannot answer: <a href="https://www.vanderbilt.edu/pcb/" target="_blank" rel="noopener">submit a ticket</a>.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -393,17 +292,16 @@
 <section id="end" class="th-dark v-sec v-end" aria-label="The end of the module">
   <div class="v-end-bg" aria-hidden="true"><img src="../../assets/img/hero-poster.jpg" alt="" width="1680" height="945" loading="lazy" /></div>
   <div class="wrap">
-    <h2 class="v-display sm">Hear it. Route it. Protect <em>it</em>.</h2>
-    <p class="v-hello">The same day, without a diagnosis, with the Leave team on the other side of Origami.</p>
+    <h2 class="v-display sm">Hear it. Route it. <em>Protect</em> it.</h2>
+    <p class="v-hello">The same day. No diagnosis. The Leave team runs it.</p>
     <div class="v-hero-cta center">
-      <a class="btn btn-gold" href="FMLA-Takeaway.pdf" target="_blank" rel="noopener">Download the guide</a>
+      <a class="btn btn-gold" href="FMLA-Takeaway.pdf" target="_blank" rel="noopener">Download the one-page guide</a>
       <button type="button" class="btn btn-ghost" id="exitBtn">Exit the module</button>
     </div>
     <nav class="v-links" aria-label="Keep these close">
-      <a href="https://www.dol.gov/agencies/whd/fmla" target="_blank" rel="noopener">FMLA at the Department of Labor</a>
-      <a href="https://www.dol.gov/agencies/whd/fmla/employee-guide" target="_blank" rel="noopener">The employee&rsquo;s guide to FMLA</a>
-      <a href="https://www.vanderbilt.edu/pcb/" target="_blank" rel="noopener">People, Culture and Belonging</a>
       <a href="mailto:fmlaprocessing@vanderbilt.edu">Leave and Workers&rsquo; Compensation</a>
+      <a href="https://www.dol.gov/agencies/whd/fmla" target="_blank" rel="noopener">FMLA at the Department of Labor</a>
+      <a href="https://www.vanderbilt.edu/pcb/" target="_blank" rel="noopener">People, Culture and Belonging</a>
     </nav>
   </div>
 </section>
@@ -441,7 +339,7 @@
   <div class="oracle-modal">
     <span class="mono">Module complete</span>
     <h2 id="oracleTitle">You have finished FMLA for managers.</h2>
-    <p id="oracleBody">Every activity is done. Download the guide, keep the Leave team&rsquo;s number close, and route the next one the same day.</p>
+    <p id="oracleBody">Download the one-page guide and route the next one the same day.</p>
     <div class="oracle-actions">
       <a class="btn btn-gold" href="FMLA-Takeaway.pdf" target="_blank" rel="noopener">Download the guide</a>
       <button type="button" class="btn btn-ghost btn-sm" id="oracleGo">Done</button>

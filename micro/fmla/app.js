@@ -101,13 +101,11 @@ narrUI();
 
 /* ══════════ PROGRESS ══════════ */
 var SECTIONS = [
-  { k:'basics',    no:'01', name:'The basics',    how:'Decide three statements' },
-  { k:'recognize', no:'02', name:'Recognize it',  how:'Sort six lines: route it or handle it' },
-  { k:'steps',     no:'03', name:'Where it goes', how:'Put the six steps in order' },
-  { k:'origami',   no:'04', name:'Origami',       how:'Find the first move that holds' },
-  { k:'yourcall',  no:'05', name:'Your call',     how:'Find the Vanderbilt way in three situations' },
-  { k:'quiz',      no:'06', name:'Quick check',   how:'Score 4 of 5' },
-  { k:'next',      no:'07', name:'Next steps',    how:'Read the four practices, then mark it done' }
+  { k:'basics',    no:'01', name:'The basics',    how:'Read it, then mark it done' },
+  { k:'recognize', no:'02', name:'Recognize it',  how:'Sort four lines: route it or handle it' },
+  { k:'steps',     no:'03', name:'Where it goes', how:'Put the four steps in order' },
+  { k:'origami',   no:'04', name:'Origami',       how:'Read it, then mark it done' },
+  { k:'quiz',      no:'05', name:'Quick check',   how:'Score 2 of 3' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }
 function progWrite(k, v){ set('p-' + k, v ? '1' : null); }
@@ -203,7 +201,7 @@ var doneSeen = get('done-seen') === '1', modalReturn = null;
 function allDone(){
   var score = get('quiz-score'), sc = window.MVScorm;
   try{ if(sc && sc.connected){ if(score !== null && sc.score) sc.score(parseInt(score, 10), 5); if(sc.complete) sc.complete(); } }catch(e){}
-  try{ if(window.MVOracle && window.MVOracle.reportCompletion) window.MVOracle.reportCompletion('MM-08', { score: score ? parseInt(score, 10) : null, max: 5, course: 'FMLA for managers' }); }catch(e){}
+  try{ if(window.MVOracle && window.MVOracle.reportCompletion) window.MVOracle.reportCompletion('MM-08', { score: score ? parseInt(score, 10) : null, max: 3, course: 'FMLA for managers' }); }catch(e){}
   if(doneSeen) return;
   doneSeen = true; set('done-seen', '1');
   window.setTimeout(modalShow, reduce ? 0 : 450);
@@ -271,18 +269,11 @@ var COMMITS = [
 
 /* ══════════ ask-or-avoid and myth-or-fact drills ══════════ */
 var DRILLS = {
-  basics: { opts:['Myth','Fact'], prog:'basics', verb:'decided', items:[
-    { s:'An employee has to say &ldquo;FMLA&rdquo; or fill out a form before the leave protections apply.', a:0, x:'Myth. The employee only has to give enough information for you to know the leave may be for a covered reason. Once you have heard it, Vanderbilt&rsquo;s duty to respond has started.' },
-    { s:'As the manager, I decide whether someone is eligible for FMLA.', a:0, x:'Myth. Eligibility, the twelve months and 1,250 hours, and the medical certification are reviewed by Leave and Workers&rsquo; Compensation through Origami. You route the request.' },
-    { s:'FMLA can be taken a few hours or a day at a time, not only as one long block.', a:1, x:'Fact. Intermittent leave and reduced schedules are covered. Those approved days and hours are leave, not attendance.' }
-  ]},
   recognize: { opts:['Route it','Handle it'], prog:'recognize', verb:'sorted', items:[
-    { s:'&ldquo;My mom had a stroke. I need to be in Memphis for a while.&rdquo;', a:0, x:'Route it. Caring for a parent with a serious health condition. Origami, the same day.' },
-    { s:'&ldquo;Can I take next Friday off? My cousin is getting married.&rdquo;', a:1, x:'Handle it. Time off. Check coverage and approve it in UKG or Oracle.' },
-    { s:'&ldquo;The doctor wants me out for three weeks after the surgery.&rdquo;', a:0, x:'Route it. Their own serious health condition. You do not need to know what the surgery is.' },
-    { s:'&ldquo;We are adopting. The placement could be any week now.&rdquo;', a:0, x:'Route it. A new child by adoption is a covered reason, for either parent.' },
-    { s:'&ldquo;I would like to shift my hours to start at 7 so I beat the traffic.&rdquo;', a:1, x:'Handle it. A schedule preference with no health or family reason behind it. Yours to decide.' },
-    { s:'&ldquo;My husband&rsquo;s unit is deploying next month. There is a lot to sort out.&rdquo;', a:0, x:'Route it. A qualifying exigency from a family member&rsquo;s military service is a covered reason.' }
+    { s:'&ldquo;My mom had a stroke. I need to be in Memphis for a while.&rdquo;', a:0, x:'Route it. A parent&rsquo;s serious health condition.' },
+    { s:'&ldquo;Can I take next Friday off? My cousin is getting married.&rdquo;', a:1, x:'Handle it. Time off.' },
+    { s:'&ldquo;The doctor wants me out for three weeks after the surgery.&rdquo;', a:0, x:'Route it. Their own health. You do not need to know what the surgery is.' },
+    { s:'&ldquo;I would like to start at 7 to beat the traffic.&rdquo;', a:1, x:'Handle it. A schedule preference, no health or family reason.' }
   ]}
 };
 function buildDrill(el){
@@ -317,31 +308,27 @@ $$('[data-drill]').forEach(buildDrill);
 (function(){
   var box = $('#orderBox'), status = $('#stepsStatus'); if(!box) return;
   var STEPS = [
-    'A team member tells you, in their own words, about a health or family situation.',
-    'You thank them, listen, and ask nothing about the medical detail.',
-    'The same day, you send them to Origami, or open the request with them, and tell your HCM.',
-    'The Leave team reviews eligibility and the certification, and records the approved type and dates in Origami.',
-    'You plan coverage from those dates and record leave time with the codes the Leave team gives you.',
-    'They come back. You talk about the work and the schedule, and the attendance record stays clean.'
+    'They tell you, in their own words.',
+    'You route it to Origami the same day, and tell your HCM.',
+    'The Leave team approves the type and dates.',
+    'You plan coverage from those dates.'
   ];
-  var SHOW = [3, 0, 4, 1, 5, 2];   /* a fixed shuffle, so every learner sees the same puzzle */
+  var SHOW = [2, 0, 3, 1];   /* a fixed shuffle, so every learner sees the same puzzle */
   var next = 0;
   box.innerHTML = '<p class="o-h"><b>Activity</b>Tap the steps in the order they happen. A wrong tap tells you why.</p><ol class="order-list" aria-label="Steps, in the order shown on screen">' +
     SHOW.map(function(si){ return '<li><button type="button" data-s="' + si + '"><span class="n" aria-hidden="true"></span><span>' + esc(STEPS[si]) + '</span></button></li>'; }).join('') + '</ol>';
   var WHY = [
-    'It starts when they tell you, in any words. The law does not require the acronym or a form.',
-    'Listening without asking for the diagnosis comes before any routing.',
-    'Routing happens the same day, before anything is decided. Your HCM hears the same day.',
-    'Eligibility and certification are the Leave team\'s, and they happen after the request is in Origami.',
-    'Coverage and timekeeping come from the approved dates, so they follow the Leave team\'s decision.',
-    'The return comes last, and the record stays clean because every earlier step held.'
+    'It starts when they tell you, in any words.',
+    'Routing happens the same day, before anything is decided.',
+    'The Leave team decides, after the request is in Origami.',
+    'Coverage follows the approved dates.'
   ];
   box.addEventListener('click', function(e){
     var b = e.target.closest('button[data-s]'); if(!b || b.disabled) return;
     var si = parseInt(b.getAttribute('data-s'), 10);
     if(si === next){
       b.classList.add('placed'); b.disabled = true; b.querySelector('.n').textContent = String(next + 1); next++;
-      if(status) status.textContent = next < STEPS.length ? 'Right. ' + WHY[si] + ' ' + next + ' of ' + STEPS.length + ' placed.' : 'All six in order. Activity complete.';
+      if(status) status.textContent = next < STEPS.length ? 'Right. ' + WHY[si] + ' ' + next + ' of ' + STEPS.length + ' placed.' : 'All four in order. Activity complete.';
       if(next === STEPS.length) progDone('steps');
     } else {
       b.classList.add('shake'); window.setTimeout(function(){ b.classList.remove('shake'); }, 500);
@@ -420,16 +407,14 @@ $$('.scn[data-scn]').forEach(function(el){ buildScenario(el, function(name){ if(
 
 /* ══════════ quick check ══════════ */
 var QUIZ = [
-  { seg:'The basics', q:'How much job-protected leave does FMLA give an eligible employee in a 12-month period?', opts:['Up to 6 weeks','Up to 12 weeks, and up to 26 to care for a service member','Up to 12 weeks, paid','As much as the manager approves'], a:1, x:'Up to twelve weeks, unpaid with health coverage kept, and up to twenty six weeks to care for a covered service member. The Leave team confirms eligibility.' },
-  { seg:'Recognize it', q:'A team member says: “My mom had a stroke, I need to be in Memphis for a while.” This is:', opts:['A leave request you route to Origami the same day','A PTO request you approve','Not covered, because it is a parent, not a child','Something to revisit when she knows the dates'], a:0, x:'Caring for a parent with a serious health condition is a covered reason. No acronym needed. Route it the same day.' },
-  { seg:'Where it goes', q:'Someone on your team is hurt at work. The first step is:', opts:['Send them to Origami','The injury report the same day, then treatment by their primary work location','Ask them to see their own doctor and bring a note','Tell your HCM at the end of the week'], a:1, x:'Report the injury the same day. On the Nashville campus, treatment is at the Occupational Health Clinic; elsewhere, the nearest appropriate facility. Then the claim and any leave run through the Leave team.' },
-  { seg:'Origami', q:'A medical certification for a team member arrives in your inbox. You:', opts:['Read it so you can plan coverage','File it with your 1:1 notes','Forward it unread to the Leave team and delete your copy','Ask the employee to walk you through it'], a:2, x:'Certification goes to Leave and Workers’ Compensation, never to the manager. Forward it unread and delete your copy. Coverage comes from the approved dates, not the diagnosis.' },
-  { seg:'Your call', q:'Dana has approved intermittent leave. She has missed six mornings in five weeks. Before any attendance conversation you:', opts:['Issue the warning; policy applies to everyone','Check with the Leave team which mornings were leave, and remove them from the count','Ask Dana to schedule her condition outside the morning','Count them but note the leave in the file'], a:1, x:'Approved intermittent leave never counts against attendance. Check Origami and the Leave team first, then handle only what is left, if anything.' }
+  { seg:'Recognize it', q:'“My mom had a stroke, I need to be in Memphis for a while.” This is:', opts:['A leave request. Route it to Origami today.','A PTO request. Approve it.','Not covered. It is a parent.','Something to revisit when she knows the dates.'], a:0, x:'Caring for a parent with a serious health condition is covered. No acronym needed. Route it today.' },
+  { seg:'Origami', q:'Medical paperwork for a team member lands in your inbox. You:', opts:['Read it to plan coverage.','Forward it unread to the Leave team and delete your copy.','File it with your 1:1 notes.','Ask them to walk you through it.'], a:1, x:'The Leave team gets the paperwork, never you. Coverage comes from the approved dates.' },
+  { seg:'Origami', q:'Dana has approved intermittent leave and has missed six mornings. Before any attendance talk you:', opts:['Issue the warning. Policy is policy.','Check which mornings were leave and take them out of the count.','Ask Dana to schedule her condition outside mornings.','Count them, but note the leave in the file.'], a:1, x:'Approved leave never counts against attendance. Check Origami first.' }
 ];
-(function(){ var POS = [2, 0, 3, 1, 2]; QUIZ.forEach(function(q, i){ var t = POS[i]; if(t === undefined || t === q.a || t >= q.opts.length) return; var o = q.opts.splice(q.a, 1)[0]; q.opts.splice(t, 0, o); q.a = t; }); })();
+(function(){ var POS = [2, 0, 1]; QUIZ.forEach(function(q, i){ var t = POS[i]; if(t === undefined || t === q.a || t >= q.opts.length) return; var o = q.opts.splice(q.a, 1)[0]; q.opts.splice(t, 0, o); q.a = t; }); })();
 (function(){
   var box = $('#quizBox'), status = $('#quizStatus'), done = $('#quizDone'); if(!box) return;
-  var PASS = 4, cur = 0, score = 0, answered = {};
+  var PASS = 2, cur = 0, score = 0, answered = {};
   function render(){
     cur = 0; score = 0; answered = {};
     box.innerHTML = QUIZ.map(function(it, i){
@@ -442,7 +427,7 @@ var QUIZ = [
   }
   function show(i){ $$('.kq', box).forEach(function(q, qi){ q.classList.toggle('cur', qi === i); }); cur = i; var f = $$('.kq', box)[i].querySelector('button:not([disabled])'); if(f) f.focus({ preventScroll:true }); }
   function finish(){
-    var t = score === QUIZ.length ? ['Gold standard.', 'Perfect. Turn the page for the four practices to keep.'] : score >= PASS ? ['Module check complete.', 'Reread the explanation under the one you missed, then turn the page.'] : ['Almost there.', 'Four of five completes the check. Each missed question names the page to reread; then retake it.'];
+    var t = score === QUIZ.length ? ['Gold standard.', 'Perfect. Download the guide on the next page.'] : score >= PASS ? ['Module check complete.', 'Reread the explanation under the one you missed, then turn the page.'] : ['Almost there.', 'Two of three completes the check. Each missed question names the page to reread; then retake it.'];
     done.innerHTML = '<div class="big-score">' + score + ' / ' + QUIZ.length + '</div><h3>' + t[0] + '</h3><p>' + t[1] + '</p><button type="button" class="btn btn-ghost btn-sm" id="quizRetake">Retake the check</button>';
     done.classList.add('show');
     $$('.kq', box).forEach(function(q){ q.classList.remove('cur'); });

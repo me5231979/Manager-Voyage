@@ -15,14 +15,11 @@ try{
     { sel:'#recognize',       key:'recognize', label:'Recognize it',   mode:'whole' },
     { sel:'#steps',           key:'steps',     label:'Where it goes',  mode:'whole' },
     { sel:'#origami',         key:'origami',   label:'Origami',        mode:'whole' },
-    { sel:'#yourcall',        key:'yourcall',  label:'Your call',      mode:'whole' },
     { sel:'#quiz',            key:'quiz',      label:'Quick check',    mode:'whole' },
-    { sel:'#next',            key:'next',      label:'Next steps',     mode:'whole' },
     { sel:'#end',             key:'end',       label:'The end',        mode:'whole', extras:['footer'] }
   ];
   var TRACKED = [
-    ['basics','01','The basics'], ['recognize','02','Recognize it'], ['steps','03','Where it goes'], ['origami','04','Origami'],
-    ['yourcall','05','Your call'], ['quiz','06','Quick check'], ['next','07','Next steps']
+    ['basics','01','The basics'], ['recognize','02','Recognize it'], ['steps','03','Where it goes'], ['origami','04','Origami'], ['quiz','05','Quick check']
   ];
   var pages = [], secFirst = {};
   var topSpan = document.getElementById('top');
