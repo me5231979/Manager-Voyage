@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>FMLA for managers: a leave request, where should it go?</title>
-<meta name="description" content="One-page guide for Vanderbilt managers: the three steps when a team member mentions leave, the four doors, what you do in Origami, and what you never do.">
+<title>FMLA at Vanderbilt: the two-page guide</title>
+<meta name="description" content="Two-page guide for Vanderbilt staff, managers and HCMs: a leave request and where it goes, Origami, and the work-related injury guide: where the employee goes and who manages the claim.">
 <style>
   @font-face { font-family: 'Libre Caslon Display'; font-weight: 400; src: url('../../assets/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2'); }
   @font-face { font-family: 'Libre Caslon Text'; font-style: italic; font-weight: 400; src: url('../../assets/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2'); }
@@ -23,7 +23,9 @@
   * { box-sizing: border-box; }
   html { height: auto; }
   html, body { margin: 0; padding: 0; background: var(--cream); }
-  body { width: 11in; height: 8.45in; overflow: hidden; font-family: var(--body); color: var(--ink); font-size: 8.4pt; line-height: 1.4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { width: 11in; height: 8.5in; overflow: hidden; page-break-after: always; break-after: page; background: var(--cream); }
+  .sheet:last-child { page-break-after: auto; break-after: auto; }
+  body { width: 11in; font-family: var(--body); color: var(--ink); font-size: 8.4pt; line-height: 1.4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .eyebrow { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .09em; font-size: 7.2pt; color: var(--oak); margin: 0 0 4px; }
   em { font-family: var(--serif-i); font-style: italic; color: var(--gold); }
 
@@ -81,13 +83,34 @@
 
   .foot { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; border-top: 1px solid var(--rule); padding-top: 6px; font-size: 7.2pt; color: var(--ink2); line-height: 1.4; }
   .foot .r { text-align: right; color: var(--ink3); }
+
+  /* page two: the work-injury guide */
+  .wc-steps { grid-template-columns: 1fr 22px 1fr 22px 1fr; }
+  .wc-steps .st { grid-template-columns: 30px 30px 1fr; }
+  .wc-steps .ic { width: 30px; height: 30px; border-radius: 50%; border: 1.2px solid var(--oak); display: grid; place-items: center; }
+  .wc-steps .ic svg { width: 15px; height: 15px; fill: none; stroke: var(--oak); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .doors.wc .door .h small { display: block; font-family: var(--serif-i); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 8pt; color: rgba(255,255,255,.9); }
+  .doors.wc .door .b p.lead { font-family: var(--serif); font-weight: 400; font-size: 9.6pt; line-height: 1.15; }
+  .doors.wc .addr { display: grid; grid-template-columns: 12px 1fr; gap: 4px; align-items: start; margin: 0 0 3px; font-size: 7.6pt; color: var(--ink2); }
+  .doors.wc .addr svg { width: 10px; height: 10px; margin-top: 2px; fill: none; stroke: var(--oak); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .doors.wc strong { color: var(--ink); font-weight: 600; }
+  .sheet:last-child .title h1 { font-size: 20pt; }
+  .claim h3 { font-family: var(--serif); font-weight: 400; font-size: 13pt; margin: 2px 0 0; line-height: 1.1; text-align: center; }
+  .claims { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .claims .door .b { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: start; }
+  .claims .door .b p { margin: 0; }
+  .claims .ct { border-left: 1px solid var(--rule); padding-left: 10px; min-width: 1.9in; max-width: 2.3in; }
+  .claims .ct p { display: grid; grid-template-columns: 12px 1fr; gap: 5px; align-items: start; font-weight: 600; color: var(--ink); margin: 0 0 3px; }
+  .claims .ct svg { width: 10px; height: 10px; margin-top: 2px; fill: none; stroke: var(--oak); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .claims .ct a { color: var(--ink); text-decoration: none; }
 </style>
 </head>
 <body>
 
+<div class="sheet">
 <header class="head">
   <img src="../../assets/img/vu-lockup-white.png" alt="Vanderbilt University">
-  <div class="mid">Manager Foundations &middot; Micro course takeaway</div>
+  <div class="mid">FMLA at Vanderbilt &middot; Micro course takeaway &middot; Page 1 of 2</div>
   <div class="t"><b>Family and Medical Leave</b><span>People &middot; Culture &middot; Belonging</span></div>
 </header>
 
@@ -96,7 +119,7 @@
   <section class="title">
     <div>
       <h1>A Leave Request: Where Should It <em>Go</em>?</h1>
-      <h2>What a manager does the day a team member mentions health, family, a new child or military service</h2>
+      <h2>What a manager does the day a team member mentions health, family, a new child or military service. For staff, managers and HCMs.</h2>
     </div>
     <div class="box"><b>FMLA in one line.</b> Up to 12 weeks in 12 months, unpaid, job protected, health coverage kept. Eligible after 12 months and 1,250 hours. Continuous, intermittent, or a reduced schedule. The Leave team decides eligibility; you never do.</div>
   </section>
@@ -118,7 +141,7 @@
     <div class="door gold">
       <div class="h">Hurt at work</div>
       <div class="b"><p class="lead">The injury report, the same day. Then Origami.</p>
-        <ul><li>Nashville campus: Occupational Health Clinic, 1211 21st Ave South, Medical Arts Building Suite 640, 615-936-0955, Mon to Fri 7 a.m. to 4 p.m.</li><li>OHC closed: VUMC Emergency Department, then OHC the next business day</li><li>Outside Nashville: nearest Vanderbilt walk-in clinic or appropriate facility; say the injury is work related</li></ul></div>
+        <ul><li>Treatment and the claim follow the employee&rsquo;s primary work location, not where the injury happened</li><li>Nashville campus: Occupational Health Clinic, 615-936-0955</li><li>Outside Tennessee: the claim goes to Travelers</li><li><strong>Where the employee goes, by location: page 2</strong></li></ul></div>
     </div>
     <div class="door sage">
       <div class="h">Needs a change at work</div>
@@ -155,5 +178,80 @@
   </section>
 
 </main>
+</div>
+
+<div class="sheet">
+<header class="head">
+  <img src="../../assets/img/vu-lockup-white.png" alt="Vanderbilt University">
+  <div class="mid">FMLA at Vanderbilt &middot; Micro course takeaway &middot; Page 2 of 2</div>
+  <div class="t"><b>Workers&rsquo; Compensation</b><span>People &middot; Culture &middot; Belonging</span></div>
+</header>
+
+<main class="page">
+
+  <section class="title">
+    <div>
+      <h1>Work-Related Injury: Where Should the Employee <em>Go</em>?</h1>
+      <h2>Medical treatment and claim administration guide</h2>
+    </div>
+    <div class="box"><b>Supporting employees</b> through timely medical treatment, claim administration and return-to-work resources.</div>
+  </section>
+
+  <section class="steps wc-steps">
+    <div class="st"><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span><div><b>Employee reports a work-related injury</b><p>Employee notifies the supervisor and needs medical treatment.</p></div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="st"><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg></span><div><b>Where is the employee&rsquo;s primary work location?</b><p>Direct the employee to the appropriate medical provider based on their location.</p></div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="st"><span class="n">3</span><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0M14 20a4.5 4.5 0 0 1 8 0"/></svg></span><div><b>Claim administration</b><p>Claims are administered based on the employee&rsquo;s primary work location, not where the injury occurred.</p></div></div>
+  </section>
+
+  <section class="doors wc">
+    <div class="door">
+      <div class="h">Nashville campus</div>
+      <div class="b"><p class="lead">Seek treatment at the Occupational Health Clinic (OHC).</p>
+        <p class="addr"><svg viewBox="0 0 24 24"><path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg><span>1211 21st Ave. South, Medical Arts Building, Suite 640, Nashville, TN 37212</span></p>
+        <p class="addr"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Hours:</strong> Monday through Friday, 7:00 a.m. to 4:00 p.m.</span></p>
+        <ul><li>If OHC is closed and you require immediate medical attention, visit the <strong>VUMC Emergency Department</strong>.</li><li>If you receive treatment in the emergency department, follow up with OHC on the next business day.</li><li>Contact OHC at <strong>615-936-0955</strong> for your follow-up, which may be in person or via telehealth.</li></ul></div>
+    </div>
+    <div class="door gold">
+      <div class="h">Tennessee employees<small>outside the Nashville campus</small></div>
+      <div class="b"><p class="lead">Seek treatment at the nearest Vanderbilt Walk-in Clinic.</p>
+        <ul><li>If a Vanderbilt walk-in clinic is not available, go to the nearest appropriate medical facility, walk-in clinic, urgent care center or emergency room, depending on the nature of your injury.</li><li>Please advise the staff that your injury is work related.</li></ul></div>
+    </div>
+    <div class="door sage">
+      <div class="h">New York and other<small>non-Tennessee employees</small></div>
+      <div class="b"><p class="lead">Seek treatment at the nearest appropriate medical facility, walk-in clinic, urgent care center or emergency room, depending on the nature of your injury.</p>
+        <ul><li>Please advise the staff that your injury is work related.</li><li>Follow the workers&rsquo; compensation reporting process.</li></ul></div>
+    </div>
+    <div class="door sky">
+      <div class="h">Traveling on<small>Vanderbilt business</small></div>
+      <div class="b"><p class="lead">Seek initial treatment at the nearest appropriate medical facility, walk-in clinic, urgent care center or emergency room, depending on the nature of your injury.</p>
+        <ul><li>Please advise the staff that your injury is work related.</li><li>Claims will be administered based on your primary work location.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="claim">
+    <h3>Who Will Manage the Workers&rsquo; Compensation Claim?</h3>
+  </section>
+  <section class="claims">
+    <div class="door">
+      <div class="h">Tennessee-based employees</div>
+      <div class="b"><p>Your claim will be administered by the <strong>Vanderbilt University Workers&rsquo; Compensation Team</strong>, including injuries that occur while traveling on Vanderbilt business. A Vanderbilt claims adjuster will contact you regarding next steps and any additional information that may be needed.</p>
+        <div class="ct"><p><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a href="tel:6153434125">615-343-4125</a></p><p><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><a href="mailto:fmlaprocessing@vanderbilt.edu">fmlaprocessing@vanderbilt.edu</a></p></div></div>
+    </div>
+    <div class="door gold">
+      <div class="h">New York and other non-Tennessee employees</div>
+      <div class="b"><p>Your claim will be administered by <strong>Travelers Insurance</strong>, including injuries that occur while traveling on Vanderbilt business. A Travelers claims representative will contact you with next steps and any additional information needed.</p>
+        <div class="ct"><p><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a href="tel:8002386225">800-238-6225</a></p><p><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><a href="mailto:First.Report@travelers.com">First.Report@travelers.com</a></p><p><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><a href="https://www.travelers.com/claims/report-claim/business-claim-reporting.aspx">travelers.com/claims/report-claim</a></p></div></div>
+    </div>
+  </section>
+
+  <section class="foot">
+    <div>Workers&rsquo; compensation laws, benefits and procedures vary by jurisdiction. Employees should contact the Workers&rsquo; Compensation team with questions regarding their specific claim or situation.</div>
+    <div class="r">Vanderbilt University &middot; Futures Learning Hub<br>People, Culture and Belonging</div>
+  </section>
+
+</main>
+</div>
 </body>
 </html>
