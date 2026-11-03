@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FMLA for managers: a leave request, where should it go?</title>
+<meta name="description" content="One-page guide for Vanderbilt managers: the three steps when a team member mentions leave, the four doors, what you do in Origami, and what you never do.">
+<style>
+  @font-face { font-family: 'Libre Caslon Display'; font-weight: 400; src: url('../../assets/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Libre Caslon Text'; font-style: italic; font-weight: 400; src: url('../../assets/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 400; src: url('../../assets/fonts/inter-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 500; src: url('../../assets/fonts/inter-latin-500-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 600; src: url('../../assets/fonts/inter-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Antonio'; font-weight: 700; src: url('../../assets/fonts/antonio-latin-700-normal.woff2') format('woff2'); }
+  :root {
+    --black: #1C1C1C; --gold: #CFAE70; --oak: #946E24; --cream: #F5F3EF;
+    --ink: #1C1C1C; --ink2: #4a4640; --ink3: #7a7368; --rule: #ddd6c8; --no: #8a3b2f;
+    --serif: 'Libre Caslon Display', 'Times New Roman', serif;
+    --serif-i: 'Libre Caslon Text', 'Times New Roman', serif;
+    --body: 'Inter', Arial, sans-serif;
+    --cond: 'Antonio', Impact, sans-serif;
+  }
+  @page { size: letter landscape; margin: 0; }
+  * { box-sizing: border-box; }
+  html { height: auto; }
+  html, body { margin: 0; padding: 0; background: var(--cream); }
+  body { width: 11in; height: 8.45in; overflow: hidden; font-family: var(--body); color: var(--ink); font-size: 8.4pt; line-height: 1.4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .eyebrow { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .09em; font-size: 7.2pt; color: var(--oak); margin: 0 0 4px; }
+  em { font-family: var(--serif-i); font-style: italic; color: var(--gold); }
+
+  .head { position: relative; background: var(--black); color: #fff; padding: .22in .45in .2in; overflow: hidden; display: grid; grid-template-columns: auto 1fr auto; gap: .3in; align-items: center; }
+  .head::before { content: ''; position: absolute; inset: 0; background: radial-gradient(9in 3in at 90% 0%, rgba(207,174,112,.18), transparent 60%); }
+  .head > * { position: relative; }
+  .head img { width: 1.55in; display: block; }
+  .head .t { text-align: right; }
+  .head .t b { display: block; font-family: var(--serif); font-weight: 400; font-size: 14pt; line-height: 1.1; }
+  .head .t span { font-family: var(--cond); font-weight: 700; font-size: 7.4pt; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+  .head .mid { text-align: center; font-family: var(--cond); font-weight: 700; font-size: 8pt; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+
+  .page { padding: .16in .45in .14in; display: grid; gap: .1in; }
+  .title { display: grid; grid-template-columns: 1fr auto; gap: .3in; align-items: center; }
+  .title h1 { font-family: var(--serif); font-weight: 400; font-size: 24pt; line-height: 1; margin: 0 0 3px; }
+  .title h2 { font-family: var(--serif); font-weight: 400; font-size: 12.5pt; line-height: 1.1; margin: 0; color: var(--oak); }
+  .title .box { border: 1px solid var(--rule); border-radius: 5px; background: #fff; padding: 7px 11px; font-size: 7.8pt; color: var(--ink2); max-width: 2.9in; line-height: 1.38; }
+  .title .box b { color: var(--ink); font-weight: 600; }
+
+  .steps { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr; gap: 6px; align-items: center; }
+  .steps .st { display: grid; grid-template-columns: 30px 1fr; gap: 8px; align-items: start; }
+  .steps .n { width: 30px; height: 30px; border-radius: 50%; background: var(--gold); color: var(--black); font-family: var(--cond); font-weight: 700; font-size: 13pt; display: grid; place-items: center; }
+  .steps b { display: block; font-family: var(--serif); font-weight: 400; font-size: 11pt; line-height: 1.1; margin-bottom: 2px; }
+  .steps p { margin: 0; font-size: 7.8pt; color: var(--ink2); line-height: 1.36; }
+  .steps .arrow { text-align: center; color: var(--gold); font-family: var(--cond); font-weight: 700; font-size: 14pt; }
+
+  .doors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .door { border: 1px solid var(--rule); border-radius: 5px; background: #fff; overflow: hidden; }
+  .door .h { padding: 7px 10px; font-family: var(--cond); font-weight: 700; font-size: 8.2pt; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--black); }
+  .door.gold .h { background: var(--oak); }
+  .door.sage .h { background: #5f6f5b; }
+  .door.sky .h { background: #5a7384; }
+  .door .b { padding: 8px 10px 9px; }
+  .door .b p { margin: 0 0 5px; font-size: 7.8pt; color: var(--ink2); line-height: 1.36; }
+  .door .b p.lead { font-weight: 600; color: var(--ink); font-size: 8.2pt; }
+  .door ul { list-style: none; margin: 0; padding: 0; }
+  .door li { font-size: 7.6pt; color: var(--ink2); padding-left: 9px; position: relative; line-height: 1.36; margin-bottom: 2px; }
+  .door li::before { content: ''; position: absolute; left: 0; top: .5em; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+
+  .two { display: grid; grid-template-columns: 1.15fr 1fr; gap: 8px; }
+  .pane { border: 1px solid var(--rule); border-radius: 5px; background: #fff; padding: 8px 11px 9px; }
+  .pane h3 { font-family: var(--serif); font-weight: 400; font-size: 11pt; margin: 0 0 5px; line-height: 1.1; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
+  .cols li { font-size: 7.7pt; color: var(--ink); padding-left: 14px; position: relative; line-height: 1.36; }
+  .cols li::before { position: absolute; left: 0; top: 0; font-family: var(--cond); font-weight: 700; }
+  .cols .no li::before { content: '\2715'; color: var(--no); }
+  .cols .yes li::before { content: '\2713'; color: var(--oak); }
+  .cols .lab { display: block; font-family: var(--cond); font-weight: 700; font-size: 7pt; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); margin-bottom: 3px; }
+  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .who div { font-size: 7.7pt; color: var(--ink2); line-height: 1.38; }
+  .who b { display: block; font-family: var(--cond); font-weight: 700; font-size: 7pt; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); margin-bottom: 2px; }
+  .who strong { color: var(--ink); font-weight: 600; }
+  .who .c { margin-top: 4px; font-weight: 600; color: var(--ink); }
+
+  .foot { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; border-top: 1px solid var(--rule); padding-top: 6px; font-size: 7.2pt; color: var(--ink2); line-height: 1.4; }
+  .foot .r { text-align: right; color: var(--ink3); }
+</style>
+</head>
+<body>
+
+<header class="head">
+  <img src="../../assets/img/vu-lockup-white.png" alt="Vanderbilt University">
+  <div class="mid">Manager Foundations &middot; Micro course takeaway</div>
+  <div class="t"><b>Family and Medical Leave</b><span>People &middot; Culture &middot; Belonging</span></div>
+</header>
+
+<main class="page">
+
+  <section class="title">
+    <div>
+      <h1>A Leave Request: Where Should It <em>Go</em>?</h1>
+      <h2>What a manager does the day a team member mentions health, family, a new child or military service</h2>
+    </div>
+    <div class="box"><b>FMLA in one line.</b> Up to 12 weeks in 12 months, unpaid, job protected, health coverage kept. Eligible after 12 months and 1,250 hours. Continuous, intermittent, or a reduced schedule. The Leave team decides eligibility; you never do.</div>
+  </section>
+
+  <section class="steps">
+    <div class="st"><span class="n">1</span><div><b>They tell you, in any words.</b><p>&ldquo;My dad is in the hospital.&rdquo; &ldquo;The doctor wants me out three weeks.&rdquo; Thank them, listen, and do not ask what is wrong medically.</p></div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="st"><span class="n">2</span><div><b>You route it, the same day.</b><p>Pick the door below. For health or family, that is Origami. Tell your HCM the same day. An injury is reported first.</p></div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="st"><span class="n">3</span><div><b>The Leave team runs it.</b><p>Eligibility, certification, dates and pay are theirs. Coverage, the schedule and timekeeping are yours, with the codes they give you.</p></div></div>
+  </section>
+
+  <section class="doors">
+    <div class="door">
+      <div class="h">Health or family</div>
+      <div class="b"><p class="lead">Origami. FMLA and other medical or family leave.</p>
+        <ul><li>Send them to Origami, or open the request with them</li><li>Intermittent leave is leave, not attendance</li><li>Certification goes from the provider to the Leave team, never to you</li><li>Plan coverage from the approved dates</li></ul></div>
+    </div>
+    <div class="door gold">
+      <div class="h">Hurt at work</div>
+      <div class="b"><p class="lead">The injury report, the same day. Then Origami.</p>
+        <ul><li>Nashville campus: Occupational Health Clinic, 1211 21st Ave South, Medical Arts Building Suite 640, 615-936-0955, Mon to Fri 7 a.m. to 4 p.m.</li><li>OHC closed: VUMC Emergency Department, then OHC the next business day</li><li>Outside Nashville: nearest Vanderbilt walk-in clinic or appropriate facility; say the injury is work related</li></ul></div>
+    </div>
+    <div class="door sage">
+      <div class="h">Needs a change at work</div>
+      <div class="b"><p class="lead">Equal Opportunity and Access runs the interactive process.</p>
+        <ul><li>A request to keep working differently is an accommodation request</li><li>Recognize it, route it, keep the person working while it is worked out</li><li>Leave and accommodation can run side by side</li></ul></div>
+    </div>
+    <div class="door sky">
+      <div class="h">Plain time off</div>
+      <div class="b"><p class="lead">Yours. Approve it and say yes out loud.</p>
+        <ul><li>A wedding, a trip, a long weekend</li><li>UKG for hourly staff, Oracle Cloud for exempt staff</li><li>Check coverage first, then the approval</li></ul></div>
+    </div>
+  </section>
+
+  <section class="two">
+    <div class="pane">
+      <h3>Origami: your part, and the lines you never cross</h3>
+      <div class="cols">
+        <div class="yes"><span class="lab">You do</span><ul><li>Route it the day you hear it</li><li>Tell your HCM the same day</li><li>Watch the approved type and dates in Origami</li><li>Record leave time with the Leave team&rsquo;s codes</li><li>Keep in touch about the return, not the condition</li></ul></div>
+        <div class="no"><span class="lab">You never</span><ul><li>Ask for a diagnosis or the paperwork</li><li>Decide eligibility, or say it will not qualify</li><li>Wait for a better time, or ask them to</li><li>Count approved leave against attendance or performance</li><li>Discuss it with the team beyond the coverage plan</li></ul></div>
+      </div>
+    </div>
+    <div class="pane">
+      <h3>Who manages what</h3>
+      <div class="who">
+        <div><b>Leave and Workers&rsquo; Compensation</b>Every leave and every work-injury claim for Tennessee-based staff: eligibility, certification, dates, pay, return to work.<p class="c">615-343-4125 &middot; fmlaprocessing@vanderbilt.edu</p></div>
+        <div><b>You and your HCM</b>Coverage, the schedule, timekeeping, and the conversation when they come back. <strong>Outside Tennessee</strong>, work-injury claims go to Travelers: 800-238-6225, First.Report@travelers.com.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="foot">
+    <div>Leave laws, benefits and procedures vary by jurisdiction and by policy. Questions about a specific situation go to Leave and Workers&rsquo; Compensation, then the PCB HelpDesk. This page is guidance, not legal advice.</div>
+    <div class="r">Vanderbilt University &middot; Futures Learning Hub<br>People, Culture and Belonging</div>
+  </section>
+
+</main>
+</body>
+</html>

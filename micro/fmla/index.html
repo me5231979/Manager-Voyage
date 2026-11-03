@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FMLA for managers · Vanderbilt University</title>
+<meta name="description" content="A ten-minute narrated module for Vanderbilt managers: what FMLA protects, how to recognize a leave request that does not sound like one, where it goes the same day, what you do in Origami, and what you never do." />
+<meta name="theme-color" content="#1C1C1C" />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="alternate icon" href="../../assets/img/favicon-96.png" />
+<link rel="preload" href="../../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+  VANDERBILT UNIVERSITY · FMLA FOR MANAGERS
+  Six topics, under ten minutes, one idea per page, every page narrated.
+  Built in the Vanderbilt Voyage Online pattern (see micro/ny-hiring): a
+  headline that carries the point, one line of why, one interaction; the
+  narration carries the depth (narration-scripts.js,
+  assets/audio/fmla/<key>.mp3, no synthetic fallback). Progress:
+  localStorage mv-fmla-* plus SCORM suspend_data inside Oracle Learning.
+  Basis: the federal Family and Medical Leave Act (29 U.S.C. 2601, 29 CFR
+  825) and Vanderbilt's leave process through Origami and the Leave and
+  Workers' Compensation team. The workers' compensation lane follows the
+  PCB guide "Work-Related Injury: Where Should the Employee Go?". Confirm
+  the Origami steps and contacts with Leave and Workers' Compensation
+  before wide release. No em or en dashes anywhere in this file.
+-->
+<script>document.documentElement.classList.add('js','paged');</script>
+<link rel="stylesheet" href="../../assets/css/course.css?v=20260916b" />
+<link rel="stylesheet" href="../../assets/css/course-modules.css?v=1" />
+<link rel="stylesheet" href="../../assets/css/vvo.css?v=1" />
+<link rel="stylesheet" href="../../assets/css/nav.css?v=1" />
+<style>
+/* six topics on the rail, plus the end */
+.v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 16.66%), rgba(255,255,255,.14) 0); }
+.v-rail[data-lesson="6"]{ --l:6; } .v-rail[data-lesson="7"]{ --l:6; }
+/* the basics, as four facts */
+.fm-facts{ list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; margin-top:16px; }
+.fm-facts li{ border-top:2px solid var(--eyebrow); padding-top:8px; font-size:.92rem; color:var(--tx2); line-height:1.4; }
+.fm-facts b{ display:block; color:var(--tx); font-weight:600; margin-bottom:2px; }
+.fm-facts em{ font-family:var(--serif); font-style:normal; font-size:1.5rem; color:var(--eyebrow); display:block; line-height:1; margin-bottom:4px; }
+.fm-src{ margin-top:12px; font-size:.8rem; color:var(--tx3); line-height:1.5; }
+.fm-src a{ color:var(--tx3); }
+@media (max-width:480px){ .fm-facts{ grid-template-columns:1fr; } }
+/* the words that are a request */
+.fm-quotes{ list-style:none; display:grid; gap:8px; margin-top:16px; }
+.fm-quotes li{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:10px 14px; font-family:var(--serif); font-size:1.02rem; line-height:1.35; color:var(--tx); }
+.fm-quotes li span{ display:block; font-family:var(--sans); font-size:.82rem; color:var(--tx2); margin-top:3px; }
+/* the guide: three steps, then four doors */
+.fm-steps{ list-style:none; counter-reset:s; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px; }
+.fm-steps li{ counter-increment:s; border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:12px 14px; }
+.fm-steps li::before{ content:counter(s); display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--eyebrow); color:var(--vu-black); font-family:var(--cond); font-weight:700; font-size:1rem; margin-bottom:8px; }
+.fm-steps b{ display:block; font-weight:600; color:var(--tx); font-size:.98rem; margin-bottom:3px; }
+.fm-steps span{ display:block; color:var(--tx2); font-size:.88rem; line-height:1.4; }
+.fm-doors{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:18px; }
+.fm-doors li{ border-radius:var(--r); border:1px solid var(--bd); background:var(--card); padding:0 0 10px; overflow:hidden; font-size:.86rem; color:var(--tx2); line-height:1.4; }
+.fm-doors li b{ display:block; font-family:var(--cond); font-weight:700; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; padding:9px 12px; color:var(--vu-black); background:var(--eyebrow); margin-bottom:8px; }
+.fm-doors li.alt b{ background:rgba(207,174,112,.22); color:var(--tx); }
+.fm-doors li p{ padding:0 12px; margin:0 0 6px; }
+.fm-doors li p strong{ color:var(--tx); font-weight:600; }
+@media (max-width:760px){ .fm-steps, .fm-doors{ grid-template-columns:1fr; } }
+/* origami: what you do, what you never do */
+.fm-may{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+.fm-may ul{ list-style:none; display:grid; gap:6px; }
+.fm-may li{ font-size:.92rem; color:var(--tx); padding-left:22px; position:relative; line-height:1.4; }
+.fm-may li::before{ position:absolute; left:0; top:0; font-family:var(--cond); font-weight:700; }
+.fm-may .no li::before{ content:'\2715'; color:var(--vu-err); }
+.fm-may .yes li::before{ content:'\2713'; color:var(--eyebrow); }
+.fm-may .v-label{ margin-bottom:8px; }
+.fm-note{ margin-top:14px; font-size:.92rem; color:var(--tx2); line-height:1.45; border-top:1px solid var(--bd); padding-top:10px; }
+.fm-note b{ color:var(--tx); }
+@media (max-width:560px){ .fm-may{ grid-template-columns:1fr; } }
+/* the deck cards need room for a long sentence */
+.v-deck .dq-s{ font-size:clamp(1.05rem,.8vw + .85rem,1.4rem) !important; }
+.v-survey b{ font-size:1.25rem; }
+.v-visit + .v-visit{ margin-top:6px; }
+/* ordering activity */
+.order{ border:1px solid var(--bdg); border-radius:var(--r); background:var(--card2); padding:16px 18px 18px; }
+.order .o-h{ font-size:.92rem; color:var(--tx2); margin-bottom:10px; }
+.order .o-h b{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-right:8px; }
+.order-list{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+.order-list button{ width:100%; text-align:left; display:flex; gap:12px; align-items:flex-start; border:1px solid var(--field-bd); border-radius:8px; background:var(--field); color:var(--tx); font:inherit; font-size:.95rem; line-height:1.4; padding:11px 12px; cursor:pointer; transition:border-color .2s var(--ease); }
+.order-list button:hover:not([disabled]){ border-color:var(--eyebrow); }
+.order-list button .n{ flex:0 0 26px; height:26px; border-radius:50%; border:2px solid var(--eyebrow); display:inline-grid; place-items:center; font-family:var(--cond); font-weight:700; font-size:.8rem; color:var(--tx3); }
+.order-list button.placed{ border-color:var(--eyebrow); background:var(--card); cursor:default; }
+.order-list button.placed .n{ background:var(--eyebrow); color:var(--vu-black); }
+.order-list button.shake{ border-color:var(--vu-err); }
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<header class="gnav" id="nav">
+  <a class="gnav__brand" href="./#p/home/1" aria-label="FMLA for managers, start of the module">
+    <img src="../../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="166" height="43" decoding="async" />
+  </a>
+  <div class="gnav__right">
+    <nav class="gnav__links" id="gnavLinks" aria-label="Module">
+      <a href="./" aria-current="page">FMLA for managers</a>
+      <a href="#p/steps/1">Where it goes</a>
+      <a href="#p/origami/1">Origami</a>
+      <a href="#p/next/1">Next steps</a>
+      <a class="gnav__btn" href="mailto:fmlaprocessing@vanderbilt.edu">Contact the Leave team</a>
+    </nav>
+    <div class="gnav__extra">
+      <button type="button" class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel"><span class="pw">Progress</span> <b id="progCount">0/7</b></button>
+    </div>
+    <button type="button" class="gnav__burger" aria-label="Menu" aria-expanded="false" aria-controls="gnavLinks"><span></span><span></span><span></span></button>
+  </div>
+  <span class="gnav__line" aria-hidden="true"><span class="prog-fill" id="progFill"></span></span>
+</header>
+
+<div class="prog-panel" id="progPanel" role="region" aria-label="Your progress" hidden>
+  <div class="pp-h">Your progress</div>
+  <p class="prog-sum" id="progSum">Each activity you finish is counted here.</p>
+  <ol class="prog-list" id="progList"></ol>
+  <p class="prog-fine">Progress is saved in this browser and, when you open this module from Oracle Learning, in your Oracle record. Reset it anytime in the footer.</p>
+  <p class="prog-fine prog-warn" id="progStorageNote" hidden>Heads up: your browser is blocking saved progress (this happens in private browsing). Marks work during this visit but reset when you close the tab.</p>
+</div>
+<p class="sr" id="progStatus" role="status" aria-live="polite"></p>
+
+<main id="main"><span id="top"></span>
+
+<!-- ═══ WELCOME ═══ -->
+<section class="hero v-hero th-dark" aria-label="Welcome">
+  <div class="v-hero-bg" aria-hidden="true"><img src="../../assets/img/hero-poster.jpg" alt="" width="1680" height="945" /></div>
+  <div class="wrap v-hero-in">
+    <span class="v-kicker">Vanderbilt University &middot; Manager Foundations &middot; Micro course</span>
+    <h1 class="v-display">FMLA for <em>managers</em>.</h1>
+    <p class="v-hello">A leave request rarely sounds like one. Hear it, route it the same day, plan the work, and never ask for a diagnosis. The Leave team does the rest.</p>
+    <div class="v-hero-cta">
+      <a class="btn btn-gold" href="#p/basics/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <ul class="v-meta" aria-label="Module at a glance"><li>6 topics</li><li>Under 10 minutes</li><li>Narrated</li></ul>
+    </div>
+    <details class="v-goals">
+      <summary>What you will be able to do</summary>
+      <ol>
+        <li><b>State</b> what FMLA protects, who is eligible, and for how long.</li>
+        <li><b>Recognize</b> a leave request in the words a team member actually uses.</li>
+        <li><b>Route</b> it the same day: to Origami for leave, the injury report for a workplace injury, EOA for an accommodation.</li>
+        <li><b>Do</b> your part in Origami and in timekeeping, and leave eligibility and medical questions to the Leave team.</li>
+        <li><b>Keep</b> the job, the schedule, and the attendance record protected while someone is out and when they come back.</li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<!-- ═══ TOPIC 1 · THE BASICS ═══ -->
+<section id="basics" class="th-dark v-sec" aria-label="Topic 1: The basics">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="1"><span>Topic 1 of 6 &middot; The basics</span></div>
+    <div class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Twelve weeks, job <em>protected</em>.</h2>
+        <p class="v-why">The Family and Medical Leave Act is a federal law. It gives an eligible employee time away for health and family, and it gives them their job back.</p>
+        <ul class="fm-facts">
+          <li><em>12</em><b>weeks in a 12-month period</b>Unpaid, job-protected, with health coverage kept. Up to 26 weeks to care for a service member.</li>
+          <li><em>1,250</em><b>hours to be eligible</b>Worked in the past 12 months, after 12 months with Vanderbilt. The Leave team checks this, not you.</li>
+          <li><em>4</em><b>reasons it covers</b>Their own serious health condition. Caring for a spouse, child or parent. A new child by birth, adoption or foster care. A family member&rsquo;s military service.</li>
+          <li><em>3</em><b>shapes it can take</b>Continuous, intermittent, or a reduced schedule. Intermittent leave is the one managers mishandle most.</li>
+        </ul>
+        <p class="fm-src">U.S. Department of Labor, <a href="https://www.dol.gov/agencies/whd/fmla" target="_blank" rel="noopener">The Family and Medical Leave Act</a> &middot; 29 CFR Part 825 &middot; Vanderbilt leave policy and process: <a href="https://www.vanderbilt.edu/pcb/" target="_blank" rel="noopener">People, Culture and Belonging</a></p>
+      </div>
+      <div class="v-act">
+        <p class="v-task" data-task="basics">Myth or fact? Three statements</p>
+        <div class="drill v-deck" data-drill="basics" aria-label="Myth or fact"></div>
+        <p class="drill-status" id="basicsStatus" role="status" aria-live="polite">0 of 3 decided.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TOPIC 2 · RECOGNIZE IT ═══ -->
+<section id="recognize" class="th-dark v-sec" aria-label="Topic 2: Recognize it">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="2"><span>Topic 2 of 6 &middot; Recognize it</span></div>
+    <div class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Nobody says the word <em>FMLA</em>.</h2>
+        <p class="v-why">They say it in the hallway, at the end of a 1:1, or in a text at 6 a.m. The law does not require the acronym. Once you hear it, the clock is running.</p>
+        <ul class="fm-quotes">
+          <li>&ldquo;My dad is in and out of the hospital. I might need some time.&rdquo;<span>Caring for a parent. That is a leave request.</span></li>
+          <li>&ldquo;My doctor wants me out for three weeks after the surgery.&rdquo;<span>Their own serious health condition. That is a leave request.</span></li>
+          <li>&ldquo;The migraines are back. Some mornings I just cannot drive in.&rdquo;<span>A chronic condition, possibly intermittent leave. That is a leave request.</span></li>
+          <li>&ldquo;Can I have next Friday off for a wedding?&rdquo;<span>Time off. Yours to approve.</span></li>
+        </ul>
+        <p class="fm-note"><b>The test:</b> health, family health, a new child, or military family. Any of those, and you route it. You do not decide whether it qualifies.</p>
+      </div>
+      <div class="v-act">
+        <p class="v-task" data-task="recognize">Route it or handle it? Six lines</p>
+        <div class="drill v-deck" data-drill="recognize" aria-label="Route it or handle it"></div>
+        <p class="drill-status" id="recognizeStatus" role="status" aria-live="polite">0 of 6 sorted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TOPIC 3 · WHERE IT GOES ═══ -->
+<section id="steps" class="th-dark v-sec" aria-label="Topic 3: Where it goes">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="3"><span>Topic 3 of 6 &middot; Where it goes</span></div>
+    <div class="v-stage wide-act">
+      <div class="v-copy">
+        <h2 class="v-h">A leave request: where should it <em>go</em>?</h2>
+        <p class="v-why">Three steps, the same day. The door depends on what happened, not on how sure you are.</p>
+        <ol class="fm-steps">
+          <li><b>They tell you.</b><span>In any words. Thank them, listen, and do not ask what is wrong medically.</span></li>
+          <li><b>You route it, the same day.</b><span>Point them to Origami, or open the request with them. Tell your HCM. Report an injury first.</span></li>
+          <li><b>The Leave team runs it.</b><span>Eligibility, certification, dates and pay. You plan coverage and record time the way they tell you.</span></li>
+        </ol>
+      </div>
+      <div class="v-act">
+        <p class="v-task" data-task="steps">Tap the six steps in order</p>
+        <div class="order" id="orderBox" aria-label="Put the steps in order"></div>
+        <p class="drill-status" id="stepsStatus" role="status" aria-live="polite">A wrong tap tells you why. 0 of 6 placed.</p>
+      </div>
+    </div>
+    <ul class="fm-doors">
+          <li><b>Health or family</b><p><strong>Origami.</strong> FMLA and other medical or family leave, including intermittent.</p><p>Leave and Workers&rsquo; Compensation: <strong>615-343-4125</strong>, fmlaprocessing@vanderbilt.edu</p></li>
+          <li class="alt"><b>Hurt at work</b><p><strong>The injury report, the same day,</strong> then Origami. Treatment follows the primary work location.</p><p>Nashville campus: Occupational Health Clinic, 1211 21st Ave South, Medical Arts Building Suite 640, 615-936-0955. After hours, the VUMC Emergency Department.</p></li>
+          <li class="alt"><b>Needs a change at work</b><p><strong>Equal Opportunity and Access</strong> runs the interactive process for an accommodation.</p><p>Keep the person working while it is worked out.</p></li>
+          <li><b>Plain time off</b><p><strong>You.</strong> Approve it in UKG or Oracle, check coverage, say yes out loud.</p><p>A wedding, a trip, a long weekend.</p></li>
+        </ul>
+  </div>
+</section>
+
+<!-- ═══ TOPIC 4 · ORIGAMI ═══ -->
+<section id="origami" class="th-dark v-sec" aria-label="Topic 4: Origami">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="4"><span>Topic 4 of 6 &middot; Origami</span></div>
+    <div class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Origami is where the leave <em>lives</em>.</h2>
+        <p class="v-why">Vanderbilt&rsquo;s leave and claims system. The request, the certification, the approved dates and the return all sit there, with the Leave team on the other side.</p>
+        <div class="fm-may">
+          <div class="yes"><span class="v-label">You do</span><ul><li>Send them to Origami the day you hear it, or open it with them if they cannot</li><li>Tell your HCM the same day, and the Leave team if the person is already out</li><li>Watch for the approved type and dates, and plan coverage from those</li><li>Record leave time with the codes the Leave team gives you</li></ul></div>
+          <div class="no"><span class="v-label">You never</span><ul><li>Ask for a diagnosis, or for the medical paperwork</li><li>Decide eligibility, or say it will not qualify</li><li>Wait for a better time, or ask them to wait</li><li>Count approved leave against attendance or performance</li></ul></div>
+        </div>
+        <p class="fm-note"><b>Medical certification</b> goes from the employee&rsquo;s provider to the Leave team through Origami. If it lands in your inbox, forward it unread to fmlaprocessing@vanderbilt.edu and delete your copy.</p>
+      </div>
+      <div class="v-act">
+        <p class="v-task" data-task="origami">Which first move holds?</p>
+        <div class="scn" data-scn="origami" aria-label="Make the call"></div>
+        <p class="drill-status" id="origamiStatus" role="status" aria-live="polite">Try all three. The activity completes when you find the one that holds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TOPIC 5 · YOUR CALL ═══ -->
+<section id="yourcall" class="th-dark v-sec" aria-label="Topic 5: Your call">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="5"><span>Topic 5 of 6 &middot; Your call</span></div>
+    <div class="v-stage wide-act">
+      <div class="v-copy">
+        <h2 class="v-h">Three situations, three <em>calls</em>.</h2>
+        <p class="v-why">A parent in the hospital, an attendance write-up that is really intermittent leave, and a return to work with a curious team. The consequences teach more than the right answer.</p>
+      </div>
+      <div class="v-act">
+        <p class="v-task" data-task="yourcall">Three moments. What would you do?</p>
+        <div class="calls" id="callsBox" data-calls="ny"></div>
+        <p class="drill-status" id="nyStatus" role="status" aria-live="polite">0 of 3 situations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TOPIC 6 · QUICK CHECK ═══ -->
+<section id="quiz" class="th-dark v-sec" aria-label="Topic 6: Quick check">
+  <div class="wrap narrow">
+    <div class="v-rail" data-lesson="6"><span>Topic 6 of 6 &middot; Quick check</span></div>
+    <h2 class="v-h center">Five <em>questions</em>.</h2>
+    <p class="v-task center" data-task="quiz">Four of five to pass</p>
+    <div id="quizBox"></div>
+    <p class="drill-status" id="quizStatus" role="status" aria-live="polite">0 of 5 answered.</p>
+    <div class="kq-done" id="quizDone" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ═══ NEXT STEPS ═══ -->
+<section id="next" class="th-dark v-sec" aria-label="Next steps">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="7"><span>Next steps &middot; Four practices</span></div>
+    <div class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Your four <em>practices</em>.</h2>
+        <p class="v-task" data-task="next">Tap each one to commit</p>
+        <div class="v-commits" id="commitList" role="group" aria-label="Your four practices"></div>
+        <p class="drill-status" id="commitStatus" role="status" aria-live="polite"></p>
+      </div>
+      <div class="v-act">
+        <a class="v-survey" href="FMLA-Takeaway.pdf" target="_blank" rel="noopener"><span class="v-label">One page &middot; PDF</span><b>Download the printable guide</b><i aria-hidden="true">&darr;</i></a>
+        <p class="v-visit"><b>Leave and Workers&rsquo; Compensation</b> runs every leave: 615-343-4125, <a href="mailto:fmlaprocessing@vanderbilt.edu">fmlaprocessing@vanderbilt.edu</a>.</p>
+        <p class="v-visit"><b>Your HCM</b> hears about every leave the day you do, and helps with coverage and timekeeping.</p>
+        <p class="v-visit"><b>PCB HelpDesk</b> for anything they cannot answer: <a href="https://www.vanderbilt.edu/pcb/" target="_blank" rel="noopener">submit a ticket</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE END ═══ -->
+<section id="end" class="th-dark v-sec v-end" aria-label="The end of the module">
+  <div class="v-end-bg" aria-hidden="true"><img src="../../assets/img/hero-poster.jpg" alt="" width="1680" height="945" loading="lazy" /></div>
+  <div class="wrap">
+    <h2 class="v-display sm">Hear it. Route it. Protect <em>it</em>.</h2>
+    <p class="v-hello">The same day, without a diagnosis, with the Leave team on the other side of Origami.</p>
+    <div class="v-hero-cta center">
+      <a class="btn btn-gold" href="FMLA-Takeaway.pdf" target="_blank" rel="noopener">Download the guide</a>
+      <button type="button" class="btn btn-ghost" id="exitBtn">Exit the module</button>
+    </div>
+    <nav class="v-links" aria-label="Keep these close">
+      <a href="https://www.dol.gov/agencies/whd/fmla" target="_blank" rel="noopener">FMLA at the Department of Labor</a>
+      <a href="https://www.dol.gov/agencies/whd/fmla/employee-guide" target="_blank" rel="noopener">The employee&rsquo;s guide to FMLA</a>
+      <a href="https://www.vanderbilt.edu/pcb/" target="_blank" rel="noopener">People, Culture and Belonging</a>
+      <a href="mailto:fmlaprocessing@vanderbilt.edu">Leave and Workers&rsquo; Compensation</a>
+    </nav>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcenter">
+      <img src="../../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
+      <p class="fprogram">Vanderbilt University &middot; FMLA for managers</p>
+      <p class="flegal">&copy; <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. This module summarizes the Family and Medical Leave Act and Vanderbilt&rsquo;s leave process for managers; it is guidance, not legal advice. Leave and Workers&rsquo; Compensation decides eligibility and administers every leave. Progress is saved in this browser only, and in your Oracle Learning record when you open the module from there.</p>
+      <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="book-bar" id="bookBar" role="navigation" aria-label="Book controls">
+  <div class="bb-left">
+    <span class="bb-sec" id="bbSec" aria-hidden="true">Welcome</span>
+    <button type="button" class="bb-aud" id="bbListen" aria-pressed="false" aria-label="Listen to this page" title="Listen to this page"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5zM15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span class="bb-aud-t" id="bbListenT">Listen</span></button>
+    <button type="button" class="bb-aud" id="bbAuto" aria-pressed="false" aria-label="Auto-narrate every page" title="Auto-narrate every page"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg><span class="bb-aud-t">Auto</span></button>
+    <button type="button" class="bb-done" id="bbDone" aria-pressed="false" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span class="bb-done-t">Mark done</span></button>
+  </div>
+  <nav class="bb-dots" id="bbDots" aria-label="Module pages"></nav>
+  <div class="bb-ctl">
+    <span class="bb-count" id="bbCount" aria-live="polite">1 / 1</span>
+    <button type="button" class="bb-btn" id="pgPrev" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button type="button" class="bb-btn" id="pgNext" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+<p class="narr-toast" id="narrToast" role="status" aria-live="polite"></p>
+
+<div class="oracle-overlay" id="oracleModal" role="dialog" aria-modal="true" aria-labelledby="oracleTitle" hidden>
+  <div class="oracle-modal">
+    <span class="mono">Module complete</span>
+    <h2 id="oracleTitle">You have finished FMLA for managers.</h2>
+    <p id="oracleBody">Every activity is done. Download the guide, keep the Leave team&rsquo;s number close, and route the next one the same day.</p>
+    <div class="oracle-actions">
+      <a class="btn btn-gold" href="FMLA-Takeaway.pdf" target="_blank" rel="noopener">Download the guide</a>
+      <button type="button" class="btn btn-ghost btn-sm" id="oracleGo">Done</button>
+    </div>
+    <p class="oracle-fine" id="oracleFine">Outside Oracle Learning, completion stays in this browser.</p>
+  </div>
+</div>
+
+<script src="../../assets/js/config.js?v=20260912p"></script>
+<script src="../../assets/js/scorm.js?v=20260912p"></script>
+<script src="../../assets/js/oracle.js?v=20260912p"></script>
+<script src="narration-scripts.js?v=1"></script>
+<script src="../../assets/js/nav.js?v=1"></script>
+<script src="pager.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
