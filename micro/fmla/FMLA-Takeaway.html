@@ -12,7 +12,7 @@
   @font-face { font-family: 'Inter'; font-weight: 600; src: url('../../assets/fonts/inter-latin-600-normal.woff2') format('woff2'); }
   @font-face { font-family: 'Antonio'; font-weight: 700; src: url('../../assets/fonts/antonio-latin-700-normal.woff2') format('woff2'); }
   :root {
-    --black: #1C1C1C; --gold: #CFAE70; --oak: #946E24; --cream: #F5F3EF;
+    --black: #1C1C1C; --gold: #CFAE70; --oak: #946E24; --cream: #FFFFFF;
     --ink: #1C1C1C; --ink2: #4a4640; --ink3: #7a7368; --rule: #ddd6c8; --no: #8a3b2f;
     --serif: 'Libre Caslon Display', 'Times New Roman', serif;
     --serif-i: 'Libre Caslon Text', 'Times New Roman', serif;
@@ -56,8 +56,8 @@
   .door { border: 1px solid var(--rule); border-radius: 5px; background: #fff; overflow: hidden; }
   .door .h { padding: 7px 10px; font-family: var(--cond); font-weight: 700; font-size: 8.2pt; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--black); }
   .door.gold .h { background: var(--oak); }
-  .door.sage .h { background: #5f6f5b; }
-  .door.sky .h { background: #5a7384; }
+  .door.sage .h { background: #8BA18E; color: var(--ink); }
+  .door.sky .h { background: #BAC7D1; color: var(--ink); }
   .door .b { padding: 8px 10px 9px; }
   .door .b p { margin: 0 0 5px; font-size: 7.8pt; color: var(--ink2); line-height: 1.36; }
   .door .b p.lead { font-weight: 600; color: var(--ink); font-size: 8.2pt; }
@@ -89,7 +89,7 @@
   .wc-steps .st { grid-template-columns: 30px 30px 1fr; }
   .wc-steps .ic { width: 30px; height: 30px; border-radius: 50%; border: 1.2px solid var(--oak); display: grid; place-items: center; }
   .wc-steps .ic svg { width: 15px; height: 15px; fill: none; stroke: var(--oak); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .doors.wc .door .h small { display: block; font-family: var(--serif-i); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 8pt; color: rgba(255,255,255,.9); }
+  .doors.wc .door .h small { display: block; font-family: var(--serif-i); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 8pt; opacity: .9; }
   .doors.wc .door .b p.lead { font-family: var(--serif); font-weight: 400; font-size: 9.6pt; line-height: 1.15; }
   .doors.wc .addr { display: grid; grid-template-columns: 12px 1fr; gap: 4px; align-items: start; margin: 0 0 3px; font-size: 7.6pt; color: var(--ink2); }
   .doors.wc .addr svg { width: 10px; height: 10px; margin-top: 2px; fill: none; stroke: var(--oak); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
