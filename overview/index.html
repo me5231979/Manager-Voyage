@@ -483,7 +483,20 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
 .tbl th, .tbl td{ text-align:left; padding:5px 8px; border-bottom:1px solid var(--bd); }
 .tbl th{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tx3); }
 .tbl td:not(:first-child), .tbl th:not(:first-child){ text-align:right; }
-@media (max-width:1000px){ .agenda, .disc{ grid-template-columns:1fr; } .hire, .hstrip{ grid-template-columns:1fr; } }
+.shots{ margin-top:18px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px 16px; }
+.shots figure{ margin:0; }
+.shots img{ display:block; width:100%; height:auto; max-height:24vh; object-fit:cover; object-position:top; border:1px solid var(--bd); border-radius:var(--r); box-shadow:0 10px 30px rgba(0,0,0,.35); }
+.shots figcaption{ margin-top:7px; font-size:.84rem; color:var(--tx2); line-height:1.35; }
+.shots figcaption b{ display:block; font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+.meet{ margin-top:22px; display:grid; grid-template-columns:1fr 1fr 1.2fr; gap:14px; }
+.meet > div{ background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); padding:16px 18px; }
+.meet .lab{ display:block; font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:8px; }
+.meet .lab + ul + .lab{ margin-top:14px; }
+.meet ul{ list-style:none; padding:0; }
+.meet li{ font-size:1rem; line-height:1.35; padding:5px 0; border-bottom:1px solid var(--bd); }
+.meet li:last-child{ border-bottom:0; }
+.meet .people li{ font-family:var(--serif); font-size:1.15rem; }
+@media (max-width:1000px){ .agenda, .disc, .meet, .shots{ grid-template-columns:1fr; } .hire, .hstrip{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -516,7 +529,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     <ol class="agenda rv">
       <li><b>01</b><h3>Recap</h3><p>Update on progress since the first jam session.</p></li>
       <li><b>02</b><h3>Prototype reveal</h3><p>The journey, the standard, and the four components, live.</p></li>
-      <li><b>03</b><h3>Feedback review</h3><p>What we heard from DAR, Facilities and VBOM staff.</p></li>
+      <li><b>03</b><h3>Feedback review</h3><p>What we are hearing from DAR, Facilities, VBOM and USAC staff.</p></li>
       <li><b>04</b><h3>Discussion</h3><p>Where the feedback converges, where it diverges, and what we change.</p></li>
       <li><b>05</b><h3>Open item</h3><p>Hiring manager data: internal versus external.</p></li>
       <li><b>06</b><h3>Next steps</h3><p>Owners and dates to the next version and to launch.</p></li>
@@ -686,6 +699,23 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   </div>
 </section>
 
+<!-- 5b · THE COURSE, PAGE BY PAGE -->
+<section class="slide th-dark" id="s5b" aria-roledescription="slide" data-title="Manager Foundations · The course">
+  <div class="wrap">
+    <p class="eyebrow rv">02 &middot; Prototype reveal &middot; The Foundations course</p>
+    <h2 class="h rv">The Foundations course, <em>page by page</em>.</h2>
+    <div class="shots rv">
+      <figure><img src="../assets/img/course/gate.jpg" alt="The course opens by asking the manager to take the assessment first" width="1200" height="750" loading="lazy"><figcaption><b>Assessment first</b>Ten statements before the course opens.</figcaption></figure>
+      <figure><img src="../assets/img/course/welcome.jpg" alt="The Vanderbilt Manager Standard page with the four expectations compass" width="1200" height="750" loading="lazy"><figcaption><b>The standard</b>Four expectations, fifteen behaviors, sorted from a real week.</figcaption></figure>
+      <figure><img src="../assets/img/course/ideas.jpg" alt="Five ideas every good manager relies on, each with a live conversation" width="1200" height="750" loading="lazy"><figcaption><b>Five ideas</b>Each one practiced in a live conversation.</figcaption></figure>
+      <figure><img src="../assets/img/course/calls.jpg" alt="Who handles what: handle it, ask, route it or report it" width="1200" height="750" loading="lazy"><figcaption><b>Who handles what</b>Handle it, ask, route it, or report it. Five situations.</figcaption></figure>
+      <figure><img src="../assets/img/course/yourcall.jpg" alt="Four conversations, one per expectation, held out loud with a team member who answers back" width="1200" height="750" loading="lazy"><figcaption><b>Your call</b>Four conversations out loud, scored on what you say.</figcaption></figure>
+      <figure><img src="../assets/img/course/survey.jpg" alt="Your score by expectation, and where it should go" width="1200" height="750" loading="lazy"><figcaption><b>Your score</b>Read against the standard. A target for the re-up.</figcaption></figure>
+    </div>
+    <p class="note rv">Thirty-five minutes. Live at <a href="../foundation/">manager-voyage.vercel.app/foundation</a>. We will click through it in the room.</p>
+  </div>
+</section>
+
 <!-- 6 · THE COHORT -->
 <section class="slide th-dark" id="s6" aria-roledescription="slide" data-title="Component 03 · The four-week cohort">
   <div class="wrap">
@@ -784,58 +814,29 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
   </div>
 </section>
 
-<!-- 9b · BEHIND THE SCENES -->
-<section class="slide th-dark print-long" id="s9b" aria-roledescription="slide" data-title="Behind the scenes · How it connects">
-  <div class="wrap">
-    <p class="eyebrow rv">02 &middot; Prototype reveal &middot; Behind the scenes</p>
-    <h2 class="h rv">How the experience, program, process and systems <em>connect</em>.</h2>
-    <div class="stack4 rv" role="table" aria-label="How the experience, the programs, the process and the systems connect, by stage">
-      <div class="s4-h" role="row"><span></span><span>Day 1</span><span>Days 1 to 60</span><span>Next quarter</span><span>At 90 days</span></div>
-      <div class="s4-r" role="row"><span class="rl">Experience<small>what the manager feels</small></span>
-        <span class="c"><b>Assigned</b>Nothing to request</span>
-        <span class="c"><b>Learns the standard</b>In an hour, then as duties arrive</span>
-        <span class="c"><b>Practices</b>With their own team</span>
-        <span class="c"><b>Sees the change</b>Before and after</span>
-      </div>
-      <div class="s4-r" role="row"><span class="rl">Program<small>what they take</small></span>
-        <span class="c hi"><b>Compliance</b>and the Foundations course</span>
-        <span class="c hi"><b>Micro courses</b>FMLA, PTO, timecards, hiring</span>
-        <span class="c hi"><b>Four-week cohort</b>Room, virtual, virtual, room</span>
-        <span class="c hi"><b>Reassessment</b>The same ten statements</span>
-      </div>
-      <div class="s4-r" role="row"><span class="rl">Process<small>what moves</small></span>
-        <span class="c"><b>Role change</b>assigns the path</span>
-        <span class="c"><b>Completion recorded</b>Day 60 sends the invitation</span>
-        <span class="c"><b>Survey after each session</b>Completion recorded</span>
-        <span class="c"><b>Invitation at 90 days</b>Result beside the first score</span>
-      </div>
-      <div class="s4-r sys" role="row"><span class="rl">Systems<small>what it runs on</small></span>
-        <span class="c"><i>Oracle HCM</i><i>Oracle Learning</i></span>
-        <span class="c"><i>Oracle Learning</i><i>SCORM course</i><i>LinkedIn Learning</i></span>
-        <span class="c"><i>Cohort site</i><i>ElevenLabs</i><i>SparkWise</i></span>
-        <span class="c"><i>Power Automate</i><i>SharePoint</i><i>Email</i></span>
-      </div>
-      <div class="s4-p" role="row"><span class="rl"></span><span class="band"><b>The Manager Portal</b>always live, from day one</span></div>
-    </div>
-    <details class="more"><summary>Each connection, in a sentence</summary><div class="more-in">
-      <div class="cols">
-        <div><h4>Day 1</h4><ul><li>A role change on the Oracle HCM record assigns compliance and the Foundations course in Oracle Learning. The manager requests nothing.</li></ul>
-        <h4>Days 1 to 60</h4><ul><li>The Foundations course is a custom web course launched from Oracle Learning as a SCORM package; completion is written back to the job profile. The micro courses are LinkedIn Learning and vendor courses in Oracle Learning, taken as each duty arrives. Everything done by Day 60 sends the cohort invitation.</li></ul></div>
-        <div><h4>Next quarter</h4><ul><li>The cohort site is a custom web site: scenarios tailored to the team, ElevenLabs voice characters scored on the phone, SparkWise learning labs, the Playbook. A survey after each session and the completion record post to Power Automate and land in SharePoint.</li></ul>
-        <h4>At 90 days</h4><ul><li>A scheduled flow invites the reassessment by email. The same ten statements, stored beside the first score, show the change by expectation.</li><li>The Manager Portal, a PCB web page, is linked from the course, the cohort and every email, and never goes away.</li></ul></div>
-      </div>
-    </div></details>
-  </div>
-</section>
-
 <!-- 12 · FEEDBACK REVIEW -->
 <section class="slide th-light" id="s12" aria-roledescription="slide" data-title="Feedback review">
   <div class="wrap">
     <p class="eyebrow rv">03 &middot; Feedback review</p>
-    <h2 class="h rv">Feedback from <em>DAR, Facilities and VBOM</em> staff.</h2>
-    <p class="lead rv">Three groups, three different seats at the table. We are in conversation with each and still gathering feedback.</p>
-    <div class="grid g3 rv"><div class="card fb"><span class="when">Development and Alumni Relations</span><h3>DAR</h3><p class="st">Volunteer pilot partner. In conversation.</p><span class="lab">What we are asking</span><ul><li>Which conversation would you want your managers to practice first?</li><li>Can week one take three hours out of a fundraising calendar?</li><li>Eight management roles filled this year: where did those managers come from?</li></ul><span class="lab">What we heard</span><ul class="blank"><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li></ul></div><div class="card fb"><span class="when">Facilities</span><h3>Facilities</h3><p class="st">Volunteer pilot partner. In conversation.</p><span class="lab">What we are asking</span><ul><li>Do the virtual weeks work for supervisors on a shift, from a phone?</li><li>Timecards, leave and coverage: is the micro course order right?</li><li>Who does a supervisor call on day one, by name?</li></ul><span class="lab">What we heard</span><ul class="blank"><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li></ul></div><div class="card fb"><span class="when">Vanderbilt Business Operations Managers</span><h3>VBOM staff</h3><p class="st">Prototype presented. Feedback being gathered.</p><span class="lab">What we are asking</span><ul><li>Do the four expectations read as fair across business units?</li><li>Should the assessment score stay private, or open a conversation with the leader?</li><li>Cohort mix: across units, or within a division first?</li></ul><span class="lab">What we heard</span><ul class="blank"><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li></ul></div></div>
-    <p class="note rv">Fill in what we heard before the session, three lines per group. Nothing here is a finding yet.</p>
+    <h2 class="h rv">Feedback from <em>DAR, Facilities, VBOM and USAC</em> staff.</h2>
+    <p class="lead rv">We are meeting with DAR, Facilities, VBOM and USAC staff, and have shared the Foundations course with each of them. Their feedback shapes the next version.</p>
+    <div class="meet rv">
+      <div class="groups">
+        <span class="lab">The groups</span>
+        <ul><li>Development and Alumni Relations</li><li>Facilities</li><li>Vanderbilt Business Operations Managers</li><li>University Staff Advisory Council</li></ul>
+      </div>
+      <div class="people">
+        <span class="lab">Who we are meeting with</span>
+        <ul><li>Stacey Crowhurst</li><li>Kylie Ross</li><li>Doug Hunter</li><li>Jennifer Bennett</li><li>Kristen Conoley</li><li>Jeremy Bourgoin</li><li>Alex Enferadi</li></ul>
+      </div>
+      <div class="shared">
+        <span class="lab">What they have</span>
+        <ul><li>The Foundations course, to take end to end</li><li>The manager&rsquo;s timeline, day one to ninety</li><li>The four expectations and the assessment</li></ul>
+        <span class="lab">What we are asking</span>
+        <ul><li>Does it fit a week in your unit?</li><li>What would you change before January?</li><li>Who should be in the first fifty?</li></ul>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -847,7 +848,7 @@ table.t td:first-child{ color:var(--tx); font-weight:600; }
     <div class="disc rv">
       <div><span class="lab">Converges</span><ul><li>Practical over theoretical: real conversations, real templates.</li><li>Learn by doing, on your own team.</li><li>One standard, the same in every unit.</li><li>A Portal with names, not a library.</li></ul></div>
       <div><span class="lab">Diverges</span><ul><li>Time: three hours in the room in week one, or two?</li><li>Hourly teams: do the virtual weeks fit a shift?</li><li>Cohort mix: across units, or within a division first?</li><li>The score: private to the manager, or shared with their leader?</li></ul></div>
-      <div class="hi"><span class="lab">What we change</span><ul class="blank"><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li></ul><p class="small">Decide in the room. Each change gets an owner on the next slide but one.</p></div>
+      <div class="hi"><span class="lab">What we change</span><ul><li>What we keep as it is.</li><li>What we change before the next version.</li><li>What we park until after the January launch.</li><li>Who owns each change, and by when.</li></ul><p class="small">Decided in the room. Owners and dates go on the next steps slide.</p></div>
     </div>
   </div>
 </section>
