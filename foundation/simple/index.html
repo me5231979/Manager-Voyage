@@ -338,6 +338,23 @@
 .v-sec .job-pane .ask{ display:none; }
 .job-pane .v-why{ margin:6px 0 14px; }
 html.paged .page > section.v-sec.th-dark{ padding-top:clamp(18px,3.5vh,44px); }
+/* layout: each page sits in the middle of the stage when it fits, and starts at the top when it has to scroll */
+html.paged .page > section.v-sec:not(.v-hero){ flex:0 0 auto; margin-top:auto; margin-bottom:auto; }
+html.paged .page > footer{ margin-top:0; }
+/* big monitors: the page grows with the stage instead of floating small in the middle */
+@media (min-width:1700px) and (min-height:900px){ html.paged .page > section.v-sec:not(.v-hero){ zoom:1.18; } }
+@media (min-width:2300px) and (min-height:1200px){ html.paged .page > section.v-sec:not(.v-hero){ zoom:1.45; } }
+/* the heading column sits level with the activity beside it instead of hanging at the top */
+@media (min-width:1001px){
+  .v-stage{ align-items:center; }
+  .v-stage > .v-copy > .v-h{ align-self:end; }
+  .v-stage > .v-copy > .v-why{ align-self:start; }
+  .v-stage > .v-act{ align-self:center; }
+  .v-stage > .v-copy > .v-side{ align-self:start; }
+}
+/* the quiz column: eyebrow and status centered with the heading */
+#quiz .wrap.narrow .v-rail, #quiz .wrap.narrow .drill-status, #quiz .wrap.narrow .turn-wrap > .v-task{ justify-content:center; text-align:center; } #quiz .wrap.narrow .turn-wrap > .v-task{ display:flex; }
+#quiz .wrap.narrow .v-rail{ justify-content:center; }
 .v-h{ max-width:18ch; }
 .v-h.center{ max-width:none; }
 .hero-video{ object-position:center 35%; }

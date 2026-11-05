@@ -1467,7 +1467,9 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   var pages = $$('.page'); if(pages.length < 2) return;
   function titleOf(pg){
     var rail = pg.querySelector('.v-rail span'); if(rail){ var t = rail.textContent.split('·'); return (t[t.length - 1] || '').trim(); }
-    var h = pg.querySelector('h2, h1'); return h ? h.textContent.replace(/\s+/g, ' ').trim() : 'Next page';
+    var h = pg.querySelector('h2, h1'); if(!h) return 'Next page';
+    var c = h.cloneNode(true); $$('.mono, small, .kicker', c).forEach(function(k){ k.remove(); });
+    return c.textContent.replace(/\s+/g, ' ').trim() || 'Next page';
   }
   pages.forEach(function(pg, i){
     if(i === pages.length - 1) return;
