@@ -1209,27 +1209,22 @@ html.paged .idea .try .scn{ margin-top:0; }
 .pst-cards.three{ grid-template-columns:repeat(3,1fr); }
 .pst-cards.five{ grid-template-columns:repeat(5,1fr); }
 .pst-cards.two{ grid-template-columns:1fr 1fr; }
-.pst-cards li{ border-radius:8px; overflow:hidden; background:#FFFFFF; color:#1C1C1C; display:flex; flex-direction:column; }
-.th-light .pst-cards li{ border:1px solid #E4E4E4; }
-.pst-cards .hd{ display:flex; align-items:center; gap:10px; padding:11px 13px; color:#fff; font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; line-height:1.2; }
-.pst-cards .c1 .hd{ background:#777777; border-bottom:3px solid #CFAE70; }
-.pst-cards .c2 .hd{ background:#946E24; }
-.pst-cards .c3 .hd{ background:#8BA18E; color:#1C1C1C; }
-.pst-cards .c4 .hd{ background:#BAC7D1; color:#1C1C1C; }
-.pst-cards .bd{ padding:12px 13px 14px; font-size:.9rem; line-height:1.4; color:#4a4640; }
-.pst-cards .bd b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; color:#1C1C1C; line-height:1.2; margin-bottom:5px; }
-.pst-cards .bd strong{ color:#1C1C1C; font-weight:600; }
+.pst-cards li{ border-radius:var(--r,8px); overflow:hidden; background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--eyebrow); color:var(--tx); display:flex; flex-direction:column; }
+.pst-cards .hd{ display:flex; align-items:center; gap:10px; padding:12px 14px 0; color:var(--eyebrow); font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; line-height:1.2; }
+.pst-cards .hd svg{ width:20px; height:20px; flex:none; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.pst-cards .bd{ padding:8px 14px 14px; font-size:.9rem; line-height:1.4; color:var(--tx2); }
+.pst-cards .bd b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.12rem; color:var(--tx); line-height:1.2; margin-bottom:5px; }
+.pst-cards .bd strong{ color:var(--tx); font-weight:600; }
 .pst-cards .bd p{ margin:0 0 5px; }
 .pst-cards .bd ul{ margin:4px 0 0; padding-left:16px; }
-.pst-cards .bd li{ display:list-item; background:none; margin:0 0 3px; padding:0; border:0; }
-.pst-cards .bd .rule{ margin-top:8px; padding-top:8px; border-top:1px solid #E4E4E4; font-size:.84rem; color:#946E24; font-weight:600; }
+.pst-cards .bd li{ display:list-item; background:none; margin:0 0 3px; padding:0; border:0; color:var(--tx2); }
+.pst-cards .bd .rule{ margin-top:8px; padding-top:8px; border-top:1px solid var(--bd); font-size:.84rem; color:var(--eyebrow); font-weight:600; }
 .pst-never{ list-style:none; display:grid; gap:10px; margin-top:14px; }
-.pst-never li{ display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:center; background:#FFFFFF; color:#1C1C1C; border-radius:8px; padding:13px 14px; font-size:1rem; }
-.th-light .pst-never li{ border:1px solid #E4E4E4; }
-.pst-never li i{ width:34px; height:34px; border-radius:50%; background:#777777; color:#fff; display:grid; place-items:center; font-style:normal; font-family:var(--cond); font-weight:700; font-size:1rem; }
-.pst-never li i.n{ background:#CFAE70; color:#1C1C1C; }
-.pst-never li b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; }
-.pst-never li span{ display:block; font-size:.86rem; color:#4a4640; margin-top:2px; }
+.pst-never li{ display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:center; background:var(--card); border:1px solid var(--bd); color:var(--tx); border-radius:var(--r,8px); padding:13px 14px; font-size:1rem; }
+.pst-never li i{ width:34px; height:34px; border-radius:50%; border:2px solid var(--eyebrow); color:var(--eyebrow); display:grid; place-items:center; font-style:normal; font-family:var(--cond); font-weight:700; font-size:1rem; }
+.pst-never li i.n{ background:var(--eyebrow); color:var(--vu-black); }
+.pst-never li b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; color:var(--tx); }
+.pst-never li span{ display:block; font-size:.86rem; color:var(--tx2); margin-top:2px; }
 .pst-note{ margin-top:14px; font-size:.95rem; color:var(--tx2); line-height:1.45; }
 .pst-note b{ color:var(--tx); }
 .v-h.sm{ max-width:none; }
