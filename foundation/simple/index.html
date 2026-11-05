@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Who handles what · Manager Foundations, simplified · Vanderbilt University</title>
+<meta name="description" content="A simplified prototype of one Manager Foundations topic: one idea per screen, one activity per page, one bar. Who handles what: handle it, ask, route it, or report it." />
+<meta name="theme-color" content="#1C1C1C" />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="alternate icon" href="../../assets/img/favicon-96.png" />
+<link rel="preload" href="../../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+  MANAGER FOUNDATIONS · SIMPLIFIED PROTOTYPE · TOPIC 3, WHO HANDLES WHAT
+  One topic of the Foundation course rebuilt to five rules: one idea per
+  screen with no scrolling, one activity per page at most, one bar of
+  controls, at most 120 visible words per screen, one visual vocabulary
+  (the poster look from the FMLA micro course). A White / Dark switch in
+  the top bar swaps the content pages between the two looks so reviewers
+  can compare on the same screen. The live course at ../ is unchanged.
+  Engine: the micro course pattern (pager.js, app.js) from micro/fmla.
+  Narration clips are not recorded for this prototype. No em or en dashes
+  anywhere in this file.
+-->
+<script>document.documentElement.classList.add('js','paged');</script>
+<link rel="stylesheet" href="../../assets/css/course.css?v=20260916b" />
+<link rel="stylesheet" href="../../assets/css/course-modules.css?v=1" />
+<link rel="stylesheet" href="../../assets/css/vvo.css?v=1" />
+<link rel="stylesheet" href="../../assets/css/nav.css?v=1" />
+<style>
+/* one bar: prev, next, Listen, Mark done. No dots, no Auto. Narration is not recorded for the prototype, so its toast stays hidden. */
+#bbDots, #bbAuto, .narr-toast, #bbListen{ display:none !important; }
+/* four tracked pages on the rail */
+.v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 25%), rgba(255,255,255,.14) 0); }
+.th-light .v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 25%), rgba(0,0,0,.12) 0); }
+/* the hero: the atrium arches with a slow Ken Burns move */
+.v-hero-bg img{ object-position:center 30%; transform-origin:50% 20%; animation:fsKen 40s ease-in-out infinite alternate; }
+@keyframes fsKen{ from{ transform:scale(1.02) translate(0,0); } to{ transform:scale(1.2) translate(0,-4%); } }
+@media (prefers-reduced-motion:reduce){ .v-hero-bg img{ animation:none; } }
+/* the poster vocabulary: numbered steps, color-headed cards with white bodies, never lists.
+   Brand colors: Dark Gray #777777, Oak #946E24, Sage #8BA18E, Sky #BAC7D1, Flat Gold #CFAE70. */
+.pst{ margin-top:18px; }
+.pst-cards{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:16px; }
+.pst-cards.five{ grid-template-columns:repeat(5,1fr); }
+.pst-cards li{ border-radius:8px; overflow:hidden; background:#FFFFFF; color:#1C1C1C; display:flex; flex-direction:column; }
+.th-light .pst-cards li{ border:1px solid #E4E4E4; }
+.pst-cards .hd{ display:flex; align-items:center; gap:10px; padding:11px 13px; color:#fff; font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; line-height:1.2; }
+.pst-cards .hd svg{ width:22px; height:22px; flex:none; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.pst-cards .c1 .hd{ background:#777777; border-bottom:3px solid #CFAE70; }
+.pst-cards .c2 .hd{ background:#946E24; }
+.pst-cards .c3 .hd{ background:#8BA18E; color:#1C1C1C; }
+.pst-cards .c4 .hd{ background:#BAC7D1; color:#1C1C1C; }
+.pst-cards .bd{ padding:12px 13px 14px; font-size:.9rem; line-height:1.4; color:#4a4640; }
+.pst-cards .bd b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.12rem; color:#1C1C1C; line-height:1.2; margin-bottom:5px; }
+.pst-cards .bd strong{ color:#1C1C1C; font-weight:600; }
+.pst-cards .bd p{ margin:0 0 5px; }
+.pst-cards .bd .rule{ margin-top:8px; padding-top:8px; border-top:1px solid #E4E4E4; font-size:.84rem; color:#946E24; font-weight:600; }
+.pst-never{ list-style:none; display:grid; gap:10px; margin-top:14px; }
+.pst-never li{ display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:center; background:#FFFFFF; color:#1C1C1C; border-radius:8px; padding:13px 14px; font-size:1rem; }
+.th-light .pst-never li{ border:1px solid #E4E4E4; }
+.pst-never li i{ width:34px; height:34px; border-radius:50%; background:#777777; color:#fff; display:grid; place-items:center; font-style:normal; font-family:var(--cond); font-weight:700; font-size:1rem; }
+.pst-never li b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; }
+.pst-never li span{ display:block; font-size:.86rem; color:#4a4640; margin-top:2px; }
+.pst-note{ margin-top:14px; font-size:.95rem; color:var(--tx2); line-height:1.45; }
+.pst-note b{ color:var(--tx); }
+.doors-mini{ list-style:none; display:grid; gap:8px; margin-top:16px; }
+.doors-mini li{ display:grid; grid-template-columns:12px 1fr; gap:10px; align-items:center; font-size:.95rem; color:var(--tx2); }
+.doors-mini li i{ width:12px; height:12px; border-radius:3px; }
+.doors-mini li b{ color:var(--tx); font-weight:600; }
+.v-deck .dq-s{ font-size:clamp(1.05rem,.8vw + .85rem,1.4rem) !important; }
+.v-deck.opts4 .dq-opts button{ padding:12px 10px; font-size:.92rem; }
+/* the end page: what changed, for reviewers */
+.diff{ list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px auto 0; max-width:760px; text-align:left; }
+.diff li{ background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:8px; padding:12px 14px; }
+.diff b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.6rem; line-height:1.05; color:#CFAE70; }
+.diff span{ display:block; font-size:.86rem; color:rgba(255,255,255,.8); margin-top:4px; line-height:1.35; }
+@media (max-width:980px){ .pst-cards, .pst-cards.five{ grid-template-columns:1fr 1fr; } }
+@media (max-width:620px){ .pst-cards, .pst-cards.five, .diff{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<header class="gnav" id="nav">
+  <a class="gnav__brand" href="./#p/home/1" aria-label="Who handles what, start of the topic">
+    <img src="../../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="166" height="43" decoding="async" />
+  </a>
+  <div class="gnav__right">
+    <nav class="gnav__links" id="gnavLinks" aria-label="Prototype">
+      <a href="./" aria-current="page">Simplified prototype</a>
+      <a href="../">The live course</a>
+      <a class="gnav__btn" id="themeBtn" href="#" role="button" aria-pressed="false">See it in white</a>
+    </nav>
+    <div class="gnav__extra">
+      <button type="button" class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel"><span class="pw">Progress</span> <b id="progCount">0/4</b></button>
+    </div>
+    <button type="button" class="gnav__burger" aria-label="Menu" aria-expanded="false" aria-controls="gnavLinks"><span></span><span></span><span></span></button>
+  </div>
+  <span class="gnav__line" aria-hidden="true"><span class="prog-fill" id="progFill"></span></span>
+</header>
+
+<div class="prog-panel" id="progPanel" role="region" aria-label="Your progress" hidden>
+  <div class="pp-h">Your progress</div>
+  <p class="prog-sum" id="progSum">Each page you finish is counted here.</p>
+  <ol class="prog-list" id="progList"></ol>
+  <p class="prog-fine">Progress is saved in this browser. Reset it anytime in the footer.</p>
+  <p class="prog-fine prog-warn" id="progStorageNote" hidden>Heads up: your browser is blocking saved progress (this happens in private browsing). Marks work during this visit but reset when you close the tab.</p>
+</div>
+<p class="sr" id="progStatus" role="status" aria-live="polite"></p>
+
+<main id="main"><span id="top"></span>
+
+<!-- ═══ WELCOME ═══ -->
+<section class="hero v-hero th-dark" aria-label="Welcome">
+  <div class="v-hero-bg" aria-hidden="true"><img src="../../assets/img/campus/atrium-arches.jpg" alt="" width="1800" height="1200" /></div>
+  <div class="wrap v-hero-in">
+    <span class="v-kicker">Manager Foundations &middot; Simplified prototype &middot; Topic 3 of 6</span>
+    <h1 class="v-display">Who handles <em>what</em>.</h1>
+    <p class="v-hello">Handle it, ask, route it, or report it. Four doors for anything that lands on your desk.</p>
+    <div class="v-hero-cta">
+      <a class="btn btn-gold" href="#p/doors/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <ul class="v-meta" aria-label="Topic at a glance"><li>4 pages</li><li>About 4 minutes</li><li>One idea per screen</li></ul>
+    </div>
+    <details class="v-goals">
+      <summary>What you will be able to do</summary>
+      <ol>
+        <li><b>Pick</b> the right door for anything that lands on your desk.</li>
+        <li><b>Name</b> the three things a manager never does.</li>
+        <li><b>Know</b> the five people to call, and when.</li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<!-- ═══ PAGE 1 · FOUR DOORS ═══ -->
+<section id="doors" class="th-dark v-sec" aria-label="Page 1: Four doors">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="1"><span>Page 1 of 4 &middot; Four doors</span></div>
+    <h2 class="v-h sm">Four doors for anything that lands on your <em>desk</em>.</h2>
+    <p class="v-why">Some things are yours. Some have a process. Some go to one office the same day.</p>
+    <ul class="pst-cards" aria-label="The four doors">
+      <li class="c1"><div class="hd"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Handle it</div><div class="bd"><b>A normal manager task.</b><p>Time off, a timecard question, a 1:1, feedback.</p><p class="rule">Yours. Decide and say yes out loud.</p></div></li>
+      <li class="c2"><div class="hd"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Ask my HCM first</div><div class="bd"><b>There is a process.</b><p>Pay, hiring, a performance concern, anything you are unsure about.</p><p class="rule">Ask before you act.</p></div></li>
+      <li class="c3"><div class="hd"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>The leave office</div><div class="bd"><b>Health or family time off.</b><p>Surgery, a sick parent, a new baby, hurt at work.</p><p class="rule">The same day. Never ask for a diagnosis.</p></div></li>
+      <li class="c4"><div class="hd"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>Report to EOA</div><div class="bd"><b>Discrimination, harassment, misconduct.</b><p>Anything about how someone is being treated.</p><p class="rule">The same day. You report, you do not investigate.</p></div></li>
+    </ul>
+    <p class="pst-note">Read the four doors, then tap <b>Mark done</b> below.</p>
+  </div>
+</section>
+
+<!-- ═══ PAGE 2 · WHICH DOOR ═══ -->
+<section id="sort" class="th-dark v-sec" aria-label="Page 2: Which door">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="2"><span>Page 2 of 4 &middot; Which door</span></div>
+    <div class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Which <em>door</em>?</h2>
+        <p class="v-why">Five things that land on a manager&rsquo;s desk in a normal month. Pick the door for each.</p>
+        <ul class="doors-mini" aria-label="The four doors, in short">
+          <li><i style="background:#777777"></i><span><b>Handle it.</b> A normal manager task.</span></li>
+          <li><i style="background:#946E24"></i><span><b>Ask my HCM first.</b> There is a process.</span></li>
+          <li><i style="background:#8BA18E"></i><span><b>The leave office, the same day.</b> Health or family.</span></li>
+          <li><i style="background:#BAC7D1"></i><span><b>EOA, the same day.</b> How someone is treated.</span></li>
+        </ul>
+      </div>
+      <div class="v-act">
+        <p class="v-task" data-task="sort">Five situations</p>
+        <div class="drill v-deck opts4" data-drill="sort" aria-label="Which door"></div>
+        <p class="drill-status" id="sortStatus" role="status" aria-live="polite">0 of 5 decided.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PAGE 3 · NEVER ═══ -->
+<section id="never" class="th-dark v-sec" aria-label="Page 3: Three things you never do">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="3"><span>Page 3 of 4 &middot; Never</span></div>
+    <div class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Three things you <em>never</em> do.</h2>
+        <p class="v-why">Each one protects the person in front of you, and it protects you. The same day means today, not after the weekend.</p>
+      </div>
+      <div class="v-act">
+        <p class="v-task" data-task="never">The three</p>
+        <ul class="pst-never">
+          <li><i>&#x2715;</i><div><b>Never ask for a diagnosis.</b><span>Leave is leave until the leave office says otherwise. Adjust the work and move on.</span></div></li>
+          <li><i>&#x2715;</i><div><b>Never investigate a report yourself.</b><span>Listen, write down what was said, report it to EOA the same day. Promise nothing.</span></div></li>
+          <li><i>&#x2715;</i><div><b>Never improvise pay, hiring or a performance process.</b><span>Each has a fair process and a cycle. Your HCM tells you what is possible and when.</span></div></li>
+        </ul>
+        <p class="drill-status" role="status">Read the three, then tap Mark done below.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PAGE 4 · WHO TO CALL ═══ -->
+<section id="who" class="th-dark v-sec" aria-label="Page 4: Who to call">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="4"><span>Page 4 of 4 &middot; Who to call</span></div>
+    <h2 class="v-h sm">Five people to <em>call</em>.</h2>
+    <p class="v-why">Learn their names in your first week. Each card says what they do and when to reach them.</p>
+    <ul class="pst-cards five" aria-label="Who helps you">
+      <li class="c1"><div class="hd">Your manager</div><div class="bd"><b>Direction and priorities.</b><p><strong>When:</strong> every week in your 1:1, and before you say yes to a big request from another office.</p></div></li>
+      <li class="c2"><div class="hd">Your HCM</div><div class="bd"><b>Pay, hiring, performance, policy.</b><p><strong>When:</strong> the same day a question comes up, before you act. Your first call when unsure.</p></div></li>
+      <li class="c2"><div class="hd">Engagement Consultant</div><div class="bd"><b>The bigger people questions.</b><p><strong>When:</strong> a performance pattern, a hard conversation to plan, a team dynamic. Not same-day questions.</p></div></li>
+      <li class="c3"><div class="hd">Leave and Workers&rsquo; Comp</div><div class="bd"><b>Health and family time off. Hurt at work.</b><p><strong>When:</strong> the same day it comes up. Requests go through Origami.</p></div></li>
+      <li class="c4"><div class="hd">EOA</div><div class="bd"><b>Discrimination, harassment, misconduct.</b><p><strong>When:</strong> the same day you see it or hear about it. Then tell your HCM you did.</p></div></li>
+    </ul>
+    <p class="pst-note">Read the five, then tap <b>Mark done</b> below.</p>
+  </div>
+</section>
+
+<!-- ═══ THE END ═══ -->
+<section id="end" class="th-dark v-sec v-end" aria-label="The end of the topic">
+  <div class="v-end-bg" aria-hidden="true"><img src="../../assets/img/campus/atrium-arches.jpg" alt="" width="1800" height="1200" loading="lazy" /></div>
+  <div class="wrap">
+    <h2 class="v-display sm">That is the <em>topic</em>.</h2>
+    <p class="v-hello">Four doors, three nevers, five people. The same topic in the live course runs across one long page with three activities and a simulator.</p>
+    <ul class="diff" aria-label="What changed in this prototype">
+      <li><b>1 idea</b><span>per screen, nothing below the fold</span></li>
+      <li><b>1 activity</b><span>per page at most, where the live page stacks three</span></li>
+      <li><b>1 bar</b><span>prev, next, Listen and Mark done; no dots, no panel</span></li>
+    </ul>
+    <div class="v-hero-cta center">
+      <a class="btn btn-gold" href="../#p/calls/1">Compare with the live topic</a>
+      <button type="button" class="btn btn-ghost" id="exitBtn">Exit</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcenter">
+      <img src="../../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
+      <p class="fprogram">Vanderbilt University &middot; Manager Foundations &middot; Simplified prototype</p>
+      <p class="flegal">&copy; <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. A prototype of one topic for review. Progress is saved in this browser only.</p>
+      <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
+    </div>
+  </div>
+</footer>
+
+<div class="book-bar" id="bookBar" role="navigation" aria-label="Book controls">
+  <div class="bb-left">
+    <span class="bb-sec" id="bbSec" aria-hidden="true">Welcome</span>
+    <button type="button" class="bb-aud" id="bbListen" aria-pressed="false" aria-label="Listen to this page" title="Listen to this page"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5zM15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span class="bb-aud-t" id="bbListenT">Listen</span></button>
+    <button type="button" class="bb-aud" id="bbAuto" aria-pressed="false" aria-label="Auto-narrate every page" title="Auto-narrate every page" hidden><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg><span class="bb-aud-t">Auto</span></button>
+    <button type="button" class="bb-done" id="bbDone" aria-pressed="false" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span class="bb-done-t">Mark done</span></button>
+  </div>
+  <nav class="bb-dots" id="bbDots" aria-label="Topic pages" hidden></nav>
+  <div class="bb-ctl">
+    <span class="bb-count" id="bbCount" aria-live="polite">1 / 1</span>
+    <button type="button" class="bb-btn" id="pgPrev" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button type="button" class="bb-btn" id="pgNext" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+<p class="narr-toast" id="narrToast" role="status" aria-live="polite"></p>
+
+<div class="oracle-overlay" id="oracleModal" role="dialog" aria-modal="true" aria-labelledby="oracleTitle" hidden>
+  <div class="oracle-modal">
+    <span class="mono">Topic complete</span>
+    <h2 id="oracleTitle">You have finished Who handles what.</h2>
+    <p id="oracleBody">Four doors, three nevers, five people.</p>
+    <div class="oracle-actions">
+      <a class="btn btn-gold" href="../#p/calls/1">Compare with the live topic</a>
+      <button type="button" class="btn btn-ghost btn-sm" id="oracleGo">Done</button>
+    </div>
+    <p class="oracle-fine" id="oracleFine">A prototype. Completion stays in this browser.</p>
+  </div>
+</div>
+
+<script src="../../assets/js/config.js?v=20260912p"></script>
+<script src="../../assets/js/scorm.js?v=20260912p"></script>
+<script src="../../assets/js/oracle.js?v=20260912p"></script>
+<script src="narration-scripts.js?v=1"></script>
+<script src="../../assets/js/nav.js?v=1"></script>
+<script src="pager.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
