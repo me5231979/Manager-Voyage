@@ -664,10 +664,96 @@ var LIVE = {
     way:'The Vanderbilt way: speak up for your team with the numbers and the options, politely and early. Not a yes you cannot keep, not a no with no reason.', pass:3 }
 };
 
+/* ══════════ your world: the same nine conversations, set in the unit you manage ══════════
+   The manager picks a world once (saved in this browser). Each live agent receives it as
+   dynamic variables (world, team, scene) and plays the scene in that world. The standard
+   world is the fictional business office the course was written in. */
+var WORLDS = [
+  { k:'std', name:'A university business office', team:'a small administrative team in a university department', scenes:{
+    idea1:'The grant report is due Thursday with no owner, and forty one emails are waiting.',
+    idea2:'The summary is a two page brief for your director.',
+    safe1:'The vendor slipped and the launch moves a week.',
+    idea4:'Central is replacing the intake form.',
+    idea5:'Dev has missed two deadlines on routine reports this month.',
+    task:'The monthly report for your director. The missing piece is a data extract from Dana in Finance.',
+    relations:'Marcus is one of your strongest people.',
+    change:'Central is replacing the travel system in six weeks.',
+    external:'A director in another unit wants a full data reconciliation by Friday for audit prep. Your month end close is the same week.' } },
+  { k:'dining', name:'Campus Dining', team:'a dining unit of cooks, servers and a catering lead', scenes:{
+    idea1:'The catering plan for Family Weekend is due Thursday with no owner, and forty one emails are waiting.',
+    idea2:'The summary is the menu and staffing sheet for a donor dinner.',
+    safe1:'The produce vendor slipped and the new menu launch moves a week.',
+    idea4:'Central is replacing the catering request form.',
+    idea5:'Dev runs morning prep and has missed two opening deadlines this month.',
+    task:'The monthly food cost report. The missing piece is the vendor invoice totals from Dana in Finance.',
+    relations:'Marcus is your best line cook.',
+    change:'Central is replacing the food ordering system in six weeks.',
+    external:'The director of Conferences wants a menu cost breakdown for every event this year by Friday. Your month end inventory count is the same week.' } },
+  { k:'vuit', name:'VUIT', team:'a technology team of analysts and support technicians', scenes:{
+    idea1:'The security patch report is due Thursday with no owner, and forty one tickets are waiting.',
+    idea2:'The summary is the incident write up for university leadership.',
+    safe1:'The vendor slipped the firewall delivery and the cutover moves a week.',
+    idea4:'Central is replacing the ticket intake form.',
+    idea5:'Dev has missed two deadlines on a system migration this month.',
+    task:'The monthly service report. The missing piece is the software license spend from Dana in Finance.',
+    relations:'Marcus is your strongest systems engineer.',
+    change:'Central is replacing the ticketing system in six weeks.',
+    external:'A director in Research Administration wants seven systems reconciled by Friday for an audit. Your patch window is the same week.' } },
+  { k:'academic', name:'Academic Affairs', team:'program coordinators and an administrative assistant in a dean’s office', scenes:{
+    idea1:'The spring course schedule is due Thursday with no owner, and forty one emails are waiting.',
+    idea2:'The summary is the program review brief for the dean.',
+    safe1:'The room scheduling vendor slipped and registration opens a week late.',
+    idea4:'The Provost’s office is replacing the course change form.',
+    idea5:'Dev has missed two deadlines on catalog updates this month.',
+    task:'The monthly enrollment report. The missing piece is the tuition revenue figures from Dana in Finance.',
+    relations:'Marcus is your most experienced program coordinator.',
+    change:'The Provost’s office is replacing the faculty travel system in six weeks.',
+    external:'A director in the Registrar’s office wants seven years of degree audit data reconciled by Friday. Your grade submission deadline is the same week.' } },
+  { k:'student', name:'Student Affairs', team:'residential life coordinators and program staff', scenes:{
+    idea1:'The move in staffing plan is due Thursday with no owner, and forty one emails are waiting.',
+    idea2:'The summary is the incident report for the Dean of Students.',
+    safe1:'The vendor slipped the orientation app and the launch moves a week.',
+    idea4:'Central is replacing the event approval form.',
+    idea5:'Dev has missed two deadlines on housing assignments this month.',
+    task:'The monthly programming report. The missing piece is the activity fee spending from Dana in Finance.',
+    relations:'Marcus is your strongest residential life coordinator.',
+    change:'Central is replacing the housing system in six weeks.',
+    external:'A director in Athletics wants every student engagement record reconciled by Friday. Your move in week is the same week.' } },
+  { k:'facilities', name:'Facilities', team:'a trades crew and a scheduler', scenes:{
+    idea1:'The preventive maintenance plan is due Thursday with no owner, and forty one work requests are waiting.',
+    idea2:'The summary is the work order backlog brief for the associate vice chancellor.',
+    safe1:'The chiller parts vendor slipped and the building turnover moves a week.',
+    idea4:'Central is replacing the work request form.',
+    idea5:'Dev has missed two deadlines on inspections this month.',
+    task:'The monthly utilities report. The missing piece is the energy cost figures from Dana in Finance.',
+    relations:'Marcus is your best electrician.',
+    change:'Central is replacing the work order system in six weeks.',
+    external:'A director in Residential Life wants every room inspection reconciled by Friday. Your move in turnover is the same week.' } },
+  { k:'dar', name:'Development and Alumni Relations', team:'gift officers and an events coordinator', scenes:{
+    idea1:'The reunion giving report is due Thursday with no owner, and forty one emails are waiting.',
+    idea2:'The summary is the donor briefing for the Vice Chancellor before a major ask.',
+    safe1:'The printing vendor slipped and the appeal mailing moves a week.',
+    idea4:'Central is replacing the gift intake form.',
+    idea5:'Dev has missed two deadlines on stewardship reports this month.',
+    task:'The monthly fundraising report. The missing piece is the gift revenue totals from Dana in Finance.',
+    relations:'Marcus is your strongest gift officer.',
+    change:'Central is replacing the donor database in six weeks.',
+    external:'A director in the Chancellor’s office wants a full donor record reconciliation by Friday before a major donor ask. Your fiscal year end gift processing is the same week.' } }
+];
+function worldNow(){ var k = get('world'); return WORLDS.filter(function(w){ return w.k === k; })[0] || WORLDS[0]; }
+function worldVars(k){ var w = worldNow(); return { world:w.name, team:w.team, scene:w.scenes[k] || '' }; }
+function worldSelHTML(){ var cur = worldNow().k; return '<label class="live-world"><span>Your world:</span> <select class="world-sel" aria-label="Choose the unit this conversation is set in">' + WORLDS.map(function(w){ return '<option value="' + w.k + '"' + (w.k === cur ? ' selected' : '') + '>' + esc(w.name) + '</option>'; }).join('') + '</select></label>'; }
+function worldPaint(){
+  var w = worldNow();
+  $$('.world-sel').forEach(function(sel){ if(sel.value !== w.k) sel.value = w.k; });
+  $$('[data-world-scene]').forEach(function(el){ el.textContent = w.scenes[el.getAttribute('data-world-scene')] || ''; });
+}
+document.addEventListener('change', function(e){ var sel = e.target.closest && e.target.closest('.world-sel'); if(!sel) return; set('world', sel.value === 'std' ? null : sel.value); worldPaint(); });
+
 function liveHTML(k){
   var L = LIVE[k];
   return '<div class="live" data-live="' + k + '"><div class="live-scene"><div class="live-avatar"><i class="ring r1"></i><i class="ring r2"></i><span>' + (L.img ? '<img src="../assets/img/foundation/cast/' + L.img + '.webp" alt="" width="128" height="128" decoding="async" onerror="this.remove()" />' : '') + L.initial + '</span></div>' +
-    '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p>' + esc(L.brief) + '</p><p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Microphone</p></div></div>' +
+    '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p>' + esc(L.brief) + '</p>' + worldSelHTML() + '<p class="live-scene-line"><b>In your world:</b> <span data-world-scene="' + k + '">' + esc(worldVars(k).scene) + '</span></p><p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Microphone</p></div></div>' +
     '<ol class="live-how" aria-label="How this works"><li><b>1</b>Tap Start and allow the microphone. ' + esc(L.who) + ' speaks first.</li><li><b>2</b>Talk the way you would at work. Speak naturally, in your own words. There is no script.</li><li><b>3</b>Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.</li></ol>' + '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-state" role="status" aria-live="polite"></span></div>' +
     '<div class="live-log" aria-live="polite"></div><div class="live-score" hidden></div></div>';
 }
@@ -700,7 +786,7 @@ var SCENARIOS = {
   ]},
   task: { s:'It is Wednesday. The monthly report your team owns is due Friday. Priya, who builds it, has not mentioned it in two weeks, and you have not asked. A director just emailed you asking whether it will be on time.', opts:[
     { t:'Reply “yes” to the director, then build the report yourself Thursday night to be sure.', b:'Doing the work instead of managing it', best:false, out:'The report ships. You are now the person who builds it, Priya does not know she was doubted, and next month you are in the same spot. Doing the work is not the job; checking it is.' },
-    { t:'Reply “I will confirm today,” then ask Priya in a fifteen-minute check-in where the report stands and what she needs.', b:'Check it, then say it', best:true, out:'Priya is two-thirds done and waiting on a Finance extract nobody chased. You chase it, confirm Friday with the director, and put the monthly check-in on the calendar for the second week of every month so you never learn this on a Wednesday again.' },
+    { t:'Reply “I will confirm today,” then ask Priya in a fifteen-minute check-in where the report stands and what she needs.', b:'Check it, then say it', best:true, out:'Priya is two-thirds done and waiting on a Finance extract she asked for ten days ago. You call Dana in Finance, colleague to colleague, find out what she needs from your team, confirm Friday with the director, and put the monthly check-in on the calendar for the second week of every month so you never learn this on a Wednesday again.' },
     { t:'Forward the director’s email to Priya with “Please make sure this is on time.”', b:'The habit', best:false, out:'Priya reads it as blame from two levels up. The report may still ship, but you have clarified nothing (what does “on time” mean, what is blocking her) and you have spent trust. Checking work is a conversation, not a forwarded email.' }
   ]},
   relations: { s:'Marcus, one of your strongest people, stays after the 1:1 and says: “My dad has been in and out of the hospital. I might need some time off for it, I am not sure yet. I did not want you to think I was slacking.”', opts:[
@@ -940,7 +1026,7 @@ var IDEAS = [
       var Conversation = mod.Conversation || (mod.default && mod.default.Conversation);
       if(!Conversation) throw new Error('nosdk');
       return Conversation.startSession({
-        agentId: L.agent, connectionType: 'webrtc',
+        agentId: L.agent, connectionType: 'webrtc', dynamicVariables: worldVars(k),
         clientTools: { record_outcome: function(p){ score(root, p || {}); return 'recorded'; } },
         onConnect: function(){ setState(root, 'listening', L.who + ' is on. Speak when you are ready.'); },
         onDisconnect: function(){ el(root, '[data-live-end]').hidden = true; el(root, '[data-live-start]').hidden = false; if(root.getAttribute('data-mode') !== 'done') setState(root, 'off', 'Conversation ended.' + (el(root, '.live-score').hidden ? ' No score was recorded. Start again and finish with a next step.' : '')); sessions[k] = null; },

@@ -1194,6 +1194,11 @@ html.paged .idea .try .scn{ margin-top:0; }
 .wk-more > div b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
 .wk-total{ font-family:var(--serif); font-size:1.1rem; margin:0; } .wk-total b{ color:var(--eyebrow); font-weight:400; }
 @media (max-width:700px){ .yr-ref{ grid-template-columns:1fr; } .wk{ grid-template-columns:1fr; } .wk > div{ min-height:0; } .wk-more{ grid-template-columns:1fr; } }
+/* your world: the unit each practice conversation is set in */
+.live-world{ display:flex; align-items:center; gap:8px; margin-top:10px; font-size:.86rem; color:var(--tx2); }
+.live-world select{ font:inherit; font-size:.86rem; color:var(--tx); background:var(--field); border:1px solid var(--field-bd); border-radius:6px; padding:5px 8px; max-width:100%; }
+.live-scene-line{ margin-top:8px; font-size:.92rem; color:var(--tx2); line-height:1.45; }
+.live-scene-line b{ color:var(--eyebrow); font-weight:600; }
 </style>
 <link rel="stylesheet" href="../assets/css/nav.css?v=1">
 </head>
@@ -1249,7 +1254,7 @@ html.paged .idea .try .scn{ margin-top:0; }
     <p class="v-hello" id="heroHello">Welcome aboard.</p>
     <div class="v-hero-cta">
       <a class="btn btn-gold" href="#p/mission/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <ul class="v-meta" aria-label="Course at a glance"><li>6 topics</li><li>About 35 minutes</li><li>Narrated</li><li>Recorded in Oracle Learning</li></ul>
+      <ul class="v-meta" aria-label="Course at a glance"><li>6 topics</li><li>35 minutes on the short path, about 90 if you do everything</li><li>Narrated</li><li>Recorded in Oracle Learning</li></ul>
       <p class="v-std"><b>The Vanderbilt Manager Standard.</b> Four expectations of every manager, every week: get the work done through your team, take care of your people, make things better, connect your team to Vanderbilt. Adapted from Gary Yukl&rsquo;s research on effective leadership behavior: his four categories, his fifteen behaviors. The assessment measures it. This course teaches it.</p>
     </div>
     <details class="v-goals" open>
