@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assessment results | Manager Voyage | Vanderbilt</title>
+<meta name="description" content="Manager Effectiveness Assessment results for the Manager Voyage program: the baseline before the Foundation course and the reassessment three months on.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../assets/img/favicon-96.png">
+<link rel="preload" href="../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!--
+  MANAGER VOYAGE · ASSESSMENT RESULTS
+  A protected results page for the People, Culture and Belonging team. The
+  data file beside this page (data.enc.json) is encrypted with AES-256-GCM
+  and a key derived from a passphrase (PBKDF2-SHA256). The browser asks for
+  the passphrase, decrypts in memory, and draws the page. Nothing leaves the
+  browser and the repository never holds the plain rows. Refresh the data
+  with scripts/encrypt-assessments.js from a SharePoint export of the list
+  "Manager Voyage assessments". Brand: white page, white header, black type, gold accents.
+  No em or en dashes in this file.
+-->
+<style>
+  @font-face{ font-family:'Libre Caslon Display'; font-weight:400; font-display:swap; src:url('../assets/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2'); }
+  @font-face{ font-family:'Libre Caslon Text'; font-style:italic; font-weight:400; font-display:swap; src:url('../assets/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2'); }
+  @font-face{ font-family:'Inter'; font-weight:400; font-display:swap; src:url('../assets/fonts/inter-latin-400-normal.woff2') format('woff2'); }
+  @font-face{ font-family:'Inter'; font-weight:500; font-display:swap; src:url('../assets/fonts/inter-latin-500-normal.woff2') format('woff2'); }
+  @font-face{ font-family:'Inter'; font-weight:600; font-display:swap; src:url('../assets/fonts/inter-latin-600-normal.woff2') format('woff2'); }
+  @font-face{ font-family:'Antonio'; font-weight:700; font-display:swap; src:url('../assets/fonts/antonio-latin-700-normal.woff2') format('woff2'); }
+  :root{
+    --black:#1C1C1C; --white:#FFFFFF; --gold:#CFAE70; --oak:#946E24; --highlight:#ECB748; --gray:#777777; --sage:#8BA18E; --sky:#BAC7D1;
+    --ink2:#4a4a4a; --rule:rgba(28,28,28,.12); --rule2:rgba(28,28,28,.06); --panel:#FFFFFF; --err:#A94438;
+    --serif:'Libre Caslon Display','Times New Roman',serif; --serif-i:'Libre Caslon Text','Times New Roman',serif; --sans:'Inter',Arial,sans-serif; --cond:'Antonio',Impact,sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{ background:var(--white); color:var(--black); font-family:var(--sans); font-size:1rem; line-height:1.5; font-variant-numeric:tabular-nums; }
+  .skip{ position:absolute; left:-999px; top:8px; background:var(--gold); color:var(--black); padding:8px 12px; }
+  .skip:focus{ left:8px; z-index:20; }
+  .top{ background:var(--white); color:var(--black); border-bottom:3px solid var(--gold); }
+  .top .in{ max-width:1180px; margin:0 auto; padding:14px max(16px,env(safe-area-inset-left,0px)) 14px max(16px,env(safe-area-inset-right,0px)); display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .top img{ display:block; width:200px; height:auto; }
+  .top .where{ font-family:var(--cond); font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:.78rem; color:var(--oak); }
+  .top .where span{ color:var(--gray); }
+  .top button{ font:inherit; font-size:.85rem; color:var(--black); background:transparent; border:1px solid var(--rule); border-radius:6px; padding:6px 12px; cursor:pointer; }
+  .top button:hover{ border-color:var(--oak); color:var(--oak); }
+  main{ max-width:1180px; margin:0 auto; padding:28px max(16px,env(safe-area-inset-left,0px)) 56px max(16px,env(safe-area-inset-right,0px)); }
+  .eyebrow{ font-family:var(--cond); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; color:var(--oak); margin:0 0 6px; }
+  h1{ font-family:var(--serif); font-weight:400; font-size:clamp(1.9rem,3.2vw,2.8rem); line-height:1.08; margin:0 0 10px; text-wrap:balance; }
+  h1 em{ font-family:var(--serif-i); font-style:italic; color:var(--oak); }
+  h2{ font-family:var(--serif); font-weight:400; font-size:1.45rem; line-height:1.15; margin:0; }
+  h3{ font-size:.95rem; font-weight:600; margin:0; }
+  .lead{ font-size:1.05rem; color:var(--ink2); max-width:70ch; margin:0; }
+  .lead b{ color:var(--black); font-weight:600; }
+  .note{ font-size:.86rem; color:var(--gray); margin:0; line-height:1.45; }
+  .asof{ display:flex; gap:14px; flex-wrap:wrap; font-size:.82rem; color:var(--gray); margin-top:10px; }
+  .asof b{ color:var(--black); font-weight:500; }
+  section{ margin-top:34px; }
+  .sec-h{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:2px solid var(--black); padding-bottom:8px; margin-bottom:16px; }
+  .sec-h .kick{ font-family:var(--cond); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.74rem; color:var(--oak); }
+  .tiles{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr)); gap:14px; }
+  .tile{ border:1px solid var(--rule); border-top:4px solid var(--gold); border-radius:8px; padding:14px 16px 16px; background:var(--panel); min-width:0; }
+  .tile .lab{ font-family:var(--cond); font-weight:700; letter-spacing:.1em; text-transform:uppercase; font-size:.72rem; color:var(--gray); }
+  .tile .big{ font-family:var(--serif); font-size:2.6rem; line-height:1.05; margin:4px 0 2px; }
+  .tile .big small{ font-family:var(--sans); font-size:.8rem; color:var(--gray); margin-left:.3rem; }
+  .tile .sub{ font-size:.84rem; color:var(--ink2); }
+  .tile .sub b{ font-weight:600; color:var(--black); }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr)); gap:14px; }
+  .card{ border:1px solid var(--rule); border-radius:8px; background:var(--panel); padding:16px 18px 18px; min-width:0; display:grid; gap:10px; align-content:start; }
+  .chart{ position:relative; min-height:8rem; }
+  .chart svg{ display:block; width:100%; height:auto; overflow:visible; }
+  .chart text{ font-family:var(--sans); font-size:12.5px; fill:var(--black); }
+  .chart text.muted{ fill:var(--gray); }
+  .chart .ref{ stroke:var(--gray); stroke-dasharray:3 3; stroke-width:1; }
+  .chart .grid-line{ stroke:var(--rule); }
+  .empty{ font-size:.9rem; color:var(--gray); padding:14px; border:1px dashed var(--rule); border-radius:8px; text-align:center; }
+  table{ width:100%; border-collapse:collapse; font-size:.92rem; }
+  th,td{ text-align:left; padding:9px 10px; border-bottom:1px solid var(--rule); vertical-align:top; }
+  th{ font-family:var(--cond); font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:.72rem; color:var(--gray); background:#fff; position:sticky; top:0; }
+  th button{ all:unset; cursor:pointer; }
+  th button::after{ content:''; display:inline-block; width:0; height:0; margin-left:6px; border:4px solid transparent; vertical-align:middle; }
+  th[aria-sort=ascending] button::after{ border-bottom-color:var(--black); margin-bottom:4px; }
+  th[aria-sort=descending] button::after{ border-top-color:var(--black); margin-top:4px; }
+  th button:focus-visible{ outline:2px solid var(--black); outline-offset:2px; }
+  td.num,th.num{ text-align:right; }
+  .scroll{ max-height:30rem; overflow:auto; border:1px solid var(--rule); border-radius:8px; }
+  .scroll table{ font-size:.9rem; }
+  .pill{ display:inline-block; padding:1px 9px; border-radius:999px; font-size:.78rem; border:1px solid var(--rule); white-space:nowrap; }
+  .pill.ok{ border-color:var(--sage); color:#4e6652; background:rgba(139,161,142,.14); }
+  .pill.due{ border-color:var(--highlight); color:#7a5314; background:rgba(236,183,72,.16); }
+  .pill.inv{ border-color:var(--sky); color:#3f5664; background:rgba(186,199,209,.3); }
+  .tools{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  input[type=search],input[type=password]{ font:inherit; padding:8px 12px; border:1px solid var(--rule); border-radius:6px; background:#fff; color:var(--black); min-width:14rem; }
+  input:focus-visible{ outline:2px solid var(--black); outline-offset:1px; }
+  .btn{ font:inherit; font-weight:600; background:var(--gold); color:var(--black); border:0; border-radius:6px; padding:9px 16px; cursor:pointer; }
+  .btn:hover{ background:var(--highlight); }
+  .btn:focus-visible{ outline:2px solid var(--black); outline-offset:2px; }
+  .bar{ display:inline-block; height:.6rem; border-radius:3px; background:var(--gold); vertical-align:middle; margin-right:.45rem; }
+  .cut{ display:flex; gap:18px; flex-wrap:wrap; font-size:.8rem; color:var(--gray); }
+  .cut i{ display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:-1px; margin-right:5px; font-style:normal; }
+  .tip{ position:absolute; pointer-events:none; background:#fff; color:var(--black); border:1px solid var(--rule); box-shadow:0 4px 14px rgba(0,0,0,.12); border-radius:6px; padding:6px 10px; font-size:.8rem; white-space:nowrap; z-index:5; }
+  .tip .k{ display:block; color:var(--oak); }
+  /* the gate */
+  .gate{ max-width:460px; margin:56px auto; border:1px solid var(--rule); border-top:4px solid var(--gold); border-radius:8px; padding:26px 26px 28px; }
+  .gate h1{ font-size:1.7rem; }
+  .gate p{ margin:0 0 14px; color:var(--ink2); font-size:.95rem; }
+  .gate form{ display:grid; gap:10px; }
+  .gate .err{ color:var(--err); font-size:.88rem; min-height:1.2em; margin:0; }
+  [hidden]{ display:none !important; }
+  footer{ border-top:1px solid var(--rule); margin-top:40px; padding:18px max(16px,env(safe-area-inset-left,0px)); font-size:.8rem; color:var(--gray); text-align:center; }
+  @media (max-width:700px){ .opt{ display:none; } .top img{ width:160px; } }
+  @media (prefers-reduced-motion:no-preference){ .tile,.card{ animation:rise .5s ease-out both; } @keyframes rise{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="in">
+    <a href="../" aria-label="Manager Voyage home"><img src="../assets/img/vu-lockup-black.png" alt="Vanderbilt University" width="200" height="52"></a>
+    <div class="where">Manager Voyage <span>&middot; Assessment results</span></div>
+    <button type="button" id="lock" hidden>Lock</button>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ═══ GATE ═══ -->
+  <div class="gate" id="gate">
+    <p class="eyebrow">People, Culture and Belonging</p>
+    <h1>Assessment <em>results</em>.</h1>
+    <p>This page holds named results from the Manager Effectiveness Assessment. Enter the team passphrase to open it. The data is decrypted in your browser and nothing is sent anywhere.</p>
+    <form id="gateForm">
+      <label for="pass" class="note">Passphrase</label>
+      <input id="pass" type="password" autocomplete="current-password" required>
+      <p class="err" id="gateErr" role="alert"></p>
+      <button type="submit" class="btn">Open the results</button>
+    </form>
+  </div>
+
+  <!-- ═══ THE PAGE ═══ -->
+  <div id="page" hidden>
+    <p class="eyebrow">Manager Effectiveness Assessment</p>
+    <h1>The baseline, and three months <em>on</em>.</h1>
+    <p class="lead" id="leadLine"></p>
+    <div class="asof"><span>Data as of <b id="asOf"></b></span><span><b id="rowCount"></b> records</span><span id="exclNote"></span><span>Program staff test records are excluded.</span></div>
+
+    <!-- 1 · THE BASELINE -->
+    <section id="baseline">
+      <div class="sec-h"><h2>1. The baseline, before the Foundation course</h2><span class="kick">Taken on day one</span></div>
+      <div class="tiles">
+        <div class="tile"><div class="lab">Baselines taken</div><div class="big" id="nBase"></div><div class="sub">Since <b id="firstOn"></b></div></div>
+        <div class="tile"><div class="lab">Mean baseline score</div><div class="big"><span id="meanBase"></span><small>of 50</small></div><div class="sub">Band: <b id="bandWord"></b></div></div>
+        <div class="tile"><div class="lab">Completed the course</div><div class="big" id="nDone"></div><div class="sub"><b id="pctDone"></b> of baselines &middot; mean quick check <b id="quizMean"></b> of 5</div></div>
+        <div class="tile"><div class="lab">Lowest job</div><div class="big" id="lowJob" style="font-size:1.5rem;padding-top:.45rem"></div><div class="sub"><b id="lowMean"></b> of 5 across the cohort</div></div>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="card" id="jobsCard">
+          <h3>The four jobs, mean of 5</h3>
+          <p class="note">Baseline in gold. A black dot marks the reassessment mean where there is one.</p>
+          <div class="chart" id="jobsChart"></div>
+          <div class="cut"><span><i style="background:var(--gold)"></i>Baseline</span><span><i style="background:var(--black);border-radius:50%"></i>Three months on</span><span>Dashed lines: Building to 2.5 &middot; Practicing to 3.8 &middot; Consistent above</span></div>
+        </div>
+        <div class="card">
+          <h3>Where managers start</h3>
+          <p class="note">Band from the total score, then the job each manager rates lowest, which is where their micro modules begin.</p>
+          <div class="chart" id="bandsChart"></div>
+          <div class="chart" id="priorityChart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · THREE MONTHS ON -->
+    <section id="reassessment">
+      <div class="sec-h"><h2>2. The reassessment, three months on</h2><span class="kick">Same ten statements, 90 days after completion</span></div>
+      <div class="tiles">
+        <div class="tile"><div class="lab">Due for reassessment</div><div class="big" id="nDue"></div><div class="sub">Completed 90 or more days ago, not yet retaken</div></div>
+        <div class="tile"><div class="lab">Invited</div><div class="big" id="nInvited"></div><div class="sub">Invitation sent, retake not yet taken</div></div>
+        <div class="tile"><div class="lab">Retakes taken</div><div class="big" id="nRetake"></div><div class="sub">Of <b id="nEligible"></b> who completed the course</div></div>
+        <div class="tile"><div class="lab">Mean change</div><div class="big" id="meanChange"></div><div class="sub">Real movement, 5 points or more, for <b id="nMoved"></b></div></div>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="card">
+          <h3>Baseline to reassessment, by manager</h3>
+          <p class="note">Each line runs from the baseline total to the retake total on the 10 to 50 scale. Green is up 5 or more, red is down 5 or more, gray is about the same.</p>
+          <div class="chart" id="changeChart"></div>
+        </div>
+        <div class="card">
+          <h3>From baseline to retake</h3>
+          <p class="note">Each stage as a count of managers, with the share lost between stages.</p>
+          <div class="chart" id="funnelChart"></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3>Who is due next</h3>
+        <p class="note">Managers whose reassessment window has opened or will open within 30 days. The daily flow sends the invitation at 90 days after completion.</p>
+        <div class="scroll"><table id="dueTable">
+          <thead><tr><th>Manager</th><th class="opt">Completed</th><th>Window opens</th><th class="num">Baseline</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- 3 · THE TEN STATEMENTS (when the export carries answers) -->
+    <section id="items" hidden>
+      <div class="sec-h"><h2>3. The ten statements, lowest first</h2><span class="kick">Baseline mean of each</span></div>
+      <div class="card">
+        <p class="note">Mean rating 1 Never to 5 Always, and the share who answered Never or Rarely. Below 2.6 is a habit most managers do not do every month.</p>
+        <div class="scroll"><table id="itemsTable">
+          <thead><tr><th class="num">#</th><th>Habit</th><th class="opt">Job</th><th>Baseline mean</th><th class="num opt">Retake mean</th><th class="num">Never or rarely</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- 4 · EVERY MANAGER -->
+    <section id="roster">
+      <div class="sec-h"><h2><span id="rosterNo">3</span>. Every manager</h2><span class="kick"><span id="nPeople"></span> managers</span></div>
+      <div class="tools"><input id="search" type="search" placeholder="Search by name" aria-label="Search by name"><span class="note">Sort by any column.</span></div>
+      <div class="scroll" style="margin-top:10px"><table id="rosterTable">
+        <thead><tr>
+          <th aria-sort="none"><button type="button" data-sort="name">Manager</button></th>
+          <th class="opt" aria-sort="descending"><button type="button" data-sort="takenOn">Baseline on</button></th>
+          <th class="num" aria-sort="none"><button type="button" data-sort="score">Score</button></th>
+          <th class="opt" aria-sort="none"><button type="button" data-sort="band">Band</button></th>
+          <th aria-sort="none"><button type="button" data-sort="priority">Start with</button></th>
+          <th class="opt" aria-sort="none"><button type="button" data-sort="completedOn">Completed</button></th>
+          <th class="num opt" aria-sort="none"><button type="button" data-sort="quizScore">Quick check</button></th>
+          <th class="num" aria-sort="none"><button type="button" data-sort="retakeScore">Retake</button></th>
+          <th aria-sort="none"><button type="button" data-sort="status">Status</button></th>
+        </tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </section>
+  </div>
+</main>
+
+<footer>Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. Self-assessment results, a direction for each manager and not a performance measure. Decrypted in your browser from an encrypted file; close the tab or press Lock to forget the passphrase.</footer>
+
+<script>
+(function(){
+'use strict';
+var JOBS = ['Get the work done', 'Take care of your people', 'Make things better', 'Connect your team'];
+var MAP = [0, 0, 0, 1, 1, 1, 2, 2, 3, 3];
+var MOVE = 5;         /* points of change that count as real movement */
+var WINDOW = 90;      /* days after completion when the reassessment opens */
+var $ = function(s, c){ return (c || document).querySelector(s); };
+var $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+var f1 = function(v){ return v == null || isNaN(v) ? '' : (Math.round(v * 10) / 10).toFixed(1); };
+var fPct = function(v){ return v == null || isNaN(v) ? '' : Math.round(v * 100) + '%'; };
+var fSigned = function(v){ if(v == null || isNaN(v)) return ''; var r = Math.round(v * 10) / 10; return (r > 0 ? '+' : '') + (Number.isInteger(r) ? String(r) : r.toFixed(1)); };
+var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var fDay = function(s){ if(!s) return ''; var d = new Date(s + 'T00:00:00Z'); return MON[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear(); };
+var addDays = function(s, n){ var d = new Date(s + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+var today = new Date().toISOString().slice(0, 10);
+var mean = function(a){ a = a.filter(function(v){ return v != null && !isNaN(v); }); return a.length ? a.reduce(function(s, v){ return s + v; }, 0) / a.length : null; };
+var band = function(total){ return total >= 39 ? 'Consistent' : total >= 26 ? 'Practicing' : 'Building'; };
+var setText = function(id, v){ var el = document.getElementById(id); if(el) el.textContent = (v == null || v === '') ? '–' : v; };
+
+/* ── crypto: PBKDF2-SHA256 into AES-256-GCM, matching scripts/encrypt-assessments.js ── */
+var b64 = function(s){ var bin = atob(s), u = new Uint8Array(bin.length); for(var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; };
+function decrypt(pack, pass){
+  var enc = new TextEncoder();
+  return crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveKey']).then(function(km){
+    return crypto.subtle.deriveKey({ name:'PBKDF2', salt:b64(pack.salt), iterations:pack.iter, hash:'SHA-256' }, km, { name:'AES-GCM', length:256 }, false, ['decrypt']);
+  }).then(function(key){
+    return crypto.subtle.decrypt({ name:'AES-GCM', iv:b64(pack.iv) }, key, b64(pack.ct));
+  }).then(function(buf){ return JSON.parse(new TextDecoder().decode(buf)); });
+}
+
+/* ── the gate ── */
+var pack = null, data = null;
+function loadPack(){ return pack ? Promise.resolve(pack) : fetch('data.enc.json?v=' + Date.now()).then(function(r){ if(!r.ok) throw new Error('no data file'); return r.json(); }).then(function(j){ pack = j; return j; }); }
+function open(pass, remember){
+  return loadPack().then(function(p){ return decrypt(p, pass); }).then(function(d){
+    data = d;
+    if(remember){ try{ sessionStorage.setItem('mv-results-pass', pass); }catch(e){} }
+    $('#gate').hidden = true; $('#page').hidden = false; $('#lock').hidden = false;
+    render(d);
+    window.addEventListener('resize', function(){ if(data) drawAll(); });
+  });
+}
+$('#gateForm').addEventListener('submit', function(e){
+  e.preventDefault(); var pass = $('#pass').value; $('#gateErr').textContent = '';
+  open(pass, true).catch(function(err){ $('#gateErr').textContent = err && err.message === 'no data file' ? 'The data file is missing. Run the encrypt script and publish again.' : 'That passphrase did not open the file. Check it and try again.'; });
+});
+$('#lock').addEventListener('click', function(){ try{ sessionStorage.removeItem('mv-results-pass'); }catch(e){} location.reload(); });
+(function(){ var saved = null; try{ saved = sessionStorage.getItem('mv-results-pass'); }catch(e){} if(saved) open(saved, false).catch(function(){ try{ sessionStorage.removeItem('mv-results-pass'); }catch(e){} }); })();
+
+/* ── the numbers ── */
+var M = {};
+function compute(d){
+  var rows = d.records || [];
+  var base = rows.filter(function(r){ return r.phase === 'initial'; });
+  var re = rows.filter(function(r){ return r.phase === 'retake' && r.priorScore != null; });
+  var byEmail = {};
+  base.forEach(function(r){ byEmail[r.email] = byEmail[r.email] || r; });
+  var people = {};
+  rows.forEach(function(r){
+    var k = r.email || r.name.toLowerCase();
+    var p = people[k] = people[k] || { email:k, name:r.name, takenOn:null, score:null, band:null, priority:null, jobs:null, completedOn:null, invitedOn:null, quizScore:null, retakeScore:null, retakeOn:null, retakeJobs:null };
+    if(r.phase === 'initial'){ p.name = r.name; p.takenOn = r.takenOn; p.score = r.score; p.band = band(r.score); p.jobs = r.jobs; var lo = Math.min.apply(null, r.jobs); p.priority = JOBS[r.jobs.indexOf(lo)]; p.completedOn = r.completedOn; p.invitedOn = r.retakeInvitedOn; p.quizScore = r.quizScore; }
+    else { p.retakeScore = r.score; p.retakeOn = r.takenOn; p.retakeJobs = r.jobs; if(p.score == null && r.priorScore != null) p.score = r.priorScore; }
+  });
+  var list = Object.keys(people).map(function(k){ return people[k]; });
+  list.forEach(function(p){
+    p.windowOpens = p.completedOn ? addDays(p.completedOn, WINDOW) : null;
+    p.status = p.retakeScore != null ? 'Retake taken' : p.invitedOn ? 'Invited' : (p.windowOpens && p.windowOpens <= today) ? 'Due now' : p.completedOn ? 'Completed' : 'Baseline only';
+  });
+  var changes = list.filter(function(p){ return p.retakeScore != null && p.score != null; }).map(function(p){ return { name:p.name, baseline:p.score, retake:p.retakeScore, change:p.retakeScore - p.score }; }).sort(function(a, b){ return b.change - a.change; });
+  var jobs = JOBS.map(function(j, i){ return { job:j, baseline:mean(base.map(function(r){ return r.jobs[i]; })), retake:mean(re.map(function(r){ return r.jobs[i]; })) }; });
+  var jb = jobs.map(function(j){ return j.baseline == null ? Infinity : j.baseline; }); var low = jb.indexOf(Math.min.apply(null, jb));
+  var meanBase = mean(base.map(function(r){ return r.score; }));
+  var completed = list.filter(function(p){ return p.completedOn; });
+  var due = list.filter(function(p){ return p.windowOpens && p.retakeScore == null && p.windowOpens <= addDays(today, 30); }).sort(function(a, b){ return a.windowOpens.localeCompare(b.windowOpens); });
+  var items = null;
+  if(base.some(function(r){ return r.answers && r.answers.length; })){
+    items = [];
+    for(var n = 1; n <= 10; n++){
+      var b = base.map(function(r){ return (r.answers || []).filter(function(a){ return a.n === n; })[0]; }).filter(Boolean);
+      var t = re.map(function(r){ return (r.answers || []).filter(function(a){ return a.n === n; })[0]; }).filter(Boolean);
+      items.push({ item:n, habit:b[0] ? b[0].k : String(n), job:JOBS[MAP[n - 1]], baseline:mean(b.map(function(a){ return a.v; })), retake:mean(t.map(function(a){ return a.v; })), low:b.length ? b.filter(function(a){ return a.v <= 2; }).length / b.length : null });
+    }
+    items.sort(function(a, b){ return (a.baseline == null ? 9 : a.baseline) - (b.baseline == null ? 9 : b.baseline); });
+  }
+  M = {
+    people:list, base:base, re:re, changes:changes, jobs:jobs, items:items, due:due,
+    nBase:base.length, firstOn:base.map(function(r){ return r.takenOn; }).sort()[0] || null,
+    meanBase:meanBase, bandWord:meanBase == null ? null : band(meanBase),
+    nDone:completed.length, pctDone:base.length ? completed.length / base.length : null,
+    quizMean:mean(completed.map(function(p){ return p.quizScore; })),
+    lowJob:base.length ? JOBS[low] : null, lowMean:base.length ? jobs[low].baseline : null,
+    bands:['Building', 'Practicing', 'Consistent'].map(function(b){ var n = base.filter(function(r){ return band(r.score) === b; }).length; return { label:b, n:n, share:base.length ? n / base.length : 0 }; }),
+    priority:JOBS.map(function(j){ var n = list.filter(function(p){ return p.priority === j; }).length; return { label:j, n:n, share:list.length ? n / list.length : 0 }; }),
+    nDue:list.filter(function(p){ return p.status === 'Due now'; }).length,
+    nInvited:list.filter(function(p){ return p.status === 'Invited'; }).length,
+    nRetake:changes.length, nEligible:completed.length,
+    meanChange:mean(changes.map(function(c){ return c.change; })), nMoved:changes.filter(function(c){ return c.change >= MOVE; }).length,
+    funnel:[{ stage:'Baseline taken', n:base.length }, { stage:'Completed the course', n:completed.length }, { stage:'Invited to retake', n:list.filter(function(p){ return p.invitedOn || p.retakeScore != null; }).length }, { stage:'Retake taken', n:changes.length }]
+  };
+}
+
+/* ── drawing helpers (plain SVG, no library) ── */
+var NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, text){ var e = document.createElementNS(NS, tag); Object.keys(attrs || {}).forEach(function(k){ e.setAttribute(k, attrs[k]); }); if(text != null) e.textContent = text; return e; }
+function fit(t, max){ var s = t.textContent; while(t.getComputedTextLength() > max && s.length > 3){ s = s.slice(0, -2); t.textContent = s + '…'; } }
+function hbars(box, rows, opt){
+  box.replaceChildren();
+  if(!rows.length){ var e = document.createElement('div'); e.className = 'empty'; e.textContent = opt.empty || 'Nothing to show yet.'; box.append(e); return; }
+  var W = box.clientWidth || 320, rowH = 32, m = { l:4, r:52, t:4, b:4 }, H = m.t + rows.length * rowH + m.b;
+  var svg = el('svg', { viewBox:'0 0 ' + W + ' ' + H, width:'100%', height:H });
+  var labW = Math.min(W * 0.4, 190), x0 = m.l + labW, x1 = W - m.r;
+  var x = function(v){ return x0 + (x1 - x0) * (v / opt.max); };
+  (opt.refs || []).forEach(function(v){ svg.append(el('line', { 'class':'ref', x1:x(v), x2:x(v), y1:m.t, y2:H - m.b })); });
+  rows.forEach(function(r, i){
+    var y = m.t + i * rowH;
+    var t = el('text', { x:m.l, y:y + rowH / 2, dy:'.35em' }, r.label); svg.append(t); fit(t, labW - 8);
+    svg.append(el('rect', { x:x0, y:y + 8, width:Math.max(0, x(r.value) - x0), height:rowH - 16, rx:3, fill:r.color || 'var(--gold)' }));
+    svg.append(el('text', { x:x(r.value) + 6, y:y + rowH / 2, dy:'.35em' }, r.text));
+    if(r.mark != null) svg.append(el('circle', { cx:x(r.mark), cy:y + rowH / 2, r:5.5, fill:'var(--black)', stroke:'#fff', 'stroke-width':1.5 }));
+  });
+  box.append(svg);
+}
+function drawJobs(){
+  hbars($('#jobsChart'), M.jobs.map(function(j){ return { label:j.job, value:j.baseline || 0, text:f1(j.baseline), mark:j.retake }; }), { max:5, refs:[2.5, 3.8], empty:'No baselines yet.' });
+}
+function drawBands(){
+  var mx = Math.max(1, Math.max.apply(null, M.bands.map(function(b){ return b.n; })));
+  hbars($('#bandsChart'), M.bands.map(function(b){ return { label:b.label, value:b.n, text:b.n + ' (' + fPct(b.share) + ')', color:b.label === 'Building' ? 'var(--sky)' : b.label === 'Practicing' ? 'var(--gold)' : 'var(--sage)' }; }), { max:mx * 1.3 });
+  var mp = Math.max(1, Math.max.apply(null, M.priority.map(function(b){ return b.n; })));
+  var cap = document.createElement('p'); cap.className = 'note'; cap.textContent = 'Start with: the lowest job per manager';
+  var box = $('#priorityChart'); hbars(box, M.priority.map(function(b){ return { label:b.label, value:b.n, text:b.n + ' (' + fPct(b.share) + ')', color:'var(--gray)' }; }), { max:mp * 1.3 }); box.prepend(cap);
+}
+function drawFunnel(){
+  var box = $('#funnelChart'); box.replaceChildren();
+  var rows = M.funnel, mx = Math.max(1, rows[0].n), W = box.clientWidth || 320, rowH = 46, m = { l:4, r:60 }, H = rows.length * rowH;
+  var svg = el('svg', { viewBox:'0 0 ' + W + ' ' + H, width:'100%', height:H });
+  var x = function(v){ return m.l + (W - m.r - m.l) * (v / mx); };
+  var worst = -1, loss = 0; rows.forEach(function(r, i){ if(i && rows[i - 1].n){ var l = 1 - r.n / rows[i - 1].n; if(l > loss){ loss = l; worst = i; } } });
+  rows.forEach(function(r, i){
+    var y = i * rowH;
+    svg.append(el('text', { x:m.l, y:y + 12 }, r.stage));
+    svg.append(el('rect', { x:m.l, y:y + 20, width:Math.max(0, x(r.n) - m.l), height:16, rx:3, fill:i === worst && loss > 0 ? 'var(--err)' : 'var(--gold)' }));
+    svg.append(el('text', { x:x(r.n) + 6, y:y + 28, dy:'.35em' }, String(r.n)));
+    if(i && rows[i - 1].n) svg.append(el('text', { 'class':'muted', x:W - 4, y:y + 12, 'text-anchor':'end' }, '−' + fPct(1 - r.n / rows[i - 1].n)));
+  });
+  box.append(svg);
+}
+function drawChange(){
+  var box = $('#changeChart'); box.replaceChildren();
+  var rows = M.changes;
+  if(!rows.length){ var e = document.createElement('div'); e.className = 'empty'; e.textContent = 'No reassessments yet. The first invitations go out 90 days after a course completion.'; box.append(e); return; }
+  var W = box.clientWidth || 320, rowH = 28, m = { l:4, r:44, t:24, b:6 }, H = m.t + rows.length * rowH + m.b;
+  var svg = el('svg', { viewBox:'0 0 ' + W + ' ' + H, width:'100%', height:H });
+  var labW = Math.min(W * 0.38, 170), x0 = m.l + labW, x1 = W - m.r;
+  var x = function(v){ return x0 + (x1 - x0) * ((v - 10) / 40); };
+  [10, 20, 30, 40, 50].forEach(function(v){ svg.append(el('line', { 'class':'grid-line', x1:x(v), x2:x(v), y1:m.t - 4, y2:H - m.b })); svg.append(el('text', { 'class':'muted', x:x(v), y:m.t - 9, 'text-anchor':'middle' }, String(v))); });
+  var tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true;
+  rows.forEach(function(r, i){
+    var y = m.t + i * rowH + rowH / 2;
+    var col = r.change >= MOVE ? '#4e6652' : r.change <= -MOVE ? 'var(--err)' : 'var(--gray)';
+    var t = el('text', { x:m.l, y:y, dy:'.35em' }, r.name); svg.append(t); fit(t, labW - 8);
+    var g = el('g', {});
+    g.append(el('line', { x1:x(r.baseline), x2:x(r.retake), y1:y, y2:y, stroke:col, 'stroke-width':3, 'stroke-linecap':'round' }));
+    g.append(el('circle', { cx:x(r.baseline), cy:y, r:4, fill:'var(--gray)' }));
+    g.append(el('circle', { cx:x(r.retake), cy:y, r:5.5, fill:col }));
+    g.append(el('text', { x:x(Math.max(r.baseline, r.retake)) + 9, y:y, dy:'.35em' }, fSigned(r.change)));
+    g.addEventListener('pointermove', function(ev){ tip.replaceChildren(); var k = document.createElement('span'); k.className = 'k'; k.textContent = r.name; tip.append(k, document.createTextNode('Baseline ' + r.baseline + ' · Retake ' + r.retake + ' · ' + fSigned(r.change))); tip.hidden = false; var b = box.getBoundingClientRect(); var px = ev.clientX - b.left + 12, py = ev.clientY - b.top + 12; if(px + tip.offsetWidth > b.width) px = Math.max(0, ev.clientX - b.left - tip.offsetWidth - 12); tip.style.left = px + 'px'; tip.style.top = py + 'px'; });
+    g.addEventListener('pointerleave', function(){ tip.hidden = true; });
+    svg.append(g);
+  });
+  box.append(svg, tip);
+}
+function pill(status){ var s = document.createElement('span'); s.className = 'pill ' + (status === 'Retake taken' ? 'ok' : status === 'Due now' ? 'due' : status === 'Invited' ? 'inv' : ''); s.textContent = status; return s; }
+function drawDue(){
+  var tb = $('#dueTable tbody'); tb.replaceChildren();
+  if(!M.due.length){ var tr = document.createElement('tr'), td = document.createElement('td'); td.colSpan = 5; td.className = 'note'; td.style.textAlign = 'center'; td.textContent = 'Nobody is due within 30 days. The window opens 90 days after a manager completes the course.'; tr.append(td); tb.append(tr); return; }
+  M.due.forEach(function(p){
+    var tr = document.createElement('tr');
+    [[p.name, ''], [fDay(p.completedOn), 'opt'], [fDay(p.windowOpens), ''], [p.score == null ? '' : String(p.score), 'num'], [null, '']].forEach(function(c, i){ var td = document.createElement('td'); if(c[1]) td.className = c[1]; if(i === 4) td.append(pill(p.status)); else td.textContent = c[0]; tr.append(td); });
+    tb.append(tr);
+  });
+}
+function drawItems(){
+  var sec = $('#items'); if(!M.items){ sec.hidden = true; setText('rosterNo', '3'); return; }
+  sec.hidden = false; setText('rosterNo', '4');
+  var tb = $('#itemsTable tbody'); tb.replaceChildren();
+  M.items.forEach(function(r){
+    var tr = document.createElement('tr');
+    [[String(r.item), 'num'], [r.habit, ''], [r.job, 'opt'], [null, ''], [f1(r.retake), 'num opt'], [fPct(r.low), 'num']].forEach(function(c, i){ var td = document.createElement('td'); if(c[1]) td.className = c[1]; if(i === 3){ var bar = document.createElement('span'); bar.className = 'bar'; bar.style.width = (r.baseline == null ? 0 : r.baseline / 5 * 90) + 'px'; if(r.baseline != null && r.baseline < 2.6) bar.style.background = 'var(--err)'; td.append(bar, document.createTextNode(f1(r.baseline))); } else td.textContent = c[0]; tr.append(td); });
+    tb.append(tr);
+  });
+}
+var sort = { key:'takenOn', dir:-1 }, q = '';
+function drawRoster(){
+  var tb = $('#rosterTable tbody'); tb.replaceChildren();
+  $$('#rosterTable th').forEach(function(th){ var b = th.querySelector('button'); th.setAttribute('aria-sort', b && b.dataset.sort === sort.key ? (sort.dir > 0 ? 'ascending' : 'descending') : 'none'); });
+  var rows = M.people.filter(function(p){ return !q || p.name.toLowerCase().indexOf(q) >= 0; }).sort(function(a, b){ var va = a[sort.key], vb = b[sort.key]; if(va == null && vb == null) return 0; if(va == null) return 1; if(vb == null) return -1; return (typeof va === 'number' ? va - vb : String(va).localeCompare(String(vb))) * sort.dir; });
+  rows.forEach(function(p){
+    var tr = document.createElement('tr');
+    [[p.name, ''], [fDay(p.takenOn), 'opt'], [p.score == null ? '' : String(p.score), 'num'], [p.band, 'opt'], [p.priority, ''], [fDay(p.completedOn), 'opt'], [p.quizScore == null ? '' : String(p.quizScore), 'num opt'], [p.retakeScore == null ? '' : String(p.retakeScore), 'num'], [null, '']].forEach(function(c, i){ var td = document.createElement('td'); if(c[1]) td.className = c[1]; if(i === 8) td.append(pill(p.status)); else td.textContent = c[0] || ''; tr.append(td); });
+    tb.append(tr);
+  });
+}
+$$('#rosterTable th button').forEach(function(b){ b.addEventListener('click', function(){ var k = b.dataset.sort; if(sort.key === k) sort.dir = -sort.dir; else { sort.key = k; sort.dir = (k === 'score' || k === 'retakeScore' || k === 'quizScore' || k === 'takenOn' || k === 'completedOn') ? -1 : 1; } drawRoster(); }); });
+$('#search').addEventListener('input', function(e){ q = e.target.value.trim().toLowerCase(); drawRoster(); });
+
+function drawAll(){ drawJobs(); drawBands(); drawFunnel(); drawChange(); }
+function render(d){
+  compute(d);
+  setText('asOf', fDay(d.exportedAt)); setText('rowCount', String(d.rows));
+  setText('exclNote', d.excluded ? d.excluded + ' excluded' : '');
+  var lead = $('#leadLine'); lead.replaceChildren();
+  var b1 = document.createElement('b'); b1.textContent = String(M.nBase);
+  lead.append(b1, document.createTextNode(M.nBase === 1 ? ' manager has taken the baseline' : ' managers have taken the baseline'));
+  if(M.meanBase != null){ var b2 = document.createElement('b'); b2.textContent = f1(M.meanBase); lead.append(document.createTextNode(', averaging '), b2, document.createTextNode(' of 50. The job rated lowest is '), (function(){ var b = document.createElement('b'); b.textContent = M.lowJob; return b; })(), document.createTextNode('.')); } else lead.append(document.createTextNode('.'));
+  if(M.nRetake){ var b3 = document.createElement('b'); b3.textContent = String(M.nRetake); var b4 = document.createElement('b'); b4.textContent = fSigned(M.meanChange); lead.append(document.createTextNode(' '), b3, document.createTextNode(M.nRetake === 1 ? ' has retaken it three months on, moving ' : ' have retaken it three months on, moving '), b4, document.createTextNode(' points on average.')); }
+  else lead.append(document.createTextNode(' Nobody has reached the three-month reassessment yet.'));
+  setText('nBase', String(M.nBase)); setText('firstOn', fDay(M.firstOn)); setText('meanBase', f1(M.meanBase)); setText('bandWord', M.bandWord);
+  setText('nDone', String(M.nDone)); setText('pctDone', fPct(M.pctDone)); setText('quizMean', f1(M.quizMean)); setText('lowJob', M.lowJob); setText('lowMean', f1(M.lowMean));
+  setText('nDue', String(M.nDue)); setText('nInvited', String(M.nInvited)); setText('nRetake', String(M.nRetake)); setText('nEligible', String(M.nEligible)); setText('meanChange', M.meanChange == null ? '' : fSigned(M.meanChange)); setText('nMoved', String(M.nMoved));
+  setText('nPeople', String(M.people.length));
+  drawAll(); drawDue(); drawItems(); drawRoster();
+}
+})();
+</script>
+</body>
+</html>
