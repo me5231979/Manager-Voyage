@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Who handles what · Manager Foundations, simplified · Vanderbilt University</title>
-<meta name="description" content="A simplified prototype of one Manager Foundations topic: one idea per screen, one activity per page, one bar. Who handles what: handle it, ask, route it, or report it." />
+<title>Simplified · You Are a Manager Now · Manager Foundations · Manager Voyage</title>
+<meta name="description" content="The first course in Manager Foundations: what a manager is, five ideas that hold up, what Vanderbilt will ask, and the Vanderbilt Manager Standard: four expectations and fifteen behaviors every Vanderbilt manager meets, in plain words, with why each matters and one thing to do this week. About thirty-five minutes, narrated, with live conversations." />
 <meta name="theme-color" content="#1C1C1C" />
 <meta name="robots" content="noindex" />
+<!-- SIMPLIFIED REBUILD, a side course for review. One idea per screen, one activity per page, one bar. The live course at ../ is unchanged. -->
 <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml" />
 <link rel="alternate icon" href="../../assets/img/favicon-96.png" />
 <link rel="preload" href="../../assets/fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
@@ -14,88 +15,1293 @@
 
 <!--
   ══════════════════════════════════════════════════════════════════════════
-  MANAGER FOUNDATIONS · SIMPLIFIED PROTOTYPE · TOPIC 3, WHO HANDLES WHAT
-  One topic of the Foundation course rebuilt to five rules: one idea per
-  screen with no scrolling, one activity per page at most, one bar of
-  controls, at most 120 visible words per screen, one visual vocabulary
-  (the poster look from the FMLA micro course). A White / Dark switch in
-  the top bar swaps the content pages between the two looks so reviewers
-  can compare on the same screen. The live course at ../ is unchanged.
-  Engine: the micro course pattern (pager.js, app.js) from micro/fmla.
-  Narration clips are not recorded for this prototype. No em or en dashes
-  anywhere in this file.
+  MANAGER VOYAGE · MANAGER FOUNDATIONS · COURSE 1
+  You are a manager now. About thirty-five minutes, one idea per page.
+  The first course in Manager Foundations (after the manager compliance
+  courses, before the micro modules). It teaches Yukl's (2012) four
+  categories of manager behavior, task-oriented, relations-oriented,
+  change-oriented, and external, in plain words: get the work done, take
+  care of your people, make things better, connect your team. Each category
+  module: why it matters, the habits on a normal Tuesday (captioned training
+  video and flip cards), one real situation to make the call on, and a
+  three-question quick check. The six behaviors Vanderbilt measures managers
+  on are built from the same habits. Built on the Working Smarter engine (../assets/css/course.css,
+  pager.js) in the FLH brand. Every page is narrated (narration-scripts.js).
+  Progress: localStorage mv-found-* plus one JSON string noting whether the learner reviewed the results email or still needs to take the assessment;
+  in Oracle Learning the same state rides in SCORM suspend_data. Completion is
+  reported through ../assets/js/oracle.js (SCORM, or MV_CONFIG.completionEndpoint).
+  Assessment: managers complete the Manager Effectiveness Assessment (six
+  self-rated statements, 1 to 5, never to consistently, informed by Yukl's
+  framework) before Manager Voyage; results arrive by email; they rate the
+  same ten again 90 days after completing Manager Voyage, optionally at six
+  months (module 5, next step).
+  Source: Yukl, G. (2012). Effective leadership behavior: what we know and
+  what questions need more attention. Academy of Management Perspectives,
+  26(4), 66-85. https://doi.org/10.5465/amp.2012.0088
 -->
 <script>document.documentElement.classList.add('js','paged');</script>
 <link rel="stylesheet" href="../../assets/css/course.css?v=20260916b" />
-<link rel="stylesheet" href="../../assets/css/course-modules.css?v=1" />
 <link rel="stylesheet" href="../../assets/css/vvo.css?v=1" />
-<link rel="stylesheet" href="../../assets/css/nav.css?v=1" />
 <style>
-/* one bar: prev, next, Listen, Mark done. No dots, no Auto. Narration is not recorded for the prototype, so its toast stays hidden. */
-#bbDots, #bbAuto, .narr-toast, #bbListen{ display:none !important; }
-/* four tracked pages on the rail */
-.v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 25%), rgba(255,255,255,.14) 0); }
-.th-light .v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 25%), rgba(0,0,0,.12) 0); }
-/* the hero: the atrium arches with a slow Ken Burns move */
-.v-hero-bg img{ object-position:center 30%; transform-origin:50% 20%; animation:fsKen 40s ease-in-out infinite alternate; }
-@keyframes fsKen{ from{ transform:scale(1.02) translate(0,0); } to{ transform:scale(1.2) translate(0,-4%); } }
-@media (prefers-reduced-motion:reduce){ .v-hero-bg img{ animation:none; } }
-/* the poster vocabulary: numbered steps, color-headed cards with white bodies, never lists.
-   Brand colors: Dark Gray #777777, Oak #946E24, Sage #8BA18E, Sky #BAC7D1, Flat Gold #CFAE70. */
-.pst{ margin-top:18px; }
+.gate-steps{ list-style:none; margin:14px 0 0; padding:0; display:grid; gap:8px; }
+.gate-steps li{ display:flex; gap:10px; align-items:flex-start; font-size:.95rem; line-height:1.45; color:rgba(255,255,255,.82); }
+.gate-steps li b{ flex:none; width:22px; height:22px; border-radius:50%; border:1px solid var(--vu-gold); color:var(--vu-gold); font-family:var(--cond); font-size:.72rem; display:grid; place-items:center; margin-top:2px; }
+.gate-steps em{ font-style:normal; color:#fff; font-weight:600; }
+.gate-opened{ margin:12px 0 0; padding:10px 12px; border:1px solid rgba(207,174,112,.5); border-radius:var(--r); background:rgba(207,174,112,.12); font-size:.92rem; color:#fff; }
+.gate-opened b{ color:var(--vu-gold); font-weight:600; }
+.linkish{ background:none; border:0; padding:0; color:var(--vu-gold); font:inherit; text-decoration:underline; cursor:pointer; }
+.oracle-modal.gate{ max-height:calc(100vh - 48px); overflow:auto; width:min(980px, calc(100vw - 32px)); max-width:none; }
+.oracle-modal.gate .gate-q .scale{ grid-template-columns:repeat(5,1fr); }
+@media (min-width:900px){ .oracle-modal.gate .gate-q li{ grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); align-items:center; } .oracle-modal.gate .gate-q li.gate-grp{ grid-template-columns:1fr; } .oracle-modal.gate .gate-q li b{ grid-column:1; } .oracle-modal.gate .gate-q li p{ grid-column:1; } .oracle-modal.gate .gate-q li .scale{ grid-column:2; grid-row:1 / span 2; } }
+.gate-view[hidden]{ display:none !important; }
+.gate-who{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0 4px; }
+.gate-who label{ display:grid; gap:4px; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); }
+.gate-who input{ font:inherit; font-size:.95rem; color:#fff; background:rgba(255,255,255,.06); border:1px solid rgba(207,174,112,.4); border-radius:var(--r); padding:9px 11px; }
+.gate-who input:focus-visible{ outline:2px solid var(--vu-gold); outline-offset:1px; }
+.gate-q{ list-style:none; margin:12px 0 0; padding:0; display:grid; gap:10px; }
+.gate-q li{ border:1px solid rgba(255,255,255,.12); border-radius:var(--r); padding:10px 12px; display:grid; gap:8px; }
+.gate-q li b{ font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); }
+.gate-q li p{ margin:0; font-size:.98rem; line-height:1.4; color:#fff; }
+.gate-q .scale{ display:grid; grid-template-columns:repeat(5,1fr); gap:6px; }
+.gate-q .scale button{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.85); border-radius:999px; padding:7px 4px; font:inherit; font-size:.8rem; cursor:pointer; }
+.gate-q .scale button:hover, .gate-q .scale button:focus-visible{ border-color:var(--vu-gold); }
+.gate-q .scale button[aria-pressed="true"]{ background:var(--vu-gold); border-color:var(--vu-gold); color:#1C1C1C; font-weight:600; }
+@media (max-width:640px){ .gate-who{ grid-template-columns:1fr; } .gate-q .scale{ grid-template-columns:repeat(5,1fr); } .gate-q .scale button{ font-size:.68rem; padding:7px 2px; } }
+.gate-lead{ margin:10px 0 0; font-size:.95rem; line-height:1.45; color:rgba(255,255,255,.82); } .gate-lead b{ color:#fff; font-weight:600; }
+.gate-frame{ margin-top:12px; border:1px solid rgba(207,174,112,.45); border-radius:var(--r); overflow:hidden; background:#fff; }
+.gate-frame iframe{ display:block; width:100%; height:min(62vh, 640px); border:0; }
+.oracle-modal.gate .oracle-fine a{ color:var(--vu-gold); }
+.who-row{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+.who-row label{ display:grid; gap:4px; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.who-row input{ font:inherit; font-size:.92rem; color:var(--tx); background:var(--card2); border:1px solid var(--bdg); border-radius:var(--r); padding:8px 10px; }
+.who-row input:focus-visible{ outline:2px solid var(--eyebrow); outline-offset:1px; }
+@media (max-width:640px){ .who-row{ grid-template-columns:1fr; } }
+#meaChoice[hidden]{ display:none !important; }
+.ar{ display:grid; gap:14px; margin-top:12px; }
+.ar-top{ display:flex; gap:16px; align-items:center; }
+.ar-score{ flex:none; width:92px; height:92px; border-radius:50%; border:2px solid var(--vu-gold); display:grid; place-items:center; font-family:var(--serif); font-size:2rem; color:#fff; line-height:1; }
+.ar-score small{ display:block; font-size:.8rem; color:var(--vu-gold); font-family:var(--cond); letter-spacing:.06em; margin-top:2px; }
+.ar-top h4{ margin:0 0 4px; font-family:var(--serif); font-weight:400; font-size:1.25rem; color:#fff; }
+.ar-top p{ margin:0; font-size:.92rem; line-height:1.45; color:rgba(255,255,255,.82); }
+.ar-cats{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.ar-cats li{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 12px; align-items:center; }
+.ar-cats .ar-l{ font-size:.92rem; color:#fff; font-weight:600; }
+.ar-cats .ar-v{ font-family:var(--serif); font-size:1.1rem; color:var(--vu-gold); text-align:right; }
+.ar-cats .ar-v small{ font-size:.72rem; color:rgba(255,255,255,.6); font-family:var(--cond); letter-spacing:.06em; margin-left:4px; }
+.ar-cats .ar-bar{ grid-column:1 / -1; position:relative; height:8px; border-radius:4px; background:rgba(255,255,255,.1); overflow:visible; }
+.ar-cats .ar-bar i{ display:block; height:100%; border-radius:4px; background:var(--vu-gold); transition:width .8s cubic-bezier(.16,1,.3,1); }
+.ar-cats .ar-bar em{ position:absolute; top:-4px; width:2px; height:16px; background:#fff; opacity:.7; }
+.ar-cats .ar-f{ grid-column:1 / -1; font-size:.86rem; line-height:1.4; color:rgba(255,255,255,.75); }
+.ar-cats .ar-f b{ font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); margin-right:6px; }
+.ar-move{ border:1px solid rgba(207,174,112,.5); border-radius:var(--r); background:rgba(207,174,112,.12); padding:10px 12px; font-size:.95rem; line-height:1.4; color:#fff; }
+.ar-move b{ display:block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); margin-bottom:2px; }
+.ar-delta{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; color:#9fd8a8; margin-left:6px; } .ar-delta.down{ color:#F0B6B0; }
+#meaOut .ar .ar-top h4, #meaOut .ar .ar-score, #meaOut .ar .ar-l, #meaOut .ar-move{ color:var(--tx); } #meaOut .ar .ar-top p, #meaOut .ar .ar-f{ color:var(--tx2); }
+/* every section in the top bar: compact at wide screens, the menu button below 1500px */
+.gnav .gnav__links a i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.06em; color:#CFAE70; margin-right:5px; vertical-align:1px; }
+@media (min-width:1501px){ .gnav .gnav__links{ gap:clamp(.3rem,.8vw,1rem); } .gnav .gnav__links a{ font-size:.84rem; white-space:nowrap; } .gnav .gnav__links a.gnav__btn{ font-size:.8rem; padding:6px 11px; } }
+@media (max-width:1500px) and (min-width:901px){
+  .gnav .gnav__burger{ display:flex; }
+  .gnav .gnav__links{ position:absolute; top:var(--nav-h); left:0; right:0; display:none; flex-direction:row; flex-wrap:wrap; align-items:center; gap:0 .25rem; background:rgba(20,20,20,.98); border-bottom:1px solid rgba(207,174,112,.3); padding:.5rem clamp(16px,3vw,32px) .9rem; }
+  .gnav.is-open .gnav__links{ display:flex; }
+  .gnav .gnav__links a{ padding:.55rem .7rem; font-size:.92rem; border-bottom:0; border-left:3px solid transparent; }
+  .gnav .gnav__links a[aria-current="page"]{ border-left-color:#CFAE70; }
+  .gnav .gnav__links a.gnav__btn{ margin-left:auto; padding:.5rem 1rem; }
+  .gnav.is-open .gnav__burger span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .gnav.is-open .gnav__burger span:nth-child(2){ opacity:0; }
+  .gnav.is-open .gnav__burger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+}
+}
+/* ── the Voyage pattern on this course ── */
+.v-hero .hero-media{ z-index:0; overflow:hidden; } .v-hero .hero-media::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(28,28,28,.08) 0%, rgba(28,28,28,.3) 50%, #1C1C1C 100%); }
+.v-hero .hero-still{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 40%; opacity:.82; filter:saturate(1.05) brightness(1.04); transform-origin:62% 45%; animation:heroBurns 34s ease-in-out infinite alternate; will-change:transform; }
+.v-hero .hero-scrim{ background:rgba(28,28,28,.18); }
+@keyframes heroBurns{ from{ transform:scale(1.02) translate3d(0,0,0); } to{ transform:scale(1.14) translate3d(-2.5%,-2%,0); } }
+@media (prefers-reduced-motion:reduce){ .v-hero .hero-still{ animation:none; transform:scale(1.04); } }
+/* each topic: the heading and the why beside the activity, supporting detail full width below */
+@media (min-width:1001px){
+  .v-stage{ align-items:start; row-gap:clamp(16px,2.6vh,28px); grid-template-rows:auto auto minmax(0,1fr); }
+  .v-stage > .v-copy{ display:contents; }
+  .v-stage > .v-copy > .v-h{ grid-column:1; grid-row:1; }
+  .v-stage > .v-copy > .v-why{ grid-column:1; grid-row:2; margin-top:0; align-self:start; max-width:46ch; }
+  .v-stage > .v-copy > .v-side{ grid-column:1; grid-row:3; align-self:start; margin-top:0; }
+  .v-stage > .v-act{ grid-column:2; grid-row:1 / span 3; align-self:start; }
+  .v-stage > .v-copy > :not(.v-h):not(.v-why):not(.v-side){ grid-column:1 / -1; margin-top:0; }
+  html.paged .v-copy .isnot{ grid-template-columns:repeat(3,1fr); gap:12px 22px; }
+  html.paged .page > section.v-sec{ justify-content:flex-start; padding-top:clamp(26px,4.5vh,52px); }
+}
+/* up next: one button at the end of every page */
+.v-next{ display:flex; align-items:center; justify-content:flex-end; gap:14px; margin-top:clamp(22px,3.5vh,40px); padding-top:16px; border-top:1px solid var(--bd); }
+.v-next .v-label{ color:var(--tx3); }
+.v-next .btn svg{ width:18px; height:18px; margin-left:8px; }
+/* the situations rail beside a stepper */
+.cq-rail{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.cq-rail button{ width:100%; display:grid; grid-template-columns:30px 1fr auto; align-items:center; gap:10px; text-align:left; background:var(--card); border:1px solid var(--bd); border-radius:var(--r); color:var(--tx2); padding:9px 12px; font:inherit; font-size:.92rem; cursor:pointer; }
+.cq-rail button b{ font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.06em; color:var(--eyebrow); }
+.cq-rail button .ok{ width:18px; height:18px; border-radius:50%; border:1px solid var(--bdg); display:grid; place-items:center; font-size:.7rem; color:transparent; }
+.cq-rail button[aria-current="true"]{ border-color:var(--eyebrow); color:var(--tx); }
+.cq-rail button.found .ok{ background:var(--eyebrow); border-color:var(--eyebrow); color:var(--btn-tx); }
+.cq-rail button:hover{ border-color:var(--eyebrow); }
+/* the four categories: a compass rose and one panel */
+.rose-grid{ display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:clamp(16px,2.4vw,32px); align-items:center; }
+@media (max-width:900px){ .rose-grid{ grid-template-columns:1fr; } }
+.rose-grid .v-rose{ margin:0 auto; }
+.rose-grid > .turn-wrap{ display:grid; justify-items:center; }
+.rose-grid > .turn-wrap > .v-task{ justify-self:start; }
+.v-rose .pt{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; padding:9px 13px; min-height:44px; cursor:pointer; white-space:nowrap; }
+.v-rose .pt.n{ left:50%; top:4%; } .v-rose .pt.e{ left:94%; top:50%; } .v-rose .pt.s{ left:50%; top:96%; } .v-rose .pt.w{ left:6%; top:50%; }
+.v-rose .pt.seen{ border-color:var(--eyebrow); }
+.v-rose .pt[aria-selected="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.v-rose .hub-text{ font-family:var(--cond); font-weight:700; font-size:11px; letter-spacing:.08em; text-transform:uppercase; fill:var(--eyebrow); text-anchor:middle; }
+.fw-panel{ border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:clamp(14px,1.8vw,22px); min-height:320px; }
+.fw-panel .fw-card{ border:0; background:none; padding:0; display:block; }
+.fw-panel .fw-card ul{ display:grid; }
+.fw-panel .fw-card .hint{ display:none; }
+.fw-panel .fw-card strong{ font-size:1.5rem; }
+.fw-panel .fw-card[hidden], .fw-panel .fw[hidden], .fw-panel .fw-video[hidden]{ display:none !important; }
+.fw-panel .fw{ grid-template-columns:1fr; margin-top:0; }
+.rose-grid{ align-items:start; }
+.fw-panel .fw-back{ margin-top:14px; background:none; border:0; color:var(--eyebrow); font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; padding:0; }
+.fw-panel .fw-back:hover{ text-decoration:underline; }
+.fw-panel .fw-hint{ margin-top:10px; color:var(--tx3); font-size:.86rem; }
+/* mission: areas of focus open one at a time */
+.op-grid details summary{ list-style:none; cursor:pointer; }
+.op-grid details summary::-webkit-details-marker{ display:none; }
+.op-grid details summary b{ margin-bottom:0; }
+.op-grid details summary b::after{ content:" +"; color:var(--eyebrow); }
+.op-grid details[open] summary b::after{ content:" \2212"; }
+.op-grid details p{ margin-top:8px; }
+/* keep learning: one track open at a time */
+.track-acc{ border-bottom:1px solid var(--bd); }
+.track-acc summary{ list-style:none; cursor:pointer; padding:12px 0; display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; }
+.track-acc summary::-webkit-details-marker{ display:none; }
+.track-acc summary::after{ content:"Tap to open \00a0+"; margin-left:auto; flex:none; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:5px 10px; line-height:1; }
+.track-acc[open] summary::after{ content:"Close \00a0\2212"; background:none; color:var(--eyebrow); border:1px solid var(--eyebrow); }
+.track-acc summary .mono{ color:var(--vu-gold); } .track-acc summary b{ font-family:var(--serif); font-weight:400; font-size:1.05rem; }
+.track-acc summary .tw{ color:var(--tx2); font-size:.86rem; }
+.track-acc .out{ color:var(--tx2); font-size:.88rem; margin:0 0 10px; }
+.track-acc .comp-grid{ margin-bottom:14px; }
+/* next steps: two steps side by side, then the timeline */
+.habit-box.v-side .habit-pick:not(.acts) button{ padding:6px 11px; font-size:.86rem; }
+.hp-lead{ margin:4px 0 10px; font-size:.88rem; color:var(--tx2); line-height:1.4; }
+.habit-pick.acts{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.ns-one{ margin-top:14px; }
+.ns-steps.two{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+.ns-steps.two .evidence{ margin-top:0; }
+@media (max-width:1000px){ .habit-pick.acts{ grid-template-columns:1fr 1fr; } }
+@media (max-width:640px){ .habit-pick.acts, .ns-steps.two{ grid-template-columns:1fr; } }
+.habit-pick.acts button{ text-align:left; border:1px solid var(--bdg); border-radius:var(--r); background:var(--card2); color:var(--tx); padding:10px 12px; font:inherit; cursor:pointer; display:grid; gap:2px; }
+.habit-pick.acts button b{ font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.habit-pick.acts button strong{ font-size:.98rem; font-weight:600; line-height:1.3; }
+.habit-pick.acts button small{ font-size:.84rem; color:var(--tx2); line-height:1.35; }
+.habit-pick.acts button[aria-pressed="true"]{ border-color:var(--eyebrow); background:rgba(207,174,112,.14); color:var(--tx); }
+.habit-pick.acts button[aria-pressed="true"] strong{ color:var(--tx); } .habit-pick.acts button[aria-pressed="true"] small{ color:var(--tx2); } .habit-pick.acts button[aria-pressed="true"] b{ color:var(--eyebrow); }
+.habit-pick.acts button[aria-pressed="true"]::after{ content:"Your pick"; justify-self:start; margin-top:4px; font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:3px 8px; }
+
+.habit-box.v-side .hp-job{ margin-top:8px; }
+.v-copy .recap-row{ gap:10px; margin-top:16px; }
+.v-copy .isnot{ margin-top:12px; }
+.v-copy .operate{ margin-top:16px; }
+.v-copy .concept{ margin-top:16px !important; }
+.v-copy .threeq{ margin-top:12px; }
+@media (max-width:1000px){
+  .v-copy .recap-row{ grid-template-columns:1fr 1fr; gap:8px; }
+  .v-copy .isnot{ grid-template-columns:1fr !important; }
+  .v-copy .operate .op-grid{ grid-template-columns:1fr; gap:10px; }
+}
+.v-cities-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:10px 40px; flex-wrap:wrap; margin-bottom:clamp(12px,2vh,22px); }
+.v-cities-head .v-why{ margin-top:0; max-width:44ch; flex:1 1 320px; }
+.v-cities-head .v-h{ flex:1 1 420px; max-width:14ch; }
+/* the big rocks jars: sand pours, rocks drop, grains trickle; transform and opacity only */
+/* five ideas: the core up top, the detail folded away, two columns on wide screens */
+.idea-core, .idea-more, .live{ grid-column:1 / -1; }
+.idea-core{ display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:16px 28px; align-items:start; margin-top:4px; }
+@media (max-width:800px){ .idea-core{ grid-template-columns:1fr; } }
+.idea-core .week{ margin-top:0; }
+.idea-more{ margin-top:14px; border-top:1px solid var(--bd); border-bottom:1px solid var(--bd); }
+.idea-more summary{ list-style:none; cursor:pointer; padding:11px 0; font-family:var(--cond); font-weight:700; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); display:flex; align-items:center; }
+.idea-more summary::-webkit-details-marker{ display:none; }
+.idea-more summary:hover::after, .try-fold-cq summary:hover::after, .track-acc summary:hover::after, .try.try-fold > .cq-h:hover::after{ filter:brightness(1.08); }
+.idea-more summary::after{ content:"Tap to open \00a0+"; margin-left:auto; flex:none; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:5px 10px; line-height:1; }
+.idea-more[open] summary::after{ content:"Close \00a0\2212"; background:none; color:var(--eyebrow); border:1px solid var(--eyebrow); }
+.idea-more-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px 22px; padding:4px 0 16px; }
+@media (max-width:800px){ .idea-more-grid{ grid-template-columns:1fr; } }
+/* practice it live: the scene, the state ring, the transcript, the score */
+.calls .live{ margin-top:12px; }
+.live{ margin-top:14px; border:1px solid var(--bdg); border-radius:var(--r); background:linear-gradient(180deg, rgba(207,174,112,.08), rgba(28,28,28,0) 60%), var(--card2); padding:clamp(14px,1.6vw,20px); }
+.live-scene{ display:grid; grid-template-columns:104px minmax(0,1fr); gap:18px; align-items:center; }
+@media (max-width:600px){ .live-scene{ grid-template-columns:72px 1fr; } }
+.live-avatar{ position:relative; width:104px; height:104px; display:grid; place-items:center; }
+.live-avatar span{ position:relative; z-index:2; width:88px; height:88px; border-radius:50%; background:var(--vu-black); border:2px solid var(--vu-gold); color:var(--vu-gold); font-family:var(--serif); font-size:2rem; display:grid; place-items:center; }
+.live-avatar span{ overflow:hidden; }
+.live-avatar span img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 22%; border-radius:50%; z-index:1; }
+.live-avatar .ring{ position:absolute; inset:0; border-radius:50%; border:2px solid var(--vu-gold); opacity:0; transform:scale(.75); }
+.live[data-mode="speaking"] .ring{ animation:liveRing 1.6s ease-out infinite; }
+.live[data-mode="speaking"] .ring.r2{ animation-delay:.8s; }
+.live[data-mode="listening"] .ring.r1{ opacity:.55; transform:scale(.9); animation:liveBreath 2.4s ease-in-out infinite; }
+.live[data-mode="connecting"] .ring.r1{ opacity:.4; animation:liveSpin 1.2s linear infinite; border-top-color:transparent; }
+@keyframes liveRing{ 0%{ opacity:.7; transform:scale(.78); } 100%{ opacity:0; transform:scale(1.25); } }
+@keyframes liveBreath{ 0%,100%{ transform:scale(.88); opacity:.45; } 50%{ transform:scale(.96); opacity:.75; } }
+@keyframes liveSpin{ to{ transform:rotate(360deg) scale(.9); } }
+.live-who h4{ font-family:var(--serif); font-weight:400; font-size:clamp(1.2rem,1.4vw,1.5rem); line-height:1.15; margin:2px 0 4px; }
+.live-who h4 em{ font-family:var(--serif-i); font-style:italic; color:var(--eyebrow); }
+.live-who p{ color:var(--tx2); font-size:.93rem; line-height:1.45; max-width:62ch; }
+.live-who .live-meta{ margin-top:6px; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.live-how{ list-style:none; margin:12px 0 0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.live-how li{ display:flex; gap:8px; align-items:flex-start; font-size:.84rem; line-height:1.4; color:var(--tx2); }
+.live-how li b{ flex:none; width:20px; height:20px; border-radius:50%; border:1px solid var(--eyebrow); color:var(--eyebrow); font-family:var(--cond); font-size:.7rem; display:grid; place-items:center; margin-top:1px; }
+@media (max-width:700px){ .live-how{ grid-template-columns:1fr; } }
+.live-ctl{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:12px; }
+.live-state{ font-size:.9rem; color:var(--tx2); }
+.live[data-mode="listening"] .live-state{ color:var(--vu-gold); }
+.live-log{ margin-top:12px; display:grid; gap:6px; max-height:220px; overflow:auto; }
+.live-log:empty{ display:none; }
+.live-line{ font-size:.95rem; line-height:1.45; padding:8px 12px; border-radius:var(--r); max-width:60ch; }
+.live-line b{ display:block; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+.live-line.them{ background:var(--card); border:1px solid var(--bd); }
+.live-line.you{ background:rgba(207,174,112,.12); border:1px solid rgba(207,174,112,.35); justify-self:end; }
+.live-off{ color:var(--tx2); font-size:.92rem; } .live-off a{ color:var(--link); }
+.live-score{ margin-top:14px; border-top:1px solid var(--bdg); padding-top:14px; }
+.live-score .mono{ color:var(--eyebrow); }
+.live-sum{ font-family:var(--serif); font-size:1.15rem; line-height:1.35; margin:6px 0 10px; }
+.live-checks{ list-style:none; display:grid; gap:6px; margin:0 0 10px; }
+.live-checks li{ display:flex; gap:10px; align-items:center; font-size:.95rem; }
+.live-checks li i{ width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font-style:normal; font-size:.8rem; border:1px solid var(--bdg); color:var(--tx3); }
+.live-checks li.ok i{ background:var(--eyebrow); border-color:var(--eyebrow); color:var(--btn-tx); }
+.live-pen{ color:#F0B6B0; font-size:.92rem; margin-bottom:8px; }
+.live-way{ color:var(--tx2); font-size:.92rem; margin-bottom:12px; border-left:3px solid var(--eyebrow); padding-left:10px; }
+@media (prefers-reduced-motion:reduce){ .live .ring{ animation:none !important; } }
+.live-badge{ display:inline-block; margin-left:6px; padding:2px 7px; border-radius:999px; background:var(--eyebrow); color:var(--btn-tx); font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; vertical-align:middle; }
+.idea-tabs button[aria-selected="true"] .live-badge{ background:var(--vu-black); color:var(--eyebrow); }
+.build-bar{ position:fixed; left:50%; bottom:92px; transform:translateX(-50%); z-index:60; display:flex; align-items:center; gap:14px; background:var(--vu-black); border:1px solid var(--eyebrow); border-radius:999px; padding:8px 10px 8px 18px; color:var(--tx); font-size:.9rem; box-shadow:0 12px 40px rgba(0,0,0,.5); max-width:min(92vw, 640px); }
+/* when a live conversation exists, the tap version folds away under it */
+.try.try-fold{ margin-top:12px; border-top:1px solid var(--bd); }
+.try.try-fold > .cq-h{ cursor:pointer; padding:10px 0; }
+.try.try-fold > .cq-h::after{ content:"Tap to open \00a0+"; margin-left:auto; flex:none; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:5px 10px; line-height:1; }
+.try.try-fold.open > .cq-h::after{ content:"Close \00a0\2212"; background:none; color:var(--eyebrow); border:1px solid var(--eyebrow); }
+.try.try-fold > .scn{ display:none; }
+.try.try-fold.open > .scn{ display:block; }
+.try.try-fold > .cq-h .try-t{ font-size:1rem; }
+.try.try-fold > .cq-h .try-note{ font-weight:400; color:var(--tx3); }
+.try-fold-cq{ margin-top:12px; border-top:1px solid var(--bd); }
+.try-fold-cq summary{ list-style:none; cursor:pointer; padding:10px 0; display:flex; align-items:center; font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.try-fold-cq summary::-webkit-details-marker{ display:none; }
+.try-fold-cq summary::after{ content:"Tap to open \00a0+"; margin-left:auto; flex:none; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:5px 10px; line-height:1; }
+.try-fold-cq[open] summary::after{ content:"Close \00a0\2212"; background:none; color:var(--eyebrow); border:1px solid var(--eyebrow); }
+/* five cities: the dotted campus network map */
+.us-map .pin .badge{ fill:var(--vu-black); stroke:var(--vu-gold); stroke-width:1.6; }
+.us-map .pin .ic{ fill:none; stroke:var(--vu-gold); stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
+.us-map .pin .ic .fillc{ fill:var(--vu-gold); stroke:none; }
+.us-map .pin.home .badge{ fill:var(--vu-gold); stroke:#fff; stroke-width:1.2; }
+.us-map .pin.home .ic{ stroke:var(--vu-black); }
+.us-map .pin *{ pointer-events:none; }
+.us-map .pin .badge{ pointer-events:all; cursor:pointer; }
+.us-map .pin.on .badge{ fill:var(--vu-gold); stroke:#fff; }
+.us-map .pin.on .ic{ stroke:var(--vu-black); }
+.us-map .pin.on .ic .fillc{ fill:var(--vu-black); }
+.us-map .pin.on text{ fill:var(--vu-gold); }
+.us-map.net{ --c-sf:var(--vu-sky); --c-nyc:var(--vu-gold); --c-chattanooga:var(--vu-sage); --c-wpb:var(--vu-highlight); --c-nashville:var(--vu-gold); }
+.us-map.net .dots{ fill:none; stroke:var(--vu-gold); stroke-width:4.6; stroke-linecap:round; opacity:.5; }
+.us-map.net [data-city="sf"]{ --c:var(--c-sf); } .us-map.net [data-city="nyc"]{ --c:var(--c-nyc); } .us-map.net [data-city="chattanooga"]{ --c:var(--c-chattanooga); } .us-map.net [data-city="wpb"]{ --c:var(--c-wpb); } .us-map.net [data-city="nashville"]{ --c:var(--c-nashville); }
+.us-map.net .lbl .lead{ fill:none; stroke:var(--c); stroke-width:1.6; }
+.us-map.net .lbl text{ paint-order:normal; stroke:none; }
+.us-map.net .lbl .t1{ font-family:var(--sans); font-weight:700; font-size:26px; fill:#FFFFFF; }
+.us-map.net .lbl .t2{ font-family:var(--sans); font-weight:400; font-size:21px; fill:var(--c); }
+.us-map.net .lbl{ cursor:pointer; }
+.us-map.net .pin .ring{ stroke:var(--c); stroke-width:2.4; animation-name:netPulse; }
+@keyframes netPulse{ 0%{ opacity:.7; transform:scale(1); } 100%{ opacity:0; transform:scale(1.9); } }
+@media (prefers-reduced-motion:reduce){ .us-map.net .pin .ring{ animation:none; opacity:.35; transform:scale(1.35); } }
+.us-map.net .pin .badge{ fill:var(--vu-black); stroke:var(--c); stroke-width:2.6; }
+.us-map.net .pin .ic{ stroke:var(--c); stroke-width:1.8; }
+.us-map.net .pin .ic .fillc{ fill:var(--c); }
+.us-map.net .pin.home .badge{ fill:var(--vu-gold); stroke:#FFFFFF; stroke-width:2; }
+.us-map.net .pin.home .ic{ stroke:var(--vu-black); }
+.us-map.net .pin.on .badge{ fill:var(--c); stroke:#FFFFFF; }
+.us-map.net .pin.on .ic{ stroke:var(--vu-black); }
+.us-map.net .pin.on .ic .fillc{ fill:var(--vu-black); }
+.us-map.net .lbl.on .t1{ fill:var(--c); }
+@media (max-width:600px){ .us-map.net .lbl{ display:none; } .us-map.net{ margin:0 -4px; } }
+.map-card .us-map.net{ max-height:none; }
+.us-map.net a{ cursor:pointer; outline:none; }
+.us-map.net a:hover .t1, .us-map.net a:focus-visible .t1{ fill:var(--vu-gold); }
+.us-map.net a:hover .badge, .us-map.net a:focus-visible .badge{ stroke:#fff; }
+.us-map.net a:focus-visible .badge{ stroke-width:4; }
+#mission .v-stage{ grid-template-columns:minmax(0,4fr) minmax(0,7fr); }
+@media (max-width:1000px){ #mission .v-stage{ grid-template-columns:minmax(0,1fr); } }
+.v-copy .survey{ margin-top:14px; }
+.v-act .ov-grid.two{ grid-template-columns:1fr; }
+.v-act .route{ margin-top:0; }
+.v-act .cv-wrap{ margin-top:0; }
+.v-act > .drill-status, .v-act > .fw-status{ margin-top:12px; }
+.v-task{ margin-top:0 !important; }
+.turn-wrap > .v-task{ margin-bottom:10px; }
+.v-sec .job-pane .ask{ display:none; }
+.job-pane .v-why{ margin:6px 0 14px; }
+html.paged .page > section.v-sec.th-dark{ padding-top:clamp(18px,3.5vh,44px); }
+.v-h{ max-width:18ch; }
+.v-h.center{ max-width:none; }
+.hero-video{ object-position:center 35%; }
+.hero .hello{ font-family:var(--serif-i); font-style:italic; font-size:1.35rem; color:var(--vu-gold); margin:18px 0 10px; }
+.hero .listen-line{ margin-top:14px; font-size:.9rem; color:rgba(255,255,255,.7); max-width:none; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.hero .listen-line svg{ width:16px; height:16px; color:var(--vu-gold); flex-shrink:0; }
+.hero .listen-line b{ color:#fff; font-weight:600; }
+html.paged .hero .outcomes{ columns:2; column-gap:28px; }
+html.paged .intro-grid.even{ grid-template-columns:1.15fr 1fr; }
+html.paged .hero .outcomes li{ break-inside:avoid; }
+.quote{ margin-top:22px; border-left:3px solid var(--eyebrow); padding:6px 0 6px 22px; font-family:var(--serif); font-size:clamp(1.1rem,1.8vw,1.35rem); line-height:1.4; max-width:44ch; }
+.quote em{ font-family:var(--serif-i); font-style:italic; color:var(--eyebrow); }
+.quote cite{ display:block; margin-top:10px; font-family:var(--cond); font-style:normal; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--tx3); }
+html.paged .hw-grid{ margin-top:clamp(16px,2.5vh,28px); }
+html.paged .hw{ padding:18px 20px; }
+html.paged .hw p{ font-size:.875rem; }
+/* compact section heads for short pages */
+html.paged .sec-head p{ font-size:1.02rem; margin-top:12px; }
+html.paged .sec-head.tight{ margin-bottom:clamp(10px,1.6vh,18px); }
+#yourcall .sec-head.tight{ margin-bottom:8px; }
+.lframe.learn{ margin:0 0 10px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.lframe.learn .lf-chip{ margin:0; display:flex; flex-direction:column; gap:3px; font-size:.86rem; }
+html.paged .split2 .scn .scn-s{ font-size:1.1rem; }
+@media (max-width:900px){ .lframe.learn{ grid-template-columns:1fr; } }
+html.paged .sec-head.tight h2{ font-size:clamp(1.5rem,2vh + .9rem,2.3rem); }
+html.paged .module{ margin-top:0; }
+html.paged .module-head{ margin-bottom:14px; }
+html.paged .module-head h3{ font-size:clamp(1.3rem,2.2vw,1.75rem); }
+html.paged .module-head p{ margin-top:8px; font-size:.95rem; }
+/* welcome slot (unused) */
+.vslot{ margin-top:16px; border:1px solid var(--bdg); background:var(--card2); border-radius:var(--r); padding:20px 24px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center; }
+.vslot .vic{ width:56px; height:56px; border-radius:50%; border:2px solid var(--eyebrow); display:grid; place-items:center; color:var(--eyebrow); }
+.vslot .vic svg{ width:24px; height:24px; }
+.vslot h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; }
+.vslot p{ color:var(--tx2); font-size:.92rem; margin-top:4px; }
+/* custom narrated videos */
+.cv-wrap{ position:relative; border-radius:var(--r); overflow:hidden; border:1px solid var(--bdg); background:#1C1C1C; aspect-ratio:16/9; max-width:100%; }
+.cv-wrap video{ display:block; width:100%; height:100%; object-fit:cover; background:#1C1C1C; }
+.cv-wrap .cv-wait{ position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:20px; text-align:center; color:#fff; background:#262624; }
+.cv-wrap.nomedia video{ display:none; }
+.cv-wrap.nomedia .cv-wait{ display:flex; }
+.cv-wait .vic{ width:52px; height:52px; border-radius:50%; border:2px solid var(--vu-gold); display:grid; place-items:center; color:var(--vu-gold); }
+.cv-wait .vic svg{ width:22px; height:22px; }
+.cv-wait b{ font-weight:600; font-size:1rem; }
+.cv-wait p{ font-size:.85rem; color:rgba(255,255,255,.7); max-width:34ch; }
+.cv-cap{ margin-top:8px; font-size:.82rem; color:var(--tx3); display:flex; align-items:center; gap:8px; }
+.cv-cap svg{ width:13px; height:13px; color:var(--eyebrow); flex-shrink:0; }
+.intro-grid{ display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(18px,3vw,36px); align-items:start; margin-top:4px; }
+.intro-grid .concept{ margin:0; }
+/* numbers strip */
+.stat-strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:14px 0 16px; }
+.stat{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:12px 16px; display:flex; align-items:baseline; gap:10px; }
+.stat b{ font-family:var(--serif); font-weight:400; font-size:clamp(1.5rem,2.4vw,2rem); line-height:1; color:var(--eyebrow); }
+.stat span{ font-size:.8rem; color:var(--tx2); line-height:1.3; }
+/* the framework map: tap a category to open it */
+.fw{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px; }
+.fw-card{ width:100%; text-align:left; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:16px 16px 14px; border-top:3px solid var(--eyebrow); cursor:pointer; color:var(--tx); font:inherit; transition:border-color .2s var(--ease); display:flex; flex-direction:column; }
+.fw-card:hover{ border-color:var(--bdg); }
+.fw-card b{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.fw-card strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.2rem; line-height:1.15; margin:6px 0 6px; }
+.fw-card p{ font-size:.84rem; color:var(--tx2); }
+.fw-card ul{ list-style:none; margin-top:10px; display:none; gap:4px; }
+#fwMap .fw-card ul{ display:grid; gap:9px; }
+#fwMap .fw-card li em{ display:block; font-style:normal; color:var(--eyebrow); font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.07em; text-transform:uppercase; margin-top:1px; }
+#fwMap .fw-card:hover, #fwMap .fw-card:focus-visible{ border-color:var(--eyebrow); outline:none; }
+.fw-foot{ margin-top:auto; padding-top:12px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+.fw-foot .hint{ margin:0; padding:0; }
+.fw-foot .hint::before{ content:"\25B6  "; font-size:.6rem; }
+.fw-open{ background:none; border:1px solid var(--eyebrow); color:var(--eyebrow); border-radius:999px; padding:6px 12px; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.05em; text-transform:uppercase; cursor:pointer; }
+.fw-open::after{ content:" \2192"; }
+.fw-open:hover, .fw-open:focus-visible{ background:var(--eyebrow); color:var(--btn-tx); outline:none; }
+.jwrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(20px,5vw,48px); }
+.fw-card li{ font-size:.86rem; color:var(--tx); padding-left:14px; position:relative; }
+.fw-card li i{ font-style:normal; color:var(--tx3); font-size:.78rem; }
+.fw-card li::before{ content:''; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:50%; background:var(--eyebrow); }
+.fw-card .hint{ margin-top:auto; padding-top:12px; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.05em; text-transform:uppercase; color:var(--eyebrow); }
+.fw-card[aria-expanded="true"]{ box-shadow:0 0 0 1px var(--eyebrow) inset; }
+.fw-card.playing{ box-shadow:0 0 0 2px var(--vu-gold) inset; } .fw-card.playing .hint::after{ content:" · playing"; animation:subw 1s ease-in-out infinite; }
+.fw-card[aria-expanded="true"] ul{ display:grid; }
+.fw-card[aria-expanded="true"] .hint{ display:none; }
+.fw-status{ margin-top:12px; font-size:.9rem; color:var(--tx2); }
+/* drills, one situation at a time */
+.drill{ margin-top:14px; }
+.dq{ display:none; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:18px 20px; }
+.dq.cur{ display:block; }
+.dq.right{ border-color:var(--eyebrow); }
+.dq.wrong{ border-color:var(--vu-err); }
+.dq .dq-s{ font-size:1rem; color:var(--tx); }
+.dq .dq-s b{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-right:10px; }
+.dq-opts{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.dq-opts button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:9px 16px; font-size:.9rem; font-weight:500; cursor:pointer; transition:all .2s var(--ease); }
+.dq-opts button:hover{ border-color:var(--eyebrow); color:var(--eyebrow); }
+.dq-opts button[aria-pressed="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.dq-opts button:disabled{ cursor:default; opacity:.7; }
+.dq-opts button.is-answer{ box-shadow:0 0 0 2px var(--eyebrow) inset; opacity:1; }
+.dq-x{ display:none; margin-top:12px; font-size:.93rem; color:var(--tx2); border-top:1px solid var(--bd); padding-top:12px; }
+.dq-x b{ color:var(--tx); }
+.dq.right .dq-x, .dq.wrong .dq-x{ display:block; }
+.dq-nav{ display:none; margin-top:12px; }
+.dq.right .dq-nav, .dq.wrong .dq-nav{ display:flex; gap:10px; align-items:center; }
+.drill-status{ margin-top:12px; font-size:.92rem; color:var(--tx2); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.drill-status .pips{ display:inline-flex; gap:5px; }
+.drill-status .pips i{ width:9px; height:9px; border-radius:50%; border:1.5px solid var(--eyebrow); display:block; }
+.drill-status .pips i.ok{ background:var(--eyebrow); }
+.drill-status .pips i.no{ background:var(--vu-err); border-color:var(--vu-err); }
+/* habit or the Vanderbilt way: tap to sort */
+.sort-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+.sq{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:14px 16px; }
+.sq.right{ border-color:var(--eyebrow); }
+.sq.wrong{ border-color:var(--vu-err); }
+.sq p{ font-size:.95rem; color:var(--tx); }
+.sq-opts{ display:flex; gap:8px; margin-top:10px; }
+.sq-opts button{ flex:1; border:1px solid var(--field-bd); background:var(--field); color:var(--tx2); border-radius:var(--r); padding:8px 10px; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; transition:all .2s var(--ease); }
+.sq-opts button:hover{ border-color:var(--eyebrow); color:var(--eyebrow); }
+.sq-opts button[aria-pressed="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.sq-opts button:disabled{ cursor:default; }
+.sq-opts button.is-answer{ box-shadow:0 0 0 2px var(--eyebrow) inset; }
+.sq-x{ display:none; margin-top:10px; font-size:.86rem; color:var(--tx2); border-top:1px solid var(--bd); padding-top:8px; }
+.sq.right .sq-x, .sq.wrong .sq-x{ display:block; }
+.sq-x b{ color:var(--tx); }
+/* your call: one scenario, three responses */
+.scn{ margin-top:14px; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card2); padding:clamp(18px,2.5vw,28px); }
+.scn .scn-s{ font-family:var(--serif); font-size:clamp(1.15rem,1.9vw,1.45rem); line-height:1.4; color:var(--tx); max-width:60ch; }
+.scn .scn-s em{ font-family:var(--serif-i); font-style:italic; color:var(--strong); }
+.scn-opts{ display:grid; gap:10px; margin-top:16px; }
+.scn-opts button{ text-align:left; border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:var(--r); padding:14px 16px; font-size:.95rem; line-height:1.45; cursor:pointer; display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start; transition:border-color .2s var(--ease), background-color .2s var(--ease); }
+.scn-opts button .k{ font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.05em; color:var(--eyebrow); padding-top:3px; }
+.scn-opts button:hover{ border-color:var(--eyebrow); }
+.scn-opts button[aria-pressed="true"]{ border-color:var(--strong); background:rgba(207,174,112,.14); }
+.scn-opts button.best-pick{ box-shadow:0 0 0 2px var(--eyebrow) inset; }
+.scn-out{ display:none; margin-top:16px; padding-top:14px; border-top:1px solid var(--bd); }
+.scn-out.show{ display:block; }
+.scn-out .vtag{ display:inline-flex; align-items:center; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; padding:4px 9px; border-radius:2px; border:1px solid var(--eyebrow); color:var(--eyebrow); }
+.scn-out .vtag.best{ background:var(--eyebrow); color:var(--btn-tx); }
+.scn-out p{ margin-top:10px; font-size:.95rem; color:var(--tx2); max-width:70ch; }
+.scn-out p b{ color:var(--tx); }
+.scn-out .scn-again{ margin-top:12px; }
+/* drill beside a public video */
+.split2{ display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(18px,3vw,36px); align-items:start; }
+.split2 .module-head{ margin-bottom:10px; }
+/* What changed: one column, the three new things and what a manager is not full width, the sort drill below them */
+.split2.stack{ grid-template-columns:1fr; gap:14px; }
+.split2.stack .isnot{ grid-template-columns:repeat(3,1fr); }
+.split2.stack .module-head{ margin-top:6px; }
+
+@media (max-width:900px){ .split2.stack .isnot{ grid-template-columns:1fr; } }
+.yt{ max-width:none; }
+.yt-thumb{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.55; }
+.yt-btn{ z-index:1; }
+.yt-loading{ position:absolute; inset:0; display:grid; place-items:center; color:var(--vu-gold); font-size:.8rem; }
+.yt-off{ position:absolute; inset:0; display:grid; place-content:center; gap:12px; padding:20px; text-align:center; color:#fff; }
+.yt-off p{ color:#fff; max-width:420px; font-size:.95rem; }
+.yt-off .btn{ justify-self:center; }
+.more-watch{ list-style:none; margin-top:10px; display:grid; gap:6px; }
+.more-watch li{ font-size:.86rem; color:var(--tx2); display:flex; gap:8px; align-items:baseline; }
+.more-watch li::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--eyebrow); flex-shrink:0; position:relative; top:-2px; }
+.more-watch a{ color:var(--link); border-bottom:1px solid var(--bdg); }
+.more-watch a:hover{ color:var(--strong); }
+/* the same-way panel */
+.way{ margin-top:14px; border:1px solid var(--bdg); border-radius:var(--r); background:var(--card); padding:14px 18px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.way > div{ font-size:.9rem; }
+.way b{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; }
+.way .no b{ color:var(--vu-err); }
+.way .yes b{ color:var(--eyebrow); }
+.way p{ color:var(--tx2); }
+html.paged .flip-grid{ gap:12px; }
+html.paged .fcard button{ padding:16px 16px 14px; }
+html.paged .fcard h4{ margin-top:8px; }
+/* survey card + profile output */
+.survey{ margin-top:14px; border:2px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:18px 22px; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start; }
+.survey .sk{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); padding:6px 10px; border-radius:2px; white-space:nowrap; }
+.survey h4{ font-family:var(--serif); font-weight:400; font-size:1.3rem; }
+.survey p{ color:var(--tx2); margin-top:6px; font-size:.95rem; }
+.survey ol{ margin:10px 0 0 18px; color:var(--tx2); font-size:.9rem; display:grid; gap:4px; }
+html.paged .route{ margin-top:0; padding:clamp(18px,2.5vw,28px); }
+.route-qs{ margin-top:16px; }
+.route-q{ display:none; }
+.route-q.cur{ display:block; }
+.route-q .route-qt{ font-size:1.08rem; }
+.route-opts{ grid-template-columns:repeat(3,1fr); margin-top:14px; }
+.route-opts button{ min-height:52px; font-size:1rem; text-align:center; }
+.route-nav{ display:flex; align-items:center; gap:12px; margin-top:12px; flex-wrap:wrap; }
+.route-nav .pips{ display:inline-flex; gap:4px; flex-wrap:wrap; }
+.route-nav .pips i{ width:8px; height:8px; border-radius:50%; border:1.5px solid var(--eyebrow); display:block; }
+.route-nav .pips i.ok{ background:var(--eyebrow); }
+.route-nav .pips i.cur{ transform:scale(1.4); }
+.route-nav button{ min-height:36px; padding:6px 12px; font-size:.8rem; }
+.prof{ margin-top:14px; display:grid; gap:10px; }
+.prof > div{ display:grid; grid-template-columns:200px 1fr 60px; gap:14px; align-items:center; }
+.prof b{ font-weight:600; font-size:.95rem; }
+.prof .bar{ height:10px; background:var(--bd); border-radius:999px; overflow:hidden; }
+.prof .bar i{ display:block; height:100%; background:var(--eyebrow); width:0; transition:width .4s var(--ease); }
+.prof span{ font-family:var(--cond); font-weight:700; font-size:.9rem; color:var(--eyebrow); text-align:right; }
+.focus-list{ list-style:none; margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.focus-list li{ border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:12px 14px; font-size:.92rem; display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:baseline; }
+.focus-list li b{ font-family:var(--cond); font-weight:700; color:var(--eyebrow); font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; }
+.focus-list li small{ display:block; color:var(--tx3); font-size:.8rem; margin-top:2px; }
+.gap-line{ margin-top:12px; font-size:.95rem; color:var(--tx2); }
+.gap-line b{ color:var(--tx); }
+/* compact quiz */
+html.paged .quiz-shell{ padding:clamp(16px,2.4vw,28px); }
+html.paged .qz{ padding:14px 18px; margin-bottom:10px; }
+html.paged .qz legend{ font-size:.98rem; margin-bottom:10px; }
+html.paged .qz .opts label{ min-height:42px; padding:8px 14px; font-size:.92rem; }
+/* summary and next step, compact */
+html.paged .recap{ padding:16px 18px; }
+html.paged .recap h3{ font-size:1.15rem; }
+html.paged .recap p{ font-size:.88rem; margin-top:6px; }
+html.paged .recap .r-why{ margin-top:10px; padding-top:8px; font-size:.82rem; }
+html.paged .canon{ padding:16px 20px; }
+html.paged .canon ol{ display:grid; grid-template-columns:1fr 1fr; gap:8px 20px; }
+html.paged .hw-step{ padding:12px 0; grid-template-columns:90px 1fr auto; }
+html.paged .hw-step .hw-no{ font-size:2.2rem; }
+html.paged .hw-step h3{ font-size:1.15rem; }
+html.paged .hw-step p{ font-size:.9rem; margin-top:4px; }
+html.paged .oracle-strip{ margin-top:14px; padding:12px 18px; }
+html.paged #tell-leader{ margin-top:12px; padding:14px 18px; max-width:none; }
+html.paged .hw{ padding:14px 16px; }
+html.paged .hw h3{ font-size:1rem; margin-top:8px; }
+html.paged .hw p{ font-size:.84rem; margin-top:6px; }
+html.paged .hw .chip{ margin-top:10px; }
+html.paged .howworks .bridge{ margin-top:14px; padding-top:12px; }
+html.paged .evidence{ padding:14px 18px; margin-top:12px; }
+html.paged .evidence p{ font-size:.9rem; line-height:1.6; }
+html.paged .intro-grid.even{ grid-template-columns:1fr 1fr; }
+.vslot.stack{ grid-template-columns:1fr; gap:12px; margin-top:0; padding:18px 20px; }
+.stat-strip{ margin:10px 0 12px; gap:8px; }
+.stat{ padding:8px 12px; }
+.stat b{ font-size:clamp(1.3rem,2vw,1.6rem); }
+.stat span{ font-size:.76rem; }
+html.paged .qz{ padding:10px 14px; margin-bottom:8px; }
+html.paged .qz legend{ font-size:.95rem; margin-bottom:8px; }
+html.paged .qz .opts{ gap:6px; }
+html.paged .qz .opts label{ min-height:36px; padding:6px 12px; font-size:.9rem; }
+html.paged .ns-steps{ display:grid; gap:14px; align-content:start; } html.paged .ns-steps .evidence{ margin-top:0; } .ns-msg{ font-family:var(--serif-i); font-size:1.12rem; line-height:1.4; margin-top:8px; } .ns-ctl{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:12px; } .ns-ctl .hinttxt{ margin:0; }
+html.paged #nextstep .hw-step{ padding:10px 0; grid-template-columns:56px 1fr auto; gap:8px 14px; }
+html.paged #nextstep .hw-step .hw-no{ font-size:1.7rem; }
+html.paged #nextstep .hw-step h3{ font-size:1.05rem; }
+html.paged #nextstep .hw-step p{ font-size:.86rem; margin-top:3px; }
+html.paged #nextstep .hw-step .chip{ font-size:.64rem; padding:4px 8px; }
+@media (max-width:1100px){ html.paged #nextstep .hw-list{ grid-template-columns:1fr; } }
+/* course overview */
+.ov-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.ov-grid.two{ grid-template-columns:1fr 1fr; }
+.operate{ margin-top:16px; border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:16px 20px 18px; }
+.operate .mono{ display:block; margin-bottom:6px; }
+.operate .op-lead{ font-family:var(--serif); font-size:clamp(1.15rem,2vw,1.45rem); line-height:1.3; color:var(--tx); margin:0 0 14px; max-width:58ch; }
+.operate .op-lead em{ font-family:var(--serif-i); font-style:italic; color:var(--strong); }
+.op-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px 22px; }
+.operate .op-lead{ border-bottom:1px solid var(--bd); padding-bottom:14px; }
+.operate .op-sub{ display:block; margin:0 0 8px; }
+.op-grid .op-no{ display:block; font-family:var(--serif); font-style:normal; font-size:1.6rem; line-height:1; color:var(--vu-gold); margin-bottom:6px; }
+.op-grid b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; margin-bottom:4px; }
+.op-grid p{ font-size:.93rem; color:var(--tx2); line-height:1.5; margin:0; }
+@media (max-width:900px){ .ov-grid.two,.op-grid{ grid-template-columns:1fr; } }
+/* the scenario pages fit one screen: tighter scenario card, options, and callout */
+#yourcall .scn{ padding:clamp(12px,1.6vw,18px) clamp(14px,2vw,22px); margin-top:8px; }
+#yourcall .scn-s{ font-size:clamp(1.02rem,1.5vh + .5rem,1.25rem); line-height:1.35; margin-bottom:10px; }
+#yourcall .scn-opts{ gap:8px; } #yourcall .scn-opts button{ padding:9px 14px; font-size:.92rem; line-height:1.35; }
+#yourcall .turn{ padding:8px 14px; margin-bottom:6px; } #yourcall .turn p{ font-size:.92rem; }
+#yourcall .ask{ display:none; }
+#yourcall .scn-out{ padding-top:0; border-top:0; }
+#yourcall .cq-nav{ margin-top:8px; }
+#yourcall .cq-h{ margin-bottom:4px; }
+#yourcall .scn{ display:grid; grid-template-columns:1.1fr 1fr; gap:6px 22px; align-items:start; }
+#yourcall .scn .scn-s{ grid-column:1; max-width:none; }
+#yourcall .scn .scn-opts{ grid-column:1; }
+#yourcall .scn .scn-out{ grid-column:2; grid-row:1 / span 2; margin-top:0; align-self:stretch; }
+#yourcall .scn .scn-out:not(.show){ display:block; border:1px dashed var(--bd); border-radius:var(--r); min-height:100%; }
+#yourcall .scn .scn-out:not(.show)::before{ content:"What happens next appears here."; display:block; padding:14px; color:var(--tx3); font-size:.9rem; }
+@media (max-width:900px){ #yourcall .scn{ grid-template-columns:1fr; } #yourcall .scn .scn-out{ grid-column:1; grid-row:auto; } }
+.idea .try .scn{ display:grid; grid-template-columns:1.1fr 1fr; gap:6px 20px; align-items:start; padding:12px 16px; }
+.idea .try .scn .scn-s{ grid-column:1; max-width:none; font-size:1.02rem; line-height:1.35; margin-bottom:6px; }
+.idea .try .scn .scn-opts{ grid-column:1; gap:6px; margin-top:6px; } .idea .try .scn .scn-opts button{ padding:8px 12px; font-size:.9rem; line-height:1.3; }
+.idea .try .scn .scn-out{ grid-column:2; grid-row:1 / span 2; margin-top:0; padding-top:0; border-top:0; }
+.idea .try .scn .scn-out:not(.show){ display:block; border:1px dashed var(--bd); border-radius:var(--r); min-height:100%; }
+.idea .try .scn .scn-out:not(.show)::before{ content:"What happens next appears here."; display:block; padding:12px; color:var(--tx3); font-size:.88rem; }
+.idea .try{ padding-top:8px; margin-top:2px; } .idea .try .cq-h{ margin-bottom:4px; }
+.idea .side .week{ padding:8px 12px; font-size:.92rem; }
+.idea-nav{ margin-top:2px; }
+@media (max-width:1100px){ .idea.cur{ grid-template-columns:1fr 1fr; } } @media (max-width:900px){ .idea .try .scn{ grid-template-columns:1fr; } .idea .try .scn .scn-out{ grid-column:1; grid-row:auto; } }
+/* book mode: less air everywhere so pages fit one screen */
+html.paged .sec-head.tight{ margin-bottom:8px; }
+html.paged .sec-head.tight h2{ font-size:clamp(1.35rem,1.6vh + .8rem,2rem); }
+html.paged .you-are{ margin-bottom:6px; }
+html.paged .ask{ padding:8px 14px; margin-bottom:8px; } html.paged .ask p{ font-size:.9rem; line-height:1.4; }
+html.paged .turn{ padding:8px 14px; margin:8px 0 8px; } html.paged .turn p{ font-size:.92rem; }
+html.paged .ov-card{ padding:10px 12px; } html.paged .ov-card p{ font-size:.9rem; }
+html.paged .ov-mods{ grid-template-columns:repeat(5,1fr); gap:10px; } html.paged .ov-mods .hw p{ font-size:.86rem; } html.paged .ov-mods .hw h3{ font-size:1rem; }
+html.paged .operate{ padding:10px 16px 12px; } html.paged .operate .op-lead{ font-size:clamp(1.05rem,1.6vw,1.25rem); margin-bottom:8px; padding-bottom:8px; } html.paged .op-grid p{ font-size:.86rem; line-height:1.4; } html.paged .op-grid .op-no{ font-size:1.2rem; margin-bottom:2px; }
+html.paged .mission-charge{ padding:12px 18px 14px; margin-top:10px; } html.paged .mission-charge > p{ font-size:clamp(1.2rem,2vw,1.6rem); margin-bottom:8px; } html.paged .mission-list li{ font-size:.9rem; } html.paged .mission-charge .mission-list{ padding-top:8px; }
+html.paged .mission-grid,html.paged .ov-grid{ gap:10px; }
+html.paged .isnot{ padding:10px 14px 12px; margin-top:10px; } html.paged .isnot b{ font-size:1.02rem; } html.paged .isnot p{ font-size:.86rem; }
+html.paged .fw-status{ margin-top:6px; }
+/* read, then try: the moment opens in place of the four blocks so the tab stays one screen */
+.idea .try .cq-h{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+/* who handles what: simulator and the decide drill side by side */
+html.paged #calls .calls-grid{ display:grid; grid-template-columns:1fr; gap:20px; align-items:start; }
+html.paged #calls .sim-out.show{ grid-template-columns:1fr 1fr; } html.paged #calls .sim-out .s-note{ grid-column:1 / -1; }
+html.paged #calls .sim-out .s-first{ grid-column:1 / -1; }
+html.paged #calls .sim-pick{ max-width:640px; }
+html.paged #calls .decide-head{ display:block; margin-top:0 !important; } html.paged #calls .decide-head p{ display:none; }
+html.paged #calls .calls-grid > div{ min-width:0; }
+html.paged #calls .sim{ margin-top:0; } html.paged #calls .sim-head h3{ font-size:1.15rem; } html.paged #calls .sim-head p{ font-size:.88rem; } html.paged #calls .recap-row{ margin-top:0; } html.paged #calls .recap-row > div{ padding:10px 12px; }
+html.paged #ideas .ask, html.paged #learn .ask{ display:none; }
+.learn-tabs{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 10px; }
+.learn-tabs button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:7px 14px; font:inherit; font-size:.86rem; cursor:pointer; }
+.learn-tabs button[aria-selected="true"]{ background:var(--vu-gold); color:var(--vu-black); border-color:var(--vu-gold); }
+.learn-pane{ display:none; } .learn-pane.cur{ display:block; }
+.learn-pane .learn-top,.learn-pane .learn-grid,.learn-pane .learn-comp,.learn-pane .learn-media{ margin-top:0; }
+html.paged .learn-top a{ padding:10px 12px; } html.paged .learn-top a small{ font-size:.78rem; }
+html.paged .pdf-card{ padding:10px 16px; margin-top:8px; } html.paged .pdf-card b{ font-size:1.05rem; } html.paged .pdf-card .pdf-sub{ font-size:.86rem; }
+/* the simulator answer scrolls inside its own panel; the page does not */
+html.paged .sim-out{ max-height:none; min-height:0; overflow:visible; padding-right:0; }
+html.paged .sim-out .s-first p{ font-size:.95rem; }
+/* trying a moment: the four blocks and the headline give way to the moment */
+.comp-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:8px; }
+.comp-item{ display:grid; grid-template-columns:auto 1fr auto; gap:8px; align-items:center; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card2); padding:6px 9px; color:var(--tx); text-decoration:none; min-width:0; }
+.comp-item:hover{ border-color:var(--vu-gold); background:var(--card); }
+.comp-item .no{ font-family:var(--serif); font-size:1.1rem; color:var(--vu-gold); min-width:1.4em; }
+.comp-item .ct{ min-width:0; } .comp-item .ct i{ display:block; font-style:normal; font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); }
+.comp-item .ct b{ display:block; font-weight:500; font-size:.84rem; line-height:1.25; }
+.comp-item .go{ color:var(--vu-gold); font-size:1rem; }
+.comp-item.soon{ opacity:.85; } .comp-item.soon .go{ opacity:.5; }
+.comp-item .ct small{ display:block; color:var(--tx2); font-size:.78rem; line-height:1.3; margin-top:2px; }
+.track-head{ margin-top:16px; padding-bottom:6px; border-bottom:1px solid var(--vu-gold); display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; }
+.track-head:first-of-type{ margin-top:8px; }
+.track-head .mono{ color:var(--vu-gold); } .track-head b{ font-family:var(--serif); font-weight:400; font-size:1.05rem; }
+.track-head span.tw{ color:var(--tx2); font-size:.86rem; } .track-head .out{ flex-basis:100%; color:var(--tx2); font-size:.86rem; margin:0; }
+.learn-comp ol{ display:none; }
+@media (max-width:1100px){ .comp-grid{ grid-template-columns:repeat(3,1fr); } } @media (max-width:900px){ .comp-grid{ grid-template-columns:1fr 1fr; } } @media (max-width:640px){ .comp-grid{ grid-template-columns:1fr; } }
+html.paged #ideas .drill-status{ margin-top:4px; font-size:.82rem; }
+html.paged .learn-comp{ padding:10px 14px; } html.paged .learn-comp h4{ font-size:1.05rem; margin:0 0 2px; } html.paged .learn-comp p{ font-size:.86rem; margin-bottom:4px; }
+.helpers.tabbed{ display:block; }
+.helpers.tabbed > .mono{ display:block; margin-bottom:8px; }
+.help-tabs{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:10px; }
+.help-tabs button{ display:flex; align-items:center; gap:10px; border:1px solid var(--field-bd); border-top:3px solid transparent; background:var(--field); color:var(--tx); border-radius:var(--r); padding:8px 12px; font:inherit; font-family:var(--serif); font-size:1.02rem; cursor:pointer; text-align:left; }
+.help-tabs button .hic{ width:32px; height:32px; margin:0; flex:0 0 auto; } .help-tabs button .hic svg{ width:16px; height:16px; }
+.help-tabs button[aria-selected="true"]{ background:var(--card); border-color:var(--vu-gold); border-top-color:var(--vu-gold); }
+.helpers.tabbed > div{ display:block; border:0; padding:0; background:none; }
+.helpers.tabbed > .help-tabs{ display:grid; }
+.helpers.tabbed > .help-pane{ display:none; border:1px solid var(--bd); border-left:4px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 16px 14px; } .helpers.tabbed > .help-pane.cur{ display:block; }
+.help-pane h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; margin:0 0 8px; display:flex; align-items:center; gap:10px; }
+.help-cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px 18px; }
+.helpers .help-cols b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; border-top:2px solid var(--vu-gold); padding-top:6px; }
+.help-cols p{ font-size:.9rem; line-height:1.45; color:var(--tx2); margin:0; }
+.help-list{ margin:6px 0 0; padding:0; list-style:none; counter-reset:hl; display:grid; gap:3px; }
+.help-list li{ font-size:.88rem; line-height:1.35; color:var(--tx2); display:flex; gap:8px; counter-increment:hl; }
+.help-list li::before{ content:counter(hl, decimal-leading-zero); font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.06em; color:var(--eyebrow); min-width:20px; padding-top:3px; } .help-cols a{ color:var(--link); border-bottom:1px solid var(--bdg); }
+@media (max-width:1100px){ .help-tabs{ grid-template-columns:repeat(3,1fr); } } @media (max-width:900px){ .help-tabs,.help-cols{ grid-template-columns:1fr 1fr; } }
+.mea-choice{ display:grid; gap:10px; margin-top:6px; }
+.mission-charge{ margin-top:18px; border:2px solid var(--tx); border-left:8px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:20px 24px 22px; }
+.mission-charge .mono{ display:block; margin-bottom:6px; }
+.mission-charge > p{ font-family:var(--serif); font-weight:400; font-size:clamp(1.5rem,2.8vw,2.1rem); line-height:1.2; color:var(--tx); margin:0 0 14px; max-width:30ch; }
+.mission-charge > p em{ font-family:var(--serif-i); font-style:italic; color:var(--strong); }
+.mission-charge .mission-list{ border-top:1px solid var(--bd); padding-top:14px; }
+.mission-list{ list-style:none; padding:0; margin:6px 0 0; display:grid; gap:8px 24px; } .mission-list.three{ grid-template-columns:repeat(3,1fr); } @media (max-width:900px){ .mission-list.three{ grid-template-columns:1fr; } }
+.mission-list li{ padding-left:16px; position:relative; font-size:.95rem; color:var(--tx2); } .mission-list li::before{ content:''; position:absolute; left:0; top:.6em; width:7px; height:7px; border-radius:50%; background:var(--vu-gold); }
+.mission-list li b{ display:inline; font-family:var(--sans); font-weight:600; font-size:inherit; letter-spacing:0; text-transform:none; color:var(--tx); margin:0; }
+.ov-card{ border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 14px; }
+.ov-card b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:4px; }
+.ov-card p{ font-size:.86rem; color:var(--tx2); }
+.ov-card ul{ list-style:none; display:grid; gap:3px; }
+.ov-card li{ font-size:.84rem; color:var(--tx); padding-left:12px; position:relative; }
+.ov-card li::before{ content:''; position:absolute; left:0; top:.55em; width:5px; height:5px; border-radius:50%; background:var(--eyebrow); }
+html.paged .ov-mods .hw{ padding:12px 14px; }
+html.paged .ov-mods .hw p{ font-size:.82rem; }
+html.paged .ov-mods .hw p b{ color:var(--eyebrow); font-weight:600; }
+html.paged .ov-mods .hw .chip{ margin-top:8px; }
+@media (max-width:900px){ .ov-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:600px){ .ov-grid{ grid-template-columns:1fr; } }
+.vc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,2.2vw,24px); align-items:start; }
+.flip-grid.two{ grid-template-columns:1fr 1fr; }
+.fw.two{ grid-template-columns:1fr 1fr; margin-top:0; }
+.how{ margin-top:10px; font-size:.86rem; color:var(--tx2); line-height:1.5; }
+.how b{ display:block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+p.how{ margin:0 0 12px; }
+.split2 .module-head p{ font-size:.88rem; }
+html.paged .split2 .scn{ margin-top:8px; }
+@media (max-width:900px){ .vc-grid{ grid-template-columns:1fr; } }
+.ask{ margin:0 0 10px; border:1px solid var(--bdg); border-radius:var(--r); background:var(--card); padding:10px 14px; display:grid; grid-template-columns:1fr 1fr; gap:6px 18px; }
+.ask p{ font-size:.92rem; color:var(--tx); line-height:1.45; }
+.ask p b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+@media (max-width:900px){ .ask{ grid-template-columns:1fr; } }
+/* who is who */
+.who{ margin-top:14px; border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:12px 16px; display:grid; grid-template-columns:repeat(5,1fr); gap:8px 16px; }
+.isnot{ margin-top:14px; border:1px solid var(--bd); border-top:3px solid var(--tx); border-radius:var(--r); background:var(--card); padding:14px 18px 18px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px 22px; }
+.isnot .mono{ grid-column:1 / -1; font-size:.72rem; color:var(--tx); }
+.isnot > div{ display:grid; grid-template-columns:auto 1fr; gap:4px 10px; align-items:start; }
+.isnot .x{ grid-row:1 / span 2; width:26px; height:26px; border-radius:50%; background:var(--tx); color:var(--card); display:grid; place-items:center; font-size:1rem; line-height:1; margin-top:2px; }
+.isnot b{ font-family:var(--serif); font-weight:400; font-size:1.15rem; line-height:1.2; color:var(--tx); }
+.isnot p{ font-size:.9rem; color:var(--tx2); line-height:1.45; }
+@media (max-width:900px){ .isnot{ grid-template-columns:1fr; } }
+.threeq{ margin-top:14px; display:grid; gap:8px; }
+.threeq .mono{ font-size:.7rem; }
+.threeq > div{ display:grid; grid-template-columns:34px 1fr; gap:10px; align-items:center; border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:8px 12px 8px 8px; }
+.threeq b{ width:34px; height:34px; border-radius:50%; background:var(--eyebrow); color:var(--btn-tx); display:grid; place-items:center; font-family:var(--cond); font-weight:700; font-size:.95rem; }
+.threeq p{ font-size:.98rem; color:var(--tx); font-weight:600; line-height:1.3; }
+.helpers{ margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.helpers .mono{ grid-column:1 / -1; font-size:.72rem; }
+.helpers > div{ border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:14px 14px 12px; display:flex; flex-direction:column; gap:6px; }
+.helpers .hic{ width:44px; height:44px; border-radius:50%; background:var(--eyebrow); color:var(--btn-tx); display:grid; place-items:center; margin-bottom:4px; }
+.helpers .hic svg{ width:24px; height:24px; }
+.helpers b{ font-family:var(--serif); font-weight:400; font-size:1.15rem; line-height:1.2; color:var(--tx); }
+.helpers p{ font-size:.86rem; color:var(--tx2); line-height:1.4; }
+.helpers small{ margin-top:auto; padding-top:6px; border-top:1px solid var(--bd); font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.04em; text-transform:uppercase; color:var(--eyebrow); line-height:1.4; }
+.helpers small a{ color:var(--link); border-bottom:1px solid var(--bdg); text-transform:none; letter-spacing:0; font-family:var(--sans); font-weight:600; font-size:.86rem; }
+@media (max-width:1100px){ .helpers{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:700px){ .helpers{ grid-template-columns:1fr; } }
+/* situation simulator */
+.sim{ margin-top:18px; border:1px solid var(--bd); border-left:4px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:16px 18px 18px; }
+.sim-head h3{ font-family:var(--serif); font-weight:400; font-size:1.35rem; margin-top:4px; }
+.sim-head p{ font-size:.92rem; color:var(--tx2); margin-top:4px; max-width:70ch; }
+.sim-pick{ display:grid; gap:6px; margin-top:12px; max-width:560px; }
+.sim-pick select{ font:inherit; font-size:1rem; padding:10px 12px; border:1px solid var(--field-bd); border-radius:var(--r); background:var(--field); color:var(--tx); }
+.sim-out{ display:none; margin-top:14px; }
+.sim-out.show{ display:grid; grid-template-columns:1.2fr 1fr; gap:14px 22px; }
+.sim-out .s-lab{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:3px; }
+.sim-out p{ font-size:.93rem; color:var(--tx2); }
+.sim-out .s-first{ grid-column:1 / -1; border:1px solid var(--eyebrow); background:rgba(207,174,112,.12); border-radius:var(--r); padding:12px 14px; }
+.sim-out .s-first p{ color:var(--tx); font-weight:600; font-size:1rem; }
+.sim-out .s-who ul{ list-style:none; display:grid; gap:6px; }
+.sim-out .s-who li{ font-size:.9rem; color:var(--tx2); padding-left:14px; position:relative; }
+.sim-out .s-who li::before{ content:''; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:50%; background:var(--eyebrow); }
+.sim-out .s-never p{ color:var(--vu-err); }
+.sim-out .s-learn{ grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding-top:10px; border-top:1px solid var(--bd); }
+.sim-out .s-note{ grid-column:1 / -1; font-size:.8rem; color:var(--tx3); }
+.chip-l{ display:inline-flex; align-items:center; gap:6px; border:1px solid var(--bd); border-radius:999px; padding:5px 11px; font-size:.82rem; color:var(--tx); background:var(--card); text-decoration:none; }
+.chip-l:hover{ border-color:var(--eyebrow); color:var(--strong); }
+.chip-l i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:3px; padding:2px 5px; }
+.chip-l.mm i{ background:var(--tx); }
+@media (max-width:900px){ .sim-out.show{ grid-template-columns:1fr; } }
+/* keep learning */
+.keep{ margin-top:16px; border-top:1px solid var(--bd); padding-top:10px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.keep .mono{ font-size:.68rem; margin-right:4px; }
+.hinttxt{ font-size:.88rem; color:var(--tx2); line-height:1.5; }
+.turn-wrap{ min-width:0; }
+.turn-wrap > .turn{ margin-top:0; }
+.turn{ display:flex; gap:14px; align-items:center; margin:14px 0 10px; background:#FFFFFF; color:var(--vu-black); border-left:6px solid var(--vu-gold); border-radius:var(--r); padding:12px 16px; box-shadow:0 2px 12px rgba(0,0,0,.35); }
+.turn .t-ic{ flex:0 0 auto; width:30px; height:30px; border-radius:50%; background:var(--vu-gold); color:var(--vu-black); display:grid; place-items:center; }
+.turn .t-ic svg{ width:16px; height:16px; }
+.turn .mono{ display:block; color:var(--vu-black); font-size:.7rem; margin-bottom:1px; }
+.turn p{ margin:0; font-size:.98rem; line-height:1.35; color:var(--vu-black); }
+.turn.done{ background:transparent; color:var(--tx); border:1px solid var(--bdg); border-left:6px solid var(--vu-gold); box-shadow:none; } .turn.done p{ color:var(--tx2); } .turn.done .mono{ color:var(--eyebrow); }
+.turn.done .t-ic{ background:var(--vu-gold); color:var(--vu-black); }
+/* every accent is Vanderbilt gold on the black pages */
+.th-dark .big-score,.th-dark .quiz-result .big-score{ color:var(--vu-gold); } .th-dark .pbar.top .fill{ background:var(--vu-gold); }
+.pdf-card{ display:grid; grid-template-columns:auto 1fr auto; gap:16px; align-items:center; margin-top:14px; padding:14px 18px; border:1px solid var(--bdg); border-left:4px solid var(--vu-gold); background:var(--card); border-radius:var(--r); color:var(--tx); text-decoration:none; }
+.pdf-card:hover{ background:var(--card2); }
+.pdf-card .pdf-ic{ width:44px; height:44px; border-radius:50%; background:var(--eyebrow); color:var(--btn-tx); display:grid; place-items:center; } .pdf-card .pdf-ic svg{ width:24px; height:24px; }
+.pdf-card b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.2rem; line-height:1.2; }
+.pdf-card .pdf-sub{ display:block; color:var(--tx2); font-size:.92rem; margin-top:2px; }
+.pdf-card .pdf-go{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); white-space:nowrap; }
+@media (max-width:700px){ .pdf-card{ grid-template-columns:auto 1fr; } .pdf-card .pdf-go{ grid-column:2; } }
+.learn-top{ margin-top:14px; display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+.learn-top a .no{ font-family:var(--serif); font-size:1.4rem; line-height:1; color:var(--vu-gold); }
+.learn-top a{ display:flex; flex-direction:column; gap:6px; border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:12px 14px; text-decoration:none; color:var(--tx); }
+.learn-top a:hover{ border-color:var(--eyebrow); }
+.learn-top a b{ font-family:var(--serif); font-weight:400; font-size:1.05rem; line-height:1.25; }
+.learn-top a small{ font-size:.8rem; color:var(--tx2); line-height:1.4; }
+.learn-top a i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); }
+.learn-grid{ margin-top:16px; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; } .learn-grid > .mono{ grid-column:1 / -1; }
+.learn-grid > div{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:12px 14px; }
+.learn-grid h4{ font-family:var(--serif); font-weight:400; font-size:1.1rem; margin-bottom:6px; }
+.learn-grid ul{ list-style:none; display:grid; gap:6px; }
+.learn-grid li{ font-size:.86rem; line-height:1.35; }
+.learn-grid li a{ color:var(--tx); text-decoration:none; font-weight:600; border-bottom:1px solid var(--bdg); }
+.learn-grid li a:hover{ color:var(--strong); }
+.learn-grid li span{ display:block; color:var(--tx2); font-size:.8rem; }
+.learn-grid li i{ font-style:normal; font-family:var(--cond); font-weight:700; font-size:.6rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-right:4px; }
+.learn-comp{ margin-top:16px; border:1px solid var(--bd); border-left:4px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:14px 18px; }
+.learn-comp h4{ font-family:var(--serif); font-weight:400; font-size:1.15rem; margin:2px 0 4px; }
+.learn-comp p{ color:var(--tx2); font-size:.92rem; margin:0 0 8px; }
+.learn-comp ol{ columns:3; column-gap:24px; margin:0; padding-left:20px; font-size:.9rem; } .learn-comp li{ break-inside:avoid; margin-bottom:3px; padding-left:2px; }
+.learn-comp a.btn{ margin-top:10px; }
+@media (max-width:1000px){ .learn-comp ol{ columns:2; } } @media (max-width:640px){ .learn-comp ol{ columns:1; } }
+.learn-media{ margin-top:16px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+@media (max-width:1100px){ .learn-media{ grid-template-columns:1fr 1fr; } }
+.learn-media .mono{ display:block; margin-bottom:6px; }
+@media (max-width:1000px){ .learn-top{ grid-template-columns:repeat(2,1fr); } .learn-grid{ grid-template-columns:1fr; } }
+@media (max-width:700px){ .learn-top,.learn-grid,.learn-media{ grid-template-columns:1fr; } }
+.who .mono{ grid-column:1 / -1; font-size:.7rem; }
+.who div{ font-size:.82rem; color:var(--tx2); line-height:1.4; }
+.who b{ display:block; color:var(--tx); font-weight:600; font-size:.86rem; }
+.who a{ color:var(--link); border-bottom:1px solid var(--bdg); }
+.week{ margin-top:10px; border:1px solid var(--eyebrow); border-radius:var(--r); background:rgba(207,174,112,.12); padding:10px 14px; font-size:.95rem; color:var(--tx); }
+.week b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+.yukl.foot{ margin:12px 0 0; padding:8px 12px; font-size:.78rem; border-left-width:1px; }
+@media (max-width:900px){ .who{ grid-template-columns:1fr 1fr; } }
+/* Yukl tie-in strip */
+.yukl{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px; margin:0 0 14px; padding:10px 14px; border:1px solid var(--bdg); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); font-size:.84rem; color:var(--tx2); }
+.yukl b{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.yukl span{ display:inline-flex; align-items:baseline; gap:6px; }
+.yukl span::before{ content:''; width:5px; height:5px; border-radius:50%; background:var(--eyebrow); position:relative; top:-2px; }
+.yukl span:first-of-type::before{ display:none; }
+.yukl a{ color:var(--link); border-bottom:1px solid var(--bdg); }
+/* breadcrumb line */
+.you-are{ margin-bottom:10px; color:var(--tx2); text-transform:none; letter-spacing:0; font-family:var(--sans); font-weight:500; font-size:.86rem; display:flex; flex-wrap:wrap; gap:4px 10px; align-items:baseline; }
+.you-are b{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.you-are i{ font-style:normal; color:var(--tx3); }
+/* card backs: habit and the way */
+.fcard .back p.hb{ margin-top:8px; }
+.fcard .back p.hb b{ font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; display:block; margin-bottom:2px; }
+.fcard .back p.hb.no b{ color:var(--vu-err); }
+.fcard .back p.hb.yes b{ color:var(--eyebrow); }
+/* go deeper */
+details.deeper{ margin-top:14px; border:1px solid var(--bd); border-radius:var(--r); background:var(--card); }
+details.deeper summary{ cursor:pointer; padding:12px 16px; font-size:.92rem; color:var(--tx); display:flex; gap:10px; align-items:baseline; list-style:none; }
+details.deeper summary::-webkit-details-marker{ display:none; }
+details.deeper summary b{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+details.deeper summary .dur{ margin-left:auto; color:var(--tx3); font-size:.8rem; }
+details.deeper .d-body{ padding:0 16px 16px; }
+details.deeper .d-body p{ margin:0 0 10px; font-size:.9rem; color:var(--tx2); }
+/* quiz stepper */
+.kq{ display:none; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:18px 20px; }
+.kq.cur{ display:block; }
+.kq.right{ border-color:var(--eyebrow); } .kq.wrong{ border-color:var(--vu-err); }
+.kq .kq-q{ font-weight:600; font-size:1.05rem; color:var(--tx); }
+.kq .kq-q .qn{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; color:var(--eyebrow); margin-right:10px; }
+.kq-opts{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+.kq-opts button{ text-align:left; border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:var(--r); padding:11px 14px; font-size:.93rem; cursor:pointer; transition:border-color .2s var(--ease); }
+.kq-opts button:hover{ border-color:var(--eyebrow); }
+.kq-opts button[aria-pressed="true"]{ border-color:var(--strong); background:rgba(207,174,112,.14); }
+.kq-opts button.is-answer{ box-shadow:0 0 0 2px var(--eyebrow) inset; }
+.kq-opts button:disabled{ cursor:default; }
+.kq-x{ display:none; margin-top:12px; font-size:.92rem; color:var(--tx2); border-top:1px solid var(--bd); padding-top:12px; }
+.kq-x b{ color:var(--tx); }
+.kq.right .kq-x,.kq.wrong .kq-x{ display:block; }
+.kq-nav{ display:none; margin-top:12px; gap:10px; align-items:center; }
+.kq.right .kq-nav,.kq.wrong .kq-nav{ display:flex; }
+.kq-done{ display:none; margin-top:14px; border:1px solid var(--bdg); background:var(--card2); border-radius:var(--r); padding:22px 24px; text-align:center; }
+.kq-done.show{ display:block; }
+.kq-done .big-score{ font-family:var(--serif); font-size:clamp(2.4rem,5vw,3.6rem); line-height:1; color:var(--eyebrow); }
+.kq-done h3{ margin-top:8px; font-family:var(--serif); font-weight:400; font-size:1.4rem; }
+.kq-done p{ color:var(--tx2); margin:8px auto 0; max-width:56ch; }
+.kq-done .btn{ margin-top:14px; }
+/* recap chips */
+.recap-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px; }
+.recap-row.three{ grid-template-columns:repeat(3,1fr); margin-top:0; }
+.calls .scn{ margin-top:0; }
+.calls .cq{ display:none; } .calls .cq.cur{ display:block; }
+.calls .cq-h{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:8px; }
+.calls .cq-nav{ display:flex; gap:10px; align-items:center; margin-top:12px; }
+.ideas{ margin-top:14px; }
+.idea-tabs{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+.idea-tabs button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:7px 14px; font:inherit; font-size:.86rem; cursor:pointer; }
+.idea-tabs button[aria-selected="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.idea-tabs button.seen:not([aria-selected="true"]){ border-color:var(--eyebrow); }
+.idea{ display:none; border:1px solid var(--bd); background:var(--card); border-radius:var(--r); padding:14px 18px; }
+.idea.cur{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px 18px; }
+.idea .col{ display:contents; }
+.idea .blk{ border-top:2px solid var(--eyebrow); padding-top:8px; }
+.idea > h3{ grid-column:1 / -1; }
+.idea .side{ grid-column:1 / -1; display:grid; grid-template-columns:1fr; }
+.idea .who-is{ grid-column:1 / -1; }
+.idea .who-is{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.idea h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.25rem,2vw,1.6rem); line-height:1.2; margin-top:2px; }
+.idea h3 em{ font-family:var(--serif-i); font-style:italic; color:var(--strong); }
+.idea p{ font-size:.88rem; line-height:1.45; color:var(--tx2); margin-top:4px; }
+.idea p b{ color:var(--tx); display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:2px; }
+.idea .side{ display:grid; gap:10px; align-content:start; }
+.idea .side .week{ margin-top:0; }
+.idea .side .tue{ border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); padding:12px 14px; font-size:.92rem; color:var(--tx2); }
+.idea .side .tue b{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:4px; }
+.idea .try{ grid-column:1 / -1; margin-top:4px; border-top:1px solid var(--bd); padding-top:12px; }
+.idea .try .cq-h{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:8px; }
+.idea .try .scn{ margin-top:0; }
+.idea-nav{ grid-column:1 / -1; display:flex; gap:10px; align-items:center; }
+@media (max-width:900px){ .idea.cur{ grid-template-columns:1fr; } }
+.sub-listen{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; margin-left:8px; vertical-align:middle; border:1px solid var(--field-bd); background:var(--field); color:var(--eyebrow); border-radius:50%; cursor:pointer; padding:0; }
+.sub-listen svg{ width:14px; height:14px; }
+.sub-listen .w1,.sub-listen .w2{ opacity:.35; }
+.sub-listen.playing{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.sub-listen.playing .w1{ opacity:1; animation:subw 1s ease-in-out infinite; } .sub-listen.playing .w2{ opacity:1; animation:subw 1s ease-in-out .3s infinite; }
+@keyframes subw{ 0%,100%{ opacity:.3; } 50%{ opacity:1; } }
+.fcard .back .hb{ font-size:.82rem; }
+.flip-grid.five .fcard h4{ font-size:1.05rem; }
+.flip-grid.five .fcard .face{ min-height:250px; }
+.flip-grid.five .fcard .def{ font-size:.86rem; }
+.flip-grid.five .fcard .back .hb{ font-size:.8rem; }
+.flip-grid.five .fcard .back .tag{ font-size:.62rem; }
+@media (max-width:1100px){ .flip-grid.five{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:700px){ .flip-grid.five,.recap-row.three{ grid-template-columns:1fr; } }
+.recap-row div{ border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 14px; }
+.recap-row b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.recap-row strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.05rem; margin-top:4px; }
+.recap-row p{ font-size:.82rem; color:var(--tx2); margin-top:4px; }
+.survey-grid{ display:grid; grid-template-columns:1fr 1.3fr; gap:clamp(16px,2.5vw,28px); align-items:start; }
+.survey-grid.mea{ grid-template-columns:1.25fr 1fr; }
+.mea-map{ margin-top:12px; }
+.mea-map .fw-card li i{ display:block; font-size:.76rem; color:var(--tx3); font-style:normal; }
+.mea-map .fw-card li b{ display:inline; font-family:var(--cond); font-size:.7rem; letter-spacing:.06em; color:var(--eyebrow); margin-right:4px; }
+.mea-form{ margin-top:14px; display:grid; gap:12px; }
+.mea-form label{ display:grid; gap:6px; }
+.mea-form select,.mea-form input{ font:inherit; font-size:1rem; padding:10px 12px; border:1px solid var(--field-bd); border-radius:var(--r); background:var(--field); color:var(--tx); }
+.mea-form .route-opts{ margin-top:6px; grid-template-columns:1fr; }
+.mea-form .route-opts button{ text-align:left; }
+.survey-grid .survey{ margin-top:0; grid-template-columns:1fr; gap:10px; padding:16px 18px; }
+.survey-grid .survey ol{ font-size:.86rem; }
+html.paged .survey-grid .route{ margin-top:0; padding:18px 20px; }
+@media (max-width:900px){ .survey-grid,.recap-row{ grid-template-columns:1fr; } .recap-row{ grid-template-columns:1fr 1fr; } .kq-opts{ grid-template-columns:1fr; } }
+/* book bar: narration controls */
+.bb-aud{ display:inline-flex; align-items:center; justify-content:center; gap:7px; height:44px; padding:0 12px; flex-shrink:0; border:1px solid rgba(255,255,255,.25); border-radius:var(--r); background:transparent; color:#fff; cursor:pointer; font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.05em; text-transform:uppercase; transition:border-color .2s ease-out, color .2s ease-out; }
+.bb-aud:hover{ border-color:var(--vu-gold); color:var(--vu-gold); }
+.bb-aud svg{ width:15px; height:15px; flex-shrink:0; }
+.bb-aud[aria-pressed="true"]{ border-color:var(--vu-gold); background:var(--vu-gold); color:var(--vu-black); }
+.bb-aud.playing .wave{ display:inline-flex; gap:2px; align-items:flex-end; height:12px; }
+.bb-aud .wave{ display:none; }
+.bb-aud .wave i{ width:3px; background:currentColor; height:4px; animation:bbwave .8s ease-in-out infinite; }
+.bb-aud .wave i:nth-child(2){ animation-delay:.15s; } .bb-aud .wave i:nth-child(3){ animation-delay:.3s; }
+@keyframes bbwave{ 0%,100%{ height:4px; } 50%{ height:12px; } }
+.bb-aud.playing .ico{ display:none; }
+.narr-toast{ position:fixed; left:50%; bottom:calc(var(--bar-h,64px) + 10px); transform:translateX(-50%); z-index:215; background:var(--vu-black); color:#fff; border:1px solid rgba(207,174,112,.5); border-radius:var(--r); padding:8px 14px; font-size:.85rem; opacity:0; visibility:hidden; transition:opacity .25s ease-out, visibility 0s .25s; pointer-events:none; max-width:calc(100vw - 32px); text-align:center; }
+.narr-toast.show{ opacity:1; visibility:visible; transition:opacity .25s ease-out; }
+@media (max-width:1100px){ .bb-aud .bb-aud-t{ display:none; } .bb-aud{ width:44px; padding:0; } }
+@media (prefers-reduced-motion:reduce){ .bb-aud .wave i{ animation:none; height:8px; } }
+@media (max-width:900px){ .stat-strip,.fw{ grid-template-columns:1fr 1fr; } .way,.intro-grid,.split2,.sort-grid{ grid-template-columns:1fr; } .prof > div{ grid-template-columns:1fr 60px; } .prof .bar{ grid-column:1 / -1; } .focus-list{ grid-template-columns:1fr; } html.paged .hero .outcomes{ columns:1; } html.paged .canon ol{ grid-template-columns:1fr; } }
+@media (max-width:600px){ .stat-strip,.fw{ grid-template-columns:1fr; } .vslot,.survey{ grid-template-columns:1fr; } .route-opts{ grid-template-columns:1fr; } }
+
+/* ══════════ one type scale, title bars on every card ══════════
+   Copy inside cards is one size everywhere (no shrinking to fit); a page
+   that needs more room scrolls. Each card opens with a title bar and
+   carries a soft gradient so the copy reads as one block. */
+html.paged{ --fs-body:.95rem; --fs-small:.84rem; --fs-lab:.72rem; --fs-card-h:1.15rem; --cpx:16px; --cpy:12px; }
+html.paged .hw p, html.paged .ov-card p, html.paged .ov-card li, html.paged .op-grid p, html.paged .isnot p, html.paged .recap p, html.paged .hw-step p, html.paged #nextstep .hw-step p, html.paged .evidence p, html.paged .ask p, html.paged .turn p, html.paged #yourcall .turn p, html.paged .mission-list li, html.paged .ov-mods .hw p, html.paged .learn-comp p, html.paged .pdf-card .pdf-sub, html.paged #calls .sim-head p, html.paged .sim-head p, html.paged .sim-out p, html.paged .sim-out .s-who li, html.paged .split2 .module-head p, html.paged .module-head p, html.paged .fw-card p, html.paged .fw-card li, html.paged .dq .dq-s, html.paged .dq-x, html.paged .sq p, html.paged .sq-x, html.paged .scn-out p, html.paged .way > div, html.paged .way p, html.paged .help-cols p, html.paged .how, html.paged .more-watch li, html.paged .recap-row p, html.paged .idea p, html.paged .idea .side .week, html.paged .idea .side .tue, html.paged .fcard .def, html.paged .fcard .back p, html.paged .fcard .back .hb, html.paged .flip-grid.five .fcard .def, html.paged .flip-grid.five .fcard .back .hb, html.paged .who div, html.paged .survey p, html.paged .survey ol, html.paged .drill-status, html.paged #ideas .drill-status, html.paged .canon ol li, html.paged .sec-head p, html.paged .hero .outcomes li, html.paged .lframe.learn .lf-chip, html.paged .learn-top a, html.paged .comp-item .ct b, html.paged .comp-item .ct small, html.paged .track-head span.tw, html.paged .track-head .out, html.paged .scn-opts button, html.paged #yourcall .scn-opts button, html.paged .idea .try .scn .scn-opts button, html.paged .dq-opts button, html.paged .qz .opts label, html.paged .qz legend, html.paged .route-opts button, html.paged .mea-choice button, html.paged .idea-tabs button, html.paged .learn-tabs button, html.paged .oracle-strip p, html.paged .focus-list li, html.paged .gap-line, html.paged .vslot p, html.paged .yt-off p, html.paged .mission-charge .mission-list li, html.paged .idea .try .scn .scn-out:not(.show)::before, html.paged #yourcall .scn .scn-out:not(.show)::before{ font-size:var(--fs-body); line-height:1.5; }
+html.paged .cv-cap, html.paged .stat span, html.paged .evidence .e-src, html.paged .recap .r-why, html.paged .sim-out .s-note, html.paged .focus-list li small, html.paged .hinttxt, html.paged .learn-top a small, html.paged .canon .c-fine, html.paged .who .mono, html.paged .flegal{ font-size:var(--fs-small); }
+html.paged .recap-row strong, html.paged .isnot b, html.paged .fw-card strong, html.paged .hw h3, html.paged .ov-mods .hw h3, html.paged .recap h3, html.paged .op-grid b, html.paged .help-pane h4, html.paged .sim-head h3, html.paged #calls .sim-head h3, html.paged .learn-comp h4, html.paged .pdf-card b, html.paged .survey h4, html.paged .hw-step h3, html.paged #nextstep .hw-step h3, html.paged .fcard h4, html.paged .flip-grid.five .fcard h4, html.paged .vslot h4, html.paged .who b{ font-size:var(--fs-card-h); line-height:1.25; }
+html.paged .who b{ font-family:var(--sans); font-weight:600; font-size:var(--fs-body); }
+html.paged .recap-row b, html.paged .ov-card b, html.paged .fw-card b, html.paged .idea p b, html.paged .idea .who-is, html.paged .idea .side .tue b, html.paged .idea .side .week b, html.paged .isnot .mono, html.paged .who .mono, html.paged .turn .mono, html.paged .ask p b, html.paged .evidence .e-label, html.paged .sim-out .s-lab, html.paged .comp-item .ct i, html.paged .help-cols b, html.paged .how b, html.paged .fcard .back .tag, html.paged .flip-grid.five .fcard .back .tag, html.paged .fw-card .hint, html.paged .calls .cq-h, html.paged .idea .try .cq-h, html.paged .dq .dq-s b, html.paged .module-head .mno, html.paged .canon h5, html.paged .way b, html.paged .focus-list li b, html.paged .survey .sk, html.paged .sim-pick .mono, html.paged .operate .mono, html.paged .operate .op-sub, html.paged .mission-charge .mono, html.paged .sq-opts button, html.paged .hw-step .chip, html.paged #nextstep .hw-step .chip, html.paged .chip{ font-size:var(--fs-lab); letter-spacing:.08em; }
+/* uniform card padding so title bars can run edge to edge */
+html.paged .recap-row > div, html.paged .ov-card, html.paged .fw-card, html.paged .isnot, html.paged .who, html.paged .operate, html.paged .mission-charge, html.paged .sim, html.paged #calls .sim, html.paged .evidence, html.paged .idea, html.paged .canon, html.paged .helpers.tabbed > .help-pane, html.paged .hw, html.paged .ov-mods .hw, html.paged .recap, html.paged .learn-comp, html.paged .pdf-card, html.paged .way, html.paged .survey, html.paged .dq, html.paged .sq, html.paged #tell-leader, html.paged .oracle-strip{ padding:var(--cpy) var(--cpx) calc(var(--cpy) + 2px); background:var(--card); }
+/* the title bar: the card's label, drawn as a bar under the gold rule */
+html.paged .recap-row > div > b, html.paged .ov-card > b, html.paged .fw-card > b, html.paged .isnot > .mono, html.paged .who > .mono, html.paged .operate > .mono, html.paged .mission-charge > .mono, html.paged .sim > .sim-head > .mno, html.paged .evidence > .e-label, html.paged .idea > .who-is, html.paged .canon > h5, html.paged .learn-comp > .mono, html.paged .pdf-card > .mono, html.paged .recap > .mono, html.paged .hw > .hw-no, html.paged .ov-mods .hw > .hw-no, html.paged .help-pane > h4{ display:block; margin:calc(-1 * var(--cpy)) calc(-1 * var(--cpx)) 10px; padding:7px var(--cpx); background:none; border-bottom:1px solid var(--vu-gold); color:var(--vu-gold); grid-column:1 / -1; }
+html.paged .idea > .who-is{ display:flex; align-items:center; gap:8px; }
+html.paged .sim > .sim-head > .mno{ margin-bottom:8px; }
+html.paged .hw > .hw-no, html.paged .ov-mods .hw > .hw-no{ font-size:1.35rem; line-height:1; padding:6px var(--cpx); color:var(--vu-gold); }
+html.paged .hw h3, html.paged .ov-mods .hw h3{ margin-top:2px; }
+html.paged .help-pane > h4{ font-family:var(--serif); color:var(--tx); font-size:var(--fs-card-h); }
+html.paged .mission-charge > .mono{ margin-left:calc(-1 * var(--cpx)); }
+html.paged .isnot{ grid-template-columns:1fr; gap:10px 18px; } html.paged .isnot > div{ align-content:start; grid-template-rows:auto auto; } html.paged .isnot > div p{ margin-top:0; } html.paged .isnot .mono{ color:var(--vu-gold); } html.paged .isnot .x{ background:var(--vu-gold); color:var(--vu-black); }
+html.paged .who{ gap:8px 16px; }
+html.paged .recap-row > div, html.paged .ov-card, html.paged .fw-card, html.paged .operate, html.paged .sim, html.paged .evidence, html.paged .idea, html.paged .canon, html.paged .who, html.paged .hw, html.paged .recap, html.paged .learn-comp, html.paged .pdf-card, html.paged .helpers.tabbed > .help-pane{ border:1px solid var(--bdg); border-top:0; }
+html.paged .sim{ border-left:1px solid var(--bd); } html.paged .evidence{ border-left:1px solid var(--bd); } html.paged .helpers.tabbed > .help-pane{ border-left:1px solid var(--bd); }
+/* column labels inside cards: mini bars */
+html.paged .idea p.blk > b, html.paged .help-cols > div > b, html.paged .helpers .help-cols b, html.paged .way b, html.paged .op-grid > div > b:first-child, html.paged .ask p b{ display:block; padding:0 0 4px; margin:0 0 6px; border:0; border-bottom:1px solid var(--vu-gold); background:none; color:var(--vu-gold); }
+html.paged .idea .blk{ border-top:0; padding-top:0; }
+html.paged .op-grid > div > b:first-child{ font-family:var(--serif); font-size:var(--fs-card-h); color:var(--tx); letter-spacing:0; text-transform:none; }
+/* nothing shrinks to fit: the page scrolls instead */
+html.paged .page .wrap{ zoom:1 !important; }
+html.paged .sim-out{ max-height:none; min-height:0; overflow:visible; padding-right:0; }
+html.paged .sim-pick{ min-width:0; max-width:none; } html.paged .sim-pick select{ width:100%; max-width:100%; min-width:0; }
+html.paged #calls .calls-grid > div{ min-width:0; overflow:hidden; }
+html.paged .operate .op-lead{ max-width:none; }
+.op-link{ margin:10px 0 0; font-size:var(--fs-small); } .op-link a{ color:var(--link); border-bottom:1px solid var(--bdg); } .op-link a:hover{ color:var(--strong); }
+html.paged h3, html.paged h4, html.paged .fcard h4, html.paged .flip-grid.five .fcard h4, html.paged .hw h3, html.paged .ov-mods .hw h3, html.paged .learn-comp h4, html.paged .vslot h4, html.paged .cv-wait b, html.paged .sim-head h3{ font-family:var(--serif); font-weight:400; letter-spacing:-.01em; }
+html.paged .qz legend, html.paged .dq .dq-s, html.paged .sq p{ font-family:var(--sans); }
+/* mission: outline map of the United States with pulsing pins on the five Vanderbilt locations */
+.map-row{ grid-template-columns:1.5fr 1fr; align-items:stretch; }
+.map-card{ display:flex; flex-direction:column; }
+.us-map{ display:block; width:100%; height:auto; max-height:250px; margin:auto 0; overflow:visible; }
+.us-map .land{ fill:none; stroke:var(--vu-gold); stroke-width:1.4; stroke-linejoin:round; opacity:.85; }
+.us-map .dot{ fill:var(--vu-gold); }
+.us-map .pin.home .star{ fill:var(--vu-gold); stroke:#fff; stroke-width:1; stroke-linejoin:round; }
+.us-map .ring{ fill:none; stroke:var(--vu-gold); stroke-width:1.5; opacity:0; transform-box:fill-box; transform-origin:center; animation:pinPulse 2.4s ease-out infinite; }
+.us-map .ring.r2{ animation-delay:1.2s; }
+.us-map .pin:nth-child(3) .ring{ animation-delay:.4s; } .us-map .pin:nth-child(3) .ring.r2{ animation-delay:1.6s; }
+.us-map .pin:nth-child(4) .ring{ animation-delay:.8s; } .us-map .pin:nth-child(4) .ring.r2{ animation-delay:2s; }
+.us-map .pin:nth-child(5) .ring{ animation-delay:.2s; } .us-map .pin:nth-child(5) .ring.r2{ animation-delay:1.4s; }
+.us-map .pin:nth-child(6) .ring{ animation-delay:.6s; } .us-map .pin:nth-child(6) .ring.r2{ animation-delay:1.8s; }
+.us-map text{ font-family:var(--sans); font-size:12.5px; fill:#fff; paint-order:stroke; stroke:#1C1C1C; stroke-width:3px; stroke-linejoin:round; }
+@keyframes pinPulse{ 0%{ transform:scale(.6); opacity:.9; } 100%{ transform:scale(4); opacity:0; } }
+@media (prefers-reduced-motion:reduce){ .us-map .ring{ animation:none; opacity:.5; transform:scale(2); } .us-map .ring.r2{ display:none; } }
+.city-list{ list-style:none; margin:12px 0 0; padding:12px 0 0; border-top:1px solid var(--bd); display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; }
+.city-list li{ position:relative; padding-left:16px; font-size:var(--fs-small, .84rem); color:var(--tx2); }
+.city-list li::before{ content:""; position:absolute; left:0; top:.5em; width:7px; height:7px; border-radius:50%; background:var(--vu-gold); }
+.city-list a{ color:var(--tx); border-bottom:1px solid var(--bdg); } .city-list a:hover{ color:var(--strong); border-color:var(--strong); }
+@media (max-width:900px){ .map-row{ grid-template-columns:1fr; } }
+/* home: copy and Begin on the left, an outcomes panel with the course facts on the right, how-it-works across the bottom */
+.hero .hero-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:22px 56px; align-items:center; }
+.hero .hero-copy{ min-width:0; }
+.hero .hero-panel{ min-width:0; border:1px solid rgba(207,174,112,.5); background:rgba(28,28,28,.78); border-radius:var(--r); padding:20px 24px 22px; }
+.hero .hero-panel .panel-h{ display:block; padding-bottom:6px; margin-bottom:12px; border-bottom:1px solid var(--vu-gold); }
+.hero .hero-panel .panel-h.second{ margin-top:18px; }
+.hero .hero-panel .outcomes{ margin-top:0; max-width:none; }
+html.paged .hero .hero-panel .outcomes{ columns:auto; display:flex; flex-direction:column; gap:7px; }
+.hero .facts{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:0; }
+.hero .facts div{ display:flex; flex-direction:column; min-width:0; }
+.hero .facts b{ font-family:var(--cond); font-weight:700; font-size:2rem; line-height:1; color:var(--vu-gold); letter-spacing:.01em; }
+.hero .facts span{ font-size:var(--fs-small, .84rem); color:rgba(255,255,255,.72); margin-top:5px; }
+.hero .hero-panel .meta-line{ margin-top:14px; max-width:none; }
+html.paged .hero .hero-panel .meta-line{ margin-top:14px; }
+html.paged .hero .lead{ max-width:52ch; }
+html.paged .hero .cta-row{ margin-top:18px; }
+.hero .hero-copy .listen-line{ margin-top:16px; max-width:52ch; }
+html.paged .hero .hw-mini{ grid-column:1 / -1; margin-top:6px; }
+@media (max-width:1000px){ .hero .hero-grid{ grid-template-columns:1fr; gap:18px; } .hero .facts{ grid-template-columns:repeat(2,1fr); } }
+
+
+/* five ideas: the intro panel shows first; a tab or the list opens an idea */
+html.paged .idea-intro.cur{ display:grid; grid-template-columns:1.1fr 1fr; gap:10px 32px; align-items:start; }
+html.paged .idea-intro > .who-is, html.paged .idea-intro > h3{ grid-column:1 / -1; }
+.idea-intro .intro-copy p{ margin-top:8px; max-width:none; }
+.idea-intro .intro-copy p b{ color:var(--tx); font-weight:600; }
+.idea-intro .intro-cta{ margin-top:14px; }
+.intro-list{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.intro-list button{ width:100%; display:flex; align-items:center; gap:12px; text-align:left; border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:var(--r); padding:8px 12px; font:inherit; cursor:pointer; }
+.intro-list button:hover{ border-color:var(--vu-gold); }
+.intro-list .il-no{ font-family:var(--cond); font-weight:700; font-size:1.1rem; color:var(--vu-gold); width:22px; flex:0 0 auto; }
+.intro-list .il-t{ display:flex; flex-direction:column; min-width:0; }
+.intro-list .il-t b{ font-family:var(--serif); font-weight:400; font-size:var(--fs-card-h, 1.15rem); line-height:1.2; }
+.intro-list .il-t span{ font-size:var(--fs-small, .84rem); color:var(--tx2); line-height:1.4; }
+@media (max-width:900px){ html.paged .idea-intro.cur{ grid-template-columns:1fr; } }
+/* five ideas: the scenario is always shown under the idea. "Apply it" title, then the moment, then back and next. */
+html.paged .idea .try{ grid-column:1 / -1; border-top:1px solid var(--bd); padding-top:12px; margin-top:6px; min-width:0; }
+html.paged .idea-nav{ grid-column:1 / -1; justify-content:flex-end; margin-top:4px; }
+html.paged .idea .try .cq-h{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; margin:0 0 8px; text-transform:none; letter-spacing:0; min-width:0; max-width:none; }
+html.paged .idea .try .cq-h .mono{ font-size:var(--fs-lab); letter-spacing:.08em; white-space:nowrap; flex:0 0 auto; }
+html.paged .idea .try .cq-h .try-t{ font-family:var(--serif); font-size:var(--fs-card-h); color:var(--tx); line-height:1.2; }
+html.paged .idea .try .cq-h .sub-listen{ margin-left:0; }
+html.paged .idea .try .cq-h .try-note{ flex:1 1 100%; font-family:var(--sans); font-size:var(--fs-small); color:var(--tx2); line-height:1.45; }
+html.paged .idea .try .scn{ margin-top:0; }
+
+/* the four categories: one page, five tabs */
+.job-tabs{ display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px; }
+.job-tabs button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:7px 14px; font:inherit; font-size:.86rem; cursor:pointer; min-height:40px; }
+.job-tabs button[aria-selected="true"]{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
+.job-tabs button.seen:not([aria-selected="true"]){ border-color:var(--eyebrow); }
+.job-pane{ display:none; } .job-pane.cur{ display:block; } .job-pane[hidden]{ display:none; }
+.job-h{ font-family:var(--serif); font-weight:400; font-size:clamp(1.3rem,2.4vw,1.7rem); line-height:1.2; margin:0 0 10px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+.job-h .mono{ font-size:.72rem; }
+.v-std{ margin:14px 0 0; max-width:62ch; font-size:.95rem; line-height:1.5; color:rgba(255,255,255,.82); border-left:3px solid var(--vu-gold); padding-left:12px; }
+.v-std b{ color:var(--vu-gold); font-weight:600; }
+.std-src{ margin-top:18px; }
+.std-src-in{ padding:4px 0 16px; }
+.std-lead{ margin:0 0 12px; font-size:.98rem; line-height:1.5; color:rgba(255,255,255,.85); max-width:80ch; }
+.std-tblwrap{ overflow-x:auto; }
+.std-table{ width:100%; border-collapse:collapse; font-size:.9rem; line-height:1.45; }
+.std-table th{ text-align:left; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); padding:8px 12px 8px 0; border-bottom:1px solid rgba(207,174,112,.5); vertical-align:bottom; }
+.std-table td{ padding:10px 12px 10px 0; border-bottom:1px solid rgba(255,255,255,.12); vertical-align:top; color:rgba(255,255,255,.82); }
+.std-table td b{ color:#fff; font-weight:600; }
+.std-table td i{ font-style:normal; color:var(--vu-gold); }
+.std-note{ margin:12px 0 0; font-size:.85rem; line-height:1.5; color:rgba(255,255,255,.62); max-width:90ch; }
+.std-map{ margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; }
+.std-map .sm-grp{ border-top:2px solid var(--vu-gold); padding-top:8px; }
+.std-map .sm-grp > b{ display:block; font-family:var(--cond); font-weight:700; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); }
+.std-map .sm-y{ display:block; font-size:.8rem; color:rgba(255,255,255,.55); margin:2px 0 6px; }
+.std-map ol{ margin:0; padding-left:22px; display:grid; gap:6px; }
+.std-map li{ font-size:.88rem; line-height:1.4; color:rgba(255,255,255,.85); }
+.std-map li i{ display:block; font-style:normal; font-family:var(--cond); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); margin-top:2px; }
+.ar-cats .ar-st{ grid-column:1 / -1; display:block; font-size:.78rem; line-height:1.35; color:rgba(255,255,255,.6); margin-top:-2px; }
+.gate-q li.gate-grp{ border:0; padding:10px 0 0; gap:2px; }
+.gate-q li.gate-grp b{ font-size:.78rem; color:#fff; }
+.gate-q li.gate-grp span{ font-size:.8rem; color:rgba(255,255,255,.6); }
+@media (max-width:760px){ .std-map{ grid-template-columns:1fr; } }
+.std-tag{ display:inline-block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); border:1px solid rgba(207,174,112,.5); border-radius:999px; padding:3px 9px; margin:0 0 8px; }
+/* pick one habit */
+.habit-box{ margin-top:14px; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:12px 16px 14px; }
+.habit-pick{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.habit-pick button{ border:1px solid var(--field-bd); background:var(--field); color:var(--tx); border-radius:999px; padding:6px 12px; font:inherit; font-size:.82rem; cursor:pointer; min-height:36px; }
+.habit-pick button[aria-pressed="true"]{ background:var(--vu-gold); color:var(--vu-black); border-color:var(--vu-gold); }
+.habit-pick .hp-job{ flex:1 1 100%; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.07em; text-transform:uppercase; color:var(--eyebrow); margin-top:6px; }
+/* the wrap-up, at the foot of the last page */
+.wrapup{ text-align:center; margin-top:clamp(28px,5vh,56px); padding-top:clamp(24px,4vh,40px); border-top:1px solid rgba(207,174,112,.2); }
+.wrapup h2{ font-size:clamp(1.8rem,4vw,3rem); max-width:18ch; margin:0 auto; }
+.wrapup p{ color:rgba(255,255,255,.7); margin:16px auto 0; max-width:46ch; }
+.wrapup .btn{ margin-top:22px; }
+.wrapup .send-sign{ margin-top:22px; }
+/* the big rocks, drawn */
+.idea-art{ grid-column:1 / -1; margin:2px 0 6px; }
+.idea-art.photo{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:760px; }
+.jar-fig{ margin:0; position:relative; border:1px solid var(--bdg); border-radius:var(--r); overflow:hidden; background:#0b0b0b; }
+.jar-fig img{ display:block; width:100%; height:auto; aspect-ratio:4 / 3; object-fit:cover; object-position:center 48%; opacity:0; transform:scale(1.07); transition:opacity .9s ease, transform 1.8s cubic-bezier(.16,1,.3,1); }
+.idea-art.photo.play .jar-fig img{ opacity:1; transform:none; }
+.idea-art.photo.play .jar-fig.b img{ transition-delay:.55s; }
+.jar-fig figcaption{ position:absolute; left:0; right:0; bottom:0; padding:28px 14px 12px; background:linear-gradient(180deg, rgba(11,11,11,0), rgba(11,11,11,.92) 50%); color:var(--tx2); font-size:.86rem; line-height:1.4; }
+.jar-fig figcaption b{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); margin-bottom:3px; }
+.jar-fig.a figcaption b::after{ content:" \00b7 the rocks do not fit"; color:var(--tx3); }
+.jar-fig.b figcaption b::after{ content:" \00b7 everything fits"; color:var(--tx3); }
+@media (prefers-reduced-motion:reduce){ .jar-fig img{ opacity:1; transform:none; transition:none; } }
+@media (max-width:600px){ .idea-art.photo{ grid-template-columns:1fr; } }
+.evidence a.btn, .pol a.btn{ color:#1C1C1C; border-bottom:0; }
+@media (max-width:1000px){ .v-copy .survey{ grid-template-columns:1fr; gap:10px; padding:16px 18px; } .v-copy .survey .sk{ justify-self:start; white-space:normal; } }
+@media (min-width:1001px){ .v-copy .survey .sk{ align-self:start; } }
+.evidence a.btn-ghost, .pol a.btn-ghost{ color:var(--tx); }
+
+.v-goals summary{ pointer-events:none; } .v-goals summary::after{ content:""; transform:none; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--btn-tx); background:var(--eyebrow); border-radius:999px; padding:5px 10px; line-height:1; }
+.v-goals[open] summary::after{ content:""; display:none; }
+/* ── in practice: the video's story as a decision ── */
+.story{ position:relative; border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); overflow:hidden; background:var(--card); }
+.story-in{ position:relative; padding:clamp(14px,1.8vw,22px); display:grid; gap:10px; align-content:start; }
+.story-in > .mono{ color:var(--eyebrow); }
+.story-beats{ display:grid; gap:8px; }
+.beat{ font-family:var(--serif); font-size:clamp(1.05rem,1.3vw,1.25rem); line-height:1.35; margin:0; opacity:0; transform:translateY(6px); transition:opacity .5s ease, transform .5s ease; }
+.beat.show{ opacity:1; transform:none; }
+.story-step{ font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tx3); }
+.story-q[hidden], .story-week[hidden], .story-ctl[hidden]{ display:none !important; }
+.story-q .story-ask{ font-family:var(--cond); font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:.74rem; color:var(--eyebrow); margin:2px 0 8px; }
+.story-opts{ display:grid; gap:6px; }
+.story-opts button{ text-align:left; background:rgba(28,28,28,.88); border:1px solid var(--bdg); color:var(--tx); border-radius:var(--r); padding:9px 12px; font:inherit; font-size:.92rem; line-height:1.35; cursor:pointer; display:flex; gap:10px; align-items:flex-start; }
+.story-opts button i{ font-style:normal; font-family:var(--cond); font-weight:700; color:var(--eyebrow); }
+.story-opts button:hover, .story-opts button:focus-visible{ border-color:var(--eyebrow); }
+.story-opts button[aria-pressed="true"]{ border-color:var(--eyebrow); }
+.story-opts button.best[aria-pressed="true"]{ background:rgba(207,174,112,.18); }
+.story-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+.story-tags button{ background:rgba(28,28,28,.88); border:1px solid var(--bdg); color:var(--tx); border-radius:999px; padding:6px 11px; font:inherit; font-size:.86rem; cursor:pointer; }
+.story-tags button:hover, .story-tags button:focus-visible{ border-color:var(--eyebrow); }
+.story-tags button[aria-pressed="true"]{ background:var(--eyebrow); border-color:var(--eyebrow); color:var(--btn-tx); }
+.story-tags button.miss[aria-pressed="true"]{ background:none; color:var(--tx); border-color:#F0B6B0; }
+.story-out{ border-left:3px solid var(--eyebrow); padding-left:10px; font-size:.92rem; color:var(--tx2); margin:0; }
+.story-out:empty{ display:none; }
+.story-out.miss{ border-left-color:#F0B6B0; }
+.story-out b{ display:block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+.story-out.miss b{ color:#F0B6B0; }
+.story-week{ margin:0; padding:10px 12px; border:1px solid rgba(207,174,112,.5); border-radius:var(--r); background:rgba(207,174,112,.1); font-size:.92rem; line-height:1.4; }
+.story-week b{ display:block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+.story-ctl{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.story-video{ margin-top:10px; }
+.story-video summary{ list-style:none; cursor:pointer; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); display:flex; align-items:center; gap:8px; padding:6px 0; }
+.story-video summary::-webkit-details-marker{ display:none; }
+.story-video summary::before{ content:"\25B6"; font-size:.6rem; }
+.story-video[open] summary::before{ content:"\25BC"; }
+.story-video .cv-wrap{ margin-top:8px; }
+
+/* ── your first year: the list, and a three-tap wizard ── */
+.yr-ref{ margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; }
+.yr-ref > div b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); border-bottom:1px solid var(--vu-gold); padding-bottom:5px; margin-bottom:6px; }
+.yr-ref ul{ list-style:none; margin:0; padding:0; display:grid; gap:4px; }
+.yr-ref li{ font-size:.88rem; line-height:1.35; color:var(--tx2); padding-left:12px; position:relative; }
+.yr-ref li::before{ content:""; position:absolute; left:0; top:.55em; width:5px; height:5px; border-radius:50%; background:var(--vu-gold); }
+.yr-ref li i{ font-style:normal; color:var(--eyebrow); font-family:var(--cond); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; margin-left:6px; white-space:nowrap; }
+.wz{ border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); background:var(--card); padding:clamp(16px,2vw,24px); min-height:320px; display:grid; align-content:start; gap:14px; }
+.wz-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.wz-top .mono{ color:var(--eyebrow); }
+.wz-dots{ display:flex; gap:6px; } .wz-dots i{ width:22px; height:4px; border-radius:2px; background:var(--bd); } .wz-dots i.on{ background:var(--eyebrow); }
+.wz-q{ font-family:var(--serif); font-weight:400; font-size:clamp(1.4rem,2vw,1.9rem); line-height:1.15; margin:0; }
+.wz-q em{ font-family:var(--serif-i); font-style:italic; color:var(--eyebrow); }
+.wz-hint{ margin:-6px 0 0; color:var(--tx2); font-size:.92rem; line-height:1.45; }
+.wz-opts{ display:grid; grid-template-columns:repeat(auto-fill, minmax(96px,1fr)); gap:8px; }
+.wz-opts.wide{ grid-template-columns:repeat(auto-fill, minmax(170px,1fr)); }
+.wz-opts button{ background:var(--card2); border:1px solid var(--bdg); color:var(--tx); border-radius:var(--r); padding:14px 10px; font:inherit; cursor:pointer; text-align:center; display:grid; gap:3px; }
+.wz-opts button strong{ font-family:var(--serif); font-weight:400; font-size:1.5rem; line-height:1; }
+.wz-opts button small{ font-size:.78rem; color:var(--tx2); line-height:1.3; }
+.wz-opts button:hover, .wz-opts button:focus-visible{ border-color:var(--eyebrow); background:rgba(207,174,112,.12); }
+.wz-foot{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+.wz-back{ background:none; border:0; color:var(--eyebrow); font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; padding:0; }
+.wk{ display:grid; grid-template-columns:repeat(5,1fr); gap:6px; }
+.wk > div{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card2); padding:8px; min-height:150px; display:grid; align-content:start; gap:5px; }
+.wk > div.heavy{ opacity:.55; }
+.wk b{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); border-bottom:1px solid var(--bd); padding-bottom:4px; }
+.wk span{ display:block; font-size:.8rem; line-height:1.3; padding:5px 7px; border-radius:6px; background:rgba(207,174,112,.14); border-left:3px solid var(--vu-gold); }
+.wk span i{ display:block; font-style:normal; font-size:.7rem; color:var(--tx3); }
+.wk span.light{ background:none; border-left-color:var(--bdg); color:var(--tx2); }
+.wk-more{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.wk-more > div{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card2); padding:8px 10px; font-size:.86rem; line-height:1.4; color:var(--tx2); }
+.wk-more > div b{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:2px; }
+.wk-total{ font-family:var(--serif); font-size:1.1rem; margin:0; } .wk-total b{ color:var(--eyebrow); font-weight:400; }
+@media (max-width:700px){ .yr-ref{ grid-template-columns:1fr; } .wk{ grid-template-columns:1fr; } .wk > div{ min-height:0; } .wk-more{ grid-template-columns:1fr; } }
+/* your world: the unit each practice conversation is set in */
+.live-world{ display:flex; align-items:center; gap:8px; margin-top:10px; font-size:.86rem; color:var(--tx2); }
+.live-world select{ font:inherit; font-size:.86rem; color:var(--tx); background:var(--field); border:1px solid var(--field-bd); border-radius:6px; padding:5px 8px; max-width:100%; }
+.live-scene-line{ margin-top:8px; font-size:.92rem; color:var(--tx2); line-height:1.45; }
+.live-scene-line b{ color:var(--eyebrow); font-weight:600; }
+
+/* ═══ simplified rebuild: one bar, the poster vocabulary, the white switch ═══ */
+#bbDots, #bbAuto{ display:none !important; }
+.v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 16.66%), rgba(255,255,255,.14) 0); }
+.th-light .v-rail::before{ background:linear-gradient(90deg, var(--eyebrow) calc(var(--l,0) * 16.66%), rgba(0,0,0,.12) 0); }
 .pst-cards{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:16px; }
+.pst-cards.three{ grid-template-columns:repeat(3,1fr); }
 .pst-cards.five{ grid-template-columns:repeat(5,1fr); }
+.pst-cards.two{ grid-template-columns:1fr 1fr; }
 .pst-cards li{ border-radius:8px; overflow:hidden; background:#FFFFFF; color:#1C1C1C; display:flex; flex-direction:column; }
 .th-light .pst-cards li{ border:1px solid #E4E4E4; }
 .pst-cards .hd{ display:flex; align-items:center; gap:10px; padding:11px 13px; color:#fff; font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; line-height:1.2; }
-.pst-cards .hd svg{ width:22px; height:22px; flex:none; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 .pst-cards .c1 .hd{ background:#777777; border-bottom:3px solid #CFAE70; }
 .pst-cards .c2 .hd{ background:#946E24; }
 .pst-cards .c3 .hd{ background:#8BA18E; color:#1C1C1C; }
 .pst-cards .c4 .hd{ background:#BAC7D1; color:#1C1C1C; }
 .pst-cards .bd{ padding:12px 13px 14px; font-size:.9rem; line-height:1.4; color:#4a4640; }
-.pst-cards .bd b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.12rem; color:#1C1C1C; line-height:1.2; margin-bottom:5px; }
+.pst-cards .bd b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; color:#1C1C1C; line-height:1.2; margin-bottom:5px; }
 .pst-cards .bd strong{ color:#1C1C1C; font-weight:600; }
 .pst-cards .bd p{ margin:0 0 5px; }
+.pst-cards .bd ul{ margin:4px 0 0; padding-left:16px; }
+.pst-cards .bd li{ display:list-item; background:none; margin:0 0 3px; padding:0; border:0; }
 .pst-cards .bd .rule{ margin-top:8px; padding-top:8px; border-top:1px solid #E4E4E4; font-size:.84rem; color:#946E24; font-weight:600; }
 .pst-never{ list-style:none; display:grid; gap:10px; margin-top:14px; }
 .pst-never li{ display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:center; background:#FFFFFF; color:#1C1C1C; border-radius:8px; padding:13px 14px; font-size:1rem; }
 .th-light .pst-never li{ border:1px solid #E4E4E4; }
 .pst-never li i{ width:34px; height:34px; border-radius:50%; background:#777777; color:#fff; display:grid; place-items:center; font-style:normal; font-family:var(--cond); font-weight:700; font-size:1rem; }
+.pst-never li i.n{ background:#CFAE70; color:#1C1C1C; }
 .pst-never li b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.1rem; line-height:1.2; }
 .pst-never li span{ display:block; font-size:.86rem; color:#4a4640; margin-top:2px; }
 .pst-note{ margin-top:14px; font-size:.95rem; color:var(--tx2); line-height:1.45; }
 .pst-note b{ color:var(--tx); }
-.doors-mini{ list-style:none; display:grid; gap:8px; margin-top:16px; }
-.doors-mini li{ display:grid; grid-template-columns:12px 1fr; gap:10px; align-items:center; font-size:.95rem; color:var(--tx2); }
-.doors-mini li i{ width:12px; height:12px; border-radius:3px; }
-.doors-mini li b{ color:var(--tx); font-weight:600; }
-.v-deck .dq-s{ font-size:clamp(1.05rem,.8vw + .85rem,1.4rem) !important; }
-.v-deck.opts4 .dq-opts button{ padding:12px 10px; font-size:.92rem; }
-/* the end page: what changed, for reviewers */
-.diff{ list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px auto 0; max-width:760px; text-align:left; }
-.diff li{ background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:8px; padding:12px 14px; }
-.diff b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.6rem; line-height:1.05; color:#CFAE70; }
-.diff span{ display:block; font-size:.86rem; color:rgba(255,255,255,.8); margin-top:4px; line-height:1.35; }
-@media (max-width:980px){ .pst-cards, .pst-cards.five{ grid-template-columns:1fr 1fr; } }
-@media (max-width:620px){ .pst-cards, .pst-cards.five, .diff{ grid-template-columns:1fr; } }
+.v-h.sm{ max-width:none; }
+.sp-lead{ font-size:1.05rem; color:var(--tx2); max-width:70ch; margin-top:8px; line-height:1.5; }
+.idea-page .idea, .live-page .live{ display:block; }
+.idea-page .idea{ max-width:none; }
+.idea-page .idea-core{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px; }
+.sp-stage{ display:grid; grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:clamp(24px,4vw,56px); align-items:start; }
+@media (max-width:1000px){ .sp-stage{ grid-template-columns:1fr; } .idea-page .idea-core{ grid-template-columns:1fr; } }
+.learn-pane{ display:block !important; }
+.job-pane{ display:block !important; }
+.live-page .live{ margin-top:10px; }
+.sp-page-h{ margin-top:0; }
+@media (max-width:980px){ .pst-cards, .pst-cards.five, .pst-cards.three{ grid-template-columns:1fr 1fr; } }
+@media (max-width:620px){ .pst-cards, .pst-cards.five, .pst-cards.three, .pst-cards.two{ grid-template-columns:1fr; } }
+
+/* simplified: four habits across, compact reference tables */
+.job-pane .flip-grid.two{ grid-template-columns:repeat(4,1fr); gap:10px; }
+.job-pane .fcard .def{ font-size:.86rem; }
+.std-map table, .std-table{ font-size:.8rem; }
+.std-map td, .std-map th, .std-table td, .std-table th{ padding:4px 8px; }
+.std-src-in .std-lead{ font-size:.92rem; }
+.learn-comp .track-head{ cursor:pointer; }
+@media (max-width:1000px){ .job-pane .flip-grid.two{ grid-template-columns:1fr 1fr; } }
+
+.learn-comp .track-acc summary{ padding:8px 12px; }
+.learn-top, .learn-grid{ font-size:.86rem; }
+.learn-top > *, .learn-grid > *{ margin-top:6px; }
+
+/* reference pages: tighter so they fit one screen */
+.live-page .v-h.sm{ font-size:clamp(1.3rem,1.6vw + .6rem,1.8rem); margin-bottom:2px; }
+.live-page .live{ margin-top:6px; }
+.std-map, .std-src-in{ font-size:.78rem; }
+.std-map table td, .std-map table th, .std-table td, .std-table th{ padding:3px 7px; line-height:1.3; }
+.std-src-in .std-lead{ display:none; }
+.learn-top, .learn-grid{ font-size:.82rem; line-height:1.35; }
+.learn-top a, .learn-grid a{ padding-top:6px; padding-bottom:6px; }
+.wrapup{ padding-top:14px; padding-bottom:14px; }
+.wrapup h2{ font-size:clamp(1.5rem,2.4vw,2.2rem); }
+.pdf-card .pdf-sub{ display:none; }
+footer .flegal{ font-size:.72rem; line-height:1.35; }
+footer .fcenter img{ width:64px; height:auto; }
+
+.idea-page .idea-art{ max-width:560px; }
+.idea-page .idea-art figcaption{ font-size:.78rem; }
+.idea-page .idea-core{ margin-top:8px; }
+.std-map li{ margin-bottom:3px; }
+.std-map .v-why{ display:none; }
 </style>
+<link rel="stylesheet" href="../../assets/css/nav.css?v=1">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 
 <header class="gnav" id="nav">
-  <a class="gnav__brand" href="./#p/home/1" aria-label="Who handles what, start of the topic">
+  <a class="gnav__brand" href="./#p/home/1" aria-label="Manager Foundations, start of the course">
     <img src="../../assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="166" height="43" decoding="async" />
   </a>
   <div class="gnav__right">
-    <nav class="gnav__links" id="gnavLinks" aria-label="Prototype">
-      <a href="./" aria-current="page">Simplified prototype</a>
-      <a href="../">The live course</a>
-      <a class="gnav__btn" id="themeBtn" href="#" role="button" aria-pressed="false">See it in white</a>
+    <nav class="gnav__links" id="gnavLinks" aria-label="Manager Foundations">
+      <a href="#p/home/1">Start</a>
+      <a href="#p/mission/1">The mission</a>
+      <a href="#p/shift/1"><i>1</i>What a manager is</a>
+      <a href="#p/ideas/1"><i>2</i>Five ideas</a>
+      <a href="#p/year/1"><i>3</i>Your first year</a>
+      <a href="#p/welcome/1"><i>4</i>The four categories</a>
+      <a href="#p/survey/1"><i>5</i>Your assessment</a>
+      <a href="#p/nextstep/1"><i>6</i>Next steps</a>
+      <a class="gnav__btn" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener">Printable guide</a>
     </nav>
     <div class="gnav__extra">
-      <button type="button" class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel"><span class="pw">Progress</span> <b id="progCount">0/4</b></button>
+      <button type="button" class="prog-btn" id="progBtn" aria-expanded="false" aria-controls="progPanel"><span class="pw">Progress</span> <b id="progCount">0/13</b></button>
     </div>
     <button type="button" class="gnav__burger" aria-label="Menu" aria-expanded="false" aria-controls="gnavLinks"><span></span><span></span><span></span></button>
   </div>
@@ -104,133 +1310,489 @@
 
 <div class="prog-panel" id="progPanel" role="region" aria-label="Your progress" hidden>
   <div class="pp-h">Your progress</div>
-  <p class="prog-sum" id="progSum">Each page you finish is counted here.</p>
+  <p class="prog-sum" id="progSum">Each activity you finish is counted here.</p>
   <ol class="prog-list" id="progList"></ol>
-  <p class="prog-fine">Progress is saved in this browser. Reset it anytime in the footer.</p>
+  <p class="prog-fine">Progress is saved in this browser and, when you open this course from Oracle Learning, in your Oracle record. Reset it anytime in the footer.</p>
   <p class="prog-fine prog-warn" id="progStorageNote" hidden>Heads up: your browser is blocking saved progress (this happens in private browsing). Marks work during this visit but reset when you close the tab.</p>
 </div>
 <p class="sr" id="progStatus" role="status" aria-live="polite"></p>
 
+
+
 <main id="main"><span id="top"></span>
 
-<!-- ═══ WELCOME ═══ -->
+<!-- ═══ 1 HERO ═══ -->
 <section class="hero v-hero th-dark" aria-label="Welcome">
-  <div class="v-hero-bg" aria-hidden="true"><img src="../../assets/img/campus/atrium-arches.jpg" alt="" width="1800" height="1200" /></div>
+  <div class="hero-media" aria-hidden="true">
+    <img class="hero-still" src="../../assets/img/campus/kirkland-skyline.jpg" alt="" width="1800" height="942" decoding="async" fetchpriority="high" />
+    <div class="hero-scrim"></div>
+  </div>
   <div class="wrap v-hero-in">
-    <span class="v-kicker">Manager Foundations &middot; Simplified prototype &middot; Topic 3 of 6</span>
-    <h1 class="v-display">Who handles <em>what</em>.</h1>
-    <p class="v-hello">Handle it, ask, route it, or report it. Four doors for anything that lands on your desk.</p>
+    <span class="v-kicker">Vanderbilt University &middot; Manager Voyage &middot; Manager Foundations</span>
+    <h1 class="v-display">You are a manager <em>now</em>.</h1>
+    <p class="v-hello" id="heroHello">Welcome aboard. The simplified build: one idea per screen.</p>
     <div class="v-hero-cta">
-      <a class="btn btn-gold" href="#p/doors/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <ul class="v-meta" aria-label="Topic at a glance"><li>4 pages</li><li>About 4 minutes</li><li>One idea per screen</li></ul>
+      <a class="btn btn-gold" href="#p/mission/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <ul class="v-meta" aria-label="Course at a glance"><li>6 topics</li><li>About 30 minutes</li><li>Optional live practice adds about 25</li><li>Narrated</li><li>Recorded in Oracle Learning</li></ul>
+      <p class="v-std"><b>The Vanderbilt Manager Standard.</b> Four expectations of every manager, every week: get the work done through your team, take care of your people, make things better, connect your team to Vanderbilt. Adapted from Gary Yukl&rsquo;s research on effective leadership behavior: his four categories, his fifteen behaviors. The assessment measures it. This course teaches it.</p>
     </div>
     <details class="v-goals">
       <summary>What you will be able to do</summary>
       <ol>
-        <li><b>Pick</b> the right door for anything that lands on your desk.</li>
-        <li><b>Name</b> the three things a manager never does.</li>
-        <li><b>Know</b> the five people to call, and when.</li>
+        <li><b>Describe</b> the one change that makes you a manager, and the three things that are new.</li>
+        <li><b>Apply</b> five management ideas to a real situation and choose the response that fits.</li>
+        <li><b>Sort</b> the tasks of your first year by how often they come up.</li>
+        <li><b>Decide</b>, for a given situation, whether to handle it, ask your HCM, route it, or report it.</li>
+        <li><b>Name</b> the four expectations of the Vanderbilt Manager Standard and the fifteen behaviors inside them.</li>
+        <li><b>Read</b> your assessment results against the standard and set a target for the 90-day retake.</li>
       </ol>
     </details>
   </div>
 </section>
 
-<!-- ═══ PAGE 1 · FOUR DOORS ═══ -->
-<section id="doors" class="th-dark v-sec" aria-label="Page 1: Four doors">
+<section id="mission" class="th-dark v-sec" aria-label="The mission">
   <div class="wrap">
-    <div class="v-rail" data-lesson="1"><span>Page 1 of 4 &middot; Four doors</span></div>
-    <h2 class="v-h sm">Four doors for anything that lands on your <em>desk</em>.</h2>
-    <p class="v-why">Some things are yours. Some have a process. Some go to one office the same day.</p>
-    <ul class="pst-cards" aria-label="The four doors">
-      <li class="c1"><div class="hd"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Handle it</div><div class="bd"><b>A normal manager task.</b><p>Time off, a timecard question, a 1:1, feedback.</p><p class="rule">Yours. Decide and say yes out loud.</p></div></li>
-      <li class="c2"><div class="hd"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Ask my HCM first</div><div class="bd"><b>There is a process.</b><p>Pay, hiring, a performance concern, anything you are unsure about.</p><p class="rule">Ask before you act.</p></div></li>
-      <li class="c3"><div class="hd"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>The leave office</div><div class="bd"><b>Health or family time off.</b><p>Surgery, a sick parent, a new baby, hurt at work.</p><p class="rule">The same day. Never ask for a diagnosis.</p></div></li>
-      <li class="c4"><div class="hd"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>Report to EOA</div><div class="bd"><b>Discrimination, harassment, misconduct.</b><p>Anything about how someone is being treated.</p><p class="rule">The same day. You report, you do not investigate.</p></div></li>
+    <div class="v-rail" data-lesson="0"><span>Before we start &middot; The mission</span></div>
+    <h2 class="v-h sm">Define the great university of the 21st century, and <em>be</em> it.</h2>
+    <p class="v-why">The mission is achieved team by team. Yours is one of them. Vanderbilt operates at uncommon speed, agility and scale, in three areas of focus.</p>
+    <ul class="pst-cards three" aria-label="Three areas of focus">
+      <li class="c1"><div class="hd">1 &middot; Exceptional core operations</div><div class="bd"><b>The fuel.</b><p>Innovative, impactful capabilities so we have the talent, resources and reputation to deliver on our vision.</p></div></li>
+      <li class="c2"><div class="hd">2 &middot; Bold strategic initiatives</div><div class="bd"><b>The reach.</b><p>Increasingly bold initiatives that extend the impact of our education and research mission.</p></div></li>
+      <li class="c3"><div class="hd">3 &middot; Values leadership</div><div class="bd"><b>The example.</b><p>Advocacy and modeling the role of an essential research university, to stimulate change and meet existential threats.</p></div></li>
     </ul>
-    <p class="pst-note">Read the four doors, then tap <b>Mark done</b> below.</p>
-  </div>
-</section>
-
-<!-- ═══ PAGE 2 · WHICH DOOR ═══ -->
-<section id="sort" class="th-dark v-sec" aria-label="Page 2: Which door">
-  <div class="wrap">
-    <div class="v-rail" data-lesson="2"><span>Page 2 of 4 &middot; Which door</span></div>
-    <div class="v-stage">
-      <div class="v-copy">
-        <h2 class="v-h">Which <em>door</em>?</h2>
-        <p class="v-why">Five things that land on a manager&rsquo;s desk in a normal month. Pick the door for each.</p>
-        <ul class="doors-mini" aria-label="The four doors, in short">
-          <li><i style="background:#777777"></i><span><b>Handle it.</b> A normal manager task.</span></li>
-          <li><i style="background:#946E24"></i><span><b>Ask my HCM first.</b> There is a process.</span></li>
-          <li><i style="background:#8BA18E"></i><span><b>The leave office, the same day.</b> Health or family.</span></li>
-          <li><i style="background:#BAC7D1"></i><span><b>EOA, the same day.</b> How someone is treated.</span></li>
+    <p class="pst-note"><a id="missionLink" href="https://www.vanderbilt.edu/" target="_blank" rel="noopener">Read the full vision at vanderbilt.edu</a></p>
+    <div data-pg="Your responsibility" class="sp-stage">
+      <div>
+        <h2 class="v-h">Your responsibility: embody it, and lead your team to <em>achieve</em> it.</h2>
+        <ul class="pst-never" aria-label="Your responsibility">
+          <li><i class="n">1</i><div><b>Embody it.</b><span>Speed, agility and scale start with how you work.</span></div></li>
+          <li><i class="n">2</i><div><b>Lead your team to achieve it.</b><span>Connect the work to the mission and say the why.</span></div></li>
+          <li><i class="n">3</i><div><b>Stay in touch with your manager.</b><span>Strategy, projects, priorities, anything else.</span></div></li>
         </ul>
       </div>
-      <div class="v-act">
-        <p class="v-task" data-task="sort">Five situations</p>
-        <div class="drill v-deck opts4" data-drill="sort" aria-label="Which door"></div>
-        <p class="drill-status" id="sortStatus" role="status" aria-live="polite">0 of 5 decided.</p>
+      <div class="ov-grid two map-row">
+        <div class="ov-card map-card"><b>As we grow</b></div>
+        <div class="ov-card"><b>Your team, wherever they sit</b><p>Vanderbilt now works from five cities. Tap a campus on the map to read about it.</p><p class="op-link"><a href="https://www.vanderbilt.edu/campuses/" target="_blank" rel="noopener">All five campuses at vanderbilt.edu</a></p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PAGE 3 · NEVER ═══ -->
-<section id="never" class="th-dark v-sec" aria-label="Page 3: Three things you never do">
+
+<section id="shift" class="th-dark v-sec" aria-label="What changed">
   <div class="wrap">
-    <div class="v-rail" data-lesson="3"><span>Page 3 of 4 &middot; Never</span></div>
-    <div class="v-stage">
+    <div class="v-rail" data-lesson="1"><span>Topic 1 of 6 &middot; What changed</span></div>
+    <h2 class="v-h sm">Your job used to be your work. Now it is the team&rsquo;s work, and the <em>people</em>.</h2>
+    <p class="v-why">Most new managers keep doing the old job with a new title. Three things are new.</p>
+    <ul class="pst-cards three" aria-label="Three things that are new">
+      <li class="c1"><div class="hd">New 1</div><div class="bd"><b>You decide.</b><p>What matters this week, who does what, what waits.</p></div></li>
+      <li class="c2"><div class="hd">New 2</div><div class="bd"><b>You approve.</b><p>Timecards, time off, expenses. Timesheets and payroll must be right.</p></div></li>
+      <li class="c3"><div class="hd">New 3</div><div class="bd"><b>You are responsible for people.</b><p>Fair treatment, a safe place to speak up, a chance to grow.</p></div></li>
+    </ul>
+    <div data-pg="What a manager is not">
+      <h2 class="v-h sm">Three things a manager is <em>not</em>.</h2>
+      <p class="v-why">When you want to just do it yourself, manage instead.</p>
+      <ul class="pst-never" aria-label="What a manager is not">
+        <li><i>&#x2715;</i><div><b>Not the person who does everyone&rsquo;s work.</b><span>The team waits for a manager who never shows up.</span></div></li>
+        <li><i>&#x2715;</i><div><b>Not a friend first.</b><span>Warm and fair. The team needs a manager more than another friend.</span></div></li>
+        <li><i>&#x2715;</i><div><b>Not the police.</b><span>You do not investigate, judge or enforce. Report harassment, discrimination, injuries or threats to the right office the same day.</span></div></li>
+      </ul>
+    </div>
+    <div data-pg="Whose job is it" class="v-stage">
       <div class="v-copy">
-        <h2 class="v-h">Three things you <em>never</em> do.</h2>
-        <p class="v-why">Each one protects the person in front of you, and it protects you. The same day means today, not after the weekend.</p>
+        <h2 class="v-h">Whose job is it <em>now</em>?</h2>
+        <p class="v-why">Six things that come up in a first month. Yours now, your team member&rsquo;s, or PCB&rsquo;s.</p>
       </div>
       <div class="v-act">
-        <p class="v-task" data-task="never">The three</p>
+        <div class="drill" id="shiftDrill" data-drill="shift"></div>
+        <p class="drill-status" id="shiftStatus" role="status" aria-live="polite">0 of 6 sorted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="basics" class="th-dark v-sec" aria-label="What a manager is">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="1"><span>Topic 1 of 6 &middot; What a manager is</span></div>
+    <h2 class="v-h sm">A manager is responsible for the work, and for the people who <em>do it</em>.</h2>
+    <p class="v-why">You do not have to know everything on day one. You do have to ask three questions every week.</p>
+    <ul class="pst-never" aria-label="Three questions every week">
+      <li><i class="n">1</i><div><b>Does everyone know what to do this week?</b></div></li>
+      <li><i class="n">2</i><div><b>Is anyone stuck, struggling, or waiting on me?</b></div></li>
+      <li><i class="n">3</i><div><b>What is coming that the team should hear from me first?</b></div></li>
+    </ul>
+    <div data-pg="In practice: the dining manager" class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">In practice: the dining <em>manager</em>.</h2>
+        <p class="v-why">Lunch is in forty minutes. Decide what she does, and see what happens.</p>
+      </div>
+      <div class="v-act"><div class="story" data-story="basics"></div></div>
+    </div>
+    <div data-pg="Who helps you">
+      <h2 class="v-h sm">Five people who <em>help</em> you.</h2>
+      <p class="v-why">Learn their names in your first week. Each card says what they do and when to reach them.</p>
+      <ul class="pst-cards five" aria-label="Who helps you">
+        <li class="c1"><div class="hd">Your manager</div><div class="bd"><b>Direction and priorities.</b><p><strong>When:</strong> every week in your 1:1, and before you say yes to a big request from another office.</p></div></li>
+        <li class="c2"><div class="hd">Your HCM</div><div class="bd"><b>Pay, hiring, performance, policy.</b><p><strong>When:</strong> the same day a question comes up, before you act. Your first call when unsure.</p></div></li>
+        <li class="c2"><div class="hd">Engagement Consultant</div><div class="bd"><b>The bigger people questions.</b><p><strong>When:</strong> a performance pattern, a hard conversation to plan, a team dynamic.</p></div></li>
+        <li class="c3"><div class="hd">Leave and Workers&rsquo; Comp</div><div class="bd"><b>Health and family time off. Hurt at work.</b><p><strong>When:</strong> the same day it comes up. Requests go through Origami. Never ask for a diagnosis.</p></div></li>
+        <li class="c4"><div class="hd">EOA</div><div class="bd"><b>Discrimination, harassment, misconduct.</b><p><strong>When:</strong> the same day you see it or hear about it. You report, you do not investigate.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="ideas" class="th-dark v-sec" aria-label="Five ideas">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="2"><span>Topic 2 of 6 &middot; Five ideas</span></div>
+    <h2 class="v-h sm">Five ideas every good manager <em>relies</em> on.</h2>
+    <p class="v-why">You do not need a theory of management. You need a few ideas that hold up, and each one turns into something you can do this week.</p>
+    <ul class="pst-cards five" aria-label="The five ideas">
+      <li class="c1"><div class="hd">1 &middot; Priorities</div><div class="bd"><b>Put first things first.</b></div></li>
+      <li class="c2"><div class="hd">2 &middot; Clear expectations</div><div class="bd"><b>Clear is kind. Unclear is unkind.</b></div></li>
+      <li class="c3"><div class="hd">3 &middot; Psychological safety</div><div class="bd"><b>People only speak up when it is safe to.</b></div></li>
+      <li class="c4"><div class="hd">4 &middot; Purpose</div><div class="bd"><b>Explain the why, and put the team first.</b></div></li>
+      <li class="c2"><div class="hd">5 &middot; The people work</div><div class="bd"><b>The people work is the manager’s work.</b></div></li>
+    </ul>
+    <p class="drill-status" id="ideasStatus" role="status" aria-live="polite">0 of 5 ideas read.</p>
+    <p class="pst-note">Sources: the big rocks method (Covey), clear is kind (Brown), psychological safety (Edmondson), start with why (Sinek), the people manager standard (SHRM), the Vanderbilt Manager Standard adapted from Yukl (2012).</p>
+    <div data-pg="Idea 1 · Priorities" class="idea-page" data-idea="0"></div>
+    <div data-pg="Practice idea 1 live" class="live-page" data-live-key="idea1"><span class="mono">Optional &middot; Practice it live</span><h2 class="v-h sm">Practice it live with <em>Sam</em>.</h2></div>
+    <div data-pg="Idea 2 · Clear expectations" class="idea-page" data-idea="1"></div>
+    <div data-pg="Practice idea 2 live" class="live-page" data-live-key="idea2"><span class="mono">Optional &middot; Practice it live</span><h2 class="v-h sm">Practice it live with <em>Priya</em>.</h2></div>
+    <div data-pg="Idea 3 · Psychological safety" class="idea-page" data-idea="2"></div>
+    <div data-pg="Practice idea 3 live" class="live-page" data-live-key="safe1"><span class="mono">Optional &middot; Practice it live</span><h2 class="v-h sm">Practice it live with <em>Jordan</em>.</h2></div>
+    <div data-pg="Idea 4 · Purpose" class="idea-page" data-idea="3"></div>
+    <div data-pg="Practice idea 4 live" class="live-page" data-live-key="idea4"><span class="mono">Optional &middot; Practice it live</span><h2 class="v-h sm">Practice it live with <em>Alex</em>.</h2></div>
+    <div data-pg="Idea 5 · The people work" class="idea-page" data-idea="4"></div>
+    <div data-pg="Practice idea 5 live" class="live-page" data-live-key="idea5"><span class="mono">Optional &middot; Practice it live</span><h2 class="v-h sm">Practice it live with <em>Dev</em>.</h2></div>
+  </div>
+</section>
+
+<section id="year" class="th-dark v-sec" aria-label="Your first year">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="3"><span>Topic 3 of 6 &middot; Your first year</span></div>
+    <h2 class="v-h sm">What Vanderbilt will ask you to do, and <em>when</em>.</h2>
+    <p class="v-why">Everything a manager owns, by how often it comes up.</p>
+    <ul class="pst-cards" aria-label="What you do, and when">
+      <li class="c1"><div class="hd">Every week</div><div class="bd"><ul><li>A short 1:1 with each person</li><li>Look at work before it is due</li><li>Approve time off, and timecards if anyone is hourly</li><li>Give feedback, and thank people for specific work</li><li>Answer questions, or find who can</li></ul></div></li>
+      <li class="c2"><div class="hd">Every month or quarter</div><div class="bd"><ul><li>Approve expenses and purchases</li><li>Set and check goals</li><li>Step back: how is the work, and the team, going</li></ul></div></li>
+      <li class="c3"><div class="hd">A few times a year</div><div class="bd"><ul><li>Performance reviews</li><li>Hiring when a seat opens</li><li>Onboarding a new hire</li><li>Someone leaving</li></ul></div></li>
+      <li class="c4"><div class="hd">When it happens &middot; the same day</div><div class="bd"><ul><li>Leave, including FMLA: the leave office</li><li>Flexible work: yours to decide</li><li>An accommodation request: ask your HCM</li><li>Harassment or discrimination: report to EOA</li><li>A performance concern: ask your HCM</li></ul></div></li>
+    </ul>
+    <div data-pg="Build my week" class="v-stage wide-act">
+      <div class="v-copy">
+        <h2 class="v-h">Build your <em>week</em>.</h2>
+        <p class="v-why">Three taps: how many people, who is hourly, which day is already full. Then add it to your calendar.</p>
+      </div>
+      <div class="v-act">
+        <div class="wz" id="yearWizard"></div>
+        <p class="fw-status" id="yearStatus" role="status" aria-live="polite">Three taps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calls" class="th-dark v-sec" aria-label="Who handles what">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="3"><span>Topic 3 of 6 &middot; Who handles what</span></div>
+    <h2 class="v-h sm">Four doors for anything that lands on your <em>desk</em>.</h2>
+    <p class="v-why">Some things are yours. Some have a process. Some go to one office the same day.</p>
+    <ul class="pst-cards" aria-label="The four doors">
+      <li class="c1"><div class="hd">Handle it</div><div class="bd"><b>A normal manager task.</b><p>Time off, a timecard question, a 1:1, feedback.</p><p class="rule">Yours. Decide and say yes out loud.</p></div></li>
+      <li class="c2"><div class="hd">Ask my HCM first</div><div class="bd"><b>There is a process.</b><p>Pay, hiring, a performance concern, anything you are unsure about.</p><p class="rule">Ask before you act.</p></div></li>
+      <li class="c3"><div class="hd">The leave office</div><div class="bd"><b>Health or family time off.</b><p>Surgery, a sick parent, a new baby, hurt at work.</p><p class="rule">The same day. Never ask for a diagnosis.</p></div></li>
+      <li class="c4"><div class="hd">Report to EOA</div><div class="bd"><b>Discrimination, harassment, misconduct.</b><p>Anything about how someone is being treated.</p><p class="rule">The same day. You report, you do not investigate.</p></div></li>
+    </ul>
+    <div data-pg="Which door" class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Which <em>door</em>?</h2>
+        <p class="v-why">Five things that land on a manager&rsquo;s desk in a normal month. Pick the door for each.</p>
+      </div>
+      <div class="v-act">
+        <div class="drill" id="callsDrill" data-drill="calls"></div>
+        <p class="drill-status" id="callsStatus" role="status" aria-live="polite">0 of 5 decided.</p>
+      </div>
+    </div>
+    <div data-pg="Three things you never do" class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Three things you <em>never</em> do.</h2>
+        <p class="v-why">Each one protects the person in front of you, and it protects you. The same day means today.</p>
+      </div>
+      <div class="v-act">
         <ul class="pst-never">
           <li><i>&#x2715;</i><div><b>Never ask for a diagnosis.</b><span>Leave is leave until the leave office says otherwise. Adjust the work and move on.</span></div></li>
           <li><i>&#x2715;</i><div><b>Never investigate a report yourself.</b><span>Listen, write down what was said, report it to EOA the same day. Promise nothing.</span></div></li>
           <li><i>&#x2715;</i><div><b>Never improvise pay, hiring or a performance process.</b><span>Each has a fair process and a cycle. Your HCM tells you what is possible and when.</span></div></li>
         </ul>
-        <p class="drill-status" role="status">Read the three, then tap Mark done below.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PAGE 4 · WHO TO CALL ═══ -->
-<section id="who" class="th-dark v-sec" aria-label="Page 4: Who to call">
+<section id="welcome" class="th-dark v-sec" aria-label="The Vanderbilt Manager Standard">
   <div class="wrap">
-    <div class="v-rail" data-lesson="4"><span>Page 4 of 4 &middot; Who to call</span></div>
-    <h2 class="v-h sm">Five people to <em>call</em>.</h2>
-    <p class="v-why">Learn their names in your first week. Each card says what they do and when to reach them.</p>
-    <ul class="pst-cards five" aria-label="Who helps you">
-      <li class="c1"><div class="hd">Your manager</div><div class="bd"><b>Direction and priorities.</b><p><strong>When:</strong> every week in your 1:1, and before you say yes to a big request from another office.</p></div></li>
-      <li class="c2"><div class="hd">Your HCM</div><div class="bd"><b>Pay, hiring, performance, policy.</b><p><strong>When:</strong> the same day a question comes up, before you act. Your first call when unsure.</p></div></li>
-      <li class="c2"><div class="hd">Engagement Consultant</div><div class="bd"><b>The bigger people questions.</b><p><strong>When:</strong> a performance pattern, a hard conversation to plan, a team dynamic. Not same-day questions.</p></div></li>
-      <li class="c3"><div class="hd">Leave and Workers&rsquo; Comp</div><div class="bd"><b>Health and family time off. Hurt at work.</b><p><strong>When:</strong> the same day it comes up. Requests go through Origami.</p></div></li>
-      <li class="c4"><div class="hd">EOA</div><div class="bd"><b>Discrimination, harassment, misconduct.</b><p><strong>When:</strong> the same day you see it or hear about it. Then tell your HCM you did.</p></div></li>
+    <div class="v-rail" data-lesson="4"><span>Topic 4 of 6 &middot; The Vanderbilt Manager Standard</span></div>
+    <h2 class="v-h sm">The Vanderbilt Manager Standard: four <em>expectations</em>.</h2>
+    <p class="v-why">Every manager meets all four, every week. Adapted from Gary Yukl&rsquo;s four categories of leadership behavior and his fifteen behaviors. The assessment measures it; this course teaches it.</p>
+    <ul class="pst-cards" aria-label="The four expectations">
+      <li class="c1"><div class="hd">01 &middot; Get the work done</div><div class="bd"><b>Through your team.</b><p>Plan it, say it, check it, fix it.</p></div></li>
+      <li class="c2"><div class="hd">02 &middot; Take care of your people</div><div class="bd"><b>Growing, and staying.</b><p>Listen and help, grow them, thank them, trust them.</p></div></li>
+      <li class="c3"><div class="hd">03 &middot; Make things better</div><div class="bd"><b>Better at what it does.</b><p>Explain the why, describe where you are going, let people try, look back.</p></div></li>
+      <li class="c4"><div class="hd">04 &middot; Connect your team</div><div class="bd"><b>To the rest of Vanderbilt.</b><p>Know the people, watch for what is coming, speak up for your team.</p></div></li>
     </ul>
-    <p class="pst-note">Read the five, then tap <b>Mark done</b> below.</p>
-  </div>
-</section>
-
-<!-- ═══ THE END ═══ -->
-<section id="end" class="th-dark v-sec v-end" aria-label="The end of the topic">
-  <div class="v-end-bg" aria-hidden="true"><img src="../../assets/img/campus/atrium-arches.jpg" alt="" width="1800" height="1200" loading="lazy" /></div>
-  <div class="wrap">
-    <h2 class="v-display sm">That is the <em>topic</em>.</h2>
-    <p class="v-hello">Four doors, three nevers, five people. The same topic in the live course runs across one long page with three activities and a simulator.</p>
-    <ul class="diff" aria-label="What changed in this prototype">
-      <li><b>1 idea</b><span>per screen, nothing below the fold</span></li>
-      <li><b>1 activity</b><span>per page at most, where the live page stacks three</span></li>
-      <li><b>1 bar</b><span>prev, next, Listen and Mark done; no dots, no panel</span></li>
-    </ul>
-    <div class="v-hero-cta center">
-      <a class="btn btn-gold" href="../#p/calls/1">Compare with the live topic</a>
-      <button type="button" class="btn btn-ghost" id="exitBtn">Exit</button>
+    <p class="fw-status" id="fwStatus" role="status" aria-live="polite">Turn the pages to open each expectation.</p>
+    <div data-pg="Monday, four asks" class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Monday, four <em>asks</em>.</h2>
+        <p class="v-why">A facilities supervisor starts Monday with four asks. Sort each one into the expectation it belongs to.</p>
+      </div>
+      <div class="v-act"><div class="story" data-story="framework"></div></div>
+    </div>
+    <div data-pg="Expectation 01 · Get the work done, through your team." class="job-pane" data-job="task" data-seen-prog="welcome">
+      <h2 class="v-h sm"><span class="mono" style="display:block;margin-bottom:6px">Expectation 01 &middot; Yukl: task-oriented behavior</span>Get the work done, through your team.</h2>
+      <p class="v-why">When people are not sure what is expected, work comes in late or gets redone, and you find out on the due date. Four habits, tap each to flip it.</p>
+      <div class="flip-grid two">
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">1</span><h4>Planning</h4><span class="def">Plan it. Decide what matters, who owns it, what gives.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 1 · Planning · Plan it · Create clarity</span><p class="hb no"><b>Stop</b>Priorities set by whoever asked loudest.</p><p class="hb yes"><b>Do</b>Before the quarter: three priorities, an owner each, and what moves if a request lands.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">2</span><h4>Clarifying</h4><span class="def">Say it. What is expected, by when, how good.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 2 · Clarifying · Say it · Create clarity</span><p class="hb no"><b>Stop</b>The goal sent in one email.</p><p class="hb yes"><b>Do</b>Each person can say what they own, by when, and what good looks like. Written where they can see it.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">3</span><h4>Monitoring operations</h4><span class="def">Check it. Look at the work before it is due.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 3 · Monitoring operations · Check it · Coach and develop</span><p class="hb no"><b>Stop</b>The finished work seen on the due date.</p><p class="hb yes"><b>Do</b>Work in progress seen in the weekly 1:1, while it can still change.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Problem solving</h4><span class="def">Fix it. When it breaks twice, find the cause.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 4 · Problem solving · Fix it · Address issues</span><p class="hb no"><b>Stop</b>The report rebuilt yourself because it is faster.</p><p class="hb yes"><b>Do</b>Cause found, handoff changed, team told.</p></span></button></div>
+      </div>
+    
+    </div>
+    <div data-pg="In practice · Get the work done, through your team." class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">In <em>practice</em>.</h2>
+        <p class="v-why">When people are not sure what is expected, work comes in late or gets redone, and you find out on the due date.</p>
+        <p class="week"><b>Do this week</b>Pick one person and confirm, out loud, what they own and by when.</p>
+      </div>
+      <div class="v-act"><div class="story" data-story="task"></div></div>
+    </div>
+    <div data-pg="Name the habit · Get the work done, through your team." class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Name the <em>habit</em>.</h2>
+        <p class="v-why">Three moments from a manager&rsquo;s week. Which habit is each one?</p>
+      </div>
+      <div class="v-act">
+        <div class="drill" id="taskDrill" data-drill="task"></div>
+        <p class="drill-status" id="taskStatus" role="status" aria-live="polite">0 of 3 named.</p>
+      </div>
+    </div>
+    <div data-pg="Expectation 02 · Take care of your people." class="job-pane" data-job="relations" data-seen-prog="welcome">
+      <h2 class="v-h sm"><span class="mono" style="display:block;margin-bottom:6px">Expectation 02 &middot; Yukl: relations-oriented behavior</span>Take care of your people.</h2>
+      <p class="v-why">People stay, and do their best work, for a manager who notices them. Four habits, tap each to flip it.</p>
+      <div class="flip-grid two">
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">1</span><h4>Supporting</h4><span class="def">Listen and help. Notice pressure, move what you can, follow up.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 5 · Supporting · Listen and help · Build trust</span><p class="hb no"><b>Stop</b>“Let me know if it becomes a problem.”</p><p class="hb yes"><b>Do</b>Listen, adjust this week&rsquo;s load, check in Monday. Leave, health, or fairness: route it the same day.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">2</span><h4>Developing</h4><span class="def">Grow them. Ask where they want to go, then find the stretch.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 6 · Developing · Grow them · Coach and develop</span><p class="hb no"><b>Stop</b>Growth saved for the annual review.</p><p class="hb yes"><b>Do</b>Once a quarter: what do you want to be doing in two years? One assignment toward it.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">3</span><h4>Recognizing</h4><span class="def">Thank them. Specific, by name, that week.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 7 · Recognizing · Thank them · Build trust</span><p class="hb no"><b>Stop</b>“Great job, everyone.”</p><p class="hb yes"><b>Do</b>“The way you handled the vendor call Thursday kept us on schedule.” Said Friday.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Empowering</h4><span class="def">Trust them. Hand over the decision, not just the task.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 8 · Empowering · Trust them · Empower others</span><p class="hb no"><b>Stop</b>A new process set without asking the team.</p><p class="hb yes"><b>Do</b>Ask the team first; let their answer change the decision.</p></span></button></div>
+      </div>
+    
+    </div>
+    <div data-pg="In practice · Take care of your people." class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">In <em>practice</em>.</h2>
+        <p class="v-why">People stay, and do their best work, for a manager who notices them.</p>
+        <p class="week"><b>Do this week</b>Thank one person for one specific thing.</p>
+      </div>
+      <div class="v-act"><div class="story" data-story="relations"></div></div>
+    </div>
+    <div data-pg="Name the habit · Take care of your people." class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Name the <em>habit</em>.</h2>
+        <p class="v-why">Three moments from a manager&rsquo;s week. Which habit is each one?</p>
+      </div>
+      <div class="v-act">
+        <div class="drill" id="relationsDrill" data-drill="relations"></div>
+        <p class="drill-status" id="relationsStatus" role="status" aria-live="polite">0 of 3 named.</p>
+      </div>
+    </div>
+    <div data-pg="Expectation 03 · Make things better." class="job-pane" data-job="change" data-seen-prog="welcome">
+      <h2 class="v-h sm"><span class="mono" style="display:block;margin-bottom:6px">Expectation 03 &middot; Yukl: change-oriented behavior</span>Make things better.</h2>
+      <p class="v-why">Vanderbilt is asking every team to move faster and improve. That happens in your team, in small ways, every week. Four habits, tap each to flip it.</p>
+      <div class="flip-grid two">
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">1</span><h4>Advocating change</h4><span class="def">Explain the why. The reason, in your own words, before the announcement.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 9 · Advocating change · Explain the why · Lead change</span><p class="hb no"><b>Stop</b>Forwarding the email with “FYI.”</p><p class="hb yes"><b>Do</b>Thursday&rsquo;s team meeting, before Tuesday&rsquo;s campus email. Write down their objections.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">2</span><h4>Envisioning change</h4><span class="def">Describe where you are going. Two sentences on next year.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 10 · Envisioning change · Describe where you are going · Lead change</span><p class="hb no"><b>Stop</b>“We will see what leadership decides.”</p><p class="hb yes"><b>Do</b>What the team will be able to do next year that it cannot do now.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">3</span><h4>Encouraging innovation</h4><span class="def">Let people try. Small, short trials of new ideas.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 11 · Encouraging innovation · Let people try · Empower others</span><p class="hb no"><b>Stop</b>“That is not how we do it here.”</p><p class="hb yes"><b>Do</b>“Try it for two weeks and show me.”</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Facilitating collective learning</h4><span class="def">Look back. Ten minutes after big work.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 12 · Facilitating collective learning · Look back · Lead change</span><p class="hb no"><b>Stop</b>On to the next thing.</p><p class="hb yes"><b>Do</b>What worked, what did not, what changes. Written where the next person finds it.</p></span></button></div>
+      </div>
+    
+    </div>
+    <div data-pg="In practice · Make things better." class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">In <em>practice</em>.</h2>
+        <p class="v-why">Vanderbilt is asking every team to move faster and improve. That happens in your team, in small ways, every week.</p>
+        <p class="week"><b>Do this week</b>Hold one ten-minute look-back.</p>
+      </div>
+      <div class="v-act"><div class="story" data-story="change"></div></div>
+    </div>
+    <div data-pg="Name the habit · Make things better." class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Name the <em>habit</em>.</h2>
+        <p class="v-why">Three moments from a manager&rsquo;s week. Which habit is each one?</p>
+      </div>
+      <div class="v-act">
+        <div class="drill" id="changeDrill" data-drill="change"></div>
+        <p class="drill-status" id="changeStatus" role="status" aria-live="polite">0 of 3 named.</p>
+      </div>
+    </div>
+    <div data-pg="Expectation 04 · Connect your team." class="job-pane" data-job="external" data-seen-prog="welcome">
+      <h2 class="v-h sm"><span class="mono" style="display:block;margin-bottom:6px">Expectation 04 &middot; Yukl: external behavior</span>Connect your team.</h2>
+      <p class="v-why">Your team needs approvals, information, and a fair hearing from outside. New managers do this job least. Four habits, tap each to flip it.</p>
+      <div class="flip-grid two">
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">1</span><h4>Networking</h4><span class="def">Know the people. Your HCM, your Engagement Consultant, Finance, a peer manager. By name, before you need them.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 13 · Networking · Know the people · Build trust</span><p class="hb no"><b>Stop</b>The HCM met at the first crisis.</p><p class="hb yes"><b>Do</b>Coffee with one person your team depends on, this month.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">2</span><h4>External monitoring</h4><span class="def">Watch for what is coming. See it before it lands on your team.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 14 · External monitoring · Watch for what is coming · Lead change</span><p class="hb no"><b>Stop</b>Hearing about the compensation cycle from your team.</p><p class="hb yes"><b>Do</b>Read the calendar in August; tell the team in September what October brings.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">3</span><h4>Representing</h4><span class="def">Speak up for your team. Facts, options, a negotiated date.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Habit 15 · Representing · Speak up for your team · Address issues</span><p class="hb no"><b>Stop</b>Absorbing every request, or refusing it.</p><p class="hb yes"><b>Do</b>Show the hours, name the conflict, offer two options, negotiate the date.</p></span></button></div>
+        <div class="fcard"><button type="button" class="flip-btn" aria-expanded="false"><span class="face front"><span class="abbr" aria-hidden="true">4</span><h4>Know the campus network</h4><span class="def">Five cities, four states. Rules can differ by location.</span><span class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>Flip</span></span><span class="face back"><span class="tag">Know the campus network</span><p class="hb no"><b>Stop</b>Assuming what works in Nashville works everywhere.</p><p class="hb yes"><b>Do</b>Know where each person sits. On leave, pay, or hours, tell your HCM the location first.</p></span></button></div>
+      </div>
+    
+    </div>
+    <div data-pg="In practice · Connect your team." class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">In <em>practice</em>.</h2>
+        <p class="v-why">Your team needs approvals, information, and a fair hearing from outside. New managers do this job least.</p>
+        <p class="week"><b>Do this week</b>Have coffee with one person your team depends on.</p>
+      </div>
+      <div class="v-act"><div class="story" data-story="external"></div></div>
+    </div>
+    <div data-pg="Name the habit · Connect your team." class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Name the <em>habit</em>.</h2>
+        <p class="v-why">Three moments from a manager&rsquo;s week. Which habit is each one?</p>
+      </div>
+      <div class="v-act">
+        <div class="drill" id="externalDrill" data-drill="external"></div>
+        <p class="drill-status" id="externalStatus" role="status" aria-live="polite">0 of 3 named.</p>
+      </div>
+    </div>
+    <div data-pg="Where the standard comes from">
+      <h2 class="v-h sm">Where the standard comes from, and how the assessment <em>measures</em> it.</h2>
+      <div class="std-src-in" id="stdSrcBody"></div>
     </div>
   </div>
 </section>
+
+
+
+
+
+<section id="yourcall" class="th-dark v-sec" aria-label="Your call">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="4"><span>Topic 4 of 6 &middot; Your call</span></div>
+    <h2 class="v-h sm">Four conversations, one per <em>expectation</em>.</h2>
+    <p class="v-why">Have each one out loud, with a character who answers back. You are scored on what you actually say. Pick your world first, so the scene matches your unit.</p>
+    <ul class="pst-cards" aria-label="The four conversations">
+      <li class="c1"><div class="hd">01 &middot; Priya</div><div class="bd"><b>The monthly report.</b><p>Check where it stands before you promise anything.</p></div></li>
+      <li class="c2"><div class="hd">02 &middot; Marcus</div><div class="bd"><b>Time off for his dad.</b><p>Listen, help, route it. Never ask for a diagnosis.</p></div></li>
+      <li class="c3"><div class="hd">03 &middot; Taylor</div><div class="bd"><b>The system change.</b><p>Explain the why before the email lands.</p></div></li>
+      <li class="c4"><div class="hd">04 &middot; Director Reyes</div><div class="bd"><b>The audit request.</b><p>The numbers, the collision, two options.</p></div></li>
+    </ul>
+    <p class="drill-status" id="jobsStatus" role="status" aria-live="polite">Turn the page for the first conversation. Mark this topic done when you have had the ones you want.</p>
+    <div data-pg="01 · Priya" class="live-page" data-live-key="task"><h2 class="v-h sm">01 &middot; Get the work done: <em>Priya</em>.</h2></div>
+    <div data-pg="02 · Marcus" class="live-page" data-live-key="relations"><h2 class="v-h sm">02 &middot; Take care of your people: <em>Marcus</em>.</h2></div>
+    <div data-pg="03 · Taylor" class="live-page" data-live-key="change"><h2 class="v-h sm">03 &middot; Make things better: <em>Taylor</em>.</h2></div>
+    <div data-pg="04 · Director Reyes" class="live-page" data-live-key="external"><h2 class="v-h sm">04 &middot; Connect your team: <em>Director Reyes</em>.</h2></div>
+  </div>
+</section>
+
+<section id="survey" class="th-dark v-sec" aria-label="Your Manager Effectiveness Assessment">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="5"><span>Topic 5 of 6 &middot; Your assessment</span></div>
+    <div class="v-stage">
+      <div class="v-copy">
+        <h2 class="v-h">Your score, and where it should <em>go</em>.</h2>
+        <p class="v-why">Ten statements about what you actually do, scored by expectation. Taken before this course, and again 90 days after you finish. The score is a direction, not a grade: every point up is a behavior you do more often.</p>
+      </div>
+      <div class="v-act">
+      <div class="route reveal" id="meaBox">
+        <div class="route-head">
+          <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Manager Effectiveness Assessment</span></span>
+          <h3 id="meaHead">Your score, by <em>expectation</em>.</h3>
+          <p id="meaLead">Take it once at the start, and again three months after you finish.</p>
+        </div>
+        <div class="route-opts mea-choice" id="meaChoice" role="group" aria-label="Your assessment">
+          <button type="button" data-choice="open">Take the assessment now</button>
+          <button type="button" data-choice="reviewed" aria-pressed="false">I took it already, by email</button>
+        </div>
+        <div class="route-out" id="meaOut" aria-live="polite"></div>
+      </div>
+      </div>
+    </div>
+    <div data-pg="The ten statements">
+      <h2 class="v-h sm">The ten statements, and what each one <em>measures</em>.</h2>
+      <p class="v-why">The four expectations with Yukl&rsquo;s category for each, the statements under them, and the behavior each one measures.</p>
+      <div class="std-map" id="stdMap"></div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="th-dark v-sec" aria-label="Knowledge check">
+  <div class="wrap narrow">
+    <div class="v-rail" data-lesson="6"><span>Topic 6 of 6 &middot; Quick check</span></div>
+    <h2 class="v-h center">Five <em>questions</em>.</h2>
+    <div id="quizBox"></div>
+    <p class="drill-status" id="quizStatus" role="status" aria-live="polite">0 of 5 answered.</p>
+    <div class="kq-done" id="quizDone" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="nextstep" class="th-dark v-sec" aria-label="Your next steps">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="6"><span>Topic 6 of 6 &middot; Next steps</span></div>
+    <h2 class="v-h sm">One thing. <em>This week.</em></h2>
+    <p class="v-why">Pick one thing to do this week. On the next page, tell your manager and mark the course complete.</p>
+    <div class="habit-box reveal ns-one"><span class="mono">Step 1 &middot; Pick the one thing you will do this week</span><p class="hp-lead">Four choices, one for each expectation in the Vanderbilt Manager Standard. Each is a single action you can finish in a meeting you already have.</p><div class="habit-pick acts" id="habitPick" role="group" aria-label="Pick one action"></div></div>
+    <div data-pg="Tell your manager" class="ns-steps two">
+    <div class="evidence reveal" id="tell-leader">
+      <span class="e-label">Step 2 &middot; Tell your manager</span>
+      <p id="ns2p">Pick your action above. It drops into this message.</p>
+      <p class="ns-msg"><em id="tellText">&ldquo;I just finished the Manager Foundations course. This week I will [action]. Ask me how it went on [date].&rdquo;</em></p>
+      <div class="ns-ctl">
+        <button type="button" class="btn btn-gold btn-sm" id="copyTell" data-copytext="I just finished the Manager Foundations course. This week I will [action]. Ask me how it went on [date].">Copy the message</button>
+        <span class="hinttxt">Fill in the date, send it today.</span>
+      </div>
+    </div>
+    <div class="evidence reveal">
+      <span class="e-label">Step 3 &middot; Mark the course complete</span>
+      <p>That is the whole course. Come back in 90 days and take the self-assessment again to see what moved.</p>
+      <div class="who-row"><label><span>Your name</span><input type="text" id="whoName" autocomplete="name" placeholder="First Last" /></label><label><span>Vanderbilt email</span><input type="email" id="whoEmail" autocomplete="email" placeholder="first.last@vanderbilt.edu" /></label></div>
+      <p class="hinttxt" style="margin:6px 0 0">So your completion is recorded with the Futures Learning Hub.</p>
+      <div class="ns-ctl">
+        <button type="button" class="btn btn-ghost btn-sm md-btn" data-prog="nextstep" data-label="Mark complete" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Mark complete</span></button>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section id="learn" class="th-dark v-sec" aria-label="Keep learning: recommended courses, podcasts, and videos">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="6"><span>Keep learning &middot; The last pages</span></div>
+    <h2 class="v-h sm">Your micro modules, <em>next</em>.</h2>
+    <p class="v-why">The manager responsibilities, one short course each, in Oracle Learning. Start with the track for your lowest expectation.</p>
+    <div class="learn-pane cur" data-lpane="comp"><div class="learn-comp" id="learnComp"></div></div>
+    <div data-pg="More to take">
+      <h2 class="v-h sm">One item a month, on the habit you are <em>working on</em>.</h2>
+      <p class="v-why">More in Oracle Learning, and the best from outside Vanderbilt. Oracle links open in a new tab; podcasts and videos are free.</p>
+      <div class="learn-pane" data-lpane="oracle"><div class="learn-top" id="learnTop"></div></div>
+    </div>
+    <div data-pg="Outside Vanderbilt">
+      <h2 class="v-h sm">The best from <em>outside</em> Vanderbilt.</h2>
+      <p class="v-why">Podcasts, books and talks on the habit you are working on. Public and free.</p>
+      <div class="learn-pane" data-lpane="outside"><div class="learn-grid" id="learnGrid"></div></div>
+    </div>
+    <div data-pg="The end">
+      <div class="wrapup reveal">
+      <h2 class="metal">Now manage it the <em>same</em> way.</h2>
+      <p>Four categories, six behaviors, one habit this week. Start it today.</p>
+      <a class="btn btn-gold" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener">Download the printable guide</a>
+      <p class="send-sign">The quality of Vanderbilt&rsquo;s future depends on the quality of its managers today.</p>
+    </div>
+      <a class="pdf-card reveal" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener"><span class="pdf-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>The printable guide (PDF)</b><span class="pdf-sub">Every detail of this course on paper: what changed, the five ideas, year one, who handles what, the four categories, your results, and this list. Branded, letter size, links live.</span></span><span class="pdf-go">Open the PDF</span></a>
+    </div>
+  </div>
+</section>
+
 
 </main>
 
@@ -238,8 +1800,8 @@
   <div class="wrap">
     <div class="fcenter">
       <img src="../../assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="105" loading="lazy" decoding="async" />
-      <p class="fprogram">Vanderbilt University &middot; Manager Foundations &middot; Simplified prototype</p>
-      <p class="flegal">&copy; <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. A prototype of one topic for review. Progress is saved in this browser only.</p>
+      <p class="fprogram">Manager Voyage &middot; Manager Foundations &middot; Course 1: You Are a Manager Now <span class="build" title="Build">&middot; Build 2026.11.01.c</span></p>
+      <p class="flegal">© <span id="yr">2026</span> Vanderbilt University &middot; Futures Learning Hub &middot; People, Culture and Belonging. The Vanderbilt Manager Standard&rsquo;s four expectations and fifteen behaviors are adapted from Yukl&rsquo;s taxonomy (2012), <em>Academy of Management Perspectives</em>, 26(4), 66 to 85. Progress and your self-rating are saved in this browser, and in your Oracle Learning record when opened there. About the program</p>
       <button type="button" class="preset" id="progReset">Reset progress<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></button>
     </div>
   </div>
@@ -248,11 +1810,11 @@
 <div class="book-bar" id="bookBar" role="navigation" aria-label="Book controls">
   <div class="bb-left">
     <span class="bb-sec" id="bbSec" aria-hidden="true">Welcome</span>
-    <button type="button" class="bb-aud" id="bbListen" aria-pressed="false" aria-label="Listen to this page" title="Listen to this page"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5zM15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span class="bb-aud-t" id="bbListenT">Listen</span></button>
-    <button type="button" class="bb-aud" id="bbAuto" aria-pressed="false" aria-label="Auto-narrate every page" title="Auto-narrate every page" hidden><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg><span class="bb-aud-t">Auto</span></button>
+    <button type="button" class="bb-aud" id="bbListen" aria-pressed="false" aria-label="Listen to this page" title="Listen to this page"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg><span class="wave" aria-hidden="true"><i></i><i></i><i></i></span><span class="bb-aud-t" id="bbListenT">Listen</span></button>
+    <button type="button" class="bb-aud" id="bbAuto" aria-pressed="false" aria-label="Auto-narrate every page" title="Auto-narrate every page"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/><path d="M18 15l3 3-3 3"/></svg><span class="bb-aud-t">Auto</span></button>
     <button type="button" class="bb-done" id="bbDone" aria-pressed="false" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span class="bb-done-t">Mark done</span></button>
   </div>
-  <nav class="bb-dots" id="bbDots" aria-label="Topic pages" hidden></nav>
+  <nav class="bb-dots" id="bbDots" aria-label="Course pages"></nav>
   <div class="bb-ctl">
     <span class="bb-count" id="bbCount" aria-live="polite">1 / 1</span>
     <button type="button" class="bb-btn" id="pgPrev" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -261,25 +1823,64 @@
 </div>
 <p class="narr-toast" id="narrToast" role="status" aria-live="polite"></p>
 
+<div class="oracle-overlay" id="assessModal" role="dialog" aria-modal="true" aria-labelledby="assessTitle" hidden>
+  <div class="oracle-modal gate">
+    <div class="gate-view" id="gateIntro">
+      <span class="mono" id="gateKicker">Before you start</span>
+      <h2 id="assessTitle">Take the Manager Effectiveness Assessment <em>first</em>.</h2>
+      <p id="gateIntroText">Ten statements about what you actually do, about five minutes. The statements are the Vanderbilt Manager Standard, the four expectations this course teaches, asked about you. You get your score by expectation and feedback right away, and a copy by email. You take it again three months after you finish, to see what moved.</p>
+      <div class="oracle-actions">
+        <button type="button" class="btn btn-gold" id="assessStart">Take it now</button>
+        <button type="button" class="btn btn-ghost" id="assessDone">I have already taken it</button>
+      </div>
+      <p class="oracle-fine"><button type="button" class="linkish" id="assessLater">Skip for now</button> keeps the course open and asks again next time.</p>
+    </div>
+    <div class="gate-view" id="gateForm" hidden>
+      <span class="mono" id="gateFormKicker">Manager Effectiveness Assessment</span>
+      <h2>How often do you <em>actually</em> do each of these?</h2>
+      <div class="gate-who">
+        <label><span>Your name</span><input type="text" id="gateName" autocomplete="name" placeholder="First Last" /></label>
+        <label><span>Vanderbilt email</span><input type="email" id="gateEmail" autocomplete="email" placeholder="first.last@vanderbilt.edu" /></label>
+      </div>
+      <ol class="gate-q" id="gateQ"></ol>
+      <div class="oracle-actions">
+        <button type="button" class="btn btn-gold" id="assessSend" disabled>See my results</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="assessBack">Back</button>
+      </div>
+      <p class="oracle-fine" id="gateFine">Your answers are recorded with the Futures Learning Hub, and your results are emailed to you.</p>
+    </div>
+    <div class="gate-view" id="gateResult" hidden>
+      <span class="mono" id="gateResultKicker">Your results</span>
+      <div id="gateResultBody"></div>
+      <div class="oracle-actions">
+        <button type="button" class="btn btn-gold" id="assessContinue">Continue to the course</button>
+      </div>
+      <p class="oracle-fine" id="gateResultFine"></p>
+    </div>
+  </div>
+</div>
 <div class="oracle-overlay" id="oracleModal" role="dialog" aria-modal="true" aria-labelledby="oracleTitle" hidden>
   <div class="oracle-modal">
-    <span class="mono">Topic complete</span>
-    <h2 id="oracleTitle">You have finished Who handles what.</h2>
-    <p id="oracleBody">Four doors, three nevers, five people.</p>
+    <span class="mono">Foundation complete</span>
+    <h2 id="oracleTitle">You have completed the foundation.</h2>
+    <p id="oracleBody">Every activity is done. Practice your habit this week, and take the self-assessment again in 90 days.</p>
     <div class="oracle-actions">
-      <a class="btn btn-gold" href="../#p/calls/1">Compare with the live topic</a>
-      <button type="button" class="btn btn-ghost btn-sm" id="oracleGo">Done</button>
+      <button type="button" class="btn btn-gold" id="oracleGo">Done</button>
+      <button type="button" class="btn btn-ghost btn-sm" id="oracleLater">Stay here</button>
     </div>
-    <p class="oracle-fine" id="oracleFine">A prototype. Completion stays in this browser.</p>
+    <p class="oracle-fine" id="oracleFine">Outside Oracle Learning, completion stays in this browser.</p>
   </div>
 </div>
 
-<script src="../../assets/js/config.js?v=20260912p"></script>
+<script src="../../assets/js/config.js?v=20261101b"></script>
+<script src="../../assets/js/program-data.js?v=20260916b"></script>
 <script src="../../assets/js/scorm.js?v=20260912p"></script>
-<script src="../../assets/js/oracle.js?v=20260912p"></script>
-<script src="narration-scripts.js?v=1"></script>
+<script src="../../assets/js/oracle.js?v=20261027x"></script>
+<script src="narration-scripts.js?v=20261027s"></script>
+<script src="resources.js?v=20260912p"></script>
 <script src="../../assets/js/nav.js?v=1"></script>
-<script src="pager.js?v=1"></script>
-<script src="app.js?v=1"></script>
+<script src="pager.js?v=20260916a"></script>
+<script src="../../assets/js/email.js?v=20261101b"></script>
+<script src="app.js?v=20261101c"></script>
 </body>
 </html>

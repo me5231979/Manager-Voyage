@@ -10,15 +10,25 @@ try{
   var main = document.getElementById('main');
   if(!main) throw new Error('no main');
   var PLAN = [
-    { sel:'section.hero', key:'home',  label:'Welcome', mode:'whole' },
-    { sel:'#doors',       key:'doors', label:'Four doors', mode:'whole' },
-    { sel:'#sort',        key:'sort',  label:'Which door', mode:'whole' },
-    { sel:'#never',       key:'never', label:'Three things you never do', mode:'whole' },
-    { sel:'#who',         key:'who',   label:'Five people to call', mode:'whole' },
-    { sel:'#end',         key:'end',   label:'The end', mode:'whole', extras:['footer'] }
+    { sel:'section.hero',     key:'home',      label:'Welcome',                      mode:'whole' },
+    { sel:'#mission',         key:'mission',   label:'The mission',                  mode:'split' },
+    { sel:'#shift',           key:'shift',     label:'What changed',                 mode:'split' },
+    { sel:'#basics',          key:'basics',    label:'What a manager is',            mode:'split' },
+    { sel:'#ideas',           key:'ideas',     label:'Five ideas',                   mode:'split' },
+    { sel:'#year',            key:'year',      label:'Your first year',              mode:'split' },
+    { sel:'#calls',           key:'calls',     label:'Who handles what',             mode:'split' },
+    { sel:'#welcome',         key:'welcome',   label:'The Vanderbilt Manager Standard', mode:'split' },
+    { sel:'#yourcall',        key:'yourcall',  label:'Your call: four conversations', mode:'split' },
+    { sel:'#survey',          key:'survey',    label:'Your assessment',              mode:'split' },
+    { sel:'#quiz',            key:'quiz',      label:'Quick check',                  mode:'whole' },
+    { sel:'#nextstep',        key:'nextstep',  label:'Next steps',                   mode:'split' },
+    { sel:'#learn',           key:'learn',     label:'Keep learning',                mode:'split', extras:['footer'] }
   ];
   var TRACKED = [
-    ['doors','01','Four doors'], ['sort','02','Which door'], ['never','03','Three things you never do'], ['who','04','Five people to call']
+    ['shift','01','What changed'], ['safe','02','Five ideas at work'], ['year','03','Your first year'], ['calls','04','Who handles what'],
+    ['welcome','05','The Manager Standard'], ['task','06','Expectation 01: get the work done'], ['relations','07','Expectation 02: take care of your people'],
+    ['change','08','Expectation 03: make things better'], ['external','09','Expectation 04: connect your team'], ['yourcall','10','Your call'],
+    ['survey','11','Your assessment'], ['quiz','12','Quick check'], ['nextstep','13','Next steps']
   ];
   var pages = [], secFirst = {};
   var topSpan = document.getElementById('top');
@@ -70,6 +80,10 @@ try{
         shell.appendChild(w);
         pg.el.appendChild(shell);
       });
+      (cfg.extras || []).forEach(function(x){
+        var ex = (x === 'footer') ? document.querySelector('body > footer') : main.querySelector(x);
+        if(ex && pages.length) pages[pages.length - 1].el.appendChild(ex);
+      });
       if(S.parentNode) S.parentNode.removeChild(S);
     }
   });
@@ -95,7 +109,7 @@ try{
   if(bbDots){
     /* one dot per page; pages whose activity is tracked keep data-rail so the
        done fill still applies (the Five ideas page's activity key is 'safe') */
-    var railFor = {};
+    var railFor = { ideas:'safe' };
     var trackedKeys = {};
     TRACKED.forEach(function(s){ trackedKeys[s[0]] = s; });
     bbDots.innerHTML = pages.map(function(p, i){
@@ -110,12 +124,12 @@ try{
   }
   var cur = -1, animT = null;
   var store = (function(){
-    try{ var t = 'mv-nyh-page-test'; window.localStorage.setItem(t,'1'); window.localStorage.removeItem(t); return window.localStorage; }
+    try{ var t = 'mv-found-page-test'; window.localStorage.setItem(t,'1'); window.localStorage.removeItem(t); return window.localStorage; }
     catch(e){ return null; }
   })();
   function writeHash(p){
     try{ window.history.replaceState(null, '', '#p/' + p.key + '/' + p.n); }catch(e){}
-    if(store){ try{ store.setItem('mv-nyh-page', p.key + '/' + p.n); }catch(e){} }
+    if(store){ try{ store.setItem('mv-found-page', p.key + '/' + p.n); }catch(e){} }
   }
   function hashIndex(h){
     if(!h) return null;
@@ -253,7 +267,7 @@ try{
   var startIdx = hashIndex(window.location.hash);
   if(startIdx === null && store){
     try{
-      var saved = store.getItem('mv-nyh-page');
+      var saved = store.getItem('mv-found-page');
       if(saved){ var sb = saved.split('/'); startIdx = hashIndex('p/' + sb[0] + '/' + (sb[1] || 1)); }
     }catch(e){}
   }
