@@ -743,7 +743,7 @@ var WORLDS = [
 ];
 function worldNow(){ var k = get('world'); return WORLDS.filter(function(w){ return w.k === k; })[0] || WORLDS[0]; }
 function worldVars(k){ var w = worldNow(); return { world:w.name, team:w.team, scene:w.scenes[k] || '' }; }
-function worldSelHTML(){ var cur = worldNow().k; return '<label class="live-world"><span>Your world:</span> <select class="world-sel" aria-label="Choose the unit this conversation is set in">' + WORLDS.map(function(w){ return '<option value="' + w.k + '"' + (w.k === cur ? ' selected' : '') + '>' + esc(w.name) + '</option>'; }).join('') + '</select></label>'; }
+function worldSelHTML(){ var cur = worldNow().k; return '<div class="live-world"><b class="n" aria-hidden="true">1</b><div><label><span>Pick your world.</span> <small>The character plays the scene in your unit, with your systems and your kind of team.</small></label><select class="world-sel" aria-label="Choose the unit this conversation is set in">' + WORLDS.map(function(w){ return '<option value="' + w.k + '"' + (w.k === cur ? ' selected' : '') + '>' + esc(w.name) + '</option>'; }).join('') + '</select></div></div>'; }
 function worldPaint(){
   var w = worldNow();
   $$('.world-sel').forEach(function(sel){ if(sel.value !== w.k) sel.value = w.k; });
@@ -755,7 +755,7 @@ function liveHTML(k){
   var L = LIVE[k];
   return '<div class="live" data-live="' + k + '"><div class="live-scene"><div class="live-avatar"><i class="ring r1"></i><i class="ring r2"></i><span>' + (L.img ? '<img src="../../assets/img/foundation/cast/' + L.img + '.webp" alt="" width="128" height="128" decoding="async" onerror="this.remove()" />' : '') + L.initial + '</span></div>' +
     '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p>' + esc(L.brief) + '</p>' + worldSelHTML() + '<p class="live-scene-line"><b>In your world:</b> <span data-world-scene="' + k + '">' + esc(worldVars(k).scene) + '</span></p><p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Microphone</p></div></div>' +
-    '<ol class="live-how" aria-label="How this works"><li><b>1</b>Tap Start and allow the microphone. ' + esc(L.who) + ' speaks first.</li><li><b>2</b>Talk the way you would at work. Speak naturally, in your own words. There is no script.</li><li><b>3</b>Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.</li></ol>' + '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-state" role="status" aria-live="polite"></span></div>' +
+    '<ol class="live-how" aria-label="How this works"><li><b>2</b>Tap Start and allow the microphone. ' + esc(L.who) + ' speaks first, in your world.</li><li><b>3</b>Talk the way you would at work. Speak naturally, in your own words. There is no script.</li><li><b>4</b>When you are done, say goodbye. You are scored on what you did, not what you picked.</li></ol>' + '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-state" role="status" aria-live="polite"></span></div>' +
     '<div class="live-log" aria-live="polite"></div><div class="live-score" hidden></div></div>';
 }
 
@@ -1556,6 +1556,52 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     var wk = ip && ip.querySelector('.idea-core > .week'), fws = pg.querySelector('#fwStatus'), lv = pg.querySelector('.live-stage > .v-act');
     if(fws) fws.insertAdjacentElement('afterend', el); else if(lv) lv.appendChild(el); else if(aside) aside.insertAdjacentElement('afterbegin', el); else if(wk){ var wrap = document.createElement('div'); wk.parentNode.insertBefore(wrap, wk); wrap.appendChild(wk); wrap.appendChild(el); } else if(ip) ip.insertAdjacentElement('afterbegin', el); else if(why) why.insertAdjacentElement('afterend', el); else if(h) h.insertAdjacentElement('afterend', el);
   });
+})();
+
+/* ══════════ the course guide: a chat panel on every page that answers about the course and its content ══════════ */
+(function(){
+  var AGENT = 'agent_4601m6rpzdvjf8r98d8attr55cnk', SDK = 'https://cdn.jsdelivr.net/npm/@elevenlabs/client/+esm';
+  var fab = document.createElement('button'); fab.type = 'button'; fab.id = 'guideFab'; fab.setAttribute('aria-expanded', 'false'); fab.setAttribute('aria-controls', 'guidePanel');
+  fab.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/><path d="M9 12h6M9 9h4"/></svg><span>Ask the guide</span>';
+  var panel = document.createElement('aside'); panel.id = 'guidePanel'; panel.hidden = true; panel.setAttribute('aria-label', 'Course guide');
+  panel.innerHTML = '<div class="g-head"><span class="mono">Course guide</span><b>Ask about the course, or this page.</b><button type="button" class="g-close" aria-label="Close the guide">&times;</button></div>' +
+    '<div class="g-log" aria-live="polite"></div><p class="g-state" role="status"></p>' +
+    '<form class="g-form"><input type="text" class="g-in" placeholder="Type a question&hellip;" aria-label="Your question" autocomplete="off" maxlength="500" /><button type="submit" class="btn btn-gold btn-sm">Send</button></form>' +
+    '<div class="g-tips"><button type="button" data-q="What does this page mean for me as a manager?">What does this page mean for me?</button><button type="button" data-q="Who do I call about a leave request?">Who do I call about leave?</button><button type="button" data-q="How does the assessment work?">How does the assessment work?</button></div>';
+  document.body.appendChild(fab); document.body.appendChild(panel);
+  var log = panel.querySelector('.g-log'), state = panel.querySelector('.g-state'), form = panel.querySelector('.g-form'), input = panel.querySelector('.g-in');
+  var conv = null, starting = null, pending = [];
+  function pageName(){ var c = window.chartPager ? chartPager.current() : null; var pg = document.querySelector('.page.cur'); return (pg && pg.getAttribute('aria-label')) || (c ? c.key : 'the course'); }
+  function say(who, text){ var d = document.createElement('p'); d.className = 'g-line ' + who; d.innerHTML = '<b>' + (who === 'you' ? 'You' : 'Guide') + '</b>' + esc(text); log.appendChild(d); log.scrollTop = log.scrollHeight; }
+  function status(t){ state.textContent = t || ''; }
+  function open(){ panel.hidden = false; fab.setAttribute('aria-expanded', 'true'); document.body.classList.add('guide-open'); input.focus(); if(!conv && !starting) connect(); }
+  function close(){ panel.hidden = true; fab.setAttribute('aria-expanded', 'false'); document.body.classList.remove('guide-open'); }
+  function connect(){
+    status('Connecting…');
+    starting = import(SDK).then(function(mod){
+      var Conversation = mod.Conversation || (mod.default && mod.default.Conversation); if(!Conversation) throw new Error('nosdk');
+      return Conversation.startSession({
+        agentId: AGENT, connectionType: 'websocket', textOnly: true,
+        dynamicVariables: { page: pageName() },
+        onConnect: function(){ status(''); pending.splice(0).forEach(function(t){ send(t); }); },
+        onDisconnect: function(){ conv = null; status('The guide stepped away. Send a message to reconnect.'); },
+        onMessage: function(m){ if(m && m.message && m.source !== 'user') say('guide', m.message); },
+        onError: function(){ conv = null; status('The guide could not connect. Try again in a moment.'); }
+      });
+    }).then(function(c){ conv = c; starting = null; return c; }).catch(function(){ starting = null; conv = null; status('The guide is not available in this browser right now.'); });
+    return starting;
+  }
+  function send(text){
+    if(!text) return;
+    if(conv && conv.sendUserMessage){ try{ conv.sendUserMessage(text); }catch(e){ status('Could not send that. Try again.'); } return; }
+    pending.push(text); if(!starting) connect();
+  }
+  form.addEventListener('submit', function(e){ e.preventDefault(); var t = input.value.trim(); if(!t) return; say('you', t); input.value = ''; send(t); });
+  panel.addEventListener('click', function(e){ var q = e.target.closest('button[data-q]'); if(q){ var t = q.getAttribute('data-q'); say('you', t); send(t); return; } if(e.target.closest('.g-close')) close(); });
+  fab.addEventListener('click', function(){ if(panel.hidden) open(); else close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !panel.hidden) close(); });
+  /* the guide follows the learner from page to page */
+  document.addEventListener('chart:page', function(){ if(conv && conv.sendContextualUpdate){ try{ conv.sendContextualUpdate('The learner is now on the page: ' + pageName()); }catch(e){} } });
 })();
 
 })();
