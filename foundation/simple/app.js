@@ -1652,9 +1652,9 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   var seen = {}, told = {};
   try{ seen = JSON.parse(get('mod-seen') || '{}') || {}; }catch(e){ seen = {}; }
   try{ told = JSON.parse(get('mod-done') || '{}') || {}; }catch(e){ told = {}; }
-  /* reviewers: ?unlock=all opens every module in this browser; ?unlock=off restores the path */
-  try{ var u = new URLSearchParams(location.search).get('unlock'); if(u === 'all') set('unlock', 'all'); else if(u === 'off') set('unlock', null); }catch(e){}
-  function bypass(){ return get('unlock') === 'all'; }
+  /* reviewers: ?unlock=all opens every module for this tab only; a new tab, or ?unlock=off, is back on the path */
+  try{ set('unlock', null); var u = new URLSearchParams(location.search).get('unlock'); if(u === 'all') sessionStorage.setItem('mv-unlock', 'all'); else if(u === 'off') sessionStorage.removeItem('mv-unlock'); }catch(e){}
+  function bypass(){ try{ return sessionStorage.getItem('mv-unlock') === 'all'; }catch(e){ return false; } }
   function seenCount(m){ return MODULES[m].pages.filter(function(i){ return seen[keys[i]]; }).length; }
   function actsLeft(m){ return MODULES[m].acts.filter(function(a){ return !progIs(a); }); }
   function complete(m){ return seenCount(m) === MODULES[m].pages.length && actsLeft(m).length === 0; }
