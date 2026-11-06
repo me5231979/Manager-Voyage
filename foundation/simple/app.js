@@ -671,94 +671,108 @@ var LIVE = {
    world is the fictional business office the course was written in. */
 var WORLDS = [
   { k:'std', name:'A university business office', team:'a small administrative team in a university department', scenes:{
-    idea1:'The grant report is due Thursday with no owner, and forty one emails are waiting.',
-    idea2:'The summary is a two page brief for your director.',
-    safe1:'The vendor slipped and the launch moves a week.',
-    idea4:'Central is replacing the intake form.',
+    idea1:'Forty one emails are waiting and the grant report is due Thursday with no owner.',
+    idea2:'The summary is a two page brief for your director, and it has come back twice.',
+    safe1:'The software vendor missed its date and the new expense system launch moves a week. Three departments were told it was Monday.',
+    idea4:'Central is replacing the intake form your team uses for every request.',
     idea5:'Dev has missed two deadlines on routine reports this month.',
-    task:'The monthly report for your director. The missing piece is a data extract from Dana in Finance.',
+    task:'The monthly report for your director is due Friday. The missing piece is a data extract from Dana in Finance.',
     relations:'Marcus is one of your strongest people.',
-    change:'Central is replacing the travel system in six weeks.',
+    change:'Central is replacing the travel reimbursement system in six weeks.',
     external:'A director in another unit wants a full data reconciliation by Friday for audit prep. Your month end close is the same week.' } },
   { k:'dining', name:'Campus Dining', team:'a dining unit of cooks, servers and a catering lead', scenes:{
-    idea1:'The catering plan for Family Weekend is due Thursday with no owner, and forty one emails are waiting.',
-    idea2:'The summary is the menu and staffing sheet for a donor dinner.',
-    safe1:'The produce vendor slipped and the new menu launch moves a week.',
-    idea4:'Central is replacing the catering request form.',
-    idea5:'Dev runs morning prep and has missed two opening deadlines this month.',
-    task:'The monthly food cost report. The missing piece is the vendor invoice totals from Dana in Finance.',
-    relations:'Marcus is your best line cook.',
-    change:'Central is replacing the food ordering system in six weeks.',
+    idea1:'Forty one emails are waiting and the Family Weekend catering plan is due Thursday with no owner. Two caterings are on the board this week.',
+    idea2:'The summary is the event sheet for Saturday’s donor dinner: headcount, menu and cost for the catering director. It has come back twice.',
+    safe1:'The walk-in cooler went down overnight and Saturday’s prep for the donor dinner is lost. Jordan found it at six this morning.',
+    idea4:'Central is replacing the catering request form that every event comes in on.',
+    idea5:'Dev runs morning prep, and the line has opened late twice this month.',
+    task:'The monthly food cost report for the catering director is due Friday. The missing piece is the vendor invoice totals from Dana in Finance.',
+    relations:'Marcus is your best line cook, and Saturday is the donor dinner.',
+    change:'Central is replacing the food ordering system in six weeks, right before the spring semester opens.',
     external:'The director of Conferences wants a menu cost breakdown for every event this year by Friday. Your month end inventory count is the same week.' } },
   { k:'vuit', name:'VUIT', team:'a technology team of analysts and support technicians', scenes:{
-    idea1:'The security patch report is due Thursday with no owner, and forty one tickets are waiting.',
-    idea2:'The summary is the incident write up for university leadership.',
-    safe1:'The vendor slipped the firewall delivery and the cutover moves a week.',
-    idea4:'Central is replacing the ticket intake form.',
-    idea5:'Dev has missed two deadlines on a system migration this month.',
-    task:'The monthly service report. The missing piece is the software license spend from Dana in Finance.',
-    relations:'Marcus is your strongest systems engineer.',
+    idea1:'Forty one tickets are waiting and the monthly security patch report is due Thursday with no owner.',
+    idea2:'The summary is the incident write up for university leadership after last week’s outage. It has come back twice.',
+    safe1:'The migration test failed last night and the cutover has to move a week. Three departments were told it was Monday.',
+    idea4:'Central is replacing the ticket intake form every request comes in on.',
+    idea5:'Dev has missed two deadlines on the storage migration this month.',
+    task:'The monthly service report for the CIO’s office is due Friday. The missing piece is the software license spend from Dana in Finance.',
+    relations:'Marcus is your strongest systems engineer, and the migration cutover is in two weeks.',
     change:'Central is replacing the ticketing system in six weeks.',
     external:'A director in Research Administration wants seven systems reconciled by Friday for an audit. Your patch window is the same week.' } },
   { k:'academic', name:'Academic Affairs', team:'program coordinators and an administrative assistant in a dean’s office', scenes:{
-    idea1:'The spring course schedule is due Thursday with no owner, and forty one emails are waiting.',
-    idea2:'The summary is the program review brief for the dean.',
-    safe1:'The room scheduling vendor slipped and registration opens a week late.',
+    idea1:'Forty one emails are waiting and the spring course schedule is due to the Registrar Thursday with no owner.',
+    idea2:'The summary is the program review brief for the dean. It has come back twice.',
+    safe1:'The spring schedule went to the Registrar with forty sections missing room assignments, and registration opens Monday.',
     idea4:'The Provost’s office is replacing the course change form.',
     idea5:'Dev has missed two deadlines on catalog updates this month.',
-    task:'The monthly enrollment report. The missing piece is the tuition revenue figures from Dana in Finance.',
-    relations:'Marcus is your most experienced program coordinator.',
+    task:'The monthly enrollment report for the dean is due Friday. The missing piece is the tuition revenue figures from Dana in Finance.',
+    relations:'Marcus is your most experienced program coordinator, and advising week starts Monday.',
     change:'The Provost’s office is replacing the faculty travel system in six weeks.',
     external:'A director in the Registrar’s office wants seven years of degree audit data reconciled by Friday. Your grade submission deadline is the same week.' } },
   { k:'student', name:'Student Affairs', team:'residential life coordinators and program staff', scenes:{
-    idea1:'The move in staffing plan is due Thursday with no owner, and forty one emails are waiting.',
-    idea2:'The summary is the incident report for the Dean of Students.',
-    safe1:'The vendor slipped the orientation app and the launch moves a week.',
-    idea4:'Central is replacing the event approval form.',
+    idea1:'Forty one emails are waiting and the move in staffing plan is due Thursday with no owner.',
+    idea2:'The summary is an incident report for the Dean of Students about Saturday night in the residence hall. It has come back twice.',
+    safe1:'The move in volunteer sign ups were lost when the form reset, and move in is in nine days. Jordan found out this morning.',
+    idea4:'Central is replacing the event approval form every student group uses.',
     idea5:'Dev has missed two deadlines on housing assignments this month.',
-    task:'The monthly programming report. The missing piece is the activity fee spending from Dana in Finance.',
-    relations:'Marcus is your strongest residential life coordinator.',
+    task:'The monthly programming report for the Dean of Students is due Friday. The missing piece is the activity fee spending from Dana in Finance.',
+    relations:'Marcus is your strongest residential life coordinator, and move in is next week.',
     change:'Central is replacing the housing system in six weeks.',
     external:'A director in Athletics wants every student engagement record reconciled by Friday. Your move in week is the same week.' } },
   { k:'facilities', name:'Facilities', team:'a trades crew and a scheduler', scenes:{
-    idea1:'The preventive maintenance plan is due Thursday with no owner, and forty one work requests are waiting.',
-    idea2:'The summary is the work order backlog brief for the associate vice chancellor.',
-    safe1:'The chiller parts vendor slipped and the building turnover moves a week.',
-    idea4:'Central is replacing the work request form.',
-    idea5:'Dev has missed two deadlines on inspections this month.',
-    task:'The monthly utilities report. The missing piece is the energy cost figures from Dana in Finance.',
-    relations:'Marcus is your best electrician.',
+    idea1:'Forty one work requests are waiting and the preventive maintenance plan is due Thursday with no owner.',
+    idea2:'The summary is the work order backlog brief for the associate vice chancellor. It has come back twice.',
+    safe1:'The chiller parts came in wrong and the building turnover moves a week. Residential Life is expecting the keys Friday.',
+    idea4:'Central is replacing the work request form every building uses.',
+    idea5:'Dev has missed two deadlines on fire inspections this month.',
+    task:'The monthly utilities report for the associate vice chancellor is due Friday. The missing piece is the energy cost figures from Dana in Finance.',
+    relations:'Marcus is your best electrician, and the move in turnover is next week.',
     change:'Central is replacing the work order system in six weeks.',
     external:'A director in Residential Life wants every room inspection reconciled by Friday. Your move in turnover is the same week.' } },
   { k:'dar', name:'Development and Alumni Relations', team:'gift officers and an events coordinator', scenes:{
-    idea1:'The reunion giving report is due Thursday with no owner, and forty one emails are waiting.',
-    idea2:'The summary is the donor briefing for the Vice Chancellor before a major ask.',
-    safe1:'The printing vendor slipped and the appeal mailing moves a week.',
+    idea1:'Forty one emails are waiting and the reunion giving report is due Thursday with no owner.',
+    idea2:'The summary is the donor briefing for the Vice Chancellor before Thursday’s ask. It has come back twice.',
+    safe1:'The appeal mailing went out with the wrong reply envelope, six thousand pieces. Jordan caught it this morning.',
     idea4:'Central is replacing the gift intake form.',
     idea5:'Dev has missed two deadlines on stewardship reports this month.',
-    task:'The monthly fundraising report. The missing piece is the gift revenue totals from Dana in Finance.',
-    relations:'Marcus is your strongest gift officer.',
+    task:'The monthly fundraising report for the Vice Chancellor is due Friday. The missing piece is the gift revenue totals from Dana in Finance.',
+    relations:'Marcus is your strongest gift officer, and reunion weekend is in two weeks.',
     change:'Central is replacing the donor database in six weeks.',
-    external:'A director in the Chancellor’s office wants a full donor record reconciliation by Friday before a major donor ask. Your fiscal year end gift processing is the same week.' } }
+    external:'A director in the Chancellor’s office wants every donor record reconciled by Friday before a major ask. Your fiscal year end gift processing is the same week.' } }
 ];
 function worldNow(){ var k = get('world'); return WORLDS.filter(function(w){ return w.k === k; })[0] || WORLDS[0]; }
 function worldVars(k){ var w = worldNow(); return { world:w.name, team:w.team, scene:w.scenes[k] || '' }; }
+/* what the conversation asks of the manager, after the scene in their world */
+var COACH = {
+  idea1:'Monday, 9:00, your one to one with Sam. Tell Sam the few things that matter this week, give the work an owner and a date, and keep the meeting about Sam.',
+  idea2:'Both times your only feedback was “tighten it up.” It is due tomorrow. Tell Priya exactly what good looks like, when you need it, and why it matters. Do not rewrite it for her.',
+  safe1:'Jordan is braced for your reaction. Thank first, find out what we know, ask what she needs, and let her run the recovery.',
+  idea4:'Alex has already said here we go again. Explain the why in your own words, say what it fixes, ask what worries Alex, and carry the worries back.',
+  idea5:'You asked to see him. Say what you noticed, say what you expect, ask what is in the way, and agree a next step.',
+  task:'Nobody has mentioned it in two weeks, and you were just asked if it is on time. Fifteen minutes with Priya. Check where it stands before you promise anything.',
+  relations:'He stays after the 1:1: his dad is in and out of the hospital and he might need time off. Listen, help this week, route it to the leave office, and never ask for a diagnosis.',
+  change:'The email goes out Tuesday. You chose to tell the team first, in Thursday’s meeting. Taylor speaks for the skeptics. Explain the why, ask what worries them, write it down.',
+  external:'Call back with the numbers, the collision, and options, and ask what they actually need.'
+};
+function worldBrief(k){ return worldVars(k).scene + ' ' + (COACH[k] || ''); }
 function worldSelHTML(){ var cur = worldNow().k; return '<div class="live-world"><b class="n" aria-hidden="true">1</b><div><label><span>Pick your world.</span> <small>The character plays the scene in your unit, with your systems and your kind of team.</small></label><select class="world-sel" aria-label="Choose the unit this conversation is set in">' + WORLDS.map(function(w){ return '<option value="' + w.k + '"' + (w.k === cur ? ' selected' : '') + '>' + esc(w.name) + '</option>'; }).join('') + '</select></div></div>'; }
 /* the nouns each written situation uses, by world: the same manager moments, in the learner's unit */
 var WORLD_NOUNS = {
-  std:{ due1:'The grant report your team owns', queue:'emails', report1:'the report', report1cap:'The report', decision1:'the vendor decision', doc2:'Priya’s summary', need2:'the decision on page one, under three hundred words', reader2:'The director', docshort:'summary', bad3:'the vendor missed its deadline and the launch will slip a week', central4:'Central', central4low:'central', form4:'the intake form', why4:'the old form lost a third of requests at the handoff', miss5:'two deadlines this month', wait5:'waiting on data from another team', reportT:'The monthly report', askerT:'A director', askerT2:'the director', extractT:'a Finance extract', roleR:'one of your strongest people', deadR:'the two deadlines you have this week', centralC:'Central', centralClow:'central', systemC:'the travel reimbursement system', askerE:'A director in another unit', askE:'pull a full data reconciliation by Friday for our audit prep', clashE:'month-end close', jobE:'the reconciliation', needE:'three of the seven tables' },
-  dining:{ due1:'The catering plan for Family Weekend', queue:'emails', report1:'the catering plan', report1cap:'The catering plan', decision1:'the menu decision', doc2:'Priya’s menu and staffing sheet for the donor dinner', need2:'the headcount, the menu and the cost on page one', reader2:'The catering director', docshort:'event sheet', bad3:'the produce vendor missed its delivery and the new menu launch will slip a week', central4:'Central', central4low:'central', form4:'the catering request form', why4:'the old form lost a third of catering requests between the event office and the kitchen', miss5:'two opening deadlines this month', wait5:'waiting on a produce delivery that keeps arriving late', reportT:'The monthly food cost report', askerT:'The catering director', askerT2:'the catering director', extractT:'the vendor invoice totals', roleR:'your best line cook', deadR:'the two catering shifts you have this week', centralC:'Central', centralClow:'central', systemC:'the food ordering system', askerE:'The director of Conferences', askE:'send a menu cost breakdown for every event this year by Friday', clashE:'month end inventory count', jobE:'the cost breakdown', needE:'the ten largest events' },
-  vuit:{ due1:'The security patch report', queue:'tickets', report1:'the patch report', report1cap:'The patch report', decision1:'the firewall decision', doc2:'Priya’s incident write up', need2:'the cause and the fix in the first paragraph, under three hundred words', reader2:'University leadership', docshort:'write up', bad3:'the vendor slipped the firewall delivery and the cutover will slip a week', central4:'Central', central4low:'central', form4:'the ticket intake form', why4:'the old form lost a third of tickets at the handoff', miss5:'two deadlines on the system migration this month', wait5:'waiting on a vendor patch', reportT:'The monthly service report', askerT:'The CIO’s office', askerT2:'the CIO’s office', extractT:'the software license spend', roleR:'your strongest systems engineer', deadR:'the two migration deadlines you have this week', centralC:'Central', centralClow:'central', systemC:'the ticketing system', askerE:'A director in Research Administration', askE:'reconcile seven systems by Friday for an audit', clashE:'patch window', jobE:'the reconciliation', needE:'three of the seven systems' },
-  academic:{ due1:'The spring course schedule', queue:'emails', report1:'the schedule', report1cap:'The schedule', decision1:'the room assignment decision', doc2:'Priya’s program review brief', need2:'the recommendation on page one, under three hundred words', reader2:'The dean', docshort:'brief', bad3:'the room scheduling vendor slipped and registration will open a week late', central4:'The Provost’s office', central4low:'the Provost’s office', form4:'the course change form', why4:'the old form lost a third of course changes between the department and the Registrar', miss5:'two deadlines on catalog updates this month', wait5:'waiting on faculty sign off', reportT:'The monthly enrollment report', askerT:'The dean', askerT2:'the dean', extractT:'the tuition revenue figures', roleR:'your most experienced program coordinator', deadR:'the two catalog deadlines you have this week', centralC:'The Provost’s office', centralClow:'the Provost’s office', systemC:'the faculty travel system', askerE:'A director in the Registrar’s office', askE:'reconcile seven years of degree audit data by Friday', clashE:'grade submission deadline', jobE:'the reconciliation', needE:'the last two years' },
-  student:{ due1:'The move in staffing plan', queue:'emails', report1:'the staffing plan', report1cap:'The staffing plan', decision1:'the vendor decision', doc2:'Priya’s incident report', need2:'what happened and what we did on page one, under three hundred words', reader2:'The Dean of Students', docshort:'report', bad3:'the vendor slipped the orientation app and the launch will slip a week', central4:'Central', central4low:'central', form4:'the event approval form', why4:'the old form lost a third of event requests between the student group and the venue', miss5:'two deadlines on housing assignments this month', wait5:'waiting on roster data from Admissions', reportT:'The monthly programming report', askerT:'The Dean of Students', askerT2:'the Dean of Students', extractT:'the activity fee spending', roleR:'your strongest residential life coordinator', deadR:'the two program nights you have this week', centralC:'Central', centralClow:'central', systemC:'the housing system', askerE:'A director in Athletics', askE:'reconcile every student engagement record by Friday', clashE:'move in week', jobE:'the reconciliation', needE:'the varsity athletes only' },
-  facilities:{ due1:'The preventive maintenance plan', queue:'work requests', report1:'the maintenance plan', report1cap:'The maintenance plan', decision1:'the contractor decision', doc2:'Priya’s work order backlog brief', need2:'the ten biggest backlog items on page one, with the cost of each', reader2:'The associate vice chancellor', docshort:'brief', bad3:'the chiller parts vendor slipped and the building turnover will move a week', central4:'Central', central4low:'central', form4:'the work request form', why4:'the old form lost a third of work requests between the building and the shop', miss5:'two deadlines on inspections this month', wait5:'waiting on parts from the warehouse', reportT:'The monthly utilities report', askerT:'The associate vice chancellor', askerT2:'the associate vice chancellor', extractT:'the energy cost figures', roleR:'your best electrician', deadR:'the two inspections you have this week', centralC:'Central', centralClow:'central', systemC:'the work order system', askerE:'A director in Residential Life', askE:'reconcile every room inspection by Friday', clashE:'move in turnover', jobE:'the reconciliation', needE:'the first year buildings only' },
-  dar:{ due1:'The reunion giving report', queue:'emails', report1:'the giving report', report1cap:'The giving report', decision1:'the mailing decision', doc2:'Priya’s donor briefing', need2:'the ask and the three talking points on page one', reader2:'The Vice Chancellor', docshort:'briefing', bad3:'the printing vendor slipped and the appeal mailing will go out a week late', central4:'Central', central4low:'central', form4:'the gift intake form', why4:'the old form lost a third of gifts between the mailroom and the ledger', miss5:'two deadlines on stewardship reports this month', wait5:'waiting on gift data from Finance', reportT:'The monthly fundraising report', askerT:'The Vice Chancellor', askerT2:'the Vice Chancellor', extractT:'the gift revenue totals', roleR:'your strongest gift officer', deadR:'the two donor visits you have this week', centralC:'Central', centralClow:'central', systemC:'the donor database', askerE:'A director in the Chancellor’s office', askE:'reconcile every donor record by Friday before a major ask', clashE:'fiscal year end gift processing', jobE:'the reconciliation', needE:'the top fifty prospects' }
+  std:{ due1:'The grant report your team owns', queue:'emails', report1:'the report', report1cap:'The report', decision1:'the vendor decision', doc2:'Priya’s summary', need2:'the decision on page one, under three hundred words', reader2:'The director', docshort:'summary', bad3:'the software vendor missed its date and the new expense system launch will slip a week', central4:'Central', central4low:'central', form4:'the intake form', why4:'the old form lost a third of requests at the handoff', miss5:'two deadlines this month', wait5:'waiting on data from another team', reportT:'The monthly report', askerT:'A director', askerT2:'the director', extractT:'a Finance extract', roleR:'one of your strongest people', deadR:'the two deadlines you have this week', centralC:'Central', centralClow:'central', systemC:'the travel reimbursement system', askerE:'A director in another unit', askE:'pull a full data reconciliation by Friday for our audit prep', clashE:'month-end close', jobE:'the reconciliation', needE:'three of the seven tables' },
+  dining:{ due1:'The catering plan for Family Weekend', queue:'emails', report1:'the catering plan', report1cap:'The catering plan', decision1:'the menu decision', doc2:'Priya’s menu and staffing sheet for the donor dinner', need2:'the headcount, the menu and the cost on page one', reader2:'The catering director', docshort:'event sheet', bad3:'the walk-in cooler went down overnight and Saturday’s prep for the donor dinner is lost', central4:'Central', central4low:'central', form4:'the catering request form', why4:'the old form lost a third of catering requests between the event office and the kitchen', miss5:'two opening deadlines this month', wait5:'waiting on a produce delivery that keeps arriving late', reportT:'The monthly food cost report', askerT:'The catering director', askerT2:'the catering director', extractT:'the vendor invoice totals', roleR:'your best line cook', deadR:'the two catering shifts you have this week', centralC:'Central', centralClow:'central', systemC:'the food ordering system', askerE:'The director of Conferences', askE:'send a menu cost breakdown for every event this year by Friday', clashE:'month end inventory count', jobE:'the cost breakdown', needE:'the ten largest events' },
+  vuit:{ due1:'The security patch report', queue:'tickets', report1:'the patch report', report1cap:'The patch report', decision1:'the firewall decision', doc2:'Priya’s incident write up', need2:'the cause and the fix in the first paragraph, under three hundred words', reader2:'University leadership', docshort:'write up', bad3:'the migration test failed last night and the cutover has to move a week', central4:'Central', central4low:'central', form4:'the ticket intake form', why4:'the old form lost a third of tickets at the handoff', miss5:'two deadlines on the storage migration this month', wait5:'waiting on a vendor patch', reportT:'The monthly service report', askerT:'The CIO’s office', askerT2:'the CIO’s office', extractT:'the software license spend', roleR:'your strongest systems engineer', deadR:'the two migration deadlines you have this week', centralC:'Central', centralClow:'central', systemC:'the ticketing system', askerE:'A director in Research Administration', askE:'reconcile seven systems by Friday for an audit', clashE:'patch window', jobE:'the reconciliation', needE:'three of the seven systems' },
+  academic:{ due1:'The spring course schedule', queue:'emails', report1:'the schedule', report1cap:'The schedule', decision1:'the room assignment decision', doc2:'Priya’s program review brief', need2:'the recommendation on page one, under three hundred words', reader2:'The dean', docshort:'brief', bad3:'the spring schedule went to the Registrar with forty sections missing room assignments, and registration opens Monday', central4:'The Provost’s office', central4low:'the Provost’s office', form4:'the course change form', why4:'the old form lost a third of course changes between the department and the Registrar', miss5:'two deadlines on catalog updates this month', wait5:'waiting on faculty sign off', reportT:'The monthly enrollment report', askerT:'The dean', askerT2:'the dean', extractT:'the tuition revenue figures', roleR:'your most experienced program coordinator', deadR:'the two catalog deadlines you have this week', centralC:'The Provost’s office', centralClow:'the Provost’s office', systemC:'the faculty travel system', askerE:'A director in the Registrar’s office', askE:'reconcile seven years of degree audit data by Friday', clashE:'grade submission deadline', jobE:'the reconciliation', needE:'the last two years' },
+  student:{ due1:'The move in staffing plan', queue:'emails', report1:'the staffing plan', report1cap:'The staffing plan', decision1:'the vendor decision', doc2:'Priya’s incident report about Saturday night in the residence hall', need2:'what happened and what we did on page one, under three hundred words', reader2:'The Dean of Students', docshort:'report', bad3:'the move in volunteer sign ups were lost when the form reset, and move in is in nine days', central4:'Central', central4low:'central', form4:'the event approval form', why4:'the old form lost a third of event requests between the student group and the venue', miss5:'two deadlines on housing assignments this month', wait5:'waiting on roster data from Admissions', reportT:'The monthly programming report', askerT:'The Dean of Students', askerT2:'the Dean of Students', extractT:'the activity fee spending', roleR:'your strongest residential life coordinator', deadR:'the two program nights you have this week', centralC:'Central', centralClow:'central', systemC:'the housing system', askerE:'A director in Athletics', askE:'reconcile every student engagement record by Friday', clashE:'move in week', jobE:'the reconciliation', needE:'the varsity athletes only' },
+  facilities:{ due1:'The preventive maintenance plan', queue:'work requests', report1:'the maintenance plan', report1cap:'The maintenance plan', decision1:'the contractor decision', doc2:'Priya’s work order backlog brief', need2:'the ten biggest backlog items on page one, with the cost of each', reader2:'The associate vice chancellor', docshort:'brief', bad3:'the chiller parts came in wrong and the building turnover moves a week', central4:'Central', central4low:'central', form4:'the work request form', why4:'the old form lost a third of work requests between the building and the shop', miss5:'two deadlines on fire inspections this month', wait5:'waiting on parts from the warehouse', reportT:'The monthly utilities report', askerT:'The associate vice chancellor', askerT2:'the associate vice chancellor', extractT:'the energy cost figures', roleR:'your best electrician', deadR:'the two inspections you have this week', centralC:'Central', centralClow:'central', systemC:'the work order system', askerE:'A director in Residential Life', askE:'reconcile every room inspection by Friday', clashE:'move in turnover', jobE:'the reconciliation', needE:'the first year buildings only' },
+  dar:{ due1:'The reunion giving report', queue:'emails', report1:'the giving report', report1cap:'The giving report', decision1:'the mailing decision', doc2:'Priya’s donor briefing', need2:'the ask and the three talking points on page one', reader2:'The Vice Chancellor', docshort:'briefing', bad3:'the appeal mailing went out with the wrong reply envelope, six thousand pieces', central4:'Central', central4low:'central', form4:'the gift intake form', why4:'the old form lost a third of gifts between the mailroom and the ledger', miss5:'two deadlines on stewardship reports this month', wait5:'waiting on gift data from Finance', reportT:'The monthly fundraising report', askerT:'The Vice Chancellor', askerT2:'the Vice Chancellor', extractT:'the gift revenue totals', roleR:'your strongest gift officer', deadR:'the two donor visits you have this week', centralC:'Central', centralClow:'central', systemC:'the donor database', askerE:'A director in the Chancellor’s office', askE:'reconcile every donor record by Friday before a major ask', clashE:'fiscal year end gift processing', jobE:'the reconciliation', needE:'the top fifty prospects' }
 };
 function worldFill(text){ var n = WORLD_NOUNS[worldNow().k] || WORLD_NOUNS.std; return String(text).replace(/\{(\w+)\}/g, function(m, k){ return n[k] !== undefined ? n[k] : (WORLD_NOUNS.std[k] || m); }); }
 function worldPaint(){
   var w = worldNow();
   $$('.world-sel').forEach(function(sel){ if(sel.value !== w.k) sel.value = w.k; });
   $$('[data-world-scene]').forEach(function(el){ el.textContent = w.scenes[el.getAttribute('data-world-scene')] || ''; });
+  $$('[data-world-brief]').forEach(function(el){ el.textContent = worldBrief(el.getAttribute('data-world-brief')); });
   $$('.scn[data-scn]').forEach(function(el){ if(!el.getAttribute('data-world-built')) return; var fresh = el.cloneNode(false); el.parentNode.replaceChild(fresh, el); buildScenario(fresh); });
 }
 document.addEventListener('change', function(e){ var sel = e.target.closest && e.target.closest('.world-sel'); if(!sel) return; set('world', sel.value === 'std' ? null : sel.value); worldPaint(); });
@@ -766,7 +780,7 @@ document.addEventListener('change', function(e){ var sel = e.target.closest && e
 function liveHTML(k){
   var L = LIVE[k];
   return '<div class="live" data-live="' + k + '"><div class="live-scene"><div class="live-avatar"><i class="ring r1"></i><i class="ring r2"></i><span>' + (L.img ? '<img src="../../assets/img/foundation/cast/' + L.img + '.webp" alt="" width="128" height="128" decoding="async" onerror="this.remove()" />' : '') + L.initial + '</span></div>' +
-    '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p>' + esc(L.brief) + '</p>' + worldSelHTML() + '<p class="live-scene-line"><b>In your world:</b> <span data-world-scene="' + k + '">' + esc(worldVars(k).scene) + '</span></p><p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Microphone</p></div></div>' +
+    '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p class="live-brief" data-world-brief="' + k + '">' + esc(worldBrief(k)) + '</p>' + worldSelHTML() + '<p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Microphone</p></div></div>' +
     '<ol class="live-how" aria-label="How this works"><li><b>2</b>Tap Start and allow the microphone. ' + esc(L.who) + ' speaks first, in your world.</li><li><b>3</b>Talk the way you would at work. Speak naturally, in your own words. There is no script.</li><li><b>4</b>When you are done, say goodbye. You are scored on what you did, not what you picked.</li></ol>' + '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-state" role="status" aria-live="polite"></span></div>' +
     '<div class="live-log" aria-live="polite"></div><div class="live-score" hidden></div></div>';
 }

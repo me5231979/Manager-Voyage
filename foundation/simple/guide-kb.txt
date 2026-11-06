@@ -328,7 +328,7 @@ S
 PRACTICE IT LIVE · WITH SAM
 Have the conversation. Out loud.
 
-Monday, 9:00, your one to one with Sam. Forty one emails are waiting and the grant report is due Thursday with no owner. Tell Sam the few things that matter this week, give the report an owner and a date, and keep the meeting about Sam.
+Forty one emails are waiting and the grant report is due Thursday with no owner. Monday, 9:00, your one to one with Sam. Tell Sam the few things that matter this week, give the work an owner and a date, and keep the meeting about Sam.
 
 1
 Pick your world.
@@ -340,8 +340,6 @@ Academic Affairs
 Student Affairs
 Facilities
 Development and Alumni Relations
-
-In your world: The grant report is due Thursday with no owner, and forty one emails are waiting.
 
 SAM, COORDINATOR ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
@@ -355,7 +353,7 @@ Start the conversation
 End the conversation
 
 FOR YOU AS A MANAGER
-Practice the Monday one to one before you have the real one. The situation and the conversation give you the words.
+Practice the Monday one to one before you have the real one. The situation and the conversation give you the words. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
 Idea 2 · Clear expectations
@@ -405,7 +403,7 @@ P
 PRACTICE IT LIVE · WITH PRIYA
 Have the conversation. Out loud.
 
-Priya has rewritten the summary twice. Both times your only feedback was “tighten it up.” It is due tomorrow. Tell her exactly what good looks like, when you need it, and why it matters. Do not rewrite it for her.
+The summary is a two page brief for your director, and it has come back twice. Both times your only feedback was “tighten it up.” It is due tomorrow. Tell Priya exactly what good looks like, when you need it, and why it matters. Do not rewrite it for her.
 
 1
 Pick your world.
@@ -417,8 +415,6 @@ Academic Affairs
 Student Affairs
 Facilities
 Development and Alumni Relations
-
-In your world: The summary is a two page brief for your director.
 
 PRIYA, ANALYST ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
@@ -432,7 +428,7 @@ Start the conversation
 End the conversation
 
 FOR YOU AS A MANAGER
-Priya’s report is every handoff you make. Practice saying what you need without taking the work back.
+Priya’s report is every handoff you make. Practice saying what you need without taking the work back. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
 Idea 3 · Psychological safety
@@ -470,7 +466,7 @@ Practice it live with Jordan.
 
 Tap Start and have it out loud: Jordan answers back, in your world. No microphone? Tap the response you would give.
 
-Jordan tells you on Tuesday that the vendor missed its deadline and the launch will slip a week. She looks braced for your reaction.
+Jordan tells you on Tuesday that the software vendor missed its date and the new expense system launch will slip a week. She looks braced for your reaction.
 
 A
 “Why am I only hearing about this now?”
@@ -482,7 +478,7 @@ J
 PRACTICE IT LIVE · WITH JORDAN
 Have the conversation. Out loud.
 
-Jordan comes to you Tuesday with bad news: the vendor slipped and the launch moves a week. She is braced for your reaction. Thank first, find out what we know, ask what she needs, and let her run the recovery.
+The software vendor missed its date and the new expense system launch moves a week. Three departments were told it was Monday. Jordan is braced for your reaction. Thank first, find out what we know, ask what she needs, and let her run the recovery.
 
 1
 Pick your world.
@@ -494,8 +490,6 @@ Academic Affairs
 Student Affairs
 Facilities
 Development and Alumni Relations
-
-In your world: The vendor slipped and the launch moves a week.
 
 JORDAN, PROJECT COORDINATOR ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
@@ -509,7 +503,7 @@ Start the conversation
 End the conversation
 
 FOR YOU AS A MANAGER
-Jordan has bad news. How you answer in the first ten seconds sets what your whole team learns about telling you the truth.
+Jordan has bad news. How you answer in the first ten seconds sets what your whole team learns about telling you the truth. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
 Idea 4 · Purpose
@@ -559,7 +553,7 @@ A
 PRACTICE IT LIVE · WITH ALEX
 Have the conversation. Out loud.
 
-Central is replacing the intake form and Alex has already said here we go again. Explain the why in your own words, say what it fixes, ask what worries Alex, and carry the worries back.
+Central is replacing the intake form your team uses for every request. Alex has already said here we go again. Explain the why in your own words, say what it fixes, ask what worries Alex, and carry the worries back.
 
 1
 Pick your world.
@@ -571,8 +565,6 @@ Academic Affairs
 Student Affairs
 Facilities
 Development and Alumni Relations
-
-In your world: Central is replacing the intake form.
 
 ALEX, SPECIALIST ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
@@ -586,7 +578,7 @@ Start the conversation
 End the conversation
 
 FOR YOU AS A MANAGER
-Alex is about to hear about a change from an email. Practice getting there first, in your own words.
+Alex is about to hear about a change from an email. Practice getting there first, in your own words. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
 Idea 5 · The people work
@@ -636,7 +628,7 @@ D
 PRACTICE IT LIVE · WITH DEV
 Have the conversation. Out loud.
 
-Dev has missed two deadlines this month. You asked to see him. Say what you noticed, say what you expect, ask what is in the way, and agree a next step. He answers back. Then you are scored on what you did, not what you picked.
+Dev has missed two deadlines on routine reports this month. You asked to see him. Say what you noticed, say what you expect, ask what is in the way, and agree a next step.
 
 1
 Pick your world.
@@ -648,8 +640,6 @@ Academic Affairs
 Student Affairs
 Facilities
 Development and Alumni Relations
-
-In your world: Dev has missed two deadlines on routine reports this month.
 
 DEV, ANALYST ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
@@ -663,7 +653,7 @@ Start the conversation
 End the conversation
 
 FOR YOU AS A MANAGER
-Dev’s situation is the performance conversation most managers put off. Practice saying what you noticed before it becomes a pattern.
+Dev’s situation is the performance conversation most managers put off. Practice saying what you noticed before it becomes a pattern. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
 Your first year
@@ -1335,7 +1325,7 @@ P
 PRACTICE IT LIVE · WITH PRIYA
 Have the conversation. Out loud.
 
-Wednesday. The monthly report is due Friday, nobody has mentioned it in two weeks, and a director just asked you if it is on time. Fifteen minutes with Priya. Check where it stands before you promise anything.
+The monthly report for your director is due Friday. The missing piece is a data extract from Dana in Finance. Nobody has mentioned it in two weeks, and you were just asked if it is on time. Fifteen minutes with Priya. Check where it stands before you promise anything.
 
 1
 Pick your world.
@@ -1347,8 +1337,6 @@ Academic Affairs
 Student Affairs
 Facilities
 Development and Alumni Relations
-
-In your world: The monthly report for your director. The missing piece is a data extract from Dana in Finance.
 
 PRIYA, ANALYST WHO BUILDS THE MONTHLY REPORT · ABOUT THREE MINUTES · MICROPHONE
 
@@ -1362,7 +1350,7 @@ Start the conversation
 End the conversation
 
 FOR YOU AS A MANAGER
-A director asks for a report before it is ready. What you say decides whether you over-promise your team’s work.
+A director asks for a report before it is ready. What you say decides whether you over-promise your team’s work. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
 02 · Take care of your people: Marcus.
@@ -1384,7 +1372,7 @@ M
 PRACTICE IT LIVE · WITH MARCUS
 Have the conversation. Out loud.
 
-Marcus stays after the 1:1: his dad is in and out of the hospital and he might need time off. Listen, help this week, route it to the leave office, and never ask for a diagnosis.
+Marcus is one of your strongest people. He stays after the 1:1: his dad is in and out of the hospital and he might need time off. Listen, help this week, route it to the leave office, and never ask for a diagnosis.
 
 1
 Pick your world.
@@ -1396,8 +1384,6 @@ Academic Affairs
 Student Affairs
 Facilities
 Development and Alumni Relations
-
-In your world: Marcus is one of your strongest people.
 
 MARCUS, ONE OF YOUR STRONGEST PEOPLE · ABOUT THREE MINUTES · MICROPHONE
 
@@ -1411,7 +1397,7 @@ Start the conversation
 End the conversation
 
 FOR YOU AS A MANAGER
-A strong performer needs time off for a parent. How you respond decides whether he tells you next time, and whether leave is handled right.
+A strong performer needs time off for a parent. How you respond decides whether he tells you next time, and whether leave is handled right. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
 03 · Make things better: Taylor.
@@ -1433,7 +1419,7 @@ T
 PRACTICE IT LIVE · WITH TAYLOR
 Have the conversation. Out loud.
 
-Central is replacing the travel system in six weeks and the email goes out Tuesday. You chose to tell the team first, in Thursday’s meeting. Taylor speaks for the skeptics. Explain the why, ask what worries them, write it down.
+Central is replacing the travel reimbursement system in six weeks. The email goes out Tuesday. You chose to tell the team first, in Thursday’s meeting. Taylor speaks for the skeptics. Explain the why, ask what worries them, write it down.
 
 1
 Pick your world.
@@ -1445,8 +1431,6 @@ Academic Affairs
 Student Affairs
 Facilities
 Development and Alumni Relations
-
-In your world: Central is replacing the travel system in six weeks.
 
 TAYLOR, SENIOR ADMINISTRATOR, SPEAKING FOR THE TEAM · ABOUT THREE MINUTES · MICROPHONE
 
@@ -1460,7 +1444,7 @@ Start the conversation
 End the conversation
 
 FOR YOU AS A MANAGER
-A system change is coming by email. Getting to your team first, with the why, is the difference between a change and a grievance.
+A system change is coming by email. Getting to your team first, with the why, is the difference between a change and a grievance. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
 04 · Connect your team: Director Reyes.
@@ -1482,7 +1466,7 @@ R
 PRACTICE IT LIVE · WITH DIRECTOR REYES
 Have the conversation. Out loud.
 
-A director wants a full data reconciliation by Friday for audit prep. Your month end close is the same week. Call back with the numbers, the collision, and options, and ask what the audit actually needs.
+A director in another unit wants a full data reconciliation by Friday for audit prep. Your month end close is the same week. Call back with the numbers, the collision, and options, and ask what they actually need.
 
 1
 Pick your world.
@@ -1494,8 +1478,6 @@ Academic Affairs
 Student Affairs
 Facilities
 Development and Alumni Relations
-
-In your world: A director in another unit wants a full data reconciliation by Friday for audit prep. Your month end close is the same week.
 
 DIRECTOR REYES, DIRECTOR IN ANOTHER UNIT · ABOUT THREE MINUTES · MICROPHONE
 
@@ -1509,7 +1491,7 @@ Start the conversation
 End the conversation
 
 FOR YOU AS A MANAGER
-Another director wants your team’s weekend. Answering with the numbers and two options is how you protect your team without saying no.
+Another director wants your team’s weekend. Answering with the numbers and two options is how you protect your team without saying no. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
 Your assessment
@@ -2047,7 +2029,7 @@ A. “Maybe take one more pass when you get a chance.” Outcome: Third draft, s
 B. “It needs the decision on page one, under three hundred words, by three tomorrow. The director only reads the first page.” [the Vanderbilt way] Outcome: One draft, done by two. Priya knows what good looks like and why. The next one comes in right the first time.
 C. Rewrite it yourself tonight and send it. Outcome: It ships. Priya learns nothing, and you now own every summary from here on.
 
-Situation (safe1): Jordan tells you on Tuesday that the vendor missed its deadline and the launch will slip a week. She looks braced for your reaction.
+Situation (safe1): Jordan tells you on Tuesday that the software vendor missed its date and the new expense system launch will slip a week. She looks braced for your reaction.
 A. “Why am I only hearing about this now?” Outcome: A fair question and the wrong first sentence. Jordan learns that bad news gets a bad reaction. Next time you hear it later, or from someone else.
 B. “Thank you for telling me today. What do we know, and what do you need from me?” [the Vanderbilt way] Outcome: Jordan relaxes and gives you the full picture. Thank first, solve second, learn the cause later. She will bring you the next one earlier.
 C. “Okay. Let me handle it from here.” Outcome: It sounds supportive, and it tells Jordan she cannot be trusted with the recovery. Ask what she needs and let her run it with your help.
