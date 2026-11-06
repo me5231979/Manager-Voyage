@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Operations Portal · Manager Voyage</title>
-<meta name="description" content="The hub for launching and running Manager Voyage cohorts: details, rosters, checklists, communications, documents and the program launch itself.">
+<title>Program Operations Hub · Manager Voyage</title>
+<meta name="description" content="The Manager Voyage Program Operations Hub: program details and next sessions, the rollout plan, cohort operations, and health, success and learner data.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="../assets/img/favicon.svg">
 <link rel="stylesheet" href="../assets/css/course.css">
@@ -38,7 +38,19 @@ p{ margin:0 0 8px; }
 #top .ttl b{ color:#fff; }
 #top nav{ margin-left:auto; display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; min-width:0; }
 #top nav a{ display:block; padding:8px 10px; color:rgba(255,255,255,.78); text-decoration:none; font-size:.84rem; white-space:nowrap; border-radius:4px; }
-#top nav a:hover, #top nav a.on{ color:var(--vu-gold); }
+#top nav a:hover, #top nav a.on{ color:var(--vu-gold); } #top nav a.on{ border-bottom:2px solid var(--vu-gold); border-radius:0; }
+.subnav{ display:flex; gap:4px; flex-wrap:wrap; margin:-6px 0 18px; border-bottom:1px solid var(--bd); }
+.subnav a{ padding:8px 12px; text-decoration:none; color:var(--tx2); font-size:.86rem; border-bottom:2px solid transparent; }
+.subnav a.on{ color:var(--vu-black); border-bottom-color:var(--vu-gold); font-weight:600; }
+.hub-hero{ background:var(--vu-black); color:#fff; border-radius:var(--r); padding:26px 28px; margin-bottom:18px; border-top:3px solid var(--vu-gold); display:grid; grid-template-columns:1.3fr .7fr; gap:20px; align-items:center; }
+.hub-hero h1{ color:#fff; font-size:clamp(1.9rem,3.2vw,2.6rem); margin-top:8px; margin-bottom:6px; } .hub-hero .lede{ color:rgba(255,255,255,.78); margin-bottom:0; }
+.hub-hero .count{ text-align:right; } .hub-hero .count .n{ font-family:var(--serif); font-size:3.4rem; line-height:1; color:var(--vu-gold); } .hub-hero .count .l{ font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.7); margin-top:4px; }
+.std4{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; } .std4 div{ border:1px solid var(--bd); background:#fff; border-radius:var(--r); padding:8px 10px; font-size:.8rem; color:var(--tx2); } .std4 div b{ display:block; font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-oak); margin-bottom:2px; }
+.roll{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; } .roll .ph{ background:#fff; border:1px solid var(--bd); border-top:3px solid var(--vu-sand); border-radius:var(--r); padding:10px 12px; font-size:.78rem; color:var(--tx2); } .roll .ph.now{ border-top-color:var(--vu-gold); background:#FBF6EA; } .roll .ph.done{ border-top-color:#4C7A4C; } .roll .ph b{ display:block; font-family:var(--serif); font-size:1rem; color:var(--tx); } .roll .ph .w{ font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-oak); margin:2px 0 5px; }
+.links{ display:flex; gap:8px; flex-wrap:wrap; } .links a{ font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; border:1px solid var(--vu-gold); color:var(--vu-oak); border-radius:999px; padding:6px 12px; text-decoration:none; }
+.frame{ width:100%; height:720px; border:1px solid var(--bd); border-radius:var(--r); background:#fff; }
+td input.act{ width:90px; padding:5px 8px; font-size:.84rem; } td input.asof{ width:140px; padding:5px 8px; font-size:.84rem; }
+@media (max-width:800px){ .hub-hero{ grid-template-columns:1fr; } .hub-hero .count{ text-align:left; } .std4, .roll{ grid-template-columns:1fr 1fr; } }
 #top .new{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; background:var(--vu-gold); color:var(--vu-black); border:0; border-radius:999px; padding:9px 14px; white-space:nowrap; text-decoration:none; }
 main{ padding:28px max(18px, calc(50% - 620px)) 60px; min-height:70vh; }
 /* buttons */
@@ -100,16 +112,16 @@ footer{ padding:18px max(18px, calc(50% - 620px)); border-top:1px solid var(--bd
 <body>
 <header id="top"><div class="in">
   <a href="../" aria-label="Manager Voyage home"><img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University"></a>
-  <span class="ttl"><b>Manager Voyage</b> <span>&middot; Operations Portal</span></span>
-  <nav id="nav" aria-label="Portal">
-    <a href="#home" data-nav="home">Home</a><a href="#cohorts" data-nav="cohorts">Cohorts</a><a href="#program" data-nav="program">Program launch</a><a href="#calendar" data-nav="calendar">Calendar</a><a href="#settings" data-nav="settings">Settings</a>
+  <span class="ttl"><b>Manager Voyage</b> <span>&middot; Program Operations Hub</span></span>
+  <nav id="nav" aria-label="Hub">
+    <a href="#home" data-nav="home">Home</a><a href="../launch/" data-nav="rollout">Rollout</a><a href="#cohorts" data-nav="cohorts">Cohort ops</a><a href="#data" data-nav="data">Data</a>
   </nav>
   <a class="new" href="#new">New cohort</a>
 </div></header>
 <main id="main" aria-live="polite"></main>
-<footer><span>Manager Voyage &middot; People, Culture and Belonging &middot; Futures Learning Hub</span><span id="syncState">Saved in this browser</span></footer>
+<footer><span>Manager Voyage Program Operations Hub &middot; People, Culture and Belonging &middot; Futures Learning Hub</span><span id="syncState">Saved in this browser</span></footer>
 <div class="toast" id="toast" hidden role="status"></div>
 <input type="file" id="importFile" accept="application/json" hidden>
-<script src="app.js?v=20261106b"></script>
+<script src="app.js?v=20261106d"></script>
 </body>
 </html>

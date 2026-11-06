@@ -245,6 +245,10 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
   #topnav ul::-webkit-scrollbar{ display:none; }
   #topnav a{ display:block; padding:8px 10px; color:rgba(255,255,255,.78); text-decoration:none; font-size:.8rem; white-space:nowrap; border-radius:4px; }
   #topnav a:hover{ color:#CFAE70; }
+  #topnav ul.hub{ margin-left:0; flex:none; border-right:1px solid rgba(255,255,255,.18); padding-right:6px; }
+  #topnav ul.hub a{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.85); }
+  #topnav ul.hub a.on{ color:#CFAE70; border-bottom:2px solid #CFAE70; border-radius:0; }
+  @media (max-width:980px){ #topnav ul:not(.hub){ display:none; } }
   #topnav a.pdf{ border:1px solid #CFAE70; color:#CFAE70; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; margin-left:6px; }
   @media (max-width:980px){ #topnav .ttl span{ display:none; } }
   @media (max-width:760px){
@@ -287,7 +291,8 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
 
 <nav id="topnav" aria-label="Sections of the launch plan"><div class="in">
   <a href="../" aria-label="Manager Voyage home"><img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University"></a>
-  <span class="ttl"><b>Manager Voyage</b> <span>&middot; Launch plan</span></span>
+  <span class="ttl"><b>Manager Voyage</b> <span>&middot; Program Operations Hub</span></span>
+  <ul class="hub"><li><a href="../ops/">Home</a></li><li><a class="on" href="#cover">Rollout</a></li><li><a href="../ops/#cohorts">Cohort ops</a></li><li><a href="../ops/#data">Data</a></li></ul>
   <ul>
     <li><a href="#glance">The plan</a></li><li><a href="#program">Overview</a></li><li><a href="#objectives">Objectives</a></li><li><a href="#journey">Journey</a></li><li><a href="#funnel">Funnel</a></li><li><a href="#timeline">Timeline</a></li><li><a href="#cascade">Cascade</a></li><li><a href="#msg-c1">Messages</a></li><li><a href="#teams">Teams</a></li><li><a href="#data">Data</a></li><li><a href="#enrollment">Enrollment</a></li><li><a href="#success">Success</a></li><li><a href="#next">Decisions</a></li>
     <li><a class="pdf" href="../docs/Manager-Voyage-Launch-Plan.pdf">PDF</a></li>

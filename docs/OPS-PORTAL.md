@@ -1,7 +1,14 @@
-# Manager Voyage Operations Portal
+# Manager Voyage Program Operations Hub
 
-`ops/` is the hub for launching and running cohorts and the program launch itself:
-https://manager-voyage.vercel.app/ops/
+`ops/` is the hub for running the program: https://manager-voyage.vercel.app/ops/
+
+Four tabs. **Home**: program details, the next cohort sessions, the rollout at a
+glance with a countdown to launch. **Rollout**: the launch plan page (`launch/`).
+**Cohort ops**: cohorts, the rollout checklist, the calendar, settings. **Data**:
+program health readings against the plan's targets (with a trend per measure), the
+success scorecard with baselines and latest values, and learner data with the
+assessment results dashboard embedded. Health and scorecard entries live in the
+same store as the cohorts, so they export, import and sync with it.
 
 What it holds, per cohort: the details (name, number, quarter, the four dates, room,
 virtual link, facilitators, business unit leader, unit, capacity, notes), the roster

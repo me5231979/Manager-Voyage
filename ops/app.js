@@ -1,6 +1,7 @@
 /* =====================================================================
-   MANAGER VOYAGE - Operations Portal
-   The hub for launching and running cohorts, and the program launch itself.
+   MANAGER VOYAGE - Program Operations Hub
+   Home (program details, next sessions, the rollout), Rollout (the launch plan page),
+   Cohort ops (cohorts, checklists, calendar) and Data (health, success, learner data).
    One store in the browser (localStorage), export and import as JSON, and an
    optional sync to a SharePoint list through two Power Automate flows
    (see docs/OPS-PORTAL.md). No framework, no build step.
@@ -101,10 +102,47 @@ var PLAN_DOCS = [
   { title:'Foundations course', url:'../foundation/simple/', kind:'Course' }, { title:'Assessment results dashboard', url:'../results/', kind:'Data' }
 ];
 
+/* the program's health measures (the first ninety days) and the success scorecard, from the launch plan */
+var HEALTH = [
+  { key:'open7', title:'Launch email opened within 7 days', target:85, source:'Email system' },
+  { key:'dash14', title:'Dashboard opened by day 14', target:85, source:'Dashboard, profile feed' },
+  { key:'baseline', title:'Assessment baseline taken', target:70, source:'Assessment flow' },
+  { key:'found60', title:'Foundations complete by day 60, launch wave', target:55, source:'Oracle Learning' },
+  { key:'found60new', title:'Foundations complete by day 60, new managers', target:90, source:'Oracle Learning' },
+  { key:'legal30', title:'Legal compliance by day 30', target:100, source:'Oracle Learning' },
+  { key:'micro60', title:'Phase one micro modules by day 60', target:45, source:'Oracle Learning' },
+  { key:'seats', title:'Cohort seat requests', target:30, source:'Portal form' },
+  { key:'time', title:'Protected time given, manager\u2019s report', target:80, source:'Day 60 survey' }
+];
+var SUCCESS = [
+  { key:'fill', level:'Business', title:'Internal fill rate for manager roles', y1:'+10 points', y2:'At the benchmark', source:'Oracle Recruiting', cadence:'Quarterly' },
+  { key:'promo', level:'Business', title:'Promotions into a first manager role', y1:'+15 percent', y2:'+30 percent', source:'Oracle HCM', cadence:'Yearly' },
+  { key:'ready', level:'Business', title:'Promotion readiness: cohort graduates promoted or given larger scope within eighteen months', y1:'25 of 100', y2:'35 of 100', source:'Oracle HCM, FLH roster', cadence:'Yearly' },
+  { key:'ttf', level:'Business', title:'Time to fill a manager role', y1:'Down 15 percent', y2:'Down 25 percent', source:'Oracle Recruiting', cadence:'Quarterly' },
+  { key:'ret', level:'Business', title:'First-year retention of new managers', y1:'90 of 100 or better', y2:'92 of 100 or better', source:'Oracle HCM', cadence:'Yearly' },
+  { key:'attr', level:'Business', title:'Regretted attrition on teams led by completers, against the rest', y1:'Lower for completers', y2:'Lower by a quarter', source:'Oracle HCM', cadence:'Yearly' },
+  { key:'move', level:'Behavior', title:'Assessment movement, five or more points at the re-up', y1:'40 of 100 re-ups', y2:'50 of 100', source:'Results dashboard', cadence:'Quarterly' },
+  { key:'prio', level:'Behavior', title:'Priority expectation moved by 0.7 or more', y1:'50 of 100 re-ups', y2:'60 of 100', source:'Results dashboard', cadence:'Quarterly' },
+  { key:'pulse', level:'Behavior', title:'Cohort confidence pulse, week four against week one', y1:'Up on all four questions', y2:'Up, every cohort', source:'Cohort site', cadence:'Each cohort' },
+  { key:'route', level:'Behavior', title:'Same-day routing of leave, conduct and accommodation matters', y1:'Up', y2:'Up', source:'HCM and leave office survey', cadence:'Twice a year' }
+];
+/* the rollout phases, days from the launch date */
+var PHASES = [
+  { title:'Ready', from:-25, to:-13, what:'QA closed, fixes landed, Oracle items, the launcher, the Teams team and the assessment flows tested. Ready gate at the end.' },
+  { title:'Rehearsal', from:-15, to:-6, what:'The November 5 group and ten managers take the first thirty days in eight days. Readout, then the launch go, no go.' },
+  { title:'Cascade', from:-15, to:-1, what:'Leadership brief, business unit leader briefings, HCMs, the note from managers\u2019 managers, the teaser; Portal and Teams open.' },
+  { title:'Launch', from:0, to:62, what:'Launch email and Oracle assignments. Day 1 automation on. Nudges at day 7, 22 and 60. Cohort invitations at day 60.' },
+  { title:'Deliver and measure', from:48, to:100, what:'Cohort 1, then one a quarter. Re-ups three months after each completion. Ninety-day readout to leadership.' }
+];
+var PROGRAM = {
+  standard:[['01 \u00b7 Get the work done', 'Through your team: priorities with owners, clear expectations, work checked before it is due.'], ['02 \u00b7 Take care of your people', 'Support under pressure, thanks by name, decisions shaped by the team.'], ['03 \u00b7 Make things better', 'The why in your own words before the announcement; a look-back after big work.'], ['04 \u00b7 Connect your team', 'To the rest of Vanderbilt: hear what is coming first, show the hours, offer two options.']],
+  components:[['Compliance, by location', 'Legal and policy courses for Tennessee, New York, Florida and California, auto-assigned in Oracle Learning. Legal by day 30, policy by day 60.'], ['Manager Foundations', 'The assessment, the seven-module course of about ninety minutes with live practice, then the micro modules in Oracle Learning by day 60.'], ['The four-week cohort', 'Twenty five managers a quarter: a half day in the room, two virtual weeks, a two-hour capstone with the Playbook presented to the business unit leader.'], ['The Manager Portal', 'Every template, policy link and contact, open from day one. The My Voyage dashboard shows each manager where they stand.']]
+};
+
 /* ---------- the store ---------- */
 var S = null;
-function blank(){ return { version:1, at:'', settings:{ launchDate:'2026-12-01', capacity:25, facilitators:'', saveUrl:'', loadUrl:'', key:'', by:'' }, program:{ checklist:[], log:[] }, cohorts:[] }; }
-function load(){ try{ var raw = localStorage.getItem(KEY); S = raw ? JSON.parse(raw) : blank(); }catch(e){ S = blank(); } if(!S.settings) S.settings = blank().settings; if(!S.program) S.program = { checklist:[], log:[] }; if(!S.cohorts) S.cohorts = []; if(!S.program.checklist.length) S.program.checklist = PROGRAM_CHECKLIST.map(function(t){ return { id:uid(), phase:t.phase, title:t.title, owner:t.owner, rel:t.rel, done:false, doneAt:'' }; }); }
+function blank(){ return { version:1, at:'', settings:{ launchDate:'2026-12-01', capacity:25, facilitators:'', saveUrl:'', loadUrl:'', key:'', by:'' }, program:{ checklist:[], log:[] }, cohorts:[], data:{ health:{}, success:{} } }; }
+function load(){ try{ var raw = localStorage.getItem(KEY); S = raw ? JSON.parse(raw) : blank(); }catch(e){ S = blank(); } if(!S.settings) S.settings = blank().settings; if(!S.program) S.program = { checklist:[], log:[] }; if(!S.cohorts) S.cohorts = []; if(!S.data) S.data = { health:{}, success:{} }; if(!S.data.health) S.data.health = {}; if(!S.data.success) S.data.success = {}; if(!S.program.checklist.length) S.program.checklist = PROGRAM_CHECKLIST.map(function(t){ return { id:uid(), phase:t.phase, title:t.title, owner:t.owner, rel:t.rel, done:false, doneAt:'' }; }); }
 function save(note){ S.at = new Date().toISOString(); try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ toast('Could not save in this browser.'); } if(note) toast(note); syncPush(); }
 function cohort(id){ for(var i = 0; i < S.cohorts.length; i++){ if(S.cohorts[i].id === id) return S.cohorts[i]; } return null; }
 function logTo(target, text){ target.log = target.log || []; target.log.unshift({ at:new Date().toISOString(), text:text }); if(target.log.length > 200) target.log.length = 200; }
@@ -144,27 +182,34 @@ function upcoming(days){
 }
 function listHTML(items, empty){ if(!items.length) return '<div class="empty">' + esc(empty) + '</div>'; return '<ul class="list">' + items.map(function(i){ return '<li class="' + (i.late ? 'late' : '') + '"><span class="when">' + esc(fmt(i.date)) + (i.late ? ' &middot; overdue' : '') + '</span><span><a href="' + i.href + '">' + esc(i.text) + '</a><br><span class="who">' + esc(i.where) + ' &middot; ' + esc(i.who) + '</span></span></li>'; }).join('') + '</ul>'; }
 
+function phaseDates(ph){ return { from:programDate(ph.from), to:programDate(ph.to) }; }
+function nextSessions(limit){
+  var t = today(), out = [];
+  S.cohorts.forEach(function(c){ [['w1', 'Week one, in the room'], ['w2', 'Week two, virtual'], ['w3', 'Week three, virtual'], ['cap', 'The capstone, in the room']].forEach(function(w){ var d = c.dates[w[0]]; if(d && d >= t) out.push({ date:d, text:w[1], cohort:c }); }); });
+  out.sort(function(a, b){ return cmp(a.date, b.date); }); return out.slice(0, limit || 6);
+}
 function renderHome(){
-  var up = upcoming(14), late = up.filter(function(i){ return i.late; }).length;
-  var running = S.cohorts.filter(function(c){ return statusOf(c) === 'Running'; }).length, planned = S.cohorts.filter(function(c){ var s = statusOf(c); return s === 'Planned' || s === 'Open'; }).length, done = S.cohorts.filter(function(c){ return statusOf(c) === 'Complete'; }).length;
-  var seatsAll = S.cohorts.reduce(function(n, c){ return n + seats(c); }, 0);
-  var pdone = S.program.checklist.filter(function(i){ return i.done; }).length;
-  main.innerHTML = '<p class="eyebrow">Operations Portal</p><h1>Everything program delivery, in one <em>place</em>.</h1><p class="lede">Cohorts with their rosters, checklists, communications and documents. The program launch worked back from ' + esc(fmt(S.settings.launchDate, true)) + '. What is due in the next fourteen days, across all of it.</p>' +
-    '<div class="grid c4"><div class="stat"><div class="n">' + running + '</div><div class="l">Cohorts running</div></div><div class="stat"><div class="n">' + planned + '</div><div class="l">Cohorts planned or open</div></div><div class="stat"><div class="n">' + seatsAll + '</div><div class="l">Seats confirmed</div></div><div class="stat"><div class="n">' + (late ? '<span style="color:#F0B6B0">' + late + '</span>' : up.length) + '</div><div class="l">' + (late ? 'Overdue items' : 'Due in fourteen days') + '</div></div></div>' +
-    '<div class="grid c2 sec"><div><h3>Due in the next fourteen days</h3>' + listHTML(up, 'Nothing due in the next fourteen days.') + '</div>' +
-    '<div><h3>Program launch</h3><div class="card"><h2>' + pdone + ' of ' + S.program.checklist.length + ' launch items done</h2><p>Launch date ' + esc(fmt(S.settings.launchDate, true)) + '. Every item below is dated from it. <a href="#program">Open the program launch checklist</a>.</p><div class="bar"><i style="width:' + Math.round(pdone / S.program.checklist.length * 100) + '%"></i></div></div>' +
-    '<h3 style="margin-top:18px">Cohorts</h3>' + (S.cohorts.length ? '<div class="grid">' + S.cohorts.slice().sort(function(a, b){ return cmp(a.dates.w1, b.dates.w1); }).map(cohortCard).join('') + '</div>' : '<div class="empty">No cohorts yet. <a href="#new">Create the first one</a>, or <button type="button" class="linkish" data-act="seed">seed the four 2027 cohorts from the plan</button>.</div>') + '</div></div>';
+  var L = S.settings.launchDate, n = daysUntil(L), sessions = nextSessions(6), pdone = S.program.checklist.filter(function(i){ return i.done; }).length, t = today();
+  var count = n > 0 ? '<div class="n">' + n + '</div><div class="l">days to launch, ' + esc(fmt(L)) + '</div>' : n === 0 ? '<div class="n">Day 1</div><div class="l">Launch day, ' + esc(fmt(L)) + '</div>' : '<div class="n">Day ' + (1 - n) + '</div><div class="l">of the launch wave, from ' + esc(fmt(L)) + '</div>';
+  main.innerHTML = '<div class="hub-hero"><div><p class="eyebrow">Program Operations Hub</p><h1>Manager Voyage, from launch to <em>cohort four</em>.</h1><p class="lede">One standard for every manager at Vanderbilt, in four expectations, delivered in four components. This hub runs it: the rollout plan, every cohort with its checklist, and the numbers that say whether it is working.</p></div><div class="count">' + count + '</div></div>' +
+    '<div class="grid c2" style="grid-template-columns:1.1fr .9fr"><div><h3>Next sessions</h3>' + (sessions.length ? '<ul class="list">' + sessions.map(function(x){ var dn = daysUntil(x.date); return '<li><span class="when">' + esc(fmt(x.date)) + '</span><span><a href="#cohort/' + x.cohort.id + '">' + esc(x.cohort.name) + '</a>: ' + esc(x.text) + (x.cohort.room && x.text.indexOf('room') > -1 ? ', ' + esc(x.cohort.room) : '') + '<br><span class="who">' + seats(x.cohort) + ' of ' + x.cohort.capacity + ' seats confirmed' + (x.cohort.facilitators ? ' &middot; ' + esc(x.cohort.facilitators) : '') + '</span></span><span class="who">' + (dn === 0 ? 'today' : 'in ' + dn + ' days') + '</span></li>'; }).join('') + '</ul>' : '<div class="empty">No cohort sessions scheduled. <a href="#new">Create a cohort</a>, or <button type="button" class="linkish" data-act="seed">add the four 2027 cohorts from the plan</button> (January 18, April 12, July 12, October 4).</div>') +
+    '<h3 style="margin-top:18px">The program</h3><div class="std4">' + PROGRAM.components.map(function(c){ return '<div><b>' + esc(c[0]) + '</b>' + esc(c[1]) + '</div>'; }).join('') + '</div>' +
+    '<h3 style="margin-top:14px">The Vanderbilt Manager Standard</h3><div class="std4">' + PROGRAM.standard.map(function(c){ return '<div><b>' + esc(c[0]) + '</b>' + esc(c[1]) + '</div>'; }).join('') + '</div></div>' +
+    '<div><h3>The rollout, at a glance</h3><div class="roll" style="grid-template-columns:1fr">' + PHASES.map(function(ph){ var d = phaseDates(ph), cls = d.to < t ? 'done' : (d.from <= t ? 'now' : ''); return '<div class="ph ' + cls + '"><b>' + esc(ph.title) + (cls === 'now' ? ' <span class="pill solid">now</span>' : cls === 'done' ? ' <span class="pill complete">done</span>' : '') + '</b><div class="w">' + esc(fmt(d.from)) + ' to ' + esc(fmt(d.to)) + '</div>' + esc(ph.what) + '</div>'; }).join('') + '</div>' +
+    '<div class="card" style="margin-top:12px"><h2>' + pdone + ' of ' + S.program.checklist.length + ' rollout items done</h2><div class="bar"><i style="width:' + Math.round(pdone / Math.max(1, S.program.checklist.length) * 100) + '%"></i></div><p style="margin-top:8px"><a href="#program">Open the rollout checklist</a> &middot; <a href="../launch/">Read the full plan</a></p></div>' +
+    '<h3 style="margin-top:18px">Quick links</h3><div class="links"><a href="../launch/">Rollout plan</a><a href="../docs/Manager-Voyage-Launch-Plan.pdf">Plan PDF</a><a href="../cohort/">Cohort site</a><a href="../foundation/simple/">Foundations course</a><a href="../dashboard/">My Voyage dashboard</a><a href="../results/">Assessment results</a><a href="#data">Data</a></div></div></div>';
 }
 function cohortCard(c){ var st = statusOf(c); return '<a class="card cohort-card" href="#cohort/' + c.id + '"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span class="mono">Cohort ' + esc(c.number || '') + (c.quarter ? ' &middot; ' + esc(c.quarter) : '') + '</span>' + pill(st) + '</div><h2>' + esc(c.name) + '</h2><div class="dates"><span>W1 ' + esc(fmt(c.dates.w1)) + '</span><span>W2 ' + esc(fmt(c.dates.w2)) + '</span><span>W3 ' + esc(fmt(c.dates.w3)) + '</span><span>Capstone ' + esc(fmt(c.dates.cap)) + '</span></div><p>' + seats(c) + ' of ' + c.capacity + ' seats confirmed &middot; ' + c.roster.length + ' on the roster &middot; ' + progress(c) + ' percent of the checklist done' + (c.buLeader ? ' &middot; ' + esc(c.buLeader) : '') + '</p><div class="bar"><i style="width:' + progress(c) + '%"></i></div></a>'; }
 
+function subnav(on){ return '<div class="subnav">' + [['cohorts', 'Cohorts'], ['program', 'Rollout checklist'], ['calendar', 'Calendar'], ['settings', 'Settings']].map(function(t){ return '<a href="#' + t[0] + '" class="' + (t[0] === on ? 'on' : '') + '">' + t[1] + '</a>'; }).join('') + '</div>'; }
 function renderCohorts(){
-  main.innerHTML = '<div class="head"><div><p class="eyebrow">Cohorts</p><h1>Every cohort, past and <em>planned</em>.</h1></div><div class="acts"><a class="btn gold" href="#new">New cohort</a><button type="button" class="btn ghost" data-act="seed">Seed the 2027 cohorts</button></div></div>' +
+  main.innerHTML = subnav('cohorts') + '<div class="head"><div><p class="eyebrow">Cohorts</p><h1>Every cohort, past and <em>planned</em>.</h1></div><div class="acts"><a class="btn gold" href="#new">New cohort</a><button type="button" class="btn ghost" data-act="seed">Seed the 2027 cohorts</button></div></div>' +
     (S.cohorts.length ? '<div class="grid c2">' + S.cohorts.slice().sort(function(a, b){ return cmp(a.dates.w1, b.dates.w1); }).map(cohortCard).join('') + '</div>' : '<div class="empty">No cohorts yet.</div>');
 }
 
 function renderNew(){
   var n = S.cohorts.length + 1;
-  main.innerHTML = '<p class="eyebrow">New cohort</p><h1>Name it, set week one, and the rest <em>follows</em>.</h1><p class="lede">Give the week one date and the portal proposes the three Wednesdays after it, builds the launch checklist worked back from those dates, and lays out the communications for the cohort. You can change any date later.</p>' +
+  main.innerHTML = subnav('cohorts') + '<p class="eyebrow">New cohort</p><h1>Name it, set week one, and the rest <em>follows</em>.</h1><p class="lede">Give the week one date and the portal proposes the three Wednesdays after it, builds the launch checklist worked back from those dates, and lays out the communications for the cohort. You can change any date later.</p>' +
     '<form class="form card" data-form="new"><div><label>Name</label><input name="name" required placeholder="Cohort ' + n + ', spring 2027" value="Cohort ' + n + '"></div><div><label>Number</label><input name="number" value="' + n + '"></div>' +
     '<div><label>Quarter</label><input name="quarter" placeholder="Q2 2027"></div><div><label>Unit, for a bespoke cohort</label><input name="unit" placeholder="Open to all units, or DAR"></div>' +
     '<div><label>Week one, in the room</label><input type="date" name="w1" required data-w1></div><div><label>Week two, virtual</label><input type="date" name="w2" data-w2></div><div><label>Week three, virtual</label><input type="date" name="w3" data-w3></div><div><label>Capstone, in the room</label><input type="date" name="cap" data-cap></div>' +
@@ -190,7 +235,7 @@ function renderCohort(id, tab){
   else if(tab === 'comms') body = commsHTML(c);
   else if(tab === 'docs') body = docsHTML(c);
   else body = logHTML(c);
-  main.innerHTML = h + '<div class="tabpane" data-tab="' + tab + '">' + body + '</div>';
+  main.innerHTML = subnav('cohorts') + h + '<div class="tabpane" data-tab="' + tab + '">' + body + '</div>';
 }
 function overviewHTML(c){
   var due = upcoming(21).filter(function(i){ return i.where === c.name; });
@@ -236,7 +281,7 @@ function logHTML(c){
 function renderProgram(){
   var phases = []; S.program.checklist.forEach(function(i){ if(phases.indexOf(i.phase) < 0) phases.push(i.phase); });
   var done = S.program.checklist.filter(function(i){ return i.done; }).length;
-  main.innerHTML = '<div class="head"><div><p class="eyebrow">Program launch</p><h1>The launch checklist, dated from <em>' + esc(fmt(S.settings.launchDate)) + '</em>.</h1><p class="lede">Every item from the launch plan, with its date worked from the launch date. Change the launch date in Settings and every date moves with it. ' + done + ' of ' + S.program.checklist.length + ' done.</p></div><div class="acts"><a class="btn ghost" href="../launch/">Open the launch plan</a></div></div>' +
+  main.innerHTML = '' + subnav('program') + '<div class="head"><div><p class="eyebrow">Rollout checklist</p><h1>The launch checklist, dated from <em>' + esc(fmt(S.settings.launchDate)) + '</em>.</h1><p class="lede">Every item from the launch plan, with its date worked from the launch date. Change the launch date in Settings and every date moves with it. ' + done + ' of ' + S.program.checklist.length + ' done.</p></div><div class="acts"><a class="btn ghost" href="../launch/">Read the full plan</a></div></div>' +
     phases.map(function(ph){ var items = S.program.checklist.filter(function(i){ return i.phase === ph; }).sort(function(a, b){ return a.rel - b.rel; });
       return '<div class="phase"><h3>' + esc(ph) + ' &middot; ' + items.filter(function(i){ return i.done; }).length + ' of ' + items.length + '</h3><div class="xs"><table>' + items.map(function(i){ var d = programDate(i.rel); return '<tr class="' + dueClass(d, i.done) + '"><td style="width:34px"><input type="checkbox" data-act="ptick" data-iid="' + i.id + '"' + (i.done ? ' checked' : '') + ' aria-label="Done"></td><td class="d">' + esc(fmt(d)) + '</td><td><b>' + esc(i.title) + '</b>' + (i.done && i.doneAt ? '<br><span class="small">Done ' + esc(fmt(i.doneAt)) + '</span>' : '') + '</td><td>' + esc(i.owner) + '</td></tr>'; }).join('') + '</table></div></div>'; }).join('') +
     '<form class="form card noprint" data-form="pitem" style="margin-top:18px"><div class="full"><h3>Add an item</h3></div><div class="full"><label>What</label><input name="title" required></div><div><label>Phase</label><select name="phase">' + phases.map(function(p){ return '<option>' + esc(p) + '</option>'; }).join('') + '</select></div><div><label>Owner</label><input name="owner" value="FLH"></div><div><label>Due</label><input type="date" name="date" value="' + today() + '"></div><div class="acts"><button type="submit" class="btn gold sm">Add</button></div></form>' +
@@ -246,22 +291,49 @@ function renderCalendar(){
   var items = upcoming(400), byMonth = {};
   items.forEach(function(i){ var m = i.date.slice(0, 7); (byMonth[m] = byMonth[m] || []).push(i); });
   var months = Object.keys(byMonth).sort();
-  main.innerHTML = '<p class="eyebrow">Calendar</p><h1>Everything dated, across the program and every <em>cohort</em>.</h1><p class="lede">Open items only. Tick them off where they live and they leave this list.</p>' +
+  main.innerHTML = subnav('calendar') + '<p class="eyebrow">Calendar</p><h1>Everything dated, across the program and every <em>cohort</em>.</h1><p class="lede">Open items only. Tick them off where they live and they leave this list.</p>' +
     (months.length ? months.map(function(m){ var d = new Date(m + '-15T12:00:00'); return '<div class="phase"><h3>' + d.toLocaleDateString('en-US', { month:'long', year:'numeric' }) + '</h3>' + listHTML(byMonth[m], '') + '</div>'; }).join('') : '<div class="empty">Nothing dated ahead.</div>');
 }
 function renderSettings(){
   var st = S.settings;
-  main.innerHTML = '<p class="eyebrow">Settings</p><h1>Dates, defaults, and where the data <em>lives</em>.</h1>' +
+  main.innerHTML = subnav('settings') + '<p class="eyebrow">Settings</p><h1>Dates, defaults, and where the data <em>lives</em>.</h1>' +
     '<div class="grid c2"><form class="form card" data-form="settings"><div class="full"><h3>Program</h3></div><div><label>Launch date</label><input type="date" name="launchDate" value="' + esc(st.launchDate) + '"></div><div><label>Default cohort capacity</label><input type="number" name="capacity" value="' + esc(st.capacity) + '"></div><div class="full"><label>Default facilitators</label><input name="facilitators" value="' + esc(st.facilitators) + '"></div><div class="full"><label>Your name, for the shared copy</label><input name="by" value="' + esc(st.by) + '"></div>' +
     '<div class="full"><h3 style="margin-top:8px">Shared copy, optional</h3><p class="small">Two Power Automate flows and a SharePoint list make one copy for the team; see docs/OPS-PORTAL.md in the repository. Leave blank to keep everything in this browser.</p></div><div class="full"><label>Save URL</label><input name="saveUrl" value="' + esc(st.saveUrl) + '"></div><div class="full"><label>Load URL</label><input name="loadUrl" value="' + esc(st.loadUrl) + '"></div><div><label>Shared key</label><input name="key" value="' + esc(st.key) + '"></div><div class="acts"><button type="submit" class="btn gold">Save settings</button><button type="button" class="btn ghost" data-act="pull">Load the shared copy now</button></div></form>' +
     '<div class="card"><h3>Your data</h3><p>Everything in this portal is stored in this browser under the key <code>' + KEY + '</code>. Export it to keep a copy or move it to another person; import brings a copy back and replaces what is here.</p><div class="acts" style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" data-act="export">Export JSON</button><button type="button" class="btn ghost" data-act="import">Import JSON</button><button type="button" class="btn danger" data-act="reset">Clear everything</button></div><p class="small" style="margin-top:12px">Last saved ' + (S.at ? esc(new Date(S.at).toLocaleString()) : 'never') + '. ' + S.cohorts.length + ' cohorts, ' + S.cohorts.reduce(function(n, c){ return n + c.roster.length; }, 0) + ' people on rosters.</p></div></div>';
 }
 
+/* ---------- data: health, success, learner data ---------- */
+function dataNav(on){ return '<div class="subnav">' + [['health', 'Program health'], ['success', 'Success scorecard'], ['learners', 'Learner data']].map(function(t){ return '<a href="#data/' + t[0] + '" class="' + (t[0] === on ? 'on' : '') + '">' + t[1] + '</a>'; }).join('') + '</div>'; }
+function renderData(tab){
+  tab = tab || 'health'; var html = dataNav(tab);
+  if(tab === 'health'){
+    var H = S.data.health;
+    html += '<p class="eyebrow">Program health</p><h1>The first ninety days, against <em>target</em>.</h1><p class="lede">Enter the latest number for each measure, per hundred managers in the launch wave, and the date it was read. Every entry is kept, so the trend shows. Targets are the proposals in the plan until signed off.</p>' +
+      '<div class="xs"><table><tr><th>Measure</th><th>Target</th><th>Latest</th><th>As of</th><th>Trend</th><th>Source</th></tr>' + HEALTH.map(function(m){ var r = H[m.key] || {}, hist = r.history || [], last = hist.length ? hist[hist.length - 1] : null, late = last && last.value !== '' && Number(last.value) < m.target; return '<tr><td><b>' + esc(m.title) + '</b></td><td class="d">' + m.target + ' of 100</td><td><input class="act" type="number" min="0" max="100" data-health="' + m.key + '" value="' + esc(r.value === undefined ? '' : r.value) + '" placeholder="0 to 100"></td><td><input class="asof" type="date" data-health-asof="' + m.key + '" value="' + esc(r.asOf || today()) + '"></td><td>' + (hist.length ? hist.slice(-6).map(function(h){ return '<span title="' + esc(h.at) + '" style="display:inline-block;width:8px;margin-right:2px;height:' + Math.max(3, Math.round(Number(h.value) / 100 * 22)) + 'px;background:' + (Number(h.value) >= m.target ? 'var(--vu-oak)' : 'var(--vu-sand)') + ';vertical-align:bottom"></span>'; }).join('') + ' <span class="small">' + (late ? 'below target' : last ? 'on target' : '') + '</span>' : '<span class="small">No reading yet</span>') + '</td><td>' + esc(m.source) + '</td></tr>'; }).join('') + '</table></div>' +
+      '<div class="acts" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn gold" data-act="savehealth">Save these readings</button><a class="btn ghost" href="../launch/#measurement">The measurement plan</a></div>' +
+      '<p class="small" style="margin-top:10px">Weekly during launch, December 1 to January 29, then monthly. The funnel on the plan\u2019s page 9 sets the order of these measures.</p>';
+  } else if(tab === 'success'){
+    var U = S.data.success, lv = '';
+    html += '<p class="eyebrow">Success scorecard</p><h1>Learning, behavior, and the <em>business</em>.</h1><p class="lede">Baselines come from Oracle before November 25. Enter them here with the latest reading as it arrives; targets stay as proposed until signed off. Business numbers are read beside the same number for managers who have not yet completed Foundations, and never for a group under ten.</p>' +
+      '<div class="xs"><table><tr><th>Measure</th><th>Baseline</th><th>Year one target</th><th>Year two target</th><th>Latest</th><th>As of</th><th>Source, cadence</th></tr>' + SUCCESS.map(function(m){ var r = U[m.key] || {}, head = m.level !== lv ? '<tr class="lvl"><td colspan="7" style="background:#FBF6EA"><span class="mono">' + m.level + '</span></td></tr>' : ''; lv = m.level; return head + '<tr><td><b>' + esc(m.title) + '</b></td><td><input class="act" style="width:120px" data-success="' + m.key + '" data-f="baseline" value="' + esc(r.baseline || '') + '" placeholder="FY26"></td><td class="d">' + esc(m.y1) + '</td><td class="d">' + esc(m.y2) + '</td><td><input class="act" style="width:120px" data-success="' + m.key + '" data-f="latest" value="' + esc(r.latest || '') + '"></td><td><input class="asof" type="date" data-success="' + m.key + '" data-f="asOf" value="' + esc(r.asOf || '') + '"></td><td>' + esc(m.source) + ', ' + esc(m.cadence.toLowerCase()) + '</td></tr>'; }).join('') + '</table></div>' +
+      '<div class="acts" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn gold" data-act="savesuccess">Save the scorecard</button><a class="btn ghost" href="../launch/#success">The scorecard in the plan</a></div>';
+  } else {
+    var all = S.cohorts.reduce(function(a, c){ c.roster.forEach(function(r){ a.push(r); }); return a; }, []);
+    var conf = all.filter(function(r){ return r.seat === 'confirmed'; }).length, fd = all.filter(function(r){ return r.foundations; }).length, as = all.filter(function(r){ return r.assessment; }).length;
+    html += '<p class="eyebrow">Learner data</p><h1>Who is on a voyage, and what the assessment <em>says</em>.</h1>' +
+      '<div class="grid c4"><div class="stat"><div class="n">' + all.length + '</div><div class="l">Managers on cohort rosters</div></div><div class="stat"><div class="n">' + conf + '</div><div class="l">Seats confirmed</div></div><div class="stat"><div class="n">' + fd + '</div><div class="l">Foundations complete, on rosters</div></div><div class="stat"><div class="n">' + as + '</div><div class="l">Assessment taken, on rosters</div></div></div>' +
+      (S.cohorts.length ? '<div class="xs" style="margin-top:14px"><table><tr><th>Cohort</th><th>Week one</th><th>On the roster</th><th>Confirmed</th><th>Foundations</th><th>Assessment</th><th>Checklist</th></tr>' + S.cohorts.slice().sort(function(a, b){ return cmp(a.dates.w1, b.dates.w1); }).map(function(c){ return '<tr><td><b><a href="#cohort/' + c.id + '/roster">' + esc(c.name) + '</a></b></td><td class="d">' + esc(fmt(c.dates.w1)) + '</td><td>' + c.roster.length + '</td><td>' + seats(c) + ' of ' + c.capacity + '</td><td>' + c.roster.filter(function(r){ return r.foundations; }).length + '</td><td>' + c.roster.filter(function(r){ return r.assessment; }).length + '</td><td>' + progress(c) + ' percent</td></tr>'; }).join('') + '</table></div>' : '') +
+      '<h3 style="margin-top:18px">The assessment results dashboard</h3><p class="small">Baselines, completions, re-ups and movement, from the SharePoint list. It asks for the team passphrase; nothing leaves the browser. <a href="../results/" target="_blank" rel="noopener">Open it in its own tab</a>.</p><iframe class="frame" src="../results/" title="Assessment results dashboard" loading="lazy"></iframe>' +
+      '<h3 style="margin-top:18px">Where the rest lives</h3><ul><li><b>Oracle Learning</b>: completions by item for compliance, Foundations and the micro modules. Export by learning item number.</li><li><b>Oracle HCM and Recruiting</b>: the business measures, internal fill, promotions, time to fill, retention, pulled quarterly for the scorecard.</li><li><b>The cohort site</b>: the confidence pulse, week one and week four, per cohort.</li></ul>';
+  }
+  main.innerHTML = html;
+}
+
 /* ---------- routing ---------- */
 function route(){
   var h = (location.hash || '#home').slice(1).split('/'), v = h[0] || 'home';
-  $$('#nav a').forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-nav') === v || (v === 'cohort' && a.getAttribute('data-nav') === 'cohorts') || (v === 'new' && a.getAttribute('data-nav') === 'cohorts')); });
-  if(v === 'cohorts') renderCohorts(); else if(v === 'new') renderNew(); else if(v === 'cohort') renderCohort(h[1], h[2]); else if(v === 'program') renderProgram(); else if(v === 'calendar') renderCalendar(); else if(v === 'settings') renderSettings(); else renderHome();
+  var tab = v === 'home' ? 'home' : v === 'data' ? 'data' : 'cohorts'; $$('#nav a').forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-nav') === tab); });
+  if(v === 'cohorts') renderCohorts(); else if(v === 'data') renderData(h[1]); else if(v === 'new') renderNew(); else if(v === 'cohort') renderCohort(h[1], h[2]); else if(v === 'program') renderProgram(); else if(v === 'calendar') renderCalendar(); else if(v === 'settings') renderSettings(); else renderHome();
   window.scrollTo(0, 0);
 }
 function fd(form){ var o = {}; Array.prototype.forEach.call(form.elements, function(el){ if(el.name) o[el.name] = el.value.trim(); }); return o; }
@@ -311,6 +383,8 @@ document.addEventListener('click', function(e){
   else if(act === 'export'){ download('manager-voyage-ops-' + today() + '.json', JSON.stringify(S, null, 2), 'application/json'); }
   else if(act === 'import'){ $('#importFile').click(); }
   else if(act === 'reset'){ if(!confirm('Clear every cohort, roster and checklist in this browser? Export first if you want a copy.')) return; localStorage.removeItem(KEY); load(); save('Cleared.'); route(); }
+  else if(act === 'savehealth'){ $$('[data-health]').forEach(function(inp){ var k = inp.getAttribute('data-health'), v = inp.value.trim(); if(v === '') return; var r = S.data.health[k] = S.data.health[k] || { history:[] }; var asOf = ($('[data-health-asof="' + k + '"]') || {}).value || today(); r.value = v; r.asOf = asOf; r.history = r.history || []; if(!r.history.length || r.history[r.history.length - 1].value !== v || r.history[r.history.length - 1].at !== asOf) r.history.push({ at:asOf, value:v }); }); logTo(S.program, 'Health readings saved'); save('Readings saved.'); route(); }
+  else if(act === 'savesuccess'){ $$('[data-success]').forEach(function(inp){ var k = inp.getAttribute('data-success'), f = inp.getAttribute('data-f'); var r = S.data.success[k] = S.data.success[k] || {}; r[f] = inp.value.trim(); }); logTo(S.program, 'Scorecard saved'); save('Scorecard saved.'); route(); }
   else if(act === 'pull'){ syncPull().then(function(changed){ toast(changed ? 'Loaded the shared copy.' : 'Nothing newer in the shared copy.'); route(); }); }
 });
 $('#importFile').addEventListener('change', function(){ var f = this.files[0]; if(!f) return; var r = new FileReader(); r.onload = function(){ try{ var j = JSON.parse(r.result); if(!j || !j.cohorts) throw new Error('shape'); if(!confirm('Replace everything here with the imported copy (' + j.cohorts.length + ' cohorts)?')) return; S = j; if(!S.settings) S.settings = blank().settings; save('Imported.'); route(); }catch(e){ toast('That file is not a portal export.'); } }; r.readAsText(f); this.value = ''; });

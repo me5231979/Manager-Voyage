@@ -96,9 +96,12 @@ chat guide (agent `agent_8701m6s7j4jkfn3b8qyanmxn241z`). `node scripts/build-lau
 rewrites `launch/guide-kb.txt`, Beacon's knowledge text, which ElevenLabs
 re-reads from the raw GitHub URL on main. Run all three after editing the plan.
 
-## Operations Portal (`ops/`)
+## Program Operations Hub (`ops/`)
 
-The hub for launching and running cohorts and the program launch: cohort details,
+Four tabs: Home (program details, next sessions, the rollout at a glance),
+Rollout (the launch plan page at `launch/`), Cohort ops and Data (program health
+readings, the success scorecard with baselines and latest values, learner data
+with the results dashboard embedded). Cohort ops holds cohort details,
 rosters, checklists and communications worked back from the cohort dates, document
 links, a log, the program launch checklist dated from the launch date, a calendar
 across everything, export and import. Data lives in the browser; an optional shared
