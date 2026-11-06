@@ -65,35 +65,33 @@ var COHORT_COMMS = [
   { title:'Thank you and next steps; Playbooks and pulse to the leader', channel:'Email', anchor:'cap', rel:1 },
   { title:'Re-up assessment reminder', channel:'Email', anchor:'cap', rel:90 }
 ];
-/* the program launch checklist, days from the launch date (March 2, 2027 in the plan) */
+/* the program launch checklist, days from the launch date (December 1, 2026 in the plan) */
 var PROGRAM_CHECKLIST = [
-  { phase:'Ready', title:'QA sheet closes; content, function and layout feedback collected', owner:'FLH', rel:-97 },
-  { phase:'Ready', title:'Course fixes landed; Day 1 email and Portal carry the protected-time line', owner:'FLH', rel:-88 },
-  { phase:'Ready', title:'Oracle items for Foundations and the micro modules; SCORM launcher reports a test completion', owner:'FLH, VUIT', rel:-83 },
-  { phase:'Ready', title:'Teams team created with channels, tabs and the dynamic membership group', owner:'FLH, VUIT', rel:-83 },
-  { phase:'Ready', title:'Assessment flows tested end to end; dashboard passphrase set; list columns added', owner:'FLH', rel:-83 },
-  { phase:'Ready', title:'Drafts C1 to M6 final in the email templates', owner:'FLH, PCB comms', rel:-83 },
-  { phase:'Ready', title:'Go, no go for the pilot', owner:'PCB leadership', rel:-81 },
-  { phase:'Pilot', title:'Pilot managers’ managers get the forwardable note', owner:'FLH', rel:-56 },
-  { phase:'Pilot', title:'Pilot opens: twenty five managers', owner:'FLH', rel:-55 },
-  { phase:'Pilot', title:'Fifteen-minute check-ins with each pilot manager', owner:'FLH', rel:-43 },
-  { phase:'Pilot', title:'Pilot readout', owner:'FLH, PCB', rel:-34 },
-  { phase:'Pilot', title:'Go, no go for the launch', owner:'PCB leadership', rel:-32 },
-  { phase:'Cascade', title:'C1: leadership brief to senior leadership', owner:'PCB leadership', rel:-27 },
-  { phase:'Cascade', title:'C2: business unit leader briefings and the toolkit', owner:'FLH', rel:-20 },
-  { phase:'Cascade', title:'C3: managers’ managers get the forwardable note; private channel opens', owner:'FLH', rel:-13 },
+  { phase:'Ready', title:'QA sheet closes; rehearsal roster set; Teams team created with channels and tabs', owner:'FLH', rel:-18 },
+  { phase:'Ready', title:'Drafts C1 to M6 final in the email templates', owner:'FLH, PCB comms', rel:-15 },
+  { phase:'Ready', title:'Day 1 email and Portal checklist carry the protected-time line to the manager\u2019s manager', owner:'FLH', rel:-14 },
+  { phase:'Ready', title:'Ready gate: Oracle items, the SCORM launcher with a test completion, the Teams membership group, the assessment flows tested end to end, course fixes landed', owner:'FLH, VUIT', rel:-13 },
+  { phase:'Rehearsal', title:'Rehearsal managers\u2019 managers get the forwardable note', owner:'FLH', rel:-18 },
+  { phase:'Rehearsal', title:'Rehearsal opens: the November 5 group and ten managers', owner:'FLH', rel:-15 },
+  { phase:'Rehearsal', title:'Fifteen-minute check-ins with each rehearsal manager', owner:'FLH', rel:-11 },
+  { phase:'Rehearsal', title:'Rehearsal readout', owner:'FLH, PCB', rel:-7 },
+  { phase:'Rehearsal', title:'Go, no go for the launch', owner:'PCB leadership', rel:-6 },
+  { phase:'Cascade', title:'C1: leadership brief to senior leadership', owner:'PCB leadership', rel:-15 },
+  { phase:'Cascade', title:'C2: business unit leader briefings and the toolkit', owner:'FLH', rel:-13 },
   { phase:'Cascade', title:'C4: HCMs and Engagement Consultants briefed', owner:'FLH', rel:-12 },
-  { phase:'Cascade', title:'Launch wave population confirmed with HCMs', owner:'FLH', rel:-7 },
-  { phase:'Cascade', title:'C5: teaser in MyVU; Portal and the Teams channel open to every manager', owner:'PCB comms, FLH', rel:-6 },
-  { phase:'Cascade', title:'Cohort 1 nominations in, three per unit', owner:'Business unit leaders', rel:-3 },
+  { phase:'Cascade', title:'C3: managers\u2019 managers get the forwardable note; private channel opens', owner:'FLH', rel:-11 },
+  { phase:'Cascade', title:'Launch wave population confirmed with HCMs', owner:'FLH', rel:-8 },
+  { phase:'Cascade', title:'C5: teaser in MyVU; Portal and the Teams channel open to every manager', owner:'PCB comms, FLH', rel:-7 },
+  { phase:'Cascade', title:'Bulk assignment staged in Oracle Learning', owner:'FLH, VUIT', rel:-1 },
   { phase:'Launch', title:'Launch day: bulk assignment in Oracle, C6 launch email at 7:30, Teams post at 7:45, Day 1 automation on', owner:'FLH, PCB leadership', rel:0 },
   { phase:'Launch', title:'M2: Day 7 nudge to managers who have not started; Teams post', owner:'FLH automation', rel:7 },
   { phase:'Launch', title:'Unit dashboard views sent to business unit leaders; day 14 Teams post', owner:'FLH', rel:14 },
-  { phase:'Launch', title:'M3: Day 22 compliance reminder; Teams post', owner:'Oracle, FLH', rel:22 },
-  { phase:'Launch', title:'Day 30: legal compliance due', owner:'Every manager', rel:30 },
-  { phase:'Launch', title:'Cohort roster post in Teams', owner:'FLH', rel:35 },
-  { phase:'Launch', title:'Day 60: policy courses, Foundations and phase one modules due; M4 completion emails and cohort invitations', owner:'FLH automation', rel:60 },
-  { phase:'Measure', title:'First re-up assessments go out (ninety days after the first completions)', owner:'FLH automation', rel:92 },
+  { phase:'Launch', title:'Cohort 1 nominations in, three per unit', owner:'Business unit leaders', rel:17 },
+  { phase:'Launch', title:'M3: Day 22 compliance reminder, sent ahead of the winter break; Teams post', owner:'Oracle, FLH', rel:20 },
+  { phase:'Launch', title:'Day 30: legal compliance due; open items chased after the break', owner:'Every manager', rel:30 },
+  { phase:'Launch', title:'Cohort roster post in Teams', owner:'FLH', rel:34 },
+  { phase:'Launch', title:'Day 60: policy courses, Foundations and phase one modules due; M4 completion emails and cohort 2 invitations', owner:'FLH automation', rel:62 },
+  { phase:'Measure', title:'First re-up assessments go out (ninety days after the first completions)', owner:'FLH automation', rel:91 },
   { phase:'Measure', title:'Ninety-day readout to senior leadership; first unit aggregates; cohort capacity decision', owner:'FLH, PCB leadership', rel:100 }
 ];
 var PLAN_DOCS = [
@@ -105,7 +103,7 @@ var PLAN_DOCS = [
 
 /* ---------- the store ---------- */
 var S = null;
-function blank(){ return { version:1, at:'', settings:{ launchDate:'2027-03-02', capacity:25, facilitators:'', saveUrl:'', loadUrl:'', key:'', by:'' }, program:{ checklist:[], log:[] }, cohorts:[] }; }
+function blank(){ return { version:1, at:'', settings:{ launchDate:'2026-12-01', capacity:25, facilitators:'', saveUrl:'', loadUrl:'', key:'', by:'' }, program:{ checklist:[], log:[] }, cohorts:[] }; }
 function load(){ try{ var raw = localStorage.getItem(KEY); S = raw ? JSON.parse(raw) : blank(); }catch(e){ S = blank(); } if(!S.settings) S.settings = blank().settings; if(!S.program) S.program = { checklist:[], log:[] }; if(!S.cohorts) S.cohorts = []; if(!S.program.checklist.length) S.program.checklist = PROGRAM_CHECKLIST.map(function(t){ return { id:uid(), phase:t.phase, title:t.title, owner:t.owner, rel:t.rel, done:false, doneAt:'' }; }); }
 function save(note){ S.at = new Date().toISOString(); try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ toast('Could not save in this browser.'); } if(note) toast(note); syncPush(); }
 function cohort(id){ for(var i = 0; i < S.cohorts.length; i++){ if(S.cohorts[i].id === id) return S.cohorts[i]; } return null; }
@@ -155,7 +153,7 @@ function renderHome(){
     '<div class="grid c4"><div class="stat"><div class="n">' + running + '</div><div class="l">Cohorts running</div></div><div class="stat"><div class="n">' + planned + '</div><div class="l">Cohorts planned or open</div></div><div class="stat"><div class="n">' + seatsAll + '</div><div class="l">Seats confirmed</div></div><div class="stat"><div class="n">' + (late ? '<span style="color:#F0B6B0">' + late + '</span>' : up.length) + '</div><div class="l">' + (late ? 'Overdue items' : 'Due in fourteen days') + '</div></div></div>' +
     '<div class="grid c2 sec"><div><h3>Due in the next fourteen days</h3>' + listHTML(up, 'Nothing due in the next fourteen days.') + '</div>' +
     '<div><h3>Program launch</h3><div class="card"><h2>' + pdone + ' of ' + S.program.checklist.length + ' launch items done</h2><p>Launch date ' + esc(fmt(S.settings.launchDate, true)) + '. Every item below is dated from it. <a href="#program">Open the program launch checklist</a>.</p><div class="bar"><i style="width:' + Math.round(pdone / S.program.checklist.length * 100) + '%"></i></div></div>' +
-    '<h3 style="margin-top:18px">Cohorts</h3>' + (S.cohorts.length ? '<div class="grid">' + S.cohorts.slice().sort(function(a, b){ return cmp(a.dates.w1, b.dates.w1); }).map(cohortCard).join('') + '</div>' : '<div class="empty">No cohorts yet. <a href="#new">Create the first one</a>, or <button type="button" class="linkish" data-act="seed">seed the three 2027 cohorts from the plan</button>.</div>') + '</div></div>';
+    '<h3 style="margin-top:18px">Cohorts</h3>' + (S.cohorts.length ? '<div class="grid">' + S.cohorts.slice().sort(function(a, b){ return cmp(a.dates.w1, b.dates.w1); }).map(cohortCard).join('') + '</div>' : '<div class="empty">No cohorts yet. <a href="#new">Create the first one</a>, or <button type="button" class="linkish" data-act="seed">seed the four 2027 cohorts from the plan</button>.</div>') + '</div></div>';
 }
 function cohortCard(c){ var st = statusOf(c); return '<a class="card cohort-card" href="#cohort/' + c.id + '"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span class="mono">Cohort ' + esc(c.number || '') + (c.quarter ? ' &middot; ' + esc(c.quarter) : '') + '</span>' + pill(st) + '</div><h2>' + esc(c.name) + '</h2><div class="dates"><span>W1 ' + esc(fmt(c.dates.w1)) + '</span><span>W2 ' + esc(fmt(c.dates.w2)) + '</span><span>W3 ' + esc(fmt(c.dates.w3)) + '</span><span>Capstone ' + esc(fmt(c.dates.cap)) + '</span></div><p>' + seats(c) + ' of ' + c.capacity + ' seats confirmed &middot; ' + c.roster.length + ' on the roster &middot; ' + progress(c) + ' percent of the checklist done' + (c.buLeader ? ' &middot; ' + esc(c.buLeader) : '') + '</p><div class="bar"><i style="width:' + progress(c) + '%"></i></div></a>'; }
 
@@ -268,9 +266,9 @@ function route(){
 }
 function fd(form){ var o = {}; Array.prototype.forEach.call(form.elements, function(el){ if(el.name) o[el.name] = el.value.trim(); }); return o; }
 function seed(){
-  if(S.cohorts.length && !confirm('Add the three 2027 cohorts from the plan to the cohorts already here?')) return;
-  [['Cohort 1', '1', 'Q2 2027', '2027-04-14', 'Pilot graduates and early completers'], ['Cohort 2', '2', 'Q3 2027', '2027-07-14', 'Launch wave completers, invited from May 1'], ['Cohort 3', '3', 'Q4 2027', '2027-10-06', 'Launch wave and new managers']].forEach(function(x){ newCohort({ name:x[0], number:x[1], quarter:x[2], w1:x[3], w2:addDays(x[3], 7), w3:addDays(x[3], 14), cap:addDays(x[3], 21), notes:x[4], facilitators:S.settings.facilitators, capacity:S.settings.capacity }); });
-  save('Three cohorts added from the plan.'); route();
+  if(S.cohorts.length && !confirm('Add the four 2027 cohorts from the plan to the cohorts already here?')) return;
+  [['Cohort 1', '1', 'Q1 2027', '2027-01-18', 'Rehearsal graduates and early completers, nominated by December 18'], ['Cohort 2', '2', 'Q2 2027', '2027-04-12', 'Launch wave completers, invited from February 1'], ['Cohort 3', '3', 'Q3 2027', '2027-07-12', 'Launch wave and new managers'], ['Cohort 4', '4', 'Q4 2027', '2027-10-04', 'New managers and the waitlist']].forEach(function(x){ newCohort({ name:x[0], number:x[1], quarter:x[2], w1:x[3], w2:addDays(x[3], 7), w3:addDays(x[3], 14), cap:addDays(x[3], 21), notes:x[4], facilitators:S.settings.facilitators, capacity:S.settings.capacity }); });
+  save('Four cohorts added from the plan.'); route();
 }
 document.addEventListener('submit', function(e){
   var f = e.target.closest('form[data-form]'); if(!f) return; e.preventDefault();
