@@ -165,6 +165,28 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
 .mailnote{ font-size:.76rem; color:var(--tx3); }
 .mailnote b{ font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-gold); }
 
+/* teams posts */
+.tpost{ background:#fff; border:1px solid var(--bd); border-radius:var(--r); padding:8px 10px 8px; display:grid; grid-template-columns:30px 1fr; gap:9px; color:#333; font-size:.72rem; line-height:1.4; }
+.tpost .av{ width:30px; height:30px; border-radius:50%; background:var(--vu-black); color:var(--vu-gold); font-family:var(--cond); font-weight:700; font-size:.7rem; display:grid; place-items:center; }
+.tpost .nm{ font-weight:600; color:var(--vu-black); } .tpost .nm span{ font-weight:400; color:var(--tx3); font-size:.7rem; margin-left:8px; }
+.tpost .ch{ font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-oak); margin-bottom:2px; }
+.tpost p{ margin:4px 0 0; } .tpost .lk{ color:var(--vu-oak); text-decoration:underline; }
+.chan{ display:grid; gap:6px; }
+.chan div{ display:grid; grid-template-columns:118px 1fr 92px; gap:10px; align-items:start; background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:5px 10px; font-size:.71rem; line-height:1.35; color:var(--tx2); }
+.chan div b{ font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-oak); } .dark .chan div b{ color:var(--vu-gold); }
+.chan div i{ font-style:normal; color:var(--tx3); }
+/* data flow */
+.flow{ display:grid; grid-template-columns:repeat(5, 1fr); gap:0 6px; align-items:stretch; }
+.flow .bx{ position:relative; background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); padding:7px 10px 8px; font-size:.72rem; line-height:1.38; color:var(--tx2); min-height:80px; }
+.flow .bx b{ display:block; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); margin-bottom:3px; }
+.flow .bx em{ display:block; font-style:normal; font-family:var(--serif); font-size:.98rem; color:#fff; margin-bottom:3px; } .light .flow .bx em{ color:var(--vu-black); }
+.flow .bx::after{ content:'\25B6'; position:absolute; right:-9px; top:50%; transform:translateY(-50%); color:var(--vu-gold); font-size:.7rem; }
+.flow .bx.last::after{ content:none; }
+.flow .bx.ret::after{ content:none; }
+.flow .turn{ grid-column:1 / -1; position:relative; height:26px; }
+.flow .turn::before{ content:''; position:absolute; left:10%; right:10%; top:12px; border-top:1px dashed var(--vu-gold); }
+.flow .turn span{ position:absolute; left:50%; top:3px; transform:translateX(-50%); background:var(--bg, #1C1C1C); padding:0 10px; font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-gold); }
+.dark .flow .turn span{ background:var(--vu-black); } .light .flow .turn span{ background:var(--vu-cream); }
 /* raci */
 .cal{ font-size:.72rem; } .cal td{ padding:4px 7px; } .cal th{ padding:4px 7px; }
 .raci td.c{ text-align:center; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; }
@@ -190,7 +212,7 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
   <div class="in">
     <img class="lockup" src="../../assets/img/vu-lockup-white.png" alt="Vanderbilt University">
     <h1>Manager Voyage.<br>The launch <em>plan</em>.</h1>
-    <p class="sub">Learner journeys, the communications cascade, enrollment, delivery and measurement for bringing every Vanderbilt manager onto one standard. Draft messages included, with dates.</p>
+    <p class="sub">Learner journeys, the communications cascade, enrollment, the Microsoft Teams channel, the assessment data setup, delivery and measurement for bringing every Vanderbilt manager onto one standard. Draft messages and posts included, with dates.</p>
     <div class="meta"><span class="pill solid">People, Culture and Belonging</span><span class="pill">Futures Learning Hub</span><span class="pill">Pilot January 2027</span><span class="pill">Launch March 2, 2027</span></div>
     <div class="vers">Draft for review &middot; November 6, 2026 &middot; Dates move together with the launch date</div>
   </div>
@@ -204,7 +226,7 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
   <div class="phases">
     <div class="phase"><span class="no">Phase 0</span><h2>Ready</h2><div class="when">Nov 6 to Dec 11, 2026</div><p>QA feedback closes Nov 25. Course fixes land. Oracle items, dashboard and the SCORM launcher tested in Oracle. Sponsor go for the pilot Dec 11.</p></div>
     <div class="phase"><span class="no">Phase 1</span><h2>Pilot</h2><div class="when">Jan 6 to Jan 29, 2027</div><p>Twenty five managers from DAR, Facilities, VBOM, USAC, Campus Dining and VUIT take the whole first thirty days in three weeks. Readout Jan 27. Launch go Jan 29.</p></div>
-    <div class="phase"><span class="no">Phase 2</span><h2>Cascade</h2><div class="when">Feb 3 to Feb 27, 2027</div><p>Leadership brief, business unit leader briefings, the toolkit for managers' managers, HCMs and ECs briefed, Portal live, teaser in MyVU.</p></div>
+    <div class="phase"><span class="no">Phase 2</span><h2>Cascade</h2><div class="when">Feb 3 to Feb 27, 2027</div><p>Leadership brief, business unit leader briefings, the toolkit for managers' managers, HCMs and ECs briefed, Portal and the Teams channel open, teaser in MyVU.</p></div>
     <div class="phase"><span class="no">Phase 3</span><h2>Launch</h2><div class="when">Mar 2 to May 1, 2027</div><p>Launch email to every manager. Oracle assignments open. Day 1 automation on for new managers. Nudges at day 7, 22 and 60. Cohort invitations from May 1.</p></div>
     <div class="phase"><span class="no">Phase 4</span><h2>Deliver and measure</h2><div class="when">Apr 2027 onward</div><p>Cohort 1 Apr 14 to May 5. Re-up assessment three months after each completion. Ninety day readout Jun 10. Quarterly dashboard to leadership.</p></div>
   </div>
@@ -260,7 +282,7 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
 <section class="pg dark">
   <p class="eyebrow">The learner journey</p>
   <h1>Day one to <em>ninety</em>, and every touchpoint on the way.</h1>
-  <p class="lede" style="margin-bottom:4px">What a manager does, and what reaches them, from the day the role changes to the re-up. The numbered messages are drafted on pages 11 to 16.</p>
+  <p class="lede" style="margin-bottom:4px">What a manager does, and what reaches them, from the day the role changes to the re-up. The numbered messages are drafted on pages 11 to 16; the Teams posts on page 18.</p>
   <div class="tl">
     <div class="axis">
       <span style="--x:0%"><b>Day 1</b>Role changes</span>
@@ -387,7 +409,7 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
       <div class="tier"><div class="who"><span>Tier 4 &middot; Mar 2</span><b>PCB leadership to every manager</b></div><div class="say"><b>What they say.</b> You are a manager now, whatever year you started. Here is the standard, here is your dashboard, here are your dates. Open the assessment today.</div><div class="when"><b>How</b>The launch email, the Oracle assignment the same morning, the MyVU story, the Portal.</div></div>
     </div>
     <div>
-      <div class="side"><h3>Beside the cascade</h3><p><b>HCMs and Engagement Consultants, Feb 18.</b> A forty-minute briefing. They carry the one-line pitch, the dashboard link and the routing: a stuck manager goes to FLH, a people question stays with the manager.</p><p><b>Oracle Learning, from Mar 2.</b> Assignment notices and the Day 1 email for every new manager, automatically, with a note to the manager's manager.</p><p><b>MyVU and the PCB newsletter, Feb 24 and Mar 2.</b> The teaser, then the story.</p><p><b>Compass, on every page.</b> The course guide answers questions about the course in the course, so the launch inbox stays small.</p></div>
+      <div class="side"><h3>Beside the cascade</h3><p><b>HCMs and Engagement Consultants, Feb 18.</b> A forty-minute briefing. They carry the one-line pitch, the dashboard link and the routing: a stuck manager goes to FLH, a people question stays with the manager.</p><p><b>Oracle Learning, from Mar 2.</b> Assignment notices and the Day 1 email for every new manager, automatically, with a note to the manager's manager.</p><p><b>The Teams channel, from Feb 24.</b> Every manager is a member before launch. Announcements mirror the cascade; Ask FLH takes the questions. Page 17.</p><p><b>MyVU and the PCB newsletter, Feb 24 and Mar 2.</b> The teaser, then the story.</p><p><b>Compass, on every page.</b> The course guide answers questions about the course in the course, so the launch inbox stays small.</p></div>
     </div>
   </div>
   <div class="rules">
@@ -420,7 +442,7 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
     <tr><td>M6</td><td class="d">+3 months</td><td>Each manager who completed</td><td>PCB, automated</td><td>Rate the ten statements again. See what moved. Existing template.</td><td>FLH automation</td></tr>
     <tr><td>R1</td><td class="d">Thu Jun 10</td><td>Senior leadership</td><td>PCB leadership, readout</td><td>Ninety days: funnel, compliance, movement, cohort 1. Capacity decision.</td><td>FLH, PCB</td></tr>
   </table>
-  <p class="small" style="margin-top:8px">Day counts for the launch wave run from March 2. For a new manager they run from the day the assignment starts in Oracle HCM. Weekend dates shift to the next business day.</p>
+  <p class="small" style="margin-top:8px">Day counts for the launch wave run from March 2. For a new manager they run from the day the assignment starts in Oracle HCM. Weekend dates shift to the next business day. The Teams posts that run beside these messages are on page 18; the assessment data messages on page 21.</p>
   <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
 </section>
 
@@ -623,7 +645,170 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
   <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
 </section>
 
-<!-- 17 enrollment mechanics -->
+<!-- 17 teams channel -->
+<section class="pg light">
+  <p class="eyebrow">The Microsoft Teams channel</p>
+  <h1>One team in Teams, where every manager already <em>is</em>.</h1>
+  <p class="lede" style="margin-bottom:4px">Email launches it; Teams keeps it alive. One Manager Voyage team, every manager a member before launch.</p>
+  <div class="two" style="grid-template-columns:1.15fr .85fr">
+    <div>
+      <h3>Channels</h3>
+      <div class="chan">
+        <div><b>Announcements</b><span>Posts from FLH and PCB only. The cascade mirrored: the teaser, the launch post, the Monday posts in March and April, the cohort roster, the readout. Welcome pinned.</span><i>Opens Feb 24</i></div>
+        <div><b>Ask FLH</b><span>Any question about the program, the course, Oracle or the dashboard, answered the same business day. Office hours Thursdays 12:00 to 12:30 Central by Teams call, March through May.</span><i>Opens Mar 2</i></div>
+        <div><b>Your first 90 days</b><span>For new managers from Day 1: the week-by-week thread, what others did with the protected time, which habit they picked. Peer to peer.</span><i>Opens Mar 2</i></div>
+        <div><b>Managers' managers</b><span>Private. The toolkit, the protected-time ask, how the day 14 conversation went, cohort nominations.</span><i>Opens Feb 17</i></div>
+        <div><b>Cohort 1, 2, DAR</b><span>Private, one per cohort. The four dates, the core module links, the Playbook thread between weeks. Archived after the capstone, kept readable.</span><i>Two weeks before week one</i></div>
+      </div>
+    </div>
+    <div>
+      <h3>Setup, owners and dates</h3>
+      <table>
+        <tr><th>What</th><th>Who</th><th>By</th></tr>
+        <tr><td>Team created, channels and tabs set; owners FLH plus one PCB communications owner</td><td>FLH</td><td class="d">Dec 9</td></tr>
+        <tr><td>Membership from a dynamic Microsoft 365 group on the manager attribute in Oracle HCM, so Day 1 adds a new manager on its own</td><td>VUIT, FLH</td><td class="d">Dec 9</td></tr>
+        <tr><td>Pilot members in, posting rule set, office hours on the calendar</td><td>FLH</td><td class="d">Jan 5</td></tr>
+        <tr><td>Managers' managers channel opens with the toolkit</td><td>FLH</td><td class="d">Feb 17</td></tr>
+        <tr><td>Every manager a member, welcome pinned, teaser posted</td><td>FLH, PCB comms</td><td class="d">Feb 24</td></tr>
+        <tr><td>Launch post at 7:45 am, fifteen minutes after the email</td><td>PCB leadership</td><td class="d">Mar 2</td></tr>
+      </table>
+      <h3 style="margin-top:10px">Tabs, pinned in every channel</h3>
+      <div class="kpis"><span class="kpi">My Voyage dashboard</span><span class="kpi">The Manager Portal</span><span class="kpi">Foundations course</span><span class="kpi">The assessment</span><span class="kpi">Who to call</span></div>
+    </div>
+  </div>
+  <div class="rules" style="grid-template-columns:repeat(4,1fr);margin-top:8px">
+    <div><b>Posts only up top</b>Announcements is posts only; every other channel takes replies.</div>
+    <div><b>Never a person's situation</b>A leave, a concern, a complaint goes to the HCM, the leave office or EOA the same day. FLH redirects any such post within the hour.</div>
+    <div><b>One post a week</b>Mondays in March and April, then monthly. Each repeats a dated message.</div>
+    <div><b>Answered by end of day</b>Ask FLH is answered the same business day; repeat questions become Portal FAQ entries.</div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 18 teams posts -->
+<section class="pg light">
+  <p class="eyebrow">Draft Teams posts, with dates</p>
+  <h1>Enrollment, kept moving, one Monday post at a <em>time</em>.</h1>
+  <div class="grid c4" style="gap:9px;font-size:.72rem;margin-top:-4px">
+    <div class="tpost"><div class="av">FLH</div><div><div class="ch">Announcements &middot; pinned &middot; Wed Feb 24</div><div class="nm">Futures Learning Hub <span>7:30 am</span></div><p>Welcome. This is the home of Manager Voyage in Teams. On Monday, March 2 every manager at Vanderbilt gets the same first ninety days: a five-minute self-assessment, a ninety-minute course for your phone, short modules on the systems you own, and a dashboard that shows where you stand. The tabs above take you to each one. Questions go in Ask FLH. The Manager Portal is open now.</p></div></div>
+    <div class="tpost"><div class="av">PCB</div><div><div class="ch">Announcements &middot; Mon Mar 2</div><div class="nm">[Name], People, Culture and Belonging <span>7:45 am</span></div><p>Today it starts. You are a manager now, whatever year you began. Your email has your dates and your dashboard. The first step is five minutes: rate ten statements about how you manage in a typical month. Your results come straight back. <span class="lk">Take the assessment</span>. Then <span class="lk">open My Voyage</span>. Your manager has blocked time for the course in the next two weeks. See you in Ask FLH.</p></div></div>
+    <div class="tpost"><div class="av">FLH</div><div><div class="ch">Announcements &middot; Mon Mar 9 &middot; Day 7</div><div class="nm">Futures Learning Hub <span>8:00 am</span></div><p>One week in. Most of you have taken the assessment; if you have not, it is five minutes and the link is in the tab above. Module 1 of the course, the mission, is five more. This week, the habit: pick the one your results pointed to and do it once, on purpose, in a meeting you already have. Office hours Thursday 12:00 to 12:30 Central, here in Teams.</p></div></div>
+    <div class="tpost"><div class="av">FLH</div><div><div class="ch">Announcements &middot; Mon Mar 16 &middot; Day 14</div><div class="nm">Futures Learning Hub <span>8:00 am</span></div><p>Your 1:1 week. Your manager will ask what the assessment showed and which habit you picked. Bring the results email. For managers' managers: the question is the whole conversation; the number is theirs. Legal compliance courses are due Wednesday, April 1. Your dashboard lists yours.</p></div></div>
+    <div class="tpost"><div class="av">FLH</div><div><div class="ch">Announcements &middot; Tue Mar 24 &middot; Day 22</div><div class="nm">Futures Learning Hub <span>8:00 am</span></div><p>Eight days to the legal deadline. If a compliance course is still open for you, it is in Oracle Learning and on your dashboard with its minutes. If a course will not open or a completion has not recorded, post in Ask FLH or reply to the reminder email and we will sort it today. The whole Foundations course is due Friday, May 1, in sittings.</p></div></div>
+    <div class="tpost"><div class="av">FLH</div><div><div class="ch">Announcements &middot; Mon Apr 6</div><div class="nm">Futures Learning Hub <span>8:00 am</span></div><p>Cohort 1 opens Wednesday, April 14 with twenty five managers: the pilot group and the first to finish Foundations. Cohort 2 opens July 14. Finish the course and the policy courses by May 1 and your invitation comes with your completion email; your manager can nominate you, or ask for a seat on the Portal. [Number] managers have taken the assessment so far.</p></div></div>
+    <div class="tpost"><div class="av">FLH</div><div><div class="ch">Cohort 1 &middot; private &middot; Wed Mar 31</div><div class="nm">[Facilitator], FLH <span>9:00 am</span></div><p>Welcome to Cohort 1. Four Wednesdays: April 14 in the room, April 21 and 28 virtual, May 5 the capstone in the room. Calendar holds are on their way. Before April 14, twenty minutes on the cohort site: your team profile, the confidence pulse, one sentence on what your team can expect from you. The Playbook gets built here between weeks: post a draft, read two, reply to one.</p></div></div>
+    <div class="tpost"><div class="av">FLH</div><div><div class="ch">Managers' managers &middot; private &middot; Wed Feb 17</div><div class="nm">Futures Learning Hub <span>9:00 am</span></div><p>Your toolkit is pinned above: the one-page brief, five slides, the forwardable note, the FAQ. Before March 2: tell your managers yourself, block two to three hours per manager in the first two weeks, and put the day 14 question in a 1:1. Reply with how you plan to do it; the best versions get shared. Cohort nominations, three names per unit, by February 27.</p></div></div>
+  </div>
+  <p class="mailnote" style="margin-top:8px"><b>Rule</b> Every Teams post repeats a dated message or precedes nothing. A manager who reads only email misses nothing; a manager who lives in Teams gets the same plan in the same words.</p>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 19 assessment data flow -->
+<section class="pg dark">
+  <p class="eyebrow">The assessment data setup</p>
+  <h1>From ten statements to a report, without a person <em>copying</em> anything.</h1>
+  <p class="lede" style="margin-bottom:8px">Taken before the course, reviewed in it, retaken three months after completion. Every record goes through one Power Automate flow into one SharePoint list, and from there to the manager's inbox, the results dashboard and the quarterly report.</p>
+  <div class="flow">
+    <div class="bx"><b>1 &middot; Take</b><em>Ten statements, five minutes</em>In the course site, from the launch email, the Day 1 email, the dashboard or the Teams tab. Name and Vanderbilt email on the form.</div>
+    <div class="bx"><b>2 &middot; Post</b><em>One record, one URL</em>The site posts a JSON record: name, email, date, ten answers, total of 50, four expectation averages, feedback lines, the first move, the finished email.</div>
+    <div class="bx"><b>3 &middot; Flow 1</b><em>Record and email</em>Power Automate, HTTP trigger. Checks the shared key, stores the record, sends the results email from the PCB mailbox, with the optional AI-written note.</div>
+    <div class="bx"><b>4 &middot; The list</b><em>Manager Voyage assessments</em>SharePoint, one row per record: phase initial or retake, scores, the four averages, answers, first move, completed on, retake invited on.</div>
+    <div class="bx last"><b>5 &middot; The manager</b><em>Results in the inbox</em>Score, the four expectations with bands, the habit to start with, courses in Oracle Learning. The course shows the same page. Only the manager sees it.</div>
+    <div class="turn"><span>Three months on</span></div>
+    <div class="bx"><b>6 &middot; Complete</b><em>Course done</em>The completion record updates the row with the date and the quick check score. The ninety-day clock starts here.</div>
+    <div class="bx"><b>7 &middot; Flow 2</b><em>Daily, 8:00 Central</em>Finds rows completed ninety or more days ago with no invitation, sends the re-up email, stamps the date.</div>
+    <div class="bx"><b>8 &middot; Retake</b><em>The same ten, beside the baseline</em>At the reassessment page. The record carries the starting point, so the email shows what moved. A total under 25 routes back through Foundations.</div>
+    <div class="bx"><b>9 &middot; Dashboard</b><em>Results, encrypted</em>The list export, encrypted, published on the site. FLH opens it with the team passphrase. Baselines, completions, re-ups, movement, the ten statements.</div>
+    <div class="bx last"><b>10 &middot; Report</b><em>Aggregates only</em>Weekly funnel during launch, the June 10 readout, quarterly by business unit to its leader. Never a named row outside FLH.</div>
+  </div>
+  <div class="grid c3" style="margin-top:12px">
+    <div class="card"><span class="mono">Built</span><p>The site, the record format, both flows and the encrypted dashboard exist and have run on real records. Flow 1's URL is live in the site configuration.</p></div>
+    <div class="card"><span class="mono">To finish before the pilot</span><p>The sender mailbox and subject line for the results email, the shared key check at the top of Flow 1, two new list columns (business unit, location) from the profile feed, and the AI note decision.</p></div>
+    <div class="card"><span class="mono">To decide</span><p>Retention of named records, who holds the dashboard passphrase, and the smallest group size for a unit report. Proposals on the next page.</p></div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 20 assessment data: fields, access, retention -->
+<section class="pg light">
+  <p class="eyebrow">The assessment data: what is held, who sees it, how long</p>
+  <h1>A self-reflection tool. Named to the manager, <em>aggregate</em> to everyone else.</h1>
+  <div class="two" style="grid-template-columns:1.05fr .95fr">
+    <div>
+      <h3>The record, one row per assessment</h3>
+      <table class="cal">
+        <tr><th>Field</th><th>What it holds</th><th>From</th></tr>
+        <tr><td><b>Title, Email</b></td><td>Name and Vanderbilt email; the key that joins baseline, completion and retake</td><td>The form</td></tr>
+        <tr><td><b>Phase, TakenOn</b></td><td>initial or retake, and the date</td><td>The site</td></tr>
+        <tr><td><b>Score, Max</b></td><td>Total of the ten items, out of 50</td><td>Computed on the site</td></tr>
+        <tr><td><b>Four expectation averages</b></td><td>Get the work done, take care of your people, make things better, connect your team, 1.0 to 5.0</td><td>Computed on the site</td></tr>
+        <tr><td><b>Answers</b></td><td>The ten items, 1 to 5 with the label, as text</td><td>The form</td></tr>
+        <tr><td><b>FirstMove</b></td><td>The habit the results pointed to</td><td>Computed on the site</td></tr>
+        <tr><td><b>CompletedOn, QuizScore</b></td><td>Course completion date and the quick check score</td><td>Flow 1, completion case</td></tr>
+        <tr><td><b>PriorScore, RetakeInvitedOn</b></td><td>The baseline total on a retake row; the day Flow 2 sent the invitation</td><td>The site, Flow 2</td></tr>
+        <tr><td><b>BusinessUnit, Location</b> <span class="pill">new</span></td><td>For unit and location aggregates; filled from the profile feed, never typed</td><td>Profile feed</td></tr>
+        <tr><td><b>Pilot</b> <span class="pill">new</span></td><td>Yes for January records, so they can be shown or excluded</td><td>Flow 1, by date</td></tr>
+      </table>
+      <p class="small" style="margin-top:6px">Bands on the mean item score: Building 1.0 to 2.5, Practicing 2.6 to 3.8, Consistent 3.9 to 5.0. Real movement at the retake: five or more points on the total, 0.7 or more on an expectation.</p>
+    </div>
+    <div>
+      <h3>Who sees what</h3>
+      <table class="cal">
+        <tr><th>Who</th><th>Sees</th><th>How</th></tr>
+        <tr><td><b>The manager</b></td><td>Their own results, baseline and retake, with the feedback</td><td>Results email, the course, the reassessment page</td></tr>
+        <tr><td><b>The manager's manager</b></td><td>Nothing numeric. They ask; the manager chooses what to share</td><td>The day 14 1:1</td></tr>
+        <tr><td><b>FLH, two named people</b></td><td>The list and the named dashboard</td><td>SharePoint permissions; the dashboard passphrase</td></tr>
+        <tr><td><b>Business unit leaders</b></td><td>Their unit's aggregates, only when ten or more managers have taken it</td><td>Quarterly report</td></tr>
+        <tr><td><b>PCB and senior leadership</b></td><td>Program totals, movement, the funnel</td><td>Weekly during launch, June 10, quarterly</td></tr>
+      </table>
+      <h3 style="margin-top:12px">Rules, proposed for December 11</h3>
+      <ul><li><b>Purpose.</b> Self-reflection and program measurement. Never a performance evaluation, never in a personnel file, never a factor in pay or promotion. Said on the form, in the results email and in every report.</li><li><b>Retention.</b> Named rows kept for twenty four months after the last record for that manager, then the name and email removed and the row kept as an aggregate.</li><li><b>Access.</b> The SharePoint list is restricted to the two FLH owners and the flow's service account. The dashboard passphrase changes each quarter and at any staff change. Test records are excluded by email at every refresh.</li><li><b>Security.</b> The flow accepts only records carrying the shared key; the dashboard holds no plain data; emails go from the PCB mailbox only.</li><li><b>Smallest group.</b> No aggregate is reported for fewer than ten managers.</li></ul>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 21 assessment setup and comms -->
+<section class="pg light">
+  <p class="eyebrow">The assessment: setup checklist and what we tell managers</p>
+  <h1>Ready by December 9, trusted by every manager who <em>takes it</em>.</h1>
+  <div class="two">
+    <div>
+      <h3>Setup checklist</h3>
+      <table class="cal">
+        <tr><th>Task</th><th>Who</th><th>By</th></tr>
+        <tr><td>Confirm the sender mailbox and subject line of the results email; fill them into the site configuration so the course can tell managers what to search for</td><td>PCB comms, FLH</td><td class="d">Nov 20</td></tr>
+        <tr><td>Add BusinessUnit, Location and Pilot columns to the list; map them in Flow 1</td><td>FLH</td><td class="d">Dec 2</td></tr>
+        <tr><td>Add the shared key to the site configuration and the check at the top of Flow 1</td><td>FLH</td><td class="d">Dec 4</td></tr>
+        <tr><td>Post the sample assessment and completion records to the flow; confirm the list rows and both emails</td><td>FLH</td><td class="d">Dec 4</td></tr>
+        <tr><td>Decide the AI-written note: on, with the paragraph reviewed on twenty pilot emails, or off</td><td>PCB, FLH</td><td class="d">Dec 11</td></tr>
+        <tr><td>Schedule Flow 2 and test it against a row with a backdated completion</td><td>FLH</td><td class="d">Dec 9</td></tr>
+        <tr><td>Name the two FLH owners, set the dashboard passphrase, run one refresh end to end</td><td>FLH</td><td class="d">Dec 9</td></tr>
+        <tr><td>Adopt the retention, access and smallest-group rules</td><td>PCB leadership</td><td class="d">Dec 11</td></tr>
+        <tr><td>Flag the pilot rows; refresh the dashboard the first Monday of every month, weekly during March and April</td><td>FLH</td><td class="d">Feb 1, then ongoing</td></tr>
+        <tr><td>First unit aggregates to business unit leaders</td><td>FLH</td><td class="d">Jun 10</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>What managers are told, and when</h3>
+      <table class="cal">
+        <tr><th>When</th><th>Message</th></tr>
+        <tr><td class="d">Launch and Day 1 email</td><td>Five minutes, ten statements, no wrong result; your results come straight back and only you see them.</td></tr>
+        <tr><td class="d">On the form</td><td>One line above the stem: "Your answers go to you. People, Culture and Belonging reports only group totals, never a name. This is not a performance evaluation."</td></tr>
+        <tr><td class="d">Results email, same minute</td><td>Score, the four expectations, the habit to start with, and the note that the same ten come back in three months.</td></tr>
+        <tr><td class="d">Day 14, the 1:1</td><td>Managers' managers are told: ask, do not request the number. The manager decides what to share.</td></tr>
+        <tr><td class="d">Day 60, completion email</td><td>"Where you started" repeated, so the baseline is in hand when the re-up arrives.</td></tr>
+        <tr><td class="d">+3 months</td><td>The existing invitation: rate the same ten again, see what moved, beside your starting point.</td></tr>
+        <tr><td class="d">Quarterly, to units</td><td>Aggregates with the group size shown, the bands, and movement; no names, nothing under ten managers.</td></tr>
+      </table>
+      <div class="quote" style="margin-top:12px">Answer for how you work now, not how you want to. There is no wrong result; the point is to see which habits took hold and which one to work on next.</div>
+      <p class="small" style="margin-top:6px">From the reassessment invitation, which every data message keeps to.</p>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 22 enrollment mechanics -->
 <section class="pg dark">
   <p class="eyebrow">Enrollment</p>
   <h1>How a manager gets in, and what <em>Oracle</em> does on its own.</h1>
@@ -773,6 +958,8 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
         <tr><td>Protected time and the day 14 1:1</td><td class="c">I</td><td class="c">C</td><td class="c">I</td><td class="c a">A</td><td class="c r">R</td><td class="c">C</td></tr>
         <tr><td>Pilot</td><td class="c">C</td><td class="c a">A R</td><td class="c">C</td><td class="c">C</td><td class="c">C</td><td class="c">C</td></tr>
         <tr><td>Cohorts</td><td class="c">I</td><td class="c a">A R</td><td class="c">I</td><td class="c">C</td><td class="c">C</td><td class="c">I</td></tr>
+        <tr><td>Teams channel and posts</td><td class="c">I</td><td class="c a">A R</td><td class="c">C</td><td class="c">C</td><td class="c">C</td><td class="c">C</td></tr>
+        <tr><td>Assessment data: flows, list, dashboard</td><td class="c a">A</td><td class="c r">R</td><td class="c">C</td><td class="c">I</td><td class="c">I</td><td class="c">I</td></tr>
         <tr><td>Measurement and readouts</td><td class="c a">A</td><td class="c r">R</td><td class="c">C</td><td class="c">I</td><td class="c">I</td><td class="c">I</td></tr>
       </table>
       <p class="small" style="margin-top:6px">A accountable, R responsible, C consulted, I informed.</p>
@@ -809,12 +996,14 @@ ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2)
         <tr><td>Funnel targets on page 7 adopted as the launch bar</td><td class="d">Dec 11</td><td>PCB leadership, FLH</td></tr>
         <tr><td>Pilot roster of twenty five, with managers' managers</td><td class="d">Dec 4</td><td>The November 5 group</td></tr>
         <tr><td>The first-time-manager intro: scope, and who assigns it</td><td class="d">Dec 11</td><td>FLH</td></tr>
+        <tr><td>Teams: a new Manager Voyage team, and the manager attribute VUIT builds the membership group from</td><td class="d">Dec 4</td><td>FLH, VUIT</td></tr>
+        <tr><td>Assessment data rules: retention, access, smallest group, the AI note</td><td class="d">Dec 11</td><td>PCB leadership</td></tr>
         <tr><td>Bespoke DAR cohort: yes, and the quarter</td><td class="d">Jan 29</td><td>DAR leadership, FLH</td></tr>
       </table>
     </div>
     <div>
       <h3>Work in flight</h3>
-      <ul><li><b>Nov 25.</b> QA sheet closes. Content, function and layout feedback folded in by December 4.</li><li><b>Dec 4.</b> Day 1 email and Portal checklist carry the protected-time line to the manager's manager.</li><li><b>Dec 9.</b> Oracle items for Foundations and the micro modules, the SCORM launcher, and a test completion in Oracle's test environment.</li><li><b>Dec 9.</b> Drafts C1 to M6 in final form, no em dashes, dates filled, in the FLH email templates.</li><li><b>Dec 11.</b> Go, no go for the pilot.</li><li><b>Jan 5.</b> Pilot managers' managers get the forwardable note; Jan 6 the pilot opens.</li></ul>
+      <ul><li><b>Nov 25.</b> QA sheet closes. Content, function and layout feedback folded in by December 4.</li><li><b>Dec 4.</b> Day 1 email and Portal checklist carry the protected-time line to the manager's manager.</li><li><b>Dec 9.</b> Oracle items for Foundations and the micro modules, the SCORM launcher, a test completion in Oracle's test environment, the Teams team with its channels and tabs, and the assessment flows tested end to end.</li><li><b>Dec 9.</b> Drafts C1 to M6 in final form, no em dashes, dates filled, in the FLH email templates.</li><li><b>Dec 11.</b> Go, no go for the pilot.</li><li><b>Jan 5.</b> Pilot managers' managers get the forwardable note; Jan 6 the pilot opens.</li></ul>
       <div class="quote" style="margin-top:14px">Management is a set of habits, not a personality. Pick one behavior and make it routine.</div>
       <p class="small" style="margin-top:8px">The line every message ends on, from the assessment email.</p>
     </div>
