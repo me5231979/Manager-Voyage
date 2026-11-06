@@ -1,6 +1,6 @@
 MANAGER FOUNDATIONS: YOU ARE A MANAGER NOW (Vanderbilt University, Futures Learning Hub, People, Culture and Belonging). Course content, page by page.
 
-The course is seven modules, done one at a time in order: 1 The mission (about 5 minutes), 2 What changed and what a manager is (10), 3 Five ideas (15), 4 Your first year and who handles what (10), 5 The Vanderbilt Manager Standard (20), 6 Your call, four conversations (15), 7 Your assessment, quick check and next steps (15). About 90 minutes in all, 10 to 20 minutes per module, and it does not have to be done in one sitting; progress is saved in the browser. A module is complete when every page in it has been opened and every tracked activity in it is marked done in the Your progress panel; finishing a module opens the next, and unmarking an activity locks the later modules again. Each module ends on a completion page with what was covered, how to use it as a manager, and what is next. The Listen button narrates each page; Stop keeps narration off until Listen is tapped again. Practice conversations use a microphone and a character who answers back; the Pick your world dropdown sets the unit the situation is set in; a written situation with three responses is the no-microphone path. Compass, the course guide, is the Ask Compass button at the bottom right of every page.
+The course is seven modules, done one at a time in order: 1 The mission (about 5 minutes), 2 What changed and what a manager is (10), 3 Five ideas (15), 4 Your first year and who handles what (10), 5 The Vanderbilt Manager Standard (20), 6 Your call, four conversations (15), 7 Your assessment, quick check and next steps (15). About 90 minutes in all, 10 to 20 minutes per module, and it does not have to be done in one sitting; progress is saved in the browser. A module is complete when every page in it has been opened and every tracked activity in it is marked done in the Your progress panel; finishing a module opens the next, and unmarking an activity locks the later modules again. Each module ends on a completion page with what was covered, how to use it as a manager, and what is next. The Listen button narrates each page; Stop keeps narration off until Listen is tapped again. Practice conversations use a microphone and a character who answers back; each one lasts three minutes at most, with the time left shown next to the End button, and saying goodbye or tapping End the conversation brings the score card (the checks the learner met, what to do differently, and Try it again); if the character did not score it, the learner ticks the same checks and taps See my score; the Pick your world dropdown sets the unit the situation is set in; a written situation with three responses is the no-microphone path. Compass, the course guide, is the Ask Compass button at the bottom right of every page.
 
 === Page 1 of 65 · Welcome (page key home/1) ===
 VANDERBILT UNIVERSITY · MANAGER VOYAGE · MANAGER FOUNDATIONS
@@ -448,14 +448,14 @@ Student Affairs
 Facilities
 Development and Alumni Relations
 
-SAM, COORDINATOR ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
+SAM, COORDINATOR ON YOUR TEAM · THREE MINUTES, TOPS · MICROPHONE
 
 2
 Tap Start and allow the microphone. Sam speaks first, in your world.
 3
 Talk the way you would at work. Speak naturally, in your own words. There is no script.
 4
-When you are done, say goodbye. You are scored on what you did, not what you picked.
+Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.
 Start the conversation
 End the conversation
 
@@ -524,14 +524,14 @@ Student Affairs
 Facilities
 Development and Alumni Relations
 
-PRIYA, ANALYST ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
+PRIYA, ANALYST ON YOUR TEAM · THREE MINUTES, TOPS · MICROPHONE
 
 2
 Tap Start and allow the microphone. Priya speaks first, in your world.
 3
 Talk the way you would at work. Speak naturally, in your own words. There is no script.
 4
-When you are done, say goodbye. You are scored on what you did, not what you picked.
+Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.
 Start the conversation
 End the conversation
 
@@ -600,14 +600,14 @@ Student Affairs
 Facilities
 Development and Alumni Relations
 
-JORDAN, PROJECT COORDINATOR ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
+JORDAN, PROJECT COORDINATOR ON YOUR TEAM · THREE MINUTES, TOPS · MICROPHONE
 
 2
 Tap Start and allow the microphone. Jordan speaks first, in your world.
 3
 Talk the way you would at work. Speak naturally, in your own words. There is no script.
 4
-When you are done, say goodbye. You are scored on what you did, not what you picked.
+Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.
 Start the conversation
 End the conversation
 
@@ -676,14 +676,14 @@ Student Affairs
 Facilities
 Development and Alumni Relations
 
-ALEX, SPECIALIST ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
+ALEX, SPECIALIST ON YOUR TEAM · THREE MINUTES, TOPS · MICROPHONE
 
 2
 Tap Start and allow the microphone. Alex speaks first, in your world.
 3
 Talk the way you would at work. Speak naturally, in your own words. There is no script.
 4
-When you are done, say goodbye. You are scored on what you did, not what you picked.
+Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.
 Start the conversation
 End the conversation
 
@@ -752,14 +752,14 @@ Student Affairs
 Facilities
 Development and Alumni Relations
 
-DEV, ANALYST ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
+DEV, ANALYST ON YOUR TEAM · THREE MINUTES, TOPS · MICROPHONE
 
 2
 Tap Start and allow the microphone. Dev speaks first, in your world.
 3
 Talk the way you would at work. Speak naturally, in your own words. There is no script.
 4
-When you are done, say goodbye. You are scored on what you did, not what you picked.
+Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.
 Start the conversation
 End the conversation
 
@@ -1524,14 +1524,14 @@ Student Affairs
 Facilities
 Development and Alumni Relations
 
-PRIYA, ANALYST WHO BUILDS THE MONTHLY REPORT · ABOUT THREE MINUTES · MICROPHONE
+PRIYA, ANALYST WHO BUILDS THE MONTHLY REPORT · THREE MINUTES, TOPS · MICROPHONE
 
 2
 Tap Start and allow the microphone. Priya speaks first, in your world.
 3
 Talk the way you would at work. Speak naturally, in your own words. There is no script.
 4
-When you are done, say goodbye. You are scored on what you did, not what you picked.
+Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.
 Start the conversation
 End the conversation
 
@@ -1571,14 +1571,14 @@ Student Affairs
 Facilities
 Development and Alumni Relations
 
-MARCUS, ONE OF YOUR STRONGEST PEOPLE · ABOUT THREE MINUTES · MICROPHONE
+MARCUS, ONE OF YOUR STRONGEST PEOPLE · THREE MINUTES, TOPS · MICROPHONE
 
 2
 Tap Start and allow the microphone. Marcus speaks first, in your world.
 3
 Talk the way you would at work. Speak naturally, in your own words. There is no script.
 4
-When you are done, say goodbye. You are scored on what you did, not what you picked.
+Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.
 Start the conversation
 End the conversation
 
@@ -1618,14 +1618,14 @@ Student Affairs
 Facilities
 Development and Alumni Relations
 
-TAYLOR, SENIOR ADMINISTRATOR, SPEAKING FOR THE TEAM · ABOUT THREE MINUTES · MICROPHONE
+TAYLOR, SENIOR ADMINISTRATOR, SPEAKING FOR THE TEAM · THREE MINUTES, TOPS · MICROPHONE
 
 2
 Tap Start and allow the microphone. Taylor speaks first, in your world.
 3
 Talk the way you would at work. Speak naturally, in your own words. There is no script.
 4
-When you are done, say goodbye. You are scored on what you did, not what you picked.
+Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.
 Start the conversation
 End the conversation
 
@@ -1665,14 +1665,14 @@ Student Affairs
 Facilities
 Development and Alumni Relations
 
-DIRECTOR REYES, DIRECTOR IN ANOTHER UNIT · ABOUT THREE MINUTES · MICROPHONE
+DIRECTOR REYES, DIRECTOR IN ANOTHER UNIT · THREE MINUTES, TOPS · MICROPHONE
 
 2
 Tap Start and allow the microphone. Director Reyes speaks first, in your world.
 3
 Talk the way you would at work. Speak naturally, in your own words. There is no script.
 4
-When you are done, say goodbye. You are scored on what you did, not what you picked.
+Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.
 Start the conversation
 End the conversation
 

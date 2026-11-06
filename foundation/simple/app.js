@@ -618,47 +618,47 @@ var STORIES = {
    The character is an ElevenLabs conversational agent. The page starts the session, shows the
    transcript, and the agent calls record_outcome when the talk ends; that payload is the score. */
 var LIVE = {
-  idea1: { img:'sam', agent:'agent_8001m5ww69zged0tmb479r7kyc9j', who:'Sam', initial:'S', role:'Coordinator on your team', mins:'About three minutes',
+  idea1: { img:'sam', agent:'agent_8001m5ww69zged0tmb479r7kyc9j', who:'Sam', initial:'S', role:'Coordinator on your team', mins:'Three minutes, tops',
     brief:'Monday, 9:00, your one to one with Sam. Forty one emails are waiting and the grant report is due Thursday with no owner. Tell Sam the few things that matter this week, give the report an owner and a date, and keep the meeting about Sam.',
     checks:[['named_priorities', 'You named the few things that matter this week'], ['assigned_report', 'You gave the grant report an owner and a date'], ['asked_what_you_need', 'You asked what Sam needs, and listened'], ['kept_the_one_to_one', 'You kept the one to one about Sam']],
     penalty:['took_report_themselves', 'You took the report on yourself. Doing the work is the old job.'],
     way:'The Vanderbilt way: rocks first. Three named priorities before email, said out loud, with owners. The sand fits around them.', pass:3 },
-  idea2: { img:'priya', agent:'agent_8901m5ww6bh9evns857z11cg5g1t', who:'Priya', initial:'P', role:'Analyst on your team', mins:'About three minutes',
+  idea2: { img:'priya', agent:'agent_8901m5ww6bh9evns857z11cg5g1t', who:'Priya', initial:'P', role:'Analyst on your team', mins:'Three minutes, tops',
     brief:'Priya has rewritten the summary twice. Both times your only feedback was “tighten it up.” It is due tomorrow. Tell her exactly what good looks like, when you need it, and why it matters. Do not rewrite it for her.',
     checks:[['said_what_good_looks_like', 'You said specifically what the summary needs'], ['gave_a_deadline', 'You gave a time it is due'], ['gave_the_why', 'You explained why it matters'], ['stayed_kind', 'You were direct without blaming her']],
     penalty:['rewrote_it_themselves', 'You offered to rewrite it yourself. It ships, Priya learns nothing, and you own every summary from now on.'],
     way:'The Vanderbilt way: clear is kind. What, by when, what good looks like, and why. Said in the 1:1, written in the follow up.', pass:3 },
-  safe1: { img:'jordan', agent:'agent_4501m5ww6dq5f69vc8h4zxsev35y', who:'Jordan', initial:'J', role:'Project coordinator on your team', mins:'About three minutes',
+  safe1: { img:'jordan', agent:'agent_4501m5ww6dq5f69vc8h4zxsev35y', who:'Jordan', initial:'J', role:'Project coordinator on your team', mins:'Three minutes, tops',
     brief:'Jordan comes to you Tuesday with bad news: the vendor slipped and the launch moves a week. She is braced for your reaction. Thank first, find out what we know, ask what she needs, and let her run the recovery.',
     checks:[['thanked_first', 'Your first reaction was thanks, not blame'], ['asked_what_we_know', 'You asked what we know'], ['asked_what_you_need', 'You asked what she needs from you'], ['left_recovery_with_you', 'You left the recovery with her, with your help']],
     penalty:['blamed_first', 'You opened with why am I only hearing about this now. Jordan learned that bad news gets a bad reaction. Next time you hear it later.'],
     way:'The Vanderbilt way: thank first, solve second, learn the cause later. Make the truth cheap to tell.', pass:3 },
-  idea4: { img:'alex', agent:'agent_2901m5ww6fg0f03vaprzgycpqs02', who:'Alex', initial:'A', role:'Specialist on your team', mins:'About three minutes',
+  idea4: { img:'alex', agent:'agent_2901m5ww6fg0f03vaprzgycpqs02', who:'Alex', initial:'A', role:'Specialist on your team', mins:'Three minutes, tops',
     brief:'Central is replacing the intake form and Alex has already said here we go again. Explain the why in your own words, say what it fixes, ask what worries Alex, and carry the worries back.',
     checks:[['explained_why', 'You explained why the form is changing'], ['said_what_it_fixes', 'You named what it fixes'], ['asked_what_worries_you', 'You asked what worries Alex, and listened'], ['will_carry_it_back', 'You said you would carry the concerns back']],
     penalty:['joined_the_hallway', 'You joined the hallway. Honest, and it cost the team its manager.'],
     way:'The Vanderbilt way: start with why. People who know the why make good decisions when you are not in the room.', pass:3 },
-  idea5: { img:'dev', agent:'agent_8001m5wswdhrej0959pp630zjyza', who:'Dev', initial:'D', role:'Analyst on your team', mins:'About three minutes',
+  idea5: { img:'dev', agent:'agent_8001m5wswdhrej0959pp630zjyza', who:'Dev', initial:'D', role:'Analyst on your team', mins:'Three minutes, tops',
     brief:'Dev has missed two deadlines this month. You asked to see him. Say what you noticed, say what you expect, ask what is in the way, and agree a next step. He answers back. Then you are scored on what you did, not what you picked.',
     checks:[['named_what_noticed', 'You said what you noticed'], ['stated_expectation', 'You said what you expect from now on'], ['asked_what_you_need', 'You asked what was in the way, and listened'], ['agreed_next_step', 'You agreed a concrete next step']],
     penalty:['handed_off_to_pcb', 'You handed it to PCB or your HCM. The people work is your work. PCB shows you how; it does not have the conversation for you.'],
     way:'The Vanderbilt way: say it plainly, early, in private, and ask before you judge. Then call your HCM about how to note it, not whether to have it.', pass:3 },
-  task: { img:'priya', agent:'agent_4501m5ww6h0cfdg9f1ny96r43jww', who:'Priya', initial:'P', role:'Analyst who builds the monthly report', mins:'About three minutes',
+  task: { img:'priya', agent:'agent_4501m5ww6h0cfdg9f1ny96r43jww', who:'Priya', initial:'P', role:'Analyst who builds the monthly report', mins:'Three minutes, tops',
     brief:'Wednesday. The monthly report is due Friday, nobody has mentioned it in two weeks, and a director just asked you if it is on time. Fifteen minutes with Priya. Check where it stands before you promise anything.',
     checks:[['asked_where_it_stands', 'You asked where the report stands before judging'], ['asked_what_is_blocking', 'You asked what is blocking her, and acted on it'], ['agreed_plan_for_friday', 'You settled a plan for Friday'], ['set_a_regular_check_in', 'You set a regular check in so this never lands on a Wednesday again']],
     penalty:['took_it_over_or_blamed', 'You took the report over or passed the blame down. Checking work is a conversation, not a forwarded email.'],
     way:'The Vanderbilt way: check it, then say it. Look at the work before it is due, and put the check on the calendar.', pass:3 },
-  relations: { img:'marcus', agent:'agent_8401m5ww6jprews8b25d3krxyn24', who:'Marcus', initial:'M', role:'One of your strongest people', mins:'About three minutes',
+  relations: { img:'marcus', agent:'agent_8401m5ww6jprews8b25d3krxyn24', who:'Marcus', initial:'M', role:'One of your strongest people', mins:'Three minutes, tops',
     brief:'Marcus stays after the 1:1: his dad is in and out of the hospital and he might need time off. Listen, help this week, route it to the leave office, and never ask for a diagnosis.',
     checks:[['thanked_you', 'You thanked him for telling you'], ['adjusted_the_work', 'You moved something concrete this week'], ['routed_to_leave_office', 'You routed it to the leave office'], ['reassured_about_your_work', 'You said it does not change how you see his work']],
     penalty:['asked_for_medical_details', 'You asked about the medical side. Never. Warm is right; the diagnosis is not yours to ask for.'],
     way:'The Vanderbilt way: listen, help, and route it. Adjust the load now, start the leave process so options are ready, and leave the medical detail alone.', pass:3 },
-  change: { img:'taylor', agent:'agent_2501m5ww6n2nftr9n13bnamz7bkn', who:'Taylor', initial:'T', role:'Senior administrator, speaking for the team', mins:'About three minutes',
+  change: { img:'taylor', agent:'agent_2501m5ww6n2nftr9n13bnamz7bkn', who:'Taylor', initial:'T', role:'Senior administrator, speaking for the team', mins:'Three minutes, tops',
     brief:'Central is replacing the travel system in six weeks and the email goes out Tuesday. You chose to tell the team first, in Thursday’s meeting. Taylor speaks for the skeptics. Explain the why, ask what worries them, write it down.',
     checks:[['explained_why_first', 'You explained the why in your own words, first'], ['said_what_it_fixes', 'You said what it fixes'], ['asked_what_worries_you', 'You asked what worries the team, and listened'], ['will_carry_it_back', 'You committed to carry the worries back']],
     penalty:['joined_the_hallway', 'You joined the hallway instead of leading it. Nobody’s concerns will reach the people who can act.'],
     way:'The Vanderbilt way: explain the why before the email lands, ask what worries people, and take it somewhere. Small and weekly is how agility happens.', pass:3 },
-  external: { img:'reyes', agent:'agent_7401m5ww6pyqfen820k04vmwvrmr', who:'Director Reyes', initial:'R', role:'Director in another unit', mins:'About three minutes',
+  external: { img:'reyes', agent:'agent_7401m5ww6pyqfen820k04vmwvrmr', who:'Director Reyes', initial:'R', role:'Director in another unit', mins:'Three minutes, tops',
     brief:'A director wants a full data reconciliation by Friday for audit prep. Your month end close is the same week. Call back with the numbers, the collision, and options, and ask what the audit actually needs.',
     checks:[['asked_what_you_really_need', 'You asked what the audit actually needs'], ['named_the_teams_constraint', 'You named the month end collision'], ['offered_a_workable_option', 'You offered a workable option'], ['settled_a_commitment', 'You ended with a clear commitment']],
     penalty:['committed_without_checking', 'You said yes without raising the collision. The team works the weekend, and next quarter the director asks again, sooner.'],
@@ -781,8 +781,8 @@ function liveHTML(k){
   var L = LIVE[k];
   return '<div class="live" data-live="' + k + '"><div class="live-scene"><div class="live-avatar"><i class="ring r1"></i><i class="ring r2"></i><span>' + (L.img ? '<img src="../../assets/img/foundation/cast/' + L.img + '.webp" alt="" width="128" height="128" decoding="async" onerror="this.remove()" />' : '') + L.initial + '</span></div>' +
     '<div class="live-who"><span class="mono">Practice it live &middot; with ' + esc(L.who) + '</span><h4>Have the conversation. <em>Out loud.</em></h4><p class="live-brief" data-world-brief="' + k + '">' + esc(worldBrief(k)) + '</p>' + worldSelHTML() + '<p class="live-meta">' + esc(L.who) + ', ' + esc(L.role) + ' &middot; ' + esc(L.mins) + ' &middot; Microphone</p></div></div>' +
-    '<ol class="live-how" aria-label="How this works"><li><b>2</b>Tap Start and allow the microphone. ' + esc(L.who) + ' speaks first, in your world.</li><li><b>3</b>Talk the way you would at work. Speak naturally, in your own words. There is no script.</li><li><b>4</b>When you are done, say goodbye. You are scored on what you did, not what you picked.</li></ol>' + '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-state" role="status" aria-live="polite"></span></div>' +
-    '<div class="live-log" aria-live="polite"></div><div class="live-score" hidden></div></div>';
+    '<ol class="live-how" aria-label="How this works"><li><b>2</b>Tap Start and allow the microphone. ' + esc(L.who) + ' speaks first, in your world.</li><li><b>3</b>Talk the way you would at work. Speak naturally, in your own words. There is no script.</li><li><b>4</b>Say goodbye when you are done, or tap End. Either way you get your score. Three minutes, tops.</li></ol>' + '<div class="live-ctl"><button type="button" class="btn btn-gold" data-live-start>Start the conversation</button><button type="button" class="btn btn-ghost" data-live-end hidden>End the conversation</button><span class="live-timer" hidden></span><span class="live-state" role="status" aria-live="polite"></span></div>' +
+    '<div class="live-log" aria-live="polite"></div><div class="live-score" tabindex="-1" hidden></div></div>';
 }
 
 var SCENARIOS = {
@@ -1015,12 +1015,26 @@ var IDEAS = [
 ];
 (function(){
   var SDK = 'https://cdn.jsdelivr.net/npm/@elevenlabs/client/+esm';
-  var sessions = {};
+  var sessions = {}, timers = {}, LIMIT = 180;
   function el(root, sel){ return root.querySelector(sel); }
+  function fmt(n){ return Math.floor(n / 60) + ':' + ('0' + (n % 60)).slice(-2); }
+  function clearTimers(k){ var t = timers[k]; if(t){ clearInterval(t.iv); clearTimeout(t.grace); } timers[k] = null; }
+  /* three minutes on the clock; thirty seconds out the character is told to close; at zero the page ends it */
+  function startTimer(root){
+    var k = root.getAttribute('data-live'), tm = el(root, '.live-timer'), t0 = Date.now();
+    clearTimers(k); tm.hidden = false; tm.classList.remove('low'); tm.textContent = fmt(LIMIT) + ' left';
+    timers[k] = { iv: setInterval(function(){
+      var left = LIMIT - Math.floor((Date.now() - t0) / 1000); if(left < 0) left = 0;
+      tm.textContent = left ? fmt(left) + ' left' : 'Time';
+      if(left <= 30 && !tm.classList.contains('low')){ tm.classList.add('low'); var c = sessions[k]; if(c && c.sendContextualUpdate){ try{ c.sendContextualUpdate('Thirty seconds left. Bring it to a close in your next reply.'); }catch(e){} } }
+      if(left <= 0) end(root, 'time');
+    }, 1000) };
+  }
+  function focusScore(root){ var box = el(root, '.live-score'); try{ box.scrollIntoView({ behavior:'smooth', block:'start' }); box.focus({ preventScroll:true }); }catch(e){} }
   function setState(root, mode, text){ root.setAttribute('data-mode', mode); el(root, '.live-state').textContent = text || ''; }
   function line(root, who, text){ var log = el(root, '.live-log'); var d = document.createElement('p'); d.className = 'live-line ' + who; d.innerHTML = '<b>' + (who === 'you' ? 'You' : esc(LIVE[root.getAttribute('data-live')].who)) + '</b>' + esc(text); log.appendChild(d); log.scrollTop = log.scrollHeight; }
-  function score(root, p){
-    var k = root.getAttribute('data-live'), L = LIVE[k], n = 0;
+  function score(root, p, self){
+    var k = root.getAttribute('data-live'), L = LIVE[k], n = 0; clearTimers(k); root.classList.remove('show-log');
     var rows = L.checks.map(function(c){ var ok = !!p[c[0]]; if(ok) n += 1; return '<li class="' + (ok ? 'ok' : 'no') + '"><i aria-hidden="true">' + (ok ? '&#10003;' : '&times;') + '</i>' + esc(c[1]) + '</li>'; }).join('');
     var pen = L.penalty && p[L.penalty[0]];
     var passed = n >= L.pass && !pen;
@@ -1028,8 +1042,12 @@ var IDEAS = [
     box.innerHTML = '<span class="mono">' + (passed ? 'You held the conversation' : 'Not yet') + ' &middot; ' + n + ' of ' + L.checks.length + '</span>' +
       (p.summary ? '<p class="live-sum">' + esc(p.summary) + '</p>' : '') + '<ul class="live-checks">' + rows + '</ul>' +
       (pen ? '<p class="live-pen">' + esc(L.penalty[1]) + '</p>' : '') + (p.tone === 'harsh' ? '<p class="live-pen">' + esc(L.who) + ' went quiet. Harsh gets compliance, not the truth.</p>' : '') +
-      '<p class="live-way">' + esc(L.way) + '</p><button type="button" class="btn btn-ghost btn-sm" data-live-again>Try it again</button>';
-    box.hidden = false; setState(root, 'done', passed ? 'Scored.' : 'Scored. Try it again when you are ready.');
+      '<p class="live-way">' + esc(L.way) + '</p><div class="live-score-ctl"><button type="button" class="btn btn-ghost btn-sm" data-live-again>Try it again</button><button type="button" class="linkish" data-live-log>Show the transcript</button></div>';
+    box.hidden = false; root.classList.add('scored'); setState(root, 'done', self ? 'Scored by you.' : passed ? 'Scored.' : 'Scored. Try it again when you are ready.');
+    el(root, '[data-live-end]').hidden = true; el(root, '[data-live-end]').disabled = false; el(root, '[data-live-start]').hidden = false; el(root, '.live-timer').hidden = true;
+    focusScore(root);
+    /* the character ends the call itself after scoring; if it lingers, the page ends it */
+    var c = sessions[k]; if(c){ setTimeout(function(){ if(sessions[k] === c) kill(root, true); }, 8000); }
     if(passed){ if(window.markIdeaMoment) markIdeaMoment(k); if(window.markCallFound) markCallFound(k); }
     try{ localStorage.setItem('mv-found-live-' + k, JSON.stringify({ n:n, pen:!!pen, at:Date.now() })); }catch(e){}
   }
@@ -1042,8 +1060,8 @@ var IDEAS = [
   }
   function start(root){
     var k = root.getAttribute('data-live'), L = LIVE[k];
-    el(root, '.live-log').innerHTML = ''; el(root, '.live-score').hidden = true;
-    el(root, '[data-live-start]').hidden = true; el(root, '[data-live-end]').hidden = false;
+    el(root, '.live-log').innerHTML = ''; el(root, '.live-score').hidden = true; root.classList.remove('scored', 'show-log'); root.quiet = false;
+    el(root, '[data-live-start]').hidden = true; el(root, '[data-live-end]').hidden = false; el(root, '[data-live-end]').disabled = false; el(root, '.live-timer').hidden = true;
     setState(root, 'connecting', 'Asking for the microphone…');
     if(narr.playing) narrStop(); pauseVideos();
     var mic = navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? navigator.mediaDevices.getUserMedia({ audio:true }) : Promise.reject(new Error('nomic'));
@@ -1056,8 +1074,14 @@ var IDEAS = [
       return Conversation.startSession({
         agentId: L.agent, connectionType: 'webrtc', dynamicVariables: worldVars(k),
         clientTools: { record_outcome: function(p){ score(root, p || {}); return 'recorded'; } },
-        onConnect: function(){ setState(root, 'listening', L.who + ' is on. Speak when you are ready.'); },
-        onDisconnect: function(){ el(root, '[data-live-end]').hidden = true; el(root, '[data-live-start]').hidden = false; if(root.getAttribute('data-mode') !== 'done') setState(root, 'off', 'Conversation ended.' + (el(root, '.live-score').hidden ? ' No score was recorded. Start again and finish with a next step.' : '')); sessions[k] = null; },
+        onConnect: function(){ setState(root, 'listening', L.who + ' is on. Speak when you are ready.'); startTimer(root); },
+        onDisconnect: function(){
+          sessions[k] = null; clearTimers(k); el(root, '[data-live-end]').hidden = true; el(root, '[data-live-end]').disabled = false; el(root, '[data-live-start]').hidden = false; el(root, '.live-timer').hidden = true;
+          if(root.getAttribute('data-mode') === 'done') return;
+          /* the talk ended without a score (the call was cut, or dropped): the learner scores it */
+          if(!el(root, '.live-score').hidden) return;
+          if(root.querySelector('.live-line.you') && !root.quiet) selfScore(root); else setState(root, 'off', 'Conversation ended.');
+        },
         onModeChange: function(m){ if(root.getAttribute('data-mode') === 'done') return; setState(root, m.mode === 'speaking' ? 'speaking' : 'listening', m.mode === 'speaking' ? L.who + ' is talking.' : 'Your turn.'); },
         onMessage: function(msg){ if(msg && msg.message) line(root, msg.source === 'user' ? 'you' : 'them', msg.message); },
         onError: function(e){ fallback(root, 'The conversation dropped.'); }
@@ -1067,13 +1091,47 @@ var IDEAS = [
       fallback(root, why);
     });
   }
-  function end(root){ var k = root.getAttribute('data-live'); var c = sessions[k]; if(c && c.endSession) c.endSession(); sessions[k] = null; el(root, '[data-live-end]').hidden = true; el(root, '[data-live-start]').hidden = false; if(root.getAttribute('data-mode') !== 'done') setState(root, 'off', 'Ended.'); }
+  /* End, or time up: the character is told to close and score; twenty seconds later, if no score came, the learner scores it */
+  function end(root, why){
+    var k = root.getAttribute('data-live'), L = LIVE[k], c = sessions[k];
+    if(!c){ el(root, '[data-live-end]').hidden = true; el(root, '[data-live-start]').hidden = false; return; }
+    if(!el(root, '.live-score').hidden){ kill(root, true); return; }
+    if(root.getAttribute('data-mode') === 'ending') return;
+    setState(root, 'ending', L.who + ' is wrapping up. Your score is next.');
+    el(root, '[data-live-end]').disabled = true; el(root, '.live-timer').hidden = true;
+    var note = why === 'time' ? 'Time is up.' : 'The manager tapped End.';
+    try{
+      if(c.sendContextualUpdate) c.sendContextualUpdate(note + ' Do not ask anything more. Say one short closing line in character, call record_outcome now with what the manager did so far, then end the call.');
+      if(c.sendUserMessage) c.sendUserMessage(why === 'time' ? 'We are out of time. Thanks, ' + L.who + '.' : 'I have to stop here. Thanks, ' + L.who + '.');
+    }catch(e){}
+    var t = timers[k] || (timers[k] = {}); clearInterval(t.iv);
+    t.grace = setTimeout(function(){ if(el(root, '.live-score').hidden){ kill(root); selfScore(root); } }, 20000);
+  }
+  function kill(root, quiet){
+    var k = root.getAttribute('data-live'), c = sessions[k]; sessions[k] = null; clearTimers(k); if(quiet) root.quiet = true;
+    if(c && c.endSession){ try{ c.endSession(); }catch(e){} }
+    el(root, '[data-live-end]').hidden = true; el(root, '[data-live-end]').disabled = false; el(root, '[data-live-start]').hidden = false; el(root, '.live-timer').hidden = true;
+    if(root.getAttribute('data-mode') !== 'done') setState(root, 'off', 'Ended.');
+  }
+  /* no score came back: the same checks, ticked by the learner */
+  function selfScore(root){
+    var k = root.getAttribute('data-live'), L = LIVE[k], box = el(root, '.live-score'); if(!box.hidden) return;
+    clearTimers(k);
+    box.innerHTML = '<span class="mono">Score it yourself</span><p class="live-sum">' + esc(L.who) + ' did not get to score that one. Tick what you did, honestly.</p><ul class="live-self">' +
+      L.checks.map(function(c){ return '<li><label><input type="checkbox" data-self="' + c[0] + '"> <span>' + esc(c[1]) + '</span></label></li>'; }).join('') +
+      (L.penalty ? '<li><label><input type="checkbox" data-self="' + L.penalty[0] + '"> <span>' + esc(L.penalty[1].split('. ')[0]) + '.</span></label></li>' : '') +
+      '</ul><div class="live-score-ctl"><button type="button" class="btn btn-gold btn-sm" data-self-score>See my score</button><button type="button" class="linkish" data-live-log>Show the transcript</button></div>';
+    box.hidden = false; root.classList.add('scored'); setState(root, 'off', 'Ended. Score it below.');
+    focusScore(root);
+  }
   document.addEventListener('click', function(e){
     var root = e.target.closest('.live'); if(!root) return;
     if(e.target.closest('[data-live-start]') || e.target.closest('[data-live-again]')) start(root);
     else if(e.target.closest('[data-live-end]')) end(root);
+    else if(e.target.closest('[data-live-log]')) root.classList.toggle('show-log');
+    else if(e.target.closest('[data-self-score]')){ var p = { summary:'Scored by you, from what you remember doing.', tone:'neutral' }; root.querySelectorAll('[data-self]').forEach(function(i){ p[i.getAttribute('data-self')] = i.checked; }); score(root, p, true); }
   });
-  document.addEventListener('chart:page', function(){ Object.keys(sessions).forEach(function(k){ var r = document.querySelector('.live[data-live="' + k + '"]'); if(r && sessions[k]) end(r); }); });
+  document.addEventListener('chart:page', function(){ Object.keys(sessions).forEach(function(k){ var r = document.querySelector('.live[data-live="' + k + '"]'); if(r && sessions[k]) kill(r, true); }); });
   window.MV_LIVE = { score: function(k, p){ var r = document.querySelector('.live[data-live="' + k + '"]'); if(r) score(r, p); }, LIVE: LIVE };
 })();
 

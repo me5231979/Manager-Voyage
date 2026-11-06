@@ -254,6 +254,15 @@
 .live-ctl{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:12px; }
 .live-state{ font-size:.9rem; color:var(--tx2); }
 .live[data-mode="listening"] .live-state{ color:var(--vu-gold); }
+.live[data-mode="ending"] .live-state{ color:var(--eyebrow); }
+.live-timer{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; color:var(--tx3); border:1px solid var(--bd); border-radius:999px; padding:4px 10px; white-space:nowrap; }
+.live-timer.low{ color:var(--eyebrow); border-color:var(--eyebrow); }
+.live.scored .live-log{ display:none; } .live.scored.show-log .live-log{ display:grid; }
+.live-score:focus{ outline:none; }
+.live-score-ctl{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.live-self{ list-style:none; display:grid; gap:8px; margin:0 0 12px; padding:0; }
+.live-self label{ display:flex; gap:10px; align-items:flex-start; font-size:.95rem; cursor:pointer; }
+.live-self input{ margin:4px 0 0; width:16px; height:16px; accent-color:var(--vu-gold); flex:none; }
 .live-log{ margin-top:12px; display:grid; gap:6px; max-height:220px; overflow:auto; }
 .live-log:empty{ display:none; }
 .live-line{ font-size:.95rem; line-height:1.45; padding:8px 12px; border-radius:var(--r); max-width:60ch; }
@@ -2184,6 +2193,6 @@ footer .fcenter img{ width:64px; height:auto; }
 <script src="../../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20261106f"></script>
 <script src="../../assets/js/email.js?v=20261101b"></script>
-<script src="app.js?v=20261106n"></script>
+<script src="app.js?v=20261106o"></script>
 </body>
 </html>
