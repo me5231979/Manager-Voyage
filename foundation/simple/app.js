@@ -1689,7 +1689,19 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     if(m >= 0 && !seen[keys[i]]){ seen[keys[i]] = 1; save(); }
     if(m >= 0) checkDone(m);
     if(i === landing) render();
+    paintCount(i, m);
   });
+  /* the bottom bar counts pages within the module, not across the course */
+  var bbCount = $('#bbCount'), bbSec = $('#bbSec');
+  function paintCount(i, m){
+    if(!bbCount) return;
+    if(m < 0){ bbCount.textContent = i === landing ? '7 modules' : ''; return; }
+    var pos = MODULES[m].pages.indexOf(i) + 1, total = MODULES[m].pages.length;
+    bbCount.textContent = 'Page ' + pos + ' of ' + total;
+    if(bbSec) bbSec.textContent = 'Module ' + (m + 1) + ' \u00b7 ' + (bbSec.getAttribute('data-base') || bbSec.textContent);
+  }
+  document.addEventListener('chart:page', function(){ if(bbSec && !/^Module \d/.test(bbSec.textContent)) bbSec.setAttribute('data-base', bbSec.textContent); }, true);
+  paintCount(chartPager.current().index, modOf(chartPager.current().index));
   /* the quick check can finish the last module after its pages are seen */
   var lastM = MODULES.length - 1;
   document.addEventListener('mv:prog', function(){ checkDone(lastM); });
