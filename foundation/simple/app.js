@@ -1595,8 +1595,7 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     '<div class="g-log" aria-live="polite"></div><p class="g-state" role="status"></p>' +
     '<form class="g-form"><input type="text" class="g-in" placeholder="Type a question&hellip;" aria-label="Your question" autocomplete="off" maxlength="500" /><button type="submit" class="btn btn-gold btn-sm">Send</button></form>' +
     '<div class="g-tips"><button type="button" data-q="What does this page mean for me as a manager?">What does this page mean for me?</button><button type="button" data-q="Who do I call about a leave request?">Who do I call about leave?</button><button type="button" data-q="How does the assessment work?">How does the assessment work?</button></div>';
-  var ctl = $('#bookBar .bb-ctl'); if(ctl) ctl.insertBefore(fab, ctl.firstChild); else document.body.appendChild(fab);
-  document.body.appendChild(panel);
+  document.body.appendChild(fab); document.body.appendChild(panel);
   var log = panel.querySelector('.g-log'), state = panel.querySelector('.g-state'), form = panel.querySelector('.g-form'), input = panel.querySelector('.g-in');
   var conv = null, starting = null, pending = [];
   function pageName(){ var c = window.chartPager ? chartPager.current() : null; var pg = document.querySelector('.page.cur'); return (pg && pg.getAttribute('aria-label')) || (c ? c.key : 'the course'); }
