@@ -1577,7 +1577,7 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   var FOR = window.MV_FOR_YOU || {}; if(!window.chartPager) return;
   var dots = $$('#bbDots .bb-dot');
   $$('.page').forEach(function(pg, i){
-    var href = dots[i] ? dots[i].getAttribute('href') : ''; var k = href.replace(/^#p\//, ''); var t = FOR[k]; if(!t) return;
+    var href = dots[i] ? dots[i].getAttribute('href') : ''; var k = href.replace(/^#p\//, ''); var t = FOR[k]; if(!t || k === 'modules/1') return;
     var el = document.createElement('p'); el.className = 'v-for'; el.innerHTML = '<b>For you as a manager</b><span>' + esc(t) + '</span>';
     var ip = pg.querySelector('.idea-page'), aside = pg.querySelector('.sp-aside'), why = pg.querySelector('.v-why'), h = pg.querySelector('h2, h1');
     var wk = ip && ip.querySelector('.idea-core > .week'), fws = pg.querySelector('#fwStatus'), lv = pg.querySelector('.live-stage > .v-act');
@@ -1708,6 +1708,14 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   $('#modGrid') && $('#modGrid').addEventListener('click', function(e){
     var b = e.target.closest('.mod-card'); if(!b) return;
     var m = parseInt(b.getAttribute('data-mod'), 10);
+    if(!isOpen(m)){ toast('Finish module ' + m + ' first.'); return; }
+    chartPager.go(MODULES[m].pages[0], { focus:true });
+  });
+  /* no Up next row on the landing page or a completion page; Start module buttons on the completion pages */
+  $$('.page').forEach(function(pg, i){ if(i === landing || pg.querySelector('.mod-end')){ var nx = pg.querySelector('.v-next'); if(nx) nx.parentNode.removeChild(nx); } });
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-go-mod]'); if(!b) return;
+    var m = parseInt(b.getAttribute('data-go-mod'), 10);
     if(!isOpen(m)){ toast('Finish module ' + m + ' first.'); return; }
     chartPager.go(MODULES[m].pages[0], { focus:true });
   });

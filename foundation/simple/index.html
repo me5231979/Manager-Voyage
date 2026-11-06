@@ -422,6 +422,26 @@ html.paged #welcome .fw-panel{ min-height:0; margin-top:0; }
 .mod-card .mod-lock{ position:absolute; right:12px; bottom:12px; width:16px; height:16px; color:var(--tx3); }
 html.paged #modules .drill-status{ margin-top:12px; }
 .v-next .btn.back-mods{ background:transparent; color:var(--eyebrow); border:1px solid var(--eyebrow); }
+.mod-end-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.9fr); gap:18px; margin-top:16px; align-items:start; }
+@media (max-width:1000px){ .mod-end-grid{ grid-template-columns:1fr; } }
+.mod-end-h{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); padding-bottom:6px; border-bottom:1px solid var(--eyebrow); margin-bottom:10px; }
+.mod-end-list{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+.mod-end-list li{ position:relative; padding-left:18px; font-size:.92rem; line-height:1.45; color:var(--tx2); }
+.mod-end-list li::before{ content:''; position:absolute; left:0; top:.55em; width:7px; height:7px; border-radius:50%; background:var(--eyebrow); }
+.mod-end-list.do li{ color:var(--tx); }
+.mod-end-list.do li::before{ border-radius:2px; }
+.mod-end-next{ background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); padding:14px 16px; }
+.mod-end-next p{ margin:0; font-size:.92rem; line-height:1.45; color:var(--tx2); } .mod-end-next p strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.15rem; color:var(--tx); margin-bottom:4px; }
+.mod-end-ctl{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; } .mod-end-ctl .btn svg{ width:18px; height:18px; margin-left:8px; }
+.mod-end > .mono{ display:block; margin-bottom:6px; }
+/* the modules page fits one screen */
+html.paged #modules .v-why{ max-width:70ch; margin-bottom:4px; }
+html.paged #modules .mod-grid{ margin-top:10px; gap:10px; }
+html.paged #modules .mod-card{ min-height:0; padding:10px 12px; gap:4px; }
+html.paged #modules .mod-card h3{ font-size:1.02rem; }
+html.paged #modules .mod-card p{ font-size:.8rem; line-height:1.35; }
+html.paged #modules .mod-card .mod-meta{ font-size:.72rem; }
+html.paged #modules .drill-status{ margin-top:8px; }
 /* layout: each page sits in the middle of the stage when it fits, and starts at the top when it has to scroll */
 html.paged .page > section.v-sec:not(.v-hero){ flex:0 0 auto; margin-top:auto; margin-bottom:auto; }
 html.paged .page > footer{ margin-top:0; }
@@ -1540,6 +1560,15 @@ footer .fcenter img{ width:64px; height:auto; }
         <div class="v-city" id="cityCard" aria-live="polite"><p class="v-port-empty">Tap a site on the map, or a name on the left, to open its card.</p></div>
       </div>
     </div>
+    <div data-pg="Module 1 complete" class="mod-end" data-mod="0">
+      <span class="mono">Module 1 of 7 &middot; The mission</span>
+      <h2 class="v-h sm">Module 1 <em>complete</em>.</h2>
+      <div class="mod-end-grid">
+        <div><b class="mod-end-h">What you covered</b><ul class="mod-end-list"><li>Vanderbilt’s vision and its three areas of focus: core operations, bold initiatives, values leadership.</li><li>Your responsibility: work this way yourself, lead your team to it, and keep your manager informed.</li><li>The five campuses, and what each one needs from the people and systems in Nashville.</li></ul></div>
+        <div><b class="mod-end-h">How you use it as a manager</b><ul class="mod-end-list do"><li>When your team asks why a task matters, name the area of focus it supports.</li><li>Answer the small things today, not on Friday. The pace starts with you.</li><li>Before you say yes to a big request from another office, tell your manager in your one to one.</li></ul></div>
+        <div class="mod-end-next"><b class="mod-end-h">What is next</b><p><strong>Module 2: What changed, and what a manager is.</strong> The one change that makes you a manager, three questions to ask every week, and the five people who help you.</p><div class="mod-end-ctl"><button type="button" class="btn btn-gold" data-go-mod="1">Start module 2<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="btn btn-ghost" href="#p/modules/1">Back to your modules</a></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1605,6 +1634,15 @@ footer .fcenter img{ width:64px; height:auto; }
       <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><b>EOA</b><p>Discrimination, harassment, and misconduct reports.</p><small>Report the same day. You report; you do not investigate</small></div>
       </div>
     </div>
+    <div data-pg="Module 2 complete" class="mod-end" data-mod="1">
+      <span class="mono">Module 2 of 7 &middot; What changed, and what a manager is</span>
+      <h2 class="v-h sm">Module 2 <em>complete</em>.</h2>
+      <div class="mod-end-grid">
+        <div><b class="mod-end-h">What you covered</b><ul class="mod-end-list"><li>One change: your job is now the team’s work, and the people who do it.</li><li>Three things that are new: you decide, you approve, and you are responsible for people.</li><li>What a manager is not: not the one who does everyone’s work, not a friend first, not the police.</li><li>Three questions every week, and the five people who help you.</li></ul></div>
+        <div><b class="mod-end-h">How you use it as a manager</b><ul class="mod-end-list do"><li>Ask the three questions every Monday: does everyone know what to do, is anyone stuck, what is coming.</li><li>When you want to do it yourself, that is the moment to manage instead.</li><li>This week, learn the names of your HCM and your Engagement Consultant and how to reach them.</li></ul></div>
+        <div class="mod-end-next"><b class="mod-end-h">What is next</b><p><strong>Module 3: Five ideas.</strong> Five ideas good managers rely on, each with one thing to do this week and a conversation to practice it.</p><div class="mod-end-ctl"><button type="button" class="btn btn-gold" data-go-mod="2">Start module 3<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="btn btn-ghost" href="#p/modules/1">Back to your modules</a></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1632,6 +1670,15 @@ footer .fcenter img{ width:64px; height:auto; }
     <div data-pg="Practice idea 4 live" class="live-page" data-live-key="idea4"><span class="mono">Optional &middot; Practice it live</span><h2 class="v-h sm">Practice it live with <em>Alex</em>.</h2></div>
     <div data-pg="Idea 5 · The people work" class="idea-page" data-idea="4"></div>
     <div data-pg="Practice idea 5 live" class="live-page" data-live-key="idea5"><span class="mono">Optional &middot; Practice it live</span><h2 class="v-h sm">Practice it live with <em>Dev</em>.</h2></div>
+    <div data-pg="Module 3 complete" class="mod-end" data-mod="2">
+      <span class="mono">Module 3 of 7 &middot; Five ideas</span>
+      <h2 class="v-h sm">Module 3 <em>complete</em>.</h2>
+      <div class="mod-end-grid">
+        <div><b class="mod-end-h">What you covered</b><ul class="mod-end-list"><li>Setting priorities: the big rocks go in before the sand.</li><li>Clear expectations and feedback: say what good looks like, by when, and why.</li><li>Psychological safety: make it easy for people to tell you bad news early.</li><li>Purpose: explain the why before the what.</li><li>The people work: hiring, feedback, time and leave are your job, and PCB shows you how.</li></ul></div>
+        <div><b class="mod-end-h">How you use it as a manager</b><ul class="mod-end-list do"><li>Monday, before email, write your three priorities and tell your team.</li><li>Say one thing you have been hinting at, privately and plainly.</li><li>When someone brings you a problem, thank them first, then solve it.</li><li>Explain the why behind one thing you have been asking for.</li></ul></div>
+        <div class="mod-end-next"><b class="mod-end-h">What is next</b><p><strong>Module 4: Your first year, and who handles what.</strong> Everything a manager owns, by how often it comes up, and the four doors for anything that lands on your desk.</p><div class="mod-end-ctl"><button type="button" class="btn btn-gold" data-go-mod="3">Start module 4<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="btn btn-ghost" href="#p/modules/1">Back to your modules</a></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1704,6 +1751,15 @@ footer .fcenter img{ width:64px; height:auto; }
           <label class="sim-pick" for="simSel"><span class="mono">Pick a situation</span><select id="simSel"></select></label>
           <div class="sim-out" id="simOut" aria-live="polite"></div>
         </div>
+      </div>
+    </div>
+    <div data-pg="Module 4 complete" class="mod-end" data-mod="3">
+      <span class="mono">Module 4 of 7 &middot; Your first year, and who handles what</span>
+      <h2 class="v-h sm">Module 4 <em>complete</em>.</h2>
+      <div class="mod-end-grid">
+        <div><b class="mod-end-h">What you covered</b><ul class="mod-end-list"><li>What Vanderbilt asks you to do every week, every month, a few times a year, and the same day.</li><li>Your week, built around the one to ones, the work check, approvals and feedback.</li><li>Four doors: handle it, ask your HCM, the leave office the same day, EOA the same day.</li><li>Three things you never do: ask for a diagnosis, investigate a report, improvise pay or hiring.</li></ul></div>
+        <div><b class="mod-end-h">How you use it as a manager</b><ul class="mod-end-list do"><li>Put the one to ones, the work check and the approvals on your calendar now.</li><li>When something lands, pick the door first. If you are not sure, ask your HCM before you act.</li><li>Anything about leave or an injury goes to the leave office today. Anything about how someone is treated goes to EOA today.</li></ul></div>
+        <div class="mod-end-next"><b class="mod-end-h">What is next</b><p><strong>Module 5: The Vanderbilt Manager Standard.</strong> The four expectations your assessment measures, the habits inside each one, and a drill for each.</p><div class="mod-end-ctl"><button type="button" class="btn btn-gold" data-go-mod="4">Start module 5<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="btn btn-ghost" href="#p/modules/1">Back to your modules</a></div></div>
       </div>
     </div>
   </div>
@@ -1866,6 +1922,15 @@ footer .fcenter img{ width:64px; height:auto; }
       <h2 class="v-h sm">Where the standard comes from, and how the assessment <em>measures</em> it.</h2>
       <div class="std-src-in" id="stdSrcBody"></div>
     </div>
+    <div data-pg="Module 5 complete" class="mod-end" data-mod="4">
+      <span class="mono">Module 5 of 7 &middot; The Vanderbilt Manager Standard</span>
+      <h2 class="v-h sm">Module 5 <em>complete</em>.</h2>
+      <div class="mod-end-grid">
+        <div><b class="mod-end-h">What you covered</b><ul class="mod-end-list"><li>Four expectations, every week: get the work done, take care of your people, make things better, connect your team.</li><li>Fifteen habits inside them, from Gary Yukl’s research, and the ten assessment statements that measure them.</li><li>A story and a habit drill for each expectation.</li></ul></div>
+        <div><b class="mod-end-h">How you use it as a manager</b><ul class="mod-end-list do"><li>Each week, ask which of the four expectations your week is missing, and put one thing in for it.</li><li>Use the habit names when you plan: plan it, say it, check it, fix it; listen and help, grow them, thank them, trust them.</li><li>When a change is coming, explain the why first. When another office asks for your team, speak up with facts and options.</li></ul></div>
+        <div class="mod-end-next"><b class="mod-end-h">What is next</b><p><strong>Module 6: Your call, four conversations.</strong> Four situations from your first year, in your own unit, out loud with a character who answers back.</p><div class="mod-end-ctl"><button type="button" class="btn btn-gold" data-go-mod="5">Start module 6<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="btn btn-ghost" href="#p/modules/1">Back to your modules</a></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1889,6 +1954,15 @@ footer .fcenter img{ width:64px; height:auto; }
     <div data-pg="02 · Marcus" class="live-page" data-live-key="relations"><h2 class="v-h sm">02 &middot; Take care of your people: <em>Marcus</em>.</h2></div>
     <div data-pg="03 · Taylor" class="live-page" data-live-key="change"><h2 class="v-h sm">03 &middot; Make things better: <em>Taylor</em>.</h2></div>
     <div data-pg="04 · Director Reyes" class="live-page" data-live-key="external"><h2 class="v-h sm">04 &middot; Connect your team: <em>Director Reyes</em>.</h2></div>
+    <div data-pg="Module 6 complete" class="mod-end" data-mod="5">
+      <span class="mono">Module 6 of 7 &middot; Your call: four conversations</span>
+      <h2 class="v-h sm">Module 6 <em>complete</em>.</h2>
+      <div class="mod-end-grid">
+        <div><b class="mod-end-h">What you covered</b><ul class="mod-end-list"><li>Priya and the report: check where the work stands before you promise anything.</li><li>Marcus and his dad: listen, help this week, and route it to the leave office the same day.</li><li>Taylor and the new system: tell the team the why before the email lands.</li><li>Director Reyes and the audit: answer with the numbers and two options.</li></ul></div>
+        <div><b class="mod-end-h">How you use it as a manager</b><ul class="mod-end-list do"><li>Before you commit your team to a date, ask the person doing the work where it stands.</li><li>When someone mentions leave, adjust the load now and send it to the leave office today. Never ask for a diagnosis.</li><li>Tell your team about a change in your own words before the announcement goes out.</li><li>When a big ask collides with your own deadline, reply the same day with the hours, the collision, and two options.</li></ul></div>
+        <div class="mod-end-next"><b class="mod-end-h">What is next</b><p><strong>Module 7: Your assessment, quick check and next steps.</strong> Your starting point against the standard, five questions, one action this week, and what to take next.</p><div class="mod-end-ctl"><button type="button" class="btn btn-gold" data-go-mod="6">Start module 7<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="btn btn-ghost" href="#p/modules/1">Back to your modules</a></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1999,6 +2073,15 @@ footer .fcenter img{ width:64px; height:auto; }
     </div>
       <a class="pdf-card reveal" href="Manager-Foundations-Course-1.pdf" target="_blank" rel="noopener"><span class="pdf-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>The printable guide (PDF)</b><span class="pdf-sub">Every detail of this course on paper: what changed, the five ideas, year one, who handles what, the four categories, your results, and this list. Branded, letter size, links live.</span></span><span class="pdf-go">Open the PDF</span></a>
     </div>
+    <div data-pg="Module 7 complete" class="mod-end" data-mod="6">
+      <span class="mono">Module 7 of 7 &middot; Your assessment, quick check and next steps</span>
+      <h2 class="v-h sm">Module 7 <em>complete</em>.</h2>
+      <div class="mod-end-grid">
+        <div><b class="mod-end-h">What you covered</b><ul class="mod-end-list"><li>Your assessment: your score by expectation, and the ten statements behind it.</li><li>The quick check: five questions, four of five to finish.</li><li>One action this week, sent to your manager, and your completion recorded.</li><li>What to take next: the micro modules, more in Oracle Learning, and talks from outside Vanderbilt.</li></ul></div>
+        <div><b class="mod-end-h">How you use it as a manager</b><ul class="mod-end-list do"><li>Do the one action you picked this week, in a meeting you already have.</li><li>Take the micro module for the expectation you scored lowest first.</li><li>In ninety days you will get an email to rate the same ten statements again. Answer it honestly and see what changed.</li></ul></div>
+        <div class="mod-end-next"><b class="mod-end-h">What is next</b><p><strong>The course is complete.</strong> Your completion is recorded with the Futures Learning Hub. After sixty days in good standing, you can join the four week manager cohort. Thank you for taking the time.</p><div class="mod-end-ctl"><a class="btn btn-ghost" href="#p/modules/1">Back to your modules</a></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2085,11 +2168,11 @@ footer .fcenter img{ width:64px; height:auto; }
 <script src="../../assets/js/program-data.js?v=20260916b"></script>
 <script src="../../assets/js/scorm.js?v=20260912p"></script>
 <script src="../../assets/js/oracle.js?v=20261027x"></script>
-<script src="narration-scripts.js?v=20261106d"></script>
+<script src="narration-scripts.js?v=20261106f"></script>
 <script src="resources.js?v=20261106d"></script>
 <script src="../../assets/js/nav.js?v=1"></script>
-<script src="pager.js?v=20261106d"></script>
+<script src="pager.js?v=20261106f"></script>
 <script src="../../assets/js/email.js?v=20261101b"></script>
-<script src="app.js?v=20261106e"></script>
+<script src="app.js?v=20261106f"></script>
 </body>
 </html>
