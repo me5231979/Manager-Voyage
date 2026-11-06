@@ -1352,6 +1352,16 @@ footer .fcenter img{ width:64px; height:auto; }
 .idea-page .idea-art{ max-width:560px; }
 .idea-page .idea-art figcaption{ font-size:.78rem; }
 .idea-page .idea-core{ margin-top:8px; }
+/* the idea card as two columns: title across the top, the jars beside the copy on idea one, copy and the week's move side by side on the rest */
+@media (min-width:1001px){
+  .idea-page .idea{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); column-gap:28px; align-items:start; }
+  .idea-page .idea > .who-is, .idea-page .idea > .std-tag, .idea-page .idea > h3, .idea-page .idea > .idea-more{ grid-column:1 / -1; }
+  .idea-page .idea > h3{ font-size:clamp(1.7rem,2.8vw,2.4rem); line-height:1.15; margin-bottom:6px; }
+  .idea-page .idea > .idea-art{ grid-column:1; max-width:500px; margin-top:4px; }
+  .idea-page .idea > .idea-art + .idea-core{ grid-column:2; grid-template-columns:1fr; margin-top:4px; }
+  .idea-page .idea > .idea-core{ grid-column:1 / -1; }
+  .idea-page .idea > .std-tag{ justify-self:start; }
+}
 .std-map li{ margin-bottom:3px; }
 .std-map .v-why{ display:none; }
 </style>
