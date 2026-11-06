@@ -6,7 +6,7 @@ Summary: Manager Voyage is one standard for every Vanderbilt manager in four exp
 Manager Voyage.
 The launch plan.
 
-Learner journeys, the communications cascade, enrollment, the Microsoft Teams channel, the assessment data setup, delivery and measurement for bringing every Vanderbilt manager onto one standard. Draft messages and posts included, with dates.
+The program, its learning objectives and what success looks like, then the learner journeys, the communications cascade, enrollment, the Microsoft Teams channel, the assessment data setup, delivery and measurement for bringing every Vanderbilt manager onto one standard. Draft messages and posts included, with dates.
 
 PEOPLE, CULTURE AND BELONGING
 FUTURES LEARNING HUB
@@ -113,7 +113,102 @@ ALWAYS ON
 
 Sources: Manager Voyage Executive Brief v2 (September 2026), the program data in the Manager Voyage site, and the responsibilities discussion of November 5, 2026. Cohort size follows the November 5 decision of twenty five managers a quarter.
 
-=== Section 4: Three managers, two reinforcers, one message. (Who it is for) ===
+=== Section 4: Why Manager Voyage, what it is, and what it promises. (Program overview) ===
+PROGRAM OVERVIEW
+
+Why Manager Voyage, what it is, and what it promises.
+THE PROBLEM
+A thin manager bench
+
+Internal fill rates for manager roles sit well below the benchmark People, Culture and Belonging uses, because too few staff are ready to step up. Most managers at Vanderbilt were never trained to manage: they were promoted for being good at the work, then left to approve time off for former peers on day one with no guidance. The cost shows up as slow hiring, early mistakes with leave and conduct, and teams that leave with a bad manager.
+
+THE ANSWER
+One standard, taught and practiced
+
+The Vanderbilt Manager Standard: four expectations every manager works to, adapted from Gary Yukl's research on what effective managers do. Every manager gets the same first ninety days, compliance by location, a ninety-minute Foundations course with live practice, short modules on the systems and processes they now own, and a dashboard. After sixty days, a four-week cohort builds the skill with their own team. The Portal never goes away.
+
+THE PROMISE
+What a manager can say at ninety days
+
+"I know what Vanderbilt expects of me, in four sentences. I have had the hard conversations out loud before I had them for real. I know who to call the same day, and what is mine to handle. My team knows what I expect of them, by when, and why. And I know which habit I am working on next, because I measured it."
+
+HOW IT WORKS, FROM INPUTS TO IMPACT
+INPUTS
+What we put in
+The standard and the assessment. The course, the micro modules, the cohort, the Portal. FLH facilitators, Oracle Learning, Teams, the characters. Managers' managers' time.
+ACTIVITIES
+What managers do
+Take the assessment. Finish Foundations and the phase one modules in ninety days. Practice the four conversations. Sit a cohort. Present a Playbook. Rate the ten statements again.
+OUTPUTS
+What we can count
+Completions and quick check scores. Scored conversations. Compliance on time. Cohort seats filled, Playbooks presented. Assessment baselines and re-ups.
+OUTCOMES
+What changes in a year
+Habits move on the ten statements. Teams get priorities with owners, feedback the week it happened, and the why before the announcement. Problems reach the HCM, the leave office and EOA the same day.
+IMPACT
+What changes in three
+More manager roles filled from inside. More staff promoted into their first manager role, and more of them still here a year later. Faster hiring, fewer early mistakes, teams that stay.
+WHO
+Every manager, M1 to M5, in Tennessee, New York, Florida and California, new or long tenured. Their managers and HCMs as reinforcers.
+OWNER
+People, Culture and Belonging, built and run by the Futures Learning Hub, with VUIT for Oracle and Teams and the business units for the cascade and the cohorts.
+SOURCE
+The Manager Voyage Executive Brief v2, September 2026; the Vanderbilt Manager Standard; the November 5, 2026 responsibilities discussion. Objectives next; the success scorecard follows measurement.
+
+=== Section 5: By the end, every manager can. (Learning objectives and outcomes) ===
+LEARNING OBJECTIVES AND OUTCOMES
+
+By the end, every manager can.
+
+Each objective names the expectation it serves: 01 get the work done, 02 take care of your people, 03 make things better, 04 connect your team.
+
+MANAGER FOUNDATIONS · SEVEN MODULES, 90 MINUTES
+Know the job, and have said the hard things out loud
+01Explain the shift from doing the work to getting it done through others, and state the four expectations with one behavior each asks for in a normal week.
+01 02Apply the five ideas, priorities with owners, clear expectations, psychological safety, purpose and the people work, in a conversation with a team member.
+02 04Decide who handles what: handle it, ask the HCM, the leave office, or EOA, and name the same-day routes.
+01 TO 04Hold four conversations out loud: the Monday one to one, feedback on a draft, bad news, and a change announcement.
+ALLRead their assessment, name the priority expectation, and pick one habit for the week.
+
+HOW WE KNOW Thirteen activities marked done. The quick check at four of five. Each live conversation scored by the character on what the manager did, three or more checks of four.
+
+MICRO MODULES · FOUR TRACKS IN ORACLE LEARNING
+Run the systems and the obligations of the role
+SYSTEMS, BY DAY 30Manage timekeeping, PTO and schedules in UKG, handle exempt time off in Oracle, open a requisition, and approve an expense.
+VANDERBILT, BY DAY 30Explain the mission, place their unit in the areas of focus, and tell the Nashville story to a new hire.
+PEOPLE, BY DAY 60Recognize a leave request, route an accommodation, document a concern, and onboard a new hire.
+PROCESSES, BY DAY 60Run the performance cycle in the performance platform, set goals, hold one to ones, give feedback, and handle a compensation or flexible work question.
+
+HOW WE KNOW Completion by item in Oracle Learning. Phase one by day 30, phase two by day 60. Fewer same-day questions to HCMs on the routine transactions, asked in the Day 60 survey.
+
+THE FOUR-WEEK COHORT · 25 A QUARTER
+Manage their own team, on purpose, with a plan
+03Write a manager philosophy and say what the team can expect from them, and what they say when bad news lands.
+01Run a one to one framework with a cadence, an agenda that belongs to the team member, and three goals per person this quarter.
+02Delegate a real decision with one boundary and a date, and write a growth line for every person.
+01 02Hold a performance conversation that is honest about the answer and specific about what would change it.
+04Present the Manager Playbook, the Integrated Management Model and a ninety-day Team Development Plan to their business unit leader.
+
+HOW WE KNOW Four simulations scored. The Playbook presented and challenged by peers. The four-question confidence pulse up from week one to week four. The re-up assessment three months on.
+
+OUTCOMES OVER TIME
+30 days
+
+Legal compliance done, assessment taken, the course under way, the Systems and Vanderbilt modules done.
+
+60 days
+
+Foundations complete in Oracle, the People and Processes modules done, the cohort invitation in hand.
+
+90 days
+
+The habit moved on the ten statements. A cohort seat booked. Same-day matters reaching the right office.
+
+1 year
+
+A Playbook in use, a team with goals and one to ones, a manager ready to be promoted and a successor in view.
+
+=== Section 6: Three managers, two reinforcers, one message. (Who it is for) ===
 WHO IT IS FOR
 
 Three managers, two reinforcers, one message.
@@ -163,12 +258,12 @@ HCMs and Engagement Consultants
 
 They see every job change first and answer the same-day questions. They are briefed on February 18, carry the one-line pitch and the dashboard link, and route a manager who is stuck. They are not the ones who have the conversation; the course is clear that the people work is the manager's work.
 
-=== Section 5: Day one to ninety, and every touchpoint on the way. (The learner journey) ===
+=== Section 7: Day one to ninety, and every touchpoint on the way. (The learner journey) ===
 THE LEARNER JOURNEY
 
 Day one to ninety, and every touchpoint on the way.
 
-What a manager does, and what reaches them, from the day the role changes to the re-up. The numbered messages are drafted on pages 11 to 16; the Teams posts on page 18.
+What a manager does, and what reaches them, from the day the role changes to the re-up. The numbered messages are drafted on pages 13 to 18; the Teams posts on page 20.
 
 DAY 1
 ROLE CHANGES
@@ -234,7 +329,7 @@ Practiced, measured
 
 The cohort, when a seat comes. The ten statements rated again at three months, beside the baseline. The Portal in weekly use.
 
-=== Section 6: What the manager does, feels and needs at each step. (The learner journey, stage by stage) ===
+=== Section 8: What the manager does, feels and needs at each step. (The learner journey, stage by stage) ===
 THE LEARNER JOURNEY, STAGE BY STAGE
 
 What the manager does, feels and needs at each step.
@@ -293,7 +388,7 @@ FLH facilitators
 FLH, BU leader
 FLH, PCB
 
-=== Section 7: Of every hundred managers in the launch wave, by day ninety. (The enrollment funnel) ===
+=== Section 9: Of every hundred managers in the launch wave, by day ninety. (The enrollment funnel) ===
 THE ENROLLMENT FUNNEL
 
 Of every hundred managers in the launch wave, by day ninety.
@@ -322,7 +417,7 @@ NEW MANAGERS AFTER LAUNCH
 
 Same funnel, higher targets, because Day 1 is real: 80 of 100 complete Foundations by day 30, 90 by day 60.
 
-=== Section 8: November 2026 to August 2027, one line per workstream. (The launch timeline) ===
+=== Section 10: November 2026 to August 2027, one line per workstream. (The launch timeline) ===
 THE LAUNCH TIMELINE
 
 November 2026 to August 2027, one line per workstream.
@@ -364,13 +459,13 @@ Course QA closed and fixed. Oracle items for Foundations and the micro modules e
 
 GO, NO GO 2 · JAN 29
 
-Pilot conversion at or above half the targets on page 7. No open blocker on microphone, Oracle write-back or the dashboard. Business unit leaders booked for February 10.
+Pilot conversion at or above half the targets on page 9. No open blocker on microphone, Oracle write-back or the dashboard. Business unit leaders booked for February 10.
 
 READOUT · JUN 10
 
 Ninety days of the launch wave: the funnel against target, compliance on time, assessment movement for the first re-ups, cohort 1 pulse. Decision on cohort capacity for the year.
 
-=== Section 9: Every manager hears it from a person before a system. (The communications cascade) ===
+=== Section 11: Every manager hears it from a person before a system. (The communications cascade) ===
 THE COMMUNICATIONS CASCADE
 
 Every manager hears it from a person before a system.
@@ -403,7 +498,7 @@ HCMs and Engagement Consultants, Feb 18. A forty-minute briefing. They carry the
 
 Oracle Learning, from Mar 2. Assignment notices and the Day 1 email for every new manager, automatically, with a note to the manager's manager.
 
-The Teams channel, from Feb 24. Every manager is a member before launch. Announcements mirror the cascade; Ask FLH takes the questions. Page 17.
+The Teams channel, from Feb 24. Every manager is a member before launch. Announcements mirror the cascade; Ask FLH takes the questions. Page 19.
 
 MyVU and the PCB newsletter, Feb 24 and Mar 2. The teaser, then the story.
 
@@ -420,28 +515,28 @@ Each message asks for exactly one thing.
 PLAIN VANDERBILT
 No jargon, no exclamation marks, short sentences.
 
-=== Section 10: Every message, with its date, sender and purpose. (The communications calendar) ===
+=== Section 12: Every message, with its date, sender and purpose. (The communications calendar) ===
 THE COMMUNICATIONS CALENDAR
 
 Every message, with its date, sender and purpose.
 #	DATE	AUDIENCE	FROM, CHANNEL	PURPOSE AND THE ONE ASK	OWNER
-C1	WED FEB 3	Senior leadership	PCB leadership, leadership meeting then email	Why now, what it is, three asks: sponsor, protect the time, name three managers. Page 11.	FLH drafts, PCB sends
-C2	WED FEB 10	Business unit leaders and their teams	FLH, thirty-minute briefings and the toolkit	Dates for the unit, the toolkit, bespoke cohort for large units. Page 12.	FLH
-C3	WED FEB 17	Managers' managers	FLH, email with the forwardable note	Tell your managers yourself, block two to three hours, ask about the assessment at day 14. Page 12.	FLH
+C1	WED FEB 3	Senior leadership	PCB leadership, leadership meeting then email	Why now, what it is, three asks: sponsor, protect the time, name three managers. Page 13.	FLH drafts, PCB sends
+C2	WED FEB 10	Business unit leaders and their teams	FLH, thirty-minute briefings and the toolkit	Dates for the unit, the toolkit, bespoke cohort for large units. Page 14.	FLH
+C3	WED FEB 17	Managers' managers	FLH, email with the forwardable note	Tell your managers yourself, block two to three hours, ask about the assessment at day 14. Page 14.	FLH
 C4	THU FEB 18	HCMs and Engagement Consultants	FLH, forty-minute briefing	The pitch, the link, the routing. Questions answered before launch.	FLH
-C5	WED FEB 24	All staff	PCB, MyVU and the newsletter	Teaser: one standard for every manager, coming March 2. Portal live. Page 13.	PCB communications
-C6	MON MAR 2	Every manager	PCB leadership, email at 7:30 am, Oracle assignment at 8:00	Launch: the standard, the dashboard, your dates, take the assessment today. Page 13.	FLH drafts, PCB sends
-M1	DAY 1, FROM MAR 2	Each new manager, and their manager	FLH, automated	Your voyage starts today: dashboard, dates, assessment first. A note to the manager's manager on protected time. Page 14.	FLH automation
-M2	DAY 7 · MON MAR 9	Managers who have not started	FLH, automated	Nudge: the assessment takes five minutes, Module 1 five more. Page 15.	FLH automation
-M3	DAY 22 · TUE MAR 24	Managers with legal courses open	Oracle Learning, automated	Eight days to the legal deadline, with the exact rows. Page 15.	Oracle, FLH
-M4	DAY 60 · SAT MAY 1	Managers who completed	PCB, automated	You finished. Your recap, your week, and the cohort invitation. Page 16.	FLH automation
-M5	COHORT WEEK 0	Cohort members	FLH facilitator, email and calendar holds	Welcome, the four dates, twenty minutes to do before week one. Page 16.	FLH
+C5	WED FEB 24	All staff	PCB, MyVU and the newsletter	Teaser: one standard for every manager, coming March 2. Portal live. Page 15.	PCB communications
+C6	MON MAR 2	Every manager	PCB leadership, email at 7:30 am, Oracle assignment at 8:00	Launch: the standard, the dashboard, your dates, take the assessment today. Page 15.	FLH drafts, PCB sends
+M1	DAY 1, FROM MAR 2	Each new manager, and their manager	FLH, automated	Your voyage starts today: dashboard, dates, assessment first. A note to the manager's manager on protected time. Page 16.	FLH automation
+M2	DAY 7 · MON MAR 9	Managers who have not started	FLH, automated	Nudge: the assessment takes five minutes, Module 1 five more. Page 17.	FLH automation
+M3	DAY 22 · TUE MAR 24	Managers with legal courses open	Oracle Learning, automated	Eight days to the legal deadline, with the exact rows. Page 17.	Oracle, FLH
+M4	DAY 60 · SAT MAY 1	Managers who completed	PCB, automated	You finished. Your recap, your week, and the cohort invitation. Page 18.	FLH automation
+M5	COHORT WEEK 0	Cohort members	FLH facilitator, email and calendar holds	Welcome, the four dates, twenty minutes to do before week one. Page 18.	FLH
 M6	+3 MONTHS	Each manager who completed	PCB, automated	Rate the ten statements again. See what moved. Existing template.	FLH automation
 R1	THU JUN 10	Senior leadership	PCB leadership, readout	Ninety days: funnel, compliance, movement, cohort 1. Capacity decision.	FLH, PCB
 
-Day counts for the launch wave run from March 2. For a new manager they run from the day the assignment starts in Oracle HCM. Weekend dates shift to the next business day. The Teams posts that run beside these messages are on page 18; the assessment data messages on page 21.
+Day counts for the launch wave run from March 2. For a new manager they run from the day the assignment starts in Oracle HCM. Weekend dates shift to the next business day. The Teams posts that run beside these messages are on page 20; the assessment data messages on page 23.
 
-=== Section 11: To senior leadership: what we are launching on March 2. (Draft message C1 · Wednesday, February 3, 2027) ===
+=== Section 13: To senior leadership: what we are launching on March 2. (Draft message C1 · Wednesday, February 3, 2027) ===
 DRAFT MESSAGE C1 · WEDNESDAY, FEBRUARY 3, 2027
 
 To senior leadership: what we are launching on March 2.
@@ -472,7 +567,7 @@ I will bring the first ninety days back to this group on June 10.
 
 [Name], [Title], People, Culture and Belonging, Vanderbilt University
 
-=== Section 12: To business unit leaders, and the note a manager's manager forwards. (Draft messages C2 and C3 · February 10 and February 17, 2027) ===
+=== Section 14: To business unit leaders, and the note a manager's manager forwards. (Draft messages C2 and C3 · February 10 and February 17, 2027) ===
 DRAFT MESSAGES C2 AND C3 · FEBRUARY 10 AND FEBRUARY 17, 2027
 
 To business unit leaders, and the note a manager's manager forwards.
@@ -518,7 +613,7 @@ The course is the start. After sixty days there is a four-week cohort, and I wou
 
 NOTE The forwardable note is deliberately short, so that it reads as the manager's own words. FLH sends it on February 17 with one line at the top: "Make it yours, then send it before March 2."
 
-=== Section 13: The teaser, and the launch email. (Draft messages C5 and C6 · February 24 and March 2, 2027) ===
+=== Section 15: The teaser, and the launch email. (Draft messages C5 and C6 · February 24 and March 2, 2027) ===
 DRAFT MESSAGES C5 AND C6 · FEBRUARY 24 AND MARCH 2, 2027
 
 The teaser, and the launch email.
@@ -561,7 +656,7 @@ Your manager has blocked time for this in the next two weeks. Questions in the c
 
 [Name], [Title], People, Culture and Belonging, Vanderbilt University
 
-=== Section 14: The Day 1 email, and the note to the manager's manager. (Draft message M1 · Day 1, automated for every new manager from March 2) ===
+=== Section 16: The Day 1 email, and the note to the manager's manager. (Draft message M1 · Day 1, automated for every new manager from March 2) ===
 DRAFT MESSAGE M1 · DAY 1, AUTOMATED FOR EVERY NEW MANAGER FROM MARCH 2
 
 The Day 1 email, and the note to the manager's manager.
@@ -609,7 +704,7 @@ People, Culture and Belonging
 
 TRIGGER The manager assignment start date in Oracle HCM, read through the profile feed. Location fills the compliance rows and the HCM name. Day dates are computed from the start date.
 
-=== Section 15: Two nudges. Short, specific, with the date. (Draft messages M2 and M3 · Day 7 and Day 22) ===
+=== Section 17: Two nudges. Short, specific, with the date. (Draft messages M2 and M3 · Day 7 and Day 22) ===
 DRAFT MESSAGES M2 AND M3 · DAY 7 AND DAY 22
 
 Two nudges. Short, specific, with the date.
@@ -653,7 +748,7 @@ People, Culture and Belonging, with Oracle Learning
 
 RULES Each nudge sends once, only to the managers it applies to, and never on a day the manager has already opened the dashboard. Managers who are current get nothing. The launch wave's Day 7 is Monday, March 9 and its Day 22 is Tuesday, March 24.
 
-=== Section 16: The completion email with the invitation, and the cohort welcome. (Draft messages M4 and M5 · Day 60 and cohort week 0) ===
+=== Section 18: The completion email with the invitation, and the cohort welcome. (Draft messages M4 and M5 · Day 60 and cohort week 0) ===
 DRAFT MESSAGES M4 AND M5 · DAY 60 AND COHORT WEEK 0
 
 The completion email with the invitation, and the cohort welcome.
@@ -697,7 +792,7 @@ Before April 14, about twenty minutes. On the cohort site: your team profile, th
 OPEN THE COHORT SITE
 [Facilitator], Futures Learning Hub
 
-=== Section 17: One team in Teams, where every manager already is. (The Microsoft Teams channel) ===
+=== Section 19: One team in Teams, where every manager already is. (The Microsoft Teams channel) ===
 THE MICROSOFT TEAMS CHANNEL
 
 One team in Teams, where every manager already is.
@@ -743,7 +838,7 @@ Mondays in March and April, then monthly. Each repeats a dated message.
 ANSWERED BY END OF DAY
 Ask FLH is answered the same business day; repeat questions become Portal FAQ entries.
 
-=== Section 18: Enrollment, kept moving, one Monday post at a time. (Draft Teams posts, with dates) ===
+=== Section 20: Enrollment, kept moving, one Monday post at a time. (Draft Teams posts, with dates) ===
 DRAFT TEAMS POSTS, WITH DATES
 
 Enrollment, kept moving, one Monday post at a time.
@@ -797,7 +892,7 @@ Your toolkit is pinned above: the one-page brief, five slides, the forwardable n
 
 RULE Every Teams post repeats a dated message or precedes nothing. A manager who reads only email misses nothing; a manager who lives in Teams gets the same plan in the same words.
 
-=== Section 19: From ten statements to a report, without a person copying anything. (The assessment data setup) ===
+=== Section 21: From ten statements to a report, without a person copying anything. (The assessment data setup) ===
 THE ASSESSMENT DATA SETUP
 
 From ten statements to a report, without a person copying anything.
@@ -847,7 +942,7 @@ TO DECIDE
 
 Retention of named records, who holds the dashboard passphrase, and the smallest group size for a unit report. Proposals on the next page.
 
-=== Section 20: A self-reflection tool. Named to the manager, aggregate to everyone else. (The assessment data: what is held, who sees it, how long) ===
+=== Section 22: A self-reflection tool. Named to the manager, aggregate to everyone else. (The assessment data: what is held, who sees it, how long) ===
 THE ASSESSMENT DATA: WHAT IS HELD, WHO SEES IT, HOW LONG
 
 A self-reflection tool. Named to the manager, aggregate to everyone else.
@@ -880,7 +975,7 @@ Access. The SharePoint list is restricted to the two FLH owners and the flow's s
 Security. The flow accepts only records carrying the shared key; the dashboard holds no plain data; emails go from the PCB mailbox only.
 Smallest group. No aggregate is reported for fewer than ten managers.
 
-=== Section 21: Ready by December 9, trusted by every manager who takes it. (The assessment: setup checklist and what we tell managers) ===
+=== Section 23: Ready by December 9, trusted by every manager who takes it. (The assessment: setup checklist and what we tell managers) ===
 THE ASSESSMENT: SETUP CHECKLIST AND WHAT WE TELL MANAGERS
 
 Ready by December 9, trusted by every manager who takes it.
@@ -909,7 +1004,7 @@ Answer for how you work now, not how you want to. There is no wrong result; the 
 
 From the reassessment invitation, which every data message keeps to.
 
-=== Section 22: How a manager gets in, and what Oracle does on its own. (Enrollment) ===
+=== Section 24: How a manager gets in, and what Oracle does on its own. (Enrollment) ===
 ENROLLMENT
 
 How a manager gets in, and what Oracle does on its own.
@@ -968,7 +1063,7 @@ An Oracle completion always outranks a self-reported one.
 
 Open decision for December 11: whether Foundations is delivered inside Oracle Learning through the SCORM launcher (one package that frames the live site, completion recorded in Oracle) or on the web with the completion flow. Both paths are built for; the launcher is the recommended path and keeps every fix live without a re-upload.
 
-=== Section 23: Self-paced on the web, cohorts on the calendar, support on every page. (Delivery) ===
+=== Section 25: Self-paced on the web, cohorts on the calendar, support on every page. (Delivery) ===
 DELIVERY
 
 Self-paced on the web, cohorts on the calendar, support on every page.
@@ -996,7 +1091,7 @@ ACCESSIBILITY AND REACH
 The course runs on a phone, with narration on every page and a written path for every live conversation, for rooms without microphones.
 Every practice conversation can be set in the manager's own world: a business office, Campus Dining, VUIT, Academic Affairs, Student Affairs, Facilities, DAR.
 
-=== Section 24: January: twenty five managers take the first thirty days in three weeks. (The pilot) ===
+=== Section 26: January: twenty five managers take the first thirty days in three weeks. (The pilot) ===
 THE PILOT
 
 January: twenty five managers take the first thirty days in three weeks.
@@ -1028,12 +1123,12 @@ WHAT WE FIX BEFORE LAUNCH
 Anything that stops a completion reaching Oracle.
 Any page where the pilot managers did not know where to click. The November 5 feedback already drove the one-idea-per-screen rebuild; the pilot confirms it.
 The two to three hour protected time ask: did the managers' managers do it, and did it hold.
-Message wording: every draft on pages 11 to 16 is tested on the pilot and rewritten from what they said.
+Message wording: every draft on pages 13 to 18 is tested on the pilot and rewritten from what they said.
 WHAT THE PILOT DOES NOT TEST
 The cascade itself. Leaders are briefed on the pilot results, not before them.
 Cohort weeks 1 to 4. Cohort 1 is the first run, with the pilot managers in it.
 
-=== Section 25: What we report, to whom, and when. (Measurement) ===
+=== Section 27: What we report, to whom, and when. (Measurement) ===
 MEASUREMENT
 
 What we report, to whom, and when.
@@ -1061,9 +1156,64 @@ June 10: the ninety-day readout to senior leadership.
 Quarterly: the results dashboard by business unit, to business unit leaders.
 Yearly: fill rate and attrition beside the program numbers.
 
-The assessment is a self-reflection tool, not a validated instrument, and never a performance evaluation. Movement is reported in aggregate; a manager's own results go only to that manager.
+The assessment is a self-reflection tool, not a validated instrument, and never a performance evaluation. Movement is reported in aggregate; a manager's own results go only to that manager. The business measures, internal fill, promotions into manager roles, time to fill and retention, are on the scorecard that follows.
 
-=== Section 26: Who owns what, and what could go wrong. (Roles and risks) ===
+=== Section 28: Success, measured at three levels: learning, behavior, and the business. (What success looks like) ===
+WHAT SUCCESS LOOKS LIKE
+
+Success, measured at three levels: learning, behavior, and the business.
+
+More manager roles filled from inside, more staff promoted into their first manager role, more of them still here a year on. Baselines come from Oracle before December 11; targets are proposals for that meeting.
+
+MEASURE	BASELINE	YEAR ONE TARGET	YEAR TWO TARGET	SOURCE	CADENCE
+BUSINESS: THE MANAGER BENCH
+Internal fill rate for manager roles, the share of manager openings filled by a Vanderbilt staff member	FY26 rate, pulled by Dec 11	+10 POINTS	AT THE BENCHMARK	Oracle Recruiting	Quarterly
+Promotions into a first manager role, staff promoted into M1 in the year	FY26 count, pulled by Dec 11	+15 PERCENT	+30 PERCENT	Oracle HCM	Yearly
+Promotion readiness, cohort graduates promoted or given a larger scope within eighteen months	None; the cohort is new	25 OF 100	35 OF 100	Oracle HCM, FLH roster	Yearly
+Time to fill a manager role, posting to accepted offer	FY26 median	DOWN 15 PERCENT	DOWN 25 PERCENT	Oracle Recruiting	Quarterly
+First-year retention of new managers	FY26 rate	90 OF 100 OR BETTER	92 OF 100 OR BETTER	Oracle HCM	Yearly
+Regretted attrition on teams led by managers who completed Foundations, against teams whose managers did not	FY26 rate, both groups	LOWER FOR COMPLETERS	LOWER BY A QUARTER	Oracle HCM	Yearly
+BEHAVIOR: THE STANDARD IN A NORMAL WEEK
+Assessment movement, five or more points on the total at the three-month re-up	Set by the first re-ups, June 2027	40 OF 100 RE-UPS	50 OF 100	Results dashboard	Quarterly
+Priority expectation moved by 0.7 or more	Set by the first re-ups	50 OF 100 RE-UPS	60 OF 100	Results dashboard	Quarterly
+Cohort confidence pulse, week four against week one	Cohort 1	UP ON ALL FOUR QUESTIONS	UP ON ALL FOUR, EVERY COHORT	Cohort site	Each cohort
+Same-day routing, leave, conduct and accommodation matters reaching the right office the same day	HCM and leave office estimate, Dec 2026	UP	UP	HCM and leave office survey	Twice a year
+Cohort seats filled and Playbooks presented	None; the cohort is new	100 MANAGERS	CAPACITY SET JUNE 10	FLH roster	Each cohort
+
+Each business number is read beside the same number for managers who have not yet completed Foundations, with group sizes. One quarter is a signal; three are a trend.
+
+=== Section 29: At ninety days, one year, and three. (What success looks like, in words) ===
+WHAT SUCCESS LOOKS LIKE, IN WORDS
+
+At ninety days, one year, and three.
+NINETY DAYS · JUNE 2027
+The program ran, and managers felt it
+
+Every manager has heard it from a person and has a dashboard with their dates. Legal compliance is on time everywhere. More than half the launch wave has finished Foundations and taken the assessment; new managers finish in their first month. Cohort 1 has presented twenty five Playbooks to their leaders. The first re-ups show the priority habit moving. HCMs say the same-day questions are the right ones.
+
+ONE YEAR · MARCH 2028
+The standard is how we manage here
+
+A hundred managers have been through a cohort and their teams have goals, one to ones and feedback the week it happened. Assessment movement is real for four in ten re-ups. Internal fill for manager roles is up ten points and manager roles fill faster. New managers are still here a year on, nine in ten or better. The Portal is the place managers go first. Business unit leaders see their own unit's numbers each quarter.
+
+THREE YEARS · 2030
+The bench is deep
+
+Manager roles are filled from inside at the benchmark or above, because staff have seen what a trained manager looks like and want the job. A third of cohort graduates have been promoted or given more scope. Teams led by trained managers keep their people. The standard is in job descriptions, in the hiring interview, and in the first conversation a new manager's manager has with them. Manager Voyage is simply what happens when someone becomes a manager at Vanderbilt.
+
+WHAT WE WILL STOP SEEING
+A new manager learning about FMLA from the mistake, not the module.
+A director's request answered with a yes that slips, instead of hours, the conflict and two options.
+Feedback saved for the review. The why arriving after the announcement.
+A strong team member leaving because nobody said what they owned or thanked them by name.
+Manager roles going outside because nobody inside was ready.
+HOW THE NUMBERS ARE READ
+Leading before lagging. Completion and movement show in months; fill rate and retention in years. The June 10 readout reports the first; the yearly readout reports the second.
+Beside a comparison. Every business number is shown for managers who completed Foundations and for those who have not yet, over the same period, with group sizes.
+In aggregate. Never a named manager outside FLH; no group under ten.
+Reported where decisions are made. Weekly during launch to FLH and PCB; June 10 to senior leadership; quarterly to business unit leaders; yearly with the people numbers.
+
+=== Section 30: Who owns what, and what could go wrong. (Roles and risks) ===
 ROLES AND RISKS
 
 Who owns what, and what could go wrong.
@@ -1092,7 +1242,7 @@ Completion not recorded.	The launcher writes to Oracle; the web path writes thro
 Experienced managers opt out.	The assessment first, the cohort as the reward, and the business unit leader saying it in their own words.
 Cohort demand above seats.	Waitlist by completion date; bespoke cohorts for units of thirty or more; capacity decision June 10.
 
-=== Section 27: Decisions and dates between now and the December go. (The next thirty days) ===
+=== Section 31: Decisions and dates between now and the December go. (The next thirty days) ===
 THE NEXT THIRTY DAYS
 
 Decisions and dates between now and the December go.
@@ -1101,7 +1251,7 @@ DECISION	BY	WHO
 Launch date confirmed as Monday, March 2, 2027, or moved; every date in this plan moves with it	NOV 20	PCB leadership
 Sender and signature for C1 and C6	NOV 20	PCB leadership
 Foundations inside Oracle through the launcher, or on the web with the completion flow	DEC 11	FLH, VUIT
-Funnel targets on page 7 adopted as the launch bar	DEC 11	PCB leadership, FLH
+Funnel targets on page 9 adopted as the launch bar	DEC 11	PCB leadership, FLH
 Pilot roster of twenty five, with managers' managers	DEC 4	The November 5 group
 The first-time-manager intro: scope, and who assigns it	DEC 11	FLH
 Teams: a new Manager Voyage team, and the manager attribute VUIT builds the membership group from	DEC 4	FLH, VUIT
@@ -1118,7 +1268,7 @@ Management is a set of habits, not a personality. Pick one behavior and make it 
 
 The line every message ends on, from the assessment email.
 
-=== Section 28: Manager Voyage. ===
+=== Section 32: Manager Voyage. ===
 Manager Voyage.
 
 People, Culture and Belonging · Futures Learning Hub
