@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operations Portal · Manager Voyage</title>
+<meta name="description" content="The hub for launching and running Manager Voyage cohorts: details, rosters, checklists, communications, documents and the program launch itself.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/img/favicon.svg">
+<link rel="stylesheet" href="../assets/css/course.css">
+<style>
+:root{ --vu-black:#1C1C1C; --vu-gold:#CFAE70; --vu-highlight:#ECB748; --vu-oak:#946E24; --vu-cream:#F5F3EF; --vu-sand:#E0D5C0; --tx:#1C1C1C; --tx2:#4A4A4A; --tx3:#6B6B6B; --bd:#DDD6C8; --card:#fff; --r:6px;
+  --serif:'Libre Caslon Display','Libre Caslon Text','Times New Roman',serif; --serif-i:'Libre Caslon Text','Times New Roman',serif; --sans:'Inter',Arial,system-ui,sans-serif; --cond:'Antonio','Arial Narrow',Impact,sans-serif; }
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{ margin:0; background:var(--vu-cream); color:var(--tx); font-family:var(--sans); font-size:15px; line-height:1.45; }
+a{ color:var(--vu-oak); }
+button{ font:inherit; cursor:pointer; }
+input, select, textarea{ font:inherit; font-size:.92rem; color:var(--tx); background:#fff; border:1px solid var(--bd); border-radius:var(--r); padding:8px 10px; width:100%; }
+input:focus, select:focus, textarea:focus, button:focus-visible{ outline:2px solid var(--vu-highlight); outline-offset:1px; }
+textarea{ min-height:84px; resize:vertical; }
+label{ display:block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-oak); margin-bottom:4px; }
+.mono{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-oak); }
+.eyebrow{ font-family:var(--cond); font-weight:700; font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:var(--vu-gold); display:flex; align-items:center; gap:12px; margin:0 0 6px; }
+.eyebrow::before{ content:''; width:40px; height:1px; background:var(--vu-gold); }
+h1{ font-family:var(--serif); font-weight:400; font-size:clamp(1.6rem,3vw,2.2rem); line-height:1.12; margin:0 0 8px; }
+h1 em, h2 em{ font-family:var(--serif-i); font-style:italic; color:var(--vu-oak); }
+h2{ font-family:var(--serif); font-weight:400; font-size:1.25rem; line-height:1.2; margin:0 0 6px; }
+h3{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-oak); margin:0 0 8px; }
+p{ margin:0 0 8px; }
+.lede{ color:var(--tx2); max-width:68ch; margin-bottom:14px; }
+.small{ font-size:.8rem; color:var(--tx3); }
+/* top bar */
+#top{ position:sticky; top:0; z-index:50; background:var(--vu-black); color:#fff; border-bottom:1px solid rgba(207,174,112,.4); }
+#top .in{ display:flex; align-items:center; gap:16px; padding:0 max(18px, calc(50% - 620px)); height:60px; }
+#top img{ height:30px; display:block; } #top > .in > a:first-child{ flex:none; }
+#top .ttl{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--vu-gold); white-space:nowrap; }
+#top .ttl b{ color:#fff; }
+#top nav{ margin-left:auto; display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; min-width:0; }
+#top nav a{ display:block; padding:8px 10px; color:rgba(255,255,255,.78); text-decoration:none; font-size:.84rem; white-space:nowrap; border-radius:4px; }
+#top nav a:hover, #top nav a.on{ color:var(--vu-gold); }
+#top .new{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; background:var(--vu-gold); color:var(--vu-black); border:0; border-radius:999px; padding:9px 14px; white-space:nowrap; text-decoration:none; }
+main{ padding:28px max(18px, calc(50% - 620px)) 60px; min-height:70vh; }
+/* buttons */
+.btn{ display:inline-flex; align-items:center; gap:8px; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; padding:9px 14px; border-radius:var(--r); border:1px solid var(--vu-black); background:var(--vu-black); color:#fff; text-decoration:none; }
+.btn.gold{ background:var(--vu-gold); border-color:var(--vu-gold); color:var(--vu-black); }
+.btn.ghost{ background:none; color:var(--vu-black); border-color:var(--bd); }
+.btn.sm{ padding:6px 10px; font-size:.64rem; }
+.btn.danger{ border-color:#B4443C; color:#B4443C; background:none; }
+.linkish{ background:none; border:0; padding:0; color:var(--vu-oak); text-decoration:underline; font-size:.84rem; }
+/* layout */
+.grid{ display:grid; gap:14px; } .c2{ grid-template-columns:1fr 1fr; } .c3{ grid-template-columns:repeat(3,1fr); } .c4{ grid-template-columns:repeat(4,1fr); }
+.card{ background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); padding:14px 16px; }
+.card h2{ font-size:1.1rem; }
+.card p{ font-size:.86rem; color:var(--tx2); }
+.stat{ background:var(--vu-black); color:#fff; border-radius:var(--r); padding:14px 16px; border-top:3px solid var(--vu-gold); }
+.stat .n{ font-family:var(--serif); font-size:2rem; line-height:1; color:var(--vu-gold); }
+.stat .l{ font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.7); margin-top:6px; }
+.pill{ display:inline-block; font-family:var(--cond); font-weight:700; font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; border:1px solid var(--vu-gold); color:var(--vu-oak); border-radius:999px; padding:2px 8px; white-space:nowrap; }
+.pill.solid{ background:var(--vu-gold); color:var(--vu-black); }
+.pill.running{ background:var(--vu-black); color:var(--vu-gold); border-color:var(--vu-black); }
+.pill.complete{ background:#E6EFE6; border-color:#4C7A4C; color:#2E5A2E; }
+.pill.late{ background:#F6E3E1; border-color:#B4443C; color:#8E2E28; }
+.head{ display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+.head .acts{ display:flex; gap:8px; flex-wrap:wrap; }
+.sec{ margin-top:26px; }
+table{ width:100%; border-collapse:collapse; font-size:.86rem; background:#fff; border:1px solid var(--bd); border-radius:var(--r); overflow:hidden; }
+th{ text-align:left; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-oak); padding:8px 10px; border-bottom:1px solid var(--vu-gold); background:#FBF9F5; }
+td{ padding:8px 10px; border-bottom:1px solid var(--bd); vertical-align:top; color:var(--tx2); }
+td b{ color:var(--tx); font-weight:600; }
+td.d{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; color:var(--vu-oak); }
+td input[type=checkbox]{ width:18px; height:18px; accent-color:var(--vu-oak); }
+tr.done td{ color:var(--tx3); } tr.done td b{ color:var(--tx3); text-decoration:line-through; }
+tr.late td.d{ color:#B4443C; }
+.xs{ overflow-x:auto; }
+.form{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px 16px; }
+.form .full{ grid-column:1 / -1; }
+.form .acts{ grid-column:1 / -1; display:flex; gap:8px; flex-wrap:wrap; }
+.tabs{ display:flex; gap:4px; flex-wrap:wrap; border-bottom:1px solid var(--bd); margin:16px 0; }
+.tabs a{ padding:8px 12px; text-decoration:none; color:var(--tx2); font-size:.86rem; border-bottom:2px solid transparent; }
+.tabs a.on{ color:var(--vu-black); border-bottom-color:var(--vu-gold); font-weight:600; }
+.cohort-card{ display:block; text-decoration:none; color:inherit; }
+.cohort-card:hover{ border-color:var(--vu-gold); }
+.cohort-card .dates{ display:flex; gap:10px; flex-wrap:wrap; margin:8px 0; }
+.cohort-card .dates span{ font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.06em; text-transform:uppercase; color:var(--vu-oak); border:1px solid var(--bd); border-radius:4px; padding:3px 6px; }
+.bar{ height:4px; background:var(--vu-sand); border-radius:2px; overflow:hidden; margin-top:8px; } .bar i{ display:block; height:100%; background:var(--vu-gold); }
+.list{ list-style:none; margin:0; padding:0; } .list li{ display:grid; grid-template-columns:110px 1fr auto; gap:12px; align-items:start; padding:8px 0; border-bottom:1px solid var(--bd); font-size:.86rem; }
+.list li .when{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--vu-oak); } .list li.late .when{ color:#B4443C; }
+.list li .who{ color:var(--tx3); font-size:.76rem; }
+.phase{ margin-top:18px; } .phase h3{ margin-bottom:6px; }
+.log{ list-style:none; margin:0; padding:0; } .log li{ padding:6px 0; border-bottom:1px solid var(--bd); font-size:.84rem; color:var(--tx2); } .log li span{ font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.06em; text-transform:uppercase; color:var(--vu-oak); margin-right:8px; }
+.empty{ padding:24px; border:1px dashed var(--bd); border-radius:var(--r); color:var(--tx3); text-align:center; font-size:.9rem; }
+.toast{ position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:var(--vu-black); color:#fff; padding:10px 16px; border-radius:999px; font-size:.86rem; border:1px solid var(--vu-gold); z-index:60; box-shadow:0 10px 30px rgba(0,0,0,.3); }
+.toast[hidden]{ display:none; }
+footer{ padding:18px max(18px, calc(50% - 620px)); border-top:1px solid var(--bd); font-size:.78rem; color:var(--tx3); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+@media (max-width:800px){ .c2, .c3, .form{ grid-template-columns:1fr; } .c4{ grid-template-columns:1fr 1fr; } .list li{ grid-template-columns:1fr; gap:2px; } #top .ttl span{ display:none; } }
+@media print{ #top, footer, .acts, .tabs, .noprint{ display:none !important; } body{ background:#fff; } main{ padding:0; } .print-all .tabpane{ display:block !important; } .card{ break-inside:avoid; } }
+</style>
+</head>
+<body>
+<header id="top"><div class="in">
+  <a href="../" aria-label="Manager Voyage home"><img src="../assets/img/vu-lockup-white.png" alt="Vanderbilt University"></a>
+  <span class="ttl"><b>Manager Voyage</b> <span>&middot; Operations Portal</span></span>
+  <nav id="nav" aria-label="Portal">
+    <a href="#home" data-nav="home">Home</a><a href="#cohorts" data-nav="cohorts">Cohorts</a><a href="#program" data-nav="program">Program launch</a><a href="#calendar" data-nav="calendar">Calendar</a><a href="#settings" data-nav="settings">Settings</a>
+  </nav>
+  <a class="new" href="#new">New cohort</a>
+</div></header>
+<main id="main" aria-live="polite"></main>
+<footer><span>Manager Voyage &middot; People, Culture and Belonging &middot; Futures Learning Hub</span><span id="syncState">Saved in this browser</span></footer>
+<div class="toast" id="toast" hidden role="status"></div>
+<input type="file" id="importFile" accept="application/json" hidden>
+<script src="app.js?v=20261106a"></script>
+</body>
+</html>

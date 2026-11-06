@@ -96,3 +96,14 @@ chat guide (agent `agent_8701m6s7j4jkfn3b8qyanmxn241z`). `node scripts/build-lau
 rewrites `launch/guide-kb.txt`, Beacon's knowledge text, which ElevenLabs
 re-reads from the raw GitHub URL on main. Run all three after editing the plan.
 
+## Operations Portal (`ops/`)
+
+The hub for launching and running cohorts and the program launch: cohort details,
+rosters, checklists and communications worked back from the cohort dates, document
+links, a log, the program launch checklist dated from the launch date, a calendar
+across everything, export and import. Data lives in the browser; an optional shared
+copy through Power Automate and SharePoint is described in `docs/OPS-PORTAL.md`.
+Templates for a cohort's checklist and communications are at the top of `ops/app.js`.
+`docs/PROMPT-launch-kit.md` is the prompt that recreates the launch plan, the site
+page and the chat guide for another program.
+
