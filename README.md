@@ -83,3 +83,16 @@ page and shipped in the SCORM package.
 - Assessment: the Manager Effectiveness Assessment (14 items, out of 70) is completed before the course, results and feedback are emailed, and it is retaken six months after completion. The course asks the learner to review the email or take the assessment (link in assets/js/config.js, assessmentUrl). Open items:
   confirm the YouTube video IDs still resolve (each has an open-on-YouTube
   link).
+
+## Launch plan (`launch/` and `docs/launch-plan/`)
+
+The learner journey, communications cascade, enrollment, Teams channel,
+assessment data setup, delivery and measurement plan. `docs/launch-plan/index.html`
+is the single source: `node scripts/build-launch-plan-pdf.js` prints it to
+`docs/Manager-Voyage-Launch-Plan.pdf` (Letter landscape, one page per section),
+and `python3 scripts/build-launch-site.py <agent id>` builds the web edition at
+`launch/index.html` with the navigation bar and Beacon, the ElevenLabs text
+chat guide (agent `agent_8701m6s7j4jkfn3b8qyanmxn241z`). `node scripts/build-launch-kb.js`
+rewrites `launch/guide-kb.txt`, Beacon's knowledge text, which ElevenLabs
+re-reads from the raw GitHub URL on main. Run all three after editing the plan.
+
