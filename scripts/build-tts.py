@@ -21,8 +21,8 @@ COURSES = [
     # name, scripts file, audio dir, whether the Foundation videos belong to it, cache key prefix
     ('foundation', 'foundation/narration-scripts.js', 'assets/audio/foundation', True, ''),
     ('ny-hiring', 'micro/ny-hiring/narration-scripts.js', 'assets/audio/ny-hiring', False, 'ny-hiring/'),
-    # the simplified Foundations build shares the live course's clips (same keys, same text) and adds its own pages
-    ('foundation-simple', 'foundation/simple/narration-scripts.js', 'assets/audio/foundation', False, ''),
+    # the simplified Foundations build: its own scripts and its own clips
+    ('foundation-simple', 'foundation/simple/narration-scripts.js', 'assets/audio/foundation-simple', False, 'foundation-simple/'),
 ]
 if os.environ.get('MV_COURSE'): COURSES = [c for c in COURSES if c[0] == os.environ['MV_COURSE']]
 

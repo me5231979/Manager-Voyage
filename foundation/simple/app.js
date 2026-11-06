@@ -139,7 +139,7 @@ function narrSpeak(text){
   }catch(e){ narr.playing = false; narrUI(); }
 }
 /* bumped whenever a clip or video is re-recorded, so browsers fetch the new file instead of a cached one */
-var MEDIA_V = '20261101c';
+var MEDIA_V = '20261106a';
 /* the course videos carry their own narration: nothing else should talk over them, and they should not talk over anything else */
 function pauseVideos(){ $$('video').forEach(function(v){ if(v.id !== 'heroVideo' && !v.paused){ try{ v.pause(); }catch(e){} } }); }
 function narrPlay(k){
@@ -149,7 +149,7 @@ function narrPlay(k){
   if(!text){ toast('No narration on this page.'); return; }
   narr.key = k; narr.playing = true; narrUI();
   var fk = (window.MV_NARR_CLIP && window.MV_NARR_CLIP[k]) || k;
-  var a = new Audio('../../assets/audio/foundation/' + fk.replace(/\//g, '-') + '.mp3?v=' + MEDIA_V);
+  var a = new Audio('../../assets/audio/foundation-simple/' + fk.replace(/\//g, '-') + '.mp3?v=' + MEDIA_V);
   a.preload = 'auto';
   a.addEventListener('ended', function(){ if(narr.audio === a){ narr.audio = null; narr.playing = false; delete narrPos[k]; narrPosSave(); narrUI(); } });
   a.addEventListener('error', function(){ if(narr.audio === a){ narr.audio = null; narrSpeak(text); } });
@@ -1061,7 +1061,16 @@ var IDEAS = [
     pg.setAttribute('data-seen-prog', 'safe');
   });
   /* every live page, here and in Your call, gets its conversation */
-  $$('.live-page[data-live-key]').forEach(function(pg){ var k = pg.getAttribute('data-live-key'); if(LIVE[k]) pg.insertAdjacentHTML('beforeend', liveHTML(k)); });
+  $$('.live-page[data-live-key]').forEach(function(pg){
+    var k = pg.getAttribute('data-live-key'); if(!LIVE[k]) return;
+    var L = LIVE[k], sc = SCENARIOS[k];
+    var head = $$(':scope > .mono, :scope > h2', pg).map(function(x){ return x.outerHTML; }).join('');
+    $$(':scope > .mono, :scope > h2', pg).forEach(function(x){ x.remove(); });
+    var why = sc ? '<p class="v-why">Read the situation and tap the response you would give. The page tells you what each one costs. Then have it out loud with ' + esc(L.who) + ', in your own world.</p>' : '<p class="v-why">' + esc(L.brief) + '</p>';
+    pg.insertAdjacentHTML('beforeend', '<div class="v-stage wide-act"><div class="v-copy">' + head + why + '</div><div class="v-act">' + (sc ? '<div class="scn" data-scn="' + k + '"></div>' : '') + '</div></div>' +
+      '<details class="try-fold-cq live-fold"' + (sc ? '' : ' open') + '><summary>Now have it out loud with ' + esc(L.who) + ' (optional, microphone)</summary>' + liveHTML(k) + '</details>');
+    var el = pg.querySelector('.scn[data-scn]'); if(el) buildScenario(el);
+  });
   function paint(){ var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 5 ideas read.' + (n === 5 ? ' Activity complete.' : ''); if(n === 5) progDone('safe'); }
   document.addEventListener('chart:page', function(){
     var pg = document.querySelector('.page.cur'); if(!pg) return;
@@ -1481,4 +1490,72 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   });
   document.addEventListener('click', function(e){ var b = e.target.closest('button[data-go-page]'); if(b && window.chartPager) chartPager.go(parseInt(b.getAttribute('data-go-page'), 10), { focus:true }); });
 })();
+
+/* ══════════ growth: one frame, two maps; tap a site for its card and clip ══════════ */
+(function(){
+  var sec = $('#growth'); if(!sec) return;
+  var CT = {
+    nyc:{ name:'Vanderbilt NYC', focus:'New York City, NY', narr:'mission/g1', why:'It takes Vanderbilt to students and employers in New York, with an undergraduate semester and a master’s in business and technology.', line:'Vanderbilt’s first campus beyond Nashville, open since August 2026: 13 buildings on 2.7 acres in Chelsea, with an undergraduate semester program and a Master of Science in Business and Technology.', meet:'Any service a student or colleague in New York needs from Nashville.', url:'https://www.vanderbilt.edu/nyc/' },
+    wpb:{ name:'Vanderbilt WPB', focus:'West Palm Beach, FL', narr:'mission/g2', why:'It grows graduate education in business, engineering, data science, and AI, the fields that drive the prosperity the Industry Vision is about.', line:'A graduate campus for business, engineering, data science, and AI, with programs planned in finance and in space and defense technology: about 1,000 graduate students and 100 faculty.', meet:'The programs, hiring, and systems built for a second home.', url:'https://www.vanderbilt.edu/chancellor/initiatives-and-outreach/growth/west-palm-beach/' },
+    sf:{ name:'Vanderbilt SF', focus:'San Francisco, CA', narr:'mission/g3', why:'It joins art and design with engineering and AI, alongside the technology and creative sectors.', line:'Opens for the 2027 to 2028 school year on the California College of the Arts campus, home to the Huang College of Art, Architecture and Design, which blends art and design with engineering and AI: about 1,000 students.', meet:'Partnerships with the technology and creative sectors.', url:'https://www.vanderbilt.edu/chancellor/initiatives-and-outreach/growth/san-francisco/' },
+    chattanooga:{ name:'Quantum Innovation', focus:'Chattanooga, TN', narr:'mission/g4', why:'It puts Vanderbilt research at the front of quantum technology, with access no other U.S. site offers.', line:'The Institute for Quantum Innovation, launched with EPB in July 2026: about 250 researchers, faculty, and staff, working with the first U.S. site with commercial access to both a trapped-ion quantum computer and a quantum network.', meet:'Research administration and partnerships across Tennessee.', url:'https://www.vanderbilt.edu/chancellor/initiatives-and-outreach/growth/quantum-innovation/' },
+    nashville:{ name:'Nashville', focus:'Home', narr:'mission/g5', why:'Every growth site runs on the systems and people built here.', line:'Home since 1873: the residential campus and the heart of the university.', meet:'Every day. The back office Nashville already has is what each new site needs on day one.', url:'https://www.vanderbilt.edu/' }
+  };
+  var f = $('.lr-compare', sec), fr = $('.cmp-frame', f), r = $('.cmp-range', f), chips = $('.v-cities', sec), card = $('#cityCard'), task = $('.v-task', sec), st = $('#growthStatus');
+  var seen = {}, sites = ['nyc', 'wpb', 'sf', 'chattanooga'];
+  try{ seen = JSON.parse(get('growth-seen') || '{}') || {}; }catch(e){ seen = {}; }
+  function setPos(v){
+    v = Math.max(0, Math.min(100, v)); fr.style.setProperty('--pos', v + '%'); r.value = v;
+    r.setAttribute('aria-valuetext', v < 15 ? f.getAttribute('data-b') : v > 85 ? f.getAttribute('data-a') : 'Both, divided at ' + Math.round(v) + ' percent');
+    $$('.cmp-pin', fr).forEach(function(p){ var off = parseFloat(p.getAttribute('data-x')) < v; p.classList.toggle('off', off); p.tabIndex = off ? -1 : 0; p.setAttribute('aria-hidden', off ? 'true' : 'false'); });
+    var ta = $('.cmp-tag.a', fr), tb = $('.cmp-tag.b', fr); if(ta) ta.style.opacity = v < 8 ? 0 : ''; if(tb) tb.style.opacity = v > 92 ? 0 : '';
+  }
+  r.addEventListener('input', function(){ setPos(parseFloat(r.value)); });
+  var drag = false;
+  function at(e){ var b = fr.getBoundingClientRect(); setPos((e.clientX - b.left) / b.width * 100); }
+  fr.addEventListener('pointerdown', function(e){ if(e.target.closest('.cmp-pin')) return; drag = true; try{ fr.setPointerCapture(e.pointerId); }catch(err){} at(e); });
+  fr.addEventListener('pointermove', function(e){ if(drag) at(e); });
+  fr.addEventListener('pointerup', function(){ drag = false; });
+  $$('[data-cmp]', f).forEach(function(b){ b.addEventListener('click', function(){ setPos(parseFloat(b.getAttribute('data-cmp'))); }); });
+  setPos(100);
+  function paint(){ var n = sites.filter(function(k){ return seen[k]; }).length; if(st) st.textContent = n + ' of 4 growth sites seen.' + (n === 4 ? ' Activity complete.' : ''); if(n === 4 && task) task.classList.add('done'); }
+  function show(k){
+    var c = CT[k]; if(!c) return;
+    if(parseFloat(r.value) > 0) setPos(0);
+    seen[k] = 1; set('growth-seen', JSON.stringify(seen));
+    $$('.cmp-pin', fr).forEach(function(p){ p.classList.toggle('on', p.getAttribute('data-city') === k); });
+    $$('button[data-city]', chips).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-city') === k ? 'true' : 'false'); });
+    card.innerHTML = '<span class="v-label">' + esc(c.focus) + '</span><b>' + esc(c.name) + '</b><p><b class="lr-meet">Why here.</b> ' + esc(c.why) + '</p><p>' + esc(c.line) + '</p><p><b class="lr-meet">Where you meet it.</b> ' + esc(c.meet) + '</p><a href="' + esc(c.url) + '" target="_blank" rel="noopener">' + esc(c.name) + ' at vanderbilt.edu</a>';
+    narrSub(c.narr);
+    paint();
+  }
+  chips.addEventListener('click', function(e){ var b = e.target.closest('button[data-city]'); if(b) show(b.getAttribute('data-city')); });
+  fr.addEventListener('click', function(e){ var p = e.target.closest('.cmp-pin'); if(p) show(p.getAttribute('data-city')); });
+  paint();
+})();
+
+/* ══════════ the compass: "Open this expectation" turns to that expectation's page; the status counts the points opened ══════════ */
+(function(){
+  if(!$('#fwRose')) return;
+  var st = $('#fwStatus'), seen = {};
+  window.markJob = function(k){ if(seen[k]) return; seen[k] = 1; var n = Object.keys(seen).length; if(st) st.textContent = n + ' of 4 expectations opened.' + (n === 4 ? ' Activity complete.' : ''); };
+  window.showJob = function(k){
+    var pages = $$('.page'), i;
+    for(i = 0; i < pages.length; i++){ if(pages[i].querySelector('.job-pane[data-job="' + k + '"]')){ if(window.chartPager) chartPager.go(i, { focus:true }); return; } }
+  };
+})();
+
+/* ══════════ for you as a manager: one line per page, after the why line ══════════ */
+(function(){
+  var FOR = window.MV_FOR_YOU || {}; if(!window.chartPager) return;
+  var dots = $$('#bbDots .bb-dot');
+  $$('.page').forEach(function(pg, i){
+    var href = dots[i] ? dots[i].getAttribute('href') : ''; var k = href.replace(/^#p\//, ''); var t = FOR[k]; if(!t) return;
+    var el = document.createElement('p'); el.className = 'v-for'; el.innerHTML = '<b>For you as a manager</b><span>' + esc(t) + '</span>';
+    var ip = pg.querySelector('.idea-page'), aside = pg.querySelector('.sp-aside'), why = pg.querySelector('.v-why'), h = pg.querySelector('h2, h1');
+    var wk = ip && ip.querySelector('.idea-core > .week'), fws = pg.querySelector('#fwStatus');
+    if(fws) fws.insertAdjacentElement('afterend', el); else if(aside) aside.insertAdjacentElement('afterbegin', el); else if(wk){ var wrap = document.createElement('div'); wk.parentNode.insertBefore(wrap, wk); wrap.appendChild(wk); wrap.appendChild(el); } else if(ip) ip.insertAdjacentElement('afterbegin', el); else if(why) why.insertAdjacentElement('afterend', el); else if(h) h.insertAdjacentElement('afterend', el);
+  });
+})();
+
 })();

@@ -126,7 +126,7 @@
   .v-stage > .v-copy > .v-why{ grid-column:1; grid-row:2; margin-top:0; align-self:start; max-width:46ch; }
   .v-stage > .v-copy > .v-side{ grid-column:1; grid-row:3; align-self:start; margin-top:0; }
   .v-stage > .v-act{ grid-column:2; grid-row:1 / span 3; align-self:start; }
-  .v-stage > .v-copy > :not(.v-h):not(.v-why):not(.v-side){ grid-column:1 / -1; margin-top:0; }
+  .v-stage > .v-copy > :not(.v-h):not(.v-why):not(.v-side):not(.v-for){ grid-column:1 / -1; margin-top:0; }
   html.paged .v-copy .isnot{ grid-template-columns:repeat(3,1fr); gap:12px 22px; }
   html.paged .page > section.v-sec{ justify-content:flex-start; padding-top:clamp(26px,4.5vh,52px); }
 }
@@ -338,6 +338,68 @@
 .v-sec .job-pane .ask{ display:none; }
 .job-pane .v-why{ margin:6px 0 14px; }
 html.paged .page > section.v-sec.th-dark{ padding-top:clamp(18px,3.5vh,44px); }
+
+/* ── for you as a manager: one line on every page that says what the content does for you ── */
+.v-for{ display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:baseline; margin:10px 0 0; padding:7px 12px; border-left:3px solid var(--eyebrow); background:rgba(207,174,112,.07); color:var(--tx); font-size:.9rem; line-height:1.4; max-width:none; }
+.idea-core .v-for{ margin-top:10px; }
+.v-for > b{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); white-space:nowrap; }
+@media (max-width:640px){ .v-for{ grid-template-columns:1fr; } }
+.v-stage > .v-copy > .v-for.v-for{ grid-column:1; grid-row:3; align-self:start; margin-top:0; }
+.v-stage > .v-copy > .v-side{ grid-row:4; }
+@media (min-width:1001px){ .v-stage{ grid-template-rows:auto auto auto minmax(0,1fr); row-gap:0; } .v-stage > .v-act{ grid-row:1 / span 4; } .v-stage > .v-copy > .v-h, .v-stage > .v-copy > .v-why, .v-stage > .v-copy > .v-for{ margin-bottom:clamp(14px,2.4vh,26px); } }
+html.paged .v-next{ margin-top:16px; padding-top:12px; }
+html.paged #welcome #fwBack{ display:none; }
+.pst-never .eg{ display:block; margin-top:4px; font-size:.86rem; color:var(--eyebrow); }
+.sp-aside .ov-card p{ margin-top:6px; color:var(--tx2); font-size:.95rem; line-height:1.5; }
+/* ── the growth page: one frame, two maps, pins that appear as 2026 is uncovered ── */
+.lr-compare{ margin:0; }
+.lr-compare .cmp-frame{ --pos:50%; position:relative; overflow:hidden; border-radius:var(--r); border:1px solid var(--bdg); cursor:ew-resize; touch-action:pan-y; user-select:none; }
+.lr-compare .cmp-frame img{ display:block; width:100%; height:auto; pointer-events:none; }
+.lr-compare .cmp-b{ position:absolute; inset:0; clip-path:inset(0 0 0 var(--pos)); }
+.lr-compare .cmp-b img{ width:100%; height:100%; object-fit:cover; }
+.lr-compare .cmp-line{ position:absolute; top:0; bottom:0; left:var(--pos); width:2px; margin-left:-1px; background:#ECB748; box-shadow:0 0 0 1px rgba(0,0,0,.4); pointer-events:none; }
+.lr-compare .cmp-line::after{ content:''; position:absolute; top:50%; left:50%; width:34px; height:34px; margin:-17px 0 0 -17px; border-radius:50%; background:#ECB748; box-shadow:0 2px 10px rgba(0,0,0,.5); }
+.lr-compare .cmp-tag{ position:absolute; top:10px; padding:4px 8px; border-radius:3px; background:rgba(15,15,15,.85); color:#fff; font:700 .75rem/1 var(--cond); letter-spacing:.06em; text-transform:uppercase; pointer-events:none; }
+.lr-compare .cmp-tag.a{ left:10px; } .lr-compare .cmp-tag.b{ right:10px; color:#ECB748; }
+.lr-compare .cmp-ctl{ display:flex; align-items:center; gap:12px; margin-top:10px; }
+.lr-compare .cmp-ctl button{ flex:0 0 auto; min-height:36px; padding:6px 12px; border:1px solid var(--bdg); border-radius:var(--r); background:transparent; color:var(--tx); font:600 .875rem/1 var(--sans); cursor:pointer; }
+.lr-compare .cmp-ctl button:hover{ border-color:var(--eyebrow); }
+.lr-compare .cmp-range{ flex:1; accent-color:#ECB748; min-height:24px; }
+.lr-compare figcaption{ margin-top:8px; font-size:.82rem; color:var(--tx3); } .lr-compare figcaption a{ color:var(--link); }
+.lr-footmap .cmp-pin{ position:absolute; z-index:4; width:2.4em; height:2.4em; min-width:24px; min-height:24px; margin:0; padding:0; transform:translate(-50%,-50%); border-radius:50%; border:2px solid #ECB748; background:rgba(236,183,72,.12); cursor:pointer; transition:opacity .25s, transform .25s, background .2s; animation:lrPinPulse 2.2s ease-in-out infinite; }
+.lr-footmap .cmp-pin:hover, .lr-footmap .cmp-pin:focus-visible{ background:rgba(236,183,72,.35); transform:translate(-50%,-50%) scale(1.12); }
+.lr-footmap .cmp-pin:focus-visible{ outline:3px solid #fff; outline-offset:3px; }
+.lr-footmap .cmp-pin.on{ background:rgba(236,183,72,.55); box-shadow:0 0 0 6px rgba(236,183,72,.25); animation:none; }
+.lr-footmap .cmp-pin.off{ opacity:0; pointer-events:none; transform:translate(-50%,-50%) scale(.6); }
+@keyframes lrPinPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(236,183,72,.45); } 50%{ box-shadow:0 0 0 10px rgba(236,183,72,0); } }
+@media (prefers-reduced-motion:reduce){ .lr-footmap .cmp-pin{ animation:none; transition:none; } }
+.v-cities{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.v-cities button{ font:inherit; font-size:.84rem; color:var(--tx); background:none; border:1px solid var(--bdg); border-radius:999px; padding:6px 12px; cursor:pointer; min-height:36px; transition:border-color .2s ease, background .2s ease, color .2s ease; }
+.v-cities button:hover{ border-color:var(--eyebrow); color:var(--eyebrow); }
+.v-cities button[aria-pressed="true"]{ background:var(--eyebrow); border-color:var(--eyebrow); color:var(--vu-black); }
+.v-city{ margin-top:12px; border:1px solid var(--bd); border-left:3px solid var(--eyebrow); border-radius:4px; background:var(--card); padding:12px 16px; min-height:84px; }
+.v-city .v-label{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
+.v-city b{ display:block; font-family:var(--serif); font-weight:400; font-size:1.2rem; color:var(--tx); margin-top:4px; }
+.v-city p{ color:var(--tx2); font-size:.9rem; line-height:1.45; margin-top:4px; }
+.v-city p .lr-meet{ display:inline; font-family:var(--sans); font-size:inherit; font-weight:600; color:var(--tx); }
+.v-city a{ color:var(--link); font-size:.88rem; }
+.v-port-empty{ color:var(--tx3); font-size:.95rem; }
+html.paged #growth .drill-status{ margin-top:8px; }
+html.paged #growth .v-side{ margin-top:0; }
+/* ── the compass: the four expectations listed until a point is tapped ── */
+.fw-empty .fw-list{ margin-top:0; }
+/* ── practice pages: the written situation first, the live conversation under a fold ── */
+.live-page .scn{ margin-top:0; } .live-page .scn .scn-s{ font-size:1.12rem; }
+html.paged #fwRose{ max-width:min(100%, 320px); margin:0 auto; }
+html.paged #welcome .fw-panel .fw-card li em{ display:inline; margin-left:6px; } html.paged #welcome .fw-panel .fw-card li{ line-height:1.35; }
+html.paged #welcome .fw-panel .fw-card ul{ display:grid; grid-template-columns:1fr 1fr; gap:4px 14px; } html.paged #welcome .fw-panel .fw-card p{ margin-top:4px; } html.paged #welcome .fw-panel .fw-card strong{ font-size:1.1rem; }
+html.paged #welcome .fw-list li{ padding:8px 12px; } html.paged #welcome .fw-list{ gap:6px; }
+html.paged #welcome .fw-panel .fw-card ul{ margin-top:6px; } html.paged #welcome .fw-panel .fw-card li{ font-size:.92rem; }
+html.paged #welcome .fw-panel{ min-height:0; margin-top:0; }
+.live-fold{ margin-top:16px; }
+.live-fold > summary{ cursor:pointer; font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); padding:10px 0; border-top:1px solid var(--bd); }
+.live-fold > summary::marker{ color:var(--eyebrow); }
+
 /* layout: each page sits in the middle of the stage when it fits, and starts at the top when it has to scroll */
 html.paged .page > section.v-sec:not(.v-hero){ flex:0 0 auto; margin-top:auto; margin-bottom:auto; }
 html.paged .page > footer{ margin-top:0; }
@@ -1375,16 +1437,39 @@ footer .fcenter img{ width:64px; height:auto; }
     <p class="pst-note"><a id="missionLink" href="https://www.vanderbilt.edu/" target="_blank" rel="noopener">Read the full vision at vanderbilt.edu</a></p>
     <div data-pg="Your responsibility" class="sp-stage">
       <div>
-        <h2 class="v-h">Your responsibility: embody it, and lead your team to <em>achieve</em> it.</h2>
+        <h2 class="v-h sm">Your responsibility: embody it, and lead your team to <em>achieve</em> it.</h2>
         <ul class="pst-never" aria-label="Your responsibility">
-          <li><i class="n">1</i><div><b>Embody it.</b><span>Speed, agility and scale start with how you work.</span></div></li>
-          <li><i class="n">2</i><div><b>Lead your team to achieve it.</b><span>Connect the work to the mission and say the why.</span></div></li>
-          <li><i class="n">3</i><div><b>Stay in touch with your manager.</b><span>Strategy, projects, priorities, anything else.</span></div></li>
+          <li><i class="n">1</i><div><b>Embody it.</b><span>Speed, agility and scale start with how you work.</span><span class="eg">For example: the timecard question gets answered today, not Friday.</span></div></li>
+          <li><i class="n">2</i><div><b>Lead your team to achieve it.</b><span>Connect the work to the mission and say the why.</span><span class="eg">For example: the new ordering system is not an IT project, it is how Dining feeds five more buildings with the same crew.</span></div></li>
+          <li><i class="n">3</i><div><b>Stay in touch with your manager.</b><span>Strategy, projects, priorities, anything else.</span><span class="eg">For example: before you say yes to another office's big request, your manager hears about it in your 1:1.</span></div></li>
         </ul>
       </div>
-      <div class="ov-grid two map-row">
-        <div class="ov-card map-card"><b>As we grow</b></div>
-        <div class="ov-card"><b>Your team, wherever they sit</b><p>Vanderbilt now works from five cities. Tap a campus on the map to read about it.</p><p class="op-link"><a href="https://www.vanderbilt.edu/campuses/" target="_blank" rel="noopener">All five campuses at vanderbilt.edu</a></p></div>
+      <div class="sp-aside">
+        <div class="ov-card"><b>What this looks like on a Tuesday</b><p>A team member asks why the new system matters. A director asks for your whole team on Friday. A timecard is late. One of the three responsibilities answers each one. The next page shows where your team sits in a university that now works from five cities.</p></div>
+      </div>
+    </div>
+    <div data-pg="Vanderbilt has grown" class="v-stage" id="growth">
+      <div class="v-copy">
+        <h2 class="v-h">Vanderbilt has grown beyond <em>Nashville</em>.</h2>
+        <p class="v-why">One frame, two maps: the footprint in 2020, and in 2026. Each new site has a reason.</p>
+        <div class="v-side growth-side">
+          <p class="v-task" data-task="growth">Drag the gold line to 2026, then tap each new site</p>
+          <div class="v-cities" role="group" aria-label="Vanderbilt growth sites"><button type="button" data-city="nyc" aria-pressed="false">New York City</button><button type="button" data-city="wpb" aria-pressed="false">West Palm Beach</button><button type="button" data-city="sf" aria-pressed="false">San Francisco</button><button type="button" data-city="chattanooga" aria-pressed="false">Chattanooga</button><button type="button" data-city="nashville" aria-pressed="false">Nashville</button></div>
+          <p class="drill-status" id="growthStatus" role="status" aria-live="polite">0 of 4 growth sites seen.</p>
+        </div>
+      </div>
+      <div class="v-act">
+        <figure class="lr-compare lr-footmap" data-nosweep data-a="Vanderbilt University footprint in 2020: Nashville" data-b="Vanderbilt University footprint in 2026: Nashville, Chattanooga, New York, San Francisco, and West Palm Beach">
+          <div class="cmp-frame">
+            <img class="cmp-a" src="../../assets/img/foundation/footprint-2020.jpg" width="1600" height="835" alt="2020 map of the United States with one gold marker, at Nashville." />
+            <div class="cmp-b"><img src="../../assets/img/foundation/footprint-2026.jpg" width="1600" height="835" alt="2026 map of the United States with gold markers at Nashville, Chattanooga, New York, San Francisco, and West Palm Beach, each linked to Nashville by an arc." /></div>
+            <span class="cmp-tag a" aria-hidden="true">2020</span><span class="cmp-tag b" aria-hidden="true">2026</span><span class="cmp-line" aria-hidden="true"></span>
+            <button type="button" class="pin cmp-pin" data-city="sf" data-x="3.25" style="left:3.25%;top:35.9%" aria-label="Open Vanderbilt SF, San Francisco"></button><button type="button" class="pin cmp-pin" data-city="nyc" data-x="83.9" style="left:83.9%;top:27.7%" aria-label="Open Vanderbilt NYC, New York City"></button><button type="button" class="pin cmp-pin" data-city="nashville" data-x="64.2" style="left:64.2%;top:53.3%" aria-label="Open Nashville, home"></button><button type="button" class="pin cmp-pin" data-city="chattanooga" data-x="67.0" style="left:67.0%;top:57.6%" aria-label="Open Quantum Innovation, Chattanooga"></button><button type="button" class="pin cmp-pin" data-city="wpb" data-x="79.4" style="left:79.4%;top:89.8%" aria-label="Open Vanderbilt WPB, West Palm Beach"></button>
+          </div>
+          <div class="cmp-ctl"><button type="button" data-cmp="0">2026</button><input type="range" class="cmp-range" min="0" max="100" value="100" aria-label="Compare the 2020 and 2026 footprint maps: slide left to uncover 2026" /><button type="button" data-cmp="100">2020</button></div>
+          <figcaption>Vanderbilt University's footprint in 2020 and in 2026. Site details at <a href="https://www.vanderbilt.edu/campuses/" target="_blank" rel="noopener">vanderbilt.edu</a>.</figcaption>
+        </figure>
+        <div class="v-city" id="cityCard" aria-live="polite"><p class="v-port-empty">Tap a site on the map, or a name on the left, to open its card.</p></div>
       </div>
     </div>
   </div>
@@ -1442,14 +1527,15 @@ footer .fcenter img{ width:64px; height:auto; }
     </div>
     <div data-pg="Who helps you">
       <h2 class="v-h sm">Five people who <em>help</em> you.</h2>
-      <p class="v-why">Learn their names in your first week. Each card says what they do and when to reach them.</p>
-      <ul class="pst-cards five" aria-label="Who helps you">
-        <li class="c1"><div class="hd">Your manager</div><div class="bd"><b>Direction and priorities.</b><p><strong>When:</strong> every week in your 1:1, and before you say yes to a big request from another office.</p></div></li>
-        <li class="c2"><div class="hd">Your HCM</div><div class="bd"><b>Pay, hiring, performance, policy.</b><p><strong>When:</strong> the same day a question comes up, before you act. Your first call when unsure.</p></div></li>
-        <li class="c2"><div class="hd">Engagement Consultant</div><div class="bd"><b>The bigger people questions.</b><p><strong>When:</strong> a performance pattern, a hard conversation to plan, a team dynamic.</p></div></li>
-        <li class="c3"><div class="hd">Leave and Workers&rsquo; Comp</div><div class="bd"><b>Health and family time off. Hurt at work.</b><p><strong>When:</strong> the same day it comes up. Requests go through Origami. Never ask for a diagnosis.</p></div></li>
-        <li class="c4"><div class="hd">EOA</div><div class="bd"><b>Discrimination, harassment, misconduct.</b><p><strong>When:</strong> the same day you see it or hear about it. You report, you do not investigate.</p></div></li>
-      </ul>
+      <p class="v-why">Learn their names in your first week. Tap each one: what they do, when you contact them, and how.</p>
+      <div class="helpers" role="list" aria-label="Who helps you at Vanderbilt">
+      <span class="mono">Who helps you</span>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M12 2v1.5M18.5 5.5l-1 1M5.5 5.5l1 1"/></svg></span><b>Your manager</b><p>Stay in touch to stay aligned.</p><small>Strategy, projects, priorities, anything else</small></div>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M14.5 20a4.5 4.5 0 0 1 7 -3.5"/></svg></span><b>Your Engagement Consultant</b><p>Your go-to in PCB for HR issues, concerns, and support.</p><small>The bigger people questions for your business unit</small></div>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></span><b>Your HCM</b><p>In most business units, for immediate HR issues.</p><small>Pay, hiring, performance, policy. First call when unsure</small></div>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span><b>Workers Comp and Leave</b><p>Time off for health and family, and injuries at work.</p><small>Contact them the same day. FMLA requests go through Origami. Never ask for a diagnosis</small></div>
+      <div role="listitem"><span class="hic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><b>EOA</b><p>Discrimination, harassment, and misconduct reports.</p><small>Report the same day. You report; you do not investigate</small></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1539,21 +1625,52 @@ footer .fcenter img{ width:64px; height:auto; }
         </ul>
       </div>
     </div>
+    <div data-pg="Situation simulator" class="v-stage wide-act">
+      <div class="v-copy">
+        <h2 class="v-h">Something just landed on your desk. <em>What now?</em></h2>
+        <p class="v-why">Pick a situation. The page gives you the first move today, what it sounds like, who handles what, and what never to do.</p>
+      </div>
+      <div class="v-act">
+        <div class="sim" id="simBox" data-sim>
+          <div class="sim-head"><span class="mno">Situation simulator</span></div>
+          <label class="sim-pick" for="simSel"><span class="mono">Pick a situation</span><select id="simSel"></select></label>
+          <div class="sim-out" id="simOut" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="welcome" class="th-dark v-sec" aria-label="The Vanderbilt Manager Standard">
   <div class="wrap">
     <div class="v-rail" data-lesson="4"><span>Topic 4 of 6 &middot; The Vanderbilt Manager Standard</span></div>
-    <h2 class="v-h sm">The Vanderbilt Manager Standard: four <em>expectations</em>.</h2>
-    <p class="v-why">Every manager meets all four, every week. Adapted from Gary Yukl&rsquo;s four categories of leadership behavior and his fifteen behaviors. The assessment measures it; this course teaches it.</p>
-    <ul class="pst-cards" aria-label="The four expectations">
-      <li class="c1"><div class="hd">01 &middot; Get the work done</div><div class="bd"><b>Through your team.</b><p>Plan it, say it, check it, fix it.</p></div></li>
-      <li class="c2"><div class="hd">02 &middot; Take care of your people</div><div class="bd"><b>Growing, and staying.</b><p>Listen and help, grow them, thank them, trust them.</p></div></li>
-      <li class="c3"><div class="hd">03 &middot; Make things better</div><div class="bd"><b>Better at what it does.</b><p>Explain the why, describe where you are going, let people try, look back.</p></div></li>
-      <li class="c4"><div class="hd">04 &middot; Connect your team</div><div class="bd"><b>To the rest of Vanderbilt.</b><p>Know the people, watch for what is coming, speak up for your team.</p></div></li>
-    </ul>
-    <p class="fw-status" id="fwStatus" role="status" aria-live="polite">Turn the pages to open each expectation.</p>
+    <div class="v-stage">
+      <div class="v-copy">
+      <h2 class="v-h sm">The Vanderbilt Manager Standard: four <em>expectations</em>.</h2>
+      <p class="v-why">Every manager meets all four, every week.</p>
+      <div class="v-side fw-panel" id="fwPanel">
+        <div class="fw-video fw-empty" id="fwVideo">
+          <ul class="pst-never fw-list" aria-label="The four expectations">
+            <li><i class="n">1</i><div><b>Get the work done, through your team.</b><span>Plan it, say it, check it, fix it.</span></div></li>
+            <li><i class="n">2</i><div><b>Take care of your people.</b><span>Listen and help, grow them, thank them, trust them.</span></div></li>
+            <li><i class="n">3</i><div><b>Make things better.</b><span>Explain the why, describe where you are going, let people try, look back.</span></div></li>
+            <li><i class="n">4</i><div><b>Connect your team to the rest of Vanderbilt.</b><span>Know the people, watch for what is coming, speak up for your team.</span></div></li>
+          </ul>
+        </div>
+        <div class="fw" id="fwMap" hidden>
+      <div class="fw-card" data-job="task" role="button" tabindex="0" aria-label="Hear expectation one"><b>Expectation 01 &middot; Yukl: task-oriented</b><strong>Get the work done, through your team.</strong><p>Is the team&rsquo;s work getting done, and done well? You check it and unblock it; you do not do it yourself.</p><ul><li>Planning <i>(plan it)</i><em>Create clarity</em></li><li>Clarifying <i>(say it)</i><em>Create clarity</em></li><li>Monitoring operations <i>(check it)</i><em>Coach and develop</em></li><li>Problem solving <i>(fix it)</i><em>Address issues</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="task">Open this expectation</button></span></div>
+      <div class="fw-card" data-job="relations" role="button" tabindex="0" aria-label="Hear expectation two"><b>Expectation 02 &middot; Yukl: relations-oriented</b><strong>Take care of your people.</strong><p>Are people growing, and staying?</p><ul><li>Supporting <i>(listen and help)</i><em>Build trust</em></li><li>Developing <i>(grow them)</i><em>Coach and develop</em></li><li>Recognizing <i>(thank them)</i><em>Build trust</em></li><li>Empowering <i>(trust them)</i><em>Empower others</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="relations">Open this expectation</button></span></div>
+      <div class="fw-card" data-job="change" role="button" tabindex="0" aria-label="Hear expectation three"><b>Expectation 03 &middot; Yukl: change-oriented</b><strong>Make things better.</strong><p>Is the team getting better at what it does?</p><ul><li>Advocating change <i>(explain the why)</i><em>Lead change</em></li><li>Envisioning change <i>(describe where you are going)</i><em>Lead change</em></li><li>Encouraging innovation <i>(let people try)</i><em>Empower others</em></li><li>Facilitating collective learning <i>(look back)</i><em>Lead change</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="change">Open this expectation</button></span></div>
+      <div class="fw-card" data-job="external" role="button" tabindex="0" aria-label="Hear expectation four"><b>Expectation 04 &middot; Yukl: external</b><strong>Connect your team to the rest of Vanderbilt.</strong><p>Does the team get what it needs from outside?</p><ul><li>Networking <i>(know the people)</i><em>Build trust</em></li><li>External monitoring <i>(watch for what is coming)</i><em>Lead change</em></li><li>Representing <i>(speak up for your team)</i><em>Address issues</em></li></ul><span class="fw-foot"><button type="button" class="fw-open" data-open="external">Open this expectation</button></span></div>
+        <button type="button" class="fw-back" id="fwBack">Back to the standard</button>
+        </div>
+      </div>
+      </div>
+      <div class="v-act">
+        <div class="v-rose" id="fwRose" aria-label="The four expectations"></div>
+        <p class="fw-status" id="fwStatus" role="status" aria-live="polite">0 of 4 expectations opened.</p>
+      </div>
+    </div>
     <div data-pg="Monday, four asks" class="v-stage">
       <div class="v-copy">
         <h2 class="v-h">Monday, four <em>asks</em>.</h2>
@@ -1792,6 +1909,18 @@ footer .fcenter img{ width:64px; height:auto; }
       <h2 class="v-h sm">The best from <em>outside</em> Vanderbilt.</h2>
       <p class="v-why">Podcasts, books and talks on the habit you are working on. Public and free.</p>
       <div class="learn-pane" data-lpane="outside"><div class="learn-grid" id="learnGrid"></div></div>
+    </div>
+    <div data-pg="Watch">
+      <h2 class="v-h sm">Four short <em>talks</em>.</h2>
+      <p class="v-why">The ideas from this course, from the people who named them: feedback, delegation, purpose, and safety. Tap play.</p>
+      <div class="learn-pane cur" data-lpane="watch">
+      <div class="learn-media">
+        <div><span class="mono">Watch: feedback in three parts</span><div class="yt" data-embed="-oRKr5xA9N0" data-title="Give feedback with situation, behavior, impact"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=-oRKr5xA9N0" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+        <div><span class="mono">Watch: delegation and priorities</span><div class="yt" data-embed="dRhb0-CFBbk" data-title="Delegation and the urgent and important grid"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=dRhb0-CFBbk" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+        <div><span class="mono">Watch: start with why</span><div class="yt" data-embed="2Ss78LfY3nE" data-title="Start with why: how great leaders inspire action"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=2Ss78LfY3nE" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+        <div><span class="mono">Watch: psychological safety</span><div class="yt" data-embed="LhoLuui9gX8" data-title="Building a psychologically safe workplace"></div><p class="yt-fallback">Video not loading? <a href="https://www.youtube.com/watch?v=LhoLuui9gX8" target="_blank" rel="noopener">Open it on YouTube</a>.</p></div>
+      </div>
+      </div>
     </div>
     <div data-pg="The end">
       <div class="wrapup reveal">
