@@ -1064,11 +1064,10 @@ var IDEAS = [
   $$('.live-page[data-live-key]').forEach(function(pg){
     var k = pg.getAttribute('data-live-key'); if(!LIVE[k]) return;
     var L = LIVE[k], sc = SCENARIOS[k];
-    var head = $$(':scope > .mono, :scope > h2', pg).map(function(x){ return x.outerHTML; }).join('');
-    $$(':scope > .mono, :scope > h2', pg).forEach(function(x){ x.remove(); });
-    var why = sc ? '<p class="v-why">Read the situation and tap the response you would give. The page tells you what each one costs. Then have it out loud with ' + esc(L.who) + ', in your own world.</p>' : '<p class="v-why">' + esc(L.brief) + '</p>';
-    pg.insertAdjacentHTML('beforeend', '<div class="v-stage wide-act"><div class="v-copy">' + head + why + '</div><div class="v-act">' + (sc ? '<div class="scn" data-scn="' + k + '"></div>' : '') + '</div></div>' +
-      '<details class="try-fold-cq live-fold"' + (sc ? '' : ' open') + '><summary>Now have it out loud with ' + esc(L.who) + ' (optional, microphone)</summary>' + liveHTML(k) + '</details>');
+    var head = $$(':scope > h2', pg).map(function(x){ return x.outerHTML; }).join('');
+    $$(':scope > .mono, :scope > h2', pg).forEach(function(x){ x.parentNode.removeChild(x); });
+    var why = '<p class="v-why">Tap Start and have it out loud: ' + esc(L.who) + ' answers back, in your world.' + (sc ? ' No microphone? Tap the response you would give.' : '') + '</p>';
+    pg.insertAdjacentHTML('beforeend', '<div class="v-stage wide-act live-stage"><div class="v-copy">' + head + why + (sc ? '<div class="v-side"><div class="scn" data-scn="' + k + '"></div></div>' : '') + '</div><div class="v-act">' + liveHTML(k) + '</div></div>');
     var el = pg.querySelector('.scn[data-scn]'); if(el) buildScenario(el);
   });
   function paint(){ var n = Object.keys(seen).length; if(status) status.textContent = n + ' of 5 ideas read.' + (n === 5 ? ' Activity complete.' : ''); if(n === 5) progDone('safe'); }
@@ -1476,7 +1475,8 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   var pages = $$('.page'); if(pages.length < 2) return;
   function titleOf(pg){
     var rail = pg.querySelector('.v-rail span'); if(rail){ var t = rail.textContent.split('·'); return (t[t.length - 1] || '').trim(); }
-    var h = pg.querySelector('h2, h1'); if(!h) return 'Next page';
+    var h = pg.querySelector('h2, h1');
+    if(!h){ var i = $$('.page').indexOf(pg), d = $$('#bbDots .bb-dot')[i]; var nm = d ? (d.getAttribute('data-name') || '').split(' \u00b7 ').slice(1).join(' \u00b7 ') : ''; return nm || 'Next page'; }
     var c = h.cloneNode(true); $$('.mono, small, .kicker', c).forEach(function(k){ k.remove(); });
     return c.textContent.replace(/\s+/g, ' ').trim() || 'Next page';
   }
@@ -1553,8 +1553,8 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     var href = dots[i] ? dots[i].getAttribute('href') : ''; var k = href.replace(/^#p\//, ''); var t = FOR[k]; if(!t) return;
     var el = document.createElement('p'); el.className = 'v-for'; el.innerHTML = '<b>For you as a manager</b><span>' + esc(t) + '</span>';
     var ip = pg.querySelector('.idea-page'), aside = pg.querySelector('.sp-aside'), why = pg.querySelector('.v-why'), h = pg.querySelector('h2, h1');
-    var wk = ip && ip.querySelector('.idea-core > .week'), fws = pg.querySelector('#fwStatus');
-    if(fws) fws.insertAdjacentElement('afterend', el); else if(aside) aside.insertAdjacentElement('afterbegin', el); else if(wk){ var wrap = document.createElement('div'); wk.parentNode.insertBefore(wrap, wk); wrap.appendChild(wk); wrap.appendChild(el); } else if(ip) ip.insertAdjacentElement('afterbegin', el); else if(why) why.insertAdjacentElement('afterend', el); else if(h) h.insertAdjacentElement('afterend', el);
+    var wk = ip && ip.querySelector('.idea-core > .week'), fws = pg.querySelector('#fwStatus'), lv = pg.querySelector('.live-stage > .v-act');
+    if(fws) fws.insertAdjacentElement('afterend', el); else if(lv) lv.appendChild(el); else if(aside) aside.insertAdjacentElement('afterbegin', el); else if(wk){ var wrap = document.createElement('div'); wk.parentNode.insertBefore(wrap, wk); wrap.appendChild(wk); wrap.appendChild(el); } else if(ip) ip.insertAdjacentElement('afterbegin', el); else if(why) why.insertAdjacentElement('afterend', el); else if(h) h.insertAdjacentElement('afterend', el);
   });
 })();
 
