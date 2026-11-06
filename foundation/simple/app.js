@@ -363,7 +363,7 @@ function bbDoneSync(){
 }
 if(bbDoneBtn) bbDoneBtn.addEventListener('click', function(){ var k = bbDoneBtn.getAttribute('data-prog'); if(k) progToggle(k); });
 document.addEventListener('chart:page', bbDoneSync);
-function progDone(k){ if(progIs(k)) return; progWrite(k, true); progRender(k, true); if(window.turnDone) turnDone(k); }
+function progDone(k){ if(progIs(k)) return; progWrite(k, true); progRender(k, true); if(window.turnDone) turnDone(k); try{ document.dispatchEvent(new CustomEvent('mv:prog', { detail:{ key:k } })); }catch(e){} }
 function progToggle(k){ var v = !progIs(k); progWrite(k, v); progRender(k, v); }
 function progOpen(open){ if(!progPanel || !progBtn) return; progPanel.hidden = !open; progBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
 if(progBtn) progBtn.addEventListener('click', function(){ progOpen(progPanel && progPanel.hidden); });
@@ -1588,10 +1588,10 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
 /* ══════════ the course guide: a chat panel on every page that answers about the course and its content ══════════ */
 (function(){
   var AGENT = 'agent_4601m6rpzdvjf8r98d8attr55cnk', SDK = 'https://cdn.jsdelivr.net/npm/@elevenlabs/client/+esm';
-  var fab = document.createElement('button'); fab.type = 'button'; fab.id = 'guideFab'; fab.setAttribute('aria-expanded', 'false'); fab.setAttribute('aria-controls', 'guidePanel');
-  fab.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/><path d="M9 12h6M9 9h4"/></svg><span>Ask the guide</span>';
-  var panel = document.createElement('aside'); panel.id = 'guidePanel'; panel.hidden = true; panel.setAttribute('aria-label', 'Course guide');
-  panel.innerHTML = '<div class="g-head"><span class="mono">Course guide</span><b>Ask about the course, or this page.</b><button type="button" class="g-close" aria-label="Close the guide">&times;</button></div>' +
+  var fab = document.createElement('button'); fab.type = 'button'; fab.id = 'guideFab'; fab.setAttribute('aria-expanded', 'false'); fab.setAttribute('aria-controls', 'guidePanel'); fab.setAttribute('aria-label', 'Ask Compass, the course guide');
+  fab.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/><path d="M9 12h6M9 9h4"/></svg><span>Ask Compass</span>';
+  var panel = document.createElement('aside'); panel.id = 'guidePanel'; panel.hidden = true; panel.setAttribute('aria-label', 'Compass, the course guide');
+  panel.innerHTML = '<div class="g-head"><span class="mono">Compass &middot; your course guide</span><b>Ask about the course, or this page.</b><button type="button" class="g-close" aria-label="Close the guide">&times;</button></div>' +
     '<div class="g-log" aria-live="polite"></div><p class="g-state" role="status"></p>' +
     '<form class="g-form"><input type="text" class="g-in" placeholder="Type a question&hellip;" aria-label="Your question" autocomplete="off" maxlength="500" /><button type="submit" class="btn btn-gold btn-sm">Send</button></form>' +
     '<div class="g-tips"><button type="button" data-q="What does this page mean for me as a manager?">What does this page mean for me?</button><button type="button" data-q="Who do I call about a leave request?">Who do I call about leave?</button><button type="button" data-q="How does the assessment work?">How does the assessment work?</button></div>';
@@ -1599,7 +1599,7 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   var log = panel.querySelector('.g-log'), state = panel.querySelector('.g-state'), form = panel.querySelector('.g-form'), input = panel.querySelector('.g-in');
   var conv = null, starting = null, pending = [];
   function pageName(){ var c = window.chartPager ? chartPager.current() : null; var pg = document.querySelector('.page.cur'); return (pg && pg.getAttribute('aria-label')) || (c ? c.key : 'the course'); }
-  function say(who, text){ var d = document.createElement('p'); d.className = 'g-line ' + who; d.innerHTML = '<b>' + (who === 'you' ? 'You' : 'Guide') + '</b>' + esc(text); log.appendChild(d); log.scrollTop = log.scrollHeight; }
+  function say(who, text){ var d = document.createElement('p'); d.className = 'g-line ' + who; d.innerHTML = '<b>' + (who === 'you' ? 'You' : 'Compass') + '</b>' + esc(text); log.appendChild(d); log.scrollTop = log.scrollHeight; }
   function status(t){ state.textContent = t || ''; }
   function open(){ panel.hidden = false; fab.setAttribute('aria-expanded', 'true'); document.body.classList.add('guide-open'); input.focus(); if(!conv && !starting) connect(); }
   function close(){ panel.hidden = true; fab.setAttribute('aria-expanded', 'false'); document.body.classList.remove('guide-open'); }
@@ -1611,11 +1611,11 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
         agentId: AGENT, connectionType: 'websocket', textOnly: true,
         dynamicVariables: { page: pageName() },
         onConnect: function(){ status(''); pending.splice(0).forEach(function(t){ send(t); }); },
-        onDisconnect: function(){ conv = null; status('The guide stepped away. Send a message to reconnect.'); },
+        onDisconnect: function(){ conv = null; status('Compass stepped away. Send a message to reconnect.'); },
         onMessage: function(m){ if(m && m.message && m.source !== 'user') say('guide', m.message); },
-        onError: function(){ conv = null; status('The guide could not connect. Try again in a moment.'); }
+        onError: function(){ conv = null; status('Compass could not connect. Try again in a moment.'); }
       });
-    }).then(function(c){ conv = c; starting = null; return c; }).catch(function(){ starting = null; conv = null; status('The guide is not available in this browser right now.'); });
+    }).then(function(c){ conv = c; starting = null; return c; }).catch(function(){ starting = null; conv = null; status('Compass is not available in this browser right now.'); });
     return starting;
   }
   function send(text){
@@ -1629,6 +1629,83 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !panel.hidden) close(); });
   /* the guide follows the learner from page to page */
   document.addEventListener('chart:page', function(){ if(conv && conv.sendContextualUpdate){ try{ conv.sendContextualUpdate('The learner is now on the page: ' + pageName()); }catch(e){} } });
+})();
+
+/* ══════════ modules: seven, one at a time; finish one and the next opens ══════════ */
+(function(){
+  if(!window.chartPager) return;
+  var MODULES = [
+    { title:'The mission', secs:['mission'], mins:5, forYou:'Why the work matters when your team asks, and where your team sits in a university that works from five cities.' },
+    { title:'What changed, and what a manager is', secs:['shift', 'basics'], mins:10, forYou:'The one shift that makes you a manager, three questions every week, and the five people who help you.' },
+    { title:'Five ideas', secs:['ideas'], mins:15, forYou:'Five ideas that hold up in every unit, each with a move for this week and a conversation to practice it.' },
+    { title:'Your first year, and who handles what', secs:['year', 'calls'], mins:10, forYou:'The whole job by how often it comes up, and the four doors for anything that lands on your desk.' },
+    { title:'The Vanderbilt Manager Standard', secs:['welcome'], mins:20, forYou:'The four expectations your assessment measures and your manager looks for, with a habit drill for each.' },
+    { title:'Your call: four conversations', secs:['yourcall'], mins:15, forYou:'Four situations from your first year, in your own unit, out loud or in writing.' },
+    { title:'Your assessment, quick check and next steps', secs:['survey', 'quiz', 'nextstep', 'learn'], mins:15, forYou:'Your starting point against the standard, five questions, one action this week, and what to take next.', needs:'quiz' }
+  ];
+  var dots = $$('#bbDots .bb-dot'), keys = dots.map(function(d){ return d.getAttribute('href').replace(/^#p\//, ''); });
+  var secOf = function(i){ return (keys[i] || '').split('/')[0]; };
+  var modOf = function(i){ var sec = secOf(i); for(var m = 0; m < MODULES.length; m++){ if(MODULES[m].secs.indexOf(sec) >= 0) return m; } return -1; };
+  var landing = keys.indexOf('modules/1');
+  MODULES.forEach(function(m){ m.pages = []; keys.forEach(function(k, i){ if(m.secs.indexOf(k.split('/')[0]) >= 0) m.pages.push(i); }); });
+  var seen = {}, done = {};
+  try{ seen = JSON.parse(get('mod-seen') || '{}') || {}; }catch(e){ seen = {}; }
+  try{ done = JSON.parse(get('mod-done') || '{}') || {}; }catch(e){ done = {}; }
+  /* reviewers: ?unlock=all opens every module in this browser; ?unlock=off restores the path */
+  try{ var u = new URLSearchParams(location.search).get('unlock'); if(u === 'all') set('unlock', 'all'); else if(u === 'off') set('unlock', null); }catch(e){}
+  function bypass(){ return get('unlock') === 'all'; }
+  function isDone(m){ return !!done[m]; }
+  function isOpen(m){ return bypass() || m === 0 || isDone(m - 1); }
+  function seenCount(m){ return MODULES[m].pages.filter(function(i){ return seen[keys[i]]; }).length; }
+  function complete(m){ var M = MODULES[m]; return seenCount(m) === M.pages.length && (!M.needs || progIs(M.needs)); }
+  function save(){ set('mod-seen', JSON.stringify(seen)); set('mod-done', JSON.stringify(done)); }
+  function firstOpen(){ for(var m = 0; m < MODULES.length; m++){ if(!isDone(m)) return m; } return MODULES.length - 1; }
+  function render(){
+    var grid = $('#modGrid'), st = $('#modStatus'); if(!grid) return;
+    grid.innerHTML = MODULES.map(function(M, m){
+      var open = isOpen(m), dn = isDone(m), n = seenCount(m), total = M.pages.length;
+      var cls = dn ? 'done' : !open ? 'locked' : n > 0 ? 'now' : 'open';
+      var pill = dn ? 'Complete' : !open ? 'Locked' : n > 0 ? n + ' of ' + total + ' pages' : 'Start';
+      return '<li><button type="button" class="mod-card ' + cls + '" data-mod="' + m + '"' + (open ? '' : ' aria-disabled="true"') + '>' +
+        '<span class="mod-no"><span>Module ' + (m + 1) + '</span><span class="pill">' + pill + '</span></span>' +
+        '<h3>' + esc(M.title) + '</h3><p>' + esc(M.forYou) + '</p>' +
+        '<span class="mod-meta">About ' + M.mins + ' minutes &middot; ' + total + ' pages' + (M.needs === 'quiz' ? ' &middot; four of five on the quick check' : '') + '</span>' +
+        '<span class="mod-bar" aria-hidden="true"><i style="width:' + Math.round((dn ? total : n) / total * 100) + '%"></i></span>' +
+        (!open ? '<svg class="mod-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>' : '') +
+        '</button></li>';
+    }).join('');
+    if(st){ var nd = MODULES.filter(function(M, m){ return isDone(m); }).length; var f = firstOpen();
+      st.textContent = nd === MODULES.length ? 'All seven modules complete.' : nd + ' of 7 complete. ' + (seenCount(f) > 0 ? 'Module ' + (f + 1) + ' is in progress: ' + seenCount(f) + ' of ' + MODULES[f].pages.length + ' pages.' : 'Module ' + (f + 1) + ' is ready.') + (bypass() ? ' Reviewer view: every module is open.' : ''); }
+  }
+  function checkDone(m, quiet){
+    if(m < 0 || isDone(m) || !complete(m)) return;
+    done[m] = 1; save(); render();
+    if(!quiet) toast(m < MODULES.length - 1 ? 'Module ' + (m + 1) + ' complete. Module ' + (m + 2) + ' is open.' : 'All seven modules complete.');
+  }
+  /* the gate: a page in a locked module turns back to the landing page */
+  document.addEventListener('chart:page', function(ev){
+    var i = ev.detail ? ev.detail.index : chartPager.current().index, m = modOf(i);
+    if(m >= 0 && !isOpen(m)){ var f = firstOpen(); window.setTimeout(function(){ chartPager.go(landing); toast('Finish module ' + (f + 1) + ' first.'); }, 0); return; }
+    if(m >= 0 && !seen[keys[i]]){ seen[keys[i]] = 1; save(); }
+    if(m >= 0) checkDone(m);
+    if(i === landing) render();
+  });
+  /* the quick check can finish the last module after its pages are seen */
+  var lastM = MODULES.length - 1;
+  document.addEventListener('mv:prog', function(){ checkDone(lastM); });
+  $('#modGrid') && $('#modGrid').addEventListener('click', function(e){
+    var b = e.target.closest('.mod-card'); if(!b) return;
+    var m = parseInt(b.getAttribute('data-mod'), 10);
+    if(!isOpen(m)){ toast('Finish module ' + m + ' first.'); return; }
+    chartPager.go(MODULES[m].pages[0], { focus:true });
+  });
+  /* the last page of a module turns back to the landing page */
+  $$('.v-next button[data-go-page]').forEach(function(b){
+    var to = parseInt(b.getAttribute('data-go-page'), 10), from = to - 1;
+    if(modOf(from) >= 0 && modOf(to) !== modOf(from)){ b.setAttribute('data-go-page', landing); b.classList.add('back-mods'); b.innerHTML = 'Back to your modules' + b.innerHTML.slice(b.innerHTML.indexOf('<svg')); }
+  });
+  render();
+  window.MV_MODULES = { MODULES: MODULES, isOpen: isOpen, isDone: isDone, render: render };
 })();
 
 })();

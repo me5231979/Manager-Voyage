@@ -2,7 +2,7 @@ MANAGER FOUNDATIONS: YOU ARE A MANAGER NOW (Vanderbilt University, Futures Learn
 
 The course has six topics plus a mission opener and next steps: 1 What a manager is, 2 Five ideas, 3 Your first year and Who handles what, 4 The Vanderbilt Manager Standard and Your call (four conversations), 5 Your assessment, 6 Quick check. It takes about 35 minutes on the short path and about 90 minutes if you do every conversation and detail. Progress is saved in the browser. The Listen button narrates each page. Practice conversations use a microphone and a character who answers back; a written situation with three responses is the no-microphone path.
 
-=== Page 1 of 57 · Welcome (page key home/1) ===
+=== Page 1 of 58 · Welcome (page key home/1) ===
 VANDERBILT UNIVERSITY · MANAGER VOYAGE · MANAGER FOUNDATIONS
 You are a manager now.
 
@@ -25,7 +25,71 @@ Decide, for a given situation, whether to handle it, ask your HCM, route it, or 
 Name the four expectations of the Vanderbilt Manager Standard and the fifteen behaviors inside them.
 Read your assessment results against the standard and set a target for the 90-day retake.
 
-=== Page 2 of 57 · The mission (page key mission/1) ===
+=== Page 2 of 58 · Your modules (page key modules/1) ===
+YOUR MODULES
+Seven modules. One at a time.
+
+Finish one and the next opens. Stop whenever you like: your place is saved here. Questions on any page? Tap Ask Compass, bottom right.
+
+FOR YOU AS A MANAGER
+Seven short modules instead of one long sitting. Do one between meetings; the next is ready when you are, and your place is saved.
+
+MODULE 1
+START
+The mission
+
+Why the work matters when your team asks, and where your team sits in a university that works from five cities.
+
+About 5 minutes · 3 pages
+MODULE 2
+LOCKED
+What changed, and what a manager is
+
+The one shift that makes you a manager, three questions every week, and the five people who help you.
+
+About 10 minutes · 6 pages
+MODULE 3
+LOCKED
+Five ideas
+
+Five ideas that hold up in every unit, each with a move for this week and a conversation to practice it.
+
+About 15 minutes · 11 pages
+MODULE 4
+LOCKED
+Your first year, and who handles what
+
+The whole job by how often it comes up, and the four doors for anything that lands on your desk.
+
+About 10 minutes · 6 pages
+MODULE 5
+LOCKED
+The Vanderbilt Manager Standard
+
+The four expectations your assessment measures and your manager looks for, with a habit drill for each.
+
+About 20 minutes · 15 pages
+MODULE 6
+LOCKED
+Your call: four conversations
+
+Four situations from your first year, in your own unit, out loud or in writing.
+
+About 15 minutes · 5 pages
+MODULE 7
+LOCKED
+Your assessment, quick check and next steps
+
+Your starting point against the standard, five questions, one action this week, and what to take next.
+
+About 15 minutes · 10 pages · four of five on the quick check
+
+0 of 7 complete. Module 1 is ready.
+
+UP NEXT
+The mission
+
+=== Page 3 of 58 · The mission (page key mission/1) ===
 BEFORE WE START · THE MISSION
 Define the great university of the 21st century, and be it.
 
@@ -54,7 +118,7 @@ Read the full vision at vanderbilt.edu
 UP NEXT
 Your responsibility: embody it, and lead your team to achieve it.
 
-=== Page 3 of 57 · Your responsibility (page key mission/2) ===
+=== Page 4 of 58 · Your responsibility (page key mission/2) ===
 Your responsibility: embody it, and lead your team to achieve it.
 1
 Embody it.
@@ -79,7 +143,7 @@ A team member asks why the new system matters. A director asks for your whole te
 UP NEXT
 Vanderbilt has grown beyond Nashville.
 
-=== Page 4 of 57 · Vanderbilt has grown (page key mission/3) ===
+=== Page 5 of 58 · Vanderbilt has grown (page key mission/3) ===
 Vanderbilt has grown beyond Nashville.
 
 One frame, two maps: the footprint in 2020, and in 2026. Each new site has a reason.
@@ -106,9 +170,9 @@ Vanderbilt University's footprint in 2020 and in 2026. Site details at vanderbil
 Tap a site on the map, or a name on the left, to open its card.
 
 UP NEXT
-What changed
+Back to your modules
 
-=== Page 5 of 57 · What changed (page key shift/1) ===
+=== Page 6 of 58 · What changed (page key shift/1) ===
 TOPIC 1 OF 6 · WHAT CHANGED
 Your job used to be your work. Now it is the team’s work, and the people.
 
@@ -135,7 +199,7 @@ Fair treatment, a safe place to speak up, a chance to grow.
 UP NEXT
 Three things a manager is not.
 
-=== Page 6 of 57 · What a manager is not (page key shift/2) ===
+=== Page 7 of 58 · What a manager is not (page key shift/2) ===
 Three things a manager is not.
 
 When you want to just do it yourself, manage instead.
@@ -155,7 +219,7 @@ You do not investigate, judge or enforce. Report harassment, discrimination, inj
 UP NEXT
 Whose job is it now?
 
-=== Page 7 of 57 · Whose job is it (page key shift/3) ===
+=== Page 8 of 58 · Whose job is it (page key shift/3) ===
 Whose job is it now?
 
 Six things that come up in a first month. Yours now, your team member’s, or PCB’s.
@@ -172,7 +236,7 @@ SORT SIX THINGS: YOURS, A TEAM MEMBER’S, OR ANOTHER OFFICE
 UP NEXT
 What a manager is
 
-=== Page 8 of 57 · What a manager is (page key basics/1) ===
+=== Page 9 of 58 · What a manager is (page key basics/1) ===
 TOPIC 1 OF 6 · WHAT A MANAGER IS
 A manager is responsible for the work, and for the people who do it.
 
@@ -190,7 +254,7 @@ What is coming that the team should hear from me first?
 UP NEXT
 In practice: the dining manager.
 
-=== Page 9 of 57 · In practice: the dining manager (page key basics/2) ===
+=== Page 10 of 58 · In practice: the dining manager (page key basics/2) ===
 In practice: the dining manager.
 
 Lunch is in forty minutes. Decide what she does, and see what happens.
@@ -222,7 +286,7 @@ Before Monday ends, answer the three questions on the left for your own team.
 UP NEXT
 Five people who help you.
 
-=== Page 10 of 57 · Who helps you (page key basics/3) ===
+=== Page 11 of 58 · Who helps you (page key basics/3) ===
 Five people who help you.
 
 Learn their names in your first week. Tap each one: what they do, when you contact them, and how.
@@ -250,9 +314,9 @@ HOW YOU CONTACT THEM
 Your standing 1:1. A quick message when it cannot wait. Bring the ask and your recommendation.
 
 UP NEXT
-Five ideas
+Back to your modules
 
-=== Page 11 of 57 · Five ideas (page key ideas/1) ===
+=== Page 12 of 58 · Five ideas (page key ideas/1) ===
 TOPIC 2 OF 6 · FIVE IDEAS
 Five ideas every good manager relies on.
 
@@ -279,7 +343,7 @@ Sources: the big rocks method (Covey), clear is kind (Brown), psychological safe
 UP NEXT
 Idea 1 · Priorities
 
-=== Page 12 of 57 · Idea 1 · Priorities (page key ideas/2) ===
+=== Page 13 of 58 · Idea 1 · Priorities (page key ideas/2) ===
 SETTING PRIORITIES · THE BIG ROCKS METHOD
 STANDARD 01 · GET THE WORK DONE
 Put first things first.
@@ -311,7 +375,7 @@ A team that knows this week’s three things wastes less, argues less, and finis
 UP NEXT
 Practice it live with Sam.
 
-=== Page 13 of 57 · Practice idea 1 live (page key ideas/3) ===
+=== Page 14 of 58 · Practice idea 1 live (page key ideas/3) ===
 Practice it live with Sam.
 
 Tap Start and have it out loud: Sam answers back, in your world. No microphone? Tap the response you would give.
@@ -358,7 +422,7 @@ Practice the Monday one to one before you have the real one. The situation and t
 UP NEXT
 Idea 2 · Clear expectations
 
-=== Page 14 of 57 · Idea 2 · Clear expectations (page key ideas/4) ===
+=== Page 15 of 58 · Idea 2 · Clear expectations (page key ideas/4) ===
 CLEAR EXPECTATIONS AND FEEDBACK · CLEAR IS KIND
 STANDARD 01 · GET THE WORK DONE
 Clear is kind. Unclear is unkind.
@@ -386,7 +450,7 @@ Fewer surprises at the deadline, fewer redo cycles, and a team that always knows
 UP NEXT
 Practice it live with Priya.
 
-=== Page 15 of 57 · Practice idea 2 live (page key ideas/5) ===
+=== Page 16 of 58 · Practice idea 2 live (page key ideas/5) ===
 Practice it live with Priya.
 
 Tap Start and have it out loud: Priya answers back, in your world. No microphone? Tap the response you would give.
@@ -433,7 +497,7 @@ Priya’s report is every handoff you make. Practice saying what you need withou
 UP NEXT
 Idea 3 · Psychological safety
 
-=== Page 16 of 57 · Idea 3 · Psychological safety (page key ideas/6) ===
+=== Page 17 of 58 · Idea 3 · Psychological safety (page key ideas/6) ===
 PSYCHOLOGICAL SAFETY
 STANDARD 02 · TAKE CARE OF YOUR PEOPLE
 People only speak up when it is safe to.
@@ -461,7 +525,7 @@ You hear about problems while they are small. The best teams report more mistake
 UP NEXT
 Practice it live with Jordan.
 
-=== Page 17 of 57 · Practice idea 3 live (page key ideas/7) ===
+=== Page 18 of 58 · Practice idea 3 live (page key ideas/7) ===
 Practice it live with Jordan.
 
 Tap Start and have it out loud: Jordan answers back, in your world. No microphone? Tap the response you would give.
@@ -508,7 +572,7 @@ Jordan has bad news. How you answer in the first ten seconds sets what your whol
 UP NEXT
 Idea 4 · Purpose
 
-=== Page 18 of 57 · Idea 4 · Purpose (page key ideas/8) ===
+=== Page 19 of 58 · Idea 4 · Purpose (page key ideas/8) ===
 PURPOSE · START WITH WHY, TEAM FIRST
 STANDARD 03 · MAKE THINGS BETTER
 Explain the why. Take care of the people, and they take care of the work.
@@ -536,7 +600,7 @@ A team that trusts you tells you the truth, stays, and works through the hard we
 UP NEXT
 Practice it live with Alex.
 
-=== Page 19 of 57 · Practice idea 4 live (page key ideas/9) ===
+=== Page 20 of 58 · Practice idea 4 live (page key ideas/9) ===
 Practice it live with Alex.
 
 Tap Start and have it out loud: Alex answers back, in your world. No microphone? Tap the response you would give.
@@ -583,7 +647,7 @@ Alex is about to hear about a change from an email. Practice getting there first
 UP NEXT
 Idea 5 · The people work
 
-=== Page 20 of 57 · Idea 5 · The people work (page key ideas/10) ===
+=== Page 21 of 58 · Idea 5 · The people work (page key ideas/10) ===
 THE PEOPLE WORK · A MANAGER’S CORE RESPONSIBILITIES
 STANDARD 02 AND 04 · YOUR PEOPLE, YOUR NETWORK
 The people work is the manager’s work.
@@ -611,7 +675,7 @@ Problems get handled while they are small, by the person closest to them, and yo
 UP NEXT
 Practice it live with Dev.
 
-=== Page 21 of 57 · Practice idea 5 live (page key ideas/11) ===
+=== Page 22 of 58 · Practice idea 5 live (page key ideas/11) ===
 Practice it live with Dev.
 
 Tap Start and have it out loud: Dev answers back, in your world. No microphone? Tap the response you would give.
@@ -656,9 +720,9 @@ FOR YOU AS A MANAGER
 Dev’s situation is the performance conversation most managers put off. Practice saying what you noticed before it becomes a pattern. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
-Your first year
+Back to your modules
 
-=== Page 22 of 57 · Your first year (page key year/1) ===
+=== Page 23 of 58 · Your first year (page key year/1) ===
 TOPIC 3 OF 6 · YOUR FIRST YEAR
 What Vanderbilt will ask you to do, and when.
 
@@ -691,7 +755,7 @@ A performance concern: ask your HCM
 UP NEXT
 Build your week.
 
-=== Page 23 of 57 · Build my week (page key year/2) ===
+=== Page 24 of 58 · Build my week (page key year/2) ===
 Build your week.
 
 Three taps: how many people, who is hourly, which day is already full. Then add it to your calendar.
@@ -722,7 +786,7 @@ Three taps. 1 of 3.
 UP NEXT
 Who handles what
 
-=== Page 24 of 57 · Who handles what (page key calls/1) ===
+=== Page 25 of 58 · Who handles what (page key calls/1) ===
 TOPIC 3 OF 6 · WHO HANDLES WHAT
 Four doors for anything that lands on your desk.
 
@@ -762,7 +826,7 @@ The same day. You report, you do not investigate.
 UP NEXT
 Which door?
 
-=== Page 25 of 57 · Which door (page key calls/2) ===
+=== Page 26 of 58 · Which door (page key calls/2) ===
 Which door?
 
 Five things that land on a manager’s desk in a normal month. Pick the door for each.
@@ -779,7 +843,7 @@ DECIDE FIVE SITUATIONS
 UP NEXT
 Three things you never do.
 
-=== Page 26 of 57 · Three things you never do (page key calls/3) ===
+=== Page 27 of 58 · Three things you never do (page key calls/3) ===
 Three things you never do.
 
 Each one protects the person in front of you, and it protects you. The same day means today.
@@ -799,7 +863,7 @@ Each has a fair process and a cycle. Your HCM tells you what is possible and whe
 UP NEXT
 Something just landed on your desk. What now?
 
-=== Page 27 of 57 · Situation simulator (page key calls/4) ===
+=== Page 28 of 58 · Situation simulator (page key calls/4) ===
 Something just landed on your desk. What now?
 
 Pick a situation. The page gives you the first move today, what it sounds like, who handles what, and what never to do.
@@ -827,9 +891,9 @@ A new hire starts Monday
 A team member seems to be struggling (stress, mental health)
 An injury or a safety concern at work
 UP NEXT
-The Vanderbilt Manager Standard
+Back to your modules
 
-=== Page 28 of 57 · The Vanderbilt Manager Standard (page key welcome/1) ===
+=== Page 29 of 58 · The Vanderbilt Manager Standard (page key welcome/1) ===
 TOPIC 4 OF 6 · THE VANDERBILT MANAGER STANDARD
 The Vanderbilt Manager Standard: four expectations.
 
@@ -903,7 +967,7 @@ The standard is what your assessment measures and what your own manager looks fo
 UP NEXT
 Monday, four asks.
 
-=== Page 29 of 57 · Monday, four asks (page key welcome/2) ===
+=== Page 30 of 58 · Monday, four asks (page key welcome/2) ===
 Monday, four asks.
 
 A facilities supervisor starts Monday with four asks. Sort each one into the expectation it belongs to.
@@ -931,7 +995,7 @@ Sort your own list for this week into the four jobs.
 UP NEXT
 Get the work done, through your team.
 
-=== Page 30 of 57 · Expectation 01 · Get the work done, through your team. (page key welcome/3) ===
+=== Page 31 of 58 · Expectation 01 · Get the work done, through your team. (page key welcome/3) ===
 EXPECTATION 01 · YUKL: TASK-ORIENTED BEHAVIOR
 Get the work done, through your team.
 
@@ -959,7 +1023,7 @@ FLIP
 UP NEXT
 In practice.
 
-=== Page 31 of 57 · In practice · Get the work done, through your team. (page key welcome/4) ===
+=== Page 32 of 58 · In practice · Get the work done, through your team. (page key welcome/4) ===
 In practice.
 
 When people are not sure what is expected, work comes in late or gets redone, and you find out on the due date.
@@ -991,7 +1055,7 @@ Pick one person and confirm, out loud, what they own and by when.
 UP NEXT
 Name the habit.
 
-=== Page 32 of 57 · Name the habit · Get the work done, through your team. (page key welcome/5) ===
+=== Page 33 of 58 · Name the habit · Get the work done, through your team. (page key welcome/5) ===
 Name the habit.
 
 Three moments from a manager’s week. Which habit is each one?
@@ -1006,7 +1070,7 @@ Three moments from a manager’s week. Naming the habit is how you notice when y
 UP NEXT
 Take care of your people.
 
-=== Page 33 of 57 · Expectation 02 · Take care of your people. (page key welcome/6) ===
+=== Page 34 of 58 · Expectation 02 · Take care of your people. (page key welcome/6) ===
 EXPECTATION 02 · YUKL: RELATIONS-ORIENTED BEHAVIOR
 Take care of your people.
 
@@ -1034,7 +1098,7 @@ FLIP
 UP NEXT
 In practice.
 
-=== Page 34 of 57 · In practice · Take care of your people. (page key welcome/7) ===
+=== Page 35 of 58 · In practice · Take care of your people. (page key welcome/7) ===
 In practice.
 
 People stay, and do their best work, for a manager who notices them.
@@ -1069,7 +1133,7 @@ Thank one person for one specific thing, by name, this week.
 UP NEXT
 Name the habit.
 
-=== Page 35 of 57 · Name the habit · Take care of your people. (page key welcome/8) ===
+=== Page 36 of 58 · Name the habit · Take care of your people. (page key welcome/8) ===
 Name the habit.
 
 Three moments from a manager’s week. Which habit is each one?
@@ -1084,7 +1148,7 @@ Three moments, four habits. Naming them tells you which one your team is not get
 UP NEXT
 Make things better.
 
-=== Page 36 of 57 · Expectation 03 · Make things better. (page key welcome/9) ===
+=== Page 37 of 58 · Expectation 03 · Make things better. (page key welcome/9) ===
 EXPECTATION 03 · YUKL: CHANGE-ORIENTED BEHAVIOR
 Make things better.
 
@@ -1112,7 +1176,7 @@ FLIP
 UP NEXT
 In practice.
 
-=== Page 37 of 57 · In practice · Make things better. (page key welcome/10) ===
+=== Page 38 of 58 · In practice · Make things better. (page key welcome/10) ===
 In practice.
 
 Vanderbilt is asking every team to move faster and improve. That happens in your team, in small ways, every week.
@@ -1147,7 +1211,7 @@ Hold one ten-minute look-back after a piece of big work.
 UP NEXT
 Name the habit.
 
-=== Page 38 of 57 · Name the habit · Make things better. (page key welcome/11) ===
+=== Page 39 of 58 · Name the habit · Make things better. (page key welcome/11) ===
 Name the habit.
 
 Three moments from a manager’s week. Which habit is each one?
@@ -1162,7 +1226,7 @@ Three moments. Naming the habit shows you where your team is being told about ch
 UP NEXT
 Connect your team.
 
-=== Page 39 of 57 · Expectation 04 · Connect your team. (page key welcome/12) ===
+=== Page 40 of 58 · Expectation 04 · Connect your team. (page key welcome/12) ===
 EXPECTATION 04 · YUKL: EXTERNAL BEHAVIOR
 Connect your team.
 
@@ -1190,7 +1254,7 @@ FLIP
 UP NEXT
 In practice.
 
-=== Page 40 of 57 · In practice · Connect your team. (page key welcome/13) ===
+=== Page 41 of 58 · In practice · Connect your team. (page key welcome/13) ===
 In practice.
 
 Your team needs approvals, information, and a fair hearing from outside. New managers do this job least.
@@ -1225,7 +1289,7 @@ Have coffee with one person your team depends on, before you need them.
 UP NEXT
 Name the habit.
 
-=== Page 41 of 57 · Name the habit · Connect your team. (page key welcome/14) ===
+=== Page 42 of 58 · Name the habit · Connect your team. (page key welcome/14) ===
 Name the habit.
 
 Three moments from a manager’s week. Which habit is each one?
@@ -1240,7 +1304,7 @@ Three moments. Naming the habit shows you whether you are speaking up for your t
 UP NEXT
 Where the standard comes from, and how the assessment measures it.
 
-=== Page 42 of 57 · Where the standard comes from (page key welcome/15) ===
+=== Page 43 of 58 · Where the standard comes from (page key welcome/15) ===
 Where the standard comes from, and how the assessment measures it.
 
 FOR YOU AS A MANAGER
@@ -1272,9 +1336,9 @@ Representing (speak up for your team)	9 · Watching ahead measures external moni
 Adapted from Gary Yukl, Effective Leadership Behavior: What We Know and What Questions Need More Attention, Academy of Management Perspectives 26(4), 2012. The four expectations are Yukl’s four categories and the fifteen behaviors are his fifteen. Each assessment statement is one behavior written as something a manager does in a normal week. Five behaviors have no statement of their own (problem solving, developing, envisioning change, encouraging innovation, networking), so the ten statements sample the standard; the course teaches all fifteen. A self-reflection tool, not a validated instrument, and not a performance evaluation.
 
 UP NEXT
-Your call
+Back to your modules
 
-=== Page 43 of 57 · Your call: four conversations (page key yourcall/1) ===
+=== Page 44 of 58 · Your call: four conversations (page key yourcall/1) ===
 TOPIC 4 OF 6 · YOUR CALL
 Four conversations, one per expectation.
 
@@ -1308,7 +1372,7 @@ Turn the page for the first conversation. Mark this topic done when you have had
 UP NEXT
 01 · Get the work done: Priya.
 
-=== Page 44 of 57 · 01 · Priya (page key yourcall/2) ===
+=== Page 45 of 58 · 01 · Priya (page key yourcall/2) ===
 01 · Get the work done: Priya.
 
 Tap Start and have it out loud: Priya answers back, in your world. No microphone? Tap the response you would give.
@@ -1355,7 +1419,7 @@ A director asks for a report before it is ready. What you say decides whether yo
 UP NEXT
 02 · Take care of your people: Marcus.
 
-=== Page 45 of 57 · 02 · Marcus (page key yourcall/3) ===
+=== Page 46 of 58 · 02 · Marcus (page key yourcall/3) ===
 02 · Take care of your people: Marcus.
 
 Tap Start and have it out loud: Marcus answers back, in your world. No microphone? Tap the response you would give.
@@ -1402,7 +1466,7 @@ A strong performer needs time off for a parent. How you respond decides whether 
 UP NEXT
 03 · Make things better: Taylor.
 
-=== Page 46 of 57 · 03 · Taylor (page key yourcall/4) ===
+=== Page 47 of 58 · 03 · Taylor (page key yourcall/4) ===
 03 · Make things better: Taylor.
 
 Tap Start and have it out loud: Taylor answers back, in your world. No microphone? Tap the response you would give.
@@ -1449,7 +1513,7 @@ A system change is coming by email. Getting to your team first, with the why, is
 UP NEXT
 04 · Connect your team: Director Reyes.
 
-=== Page 47 of 57 · 04 · Director Reyes (page key yourcall/5) ===
+=== Page 48 of 58 · 04 · Director Reyes (page key yourcall/5) ===
 04 · Connect your team: Director Reyes.
 
 Tap Start and have it out loud: Director Reyes answers back, in your world. No microphone? Tap the response you would give.
@@ -1494,9 +1558,9 @@ FOR YOU AS A MANAGER
 Another director wants your team’s weekend. Answering with the numbers and two options is how you protect your team without saying no. Pick your world first: the dropdown changes the situation to your unit, so the conversation is about your work, not a generic office.
 
 UP NEXT
-Your assessment
+Back to your modules
 
-=== Page 48 of 57 · Your assessment (page key survey/1) ===
+=== Page 49 of 58 · Your assessment (page key survey/1) ===
 TOPIC 5 OF 6 · YOUR ASSESSMENT
 Your score, and where it should go.
 
@@ -1517,7 +1581,7 @@ I took it already, by email
 UP NEXT
 The ten statements, and what each one measures.
 
-=== Page 49 of 57 · The ten statements (page key survey/2) ===
+=== Page 50 of 58 · The ten statements (page key survey/2) ===
 The ten statements, and what each one measures.
 
 The four expectations with Yukl’s category for each, the statements under them, and the behavior each one measures.
@@ -1556,7 +1620,7 @@ MEASURES REPRESENTING
 UP NEXT
 Quick check
 
-=== Page 50 of 57 · Quick check (page key quiz/1) ===
+=== Page 51 of 58 · Quick check (page key quiz/1) ===
 TOPIC 6 OF 6 · QUICK CHECK
 Five questions.
 
@@ -1578,7 +1642,7 @@ Approving things
 UP NEXT
 Next steps
 
-=== Page 51 of 57 · Next steps (page key nextstep/1) ===
+=== Page 52 of 58 · Next steps (page key nextstep/1) ===
 TOPIC 6 OF 6 · NEXT STEPS
 One thing. This week.
 
@@ -1606,7 +1670,7 @@ Know the people your team needs by name before you need them. New managers do th
 UP NEXT
 Tell your manager
 
-=== Page 52 of 57 · Tell your manager (page key nextstep/2) ===
+=== Page 53 of 58 · Tell your manager (page key nextstep/2) ===
 COPY THE MESSAGE, SEND IT, THEN MARK THIS DONE
 
 STEP 2 · TELL YOUR MANAGER
@@ -1630,7 +1694,7 @@ Mark complete
 UP NEXT
 The last pages
 
-=== Page 53 of 57 · Keep learning (page key learn/1) ===
+=== Page 54 of 58 · Keep learning (page key learn/1) ===
 KEEP LEARNING · THE LAST PAGES
 Your micro modules, next.
 
@@ -1771,7 +1835,7 @@ Who does what across schools, central units, and business units, and how work mo
 UP NEXT
 One item a month, on the habit you are working on.
 
-=== Page 54 of 57 · More to take (page key learn/2) ===
+=== Page 55 of 58 · More to take (page key learn/2) ===
 One item a month, on the habit you are working on.
 
 More in Oracle Learning, and the best from outside Vanderbilt. Oracle links open in a new tab; podcasts and videos are free.
@@ -1823,7 +1887,7 @@ Leading your team through a change you did not choose.
 UP NEXT
 The best from outside Vanderbilt.
 
-=== Page 55 of 57 · Outside Vanderbilt (page key learn/3) ===
+=== Page 56 of 58 · Outside Vanderbilt (page key learn/3) ===
 The best from outside Vanderbilt.
 
 Podcasts, books and talks on the habit you are working on. Public and free.
@@ -1858,7 +1922,7 @@ Free, practical guides a large company built for its own new managers. (Google r
 UP NEXT
 Four short talks.
 
-=== Page 56 of 57 · Watch (page key learn/4) ===
+=== Page 57 of 58 · Watch (page key learn/4) ===
 Four short talks.
 
 The ideas from this course, from the people who named them: feedback, delegation, purpose, and safety. Tap play.
@@ -1893,7 +1957,7 @@ Video not loading? Open it on YouTube.
 UP NEXT
 Now manage it the same way.
 
-=== Page 57 of 57 · The end (page key learn/5) ===
+=== Page 58 of 58 · The end (page key learn/5) ===
 Now manage it the same way.
 
 Four categories, six behaviors, one habit this week. Start it today.

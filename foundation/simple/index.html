@@ -402,6 +402,26 @@ html.paged #welcome .fw-panel{ min-height:0; margin-top:0; }
 .live-fold > summary{ cursor:pointer; font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); padding:10px 0; border-top:1px solid var(--bd); }
 .live-fold > summary::marker{ color:var(--eyebrow); }
 
+.mod-grid{ list-style:none; margin:14px 0 0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; }
+@media (max-width:1100px){ .mod-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width:600px){ .mod-grid{ grid-template-columns:1fr; } }
+.mod-card{ position:relative; display:flex; flex-direction:column; gap:6px; width:100%; min-height:150px; text-align:left; font:inherit; color:var(--tx); background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--eyebrow); border-radius:var(--r); padding:12px 14px 12px; cursor:pointer; transition:border-color .2s, transform .2s; }
+.mod-card:hover{ border-color:var(--eyebrow); transform:translateY(-2px); }
+.mod-card .mod-no{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.mod-card .mod-no .pill{ font-size:.62rem; padding:3px 8px; border-radius:999px; border:1px solid var(--eyebrow); color:var(--eyebrow); letter-spacing:.06em; white-space:nowrap; }
+.mod-card.done .mod-no .pill{ background:var(--eyebrow); color:var(--vu-black); }
+.mod-card.now .mod-no .pill{ background:rgba(207,174,112,.18); }
+.mod-card h3{ font-family:var(--serif); font-weight:400; font-size:1.12rem; line-height:1.2; margin:0; color:var(--tx); }
+.mod-card p{ margin:0; font-size:.84rem; line-height:1.4; color:var(--tx2); flex:1 1 auto; }
+.mod-card .mod-meta{ font-size:.76rem; color:var(--tx3); }
+.mod-card .mod-bar{ height:3px; border-radius:2px; background:rgba(255,255,255,.1); overflow:hidden; }
+.mod-card .mod-bar i{ display:block; height:100%; background:var(--eyebrow); width:0; }
+.mod-card.locked{ cursor:default; opacity:.55; border-top-color:var(--bd); }
+.mod-card.locked:hover{ transform:none; border-color:var(--bd); }
+.mod-card.locked .mod-no{ color:var(--tx3); } .mod-card.locked .mod-no .pill{ border-color:var(--tx3); color:var(--tx3); }
+.mod-card .mod-lock{ position:absolute; right:12px; bottom:12px; width:16px; height:16px; color:var(--tx3); }
+html.paged #modules .drill-status{ margin-top:12px; }
+.v-next .btn.back-mods{ background:transparent; color:var(--eyebrow); border:1px solid var(--eyebrow); }
 /* layout: each page sits in the middle of the stage when it fits, and starts at the top when it has to scroll */
 html.paged .page > section.v-sec:not(.v-hero){ flex:0 0 auto; margin-top:auto; margin-bottom:auto; }
 html.paged .page > footer{ margin-top:0; }
@@ -1444,7 +1464,7 @@ footer .fcenter img{ width:64px; height:auto; }
     <h1 class="v-display">You are a manager <em>now</em>.</h1>
     <p class="v-hello" id="heroHello">Welcome aboard. The simplified build: one idea per screen.</p>
     <div class="v-hero-cta">
-      <a class="btn btn-gold" href="#p/mission/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-gold" href="#p/modules/1">Begin<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <ul class="v-meta" aria-label="Course at a glance"><li>6 topics</li><li>About 30 minutes</li><li>Optional live practice adds about 25</li><li>Narrated</li><li>Recorded in Oracle Learning</li></ul>
       <p class="v-std"><b>The Vanderbilt Manager Standard.</b> Four expectations of every manager, every week: get the work done through your team, take care of your people, make things better, connect your team to Vanderbilt. Adapted from Gary Yukl&rsquo;s research on effective leadership behavior: his four categories, his fifteen behaviors. The assessment measures it. This course teaches it.</p>
     </div>
@@ -1459,6 +1479,16 @@ footer .fcenter img{ width:64px; height:auto; }
         <li><b>Read</b> your assessment results against the standard and set a target for the 90-day retake.</li>
       </ol>
     </details>
+  </div>
+</section>
+
+<section id="modules" class="th-dark v-sec" aria-label="Your modules">
+  <div class="wrap">
+    <div class="v-rail" data-lesson="0"><span>Your modules</span></div>
+    <h2 class="v-h sm">Seven modules. One at a <em>time</em>.</h2>
+    <p class="v-why">Finish one and the next opens. Stop whenever you like: your place is saved here. Questions on any page? Tap Ask Compass, bottom right.</p>
+    <ol class="mod-grid" id="modGrid" aria-label="Modules"></ol>
+    <p class="drill-status" id="modStatus" role="status" aria-live="polite"></p>
   </div>
 </section>
 
