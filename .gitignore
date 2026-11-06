@@ -1,3 +1,4 @@
 *.zip
 mv-media-*/
 .github/tts-commit-scope
+docs/launch-plan/preview/

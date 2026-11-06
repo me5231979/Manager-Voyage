@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manager Voyage launch plan</title>
+<meta name="description" content="Learner journey, communications cascade, enrollment and delivery plan for Manager Voyage, Vanderbilt University.">
+<style>
+@font-face{ font-family:'Libre Caslon Display'; src:url('../../assets/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2'); font-weight:400; font-display:block; }
+@font-face{ font-family:'Libre Caslon Text'; src:url('../../assets/fonts/libre-caslon-text-latin-400-normal.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:block; }
+@font-face{ font-family:'Libre Caslon Text'; src:url('../../assets/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:block; }
+@font-face{ font-family:'Inter'; src:url('../../assets/fonts/inter-latin-400-normal.woff2') format('woff2'); font-weight:400; font-display:block; }
+@font-face{ font-family:'Inter'; src:url('../../assets/fonts/inter-latin-500-normal.woff2') format('woff2'); font-weight:500; font-display:block; }
+@font-face{ font-family:'Inter'; src:url('../../assets/fonts/inter-latin-600-normal.woff2') format('woff2'); font-weight:600; font-display:block; }
+@font-face{ font-family:'Antonio'; src:url('../../assets/fonts/antonio-latin-700-normal.woff2') format('woff2'); font-weight:700; font-display:block; }
+:root{
+  --vu-black:#1C1C1C; --vu-gold:#CFAE70; --vu-highlight:#ECB748; --vu-oak:#946E24; --vu-cream:#F5F3EF; --vu-sand:#E0D5C0;
+  --serif:'Libre Caslon Display','Libre Caslon Text','Times New Roman',serif; --serif-i:'Libre Caslon Text','Times New Roman',serif;
+  --sans:'Inter',Arial,system-ui,sans-serif; --cond:'Antonio','Arial Narrow',Impact,sans-serif; --r:4px;
+}
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; background:#555; }
+body{ font-family:var(--sans); font-size:12.5px; line-height:1.45; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+@page{ size:11in 8.5in; margin:0; }
+.pg{ position:relative; width:11in; height:8.5in; overflow:hidden; padding:.52in .6in .5in; page-break-after:always; break-after:page; margin:0 auto 14px; display:flex; flex-direction:column; }
+@media print{ .pg{ margin:0; } }
+.dark{ background:var(--vu-black); color:#fff; --tx2:rgba(255,255,255,.8); --tx3:rgba(255,255,255,.62); --bd:rgba(255,255,255,.16); --card:#262624; --card2:#2E2D2A; --line:rgba(207,174,112,.45); }
+.light{ background:var(--vu-cream); color:var(--vu-black); --tx2:#4A4A4A; --tx3:#5E5E5E; --bd:#DDD6C8; --card:#FFFFFF; --card2:#FBF9F5; --line:rgba(207,174,112,.6); }
+.eyebrow{ font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--vu-gold); display:flex; align-items:center; gap:12px; margin:0 0 8px; }
+.eyebrow::before{ content:''; width:44px; height:1px; background:var(--vu-gold); }
+h1{ font-family:var(--serif); font-weight:400; font-size:2.05rem; line-height:1.12; margin:0 0 6px; letter-spacing:-.005em; }
+h1 em, h2 em, .lede em{ font-family:var(--serif-i); font-style:italic; color:var(--vu-gold); }
+h2{ font-family:var(--serif); font-weight:400; font-size:1.2rem; line-height:1.2; margin:0 0 6px; }
+h3{ font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-gold); margin:0 0 5px; }
+p{ margin:0 0 7px; }
+.lede{ font-size:1rem; line-height:1.45; color:var(--tx2); max-width:62ch; margin-bottom:12px; }
+.mono{ font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-gold); }
+.small{ font-size:.78rem; color:var(--tx3); }
+.foot{ position:absolute; left:.6in; right:.6in; bottom:.3in; display:flex; justify-content:space-between; align-items:center; font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--tx3); }
+.foot b{ color:var(--vu-gold); font-weight:700; }
+.grow{ flex:1 1 auto; min-height:0; }
+.grid{ display:grid; gap:12px; }
+.c2{ grid-template-columns:1fr 1fr; } .c3{ grid-template-columns:repeat(3,1fr); } .c4{ grid-template-columns:repeat(4,1fr); } .c5{ grid-template-columns:repeat(5,1fr); }
+.card{ background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); padding:12px 14px; }
+.card h2{ font-size:1.05rem; margin-bottom:4px; }
+.card p{ font-size:.8rem; color:var(--tx2); margin-bottom:4px; }
+.card .n{ font-family:var(--serif); font-size:1.9rem; line-height:1; color:var(--vu-gold); margin-bottom:6px; }
+.pill{ display:inline-block; font-family:var(--cond); font-weight:700; font-size:.6rem; letter-spacing:.08em; text-transform:uppercase; border:1px solid var(--vu-gold); color:var(--vu-gold); border-radius:999px; padding:2px 8px; }
+.pill.solid{ background:var(--vu-gold); color:var(--vu-black); }
+table{ width:100%; border-collapse:collapse; font-size:.78rem; }
+th{ text-align:left; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-gold); padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:bottom; }
+td{ padding:6px 8px; border-bottom:1px solid var(--bd); vertical-align:top; color:var(--tx2); }
+td b{ color:inherit; font-weight:600; } .light td b{ color:var(--vu-black); } .dark td b{ color:#fff; }
+td.d{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; color:var(--vu-oak); } .dark td.d{ color:var(--vu-gold); }
+ul{ margin:0 0 6px; padding-left:16px; } li{ margin-bottom:3px; color:var(--tx2); font-size:.8rem; }
+.rule{ height:1px; background:var(--line); margin:10px 0; }
+.quote{ border-left:3px solid var(--vu-gold); padding-left:12px; font-family:var(--serif-i); font-style:italic; font-size:1.02rem; line-height:1.4; color:var(--tx2); }
+.kpis{ display:flex; gap:10px; flex-wrap:wrap; }
+.kpi{ border:1px solid var(--vu-gold); border-radius:999px; padding:5px 12px; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-gold); white-space:nowrap; }
+
+/* cover */
+.cover{ padding:0; }
+.cover .bg{ position:absolute; inset:0; background:url('../../assets/img/campus/kirkland-skyline.jpg') center/cover no-repeat; opacity:.42; }
+.cover .shade{ position:absolute; inset:0; background:linear-gradient(90deg, rgba(28,28,28,.96) 0%, rgba(28,28,28,.72) 55%, rgba(28,28,28,.25) 100%); }
+.cover .in{ position:relative; padding:.62in .7in; height:100%; display:flex; flex-direction:column; }
+.cover img.lockup{ width:230px; }
+.cover h1{ font-size:3.5rem; line-height:1.04; max-width:9in; margin-top:auto; }
+.cover .sub{ font-size:1.12rem; color:var(--tx2); max-width:60ch; margin:10px 0 22px; }
+.cover .meta{ display:flex; gap:10px; flex-wrap:wrap; }
+.cover .vers{ margin-top:26px; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--tx3); }
+
+/* phases strip */
+.phases{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-top:10px; }
+.phase{ position:relative; background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:10px 12px 10px; }
+.phase .no{ font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.12em; color:var(--vu-gold); text-transform:uppercase; }
+.phase h2{ font-size:1rem; margin:3px 0 2px; }
+.phase .when{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--vu-oak); margin-bottom:6px; } .dark .phase .when{ color:var(--vu-gold); }
+.phase p{ font-size:.76rem; color:var(--tx2); }
+.phase::after{ content:''; position:absolute; top:-10px; left:12px; width:40px; height:3px; background:var(--vu-gold); }
+
+/* timeline, day one to ninety */
+.tl{ --ln:150px; position:relative; margin-top:8px; }
+.tl .axis{ position:relative; height:34px; margin-left:var(--ln); border-bottom:1px solid var(--line); }
+.tl .axis span{ position:absolute; left:var(--x); transform:translateX(-50%); width:86px; font-family:var(--cond); font-weight:700; font-size:.6rem; letter-spacing:.06em; text-transform:uppercase; color:var(--tx3); text-align:center; line-height:1.15; top:0; }
+.tl .axis span b{ display:block; color:var(--vu-gold); font-size:.72rem; }
+.tl .axis span::after{ content:''; position:absolute; left:50%; bottom:-7px; width:1px; height:6px; background:var(--vu-gold); }
+.tl .lane{ display:grid; grid-template-columns:var(--ln) 1fr; align-items:center; min-height:40px; border-bottom:1px dashed var(--bd); }
+.tl .ln{ font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tx2); padding-right:10px; }
+.tl .track{ position:relative; height:24px; }
+.tl .seg{ position:absolute; top:3px; height:18px; left:var(--x); width:var(--w); background:rgba(207,174,112,.22); border:1px solid rgba(207,174,112,.6); border-radius:3px; font-family:var(--cond); font-weight:700; font-size:.6rem; letter-spacing:.06em; text-transform:uppercase; color:var(--vu-oak); display:flex; align-items:center; padding:0 6px; white-space:nowrap; overflow:hidden; }
+.dark .tl .seg{ color:#fff; }
+.tl .seg.hi{ background:var(--vu-gold); color:var(--vu-black); border-color:var(--vu-gold); }
+.tl .seg.live{ background:repeating-linear-gradient(90deg, rgba(207,174,112,.18) 0 8px, rgba(207,174,112,.06) 8px 16px); }
+.tl .ms{ position:absolute; left:var(--x); top:0; transform:translateX(-50%); width:14px; height:14px; background:var(--vu-gold); transform:translateX(-50%) rotate(45deg); top:5px; }
+.tl .ms small{ position:absolute; left:18px; top:-3px; transform:rotate(-45deg); transform-origin:0 0; white-space:nowrap; font-family:var(--cond); font-weight:700; font-size:.58rem; letter-spacing:.06em; text-transform:uppercase; color:var(--tx3); }
+.tl .mail{ position:absolute; left:var(--x); top:2px; transform:translateX(-50%); width:20px; height:20px; border-radius:50%; background:var(--vu-black); color:var(--vu-gold); border:1px solid var(--vu-gold); font-family:var(--cond); font-weight:700; font-size:.58rem; display:grid; place-items:center; }
+.dark .tl .mail{ background:var(--vu-gold); color:var(--vu-black); }
+.tl .chip{ position:absolute; left:var(--x); top:3px; height:18px; padding:0 5px; border-radius:3px; background:var(--card); border:1px solid var(--bd); font-family:var(--cond); font-weight:700; font-size:.56rem; letter-spacing:.05em; text-transform:uppercase; color:var(--tx2); display:flex; align-items:center; white-space:nowrap; }
+.legend{ display:flex; gap:16px; flex-wrap:wrap; font-size:.74rem; color:var(--tx3); margin-top:8px; }
+.legend i{ display:inline-block; width:12px; height:12px; vertical-align:-2px; margin-right:6px; border-radius:2px; }
+
+/* journey map */
+.jm{ display:grid; grid-template-columns:120px repeat(7,1fr); gap:4px; font-size:.72rem; }
+.jm .h{ font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); padding:6px 8px; border-bottom:1px solid var(--line); }
+.jm .h b{ display:block; font-family:var(--serif); font-weight:400; font-size:1rem; letter-spacing:0; text-transform:none; color:inherit; } .light .jm .h b{ color:var(--vu-black); } .dark .jm .h b{ color:#fff; }
+.jm .rl{ font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tx2); padding:8px 8px 8px 0; border-right:1px solid var(--line); }
+.jm .cell{ background:var(--card); border:1px solid var(--bd); border-radius:3px; padding:6px 8px; color:var(--tx2); line-height:1.35; }
+.jm .cell.feel{ font-family:var(--serif-i); font-style:italic; font-size:.8rem; }
+.jm .cell.tp{ border-left:3px solid var(--vu-gold); }
+
+/* funnel */
+.funnel{ display:grid; grid-template-columns:1.25fr 1fr; gap:22px; align-items:start; }
+.funnel svg{ width:100%; height:auto; display:block; }
+
+/* gantt */
+.gantt{ display:grid; grid-template-columns:170px repeat(10,1fr); gap:0; font-size:.72rem; }
+.gantt .mh{ font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-gold); text-align:center; padding:4px 0 6px; border-bottom:1px solid var(--line); border-left:1px dashed var(--bd); }
+.gantt .mh.y{ color:var(--tx3); }
+.gantt .rl{ font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--tx2); padding:0 8px 0 0; border-bottom:1px dashed var(--bd); display:flex; align-items:center; }
+.gantt .row{ grid-column:2 / span 10; position:relative; height:50px; border-bottom:1px dashed var(--bd); background:repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), var(--bd) calc(10% - 1px) 10%); }
+.gantt .bar{ position:absolute; top:18px; height:24px; left:var(--x); width:var(--w); background:rgba(207,174,112,.22); border:1px solid rgba(207,174,112,.7); border-radius:3px; font-family:var(--cond); font-weight:700; font-size:.6rem; letter-spacing:.05em; text-transform:uppercase; color:var(--vu-oak); display:flex; align-items:center; padding:0 6px; white-space:nowrap; }
+.dark .gantt .bar{ color:#fff; }
+.gantt .bar.hi{ background:var(--vu-gold); color:var(--vu-black); }
+.gantt .dia{ position:absolute; left:var(--x); top:23px; width:13px; height:13px; background:var(--vu-gold); transform:translateX(-50%) rotate(45deg); }
+.gantt .dl{ position:absolute; left:var(--x); top:3px; transform:translateX(-50%); font-family:var(--cond); font-weight:700; font-size:.56rem; letter-spacing:.05em; text-transform:uppercase; color:var(--tx3); white-space:nowrap; }
+.gantt .today{ position:absolute; top:0; bottom:0; left:var(--x); width:2px; background:var(--vu-highlight); }
+
+/* cascade */
+.cascade{ display:grid; grid-template-columns:1fr 250px; gap:18px; align-items:start; }
+.rules{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-top:12px; }
+.rules div{ border:1px solid var(--line); border-radius:var(--r); padding:8px 10px; font-size:.74rem; color:var(--tx2); }
+.rules div b{ display:block; font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); margin-bottom:2px; }
+.tiers{ display:grid; gap:10px; }
+.tier{ display:grid; grid-template-columns:150px 1fr 170px; gap:12px; align-items:stretch; }
+.tier .who{ background:var(--vu-black); color:#fff; border-radius:var(--r); padding:10px 12px; border-left:4px solid var(--vu-gold); }
+.tier .who b{ display:block; font-family:var(--serif); font-weight:400; font-size:1rem; line-height:1.15; }
+.tier .who span{ font-family:var(--cond); font-weight:700; font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-gold); }
+.tier .say{ background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:9px 12px; font-size:.78rem; color:var(--tx2); }
+.tier .say b{ color:var(--vu-black); font-weight:600; }
+.tier .when{ background:var(--card2); border:1px solid var(--bd); border-radius:var(--r); padding:9px 12px; font-size:.74rem; color:var(--tx2); }
+.tier .when b{ display:block; font-family:var(--cond); font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-oak); }
+.arrowdown{ text-align:center; color:var(--vu-gold); font-size:1rem; line-height:1; margin:-4px 0; }
+.side{ background:var(--card); border:1px solid var(--bd); border-top:3px solid var(--vu-gold); border-radius:var(--r); padding:12px 14px; font-size:.78rem; color:var(--tx2); }
+.side h3{ margin-bottom:6px; }
+
+/* email mockups */
+.mail-wrap{ display:grid; gap:14px; }
+.mail-wrap.two{ grid-template-columns:1fr 1fr; }
+.email{ background:#fff; border:1px solid var(--bd); border-radius:var(--r); overflow:hidden; color:var(--vu-black); display:flex; flex-direction:column; }
+.email .hd{ background:var(--vu-black); color:#fff; padding:10px 16px; display:flex; justify-content:space-between; align-items:center; }
+.email .hd .org{ font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.12em; text-transform:uppercase; color:var(--vu-gold); }
+.email .hd .org b{ display:block; font-family:var(--serif); font-weight:400; font-size:.95rem; letter-spacing:0; text-transform:none; color:#fff; }
+.email .hd img{ height:22px; }
+.email .meta{ padding:8px 16px; border-bottom:1px solid var(--bd); font-size:.72rem; color:var(--tx3); display:grid; grid-template-columns:auto 1fr; gap:2px 10px; }
+.email .meta b{ font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-oak); }
+.email .body{ padding:12px 16px 14px; font-size:.8rem; line-height:1.5; color:#333; }
+.email .body h2{ font-size:1.25rem; margin-bottom:8px; color:var(--vu-black); }
+.email .body h2 em{ font-family:var(--serif-i); font-style:italic; color:var(--vu-oak); }
+.email .body p{ margin-bottom:8px; }
+.email .body ul{ margin-bottom:8px; } .email .body li{ color:#333; font-size:.8rem; }
+.email .btn{ display:inline-block; background:var(--vu-black); color:#fff; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; padding:8px 14px; border-radius:var(--r); margin:4px 0 8px; }
+.email .btn.gold{ background:var(--vu-gold); color:var(--vu-black); }
+.email .sig{ font-size:.74rem; color:var(--tx3); border-top:1px solid var(--bd); padding-top:8px; margin-top:4px; }
+.email .tag{ position:absolute; }
+.mailnote{ font-size:.76rem; color:var(--tx3); }
+.mailnote b{ font-family:var(--cond); font-weight:700; font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--vu-gold); }
+
+/* raci */
+.cal{ font-size:.72rem; } .cal td{ padding:4px 7px; } .cal th{ padding:4px 7px; }
+.raci td.c{ text-align:center; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; }
+.raci td.c.r{ color:var(--vu-oak); } .raci td.c.a{ color:var(--vu-black); background:rgba(207,174,112,.22); }
+.two{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.num{ font-family:var(--serif); font-size:1.5rem; color:var(--vu-gold); line-height:1; }
+.step{ display:grid; grid-template-columns:34px 1fr; gap:10px; align-items:start; margin-bottom:8px; }
+.step .k{ width:28px; height:28px; border-radius:50%; border:1px solid var(--vu-gold); color:var(--vu-gold); font-family:var(--cond); font-weight:700; font-size:.78rem; display:grid; place-items:center; }
+.step p{ font-size:.8rem; color:var(--tx2); margin:0; } .step b{ display:block; color:inherit; font-weight:600; } .light .step b{ color:var(--vu-black); } .dark .step b{ color:#fff; }
+.std{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:8px; }
+.std div{ border:1px solid var(--line); border-radius:var(--r); padding:8px 10px; font-size:.76rem; color:var(--tx2); }
+.std div b{ display:block; font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vu-gold); margin-bottom:2px; }
+.back{ align-items:center; justify-content:center; text-align:center; }
+.back img{ width:260px; margin-bottom:22px; }
+.back h1{ font-size:2.4rem; }
+</style>
+</head>
+<body>
+
+<!-- 1 cover -->
+<section class="pg dark cover">
+  <div class="bg"></div><div class="shade"></div>
+  <div class="in">
+    <img class="lockup" src="../../assets/img/vu-lockup-white.png" alt="Vanderbilt University">
+    <h1>Manager Voyage.<br>The launch <em>plan</em>.</h1>
+    <p class="sub">Learner journeys, the communications cascade, enrollment, delivery and measurement for bringing every Vanderbilt manager onto one standard. Draft messages included, with dates.</p>
+    <div class="meta"><span class="pill solid">People, Culture and Belonging</span><span class="pill">Futures Learning Hub</span><span class="pill">Pilot January 2027</span><span class="pill">Launch March 2, 2027</span></div>
+    <div class="vers">Draft for review &middot; November 6, 2026 &middot; Dates move together with the launch date</div>
+  </div>
+</section>
+
+<!-- 2 at a glance -->
+<section class="pg dark">
+  <p class="eyebrow">The plan on one page</p>
+  <h1>Pilot in January. Cascade in February. Launch on <em>March 2</em>. Measure at ninety days.</h1>
+  <p class="lede">Manager Voyage gives every manager at Vanderbilt the same standard, the same first ninety days and the same help. The launch follows the manager's own journey: nobody hears about it from a system before they hear about it from their own manager.</p>
+  <div class="phases">
+    <div class="phase"><span class="no">Phase 0</span><h2>Ready</h2><div class="when">Nov 6 to Dec 11, 2026</div><p>QA feedback closes Nov 25. Course fixes land. Oracle items, dashboard and the SCORM launcher tested in Oracle. Sponsor go for the pilot Dec 11.</p></div>
+    <div class="phase"><span class="no">Phase 1</span><h2>Pilot</h2><div class="when">Jan 6 to Jan 29, 2027</div><p>Twenty five managers from DAR, Facilities, VBOM, USAC, Campus Dining and VUIT take the whole first thirty days in three weeks. Readout Jan 27. Launch go Jan 29.</p></div>
+    <div class="phase"><span class="no">Phase 2</span><h2>Cascade</h2><div class="when">Feb 3 to Feb 27, 2027</div><p>Leadership brief, business unit leader briefings, the toolkit for managers' managers, HCMs and ECs briefed, Portal live, teaser in MyVU.</p></div>
+    <div class="phase"><span class="no">Phase 3</span><h2>Launch</h2><div class="when">Mar 2 to May 1, 2027</div><p>Launch email to every manager. Oracle assignments open. Day 1 automation on for new managers. Nudges at day 7, 22 and 60. Cohort invitations from May 1.</p></div>
+    <div class="phase"><span class="no">Phase 4</span><h2>Deliver and measure</h2><div class="when">Apr 2027 onward</div><p>Cohort 1 Apr 14 to May 5. Re-up assessment three months after each completion. Ninety day readout Jun 10. Quarterly dashboard to leadership.</p></div>
+  </div>
+  <div class="grid c4" style="margin-top:14px">
+    <div class="card"><div class="n">4</div><h2>Components</h2><p>Compliance by location, Manager Foundations, the four-week cohort, the Manager Portal. One standard runs through all four.</p></div>
+    <div class="card"><div class="n">90</div><h2>Days, day one to the re-up</h2><p>Legal courses by day 30. Policy courses, Foundations and the phase one micro modules by day 60. Cohort invitation at 60 days in good standing.</p></div>
+    <div class="card"><div class="n">7</div><h2>Modules in Foundations</h2><p>About 90 minutes in all, 10 to 20 minutes each, in as many sittings as the manager likes. The essentials in 35.</p></div>
+    <div class="card"><div class="n">25</div><h2>Managers per cohort, each quarter</h2><p>Bespoke cohorts for large units such as DAR. Fifty managers a year through the room and the two virtual weeks, growing with facilitator capacity.</p></div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 3 what we are launching -->
+<section class="pg light">
+  <p class="eyebrow">What we are launching</p>
+  <h1>Four components. One <em>standard</em>.</h1>
+  <p class="lede">The Vanderbilt Manager Standard is adapted from Gary Yukl's research on what effective managers do: four expectations, measured by the assessment, taught by the course, practiced in the cohort, and kept alive by the Portal.</p>
+  <div class="std">
+    <div><b>01 &middot; Get the work done</b>Through your team. Priorities with owners, clear expectations, work checked before it is due.</div>
+    <div><b>02 &middot; Take care of your people</b>Support under pressure, thanks by name, decisions shaped by the team.</div>
+    <div><b>03 &middot; Make things better</b>The why in your own words before the announcement. A look-back after big work.</div>
+    <div><b>04 &middot; Connect your team</b>To the rest of Vanderbilt. Hear what is coming first. Show the hours, offer two options.</div>
+  </div>
+  <div class="grid c4" style="margin-top:14px">
+    <div class="card"><span class="mono">Component 01</span><h2>Compliance, by location</h2><p>The legal and policy courses for Tennessee, New York, Florida and California, supervisor versions included. Auto-assigned in Oracle Learning by the manager's work location. Legal by day 30, policy by day 60.</p><span class="pill">Required</span></div>
+    <div class="card"><span class="mono">Component 02</span><h2>Manager Foundations</h2><p>The assessment, then the course You Are a Manager Now on the web: seven modules, narrated, with live practice conversations in the manager's own world, Compass the course guide, and a quick check. Then the micro modules in Oracle Learning: Systems and Vanderbilt in days 1 to 30, People and Processes in days 31 to 60.</p><span class="pill">Strongly encouraged, tracked</span></div>
+    <div class="card"><span class="mono">Component 03</span><h2>The four-week cohort</h2><p>Where skill is built. A half day in the room, two virtual weeks under ninety minutes, a two-hour capstone. SparkWise learning labs, voice simulations with Sam, Dev, Priya and Marcus, and the Manager Playbook presented to the business unit leader.</p><span class="pill">By invitation, 25 a quarter</span></div>
+    <div class="card"><span class="mono">Component 04</span><h2>The Manager Portal</h2><p>Every template, framework, policy link and contact from the course and the cohort, open from day one and never taken away. Who to call, same-day routes, and the My Voyage dashboard that shows each manager where they stand.</p><span class="pill">Always on</span></div>
+  </div>
+  <div class="rule"></div>
+  <p class="small">Sources: Manager Voyage Executive Brief v2 (September 2026), the program data in the Manager Voyage site, and the responsibilities discussion of November 5, 2026. Cohort size follows the November 5 decision of twenty five managers a quarter.</p>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 4 who it is for -->
+<section class="pg light">
+  <p class="eyebrow">Who it is for</p>
+  <h1>Three managers, two <em>reinforcers</em>, one message.</h1>
+  <p class="lede">The audience is everyone who manages people at Vanderbilt: new to the university, promoted into the M track, or long tenured and never trained. The journey is the same. The way they first hear about it is not.</p>
+  <div class="grid c3">
+    <div class="card"><span class="mono">Learner A</span><h2>The brand-new manager</h2><p><b>Who.</b> Hired or promoted into a manager role on or after launch. Day 1 is the day the assignment starts in Oracle HCM.</p><p><b>How they hear.</b> Their own manager, in the first week, then the automated Day 1 email with the dashboard link.</p><p><b>What is different.</b> The deadlines are real from day one. The protected time ask goes to their manager the same day.</p><p><b>Risk.</b> Buried under the new job. Mitigated by the Day 7 nudge and the manager's manager check-in at day 14.</p></div>
+    <div class="card"><span class="mono">Learner B</span><h2>The experienced manager, never trained</h2><p><b>Who.</b> Every current manager at launch, M1 to M5, whatever their tenure. The launch wave.</p><p><b>How they hear.</b> The cascade: their business unit leader, then their own manager, then the launch email from PCB leadership on March 2.</p><p><b>What is different.</b> Compliance is already current for most; the work is Foundations and the phase one micro modules. The essentials in 35 minutes; the whole course in about 90.</p><p><b>Risk.</b> "I have done this for years." Mitigated by the assessment first, which shows where the habits sit, and by the cohort as the reward.</p></div>
+    <div class="card"><span class="mono">Learner C</span><h2>The line manager moving into the M track</h2><p><b>Who.</b> A supervisor or lead who now approves time off for former peers, in Dining, Facilities, VUIT or a business office.</p><p><b>How they hear.</b> Their HCM at the moment of the job change, plus the Day 1 email.</p><p><b>What is different.</b> The practice conversations in their own world matter most: Campus Dining, VUIT, Facilities, Student Affairs, Academic Affairs, DAR or a business office.</p><p><b>Risk.</b> Desk time is scarce on a floor or a route. Mitigated by the phone-friendly course and the no-microphone path.</p></div>
+  </div>
+  <div class="grid c2" style="margin-top:12px">
+    <div class="card"><span class="mono">Reinforcer</span><h2>The manager's manager</h2><p>The single biggest lever. They tell their managers it is coming, carve out two to three hours of protected time in the first two weeks, ask about the assessment in a 1:1, and hear the Playbook at the capstone. They get a toolkit on February 17 and one automated note per new manager.</p></div>
+    <div class="card"><span class="mono">Reinforcer</span><h2>HCMs and Engagement Consultants</h2><p>They see every job change first and answer the same-day questions. They are briefed on February 18, carry the one-line pitch and the dashboard link, and route a manager who is stuck. They are not the ones who have the conversation; the course is clear that the people work is the manager's work.</p></div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 5 learner journey timeline -->
+<section class="pg dark">
+  <p class="eyebrow">The learner journey</p>
+  <h1>Day one to <em>ninety</em>, and every touchpoint on the way.</h1>
+  <p class="lede" style="margin-bottom:4px">What a manager does, and what reaches them, from the day the role changes to the re-up. The numbered messages are drafted on pages 11 to 16.</p>
+  <div class="tl">
+    <div class="axis">
+      <span style="--x:0%"><b>Day 1</b>Role changes</span>
+      <span style="--x:10%"><b>Day 7</b>Course started</span>
+      <span style="--x:20%"><b>Day 14</b>1:1 check-in</span>
+      <span style="--x:38%"><b>Day 30</b>Legal due</span>
+      <span style="--x:62%"><b>Day 60</b>Complete, invited</span>
+      <span style="--x:78%"><b>Next quarter</b>The cohort</span>
+      <span style="--x:97%"><b>+3 months</b>The re-up</span>
+    </div>
+    <div class="lane"><span class="ln">Assessment</span><div class="track"><b class="ms" style="--x:1.5%"><small>Baseline, before the course</small></b><b class="ms" style="--x:86%"><small>Capstone</small></b><b class="ms" style="--x:97%"><small>Re-up</small></b></div></div>
+    <div class="lane"><span class="ln">Compliance</span><div class="track"><i class="seg" style="--x:0%;--w:38%">Legal courses by day 30</i><i class="seg" style="--x:39%;--w:23%">Policy courses by day 60</i></div></div>
+    <div class="lane"><span class="ln">Foundations course</span><div class="track"><i class="seg hi" style="--x:1.5%;--w:17%">7 modules, about 90 min</i></div></div>
+    <div class="lane"><span class="ln">Micro modules</span><div class="track"><i class="seg" style="--x:8%;--w:30%">Systems &middot; Vanderbilt and Nashville</i><i class="seg" style="--x:39%;--w:23%">People &middot; Processes</i></div></div>
+    <div class="lane"><span class="ln">Cohort</span><div class="track"><i class="seg" style="--x:66%;--w:6.5%">W1 room</i><i class="seg" style="--x:73%;--w:5.5%">W2</i><i class="seg" style="--x:79%;--w:5.5%">W3</i><i class="seg hi" style="--x:85%;--w:8%">Capstone</i></div></div>
+    <div class="lane"><span class="ln">Portal and dashboard</span><div class="track"><i class="seg live" style="--x:0%;--w:100%">Always live, from day one</i></div></div>
+    <div class="lane"><span class="ln">Manager's manager</span><div class="track"><span class="chip" style="--x:0%">Protected time, 2 to 3 hrs</span><span class="chip" style="--x:20%">Asks about the assessment</span><span class="chip" style="--x:62%">Nominates for the cohort</span><span class="chip" style="--x:85%">Hears the Playbook</span></div></div>
+    <div class="lane"><span class="ln">Messages</span><div class="track"><span class="mail" style="--x:0.5%">1</span><span class="mail" style="--x:10%">2</span><span class="mail" style="--x:29%">3</span><span class="mail" style="--x:62%">4</span><span class="mail" style="--x:66%">5</span><span class="mail" style="--x:97%">6</span></div></div>
+  </div>
+  <div class="legend"><span><i style="background:var(--vu-gold)"></i>Required or central</span><span><i style="background:rgba(207,174,112,.25);border:1px solid rgba(207,174,112,.6)"></i>Window</span><span><i style="background:var(--vu-gold);transform:rotate(45deg)"></i>Assessment point</span><span><i style="background:var(--vu-gold);border-radius:50%"></i>1 Day 1 assignment &middot; 2 Day 7 nudge &middot; 3 Day 22 compliance reminder &middot; 4 Day 60 completion and invitation &middot; 5 Cohort welcome &middot; 6 Re-up invitation</span></div>
+  <div class="grid c3" style="margin-top:10px">
+    <div class="card"><span class="mono">By day 30</span><h2>Legal, seen, started</h2><p>Legal courses done. The assessment taken and the results email kept. The course begun, with the manager's manager having asked about it once.</p></div>
+    <div class="card"><span class="mono">By day 60</span><h2>Complete, invited</h2><p>Policy courses, Foundations and the Systems and Vanderbilt modules done. Completion in Oracle. The cohort invitation in hand, the People and Processes modules open.</p></div>
+    <div class="card"><span class="mono">By day 90</span><h2>Practiced, measured</h2><p>The cohort, when a seat comes. The ten statements rated again at three months, beside the baseline. The Portal in weekly use.</p></div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 6 journey map -->
+<section class="pg light">
+  <p class="eyebrow">The learner journey, stage by stage</p>
+  <h1>What the manager does, feels and <em>needs</em> at each step.</h1>
+  <div class="jm">
+    <div></div>
+    <div class="h">Stage 1<b>Hear</b></div><div class="h">Stage 2<b>Enroll</b></div><div class="h">Stage 3<b>Start</b></div><div class="h">Stage 4<b>Learn</b></div><div class="h">Stage 5<b>Practice</b></div><div class="h">Stage 6<b>Prove</b></div><div class="h">Stage 7<b>Keep</b></div>
+    <div class="rl">When</div>
+    <div class="cell">Launch wave: Feb 10 to Mar 2. New manager: the first week.</div><div class="cell">Mar 2, or Day 1 for a new manager.</div><div class="cell">Days 1 to 7.</div><div class="cell">Days 7 to 60.</div><div class="cell">Inside the course, then the cohort next quarter.</div><div class="cell">Day 60 and the capstone.</div><div class="cell">Three months on, and every week after.</div>
+    <div class="rl">They do</div>
+    <div class="cell">Hear it from their business unit leader and their own manager. Read the teaser.</div><div class="cell">Open the launch or Day 1 email. Open the My Voyage dashboard. See their compliance rows by location.</div><div class="cell">Take the assessment, ten statements, five minutes. Get the results email. Begin Module 1.</div><div class="cell">Finish the seven modules in sittings. Complete the legal courses by day 30, the rest and the phase one micro modules by day 60.</div><div class="cell">Have the live conversations with Sam, Priya, Jordan and the rest in their own world. In the cohort, the Playbook one section a week.</div><div class="cell">Every activity marked done; the quick check at four of five. Completion recorded in Oracle. Present the Playbook at the capstone.</div><div class="cell">Rate the ten statements again. See what moved. Use the Portal every week: templates, who to call, the dashboard.</div>
+    <div class="rl">They feel</div>
+    <div class="cell feel">"Another course?" or "Finally."</div><div class="cell feel">"This is for me, in my location, with my dates."</div><div class="cell feel">"I did not know I never do that."</div><div class="cell feel">"One idea per screen. I can do this on my phone."</div><div class="cell feel">"That is exactly what Dev said to me last month."</div><div class="cell feel">"My manager heard how I will lead."</div><div class="cell feel">"The habits moved. One more to work on."</div>
+    <div class="rl">Touchpoint</div>
+    <div class="cell tp">Cascade messages, MyVU teaser, Portal page.</div><div class="cell tp">Launch email (Mar 2) or Day 1 email. Oracle assignment. Dashboard.</div><div class="cell tp">Assessment results email. Day 7 nudge if not started.</div><div class="cell tp">Day 22 compliance reminder. Manager's manager 1:1 at day 14. Compass on every page.</div><div class="cell tp">Course scoring. Cohort welcome at week 0. SparkWise labs.</div><div class="cell tp">Day 60 completion email with the cohort invitation. Capstone in the room.</div><div class="cell tp">Re-up invitation at +3 months. Portal. Quarterly dashboard to the unit.</div>
+    <div class="rl">Owner</div>
+    <div class="cell">BU leader, manager's manager, FLH</div><div class="cell">FLH, Oracle Learning (VUIT)</div><div class="cell">FLH automation</div><div class="cell">Manager's manager, HCM</div><div class="cell">FLH facilitators</div><div class="cell">FLH, BU leader</div><div class="cell">FLH, PCB</div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 7 funnel -->
+<section class="pg light">
+  <p class="eyebrow">The enrollment funnel</p>
+  <h1>Of every hundred managers in the launch wave, by day <em>ninety</em>.</h1>
+  <div class="funnel">
+    <svg viewBox="0 0 560 500" role="img" aria-label="Funnel from assigned to re-up">
+      <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#CFAE70"/><stop offset="1" stop-color="#946E24"/></linearGradient></defs>
+      <g font-family="Antonio, Arial Narrow, sans-serif" font-weight="700" font-size="12" letter-spacing="1">
+        <polygon points="10,8 550,8 528,66 32,66" fill="#CFAE70" opacity=".95"/><text x="280" y="42" text-anchor="middle" fill="#1C1C1C">100 ASSIGNED IN ORACLE LEARNING</text>
+        <polygon points="32,70 528,70 506,128 54,128" fill="#CFAE70" opacity=".85"/><text x="280" y="104" text-anchor="middle" fill="#1C1C1C">85 OPEN THE DASHBOARD BY DAY 14</text>
+        <polygon points="54,132 506,132 484,190 76,190" fill="#CFAE70" opacity=".75"/><text x="280" y="166" text-anchor="middle" fill="#1C1C1C">70 TAKE THE ASSESSMENT</text>
+        <polygon points="76,194 484,194 462,252 98,252" fill="#CFAE70" opacity=".65"/><text x="280" y="228" text-anchor="middle" fill="#1C1C1C">65 START FOUNDATIONS</text>
+        <polygon points="98,256 462,256 442,314 118,314" fill="#946E24" opacity=".9"/><text x="280" y="290" text-anchor="middle" fill="#fff">55 COMPLETE FOUNDATIONS BY DAY 60</text>
+        <polygon points="118,318 442,318 424,376 136,376" fill="#946E24" opacity=".8"/><text x="280" y="352" text-anchor="middle" fill="#fff">45 FINISH THE PHASE ONE MODULES</text>
+        <polygon points="136,380 424,380 408,438 152,438" fill="#1C1C1C" opacity=".9"/><text x="280" y="414" text-anchor="middle" fill="#CFAE70">30 ASK FOR A COHORT SEAT</text>
+        <polygon points="152,442 408,442 396,496 164,496" fill="#1C1C1C"/><text x="280" y="474" text-anchor="middle" fill="#CFAE70">45 RE-UP AT +3 MONTHS</text>
+      </g>
+    </svg>
+    <div>
+      <h3>Two lanes, read together</h3>
+      <p style="font-size:.8rem;color:var(--tx2)"><b>Required.</b> Compliance runs beside the funnel, not inside it: the target is 100 of 100 legal courses by day 30 and policy courses by day 60, as today. Oracle enforces it; the launch adds the dashboard so a manager sees it in one place.</p>
+      <p style="font-size:.8rem;color:var(--tx2)"><b>Encouraged, tracked.</b> Foundations, the micro modules and the cohort are the funnel above. The numbers are targets for the launch wave in its first ninety days, proposed for sign-off on December 11, and set from the pilot's actual conversion on January 27.</p>
+      <h3 style="margin-top:10px">Where each number comes from</h3>
+      <table>
+        <tr><th>Stage</th><th>Source</th></tr>
+        <tr><td>Assigned, opened</td><td>Oracle Learning assignment and launch records; dashboard first open</td></tr>
+        <tr><td>Assessment, re-up</td><td>The assessment flow and the results dashboard (baseline and retake per manager)</td></tr>
+        <tr><td>Started, complete</td><td>Course completion written back to Oracle; thirteen activities and the quick check</td></tr>
+        <tr><td>Micro modules</td><td>Oracle Learning completions by item number</td></tr>
+        <tr><td>Cohort</td><td>Requests through the Portal, seats confirmed by FLH</td></tr>
+      </table>
+      <h3 style="margin-top:10px">New managers after launch</h3>
+      <p style="font-size:.8rem;color:var(--tx2)">Same funnel, higher targets, because Day 1 is real: 80 of 100 complete Foundations by day 30, 90 by day 60.</p>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 8 launch timeline gantt -->
+<section class="pg dark">
+  <p class="eyebrow">The launch timeline</p>
+  <h1>November 2026 to August 2027, one <em>line</em> per workstream.</h1>
+  <div class="gantt">
+    <div></div>
+    <div class="mh y">Nov 26</div><div class="mh y">Dec</div><div class="mh">Jan 27</div><div class="mh">Feb</div><div class="mh">Mar</div><div class="mh">Apr</div><div class="mh">May</div><div class="mh">Jun</div><div class="mh">Jul</div><div class="mh">Aug</div>
+    <div class="rl">Build and QA</div><div class="row"><i class="bar" style="--x:0%;--w:14%">QA to Nov 25, fixes</i><i class="dia" style="--x:14.5%"></i><span class="dl" style="--x:17%">Dec 11 go, no go</span><i class="today" style="--x:2%"></i></div>
+    <div class="rl">Oracle and systems</div><div class="row"><i class="bar" style="--x:3%;--w:12%">Items, launcher, dashboard</i><i class="bar" style="--x:30%;--w:10%">Bulk assign</i></div>
+    <div class="rl">Pilot</div><div class="row"><i class="bar hi" style="--x:20.5%;--w:8%">Jan 6 to 29</i><i class="dia" style="--x:28.5%"></i><span class="dl" style="--x:31%">Readout Jan 27 &middot; go Jan 29</span></div>
+    <div class="rl">Cascade</div><div class="row"><i class="bar" style="--x:31%;--w:8.5%">Feb 3 to 27</i></div>
+    <div class="rl">Launch wave</div><div class="row"><i class="dia" style="--x:40.3%"></i><span class="dl" style="--x:40.3%">Mar 2 launch</span><i class="bar hi" style="--x:40.3%;--w:20%">Days 1 to 60 of the launch wave</i></div>
+    <div class="rl">Day 1 automation</div><div class="row"><i class="bar" style="--x:40.3%;--w:59.7%">Every new manager, from Mar 2</i></div>
+    <div class="rl">Cohorts</div><div class="row"><i class="bar hi" style="--x:54.5%;--w:7.5%">Cohort 1</i><i class="bar hi" style="--x:84.5%;--w:7.5%">Cohort 2</i></div>
+    <div class="rl">Measure</div><div class="row"><i class="dia" style="--x:73.3%"></i><span class="dl" style="--x:76%">Jun 10 readout</span><i class="bar" style="--x:70%;--w:30%">Re-ups from Jun 2 &middot; quarterly dashboard</i></div>
+  </div>
+  <div class="grid c3" style="margin-top:14px">
+    <div class="card"><span class="mono">Go, no go 1 &middot; Dec 11</span><p>Course QA closed and fixed. Oracle items for Foundations and the micro modules exist. The SCORM launcher reports a test completion in Oracle. Pilot roster of twenty five confirmed.</p></div>
+    <div class="card"><span class="mono">Go, no go 2 &middot; Jan 29</span><p>Pilot conversion at or above half the targets on page 7. No open blocker on microphone, Oracle write-back or the dashboard. Business unit leaders booked for February 10.</p></div>
+    <div class="card"><span class="mono">Readout &middot; Jun 10</span><p>Ninety days of the launch wave: the funnel against target, compliance on time, assessment movement for the first re-ups, cohort 1 pulse. Decision on cohort capacity for the year.</p></div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 9 cascade -->
+<section class="pg light">
+  <p class="eyebrow">The communications cascade</p>
+  <h1>Every manager hears it from a person <em>before</em> a system.</h1>
+  <div class="cascade">
+    <div class="tiers">
+      <div class="tier"><div class="who"><span>Tier 1 &middot; Feb 3</span><b>PCB leadership to senior leadership</b></div><div class="say"><b>What they say.</b> Why now: the manager bench is thin and internal fill rates show it. What it is: one standard, four components, ninety days. The ask: sponsor it in your area, protect the time, name three managers for cohort 1.</div><div class="when"><b>How</b>Fifteen minutes on the leadership agenda, the one-page brief, this plan.</div></div>
+      <div class="arrowdown">&#9660;</div>
+      <div class="tier"><div class="who"><span>Tier 2 &middot; Feb 10</span><b>Business unit leaders to their leadership teams</b></div><div class="say"><b>What they say.</b> This is how we will manage here. The dates for our unit. The managers' managers own the follow-through. Bespoke cohort for the largest units.</div><div class="when"><b>How</b>Thirty-minute briefing with FLH, the toolkit: slides, the one-page brief, the forwardable note, the FAQ.</div></div>
+      <div class="arrowdown">&#9660;</div>
+      <div class="tier"><div class="who"><span>Tier 3 &middot; Feb 17</span><b>Managers' managers to their managers</b></div><div class="say"><b>What they say.</b> In their own words, before the launch email: it is coming on March 2, I have blocked two to three hours for you in the first two weeks, we will talk about your assessment in our 1:1. The forwardable note is written for them; the better version is the one they write.</div><div class="when"><b>How</b>A team meeting or a 1:1, then the forwardable note. A reminder from FLH the week of launch.</div></div>
+      <div class="arrowdown">&#9660;</div>
+      <div class="tier"><div class="who"><span>Tier 4 &middot; Mar 2</span><b>PCB leadership to every manager</b></div><div class="say"><b>What they say.</b> You are a manager now, whatever year you started. Here is the standard, here is your dashboard, here are your dates. Open the assessment today.</div><div class="when"><b>How</b>The launch email, the Oracle assignment the same morning, the MyVU story, the Portal.</div></div>
+    </div>
+    <div>
+      <div class="side"><h3>Beside the cascade</h3><p><b>HCMs and Engagement Consultants, Feb 18.</b> A forty-minute briefing. They carry the one-line pitch, the dashboard link and the routing: a stuck manager goes to FLH, a people question stays with the manager.</p><p><b>Oracle Learning, from Mar 2.</b> Assignment notices and the Day 1 email for every new manager, automatically, with a note to the manager's manager.</p><p><b>MyVU and the PCB newsletter, Feb 24 and Mar 2.</b> The teaser, then the story.</p><p><b>Compass, on every page.</b> The course guide answers questions about the course in the course, so the launch inbox stays small.</p></div>
+    </div>
+  </div>
+  <div class="rules">
+    <div><b>One voice</b>Every tier uses the same four expectations, in the same words.</div>
+    <div><b>Person before system</b>No manager's first contact is an Oracle notice.</div>
+    <div><b>Dates, not adjectives</b>Each message carries the dates for that reader.</div>
+    <div><b>One ask</b>Each message asks for exactly one thing.</div>
+    <div><b>Plain Vanderbilt</b>No jargon, no exclamation marks, short sentences.</div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 10 comms calendar -->
+<section class="pg light">
+  <p class="eyebrow">The communications calendar</p>
+  <h1>Every message, with its date, sender and <em>purpose</em>.</h1>
+  <table class="cal">
+    <tr><th>#</th><th>Date</th><th>Audience</th><th>From, channel</th><th>Purpose and the one ask</th><th>Owner</th></tr>
+    <tr><td>C1</td><td class="d">Wed Feb 3</td><td>Senior leadership</td><td>PCB leadership, leadership meeting then email</td><td>Why now, what it is, three asks: sponsor, protect the time, name three managers. <b>Page 11.</b></td><td>FLH drafts, PCB sends</td></tr>
+    <tr><td>C2</td><td class="d">Wed Feb 10</td><td>Business unit leaders and their teams</td><td>FLH, thirty-minute briefings and the toolkit</td><td>Dates for the unit, the toolkit, bespoke cohort for large units. <b>Page 12.</b></td><td>FLH</td></tr>
+    <tr><td>C3</td><td class="d">Wed Feb 17</td><td>Managers' managers</td><td>FLH, email with the forwardable note</td><td>Tell your managers yourself, block two to three hours, ask about the assessment at day 14. <b>Page 12.</b></td><td>FLH</td></tr>
+    <tr><td>C4</td><td class="d">Thu Feb 18</td><td>HCMs and Engagement Consultants</td><td>FLH, forty-minute briefing</td><td>The pitch, the link, the routing. Questions answered before launch.</td><td>FLH</td></tr>
+    <tr><td>C5</td><td class="d">Wed Feb 24</td><td>All staff</td><td>PCB, MyVU and the newsletter</td><td>Teaser: one standard for every manager, coming March 2. Portal live. <b>Page 13.</b></td><td>PCB communications</td></tr>
+    <tr><td>C6</td><td class="d">Mon Mar 2</td><td>Every manager</td><td>PCB leadership, email at 7:30 am, Oracle assignment at 8:00</td><td>Launch: the standard, the dashboard, your dates, take the assessment today. <b>Page 13.</b></td><td>FLH drafts, PCB sends</td></tr>
+    <tr><td>M1</td><td class="d">Day 1, from Mar 2</td><td>Each new manager, and their manager</td><td>FLH, automated</td><td>Your voyage starts today: dashboard, dates, assessment first. A note to the manager's manager on protected time. <b>Page 14.</b></td><td>FLH automation</td></tr>
+    <tr><td>M2</td><td class="d">Day 7 &middot; Mon Mar 9</td><td>Managers who have not started</td><td>FLH, automated</td><td>Nudge: the assessment takes five minutes, Module 1 five more. <b>Page 15.</b></td><td>FLH automation</td></tr>
+    <tr><td>M3</td><td class="d">Day 22 &middot; Tue Mar 24</td><td>Managers with legal courses open</td><td>Oracle Learning, automated</td><td>Eight days to the legal deadline, with the exact rows. <b>Page 15.</b></td><td>Oracle, FLH</td></tr>
+    <tr><td>M4</td><td class="d">Day 60 &middot; Sat May 1</td><td>Managers who completed</td><td>PCB, automated</td><td>You finished. Your recap, your week, and the cohort invitation. <b>Page 16.</b></td><td>FLH automation</td></tr>
+    <tr><td>M5</td><td class="d">Cohort week 0</td><td>Cohort members</td><td>FLH facilitator, email and calendar holds</td><td>Welcome, the four dates, twenty minutes to do before week one. <b>Page 16.</b></td><td>FLH</td></tr>
+    <tr><td>M6</td><td class="d">+3 months</td><td>Each manager who completed</td><td>PCB, automated</td><td>Rate the ten statements again. See what moved. Existing template.</td><td>FLH automation</td></tr>
+    <tr><td>R1</td><td class="d">Thu Jun 10</td><td>Senior leadership</td><td>PCB leadership, readout</td><td>Ninety days: funnel, compliance, movement, cohort 1. Capacity decision.</td><td>FLH, PCB</td></tr>
+  </table>
+  <p class="small" style="margin-top:8px">Day counts for the launch wave run from March 2. For a new manager they run from the day the assignment starts in Oracle HCM. Weekend dates shift to the next business day.</p>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 11 message C1 leadership brief -->
+<section class="pg light">
+  <p class="eyebrow">Draft message C1 &middot; Wednesday, February 3, 2027</p>
+  <h1>To senior leadership: what we are launching on <em>March 2</em>.</h1>
+  <div class="email">
+    <div class="hd"><div class="org">People, Culture and Belonging<b>Manager Voyage</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+    <div class="meta"><b>From</b><span>[Name], People, Culture and Belonging</span><b>To</b><span>Senior leadership team</span><b>Subject</b><span>Manager Voyage: one standard for every manager, launching March 2</span></div>
+    <div class="body">
+      <h2>We are asking every manager to manage the <em>same way</em>.</h2>
+      <p>Our internal fill rates sit well below benchmark because the manager bench is thin, and most of our managers were never trained to manage. Manager Voyage fixes the second problem so that, over time, it fixes the first.</p>
+      <p>It is one standard, the Vanderbilt Manager Standard, in four expectations: get the work done through your team, take care of your people, make things better, and connect your team to the rest of Vanderbilt. Every manager, M1 to M5, in every location, gets the same first ninety days: compliance by location, a ninety-minute Foundations course with live practice conversations set in their own unit, short micro modules on the systems and processes they now own, a dashboard that shows where they stand, and the Portal that never goes away. After sixty days in good standing, a four-week cohort of twenty five managers a quarter builds the skill with their own teams and ends with each manager presenting a Playbook to their business unit leader.</p>
+      <p>A pilot of twenty five managers from DAR, Facilities, VBOM, USAC, Campus Dining and VUIT ran in January. The campus launch is Monday, March 2.</p>
+      <p>Three things I am asking of each of you before then:</p>
+      <ul><li><b>Sponsor it in your area.</b> Say, in your own words, that this is how we manage here. FLH will brief your leadership team on February 10.</li><li><b>Protect the time.</b> Ask your managers' managers to block two to three hours for each manager in the first two weeks of March.</li><li><b>Name three managers</b> for the first cohort, which opens April 14.</li></ul>
+      <span class="btn">Read the one-page brief</span>
+      <p>I will bring the first ninety days back to this group on June 10.</p>
+      <div class="sig">[Name], [Title], People, Culture and Belonging, Vanderbilt University</div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 12 messages C2 and C3 -->
+<section class="pg light">
+  <p class="eyebrow">Draft messages C2 and C3 &middot; February 10 and February 17, 2027</p>
+  <h1>To business unit leaders, and the note a manager's manager <em>forwards</em>.</h1>
+  <div class="mail-wrap two">
+    <div class="email">
+      <div class="hd"><div class="org">Futures Learning Hub<b>Manager Voyage</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+      <div class="meta"><b>From</b><span>[Name], Futures Learning Hub</span><b>To</b><span>Business unit leaders</span><b>Subject</b><span>Your unit's dates for Manager Voyage, and your toolkit</span></div>
+      <div class="body">
+        <h2>Three dates for <em>your unit</em>.</h2>
+        <p>Thank you for thirty minutes on February 10. Here is what we covered, and the toolkit.</p>
+        <ul><li><b>Tuesday, February 17.</b> Your managers' managers receive the forwardable note. The ask: tell your managers yourself before March 2, block two to three hours per manager, and ask about the assessment in a 1:1 by day 14.</li><li><b>Monday, March 2.</b> Launch. Every manager in your unit gets the email and the Oracle assignment that morning.</li><li><b>Wednesday, April 14.</b> Cohort 1 opens. Send me three names by February 27. Units with thirty or more managers can run a bespoke cohort; DAR is first.</li></ul>
+        <p>The toolkit: the one-page brief, five slides for your leadership meeting, the forwardable note, and a one-page FAQ. The My Voyage dashboard shows your managers by location once they open it; I will send your unit's view on March 16.</p>
+        <span class="btn">Open the toolkit</span>
+        <div class="sig">[Name], Futures Learning Hub, People, Culture and Belonging</div>
+      </div>
+    </div>
+    <div class="email">
+      <div class="hd"><div class="org">Forwardable note<b>From a manager's manager</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+      <div class="meta"><b>From</b><span>[The manager's manager]</span><b>To</b><span>[Their managers]</span><b>Subject</b><span>Coming March 2: Manager Voyage, and two hours I have blocked for you</span></div>
+      <div class="body">
+        <h2>You are a manager now. This is how we <em>manage here</em>.</h2>
+        <p>On Monday, March 2 you will get an email from People, Culture and Belonging about Manager Voyage. I wanted you to hear it from me first.</p>
+        <p>It is one standard for every manager at Vanderbilt, in four expectations: get the work done through your team, take care of your people, make things better, connect your team to the rest of Vanderbilt. The first thing it asks of you is a five-minute self-assessment. Then a short course, about ninety minutes in all, that you can do in sittings on your phone, with practice conversations set in our unit.</p>
+        <p>I have blocked two to three hours for you between March 2 and March 13 to do it. Nothing else goes in that time. In our 1:1 in the week of March 16 I will ask what your assessment showed and which habit you picked. I am doing the same.</p>
+        <p>The course is the start. After sixty days there is a four-week cohort, and I would like you in one this year.</p>
+        <div class="sig">[Name]</div>
+      </div>
+    </div>
+  </div>
+  <p class="mailnote" style="margin-top:8px"><b>Note</b> The forwardable note is deliberately short, so that it reads as the manager's own words. FLH sends it on February 17 with one line at the top: "Make it yours, then send it before March 2."</p>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 13 messages C5 teaser and C6 launch -->
+<section class="pg light">
+  <p class="eyebrow">Draft messages C5 and C6 &middot; February 24 and March 2, 2027</p>
+  <h1>The teaser, and the launch <em>email</em>.</h1>
+  <div class="mail-wrap two" style="grid-template-columns:.74fr 1.26fr">
+    <div class="email">
+      <div class="hd"><div class="org">MyVU and the PCB newsletter<b>Teaser, February 24</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+      <div class="body">
+        <h2>Every manager. One <em>standard</em>. March 2.</h2>
+        <p>Whether you became a manager last week or fifteen years ago, on March 2 you get the same first ninety days: a five-minute self-assessment, a ninety-minute course you can take on your phone with practice conversations set in your own unit, short modules on the systems and processes you own, and a dashboard that shows where you stand. After sixty days, a four-week cohort with your own team's situations.</p>
+        <p>The Manager Portal is open today, with every template, policy link and contact a manager needs. Your dates arrive March 2.</p>
+        <span class="btn gold">Open the Manager Portal</span>
+        <div class="sig">People, Culture and Belonging</div>
+      </div>
+    </div>
+    <div class="email">
+      <div class="hd"><div class="org">People, Culture and Belonging<b>Manager Voyage</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+      <div class="meta"><b>From</b><span>[Name], People, Culture and Belonging</span><b>To</b><span>Every manager</span><b>Sent</b><span>Monday, March 2, 2027, 7:30 am</span><b>Subject</b><span>You are a manager now. Your voyage starts today.</span></div>
+      <div class="body" style="font-size:.77rem;padding-top:10px">
+        <h2>Hi [First name]. You are a manager now, whatever year you <em>started</em>.</h2>
+        <p>Today Vanderbilt launches Manager Voyage: one standard for every manager, in four expectations. Get the work done through your team. Take care of your people. Make things better. Connect your team to the rest of Vanderbilt.</p>
+        <p>Your first step takes five minutes. Rate ten statements about how you manage in a typical month. Your results come straight back, by expectation, with the one habit to start with.</p>
+        <span class="btn gold">Take the assessment, five minutes</span>
+        <p>Then your dashboard: your compliance courses for [location], your dates, the Foundations course, and the modules for the systems you own.</p>
+        <ul><li><b>By April 1.</b> Your legal compliance courses, assigned in Oracle Learning this morning.</li><li><b>By May 1.</b> The policy courses, the Foundations course (seven modules, about ninety minutes, in sittings, on your phone), and the Systems and Vanderbilt modules.</li><li><b>Then.</b> An invitation to a four-week cohort, where you practice the standard with your own team's situations and present how you will lead.</li></ul>
+        <span class="btn">Open My Voyage</span>
+        <p>Your manager has blocked time for this in the next two weeks. Questions in the course go to Compass, the guide on every page.</p>
+        <div class="sig">[Name], [Title], People, Culture and Belonging, Vanderbilt University</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 14 message M1 day 1 -->
+<section class="pg light">
+  <p class="eyebrow">Draft message M1 &middot; Day 1, automated for every new manager from March 2</p>
+  <h1>The Day 1 email, and the note to the manager's <em>manager</em>.</h1>
+  <div class="mail-wrap two" style="grid-template-columns:1.25fr .75fr">
+    <div class="email">
+      <div class="hd"><div class="org">People, Culture and Belonging<b>Manager Voyage</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+      <div class="meta"><b>To</b><span>[First name] [Last name], the day the manager assignment starts in Oracle HCM</span><b>Subject</b><span>Day 1: you are a manager now. Here is your voyage.</span></div>
+      <div class="body">
+        <h2>Hi [First name]. Today is <em>day one</em>.</h2>
+        <p>Congratulations on the role. From today you are responsible for the work of your team and for the people on it. Manager Voyage is how Vanderbilt gets you ready: the same standard every manager here works to, in four expectations, and a first ninety days with real dates.</p>
+        <p><b>Today, five minutes.</b> Rate ten statements about how you manage. There is no wrong result; it is your starting point.</p>
+        <span class="btn gold">Take the assessment</span>
+        <p><b>This week.</b> Open My Voyage. It is built for you: your compliance courses for [location] with their dates, the Foundations course, and who to call. Begin Module 1, the mission, in five minutes.</p>
+        <ul><li><b>By [Day 30 date].</b> Legal compliance courses, assigned in Oracle Learning today.</li><li><b>By [Day 60 date].</b> Policy courses, the Foundations course (about ninety minutes in sittings), and the Systems and Vanderbilt modules: timekeeping, time off, approvals, hiring.</li></ul>
+        <span class="btn">Open My Voyage</span>
+        <p>[Manager's manager first name] has been asked to block two to three hours for you in your first two weeks. Your HCM, [HCM name], is the same-day call for anything about pay, time, leave or hiring. In the course, Compass answers questions on every page.</p>
+        <div class="sig">People, Culture and Belonging, Vanderbilt University. Sent because a manager assignment started for you on [date].</div>
+      </div>
+    </div>
+    <div>
+      <div class="email">
+        <div class="hd"><div class="org">Automated, same day<b>To the manager's manager</b></div></div>
+        <div class="meta"><b>To</b><span>[Manager's manager]</span><b>Subject</b><span>[First name] became a manager today. Two to three hours, please.</span></div>
+        <div class="body">
+          <p>[First name] [Last name] started a manager assignment on your team today and has been sent their Manager Voyage: a five-minute assessment, a ninety-minute course, and compliance courses with dates.</p>
+          <p>Two things make the difference in the first month:</p>
+          <ul><li>Block two to three hours for them between now and [Day 14 date]. Nothing else goes in that time.</li><li>In a 1:1 by [Day 14 date], ask what the assessment showed and which habit they picked.</li></ul>
+          <p>Their dashboard shows their dates; yours shows your team's. Legal courses are due [Day 30 date].</p>
+          <span class="btn">See your team's voyage</span>
+          <div class="sig">People, Culture and Belonging</div>
+        </div>
+      </div>
+      <p class="mailnote" style="margin-top:10px"><b>Trigger</b> The manager assignment start date in Oracle HCM, read through the profile feed. Location fills the compliance rows and the HCM name. Day dates are computed from the start date.</p>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 15 messages M2 and M3 -->
+<section class="pg light">
+  <p class="eyebrow">Draft messages M2 and M3 &middot; Day 7 and Day 22</p>
+  <h1>Two nudges. Short, specific, with the <em>date</em>.</h1>
+  <div class="mail-wrap two">
+    <div class="email">
+      <div class="hd"><div class="org">Day 7 &middot; only if not started<b>Manager Voyage</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+      <div class="meta"><b>To</b><span>Managers with no assessment and no course activity after seven days</span><b>Subject</b><span>Five minutes today, [First name]</span></div>
+      <div class="body">
+        <h2>Ten statements. <em>Five minutes.</em></h2>
+        <p>A week ago you were sent your Manager Voyage. Nothing has been opened yet, which usually means the week was full, not that you decided against it.</p>
+        <p>The first step is the shortest. Rate ten statements about how you manage in a typical month. Your results come straight back, by expectation, with the one habit to start with.</p>
+        <span class="btn gold">Take the assessment</span>
+        <p>Then Module 1 of the course, the mission, is five more minutes. The whole course is about ninety, in as many sittings as you like, on your phone. Your manager has blocked time for it before [Day 14 date].</p>
+        <p>Your legal compliance courses are due [Day 30 date]. They are separate, in Oracle Learning, and your dashboard lists them.</p>
+        <span class="btn">Open My Voyage</span>
+        <div class="sig">People, Culture and Belonging. One reminder; we will not send this twice.</div>
+      </div>
+    </div>
+    <div class="email">
+      <div class="hd"><div class="org">Day 22 &middot; only with open legal courses<b>Manager Voyage</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+      <div class="meta"><b>To</b><span>Managers with a legal compliance course not yet complete</span><b>Subject</b><span>Eight days: [n] compliance course[s] due [Day 30 date]</span></div>
+      <div class="body">
+        <h2>Due <em>[Day 30 date]</em>.</h2>
+        <p>These legal compliance courses are still open for you in Oracle Learning. They are required for every manager in [location] and take the time shown.</p>
+        <ul><li>[Course title], [minutes] minutes</li><li>[Course title], [minutes] minutes</li></ul>
+        <span class="btn gold">Open the courses in Oracle Learning</span>
+        <p>Everything else on your voyage runs to [Day 60 date]. If a course will not open or a completion has not recorded, reply to this email and FLH will sort it the same day.</p>
+        <div class="sig">People, Culture and Belonging, with Oracle Learning</div>
+      </div>
+    </div>
+  </div>
+  <p class="mailnote" style="margin-top:8px"><b>Rules</b> Each nudge sends once, only to the managers it applies to, and never on a day the manager has already opened the dashboard. Managers who are current get nothing. The launch wave's Day 7 is Monday, March 9 and its Day 22 is Tuesday, March 24.</p>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 16 messages M4 and M5 -->
+<section class="pg light">
+  <p class="eyebrow">Draft messages M4 and M5 &middot; Day 60 and cohort week 0</p>
+  <h1>The completion email with the invitation, and the cohort <em>welcome</em>.</h1>
+  <div class="mail-wrap two">
+    <div class="email">
+      <div class="hd"><div class="org">Day 60 &middot; on completion<b>Manager Foundations</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+      <div class="meta"><b>To</b><span>Each manager, the day the course records complete in Oracle</span><b>Subject</b><span>You finished, [First name]. Here is your recap, and an invitation.</span></div>
+      <div class="body">
+        <h2>Every activity is done. <em>[4] of 5</em> on the quick check.</h2>
+        <p>This email is your recap: where you started, the one habit you chose, the week you built, and who to call. Keep it. (The recap block already exists in the completion template.)</p>
+        <p><b>Where you started.</b> [28] of 50 before the course. Strongest: [connect your team]. The one to grow first: [take care of your people]. In three months you rate the same ten statements again.</p>
+        <p><b>The one thing you chose for this week.</b> [Thank one person for one specific thing, by name.] Do it once, on purpose, in a meeting you already have.</p>
+        <p><b>Next: the four-week cohort.</b> Twenty five managers a quarter practice the standard with their own teams: a half day in the room, two virtual weeks under ninety minutes, and a two-hour capstone where you present your Manager Playbook to [business unit leader]. The next cohort opens [date]. Your manager can nominate you, or ask for a seat yourself.</p>
+        <span class="btn gold">Ask for a cohort seat</span>
+        <div class="sig">People, Culture and Belonging. Your completion is recorded in Oracle Learning.</div>
+      </div>
+    </div>
+    <div class="email">
+      <div class="hd"><div class="org">Cohort week 0 &middot; two weeks before week one<b>The four-week cohort</b></div><img src="../../assets/img/vu-lockup-white.png" alt=""></div>
+      <div class="meta"><b>From</b><span>[Facilitator], Futures Learning Hub</span><b>To</b><span>Cohort 1, twenty five managers</span><b>Subject</b><span>Your cohort: four dates, and twenty minutes before we meet</span></div>
+      <div class="body">
+        <h2>Four weeks. Your <em>own team</em>.</h2>
+        <p>Welcome to Cohort 1. Everything we do is about the team you actually run, hourly or salaried, dining or IT. Calendar holds follow this email.</p>
+        <ul><li><b>Wed Apr 14, 8:30 to 11:30, in the room.</b> What it means to manage. The hard conversation out loud, in pairs, then live with Sam.</li><li><b>Wed Apr 21, 9:00 to 10:30, virtual.</b> Goals, 1:1s and difficult conversations. Core module released Friday, April 16.</li><li><b>Wed Apr 28, 9:00 to 10:30, virtual.</b> Coaching and mentoring. Delegation lab.</li><li><b>Wed May 5, 9:00 to 11:00, in the room.</b> The capstone. Your Playbook, presented, with [business unit leader] in the room.</li></ul>
+        <p><b>Before April 14, about twenty minutes.</b> On the cohort site: your team profile, the four-question confidence pulse, and one sentence on what your team can expect from you.</p>
+        <span class="btn">Open the cohort site</span>
+        <div class="sig">[Facilitator], Futures Learning Hub</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 17 enrollment mechanics -->
+<section class="pg dark">
+  <p class="eyebrow">Enrollment</p>
+  <h1>How a manager gets in, and what <em>Oracle</em> does on its own.</h1>
+  <div class="two">
+    <div>
+      <h3>The launch wave, March 2</h3>
+      <div class="step"><span class="k">1</span><p><b>The population.</b> Every active worker with a manager assignment in Oracle HCM on February 27, by location and business unit. FLH confirms the list with HCMs the week of February 23.</p></div>
+      <div class="step"><span class="k">2</span><p><b>Bulk assignment, the morning of March 2.</b> Foundations and the phase one micro modules assigned in Oracle Learning with due dates of May 1. Compliance assignments stay as they are; most are current.</p></div>
+      <div class="step"><span class="k">3</span><p><b>The launch email, 7:30 am.</b> Dashboard link, assessment link, the dates. The Oracle assignment notice follows at 8:00 so the email is read first.</p></div>
+      <div class="step"><span class="k">4</span><p><b>The dashboard.</b> My Voyage reads the manager's name, location and completions from Oracle through the profile feed, and shows each row as Verified in Oracle, Complete, Opened or Not started.</p></div>
+      <div class="step"><span class="k">5</span><p><b>Completion write-back.</b> The Foundations course records its completion and quick check score in Oracle Learning. Inside Oracle, through the SCORM launcher; on the web, through the completion flow.</p></div>
+    </div>
+    <div>
+      <h3>Every new manager, from March 2</h3>
+      <div class="step"><span class="k">1</span><p><b>Trigger.</b> A manager assignment starts in Oracle HCM. The profile feed carries the start date and location.</p></div>
+      <div class="step"><span class="k">2</span><p><b>Day 1.</b> Compliance assigned by location with deadlines from the start date. Foundations and phase one modules assigned, due day 60. The Day 1 email and the note to the manager's manager go the same day.</p></div>
+      <div class="step"><span class="k">3</span><p><b>Days 7, 22 and 60.</b> The nudges, each sent once and only where it applies.</p></div>
+      <div class="step"><span class="k">4</span><p><b>Day 60 in good standing.</b> Compliance complete, Foundations complete. The invitation to the cohort goes with the completion email; the Portal request form takes the seat request.</p></div>
+      <h3 style="margin-top:12px">The rules</h3>
+      <ul><li>Legal compliance by day 30, policy by day 60. Oracle enforces it; the dashboard shows it.</li><li>Foundations is strongly encouraged and tracked, not a condition of the role. It is a condition of the cohort.</li><li>Twenty five seats a quarter, nominated by the manager's manager or requested by the manager. Units of thirty or more managers can run a bespoke cohort.</li><li>An Oracle completion always outranks a self-reported one.</li></ul>
+    </div>
+  </div>
+  <div class="rule"></div>
+  <p class="small">Open decision for December 11: whether Foundations is delivered inside Oracle Learning through the SCORM launcher (one package that frames the live site, completion recorded in Oracle) or on the web with the completion flow. Both paths are built for; the launcher is the recommended path and keeps every fix live without a re-upload.</p>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 18 delivery -->
+<section class="pg light">
+  <p class="eyebrow">Delivery</p>
+  <h1>Self-paced on the web, cohorts on the <em>calendar</em>, support on every page.</h1>
+  <div class="two">
+    <div>
+      <h3>Cohort calendar 2027</h3>
+      <table>
+        <tr><th>Cohort</th><th>Week 1, room</th><th>Week 2, virtual</th><th>Week 3, virtual</th><th>Capstone, room</th><th>Who</th></tr>
+        <tr><td><b>1</b></td><td class="d">Wed Apr 14</td><td class="d">Wed Apr 21</td><td class="d">Wed Apr 28</td><td class="d">Wed May 5</td><td>Pilot graduates and early completers, nominated Feb 27</td></tr>
+        <tr><td><b>2</b></td><td class="d">Wed Jul 14</td><td class="d">Wed Jul 21</td><td class="d">Wed Jul 28</td><td class="d">Wed Aug 4</td><td>Launch wave completers, invited from May 1</td></tr>
+        <tr><td><b>3</b></td><td class="d">Wed Oct 6</td><td class="d">Wed Oct 13</td><td class="d">Wed Oct 20</td><td class="d">Wed Oct 27</td><td>Launch wave and new managers</td></tr>
+        <tr><td><b>DAR</b></td><td colspan="4">Bespoke cohort, dates set with DAR leadership, target Q3</td><td>DAR managers</td></tr>
+      </table>
+      <h3 style="margin-top:12px">The weekly rhythm</h3>
+      <table>
+        <tr><th>Beat</th><th>When</th><th>Time</th></tr>
+        <tr><td><b>Core module</b> in Oracle Learning</td><td>Released Friday</td><td>30 to 35 min</td></tr>
+        <tr><td><b>Learning Lab</b> in SparkWise, small group</td><td>Your own time</td><td>40 to 45 min</td></tr>
+        <tr><td><b>Simulation lab</b>, a live voice conversation</td><td>On your phone</td><td>10 min</td></tr>
+        <tr><td><b>Playbook</b>, one section</td><td>Due Sunday</td><td>5 min</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>What it takes to run</h3>
+      <ul><li><b>Facilitation.</b> Two FLH facilitators per cohort; the business unit leader in the room for the capstone. One room for a half day and two hours per cohort.</li><li><b>Platforms.</b> Oracle Learning for the core modules and completions. SparkWise for the labs. The cohort site for the Playbook and the pulse. ElevenLabs characters for the simulations, inside the course and the cohort site.</li><li><b>Capacity.</b> Twenty five managers a cohort, three open cohorts and one bespoke cohort in 2027: about one hundred managers through the cohort in the first year. The June 10 readout decides whether to add a fourth facilitator pair.</li></ul>
+      <h3 style="margin-top:12px">Support on every page</h3>
+      <ul><li><b>Compass</b>, the course guide, answers questions about the course and its content inside the course, text only, any hour.</li><li><b>The Portal</b> holds who to call: HCM, Engagement Consultant, Employee Relations, EOA, Title IX, Leave, the Hotline, with same-day routes marked.</li><li><b>FLH inbox</b> for anything the course cannot answer: a course that will not open, a completion that did not record. Same-day reply during launch.</li></ul>
+      <h3 style="margin-top:12px">Accessibility and reach</h3>
+      <ul><li>The course runs on a phone, with narration on every page and a written path for every live conversation, for rooms without microphones.</li><li>Every practice conversation can be set in the manager's own world: a business office, Campus Dining, VUIT, Academic Affairs, Student Affairs, Facilities, DAR.</li></ul>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 19 pilot -->
+<section class="pg light">
+  <p class="eyebrow">The pilot</p>
+  <h1>January: twenty five managers take the first thirty days in <em>three weeks</em>.</h1>
+  <div class="grid c3">
+    <div class="card"><span class="mono">Who</span><h2>The roster</h2><p>Twenty five managers nominated by the November 5 group: DAR, Facilities, VBOM, USAC, Campus Dining and VUIT, a mix of M1 to M5 and at least five managers of hourly teams. Their managers' managers are in the pilot too; they get the forwardable note on January 5.</p></div>
+    <div class="card"><span class="mono">What</span><h2>The whole first thirty days</h2><p>The assessment, the Foundations course inside Oracle through the launcher, the phase one micro modules, the Day 1, Day 7 and Day 22 messages on a compressed clock, and the dashboard. Five pilot managers also do the cohort's week 0.</p></div>
+    <div class="card"><span class="mono">When</span><h2>Jan 6 to Jan 29</h2><p>Opens Wednesday, January 6. Fifteen-minute check-ins with each manager in the week of January 18. Readout Wednesday, January 27. Launch go, no go Friday, January 29.</p></div>
+  </div>
+  <div class="two" style="margin-top:14px">
+    <div>
+      <h3>What we measure</h3>
+      <table>
+        <tr><th>Measure</th><th>Exit bar for launch</th></tr>
+        <tr><td>Opened the dashboard within 7 days</td><td>20 of 25</td></tr>
+        <tr><td>Assessment taken</td><td>20 of 25</td></tr>
+        <tr><td>Foundations complete within 21 days</td><td>15 of 25</td></tr>
+        <tr><td>Completion recorded in Oracle without help</td><td>Every completion</td></tr>
+        <tr><td>Live conversation started on the first try</td><td>4 of 5 who tried, microphone and written path counted</td></tr>
+        <tr><td>Time on the course, self-reported</td><td>Median under 100 minutes</td></tr>
+        <tr><td>"I know what is expected of me as a manager here"</td><td>4 of 5 agree, in the pilot survey</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>What we fix before launch</h3>
+      <ul><li>Anything that stops a completion reaching Oracle.</li><li>Any page where the pilot managers did not know where to click. The November 5 feedback already drove the one-idea-per-screen rebuild; the pilot confirms it.</li><li>The two to three hour protected time ask: did the managers' managers do it, and did it hold.</li><li>Message wording: every draft on pages 11 to 16 is tested on the pilot and rewritten from what they said.</li></ul>
+      <h3 style="margin-top:10px">What the pilot does not test</h3>
+      <ul><li>The cascade itself. Leaders are briefed on the pilot results, not before them.</li><li>Cohort weeks 1 to 4. Cohort 1 is the first run, with the pilot managers in it.</li></ul>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 20 measurement -->
+<section class="pg dark">
+  <p class="eyebrow">Measurement</p>
+  <h1>What we report, to whom, and <em>when</em>.</h1>
+  <div class="two">
+    <div>
+      <h3>Launch measures, ninety days</h3>
+      <table>
+        <tr><th>Measure</th><th>Target</th><th>Source</th></tr>
+        <tr><td>Launch email opened within 7 days</td><td>85 of 100</td><td>Email system</td></tr>
+        <tr><td>Dashboard opened by day 14</td><td>85 of 100</td><td>Dashboard, profile feed</td></tr>
+        <tr><td>Assessment baseline taken</td><td>70 of 100</td><td>Assessment flow</td></tr>
+        <tr><td>Foundations complete by day 60</td><td>55 of 100 launch wave, 90 of 100 new managers</td><td>Oracle Learning</td></tr>
+        <tr><td>Legal compliance by day 30</td><td>100 of 100</td><td>Oracle Learning</td></tr>
+        <tr><td>Phase one micro modules by day 60</td><td>45 of 100</td><td>Oracle Learning</td></tr>
+        <tr><td>Cohort seat requests</td><td>30 of 100</td><td>Portal form</td></tr>
+        <tr><td>Protected time given, manager's report</td><td>80 of 100</td><td>Day 60 survey, one question</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Impact measures, from month three</h3>
+      <table>
+        <tr><th>Measure</th><th>Target</th><th>Source</th></tr>
+        <tr><td>Re-up assessment answered</td><td>60 of 100 completers</td><td>Assessment flow</td></tr>
+        <tr><td>Real movement: 5 or more points on the total</td><td>40 of 100 re-ups</td><td>Results dashboard</td></tr>
+        <tr><td>Priority expectation moved by 0.7 or more</td><td>50 of 100 re-ups</td><td>Results dashboard</td></tr>
+        <tr><td>Cohort confidence pulse, week 4 against week 1</td><td>Up on all four questions</td><td>Cohort site</td></tr>
+        <tr><td>Internal fill rate for manager roles</td><td>Trend, reported yearly</td><td>Oracle Recruiting</td></tr>
+        <tr><td>Manager regretted attrition in the first year</td><td>Trend, reported yearly</td><td>Oracle HCM</td></tr>
+      </table>
+      <h3 style="margin-top:12px">Cadence</h3>
+      <ul><li><b>Weekly during launch</b>, March 2 to April 30: the funnel to FLH and PCB leadership, one page.</li><li><b>June 10</b>: the ninety-day readout to senior leadership.</li><li><b>Quarterly</b>: the results dashboard by business unit, to business unit leaders.</li><li><b>Yearly</b>: fill rate and attrition beside the program numbers.</li></ul>
+    </div>
+  </div>
+  <p class="small" style="margin-top:6px">The assessment is a self-reflection tool, not a validated instrument, and never a performance evaluation. Movement is reported in aggregate; a manager's own results go only to that manager.</p>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 21 roles and risks -->
+<section class="pg light">
+  <p class="eyebrow">Roles and risks</p>
+  <h1>Who owns what, and what could go <em>wrong</em>.</h1>
+  <div class="two" style="grid-template-columns:1.1fr .9fr">
+    <div>
+      <h3>Roles</h3>
+      <table class="raci">
+        <tr><th>Workstream</th><th>PCB leadership</th><th>FLH</th><th>VUIT, Oracle</th><th>BU leaders</th><th>Managers' managers</th><th>HCMs, ECs</th></tr>
+        <tr><td>Standard and content</td><td class="c a">A</td><td class="c r">R</td><td class="c">C</td><td class="c">C</td><td class="c">I</td><td class="c">C</td></tr>
+        <tr><td>Oracle items, assignments, feed</td><td class="c">I</td><td class="c a">A</td><td class="c r">R</td><td class="c">I</td><td class="c">I</td><td class="c">C</td></tr>
+        <tr><td>Cascade messages C1 to C6</td><td class="c a">A</td><td class="c r">R</td><td class="c">I</td><td class="c r">R</td><td class="c r">R</td><td class="c">C</td></tr>
+        <tr><td>Automated messages M1 to M6</td><td class="c">I</td><td class="c a">A R</td><td class="c">C</td><td class="c">I</td><td class="c">I</td><td class="c">I</td></tr>
+        <tr><td>Protected time and the day 14 1:1</td><td class="c">I</td><td class="c">C</td><td class="c">I</td><td class="c a">A</td><td class="c r">R</td><td class="c">C</td></tr>
+        <tr><td>Pilot</td><td class="c">C</td><td class="c a">A R</td><td class="c">C</td><td class="c">C</td><td class="c">C</td><td class="c">C</td></tr>
+        <tr><td>Cohorts</td><td class="c">I</td><td class="c a">A R</td><td class="c">I</td><td class="c">C</td><td class="c">C</td><td class="c">I</td></tr>
+        <tr><td>Measurement and readouts</td><td class="c a">A</td><td class="c r">R</td><td class="c">C</td><td class="c">I</td><td class="c">I</td><td class="c">I</td></tr>
+      </table>
+      <p class="small" style="margin-top:6px">A accountable, R responsible, C consulted, I informed.</p>
+    </div>
+    <div>
+      <h3>Risks and what we do about them</h3>
+      <table>
+        <tr><th>Risk</th><th>Mitigation</th></tr>
+        <tr><td><b>Budget season and leave</b> thin the February cascade.</td><td>Briefings are thirty minutes, toolkits do the rest, and C3 can go from FLH on a leader's behalf.</td></tr>
+        <tr><td><b>Managers hear it from Oracle first.</b></td><td>The assignment notice is sent thirty minutes after the launch email; managers' managers are reminded the week before.</td></tr>
+        <tr><td><b>Microphone blocked inside Oracle.</b></td><td>Tested in the December go, no go. The written path and open in a new window cover it.</td></tr>
+        <tr><td><b>Completion not recorded.</b></td><td>The launcher writes to Oracle; the web path writes through the completion flow; FLH checks the daily exceptions list during launch.</td></tr>
+        <tr><td><b>"Thirty-five minutes" felt dishonest</b> in November.</td><td>Every message says about ninety minutes in sittings, the essentials in thirty-five.</td></tr>
+        <tr><td><b>Experienced managers opt out.</b></td><td>The assessment first, the cohort as the reward, and the business unit leader saying it in their own words.</td></tr>
+        <tr><td><b>Cohort demand above seats.</b></td><td>Waitlist by completion date; bespoke cohorts for units of thirty or more; capacity decision June 10.</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 22 next 30 days -->
+<section class="pg dark">
+  <p class="eyebrow">The next thirty days</p>
+  <h1>Decisions and dates between now and the December <em>go</em>.</h1>
+  <div class="two">
+    <div>
+      <h3>Decisions needed</h3>
+      <table>
+        <tr><th>Decision</th><th>By</th><th>Who</th></tr>
+        <tr><td>Launch date confirmed as Monday, March 2, 2027, or moved; every date in this plan moves with it</td><td class="d">Nov 20</td><td>PCB leadership</td></tr>
+        <tr><td>Sender and signature for C1 and C6</td><td class="d">Nov 20</td><td>PCB leadership</td></tr>
+        <tr><td>Foundations inside Oracle through the launcher, or on the web with the completion flow</td><td class="d">Dec 11</td><td>FLH, VUIT</td></tr>
+        <tr><td>Funnel targets on page 7 adopted as the launch bar</td><td class="d">Dec 11</td><td>PCB leadership, FLH</td></tr>
+        <tr><td>Pilot roster of twenty five, with managers' managers</td><td class="d">Dec 4</td><td>The November 5 group</td></tr>
+        <tr><td>The first-time-manager intro: scope, and who assigns it</td><td class="d">Dec 11</td><td>FLH</td></tr>
+        <tr><td>Bespoke DAR cohort: yes, and the quarter</td><td class="d">Jan 29</td><td>DAR leadership, FLH</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Work in flight</h3>
+      <ul><li><b>Nov 25.</b> QA sheet closes. Content, function and layout feedback folded in by December 4.</li><li><b>Dec 4.</b> Day 1 email and Portal checklist carry the protected-time line to the manager's manager.</li><li><b>Dec 9.</b> Oracle items for Foundations and the micro modules, the SCORM launcher, and a test completion in Oracle's test environment.</li><li><b>Dec 9.</b> Drafts C1 to M6 in final form, no em dashes, dates filled, in the FLH email templates.</li><li><b>Dec 11.</b> Go, no go for the pilot.</li><li><b>Jan 5.</b> Pilot managers' managers get the forwardable note; Jan 6 the pilot opens.</li></ul>
+      <div class="quote" style="margin-top:14px">Management is a set of habits, not a personality. Pick one behavior and make it routine.</div>
+      <p class="small" style="margin-top:8px">The line every message ends on, from the assessment email.</p>
+    </div>
+  </div>
+  <div class="foot"><span><b>Manager Voyage</b> &middot; Launch plan</span><span class="pn"></span></div>
+</section>
+
+<!-- 23 back -->
+<section class="pg dark back">
+  <img src="../../assets/img/vu-centered-white.png" alt="Vanderbilt University">
+  <h1>Manager <em>Voyage</em>.</h1>
+  <p class="lede" style="margin:0 auto">People, Culture and Belonging &middot; Futures Learning Hub<br>Draft for review, November 6, 2026</p>
+</section>
+
+<script>
+/* page numbers */
+(function(){ var pgs = document.querySelectorAll('.pg'); pgs.forEach(function(p, i){ var n = p.querySelector('.pn'); if(n) n.textContent = 'Page ' + (i + 1) + ' of ' + pgs.length; }); })();
+</script>
+</body>
+</html>
