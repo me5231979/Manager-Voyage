@@ -434,6 +434,12 @@ html.paged #modules .drill-status{ margin-top:12px; }
 .mod-end-next p{ margin:0; font-size:.92rem; line-height:1.45; color:var(--tx2); } .mod-end-next p strong{ display:block; font-family:var(--serif); font-weight:400; font-size:1.15rem; color:var(--tx); margin-bottom:4px; }
 .mod-end-ctl{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; } .mod-end-ctl .btn svg{ width:18px; height:18px; margin-left:8px; }
 .mod-end > .mono{ display:block; margin-bottom:6px; }
+.mod-end-todo{ margin-top:12px; padding:10px 12px; border:1px solid rgba(207,174,112,.4); border-radius:var(--r); background:rgba(207,174,112,.07); font-size:.86rem; line-height:1.4; color:var(--tx); }
+.mod-end-todo p{ margin:0; font-size:.86rem; color:var(--tx); } .mod-end-todo p.ok{ color:var(--eyebrow); }
+.mod-end-todo ul{ margin:6px 0 0; padding-left:18px; color:var(--tx2); } .mod-end-todo li{ margin-top:3px; }
+/* the responsibility page: the right column sits level with the list, not at the top */
+.sp-stage{ align-items:center; }
+.sp-stage > .sp-aside{ align-self:center; }
 /* the modules page fits one screen */
 html.paged #modules .v-why{ max-width:70ch; margin-bottom:4px; }
 html.paged #modules .mod-grid{ margin-top:10px; gap:10px; }
@@ -1029,7 +1035,10 @@ details.deeper .d-body p{ margin:0 0 10px; font-size:.9rem; color:var(--tx2); }
 .idea-nav{ grid-column:1 / -1; display:flex; gap:10px; align-items:center; }
 @media (max-width:900px){ .idea.cur{ grid-template-columns:1fr; } }
 .sub-listen{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; margin-left:8px; vertical-align:middle; border:1px solid var(--field-bd); background:var(--field); color:var(--eyebrow); border-radius:50%; cursor:pointer; padding:0; }
+.sub-listen{ width:auto; height:28px; padding:0 10px 0 8px; gap:6px; border-radius:999px; border-color:var(--eyebrow); color:var(--eyebrow); font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.07em; text-transform:uppercase; }
 .sub-listen svg{ width:14px; height:14px; }
+.sub-listen[aria-pressed="true"]{ background:var(--eyebrow); color:var(--vu-black); }
+.help-hint{ margin:4px 0 8px; font-size:.86rem; color:var(--tx2); }
 .sub-listen .w1,.sub-listen .w2{ opacity:.35; }
 .sub-listen.playing{ background:var(--eyebrow); color:var(--btn-tx); border-color:var(--eyebrow); }
 .sub-listen.playing .w1{ opacity:1; animation:subw 1s ease-in-out infinite; } .sub-listen.playing .w2{ opacity:1; animation:subw 1s ease-in-out .3s infinite; }
@@ -1326,7 +1335,8 @@ html.paged .idea .try .scn{ margin-top:0; }
 #guideFab{ position:fixed; right:clamp(12px,2vw,24px); bottom:calc(var(--bar-h,64px) + 54px); z-index:205; display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid #CFAE70; background:#1C1C1C; color:#CFAE70; font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; box-shadow:0 8px 28px rgba(0,0,0,.5); }
 #guideFab svg{ width:18px; height:18px; } #guideFab:hover{ background:#CFAE70; color:#1C1C1C; }
 #guideFab[aria-expanded="true"]{ background:#CFAE70; color:#1C1C1C; }
-#guidePanel{ position:fixed; right:clamp(12px,2vw,24px); bottom:calc(var(--bar-h,64px) + 104px); z-index:206; width:min(380px, calc(100vw - 24px)); max-height:min(560px, calc(100vh - var(--bar-h,64px) - var(--nav-h,96px) - 120px)); display:flex; flex-direction:column; background:#1f1f1f; border:1px solid rgba(255,255,255,.14); border-top:3px solid #CFAE70; border-radius:8px; box-shadow:0 16px 48px rgba(0,0,0,.65); color:#fff; font-family:var(--sans); }
+.bb-ctl #guideFab{ position:static; margin-right:clamp(8px,1.5vw,18px); box-shadow:none; padding:8px 12px; font-size:.7rem; }
+#guidePanel{ position:fixed; right:clamp(12px,2vw,24px); bottom:calc(var(--bar-h,64px) + 12px); z-index:206; width:min(380px, calc(100vw - 24px)); max-height:min(560px, calc(100vh - var(--bar-h,64px) - var(--nav-h,96px) - 120px)); display:flex; flex-direction:column; background:#1f1f1f; border:1px solid rgba(255,255,255,.14); border-top:3px solid #CFAE70; border-radius:8px; box-shadow:0 16px 48px rgba(0,0,0,.65); color:#fff; font-family:var(--sans); }
 #guidePanel .mono{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:#CFAE70; }
 #guidePanel[hidden]{ display:none; }
 #guidePanel .g-head{ position:relative; padding:12px 44px 10px 14px; border-bottom:1px solid rgba(255,255,255,.12); }
@@ -2173,6 +2183,6 @@ footer .fcenter img{ width:64px; height:auto; }
 <script src="../../assets/js/nav.js?v=1"></script>
 <script src="pager.js?v=20261106f"></script>
 <script src="../../assets/js/email.js?v=20261101b"></script>
-<script src="app.js?v=20261106h"></script>
+<script src="app.js?v=20261106j"></script>
 </body>
 </html>

@@ -183,7 +183,7 @@ function narrSub(k, force){
   if(force) narr.on = true;
   if(narr.on || narr.auto) narrPlay(k); else if(narr.playing) narrStop();
 }
-function subBtn(k){ return NARR[k] ? '<button type="button" class="sub-listen" data-narr="' + k + '" aria-pressed="false" aria-label="Listen to this one" title="Listen to this one"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="w1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="w2" d="M19 5a9 9 0 0 1 0 14"/></svg></button>' : ''; }
+function subBtn(k){ return NARR[k] ? '<button type="button" class="sub-listen" data-narr="' + k + '" aria-pressed="false" aria-label="Listen to this one" title="Listen to this one"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="w1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="w2" d="M19 5a9 9 0 0 1 0 14"/></svg><span>Hear this one</span></button>' : ''; }
 document.addEventListener('click', function(e){
   var b = e.target.closest('[data-narr]'); if(b){ e.preventDefault(); narrSub(b.getAttribute('data-narr'), true); return; }
   /* clicking into any activity stops whatever is playing, so the audio never talks over what the learner is doing */
@@ -310,7 +310,7 @@ var SECTIONS = [
   { k:'nextstep',  no:'13', name:'Next steps',              how:'Pick one habit, then mark it done' }
 ];
 function progIs(k){ return get('p-' + k) === '1'; }
-function progWrite(k, v){ set('p-' + k, v ? '1' : null); }
+function progWrite(k, v){ set('p-' + k, v ? '1' : null); try{ document.dispatchEvent(new CustomEvent('mv:prog', { detail:{ key:k, done:!!v } })); }catch(e){} }
 var progList = $('#progList'), progCount = $('#progCount'), progSum = $('#progSum'), progFill = $('#progFill'),
     progTop = $('#progTopLine'), progStatus = $('#progStatus'), mprogLine = $('#mprogLine'),
     progBtn = $('#progBtn'), progPanel = $('#progPanel');
@@ -363,7 +363,7 @@ function bbDoneSync(){
 }
 if(bbDoneBtn) bbDoneBtn.addEventListener('click', function(){ var k = bbDoneBtn.getAttribute('data-prog'); if(k) progToggle(k); });
 document.addEventListener('chart:page', bbDoneSync);
-function progDone(k){ if(progIs(k)) return; progWrite(k, true); progRender(k, true); if(window.turnDone) turnDone(k); try{ document.dispatchEvent(new CustomEvent('mv:prog', { detail:{ key:k } })); }catch(e){} }
+function progDone(k){ if(progIs(k)) return; progWrite(k, true); progRender(k, true); if(window.turnDone) turnDone(k); }
 function progToggle(k){ var v = !progIs(k); progWrite(k, v); progRender(k, v); }
 function progOpen(open){ if(!progPanel || !progBtn) return; progPanel.hidden = !open; progBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
 if(progBtn) progBtn.addEventListener('click', function(){ progOpen(progPanel && progPanel.hidden); });
@@ -1238,7 +1238,7 @@ var IDEAS = [
   ];
   var tabs = tiles.map(function(t, i){ var ic = t.querySelector('.hic'); return '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-htab="' + i + '">' + (ic ? ic.outerHTML : '') + '<span>' + esc(t.querySelector('b').textContent) + '</span></button>'; }).join('');
   var panes = tiles.map(function(t, i){ return '<div class="help-pane' + (i === 0 ? ' cur' : '') + '" role="tabpanel"><h4>' + esc(t.querySelector('b').textContent) + subBtn('basics/h' + (i + 1)) + '</h4><div class="help-cols"><div><b>What they do</b><p>' + H[i].does + '</p></div><div><b>When you contact them</b><p>' + H[i].when + '</p></div><div><b>How you contact them</b><p>' + H[i].how + '</p></div></div></div>'; }).join('');
-  box.innerHTML = '<span class="mono">Who helps you</span><div class="help-tabs" role="tablist" aria-label="Who helps you">' + tabs + '</div>' + panes;
+  box.innerHTML = '<span class="mono">Who helps you</span><p class="help-hint">Tap a name to open it. Tap Hear this one to listen.</p><div class="help-tabs" role="tablist" aria-label="Who helps you">' + tabs + '</div>' + panes;
   box.classList.add('tabbed'); box.removeAttribute('role');
   box.addEventListener('click', function(e){ var t = e.target.closest('button[data-htab]'); if(!t) return; var i = t.getAttribute('data-htab'); $$('button[data-htab]', box).forEach(function(b){ b.setAttribute('aria-selected', b === t ? 'true' : 'false'); }); $$('.help-pane', box).forEach(function(pn, pi){ pn.classList.toggle('cur', String(pi) === i); }); narrSub('basics/h' + (parseInt(i, 10) + 1)); });
 })();
@@ -1595,7 +1595,8 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     '<div class="g-log" aria-live="polite"></div><p class="g-state" role="status"></p>' +
     '<form class="g-form"><input type="text" class="g-in" placeholder="Type a question&hellip;" aria-label="Your question" autocomplete="off" maxlength="500" /><button type="submit" class="btn btn-gold btn-sm">Send</button></form>' +
     '<div class="g-tips"><button type="button" data-q="What does this page mean for me as a manager?">What does this page mean for me?</button><button type="button" data-q="Who do I call about a leave request?">Who do I call about leave?</button><button type="button" data-q="How does the assessment work?">How does the assessment work?</button></div>';
-  document.body.appendChild(fab); document.body.appendChild(panel);
+  var ctl = $('#bookBar .bb-ctl'); if(ctl) ctl.insertBefore(fab, ctl.firstChild); else document.body.appendChild(fab);
+  document.body.appendChild(panel);
   var log = panel.querySelector('.g-log'), state = panel.querySelector('.g-state'), form = panel.querySelector('.g-form'), input = panel.querySelector('.g-in');
   var conv = null, starting = null, pending = [];
   function pageName(){ var c = window.chartPager ? chartPager.current() : null; var pg = document.querySelector('.page.cur'); return (pg && pg.getAttribute('aria-label')) || (c ? c.key : 'the course'); }
@@ -1635,41 +1636,44 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
 (function(){
   if(!window.chartPager) return;
   var MODULES = [
-    { title:'The mission', secs:['mission'], mins:5, forYou:'Why the work matters when your team asks, and where your team sits in a university that works from five cities.' },
-    { title:'What changed, and what a manager is', secs:['shift', 'basics'], mins:10, forYou:'The one shift that makes you a manager, three questions every week, and the five people who help you.' },
-    { title:'Five ideas', secs:['ideas'], mins:15, forYou:'Five ideas that hold up in every unit, each with a move for this week and a conversation to practice it.' },
-    { title:'Your first year, and who handles what', secs:['year', 'calls'], mins:10, forYou:'The whole job by how often it comes up, and the four doors for anything that lands on your desk.' },
-    { title:'The Vanderbilt Manager Standard', secs:['welcome'], mins:20, forYou:'The four expectations your assessment measures and your manager looks for, with a habit drill for each.' },
-    { title:'Your call: four conversations', secs:['yourcall'], mins:15, forYou:'Four situations from your first year, in your own unit, out loud or in writing.' },
-    { title:'Your assessment, quick check and next steps', secs:['survey', 'quiz', 'nextstep', 'learn'], mins:15, forYou:'Your starting point against the standard, five questions, one action this week, and what to take next.', needs:'quiz' }
+    { title:'The mission', secs:['mission'], acts:[], mins:5, forYou:'Why the work matters when your team asks, and where your team sits in a university that works from five cities.' },
+    { title:'What changed, and what a manager is', secs:['shift', 'basics'], acts:['shift'], mins:10, forYou:'The one shift that makes you a manager, three questions every week, and the five people who help you.' },
+    { title:'Five ideas', secs:['ideas'], acts:['safe'], mins:15, forYou:'Five ideas that hold up in every unit, each with a move for this week and a conversation to practice it.' },
+    { title:'Your first year, and who handles what', secs:['year', 'calls'], acts:['year', 'calls'], mins:10, forYou:'The whole job by how often it comes up, and the four doors for anything that lands on your desk.' },
+    { title:'The Vanderbilt Manager Standard', secs:['welcome'], acts:['welcome', 'task', 'relations', 'change', 'external'], mins:20, forYou:'The four expectations your assessment measures and your manager looks for, with a habit drill for each.' },
+    { title:'Your call: four conversations', secs:['yourcall'], acts:['yourcall'], mins:15, forYou:'Four situations from your first year, in your own unit, out loud or in writing.' },
+    { title:'Your assessment, quick check and next steps', secs:['survey', 'quiz', 'nextstep', 'learn'], acts:['survey', 'quiz', 'nextstep'], mins:15, forYou:'Your starting point against the standard, five questions, one action this week, and what to take next.' }
   ];
   var dots = $$('#bbDots .bb-dot'), keys = dots.map(function(d){ return d.getAttribute('href').replace(/^#p\//, ''); });
   var secOf = function(i){ return (keys[i] || '').split('/')[0]; };
   var modOf = function(i){ var sec = secOf(i); for(var m = 0; m < MODULES.length; m++){ if(MODULES[m].secs.indexOf(sec) >= 0) return m; } return -1; };
   var landing = keys.indexOf('modules/1');
   MODULES.forEach(function(m){ m.pages = []; keys.forEach(function(k, i){ if(m.secs.indexOf(k.split('/')[0]) >= 0) m.pages.push(i); }); });
-  var seen = {}, done = {};
+  var ACT = { shift:'What changed: sort six things', safe:'Five ideas: find the best response in each idea\u2019s moment', year:'Your first year: open all four groups', calls:'Who handles what: decide five situations', welcome:'The Manager Standard: open all four expectations', task:'Get the work done: flip all four cards', relations:'Take care of your people: flip all four cards', change:'Make things better: flip all four cards', external:'Connect your team: flip all four cards', yourcall:'Your call: have the four conversations, or mark it done', survey:'Your assessment: take it, or confirm you did', quiz:'Quick check: four of five', nextstep:'Next steps: copy the message and send it' };
+  var seen = {}, told = {};
   try{ seen = JSON.parse(get('mod-seen') || '{}') || {}; }catch(e){ seen = {}; }
-  try{ done = JSON.parse(get('mod-done') || '{}') || {}; }catch(e){ done = {}; }
+  try{ told = JSON.parse(get('mod-done') || '{}') || {}; }catch(e){ told = {}; }
   /* reviewers: ?unlock=all opens every module in this browser; ?unlock=off restores the path */
   try{ var u = new URLSearchParams(location.search).get('unlock'); if(u === 'all') set('unlock', 'all'); else if(u === 'off') set('unlock', null); }catch(e){}
   function bypass(){ return get('unlock') === 'all'; }
-  function isDone(m){ return !!done[m]; }
-  function isOpen(m){ return bypass() || m === 0 || isDone(m - 1); }
   function seenCount(m){ return MODULES[m].pages.filter(function(i){ return seen[keys[i]]; }).length; }
-  function complete(m){ var M = MODULES[m]; return seenCount(m) === M.pages.length && (!M.needs || progIs(M.needs)); }
-  function save(){ set('mod-seen', JSON.stringify(seen)); set('mod-done', JSON.stringify(done)); }
+  function actsLeft(m){ return MODULES[m].acts.filter(function(a){ return !progIs(a); }); }
+  function complete(m){ return seenCount(m) === MODULES[m].pages.length && actsLeft(m).length === 0; }
+  function isDone(m){ return complete(m); }
+  function isOpen(m){ return bypass() || m === 0 || isDone(m - 1); }
+  function save(){ set('mod-seen', JSON.stringify(seen)); set('mod-done', JSON.stringify(told)); }
   function firstOpen(){ for(var m = 0; m < MODULES.length; m++){ if(!isDone(m)) return m; } return MODULES.length - 1; }
   function render(){
     var grid = $('#modGrid'), st = $('#modStatus'); if(!grid) return;
     grid.innerHTML = MODULES.map(function(M, m){
       var open = isOpen(m), dn = isDone(m), n = seenCount(m), total = M.pages.length;
       var cls = dn ? 'done' : !open ? 'locked' : n > 0 ? 'now' : 'open';
-      var pill = dn ? 'Complete' : !open ? 'Locked' : n > 0 ? n + ' of ' + total + ' pages' : 'Start';
+      var left = actsLeft(m).length;
+      var pill = dn ? 'Complete' : !open ? 'Locked' : (n === total && left) ? (left === 1 ? '1 activity to mark done' : left + ' activities to mark done') : n > 0 ? n + ' of ' + total + ' pages' : 'Start';
       return '<li><button type="button" class="mod-card ' + cls + '" data-mod="' + m + '"' + (open ? '' : ' aria-disabled="true"') + '>' +
         '<span class="mod-no"><span>Module ' + (m + 1) + '</span><span class="pill">' + pill + '</span></span>' +
         '<h3>' + esc(M.title) + '</h3><p>' + esc(M.forYou) + '</p>' +
-        '<span class="mod-meta">About ' + M.mins + ' minutes &middot; ' + total + ' pages' + (M.needs === 'quiz' ? ' &middot; four of five on the quick check' : '') + '</span>' +
+        '<span class="mod-meta">About ' + M.mins + ' minutes &middot; ' + total + ' pages' + (M.acts.length ? ' &middot; ' + M.acts.length + (M.acts.length === 1 ? ' activity' : ' activities') : '') + '</span>' +
         '<span class="mod-bar" aria-hidden="true"><i style="width:' + Math.round((dn ? total : n) / total * 100) + '%"></i></span>' +
         (!open ? '<svg class="mod-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>' : '') +
         '</button></li>';
@@ -1677,10 +1681,21 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     if(st){ var nd = MODULES.filter(function(M, m){ return isDone(m); }).length; var f = firstOpen();
       st.textContent = nd === MODULES.length ? 'All seven modules complete.' : nd + ' of 7 complete. ' + (seenCount(f) > 0 ? 'Module ' + (f + 1) + ' is in progress: ' + seenCount(f) + ' of ' + MODULES[f].pages.length + ' pages.' : 'Module ' + (f + 1) + ' is ready.') + (bypass() ? ' Reviewer view: every module is open.' : ''); }
   }
-  function checkDone(m, quiet){
-    if(m < 0 || isDone(m) || !complete(m)) return;
-    done[m] = 1; save(); render();
-    if(!quiet) toast(m < MODULES.length - 1 ? 'Module ' + (m + 1) + ' complete. Module ' + (m + 2) + ' is open.' : 'All seven modules complete.');
+  /* say so once when a module completes; forget it when an activity is unmarked, so it can be said again */
+  function checkDone(m){
+    if(m < 0) return;
+    if(complete(m)){ if(!told[m]){ told[m] = 1; save(); toast(m < MODULES.length - 1 ? 'Module ' + (m + 1) + ' complete. Module ' + (m + 2) + ' is open.' : 'All seven modules complete.'); } }
+    else if(told[m]){ told[m] = 0; save(); }
+    render(); todo();
+  }
+  /* the completion page lists what is still to mark done before the next module opens */
+  function todo(){
+    $$('.mod-end').forEach(function(el){
+      var m = parseInt(el.getAttribute('data-mod'), 10), left = actsLeft(m), box = el.querySelector('.mod-end-todo');
+      if(!box){ box = document.createElement('div'); box.className = 'mod-end-todo'; var ctl = el.querySelector('.mod-end-ctl'); ctl.parentNode.insertBefore(box, ctl); }
+      if(!left.length) box.innerHTML = '<p class="ok">Every activity in this module is marked done.' + (m < MODULES.length - 1 ? ' Module ' + (m + 2) + ' is open.' : '') + '</p>';
+      else box.innerHTML = '<p>To ' + (m < MODULES.length - 1 ? 'open module ' + (m + 2) : 'finish the course') + ', mark done in Your progress:</p><ul>' + left.map(function(a){ return '<li>' + esc(ACT[a] || a) + '</li>'; }).join('') + '</ul>';
+    });
   }
   /* the gate: a page in a locked module turns back to the landing page */
   document.addEventListener('chart:page', function(ev){
@@ -1702,9 +1717,8 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   }
   document.addEventListener('chart:page', function(){ if(bbSec && !/^Module \d/.test(bbSec.textContent)) bbSec.setAttribute('data-base', bbSec.textContent); }, true);
   paintCount(chartPager.current().index, modOf(chartPager.current().index));
-  /* the quick check can finish the last module after its pages are seen */
-  var lastM = MODULES.length - 1;
-  document.addEventListener('mv:prog', function(){ checkDone(lastM); });
+  /* marking an activity done, or undone, changes which modules are complete and open */
+  document.addEventListener('mv:prog', function(){ MODULES.forEach(function(M, m){ checkDone(m); }); });
   $('#modGrid') && $('#modGrid').addEventListener('click', function(e){
     var b = e.target.closest('.mod-card'); if(!b) return;
     var m = parseInt(b.getAttribute('data-mod'), 10);
@@ -1716,7 +1730,7 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
   document.addEventListener('click', function(e){
     var b = e.target.closest('button[data-go-mod]'); if(!b) return;
     var m = parseInt(b.getAttribute('data-go-mod'), 10);
-    if(!isOpen(m)){ toast('Finish module ' + m + ' first.'); return; }
+    if(!isOpen(m)){ var left = actsLeft(m - 1); toast(left.length ? 'Module ' + m + ' first: mark done ' + (ACT[left[0]] || left[0]).split(':')[0].toLowerCase() + (left.length > 1 ? ' and ' + (left.length - 1) + ' more' : '') + '.' : 'Finish module ' + m + ' first.'); return; }
     chartPager.go(MODULES[m].pages[0], { focus:true });
   });
   /* the last page of a module turns back to the landing page */
@@ -1724,7 +1738,7 @@ window.MV_COURSE = { SCENARIOS: SCENARIOS, QUIZ: QUIZ, IDEAS: IDEAS };
     var to = parseInt(b.getAttribute('data-go-page'), 10), from = to - 1;
     if(modOf(from) >= 0 && modOf(to) !== modOf(from)){ b.setAttribute('data-go-page', landing); b.classList.add('back-mods'); b.innerHTML = 'Back to your modules' + b.innerHTML.slice(b.innerHTML.indexOf('<svg')); }
   });
-  render();
+  render(); todo();
   window.MV_MODULES = { MODULES: MODULES, isOpen: isOpen, isDone: isDone, render: render };
 })();
 
