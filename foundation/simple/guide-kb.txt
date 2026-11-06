@@ -330,7 +330,9 @@ Have the conversation. Out loud.
 
 Monday, 9:00, your one to one with Sam. Forty one emails are waiting and the grant report is due Thursday with no owner. Tell Sam the few things that matter this week, give the report an owner and a date, and keep the meeting about Sam.
 
-Your world:
+1
+Pick your world.
+The character plays the scene in your unit, with your systems and your kind of team.
 A university business office
 Campus Dining
 VUIT
@@ -343,12 +345,12 @@ In your world: The grant report is due Thursday with no owner, and forty one ema
 
 SAM, COORDINATOR ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
-1
-Tap Start and allow the microphone. Sam speaks first.
 2
-Talk the way you would at work. Speak naturally, in your own words. There is no script.
+Tap Start and allow the microphone. Sam speaks first, in your world.
 3
-Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.
+Talk the way you would at work. Speak naturally, in your own words. There is no script.
+4
+When you are done, say goodbye. You are scored on what you did, not what you picked.
 Start the conversation
 End the conversation
 
@@ -405,7 +407,9 @@ Have the conversation. Out loud.
 
 Priya has rewritten the summary twice. Both times your only feedback was “tighten it up.” It is due tomorrow. Tell her exactly what good looks like, when you need it, and why it matters. Do not rewrite it for her.
 
-Your world:
+1
+Pick your world.
+The character plays the scene in your unit, with your systems and your kind of team.
 A university business office
 Campus Dining
 VUIT
@@ -418,12 +422,12 @@ In your world: The summary is a two page brief for your director.
 
 PRIYA, ANALYST ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
-1
-Tap Start and allow the microphone. Priya speaks first.
 2
-Talk the way you would at work. Speak naturally, in your own words. There is no script.
+Tap Start and allow the microphone. Priya speaks first, in your world.
 3
-Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.
+Talk the way you would at work. Speak naturally, in your own words. There is no script.
+4
+When you are done, say goodbye. You are scored on what you did, not what you picked.
 Start the conversation
 End the conversation
 
@@ -480,7 +484,9 @@ Have the conversation. Out loud.
 
 Jordan comes to you Tuesday with bad news: the vendor slipped and the launch moves a week. She is braced for your reaction. Thank first, find out what we know, ask what she needs, and let her run the recovery.
 
-Your world:
+1
+Pick your world.
+The character plays the scene in your unit, with your systems and your kind of team.
 A university business office
 Campus Dining
 VUIT
@@ -493,12 +499,12 @@ In your world: The vendor slipped and the launch moves a week.
 
 JORDAN, PROJECT COORDINATOR ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
-1
-Tap Start and allow the microphone. Jordan speaks first.
 2
-Talk the way you would at work. Speak naturally, in your own words. There is no script.
+Tap Start and allow the microphone. Jordan speaks first, in your world.
 3
-Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.
+Talk the way you would at work. Speak naturally, in your own words. There is no script.
+4
+When you are done, say goodbye. You are scored on what you did, not what you picked.
 Start the conversation
 End the conversation
 
@@ -555,7 +561,9 @@ Have the conversation. Out loud.
 
 Central is replacing the intake form and Alex has already said here we go again. Explain the why in your own words, say what it fixes, ask what worries Alex, and carry the worries back.
 
-Your world:
+1
+Pick your world.
+The character plays the scene in your unit, with your systems and your kind of team.
 A university business office
 Campus Dining
 VUIT
@@ -568,12 +576,12 @@ In your world: Central is replacing the intake form.
 
 ALEX, SPECIALIST ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
-1
-Tap Start and allow the microphone. Alex speaks first.
 2
-Talk the way you would at work. Speak naturally, in your own words. There is no script.
+Tap Start and allow the microphone. Alex speaks first, in your world.
 3
-Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.
+Talk the way you would at work. Speak naturally, in your own words. There is no script.
+4
+When you are done, say goodbye. You are scored on what you did, not what you picked.
 Start the conversation
 End the conversation
 
@@ -630,7 +638,9 @@ Have the conversation. Out loud.
 
 Dev has missed two deadlines this month. You asked to see him. Say what you noticed, say what you expect, ask what is in the way, and agree a next step. He answers back. Then you are scored on what you did, not what you picked.
 
-Your world:
+1
+Pick your world.
+The character plays the scene in your unit, with your systems and your kind of team.
 A university business office
 Campus Dining
 VUIT
@@ -643,12 +653,12 @@ In your world: Dev has missed two deadlines on routine reports this month.
 
 DEV, ANALYST ON YOUR TEAM · ABOUT THREE MINUTES · MICROPHONE
 
-1
-Tap Start and allow the microphone. Dev speaks first.
 2
-Talk the way you would at work. Speak naturally, in your own words. There is no script.
+Tap Start and allow the microphone. Dev speaks first, in your world.
 3
-Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.
+Talk the way you would at work. Speak naturally, in your own words. There is no script.
+4
+When you are done, say goodbye. You are scored on what you did, not what you picked.
 Start the conversation
 End the conversation
 
@@ -1320,14 +1330,16 @@ Reply “yes” to the director, then build the report yourself Thursday night t
 B
 Reply “I will confirm today,” then ask Priya in a fifteen-minute check-in where the report stands and what she needs.
 C
-Forward the director’s email to Priya with “Please make sure this is on time.”
+Forward the email from the director to Priya with “Please make sure this is on time.”
 P
 PRACTICE IT LIVE · WITH PRIYA
 Have the conversation. Out loud.
 
 Wednesday. The monthly report is due Friday, nobody has mentioned it in two weeks, and a director just asked you if it is on time. Fifteen minutes with Priya. Check where it stands before you promise anything.
 
-Your world:
+1
+Pick your world.
+The character plays the scene in your unit, with your systems and your kind of team.
 A university business office
 Campus Dining
 VUIT
@@ -1340,12 +1352,12 @@ In your world: The monthly report for your director. The missing piece is a data
 
 PRIYA, ANALYST WHO BUILDS THE MONTHLY REPORT · ABOUT THREE MINUTES · MICROPHONE
 
-1
-Tap Start and allow the microphone. Priya speaks first.
 2
-Talk the way you would at work. Speak naturally, in your own words. There is no script.
+Tap Start and allow the microphone. Priya speaks first, in your world.
 3
-Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.
+Talk the way you would at work. Speak naturally, in your own words. There is no script.
+4
+When you are done, say goodbye. You are scored on what you did, not what you picked.
 Start the conversation
 End the conversation
 
@@ -1374,7 +1386,9 @@ Have the conversation. Out loud.
 
 Marcus stays after the 1:1: his dad is in and out of the hospital and he might need time off. Listen, help this week, route it to the leave office, and never ask for a diagnosis.
 
-Your world:
+1
+Pick your world.
+The character plays the scene in your unit, with your systems and your kind of team.
 A university business office
 Campus Dining
 VUIT
@@ -1387,12 +1401,12 @@ In your world: Marcus is one of your strongest people.
 
 MARCUS, ONE OF YOUR STRONGEST PEOPLE · ABOUT THREE MINUTES · MICROPHONE
 
-1
-Tap Start and allow the microphone. Marcus speaks first.
 2
-Talk the way you would at work. Speak naturally, in your own words. There is no script.
+Tap Start and allow the microphone. Marcus speaks first, in your world.
 3
-Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.
+Talk the way you would at work. Speak naturally, in your own words. There is no script.
+4
+When you are done, say goodbye. You are scored on what you did, not what you picked.
 Start the conversation
 End the conversation
 
@@ -1421,7 +1435,9 @@ Have the conversation. Out loud.
 
 Central is replacing the travel system in six weeks and the email goes out Tuesday. You chose to tell the team first, in Thursday’s meeting. Taylor speaks for the skeptics. Explain the why, ask what worries them, write it down.
 
-Your world:
+1
+Pick your world.
+The character plays the scene in your unit, with your systems and your kind of team.
 A university business office
 Campus Dining
 VUIT
@@ -1434,12 +1450,12 @@ In your world: Central is replacing the travel system in six weeks.
 
 TAYLOR, SENIOR ADMINISTRATOR, SPEAKING FOR THE TEAM · ABOUT THREE MINUTES · MICROPHONE
 
-1
-Tap Start and allow the microphone. Taylor speaks first.
 2
-Talk the way you would at work. Speak naturally, in your own words. There is no script.
+Tap Start and allow the microphone. Taylor speaks first, in your world.
 3
-Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.
+Talk the way you would at work. Speak naturally, in your own words. There is no script.
+4
+When you are done, say goodbye. You are scored on what you did, not what you picked.
 Start the conversation
 End the conversation
 
@@ -1459,7 +1475,7 @@ A director in another unit emails you Monday: “We need your team to pull a ful
 A
 Say yes and ask the team to work the weekend. Better not to upset a director.
 B
-Reply the same day with the numbers: the hours the reconciliation takes, the month-end close it collides with, and two options, a partial pull by Friday with the rest the following Wednesday, or the full pull with the close pushed, and ask which the audit actually needs.
+Reply the same day with the numbers: the hours the reconciliation takes, the month-end close it collides with, and two options, the part they need most by Friday with the rest the following Wednesday, or all of it with the month-end close pushed, and ask what they actually need.
 C
 Reply “We cannot do this” and copy your manager.
 R
@@ -1468,7 +1484,9 @@ Have the conversation. Out loud.
 
 A director wants a full data reconciliation by Friday for audit prep. Your month end close is the same week. Call back with the numbers, the collision, and options, and ask what the audit actually needs.
 
-Your world:
+1
+Pick your world.
+The character plays the scene in your unit, with your systems and your kind of team.
 A university business office
 Campus Dining
 VUIT
@@ -1481,12 +1499,12 @@ In your world: A director in another unit wants a full data reconciliation by Fr
 
 DIRECTOR REYES, DIRECTOR IN ANOTHER UNIT · ABOUT THREE MINUTES · MICROPHONE
 
-1
-Tap Start and allow the microphone. Director Reyes speaks first.
 2
-Talk the way you would at work. Speak naturally, in your own words. There is no script.
+Tap Start and allow the microphone. Director Reyes speaks first, in your world.
 3
-Practice the idea on this page. When you are done, say goodbye. You are scored on what you did, not what you picked.
+Talk the way you would at work. Speak naturally, in your own words. There is no script.
+4
+When you are done, say goodbye. You are scored on what you did, not what you picked.
 Start the conversation
 End the conversation
 
@@ -2017,11 +2035,12 @@ Never: Never wait to report. Never send someone back to an unsafe task.
 Note: Injury reporting steps to be confirmed by PCB.
 
 === WRITTEN SITUATIONS AND RESPONSES (practice pages) ===
+These situations are written for a university business office; when the learner picks another world (Campus Dining, VUIT, Academic Affairs, Student Affairs, Facilities, Development and Alumni Relations) the reports, systems, forms and people change to that unit, and the same three responses apply.
 
 Situation (idea1): Monday, 8:05. Forty-one emails, two marked urgent, and a 1:1 with Sam at 9. The grant report your team owns is due Thursday and nobody has started it.
 A. Clear the inbox first. Then the day is yours. Outcome: By ten the inbox is empty, and full again. The report is still not started and Sam’s 1:1 got moved. The sand went in first, and the big rocks did not fit.
-B. Write the three things that matter this week, tell the team, then open email. [the Vanderbilt way] Outcome: Report owner named by 8:15, Sam’s 1:1 kept, the vendor decision made by noon. The forty-one emails fit around them. Most were sand.
-C. Start the report yourself so it is done right. Outcome: The report gets written and your week does not. The team never learns what mattered, and Sam’s 1:1 slips again.
+B. Write the three things that matter this week, tell the team, then open email. [the Vanderbilt way] Outcome: The report owner named by 8:15, Sam’s 1:1 kept, the vendor decision made by noon. The forty-one emails fit around them. Most were sand.
+C. Start the report yourself so it is done right. Outcome: The report gets done and your week does not. The team never learns what mattered, and Sam’s 1:1 slips again.
 
 Situation (idea2): Priya’s summary has come back twice. Both times you wrote “looks good, maybe tighten it up a bit?” It is due tomorrow and it is still not what you need.
 A. “Maybe take one more pass when you get a chance.” Outcome: Third draft, same problem. Priya has now spent three days guessing what “tighten” means. Unclear is unkind.
@@ -2045,8 +2064,8 @@ C. Wait for the performance review to bring it up. Outcome: Four more months of 
 
 Situation (task): It is Wednesday. The monthly report your team owns is due Friday. Priya, who builds it, has not mentioned it in two weeks, and you have not asked. A director just emailed you asking whether it will be on time.
 A. Reply “yes” to the director, then build the report yourself Thursday night to be sure. Outcome: The report ships. You are now the person who builds it, Priya does not know she was doubted, and next month you are in the same spot. Doing the work is not the job; checking it is.
-B. Reply “I will confirm today,” then ask Priya in a fifteen-minute check-in where the report stands and what she needs. [the Vanderbilt way] Outcome: Priya is two-thirds done and waiting on a Finance extract she asked for ten days ago. You call Dana in Finance, colleague to colleague, find out what she needs from your team, confirm Friday with the director, and put the monthly check-in on the calendar for the second week of every month so you never learn this on a Wednesday again.
-C. Forward the director’s email to Priya with “Please make sure this is on time.” Outcome: Priya reads it as blame from two levels up. The report may still ship, but you have clarified nothing (what does “on time” mean, what is blocking her) and you have spent trust. Checking work is a conversation, not a forwarded email.
+B. Reply “I will confirm today,” then ask Priya in a fifteen-minute check-in where the report stands and what she needs. [the Vanderbilt way] Outcome: Priya is two-thirds done and waiting on a Finance extract she asked Dana in Finance for ten days ago. You call Dana in Finance, colleague to colleague, find out what she needs from your team, confirm Friday with the director, and put the monthly check-in on the calendar for the second week of every month so you never learn this on a Wednesday again.
+C. Forward the email from the director to Priya with “Please make sure this is on time.” Outcome: Priya reads it as blame from two levels up. The report may still ship, but you have clarified nothing (what does “on time” mean, what is blocking her) and you have spent trust. Checking work is a conversation, not a forwarded email.
 
 Situation (relations): Marcus, one of your strongest people, stays after the 1:1 and says: “My dad has been in and out of the hospital. I might need some time off for it, I am not sure yet. I did not want you to think I was slacking.”
 A. “I am so sorry. Take whatever you need. Just let me know what is going on with him so I can plan around it.” Outcome: Warm, and it asks for a diagnosis, which you must never do. It also leaves a possible leave request sitting with you instead of with the leave office. The kindness is right; the routing is missing.
@@ -2059,6 +2078,6 @@ B. In Thursday’s team meeting, before the email, explain in your own words why
 C. Tell the team you also think it is a bad idea, but there is nothing anyone can do. Outcome: It feels honest and it costs the team its manager. You have joined the hallway instead of leading it, and nobody’s concerns will reach the people who could act on them.
 
 Situation (external): A director in another unit emails you Monday: “We need your team to pull a full data reconciliation by Friday for our audit prep.” Your team’s own month-end close is the same week. Doing both is not possible without weekend work.
-A. Say yes and ask the team to work the weekend. Better not to upset a director. Outcome: The audit prep ships, the team works the weekend, and next quarter the same director asks again, sooner, because it worked. Absorbing every request is what speaking up replaces.
-B. Reply the same day with the numbers: the hours the reconciliation takes, the month-end close it collides with, and two options, a partial pull by Friday with the rest the following Wednesday, or the full pull with the close pushed, and ask which the audit actually needs. [the Vanderbilt way] Outcome: The director needed three of the seven tables by Friday and did not know the close was that week. You deliver three tables Thursday, the rest Wednesday, no weekend. The team saw you defend their month, politely and early.
+A. Say yes and ask the team to work the weekend. Better not to upset a director. Outcome: The work ships, the team works the weekend, and next quarter the same director asks again, sooner, because it worked. Absorbing every request is what speaking up replaces.
+B. Reply the same day with the numbers: the hours the reconciliation takes, the month-end close it collides with, and two options, the part they need most by Friday with the rest the following Wednesday, or all of it with the month-end close pushed, and ask what they actually need. [the Vanderbilt way] Outcome: They needed three of the seven tables by Friday and did not know the month-end close was that week. You deliver that Thursday, the rest Wednesday, no weekend. The team saw you defend their month, politely and early.
 C. Reply “We cannot do this” and copy your manager. Outcome: Your manager now owns a negotiation you could have had in one email, and the director hears “no” with no reason and no option. Speaking up for your team means the numbers and the options, not just a refusal.
